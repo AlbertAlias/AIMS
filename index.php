@@ -153,8 +153,8 @@
     </div>
 
     <!--START::HOME HERO SECTION -->
-    <section id="home" class="container-fluid p-0 m-0 vh-100 d-flex align-items-center text-light" style="background-image: url('img/esyatek-bg1.jpeg'); background-size: cover; background-position: center;">
-        <div class="container text-center" style="max-width: 600px; margin-left: 2px;">
+    <section id="home" class="container-fluid p-0 m-0 vh-100 d-flex align-items-center justify-content-center text-light" style="background-image: url('img/esyatek-bg1.jpeg'); background-size: cover; background-position: center;">
+        <!-- <div class="container text-center" style="max-width: 600px; margin-left: 2px;">
             <div class="subheading fw-bold mb-1" style="font-size: 3.1rem; color: #343a40; text-shadow: 1px 1px 0 #dee2e6, -1px -1px 0 #dee2e6, 1px -1px 0 #dee2e6, -1px 1px 0 #dee2e6;">
                 Welcome To AIMS!
             </div>
@@ -162,8 +162,49 @@
                 Explore Beyond Your <br> Academic Goals
             </div>
             <a class="btn  btn-success btn-xl text-uppercase" href="#department">Tell Me More</a>
+        </div> -->
+
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold">Welcome To AIMS!</h1>
+            <p class="lead">Explore Beyond Your Academic Goals</p>
+            <p>Briefly introduce the Internship Management system and its purpose. Highlight its importance for 4th-year students and how it simplifies the internship process.</p>
+            <a href="#key-highlights" class="btn btn-success btn-lg mt-3">Tell Me More</a>
         </div>
     </section>
+
+    <!-- START::KEY HIGHLIGHTS SECTION -->
+    <section id="key-highlights" class="py-5 bg-light">
+        <div class="container">
+            <div class="row text-center mb-4">
+                <div class="col-12">
+                    <h2>Key Highlights</h2>
+                    <p class="text-muted">Discover the main features and benefits of the AIMS system.</p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <!-- Highlight 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="mb-3 fs-1 text-success">&#128197;</div>
+                    <h4>Automated Scheduling</h4>
+                    <p>Streamline the internship scheduling process with our automated tools.</p>
+                </div>
+                <!-- Highlight 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="mb-3 fs-1 text-success">&#128187;</div>
+                    <h4>Real-time Monitoring</h4>
+                    <p>Keep track of internship progress and activities in real-time.</p>
+                </div>
+                <!-- Highlight 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="mb-3 fs-1 text-success">&#128218;</div>
+                    <h4>Comprehensive Reports</h4>
+                    <p>Generate detailed reports on intern performance and company feedback.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END::KEY HIGHLIGHTS SECTION -->
+
     <!--END::HOME HERO SECTION-->
 
     <!--START::DEPT HERO SECTION -->
@@ -175,22 +216,28 @@
         <div class="container-fluid d-flex justify-content-center align-items-center p-0 m-0" style="height: 15vh;">
             <div class="logos">
                 <div class="logos-slide">
-                    <img src="./img/bshm-logo.svg" />
-                    <img src="./img/bsit-logo.svg" />
-                    <img src="./img/bstm-logo.svg" />
-                    <img src="./img/bsa-logo.svg" />
-                    <img src="./img/barstool-store.svg" />
-                    <img src="./img/budweiser.svg" />
-                    <img src="./img/buzzfeed.svg" />
-                    <img src="./img/forbes.svg" />
-                    <img src="./img/macys.svg" />
-                    <img src="./img/menshealth.svg" />
-                    <img src="./img/mrbeast.svg" />
+                    <img src="./img/esyatek-logo.png" />
+                    <img src="./img/esyatek-logo.png" />
+                    <img src="./img/esyatek-logo.png" />
+                    <img src="./img/bshm-logo.png" />
+                    <img src="./img/bsit-logo.png" />
+                    <img src="./img/bstm-logo.png" />
+                    <img src="./img/bsa-logo.png" />
+                    <img src="./img/esyatek-logo.png" />
+                    <img src="./img/esyatek-logo.png" />
                 </div>
             </div>
         </div>
     </section>
     <!--END::DEPT HERO SECTION-->
+
+                    <!-- <img src="./img/buzzfeed.svg" />
+                    <img src="./img/budweiser.svg" />
+                    <img src="./img/barstool-store.svg" />
+                    <img src="./img/forbes.svg" />
+                    <img src="./img/macys.svg" />
+                    <img src="./img/menshealth.svg" />
+                    <img src="./img/mrbeast.svg" /> -->
 
     <!--START::COMP HERO SECTION -->
     <section id="company" class="container-fluid p-0 m-0 vh-100 text-light" style="background-color: #edeeee;">
