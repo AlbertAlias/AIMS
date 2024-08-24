@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- STYLES -->
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="assets/style.css">
 
     <style>
         :root {
@@ -167,9 +167,27 @@
     <!--END::HOME HERO SECTION-->
 
     <!--START::DEPT HERO SECTION -->
-    <section id="department" class="container-fluid p-0 m-0 vh-100 d-flex align-items-center text-center text-light" style="background-image: url('img/esyatek-bg2.jpg'); background-size: cover; background-position: center;">
-        <div class="container d-flex justify-content-end pe-5">
-            <button class="btn btn-lg btn-outline-success fs-6 fw-semibold text-dark" style="position: relative; top: 180px;">Explore Department</button>
+    <section id="department" class="container-fluid p-0 m-0 vh-100 text-light">
+        <div class="container-fluid" style="height: 85vh; background-image: url('img/esyatek-bg2.jpg'); background-size: cover; background-position: center;">
+            
+        </div>
+
+        <div class="container-fluid d-flex justify-content-center align-items-center p-0 m-0" style="height: 15vh;">
+            <div class="logos">
+                <div class="logos-slide">
+                    <img src="./img/bshm-logo.svg" />
+                    <img src="./img/bsit-logo.svg" />
+                    <img src="./img/bstm-logo.svg" />
+                    <img src="./img/bsa-logo.svg" />
+                    <img src="./img/barstool-store.svg" />
+                    <img src="./img/budweiser.svg" />
+                    <img src="./img/buzzfeed.svg" />
+                    <img src="./img/forbes.svg" />
+                    <img src="./img/macys.svg" />
+                    <img src="./img/menshealth.svg" />
+                    <img src="./img/mrbeast.svg" />
+                </div>
+            </div>
         </div>
     </section>
     <!--END::DEPT HERO SECTION-->
@@ -396,6 +414,9 @@
                 });
             });
         });
+
+        var copy = document.querySelector(".logos-slide").cloneNode(true);
+        document.querySelector(".logos").appendChild(copy);
     </script>
 </body>
 </html>
