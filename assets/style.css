@@ -50,3 +50,48 @@
     height: 80px;
     margin: 0 40px;
   }
+
+  /* Sidebar Style */
+  /* Basic styles for the button in the navbar */
+.navbar #sidebarToggle {
+  width: 2.5rem;
+  height: 2.5rem;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  background-color: ghostwhite;
+  margin-bottom: 0;
+  transition: transform 0.3s ease; /* Smooth rotation transition */
+}
+
+/* Initial state for the icon */
+.navbar #sidebarToggle::after {
+  content: '\f104'; /* Font Awesome icon for 'collapse' */
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: #000;
+  margin: 0;
+  transition: transform 0.3s ease; /* Smooth rotation transition */
+}
+
+/* Hover effect for the button */
+.navbar #sidebarToggle:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  border-radius: 50%;
+}
+
+/* Focus effect for the button */
+/* .navbar #sidebarToggle:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
+} */
+
+/* Rotating icon when sidebar is toggled */
+.rotate-icon::after {
+  transform: rotate(180deg); /* Rotate icon 180 degrees */
+}
