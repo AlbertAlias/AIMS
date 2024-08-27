@@ -27,6 +27,9 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+    <!-- STYLES -->
+    <link rel="stylesheet" href="assets/style.css">
+
 </head>
 
 <body id="page-top">
@@ -50,8 +53,8 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="admin-dashboard.php">
+            <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/admin-dashboard.php')">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
@@ -161,11 +164,11 @@
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
+            <!-- Headernav Content -->
+            <?php include('pages/headernav.php'); // Default content ?>
+
             <!-- Main Content -->
             <div id="content">
-
-                <!-- Headernav Content -->
-                <?php include('pages/headernav.php'); // Default content ?>
 
                 <!-- Begin Page Content -->
 
@@ -173,8 +176,6 @@
                 <div id="page-content">
                     <?php include('pages/admin-dashboard.php'); // Default content ?>
                 </div>
-
-                
 
                     <!-- Content Row -->
                     <div class="row">
@@ -201,7 +202,7 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <!-- Core plugin JavaScript-->

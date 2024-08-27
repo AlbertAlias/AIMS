@@ -104,28 +104,7 @@
 <body>
 
     <!--START::HEADER -->
-    <header class="header sticky-top py-1">
-        <div class="container-fluid">
-            <div class="d-flex justify-content-between align-items-center py-1">
-                <!-- Logo -->
-                <a href="#" class="navbar-brand ms-3">
-                    <img src="img/esyatek-logo.png" alt="Logo" width="50">
-                </a>
-                
-                <!-- Navigation Links -->
-                <nav class="d-flex gap-3">
-                    <a href="#home" class="fs-6 fw-semibold text-dark text-decoration-none">Home</a>
-                    <a href="#department" class="fs-6 fw-semibold  text-dark text-decoration-none ms-4">Department</a>
-                    <a href="#company" class="fs-6 fw-semibold text-dark text-decoration-none mx-4">Company</a>
-                    <a href="#about" class="fs-6 fw-semibold text-dark text-decoration-none me-4">About</a>
-                    <a href="#contact" class="fs-6 fw-semibold text-dark text-decoration-none">Contact</a>
-                </nav>
-
-                <!-- Button -->
-                <a href="#" class="btn btn-success fs-6 fw-semibold text-dark me-3 border-1 border-black" data-bs-toggle="modal" data-bs-target="#loginModal">Sign in</a>
-            </div>
-        </div>
-    </header>
+    <?php include('pages/landing-header.php'); ?>
     <!--END::HEADER-->
 
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -152,60 +131,20 @@
         </div>
     </div>
 
-    <!--START::HOME HERO SECTION -->
-    <section id="home" class="container-fluid p-0 m-0 vh-100 d-flex align-items-center justify-content-center text-light" style="background-image: url('img/esyatek-bg1.jpeg'); background-size: cover; background-position: center;">
-        <!-- <div class="container text-center" style="max-width: 600px; margin-left: 2px;">
-            <div class="subheading fw-bold mb-1" style="font-size: 3.1rem; color: #343a40; text-shadow: 1px 1px 0 #dee2e6, -1px -1px 0 #dee2e6, 1px -1px 0 #dee2e6, -1px 1px 0 #dee2e6;">
-                Welcome To AIMS!
-            </div>
-            <div class="masthead-heading text-uppercase fw-bold mb-2" style="font-size: 2rem; color: #343a40; text-shadow: 1px 1px 0 #dee2e6, -1px -1px 0 #dee2e6, 1px -1px 0 #dee2e6, -1px 1px 0 #dee2e6;">
-                Explore Beyond Your <br> Academic Goals
-            </div>
-            <a class="btn  btn-success btn-xl text-uppercase" href="#department">Tell Me More</a>
-        </div> -->
-
-        <div class="container text-center">
-            <h1 class="display-4 fw-bold">Welcome To AIMS!</h1>
-            <p class="lead">Explore Beyond Your Academic Goals</p>
-            <p>Briefly introduce the Internship Management system and its purpose. Highlight its importance for 4th-year students and how it simplifies the internship process.</p>
-            <a href="#key-highlights" class="btn btn-success btn-lg mt-3">Tell Me More</a>
-        </div>
-    </section>
-
-    <!-- START::KEY HIGHLIGHTS SECTION -->
-    <section id="key-highlights" class="py-5 bg-light">
-        <div class="container">
-            <div class="row text-center mb-4">
-                <div class="col-12">
-                    <h2>Key Highlights</h2>
-                    <p class="text-muted">Discover the main features and benefits of the AIMS system.</p>
-                </div>
-            </div>
-            <div class="row text-center">
-                <!-- Highlight 1 -->
-                <div class="col-md-4 mb-4">
-                    <div class="mb-3 fs-1 text-success">&#128197;</div>
-                    <h4>Automated Scheduling</h4>
-                    <p>Streamline the internship scheduling process with our automated tools.</p>
-                </div>
-                <!-- Highlight 2 -->
-                <div class="col-md-4 mb-4">
-                    <div class="mb-3 fs-1 text-success">&#128187;</div>
-                    <h4>Real-time Monitoring</h4>
-                    <p>Keep track of internship progress and activities in real-time.</p>
-                </div>
-                <!-- Highlight 3 -->
-                <div class="col-md-4 mb-4">
-                    <div class="mb-3 fs-1 text-success">&#128218;</div>
-                    <h4>Comprehensive Reports</h4>
-                    <p>Generate detailed reports on intern performance and company feedback.</p>
-                </div>
+<!--START::HOME HERO SECTION -->
+<section id="home" class="container-fluid p-0 m-0 vh-100 d-flex align-items-center justify-content-center text-light" style="background-image: url('img/esyatek-bg1.jpeg'); background-size: cover; background-position: center;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
+                <h1 class="display-6 fw-bold text-black d-none d-md-block">Welcome To AIMS!</h1> <!-- Hidden on screens smaller than md -->
+                <p class="lead text-black d-none d-md-block">Where you Achieve, Inspire, Motivate, & Succeed</p> <!-- Hidden on screens smaller than md -->
+                <a href="#department" class="btn btn-success btn-md d-none d-md-block">Tell Me More</a> <!-- Hidden on screens smaller than md -->
             </div>
         </div>
-    </section>
-    <!-- END::KEY HIGHLIGHTS SECTION -->
+    </div>
+</section>
+<!--END::HOME HERO SECTION-->
 
-    <!--END::HOME HERO SECTION-->
 
     <!--START::DEPT HERO SECTION -->
     <section id="department" class="container-fluid p-0 m-0 vh-100 text-light">
