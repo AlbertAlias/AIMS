@@ -104,46 +104,22 @@
 <body>
 
     <!--START::HEADER -->
-    <?php include('pages/landing-header.php'); ?>
+    <?php include('components/landing-header.php'); ?>
     <!--END::HEADER-->
 
-    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="display: flex; align-items: center; min-height: calc(100% - 1rem);">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="loginForm" method="POST" action="">
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </form>
+    <!--START::HOME HERO SECTION -->
+    <section id="home" class="container-fluid p-0 m-0 vh-100 d-flex align-items-center justify-content-center text-light" style="background-image: url('img/esyatek-bg1.jpeg'); background-size: cover; background-position: center;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
+                    <h1 class="display-6 fw-bold text-black d-none d-md-block">Welcome To AIMS!</h1> <!-- Hidden on screens smaller than md -->
+                    <p class="lead text-black d-none d-md-block">Where you Achieve, Inspire, Motivate, & Succeed</p> <!-- Hidden on screens smaller than md -->
+                    <a href="#department" class="btn btn-success btn-md d-none d-md-block">Tell Me More</a> <!-- Hidden on screens smaller than md -->
                 </div>
             </div>
         </div>
-    </div>
-
-<!--START::HOME HERO SECTION -->
-<section id="home" class="container-fluid p-0 m-0 vh-100 d-flex align-items-center justify-content-center text-light" style="background-image: url('img/esyatek-bg1.jpeg'); background-size: cover; background-position: center;">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
-                <h1 class="display-6 fw-bold text-black d-none d-md-block">Welcome To AIMS!</h1> <!-- Hidden on screens smaller than md -->
-                <p class="lead text-black d-none d-md-block">Where you Achieve, Inspire, Motivate, & Succeed</p> <!-- Hidden on screens smaller than md -->
-                <a href="#department" class="btn btn-success btn-md d-none d-md-block">Tell Me More</a> <!-- Hidden on screens smaller than md -->
-            </div>
-        </div>
-    </div>
-</section>
-<!--END::HOME HERO SECTION-->
+    </section>
+    <!--END::HOME HERO SECTION-->
 
 
     <!--START::DEPT HERO SECTION -->
