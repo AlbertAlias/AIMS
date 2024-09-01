@@ -1,4 +1,4 @@
-function submitForm() {
+function submitForm(event) {
     // Prevent the default form submission
     event.preventDefault();
 

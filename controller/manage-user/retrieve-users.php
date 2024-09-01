@@ -1,26 +1,67 @@
 <?php
-    include('../../dbconn.php');
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+    
+    include '../../dbconn.php';
 
-    // Query to fetch user data
-    $sql = "SELECT firstname, lastname, department, studentID, company, email, password, user_type FROM users_acc";
-    $result = $conn->query($sql);
+    $draw = $_POST['draw'];
+    $row = $_POST['start'];
+    $rowperpage = $_POST['length']; // Rows display per page
+    $columnIndex = $_POST['order'][0]['column']; // Column index
+    $columnName = $_POST['columns'][$columnIndex]['data']; // Column name
+    $columnSortOrder = $_POST['order'][0]['dir']; // asc or desc
+    $searchValue = $_POST['search']['value']; // Search value
 
-    if (!$result) {
-        // If there is an error with the query, output it
-        die('Query Error: ' . $conn->error);
+    // Search query
+    $searchQuery = " ";
+    if($searchValue != ''){
+        $searchQuery = " AND (firstname LIKE '%".$searchValue."%' 
+                            OR lastname LIKE '%".$searchValue."%' 
+                            OR department LIKE '%".$searchValue."%' 
+                            OR studentID LIKE '%".$searchValue."%' 
+                            OR company LIKE '%".$searchValue."%' 
+                            OR email LIKE '%".$searchValue."%' 
+                            OR user_type LIKE '%".$searchValue."%') ";
     }
 
-    $users = array();
+    // Total number of records without filtering
+    $totalRecordsQuery = "SELECT COUNT(*) AS totalcount FROM users_acc";
+    $totalRecordsResult = mysqli_query($conn, $totalRecordsQuery);
+    $totalRecords = mysqli_fetch_assoc($totalRecordsResult)['totalcount'];
 
-    // Fetch all users
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $users[] = $row;
-        }
+    // Total number of records with filtering
+    $totalRecordwithFilterQuery = "SELECT COUNT(*) AS totalcountfiltered FROM users_acc WHERE 1 ".$searchQuery;
+    $totalRecordwithFilterResult = mysqli_query($conn, $totalRecordwithFilterQuery);
+    $totalRecordwithFilter = mysqli_fetch_assoc($totalRecordwithFilterResult)['totalcountfiltered'];
+
+    // Fetch records
+    $empQuery = "SELECT * FROM users_acc WHERE 1 ".$searchQuery." ORDER BY ".$columnName." ".$columnSortOrder." LIMIT ".$row.",".$rowperpage;
+    $empRecords = mysqli_query($conn, $empQuery);
+
+    $data = array();
+
+    while ($row = mysqli_fetch_assoc($empRecords)) {
+        $data[] = array(
+            "firstname" => $row['firstname'],
+            "lastname" => $row['lastname'],
+            "department" => $row['department'],
+            "studentID" => $row['studentID'],
+            "company" => $row['company'],
+            "email" => $row['email'],
+            "password" => $row['password'],
+            "user_type" => $row['user_type'],
+            "action" => '<button class="btn btn-primary edit-btn" data-id="'.$row['id'].'">Edit</button>
+                        <button class="btn btn-danger delete-btn" data-id="'.$row['id'].'">Delete</button>'
+        );
     }
 
-    // Return the data as JSON
-    echo json_encode($users);
+    // Prepare response
+    $response = array(
+        "draw" => intval($draw),
+        "iTotalRecords" => $totalRecords,
+        "iTotalDisplayRecords" => $totalRecordwithFilter,
+        "aaData" => $data
+    );
 
-    $conn->close();
+    echo json_encode($response);
 ?>

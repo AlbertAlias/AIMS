@@ -7,43 +7,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Tables</title>
+    <title>Manage User</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- DataTables CSS -->
-    <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/2.1.5/css/dataTables.dataTables.css"> -->
 
-    <style>
-        .dataTables_wrapper .dataTables_paginate .paginate_button {
-            padding: 0.5rem 1rem;
-            margin: 0 0.2rem; /* Adjust spacing between buttons */
-        }
-
-        /* Reduce the size of pagination buttons */
-        .dataTables_wrapper .dataTables_paginate .paginate_button {
-            font-size: 0.875rem; /* Adjust font size */
-        }
-
-        /* Style the active button */
-        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-            background-color: #007bff; /* Adjust background color */
-            color: #fff; /* Adjust text color */
-            border-radius: 0.25rem; /* Adjust border radius */
-        }
-
-        /* Style the disabled buttons */
-        .dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
-            color: #6c757d; /* Adjust color */
-            cursor: not-allowed;
-        }
-
-        /* Adjust spacing around the pagination container */
-        .dataTables_wrapper .dataTables_paginate {
-            margin: 1rem 0; /* Adjust margins */
-        }
-    </style>
 </head>
 <body id="page-top">
 
@@ -56,7 +23,7 @@
             For more information about DataTables, please visit the <a target="_blank"
                 href="https://datatables.net">official DataTables documentation</a>.</p>
 
-        <!-- DataTables Example -->
+        <!-- DataTables Example  style="max-width: 90%; margin: 0 auto; padding: 5px; left: -5%;"-->
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
                 <h6 class="font-weight-bold text-primary mb-0">Manage Users</h6>
@@ -64,7 +31,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <!-- <table class="table table-bordered" id="users-acc_dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="overflow: auto;">
                         <thead>
                             <tr>
                                 <th>First Name</th>
@@ -78,7 +45,7 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tfoot>
+                        <!-- <tfoot>
                             <tr>
                                 <th>First Name</th>
                                 <th>Last Name</th>
@@ -90,26 +57,8 @@
                                 <th>User Type</th>
                                 <th>Action</th>
                             </tr>
-                        </tfoot>
+                        </tfoot> -->
                         <tbody id="tdata"></tbody>
-                    </table> -->
-                    <table id="example" class="table table-striped table-bordered" style="width:100%">
-                        <thead>
-                            <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Department</th>
-                                <th>Student ID</th>
-                                <th>Company</th>
-                                <th>Email</th>
-                                <th>Password</th>
-                                <th>User Type</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tdata">
-                            <!-- Data goes here -->
-                        </tbody>
                     </table>
                 </div>
             </div>
@@ -173,10 +122,17 @@
                             <div class="mb-3">
                                 <label for="user_type" class="form-label">User Type</label>
                                 <select class="form-select" id="user_type" name="user_type" required>
-                                    <option value="OJT Student">OJT Student</option>
+                                    <!-- <option value="OJT Student">OJT Student</option>
                                     <option value="OJT Coordinator">OJT Coordinator</option>
                                     <option value="OJT Supervisor">OJT Supervisor</option>
-                                    <option value="Registrar">Registrar</option>
+                                    <option value="Registrar">Registrar</option> -->
+                                    <?php
+                                        // Exclude admin from the dropdown
+                                        $user_types = ['OJT Student', 'OJT Coordinator', 'OJT Supervisor', 'Registrar'];
+                                        foreach ($user_types as $type) {
+                                            echo "<option value=\"$type\">$type</option>";
+                                        }
+                                    ?>
                                 </select>
                             </div>
                         </form>
@@ -189,13 +145,10 @@
             </div>
         </div>
 
-        <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <!-- Bootstrap Bundle with Popper -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-        <!-- DataTables JS -->
-        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+        <!-- jQuery CDN Link -->
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+        <!-- <script src="assets/datatables.js"></script> -->
 
         <!--START::ADD USER MODAL FUNCTION-->
         <script src="functions/add-users/user-type.js"></script>
@@ -206,136 +159,35 @@
         <!--START::CRUD AJAX -->
         <script src="crud-ajax/manage-users/create-users.js"></script>
 
-        <!--END::CRUD AJAX-->
-
-    
-        <!-- <script>
-            $(document).ready(function() {
-            $('#example').DataTable({
-                // DataTable options go here
-            });
-        });
-        </script>
-
-        <script>
-            $('#example').DataTable({
-                responsive: true
-            });
-        </script>
-
-        <script>
-            $('#example').DataTable({
-                serverSide: true,
-                ajax: 'server-side-script.php'
-            });
-        </script>
-
-        <script>
-            $('#example').DataTable({
-                columnDefs: [
-                    {
-                        targets: 5,
-                        render: function (data, type, row) {
-                            return '$' + data;
-                        }
-                    }
-                ]
-            });
-        </script>
-
-        <script>
-            $('#example').DataTable({
-                rowGroup: {
-                    dataSrc: 2 // Index of the column to group by
-                }
-            });
-        </script>
-
-        <script>
-            $('#example').DataTable({
-                select: true
-            });
-        </script>
-        
-        <script>
-            new $.fn.dataTable.FixedHeader($('#example').DataTable());
-        </script> -->
-
         <script>
             $(document).ready(function() {
-                $('#example').DataTable({
-                    responsive: true,
-                    serverSide: true,
-                    ajax: 'controller/manage-user/retrieve-users.php',
-                    columnDefs: [
-                        {
-                            targets: 5,
-                            render: function (data, type, row) {
-                                return '$' + data;
-                            }
+                $('#dataTable').DataTable({
+                    "processing": true,
+                    "serverSide": true,
+                    "ajax": {
+                        "url": "controller/manage-user/retrieve-users.php",
+                        "type": "POST",
+                        "dataSrc": function (json) {
+                            console.log(json); // Debugging line to check the response
+                            return json.aaData;
                         }
-                    ],
-                    rowGroup: {
-                        dataSrc: 2 // Index of the column to group by
                     },
-                    select: true
-                });
-
-                // Initialize FixedHeader
-                new $.fn.dataTable.FixedHeader($('#example').DataTable());
-            });
-
-            $(document).ready(function() {
-                $('#example').DataTable({
-                    responsive: true
+                    "columns": [
+                        { "data": "firstname" },
+                        { "data": "lastname" },
+                        { "data": "department" },
+                        { "data": "studentID" },
+                        { "data": "company" },
+                        { "data": "email" },
+                        { "data": "password" },
+                        { "data": "user_type" },
+                        { "data": "action", "orderable": false, "searchable": false }
+                    ]
                 });
             });
         </script>
 
-        <script>
-            // $(document).ready(function() {
-            //     // Initialize DataTable
-            //     $('#example').DataTable();
-
-            //     // Fetch users data from the server
-            //     function fetchUsers() {
-            //         $.ajax({
-            //             url: 'controller/manage-users/retrieve-users.php',
-            //             type: 'GET',
-            //             dataType: 'json',
-            //             success: function(response) {
-            //                 let tbody = '';
-            //                 response.forEach(user => {
-            //                     tbody += `
-            //                         <tr>
-            //                             <td>${user.firstname}</td>
-            //                             <td>${user.lastname}</td>
-            //                             <td>${user.department}</td>
-            //                             <td>${user.studentID}</td>
-            //                             <td>${user.company}</td>
-            //                             <td>${user.email}</td>
-            //                             <td>${user.password}</td>
-            //                             <td>${user.user_type}</td>
-            //                             <td>
-            //                                 <!-- Add your action buttons here (Edit/Delete) -->
-            //                                 <button class="btn btn-warning btn-sm">Edit</button>
-            //                                 <button class="btn btn-danger btn-sm">Delete</button>
-            //                             </td>
-            //                         </tr>`;
-            //                 });
-            //                 $('#tdata').html(tbody);
-            //                 $('#example').DataTable();
-            //             },
-            //             error: function(xhr, status, error) {
-            //                 console.error('Error fetching data:', error);
-            //             }
-            //         });
-            //     }
-
-            //     // Call the function to fetch user data
-            //     fetchUsers();
-            // });
-        </script>
+        <!--END::CRUD AJAX-->
 
 </body>
 

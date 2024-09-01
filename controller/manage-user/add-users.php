@@ -11,15 +11,6 @@
     $password = isset($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : null;
     $user_type = $_POST['user_type'] ?? null;
 
-    // Debugging - Check received values
-    echo "Received firstname: " . htmlspecialchars($firstname) . "<br>";
-    echo "Received lastname: " . htmlspecialchars($lastname) . "<br>";
-    echo "Received department: " . htmlspecialchars($department) . "<br>";
-    echo "Received studentID: " . htmlspecialchars($studentID) . "<br>";
-    echo "Received company: " . htmlspecialchars($company) . "<br>";
-    echo "Received email: " . htmlspecialchars($email) . "<br>";
-    echo "Received user_type: " . htmlspecialchars($user_type) . "<br>";
-
     // Prepare SQL query
     $sql = "INSERT INTO users_acc (firstname, lastname, department, studentID, company, email, password, user_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 

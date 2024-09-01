@@ -5,7 +5,14 @@
         exit();
     }
 
-    $page = isset($_GET['page']) ? $_GET['page'] : 'pages/admin-dashboard.php'; // Set default page
+    // Set default page path correctly
+    $page = isset($_GET['page']) ? $_GET['page'] : 'pages/admin-dashboard.php';
+
+    // Sanitize and validate the page parameter to prevent security issues
+    $allowed_pages = ['pages/admin-dashboard.php', 'pages/manage-users.php']; // Add more pages as needed
+    if (!in_array($page, $allowed_pages)) {
+        $page = 'pages/admin-dashboard.php'; // Default page
+    }
 ?>
 
 <!DOCTYPE html>
@@ -18,13 +25,13 @@
     <meta name="author" content="">
 
     <title>SB Admin 2 - Dashboard</title>
-
+    
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- STYLES -->
     <link rel="stylesheet" href="assets/style.css">
-
+    <link rel="stylesheet" href="assets/datatable.css">
 </head>
 
 <body id="page-top">
@@ -48,12 +55,11 @@
 
                 <!-- Pages Content -->
                 <div id="page-content">
-                    <?php include('pages/' . $page); ?>
+                    <?php include($page); ?>
                 </div>
 
                 <!-- Content Row -->
                 <div class="row">
-
                     <div class="col-lg-6 mb-4"></div>
                 </div>
 
@@ -70,9 +76,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    <!-- jQuery CDN Link -->
-    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 
     <!-- BOOTSTRAP CDN LINK -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

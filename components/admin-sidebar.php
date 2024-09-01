@@ -15,7 +15,7 @@
 
 <!-- Nav Item - Dashboard -->
 <li class="nav-item">
-    <a class="nav-link" href="javascript:void(0);" onclick="loadPage('admin-dashboard.php')">
+    <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/admin-dashboard.php')">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span>
     </a>
@@ -31,7 +31,7 @@
 
 <!-- Nav Item - Manage Users -->
 <li class="nav-item">
-    <a class="nav-link" href="javascript:void(0);" onclick="loadPage('manage-users.php')">
+    <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/manage-users.php')">
         <i class="fa-solid fa-user-gear"></i>
         <span>Manage Users</span>
     </a>

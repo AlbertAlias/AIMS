@@ -350,35 +350,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
 
-    <script>
-        $(document).ready(function () {
-            $('#loginForm').submit(function (e) {
-                e.preventDefault(); // Prevent the default form submission
-
-                $.ajax({
-                    type: 'POST',
-                    url: 'login_cont.php',
-                    data: $(this).serialize(),
-                    dataType: 'json',
-                    success: function (response) {
-                        if (response.status == 'success') {
-                            alert(response.message);
-                            // Redirect to the dashboard or another page
-                            window.location.href = 'admin.php';
-                        } else {
-                            alert(response.message);
-                        }
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.log('AJAX error:', textStatus, errorThrown);
-                        alert('An error occurred. Please try again.');
-                    }
-                });
-            });
-        });
-
-        var copy = document.querySelector(".logos-slide").cloneNode(true);
-        document.querySelector(".logos").appendChild(copy);
+    <!--START::ADD USER MODAL FUNCTION-->
+    <script src="crud-ajax/manage-users/login-users.js"></script>
+    <!--END::ADD USER MODAL FUNCTION-->
     </script>
 </body>
 </html>

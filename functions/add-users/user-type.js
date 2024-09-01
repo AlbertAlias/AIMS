@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    // Show/Hide fields based on user type selection
     $('#user_type').change(function() {
         var userType = $(this).val();
         $('#departmentField, #studentIDField, #companyField').hide();
