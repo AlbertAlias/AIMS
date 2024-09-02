@@ -17,17 +17,11 @@
     <!-- Begin Page Content -->
     <div class="container-fluid">
 
-        <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-        <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-            For more information about DataTables, please visit the <a target="_blank"
-                href="https://datatables.net">official DataTables documentation</a>.</p>
-
         <!-- DataTables Example  style="max-width: 90%; margin: 0 auto; padding: 5px; left: -5%;"-->
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
                 <h6 class="font-weight-bold text-primary mb-0">Manage Users</h6>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add User</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal"><i class="fa-solid fa-user-plus"></i> Add User</button>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -144,50 +138,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- jQuery CDN Link -->
-        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-        <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
-        <!-- <script src="assets/datatables.js"></script> -->
-
-        <!--START::ADD USER MODAL FUNCTION-->
-        <script src="functions/add-users/user-type.js"></script>
-        <script src="functions/add-users/email.js"></script>
-        <script src="functions/add-users/studID.js"></script>
-        <!--END::ADD USER MODAL FUNCTION-->
-
-        <!--START::CRUD AJAX -->
-        <script src="crud-ajax/manage-users/create-users.js"></script>
-
-        <script>
-            $(document).ready(function() {
-                $('#dataTable').DataTable({
-                    "processing": true,
-                    "serverSide": true,
-                    "ajax": {
-                        "url": "controller/manage-user/retrieve-users.php",
-                        "type": "POST",
-                        "dataSrc": function (json) {
-                            console.log(json); // Debugging line to check the response
-                            return json.aaData;
-                        }
-                    },
-                    "columns": [
-                        { "data": "firstname" },
-                        { "data": "lastname" },
-                        { "data": "department" },
-                        { "data": "studentID" },
-                        { "data": "company" },
-                        { "data": "email" },
-                        { "data": "password" },
-                        { "data": "user_type" },
-                        { "data": "action", "orderable": false, "searchable": false }
-                    ]
-                });
-            });
-        </script>
-
-        <!--END::CRUD AJAX-->
 
 </body>
 

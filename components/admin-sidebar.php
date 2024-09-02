@@ -1,4 +1,4 @@
-<!-- Sidebar -->
+<!-- Sidebar-->
 <ul class="navbar-nav sidebar sidebar-dark accordion" style="background-color: #198754;" id="accordionSidebar">
 
 <!-- Sidebar - Brand -->
@@ -6,7 +6,7 @@
     <div class="sidebar-brand-icon">
     <img src="img/esyatek-logo.png" alt="Logo" width="50">
     </div>
-    <div class="sidebar-brand-text mx-1">AIMS</div>
+    <div class="sidebar-brand-text mx-1 text-black">AIMS</div>
     
 </a>
 
@@ -14,39 +14,29 @@
 <hr class="sidebar-divider my-0">
 
 <!-- Nav Item - Dashboard -->
-<li class="nav-item">
+<li class="nav-item <?php echo $current_page === 'pages/admin-dashboard.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
     <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/admin-dashboard.php')">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Dashboard</span>
+        <i class='bx bxs-dashboard' style="font-size: 18px;"></i>
+        <span class="text-black">Dashboard</span>
     </a>
 </li>
 
-<!-- Divider -->
-<hr class="sidebar-divider">
-
-<!-- Heading -->
-<div class="sidebar-heading">
-    Manage Accounts
-</div>
-
 <!-- Nav Item - Manage Users -->
-<li class="nav-item">
+<li class="nav-item <?php echo $current_page === 'pages/manage-users.php' ? 'active' : ''; ?>">
     <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/manage-users.php')">
         <i class="fa-solid fa-user-gear"></i>
-        <span>Manage Users</span>
+        <span style="font-size: 12px;">Manage Users</span>
     </a>
 </li>
 
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <!-- <i class="fas fa-fw fa-cog"></i> -->
+    <a class="nav-link collapsed" style="" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAddUser" aria-expanded="true" aria-controls="collapseAddUser">
         <i class="fa-solid fa-user-plus"></i>
         <span>Add User</span>
         <i class="fas fa-chevron-right rotate-icon" style="margin-left: 92px; transition: transform 0.2s ease-in-out;"></i>
     </a>
-    <div class="collapse" id="collapseTwo" aria-labelledby="headingTwo" data-bs-parent="#accordionSidebar">
+    <div class="collapse" id="collapseAddUser" aria-labelledby="headingAddUser" data-bs-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item text-black" href="layout-static.html">Manage Users</a>
             <a class="collapse-item" href="layout-sidenav-light.html">Light Sidenav</a>

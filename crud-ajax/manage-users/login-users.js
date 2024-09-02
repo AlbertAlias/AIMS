@@ -16,8 +16,10 @@ $(document).ready(function() {
             },
             success: function(response) {
                 if (response === 'success') {
-                    // Redirect to the admin dashboard or desired page
-                    window.location.href = 'admin.php';
+                    // Redirect to the admin dashboard with the correct URL
+                    window.location.href = 'admin.php?page=pages/admin-dashboard.php';
+                } else if (response === 'invalid_email_format') {
+                    alert('Invalid email format. Please enter a valid email.');
                 } else {
                     // Show an error message
                     alert('Invalid email or password. Please try again.');
