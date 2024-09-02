@@ -4,17 +4,19 @@
     
     include '../../dbconn.php';
 
-    $draw = $_POST['draw'];
-    $row = $_POST['start'];
-    $rowperpage = $_POST['length']; // Rows display per page
-    $columnIndex = $_POST['order'][0]['column']; // Column index
-    $columnName = $_POST['columns'][$columnIndex]['data']; // Column name
-    $columnSortOrder = $_POST['order'][0]['dir']; // asc or desc
-    $searchValue = $_POST['search']['value']; // Search value
+    $draw = isset($_POST['draw']) ? $_POST['draw'] : 1;  // Provide a default value for draw
+    $row = isset($_POST['start']) ? $_POST['start'] : 0;
+    $rowperpage = isset($_POST['length']) ? $_POST['length'] : 10; // Rows display per page
+
+    // Check if 'order' is set and not empty
+    $columnIndex = isset($_POST['order'][0]['column']) ? $_POST['order'][0]['column'] : 0; // Column index
+    $columnName = isset($_POST['columns'][$columnIndex]['data']) ? $_POST['columns'][$columnIndex]['data'] : 'firstname'; // Column name
+    $columnSortOrder = isset($_POST['order'][0]['dir']) ? $_POST['order'][0]['dir'] : 'asc'; // asc or desc
+    $searchValue = isset($_POST['search']['value']) ? $_POST['search']['value'] : ''; // Search value
 
     // Search query
-    $searchQuery = " ";
-    if($searchValue != ''){
+    $searchQuery = "";
+    if ($searchValue != '') {
         $searchQuery = " AND (firstname LIKE '%".$searchValue."%' 
                             OR lastname LIKE '%".$searchValue."%' 
                             OR department LIKE '%".$searchValue."%' 
@@ -58,9 +60,9 @@
     // Prepare response
     $response = array(
         "draw" => intval($draw),
-        "iTotalRecords" => $totalRecords,
-        "iTotalDisplayRecords" => $totalRecordwithFilter,
-        "aaData" => $data
+        "recordsTotal" => $totalRecords,
+        "recordsFiltered" => $totalRecordwithFilter,
+        "data" => $data
     );
 
     echo json_encode($response);

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if (!isset($_SESSION['user_id'])) {
+    if (!isset($_SESSION['email'])) {
         header('Location: index.php');
         exit();
     }
@@ -9,7 +9,7 @@
     $page = isset($_GET['page']) ? $_GET['page'] : 'pages/admin-dashboard.php';
 
     // Sanitize and validate the page parameter to prevent security issues
-    $allowed_pages = ['pages/admin-dashboard.php', 'pages/manage-users.php']; // Add more pages as needed
+    $allowed_pages = ['pages/admin-dashboard.php', 'pages/add-users.php', 'pages/manage-users.php']; // Add more pages as needed
     if (!in_array($page, $allowed_pages)) {
         $page = 'pages/admin-dashboard.php'; // Default page
     }
@@ -38,7 +38,14 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <style>
-
+        .form-container {
+            background-color: #f8f9fa; /* Light gray background */
+            border: 1px solid #ced4da; /* Light border */
+            border-radius: 0.375rem; /* Rounded corners */
+            box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            padding: 1.5rem; /* Padding inside the container */
+            margin-bottom: 1.5rem; /* Margin below each container */
+        }
     </style>
 </head>
 
@@ -100,6 +107,7 @@
     <script src="functions/add-users/user-type.js"></script>
     <script src="functions/add-users/email.js"></script>
     <script src="functions/add-users/studID.js"></script>
+    <script src="functions/add-users/add-users.js"></script>
     <!--END::ADD USER MODAL FUNCTION-->
 
     <!--START::CRUD AJAX -->

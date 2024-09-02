@@ -26,9 +26,9 @@ function submitForm(event) {
     });
 }
 
-// Bind submitForm function to form submission
+// Ensure that the function is triggered on form submission
 $(document).ready(function() {
     $('#addUserForm').on('submit', function(event) {
-        submitForm(event); // Pass the event object here
+        submitForm(event); // Call submitForm function with the event object
     });
 });

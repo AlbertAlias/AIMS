@@ -22,15 +22,30 @@
 </li>
 
 <!-- Nav Item - Manage Users -->
-<li class="nav-item <?php echo $current_page === 'pages/manage-users.php' ? 'active' : ''; ?>">
+<!-- <li class="nav-item">
     <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/manage-users.php')">
         <i class="fa-solid fa-user-gear"></i>
         <span style="font-size: 12px;">Manage Users</span>
     </a>
-</li>
+</li> -->
 
 <!-- Nav Item - Pages Collapse Menu -->
 <li class="nav-item">
+    <a class="nav-link collapsed" style="" data-bs-toggle="collapse" data-bs-target="#collapseAddUser" aria-expanded="true" aria-controls="collapseAddUser">
+        <i class="fa-solid fa-user-gear"></i>
+        <span>Manage Users</span>
+        <i class="fas fa-chevron-right rotate-icon" style="margin-top: 6px; float: right; transition: transform 0.2s ease-in-out;"></i>
+    </a>
+    <div class="collapse" id="collapseAddUser" aria-labelledby="headingAddUser" data-bs-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+        <a class="collapse-item <?php echo $current_page === 'pages/add-users.php' ? 'active' : ''; ?>" href="javascript:void(0);" onclick="loadPage('pages/add-users.php')">Add Users</a>
+            <a class="collapse-item <?php echo $current_page === 'pages/manage-users.php' ? 'active' : ''; ?>" href="javascript:void(0);" onclick="loadPage('pages/manage-users.php')">View Users</a>
+        </div>
+    </div>
+</li>
+
+<!-- Nav Item - Pages Collapse Menu -->
+<!-- <li class="nav-item">
     <a class="nav-link collapsed" style="" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAddUser" aria-expanded="true" aria-controls="collapseAddUser">
         <i class="fa-solid fa-user-plus"></i>
         <span>Add User</span>
@@ -42,7 +57,7 @@
             <a class="collapse-item" href="layout-sidenav-light.html">Light Sidenav</a>
         </div>
     </div>
-</li>
+</li> -->
 
 <!-- Nav Item - Utilities Collapse Menu -->
 <!-- <li class="nav-item">
@@ -64,7 +79,7 @@
 </li> -->
 
 <!-- Divider -->
-<hr class="sidebar-divider">
+<!-- <hr class="sidebar-divider"> -->
 
 <!-- Heading -->
 <!-- <div class="sidebar-heading">
@@ -107,7 +122,7 @@
 </li> -->
 
 <!-- Divider -->
-<hr class="sidebar-divider d-none d-md-block">
+<!-- <hr class="sidebar-divider d-none d-md-block"> -->
 
 </ul>
 <!-- End of Sidebar -->
