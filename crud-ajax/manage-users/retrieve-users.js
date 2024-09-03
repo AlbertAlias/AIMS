@@ -24,7 +24,7 @@ $(document).ready(function() {
         "processing": true,
         "serverSide": true,
         "ajax": {
-            "url": "controller/manage-user/retrieve-users.php",
+            "url": "controller/manage-users/retrieve-users.php",
             "type": "POST",
             "dataSrc": function (json) {
                 console.log(json);

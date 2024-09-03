@@ -115,3 +115,20 @@
       width: 20%; /* Optional: Full-width button in collapsible menu */
   }
 }
+
+.sidebar:not(.toggled) .nav-link i {
+  font-size: 1rem; /* Adjust size as needed */
+}
+
+.sidebar:not(.toggled) .nav-link span {
+  font-size: 1rem; /* Adjust size as needed */
+}
+
+/* Increased size when sidebar is collapsed */
+.sidebar.toggled .nav-link i {
+  font-size: 1.8rem; /* Adjust size as needed */
+}
+
+.sidebar.toggled .nav-link span {
+  font-size: 2rem; /* Adjust size as needed */
+}

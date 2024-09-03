@@ -8,7 +8,7 @@ $(document).ready(function() {
 
         // AJAX request
         $.ajax({
-            url: 'controller/manage-user/login-users.php',
+            url: 'controller/manage-users/login-users.php',
             type: 'POST',
             data: {
                 email: email,

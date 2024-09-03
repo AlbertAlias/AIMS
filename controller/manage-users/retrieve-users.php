@@ -52,7 +52,7 @@
             "email" => $row['email'],
             "password" => $row['password'],
             "user_type" => $row['user_type'],
-            "action" => '<button class="btn btn-primary edit-btn" data-id="'.$row['id'].'">Edit</button>
+            "action" => '<button class="btn btn-primary edit-btn" data-id="'.$row['id'].'"><i class="fa-solid fa-pen-to-square"></i></button>
                         <button class="btn btn-danger delete-btn" data-id="'.$row['id'].'"><i class="fa-solid fa-trash"></i></button>'
         );
     }

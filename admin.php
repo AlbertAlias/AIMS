@@ -9,7 +9,7 @@
     $page = isset($_GET['page']) ? $_GET['page'] : 'pages/admin-dashboard.php';
 
     // Sanitize and validate the page parameter to prevent security issues
-    $allowed_pages = ['pages/admin-dashboard.php', 'pages/add-users.php', 'pages/manage-users.php']; // Add more pages as needed
+    $allowed_pages = ['pages/admin-dashboard.php', 'pages/add-users.php', 'pages/manage-users.php', 'pages/admin-profile.php']; // Add more pages as needed
     if (!in_array($page, $allowed_pages)) {
         $page = 'pages/admin-dashboard.php'; // Default page
     }
@@ -38,13 +38,30 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <style>
-        .form-container {
-            background-color: #f8f9fa; /* Light gray background */
-            border: 1px solid #ced4da; /* Light border */
-            border-radius: 0.375rem; /* Rounded corners */
-            box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1); /* Subtle shadow */
-            padding: 1.5rem; /* Padding inside the container */
-            margin-bottom: 1.5rem; /* Margin below each container */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        #wrapper {
+            height: 100%;
+        }
+
+        #content-wrapper {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        #content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            padding: 1rem;
+        }
+
+        #page-content {
+            flex-grow: 1;
         }
     </style>
 </head>
@@ -64,7 +81,7 @@
             <?php include('components/headernav.php'); ?>
 
             <!-- Main Content -->
-            <div id="content">
+            <div class="" id="content">
 
                 <!-- Begin Page Content -->
 
@@ -79,13 +96,10 @@
                 </div>
 
             </div>
-            <!-- /.container-fluid -->
-
+            <!-- End of Main Content -->
         </div>
-        <!-- End of Main Content -->
-
+        <!-- End of Content Wrapper -->
     </div>
-    <!-- End of Content Wrapper -->
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -100,14 +114,15 @@
     <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+    <!-- <script src="js/sb-admin-2.js"></script> -->
 
     <!-- <script src="assets/datatables.js"></script> -->
 
     <!--START::ADD USER MODAL FUNCTION-->
-    <script src="functions/add-users/user-type.js"></script>
     <script src="functions/add-users/email.js"></script>
+    <script src="functions/add-users/studForm-display.js"></script>
     <script src="functions/add-users/studID.js"></script>
-    <script src="functions/add-users/add-users.js"></script>
+    <script src="functions/add-users/user-type.js"></script>
     <!--END::ADD USER MODAL FUNCTION-->
 
     <!--START::CRUD AJAX -->
