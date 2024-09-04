@@ -1,0 +1,102 @@
+/* Ensure table header and cells align properly */
+.table th, .table td {
+    vertical-align: middle;
+}
+
+/* Make sure the table header text wraps properly on smaller screens */
+.table th {
+    white-space: nowrap;
+}
+
+/* Adjust the button sizes to fit the table cells */
+.table .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Optional: Add subtle hover effects to the table rows */
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Add a single underline to each table row */
+.table tbody tr {
+    border-bottom: 1px solid #dee2e6; /* Light gray border */
+}
+
+/* Remove the underline from the last row */
+.table tbody tr:last-child {
+    border-bottom: none;
+}
+
+/* Optional: Adjust padding and text alignment */
+.table td {
+    padding: 0.75rem;
+    text-align: center;
+}
+
+/* Custom Select Styling */
+.custom-select {
+    max-width: 100px; /* Adjust the width as needed */
+    border: 1px solid #ced4da; /* Border color */
+    border-radius: .25rem; /* Rounded corners */
+    box-shadow: 0 0 0 0 rgba(0,0,0,.125); /* Remove default box shadow */
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.custom-select:focus {
+    border-color: #007bff; /* Highlight color on focus */
+    box-shadow: 0 0 0 .2rem rgba(38,143,255,.25); /* Focus shadow */
+}
+
+/* Form Label Styling */
+.form-label {
+    font-size: 0.875rem; /* Slightly smaller font size */
+    color: #495057; /* Darker text color */
+}
+
+/* Pagination Styling */
+.pagination {
+    justify-content: center; /* Center pagination items */
+}
+
+.pagination .page-item {
+    margin: 0 2px; /* Space between pagination items */
+}
+
+.pagination .page-link {
+    border-radius: .25rem; /* Rounded corners */
+    background-color: #f8f9fa; /* Light background color */
+    color: #007bff; /* Link color */
+    border: 1px solid #dee2e6; /* Border color */
+    transition: background-color .15s ease, color .15s ease; /* Smooth transition */
+    padding: 0.5rem 0.75rem; /* Padding for better click area */
+}
+
+.pagination .page-link:hover {
+    background-color: #e2e6ea; /* Light gray background on hover */
+    color: #0056b3; /* Darker blue color on hover */
+    text-decoration: none; /* Remove underline on hover */
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #007bff; /* Active page background color */
+    color: #fff; /* Active page text color */
+    border-color: #007bff; /* Active page border color */
+}
+
+.pagination .page-item.disabled .page-link {
+    color: #6c757d; /* Disabled state text color */
+    cursor: not-allowed; /* Disable cursor */
+}
+
+/* Ensure responsiveness of table */
+.table-responsive {
+    overflow-x: auto; /* Allow horizontal scrolling on small screens */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
+}
+
+/* Ensure card container does not overflow */
+.card {
+    overflow: hidden; /* Hide overflow */
+}

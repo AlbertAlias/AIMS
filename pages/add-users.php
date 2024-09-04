@@ -163,9 +163,3 @@
         </div>
     </div>
 </div>
-
-<!-- <script src="functions/add-users/email.js"></script>
-    <script src="functions/add-users/studForm-display.js"></script>
-    <script src="functions/add-users/studID.js"></script>
-    <script src="functions/add-users/user-type.js"></script>
-    <script src="crud-ajax/manage-users/create-users.js"></script> -->

@@ -34,7 +34,8 @@
 
     <!-- STYLES -->
     <link rel="stylesheet" href="assets/style.css">
-    <link rel="stylesheet" href="assets/datatable.css">
+    <!-- <link rel="stylesheet" href="assets/datatable.css"> -->
+    <link rel="stylesheet" href="assets/ownTable.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <style>
@@ -111,7 +112,7 @@
     <!-- BOOTSTRAP CDN LINK -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <!-- DataTables CDN Link -->
-    <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script>
+    <!-- <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script> -->
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
     <!-- <script src="js/sb-admin-2.js"></script> -->
@@ -127,28 +128,14 @@
 
     <!--START::CRUD AJAX -->
     <script src="crud-ajax/manage-users/create-users.js"></script>
-    <script src="crud-ajax/manage-users/retrieve-users.js"></script>
+    <script src="crud-ajax/manage-users/ownTable.js"></script>
+    <!-- <script src="crud-ajax/manage-users/retrieve-users.js"></script> -->
 
     <!--START:FONT AWESOME ICON LINK-->
     <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
     <!--END:FONT AWESOME ICON LINK-->
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var collapseToggle = document.querySelectorAll('[data-bs-toggle="collapse"]');
-
-            collapseToggle.forEach(function (toggle) {
-                toggle.addEventListener('click', function () {
-                    var icon = this.querySelector('.fas.fa-chevron-right');
-                    if (this.classList.contains('collapsed')) {
-                        icon.style.transform = 'rotate(0deg)';
-                    } else {
-                        icon.style.transform = 'rotate(90deg)';
-                    }
-                });
-            });
-        });
-
         function loadPage(page) {
             window.location.href = 'admin.php?page=' + page;
         }
