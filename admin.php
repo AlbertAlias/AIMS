@@ -9,7 +9,12 @@
     $page = isset($_GET['page']) ? $_GET['page'] : 'pages/admin-dashboard.php';
 
     // Sanitize and validate the page parameter to prevent security issues
-    $allowed_pages = ['pages/admin-dashboard.php', 'pages/add-users.php', 'pages/manage-users.php', 'pages/admin-profile.php']; // Add more pages as needed
+    $allowed_pages = [
+        'pages/admin-dashboard.php',
+        'pages/add-users.php',
+        'pages/manage-users.php',
+        'pages/admin-profile.php',
+    ]; // Add more pages as needed
     if (!in_array($page, $allowed_pages)) {
         $page = 'pages/admin-dashboard.php'; // Default page
     }
@@ -36,6 +41,7 @@
     <link rel="stylesheet" href="assets/style.css">
     <!-- <link rel="stylesheet" href="assets/datatable.css"> -->
     <link rel="stylesheet" href="assets/ownTable.css">
+    <link rel="stylesheet" href="assets/admin-profile.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <style>
@@ -78,8 +84,8 @@
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Headernav Content -->
-            <?php include('components/headernav.php'); ?>
+            <!--Header Content -->
+            <?php include('components/admin-header.php'); ?>
 
             <!-- Main Content -->
             <div class="" id="content">
@@ -108,36 +114,57 @@
     </a>
 
     <!-- JQUERY CDN Link -->
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" defer></script>
     <!-- BOOTSTRAP CDN LINK -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+    <!--START:FONT AWESOME ICON LINK-->
+    <script src="https://kit.fontawesome.com/29c04b1733.js" defer crossorigin="anonymous"></script>
+    <!--END:FONT AWESOME ICON LINK-->
+    
     <!-- DataTables CDN Link -->
     <!-- <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script> -->
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+    <script src="js/sb-admin-2.min.js" defer></script>
     <!-- <script src="js/sb-admin-2.js"></script> -->
 
-    <!-- <script src="assets/datatables.js"></script> -->
+    <!--START::FUNCTIONS-->
+    <script src="functions/add-users/email.js" defer></script>
+    <script src="functions/add-users/studForm-display.js" defer></script>
+    <script src="functions/add-users/studID.js" defer></script>
+    <script src="functions/add-users/user-type.js" defer></script>
+    <script src="functions/admin-profile/drag_drop.js" defer></script>
+    <!--END::FUNCTION-->
 
-    <!--START::ADD USER MODAL FUNCTION-->
-    <script src="functions/add-users/email.js"></script>
-    <script src="functions/add-users/studForm-display.js"></script>
-    <script src="functions/add-users/studID.js"></script>
-    <script src="functions/add-users/user-type.js"></script>
-    <!--END::ADD USER MODAL FUNCTION-->
-
-    <!--START::CRUD AJAX -->
-    <script src="crud-ajax/manage-users/create-users.js"></script>
-    <script src="crud-ajax/manage-users/ownTable.js"></script>
+    <!--START::CRUD AJAX FUNCTIONS-->
+    <script src="crud-ajax/manage-users/create-users.js" defer></script>
+    <script src="crud-ajax/manage-users/ownTable.js" defer></script>
+    <script src="crud-ajax/admin-profile/create_profile.js" defer></script>
     <!-- <script src="crud-ajax/manage-users/retrieve-users.js"></script> -->
-
-    <!--START:FONT AWESOME ICON LINK-->
-    <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
-    <!--END:FONT AWESOME ICON LINK-->
+    <!--END::CRUD AJAX FUNCTIONS-->
 
     <script>
         function loadPage(page) {
             window.location.href = 'admin.php?page=' + page;
+        }
+        // function loadContent(type) {
+        //     $.ajax({
+        //         url: 'pages/' + type + '.php',
+        //         method: 'GET',
+        //         success: function (response) {
+        //             $('#page-content').html(response);
+        //         },
+        //         error: function(xhr, status, error) {
+        //             console.error('Error loading content:', error);
+        //             $('#page-content').html('<p>Content could not be loaded.</p>');
+        //         }
+        //     });
+        // }
+
+        function toggleActive(element) {
+            // Remove 'active' class from all sidebar items
+            $('.nav-item').removeClass('active');
+            // Add 'active' class to the clicked item
+            $(element).closest('.nav-item').addClass('active');
         }
     </script>
 </body>
