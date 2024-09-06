@@ -29,10 +29,12 @@
 
     <li class="nav-item align-items-center justify-content-center <?php echo $current_page === 'pages/manage-users.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
         <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/manage-users.php')">
-            <i class="fa-solid fa-eye"></i>
-            <span class="text-black">View Users</span>
+            <i class="fa-solid fa-users-gear"></i>
+            <span class="text-black">Manage Users</span>
         </a>
     </li>
+
+</ul>
 
     <!-- Nav Item - Manage Users -->
     <!-- <li class="nav-item">
@@ -48,5 +50,3 @@
             </div>
         </div>
     </li> -->
-
-</ul>

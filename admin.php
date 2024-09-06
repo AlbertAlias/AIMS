@@ -40,8 +40,9 @@
     <!-- STYLES -->
     <link rel="stylesheet" href="assets/style.css">
     <!-- <link rel="stylesheet" href="assets/datatable.css"> -->
-    <link rel="stylesheet" href="assets/ownTable.css">
+    <!-- <link rel="stylesheet" href="assets/ownTable.css"> -->
     <link rel="stylesheet" href="assets/admin-profile.css">
+    <link rel="stylesheet" href="assets/manage-users.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <style>
@@ -93,14 +94,14 @@
                 <!-- Begin Page Content -->
 
                 <!-- Pages Content -->
-                <div id="page-content">
+                <div id="page-content" style="width: 100%;">
                     <?php include($page); ?>
                 </div>
 
                 <!-- Content Row -->
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-lg-6 mb-4"></div>
-                </div>
+                </div> -->
 
             </div>
             <!-- End of Main Content -->
@@ -118,8 +119,10 @@
     <!-- BOOTSTRAP CDN LINK -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
     <!--START:FONT AWESOME ICON LINK-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/29c04b1733.js" defer crossorigin="anonymous"></script>
     <!--END:FONT AWESOME ICON LINK-->
+
     
     <!-- DataTables CDN Link -->
     <!-- <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script> -->
@@ -128,6 +131,7 @@
     <!-- <script src="js/sb-admin-2.js"></script> -->
 
     <!--START::FUNCTIONS-->
+    <script src="functions/manage-users/table-actions.js" defer></script>
     <script src="functions/add-users/email.js" defer></script>
     <script src="functions/add-users/studForm-display.js" defer></script>
     <script src="functions/add-users/studID.js" defer></script>
@@ -139,32 +143,12 @@
     <script src="crud-ajax/manage-users/create-users.js" defer></script>
     <script src="crud-ajax/manage-users/ownTable.js" defer></script>
     <script src="crud-ajax/admin-profile/create_profile.js" defer></script>
-    <!-- <script src="crud-ajax/manage-users/retrieve-users.js"></script> -->
+    <script src="crud-ajax/manage-users/retrieve-users.js" defer></script>
     <!--END::CRUD AJAX FUNCTIONS-->
 
     <script>
         function loadPage(page) {
             window.location.href = 'admin.php?page=' + page;
-        }
-        // function loadContent(type) {
-        //     $.ajax({
-        //         url: 'pages/' + type + '.php',
-        //         method: 'GET',
-        //         success: function (response) {
-        //             $('#page-content').html(response);
-        //         },
-        //         error: function(xhr, status, error) {
-        //             console.error('Error loading content:', error);
-        //             $('#page-content').html('<p>Content could not be loaded.</p>');
-        //         }
-        //     });
-        // }
-
-        function toggleActive(element) {
-            // Remove 'active' class from all sidebar items
-            $('.nav-item').removeClass('active');
-            // Add 'active' class to the clicked item
-            $(element).closest('.nav-item').addClass('active');
         }
     </script>
 </body>

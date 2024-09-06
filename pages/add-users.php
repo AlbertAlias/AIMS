@@ -1,4 +1,4 @@
-<div class="container mt-2">
+<div class="container mt-2 mx-0 p-0">
     <div class="row">
         <!-- User Role Selection Container (Top Left) -->
         <div class="col-12 col-md-4 mb-4">
