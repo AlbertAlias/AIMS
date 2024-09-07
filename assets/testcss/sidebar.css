@@ -1,0 +1,156 @@
+/* SIDEBAR CONTAINER */
+#sidebar {
+    width: 210px;
+    min-height: 100vh;
+    background-color: #343a40; /* Dark theme like Metronic */
+    transition: all 0.3s ease-in-out;
+    position: relative;
+}
+
+@media (min-width: 768px) {
+    #sidebar {
+        width: 210px;
+        min-height: 100vh;
+        background-color: #343a40; /* Dark theme like Metronic */
+        transition: all 0.3s ease-in-out;
+        position: relative;
+    }
+}
+
+/* Sidebar collapsed state */
+#sidebar.collapsed {
+    width: 113px;
+}
+
+@media (max-width: 767.98px) {
+    #sidebar.collapsed {
+        width: 100px;
+    }
+}
+
+/* Styling for sidebar navigation links */
+#sidebar .nav-link {
+    color: #adb5bd;
+    padding: 10px 15px;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#sidebar .nav-link:hover {
+    background-color: #495057;
+    color: #fff;
+}
+
+#sidebar .nav-link i {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+#sidebar.collapsed .nav-link span {
+    display: none;
+}
+
+#sidebar.collapsed .nav-link i {
+    margin-right: 0;
+    font-size: 24px;
+}
+
+/* Sidebar toggle button styling (smaller and square) */
+.sidebar-toggle {
+    top: 28px;
+    right: -15px; /* Slightly adjusted to keep it centered */
+    width: 30px; /* Smaller width */
+    height: 30px; /* Make it square */
+    background-color: #495057;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: absolute; /* Keep it positioned correctly */
+    border-radius: 7px;
+}
+
+@media (min-width: 768px) {
+    .sidebar-toggle {
+        top: 32px;
+        right: -15px; /* Slightly adjusted to keep it centered */
+        width: 30px; /* Smaller width */
+        height: 30px; /* Make it square */
+        background-color: #495057;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        position: absolute; /* Keep it positioned correctly */
+        border-radius: 7px;
+    }
+}
+
+/* Smaller icon inside the toggle */
+.sidebar-toggle i {
+    font-size: 16px; /* Reduced icon size */
+    color: #fff;
+    transition: transform 0.8s ease;
+}
+
+#sidebar.collapsed .sidebar-toggle i {
+    transform: rotate(-180deg);
+}
+
+/* Sidebar Header */
+#sidebar .sidebar-header {
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+/* Content styling */
+#content {
+    margin-left: 250px;
+    padding: 20px;
+    transition: margin-left 0.3s;
+}
+
+#sidebar.collapsed ~ #content {
+    margin-left: 80px;
+}
+
+/* SIDEBAR HEADER LOGO */
+/* Sidebar Header */
+#sidebar .sidebar-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+
+
+/* Ensure logo and text are responsive */
+.sidebar-header a {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-header .text-white {
+    font-size: 1rem; /* Adjust font size as needed */
+}
+
+@media (max-width: 767.98px) {
+    .sidebar-logo {
+        width: 75px; /* Smaller logo on small screens */
+    }
+    
+    .sidebar-header .text-white {
+        display: none; /* Hide text on small screens */
+    }
+}
+
+@media (min-width: 768px) {
+    .sidebar-logo {
+        width: 85px; /* Logo size for medium screens and up */
+    }
+
+    .sidebar-header .text-white {
+        display: block; /* Show text on medium screens and up */
+    }
+}

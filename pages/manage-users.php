@@ -1,18 +1,24 @@
 <!-- Begin Page Content -->
 <div class="container-fluid bg-light p-0 m-0">
-    <div class="page-header d-flex justify-content-between align-items-center mb-3 border-bottom border-secondary pb-2">
-        <!-- Actions Section on the Left (hidden by default) -->
+    <div class="page-header d-flex justify-content-between align-items-center mb-3 border-bottom border-secondary pb-1">
+        <!-- Actions Section (hidden by default) -->
         <div id="actionsSection" class="d-flex align-items-center justify-content-between px-3 bg-light" style="display: none;">
-            <span id="actionsText" class="me-4 text-dark fw-bold" style="display: none; margin-right: 5px;">Actions:</span>
-            <button id="viewButton" class="btn btn-info me-3" style="display: none; margin-right: 5px;"><i class="fa-solid fa-eye"></i></button>
-            <button id="editButton" class="btn btn-warning me-3" style="display: none; margin-right: 5px;"><i class="fa-solid fa-pen-to-square"></i></button>
-            <button id="deleteButton" class="btn btn-danger" style="display: none;"><i class="fa-solid fa-trash"></i></button>
+            <span id="actionsText" class="me-4 text-dark fw-bold" style="display: none;">Actions:</span>
+            <button id="viewButton" class="btn btn-info" style="display: none;">
+                <i class="fa-solid fa-eye"></i>
+            </button>
+            <button id="editButton" class="btn btn-warning" style="display: none;">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+            <button id="deleteButton" class="btn btn-danger" style="display: none;">
+                <i class="fa-solid fa-trash"></i>
+            </button>
         </div>
 
-        <!-- Right controls are aligned to the right -->
-        <div class="d-flex align-items-center ms-auto">
+        <!-- Right controls aligned to the right -->
+        <div class="d-flex align-items-center mt-md-0">
             <!-- Page Length Select -->
-            <div class="custom-select-container me-3">
+            <div class="custom-select-container me-2">
                 <select id="pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
                     <option value="10">10</option>
                     <option value="25">25</option>
@@ -24,18 +30,71 @@
                 </div>
             </div>
 
-            <!-- Filter Dropdown -->
-            <div class="dropdown me-3">
-                <button class="btn btn-light dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <!-- Filter Checkboxes -->
+            <div class="filter-container mx-1">
+                <button class="btn btn-light dropdown-toggle" type="button" id="filterCheckboxButton" data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="fa-solid fa-filter"></i>
                 </button>
-                <ul class="dropdown-menu" aria-labelledby="filterDropdown">
-                    <li><a class="dropdown-item" href="#">Filter 1</a></li>
-                    <li><a class="dropdown-item" href="#">Filter 2</a></li>
-                    <li><a class="dropdown-item" href="#">Filter 3</a></li>
-                </ul>
+                <div class="dropdown-menu px-1 pt-1" aria-labelledby="filterCheckboxButton">
+                    <div class="dropdown-header">
+                        <strong class="text-center">Filter by</strong>
+                    </div>
+                    <div class="form-check mb-2 mt-1">
+                        <input class="form-check-input filter-checkbox" type="checkbox" id="filterDepartment">
+                        <label class="form-check-label" for="filterDepartment">Department</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input filter-checkbox" type="checkbox" id="filterCompany">
+                        <label class="form-check-label" for="filterCompany">Company</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input filter-checkbox" type="checkbox" id="filterUserType">
+                        <label class="form-check-label" for="filterUserType">User Type</label>
+                    </div>
+                    <div class="dropdown-footer mt-2 text-center">
+                        <button class="btn btn-primary" id="applyFiltersButton">Apply Filters</button>
+                    </div>
+                </div>
             </div>
 
+            <div class="dropdown-menu px-1 pt-1" aria-labelledby="filterCheckboxButton">
+                <h6 class="dropdown-header">Filter by</h6>
+                <div class="form-check mb-2 mt-1">
+                    <input class="form-check-input filter-checkbox" type="checkbox" id="filterDepartment">
+                    <label class="form-check-label" for="filterDepartment">Department</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input filter-checkbox" type="checkbox" id="filterCompany">
+                    <label class="form-check-label" for="filterCompany">Company</label>
+                </div>
+                <div class="form-check mb-2">
+                    <input class="form-check-input filter-checkbox" type="checkbox" id="filterUserType">
+                    <label class="form-check-label" for="filterUserType">User Type</label>
+                </div>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" id="dropdownProceedButton">Apply Filters</button>
+                </div>
+            </div>
+
+            <!-- Bootstrap 5 Modal -->
+            <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"> <!-- Centering modal -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="filterModalLabel">Apply Filters</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="filterInputContainer">
+                            <!-- Dynamic content will be inserted here -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="applyFilterButton">Apply Filters</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Search Input -->
             <div class="input-group">
                 <input type="text" id="searchInput" class="form-control form-control-md rounded-start" placeholder="Search..." aria-label="Search">

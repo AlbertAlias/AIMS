@@ -1,9 +1,9 @@
 <!-- Topbar -->
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+<nav class="navbar navbar-expand navbar-light bg-white topbar m-0 p-0 px-2 static-top shadow">
     
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        <button class="rounded-circle border-0" id="sidebarToggle"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
 
     <!-- Sidebar Toggle (Topbar) -->

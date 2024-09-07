@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const anyChecked = Array.from(rowCheckboxes).some(checkbox => checkbox.checked);
 
         if (anyChecked) {
-            actionsSection.style.display = 'inline-block'; // Show Action Section
+            actionsSection.style.display = 'flex'; // Show Action Section
             actionsText.style.display = 'inline-block';    // Show Span Text
             viewButton.style.display = 'inline-block';     // Show View button
             editButton.style.display = 'inline-block';     // Show Edit button
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     rowCheckboxes.forEach(checkbox => {
                         checkbox.checked = true; // Set all row checkboxes to checked
                     });
-                    actionsSection.style.display = 'inline-block'; // Show actions section
+                    actionsSection.style.display = 'flex'; // Show actions section
                     actionsText.style.display = 'inline-block';    // Show span text
                     deleteButton.style.display = 'inline-block';   // Only show Delete button
                     viewButton.style.display = 'none';             // Hide View button
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const anyChecked = Array.from(rowCheckboxes).some(checkbox => checkbox.checked);
 
             if (anyChecked) {
-                actionsSection.style.display = 'inline-block';  // Show Action Section
+                actionsSection.style.display = 'flex';  // Show Action Section
                 actionsText.style.display = 'inline-block';    // Show span text
                 viewButton.style.display = 'inline-block';      // Show View button
                 editButton.style.display = 'inline-block';      // Show Edit button

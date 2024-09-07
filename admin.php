@@ -35,14 +35,13 @@
     <title>SB Admin 2 - Dashboard</title>
     
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="assets/css/main.css" rel="stylesheet">
 
     <!-- STYLES -->
-    <link rel="stylesheet" href="assets/style.css">
-    <!-- <link rel="stylesheet" href="assets/datatable.css"> -->
-    <!-- <link rel="stylesheet" href="assets/ownTable.css"> -->
-    <link rel="stylesheet" href="assets/admin-profile.css">
-    <link rel="stylesheet" href="assets/manage-users.css">
+    <link rel="stylesheet" href="assets/css/admin-profile.css">
+    <link rel="stylesheet" href="assets/css/manage-users.css">
+    <!-- <link rel="stylesheet" href="assets/css/datatable.css"> -->
+    <!-- <link rel="stylesheet" href="assets/css/ownTable.css"> -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <style>
@@ -131,19 +130,18 @@
     <!-- <script src="js/sb-admin-2.js"></script> -->
 
     <!--START::FUNCTIONS-->
-    <script src="functions/manage-users/table-actions.js" defer></script>
     <script src="functions/add-users/email.js" defer></script>
     <script src="functions/add-users/studForm-display.js" defer></script>
     <script src="functions/add-users/studID.js" defer></script>
     <script src="functions/add-users/user-type.js" defer></script>
+    <script src="functions/manage-users/table-actions.js" defer></script>
     <script src="functions/admin-profile/drag_drop.js" defer></script>
     <!--END::FUNCTION-->
 
     <!--START::CRUD AJAX FUNCTIONS-->
     <script src="crud-ajax/manage-users/create-users.js" defer></script>
-    <script src="crud-ajax/manage-users/ownTable.js" defer></script>
+    <script src="crud-ajax/manage-users/retrieve-tableData.js" defer></script>
     <script src="crud-ajax/admin-profile/create_profile.js" defer></script>
-    <script src="crud-ajax/manage-users/retrieve-users.js" defer></script>
     <!--END::CRUD AJAX FUNCTIONS-->
 
     <script>
