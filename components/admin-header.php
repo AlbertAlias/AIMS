@@ -6,6 +6,12 @@
         <button class="rounded-circle border-0" id="sidebarToggle"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
 
+    <!-- <div class="container d-flex justify-content-end">
+        <button id="sidebarToggle" class="btn btn-primary rounded py-1 px-2">
+            <i class='bx bxs-arrow-to-right'></i>
+        </button>
+    </div> -->
+
     <!-- Sidebar Toggle (Topbar) -->
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars"></i>
