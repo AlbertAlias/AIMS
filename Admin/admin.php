@@ -32,17 +32,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Admin</title>
     
     <!-- Custom styles for this template-->
-    <link href="assets/css/main.css" rel="stylesheet">
+    <link href="../assets/css/main.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- STYLES -->
-    <link rel="stylesheet" href="assets/css/admin-profile.css">
-    <link rel="stylesheet" href="assets/css/manage-users.css">
+    <link rel="stylesheet" href="../assets/css/admin-profile.css">
+    <link rel="stylesheet" href="../assets/css/manage-users.css">
     <!-- <link rel="stylesheet" href="assets/css/datatable.css"> -->
     <!-- <link rel="stylesheet" href="assets/css/ownTable.css"> -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <style>
         html, body {
@@ -78,7 +80,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar Content -->
+        <!-- Sidebar-->
         <?php include('components/admin-sidebar.php'); ?>
 
         <!-- Content Wrapper -->
@@ -91,8 +93,6 @@
             <div class="" id="content">
 
                 <!-- Begin Page Content -->
-
-                <!-- Pages Content -->
                 <div id="page-content" style="width: 100%;">
                     <?php include($page); ?>
                 </div>
@@ -107,6 +107,7 @@
         </div>
         <!-- End of Content Wrapper -->
     </div>
+    <!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -126,7 +127,7 @@
     <!-- DataTables CDN Link -->
     <!-- <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script> -->
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js" defer></script>
+    <script src="../js/sidebar.js" defer></script>
     <!-- <script src="js/sb-admin-2.js"></script> -->
 
     <!--START::FUNCTIONS-->

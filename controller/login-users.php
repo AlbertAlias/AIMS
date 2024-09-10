@@ -1,5 +1,5 @@
 <?php
-    require '../../dbconn.php';
+    require '../dbconn.php';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $email = $_POST['email'];

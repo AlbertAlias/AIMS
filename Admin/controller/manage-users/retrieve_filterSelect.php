@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-include '../../dbconn.php';
+include '../../../dbconn.php';
 
 try {
     $response = [];

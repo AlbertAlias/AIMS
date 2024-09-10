@@ -8,7 +8,7 @@
         exit();
     }
 
-    include('../../dbconn.php');
+    include('../../../dbconn.php');
     header('Content-Type: application/json');
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

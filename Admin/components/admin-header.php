@@ -3,14 +3,8 @@
     
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"><i class="fa-solid fa-chevron-right"></i></button>
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
-
-    <!-- <div class="container d-flex justify-content-end">
-        <button id="sidebarToggle" class="btn btn-primary rounded py-1 px-2">
-            <i class='bx bxs-arrow-to-right'></i>
-        </button>
-    </div> -->
 
     <!-- Sidebar Toggle (Topbar) -->
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -51,7 +45,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Rozaida Tuazon</span>
-                <img class="img-profile rounded-circle" src="img/undraw_profile_1.svg">
+                <img class="img-profile rounded-circle" src="../img/undraw_profile_1.svg">
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -92,7 +86,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="index.php">Logout</a>
+                <a class="btn btn-primary" href="../index.php">Logout</a>
             </div>
         </div>
     </div>

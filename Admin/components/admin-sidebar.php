@@ -3,9 +3,9 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon">
-        <img src="img/esyatek-logo.png" alt="Logo" width="50">
+        <img src="../img/esyatek-logo.png" alt="Logo" width="50">
         </div>
-        <div class="sidebar-brand-text mx-1 text-black">AIMS</div>
+        <div class="sidebar-brand-text mx-1">AIMS</div>
         
     </a>
 
@@ -16,25 +16,33 @@
     <li class="nav-item align-items-center justify-content-center <?php echo $current_page === 'pages/admin-dashboard.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
         <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/admin-dashboard.php')">
             <i class="fa-solid fa-qrcode"></i>
-            <span class="text-black">Dashboard</span>
+            <span class="">Dashboard</span>
         </a>
     </li>
 
     <li class="nav-item align-items-center justify-content-center <?php echo $current_page === 'pages/add-users.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
         <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/add-users.php')">
             <i class="fa-solid fa-user-plus"></i>
-            <span class="text-black">Add Users</span>
+            <span class="">Add Users</span>
         </a>
     </li>
 
     <li class="nav-item align-items-center justify-content-center <?php echo $current_page === 'pages/manage-users.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
         <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/manage-users.php')">
             <i class="fa-solid fa-users-gear"></i>
-            <span class="text-black">Manage Users</span>
+            <span class="">Manage Users</span>
         </a>
     </li>
 
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+    
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
 </ul>
+
 
     <!-- Nav Item - Manage Users -->
     <!-- <li class="nav-item">

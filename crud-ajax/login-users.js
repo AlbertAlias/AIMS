@@ -8,7 +8,7 @@ $(document).ready(function() {
 
         // AJAX request
         $.ajax({
-            url: 'controller/manage-users/login-users.php',
+            url: '../controller/login-users.php',
             type: 'POST',
             data: {
                 email: email,
@@ -17,7 +17,7 @@ $(document).ready(function() {
             success: function(response) {
                 if (response === 'success') {
                     // Redirect to the admin dashboard with the correct URL
-                    window.location.href = 'admin.php?page=pages/admin-dashboard.php';
+                    window.location.href = '../Admin/admin.php?page=pages/admin-dashboard.php';
                 } else if (response === 'invalid_email_format') {
                     alert('Invalid email format. Please enter a valid email.');
                 } else {
