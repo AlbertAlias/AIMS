@@ -3,10 +3,9 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon">
-        <img src="../img/esyatek-logo.png" alt="Logo" width="50">
+        <img src="../img/esyatek-crim-logo.png" alt="Logo" width="50">
         </div>
         <div class="sidebar-brand-text mx-1 text-black">AIMS</div>
-        
     </a>
 
     <!-- Divider -->
@@ -23,14 +22,14 @@
     <li class="nav-item align-items-center justify-content-center <?php echo $current_page === 'pages/add-users.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
         <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/add-users.php')">
             <i class="fa-solid fa-user-plus"></i>
-            <span class="text-black">Add Users</span>
+            <span class="text-black">Weekly Reports</span>
         </a>
     </li>
 
     <li class="nav-item align-items-center justify-content-center <?php echo $current_page === 'pages/manage-users.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
         <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/manage-users.php')">
             <i class="fa-solid fa-users-gear"></i>
-            <span class="text-black">Manage Users</span>
+            <span class="text-black">Requirements</span>
         </a>
     </li>
 

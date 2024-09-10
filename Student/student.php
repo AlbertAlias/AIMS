@@ -1,27 +1,61 @@
 <?php
-    session_start();
-    if (!isset($_SESSION['email'])) {
-        header('Location: index.php');
-        exit();
-    }
+session_start();
 
-    // Set default page path correctly
-    $page = isset($_GET['page']) ? $_GET['page'] : 'pages/admin-dashboard.php';
+// Check if user is logged in and is a student
+if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'OJT Student') {
+    // Redirect to login if not a student
+    header('Location: login.php');
+    exit();
+}
 
-    // Sanitize and validate the page parameter to prevent security issues
-    $allowed_pages = [
-        'pages/admin-dashboard.php',
-        'pages/add-users.php',
-        'pages/manage-users.php',
-        'pages/admin-profile.php',
-    ]; // Add more pages as needed
-    if (!in_array($page, $allowed_pages)) {
-        $page = 'pages/admin-dashboard.php'; // Default page
-    }
+// Check if department is set in session
+if (!isset($_SESSION['department'])) {
+    echo 'Department is not set.';
+    exit();
+}
 
-    // Pass the current page to sidebar
-    $current_page = $page;
+$department = $_SESSION['department'];
 ?>
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar-->
+    <?php
+    // Include the sidebar based on the department
+    switch ($department) {
+        case 'Information Technology':
+            include('IT/components/it-sidebar.php');
+            break;
+        case 'Computer Science':
+            include('CS/components/cs-sidebar.php');
+            break;
+        case 'Computer Engineering':
+            include('CpE/components/cpe-sidebar.php');
+            break;
+        case 'Tourism Management':
+            include('TM/components/tm-sidebar.php');
+            break;
+        case 'Hospitality Management':
+            include('HM/components/hm-sidebar.php');
+            break;
+        case 'Business Administration':
+            include('BA/components/ba-sidebar.php');
+            break;
+        case 'Accountancy':
+            include('A/components/a-sidebar.php');
+            break;
+        case 'Education':
+            include('EDUC/components/educ-sidebar.php');
+            break;
+        case 'Criminology':
+            include('CRIM/components/crim-sidebar.php');
+            break;
+        default:
+            echo 'Invalid department';
+            break;
+    }
+    ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +66,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin</title>
+    <title>Student</title>
     
     <!-- Custom styles for this template-->
     <link href="../assets/css/main.css" rel="stylesheet">
@@ -75,37 +109,46 @@
 
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-        <!-- Sidebar-->
-        <?php include('components/admin-sidebar.php'); ?>
+        <!-- Header Content -->
+        <?php 
+        // Check if the student-header.php file exists
+        $header_file = 'components/student-header.php';
+        if (file_exists($header_file)) {
+            include($header_file);
+        } else {
+            echo 'Header file not found.';
+        }
+        ?>
 
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div class="" id="content">
 
-            <!--Header Content -->
-            <?php include('components/admin-header.php'); ?>
-
-            <!-- Main Content -->
-            <div class="" id="content">
-
-                <!-- Begin Page Content -->
-                <div id="page-content" style="width: 100%;">
-                    <?php include($page); ?>
-                </div>
-
-                <!-- Content Row -->
-                <!-- <div class="row">
-                    <div class="col-lg-6 mb-4"></div>
-                </div> -->
-
+            <!-- Begin Page Content -->
+            <div id="page-content" style="width: 100%;">
+                <?php
+                // Ensure $page is set before including
+                if (isset($page) && file_exists($page)) {
+                    include($page);
+                } else {
+                    echo '';
+                }
+                ?>
             </div>
-            <!-- End of Main Content -->
+
+            <!-- Content Row -->
+            <!-- <div class="row">
+                <div class="col-lg-6 mb-4"></div>
+            </div> -->
+
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
 
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -137,7 +180,7 @@
 
     <script>
         function loadPage(page) {
-            window.location.href = 'admin.php?page=' + page;
+            window.location.href = 'student.php?page=' + page;
         }
     </script>
 </body>

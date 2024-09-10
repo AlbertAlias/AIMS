@@ -2,9 +2,9 @@
 <nav class="navbar navbar-expand navbar-light bg-white topbar m-0 p-0 px-2 static-top shadow">
     
     <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
+    <!-- <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
-    </div>
+    </div> -->
 
     <!-- Sidebar Toggle (Topbar) -->
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -38,13 +38,13 @@
             </div>
         </li>
 
-        <div class="topbar-divider d-none d-sm-block"></div>
 
         <!-- Nav Item - User Information -->
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Rozaida Tuazon</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                <div class="topbar-divider d-none d-sm-block"></div>
                 <img class="img-profile rounded-circle" src="../img/undraw_profile_1.svg">
             </a>
             <!-- Dropdown - User Information -->
@@ -86,7 +86,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="index.php">Logout</a>
+                <a class="btn btn-primary" href="../pages/login.php">Logout</a>
             </div>
         </div>
     </div>
