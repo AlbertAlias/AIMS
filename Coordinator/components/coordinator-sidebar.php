@@ -3,9 +3,10 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon">
-        <img src="../img/esyatek-a-logo.png" alt="Logo" width="50">
+        <img src="../img/esyatek-logo.png" alt="Logo" width="50">
         </div>
-        <div class="sidebar-brand-text mx-1 text-black">AIMS</div>
+        <div class="sidebar-brand-text mx-1">AIMS</div>
+        
     </a>
 
     <!-- Divider -->
@@ -15,21 +16,21 @@
     <li class="nav-item align-items-center justify-content-center <?php echo $current_page === '' ? 'active' : ''; ?>" style="margin-top: 5px;">
         <a class="nav-link" href="javascript:void(0);" onclick="loadPage('')">
             <i class="fa-solid fa-qrcode"></i>
-            <span class="text-black">Dashboard</span>
+            <span class="">Dashboard</span>
         </a>
     </li>
 
     <li class="nav-item align-items-center justify-content-center <?php echo $current_page === '' ? 'active' : ''; ?>" style="margin-top: 5px;">
         <a class="nav-link" href="javascript:void(0);" onclick="loadPage('')">
             <i class="fa-solid fa-user-plus"></i>
-            <span class="text-black">Weekly Reports</span>
+            <span class="">Check Reports</span>
         </a>
     </li>
 
     <li class="nav-item align-items-center justify-content-center <?php echo $current_page === '' ? 'active' : ''; ?>" style="margin-top: 5px;">
         <a class="nav-link" href="javascript:void(0);" onclick="loadPage('')">
             <i class="fa-solid fa-users-gear"></i>
-            <span class="text-black">Requirements</span>
+            <span class="">Check Requirements</span>
         </a>
     </li>
 

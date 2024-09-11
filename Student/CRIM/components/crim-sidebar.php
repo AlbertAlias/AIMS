@@ -12,22 +12,22 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item align-items-center justify-content-center <?php echo $current_page === 'pages/admin-dashboard.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
-        <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/admin-dashboard.php')">
+    <li class="nav-item align-items-center justify-content-center <?php echo $current_page === '' ? 'active' : ''; ?>" style="margin-top: 5px;">
+        <a class="nav-link" href="javascript:void(0);" onclick="loadPage('')">
             <i class="fa-solid fa-qrcode"></i>
             <span class="text-black">Dashboard</span>
         </a>
     </li>
 
-    <li class="nav-item align-items-center justify-content-center <?php echo $current_page === 'pages/add-users.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
-        <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/add-users.php')">
+    <li class="nav-item align-items-center justify-content-center <?php echo $current_page === '' ? 'active' : ''; ?>" style="margin-top: 5px;">
+        <a class="nav-link" href="javascript:void(0);" onclick="loadPage('')">
             <i class="fa-solid fa-user-plus"></i>
             <span class="text-black">Weekly Reports</span>
         </a>
     </li>
 
-    <li class="nav-item align-items-center justify-content-center <?php echo $current_page === 'pages/manage-users.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
-        <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/manage-users.php')">
+    <li class="nav-item align-items-center justify-content-center <?php echo $current_page === '' ? 'active' : ''; ?>" style="margin-top: 5px;">
+        <a class="nav-link" href="javascript:void(0);" onclick="loadPage('')">
             <i class="fa-solid fa-users-gear"></i>
             <span class="text-black">Requirements</span>
         </a>

@@ -29,6 +29,12 @@ $(document).ready(function() {
 
                         // Redirect to student.php
                         window.location.href = '../Student/student.php';
+                    } else if (user_type === 'OJT Coordinator') {
+                        // Store department information in sessionStorage
+                        sessionStorage.setItem('department', department);
+
+                        // Redirect to coordinator.php
+                        window.location.href = '../Coordinator/coordinator.php';
                     } else {
                         alert('Invalid user type.');
                     }
