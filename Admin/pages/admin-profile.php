@@ -1,6 +1,6 @@
 <?php
     // Assuming you have a database connection setup and the admin's email is stored in the session
-    include('dbconn.php'); // Adjust the path to your actual database connection file
+    include('../../dbconn.php'); // Adjust the path to your actual database connection file
 
     // Fetch the admin details from the database
     $email = $_SESSION['email'];

@@ -2,7 +2,7 @@ function uploadFile(file) {
     const formData = new FormData();
     formData.append('profile_picture', file);
 
-    fetch('controller/admin-profile/create-profile.php', {
+    fetch('../../controller/admin-profile/create-profile.php', {
         method: 'POST',
         body: formData
     })

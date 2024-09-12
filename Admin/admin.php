@@ -143,6 +143,7 @@
     <script src="crud-ajax/manage-users/create-users.js" defer></script>
     <script src="crud-ajax/manage-users/retrieve-tableData.js" defer></script>
     <script src="crud-ajax/admin-profile/create_profile.js" defer></script>
+    <script src="crud-ajax/manage-users/update-users.js" defer></script>
     <!--END::CRUD AJAX FUNCTIONS-->
 
     <script>

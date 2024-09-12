@@ -15,6 +15,7 @@
             </button>
         </div>
 
+
         <!-- Right controls aligned to the right -->
         <div class="d-flex align-items-center mt-md-0">
             <!-- Page Length Select -->
@@ -136,44 +137,3 @@
     </div>
 </div>
 <!-- End Page Content -->
-
-
-<div id="editFormContainer" class="container-fluid p-3 bg-light border rounded shadow-sm mt-3" style="display: none;">
-        <h4>Edit User Information</h4>
-        <form id="editUserForm">
-            <input type="hidden" id="userId" name="userId">
-            <div class="mb-3">
-                <label for="firstname" class="form-label">First Name</label>
-                <input type="text" class="form-control" id="firstname" name="firstname" required>
-            </div>
-            <div class="mb-3">
-                <label for="lastname" class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="lastname" name="lastname" required>
-            </div>
-            <div class="mb-3">
-                <label for="department" class="form-label">Department</label>
-                <input type="text" class="form-control" id="department" name="department" required>
-            </div>
-            <div class="mb-3">
-                <label for="studentID" class="form-label">Student ID</label>
-                <input type="text" class="form-control" id="studentID" name="studentID" required>
-            </div>
-            <div class="mb-3">
-                <label for="company" class="form-label">Company</label>
-                <input type="text" class="form-control" id="company" name="company" required>
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <div class="mb-3">
-                <label for="userType" class="form-label">User Type</label>
-                <input type="text" class="form-control" id="userType" name="userType" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Save Changes</button>
-        </form>
-    </div>
