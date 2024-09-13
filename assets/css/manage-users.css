@@ -209,12 +209,6 @@ th.table-header-cell, td {
     }
 }
 
-
-
-
-
-
-
 .filter-container .dropdown-menu {
     border-radius: 0.375rem; /* Rounded corners */
     box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.075); /* Light shadow */
@@ -231,3 +225,22 @@ th.table-header-cell, td {
 
 
 
+
+
+
+
+
+
+.action-link {
+    color: black;
+    text-decoration: none;
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+.action-link:hover {
+    color: black;
+    text-decoration: underline;
+    text-decoration-color: green;
+    text-underline-offset: 3px;
+}

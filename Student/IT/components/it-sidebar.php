@@ -12,35 +12,38 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item align-items-center justify-content-center <?php echo $current_page === '' ? 'active' : ''; ?>" style="margin-top: 5px;">
-        <a class="nav-link" href="javascript:void(0);" onclick="loadPage('')">
+    <li class="nav-item align-items-center justify-content-center">
+        <a class="nav-link" href="javascript:void(0);" onclick="loadPage('it-dashboard.php')">
             <i class="fa-solid fa-qrcode"></i>
             <span class="text-black">Dashboard</span>
         </a>
     </li>
 
-    <li class="nav-item align-items-center justify-content-center <?php echo $current_page === '' ? 'active' : ''; ?>" style="margin-top: 5px;">
-        <a class="nav-link" href="javascript:void(0);" onclick="loadPage('')">
-            <i class="fa-solid fa-user-plus"></i>
+    <!-- Nav Item - Weekly Reports -->
+    <li class="nav-item align-items-center justify-content-center">
+        <a class="nav-link" href="javascript:void(0);" onclick="loadPage('weekly-reports.php')">
+            <i class="fa-solid fa-file-lines"></i>
             <span class="text-black">Weekly Reports</span>
         </a>
     </li>
 
-    <li class="nav-item align-items-center justify-content-center <?php echo $current_page === '' ? 'active' : ''; ?>" style="margin-top: 5px;">
-        <a class="nav-link" href="javascript:void(0);" onclick="loadPage('')">
-            <i class="fa-solid fa-users-gear"></i>
+    <!-- Nav Item - Requirements -->
+    <li class="nav-item align-items-center justify-content-center">
+        <a class="nav-link" href="javascript:void(0);" onclick="loadPage('requirements.php')">
+            <i class="fa-solid fa-folder"></i>
             <span class="text-black">Requirements</span>
         </a>
     </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider">
-    
-    <!-- Sidebar Toggler (Sidebar) -->
+
+    <!-- Sidebar Toggler -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
 </ul>
+
 
 
     <!-- Nav Item - Manage Users -->

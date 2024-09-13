@@ -1,6 +1,10 @@
 <?php
     include '../../../dbconn.php';
 
+    // Enable error reporting for debugging
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];

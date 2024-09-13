@@ -113,7 +113,7 @@ function submitForm(event) {
 
     // AJAX request to send form data to the server
     $.ajax({
-        url: 'controller/manage-users/create-users.php',  // URL of the PHP script
+        url: 'controller/add-users/create-users.php',  // URL of the PHP script
         type: 'POST',          // Request type
         data: formData,        // Data to be sent
         success: function(response) {

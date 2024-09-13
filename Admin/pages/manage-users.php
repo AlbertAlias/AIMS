@@ -4,15 +4,12 @@
         <!-- Actions Section (hidden by default) -->
         <div id="actionsSection" class="d-flex align-items-center justify-content-between px-3 bg-light" style="display: none;">
             <span id="actionsText" class="me-4 text-dark fw-bold" style="display: none;">Actions:</span>
-            <button id="viewButton" class="btn btn-info" style="display: none;">
-                <i class="fa-solid fa-eye"></i>
-            </button>
-            <button id="editButton" class="btn btn-warning" style="display: none;">
-                <i class="fa-solid fa-pen-to-square"></i>
-            </button>
-            <button id="deleteButton" class="btn btn-danger" style="display: none;">
-                <i class="fa-solid fa-trash"></i>
-            </button>
+            <!-- View link -->
+            <a href="#" id="viewButton" class="action-link" style="display: none;">View</a>
+            <!-- Edit link -->
+            <a href="#" id="editButton" class="action-link" style="display: none;">Edit</a>
+            <!-- Delete link -->
+            <a href="#" id="deleteButton" class="action-link" style="display: none;">Delete</a>
         </div>
 
 
@@ -113,7 +110,7 @@
                 <table id="usersTable" class="table table-hover text-center p-0 m-0">
                     <thead class="table-light">
                         <tr>
-                            <th><input class="form-check-input select-all" type="checkbox" id="select-all"></th>
+                            <th><input class="form-check-input select-all row-checkbox" type="checkbox" id="select-all" name="rowCheckbox" data-id="<?php echo $id; ?>"></th>
                             <th class="table-header-cell">First Name</th>
                             <th class="table-header-cell">Last Name</th>
                             <th class="table-header-cell">Department</th>
@@ -137,3 +134,89 @@
     </div>
 </div>
 <!-- End Page Content -->
+
+<!-- Actions Section Modal -->
+<div class="modal fade" id="actionsModal" tabindex="-1" role="dialog" aria-labelledby="actionsModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="actionsModalLabel">User Details</h5>
+            </div>
+            <div class="modal-body">
+                <!-- Form fields for editing/viewing user -->
+                <form id="userForm">
+                    <input type="hidden" id="userId" name="id">
+
+                    <!-- First Name -->
+                    <div class="form-group">
+                        <label for="firstname">First Name</label>
+                        <input type="text" class="form-control" id="firstname" name="firstname" required>
+                    </div>
+
+                    <!-- Last Name -->
+                    <div class="form-group">
+                        <label for="lastname">Last Name</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname" required>
+                    </div>
+
+                    <!-- Department -->
+                    <div class="form-group" id="departmentField">
+                        <label for="department">Department</label>
+                        <select class="form-control" id="department" name="department" required>
+                            <option value="" disabled>Select Department</option>
+                            <option value="Information Technology">Information Technology</option>
+                            <option value="Computer Engineering">Computer Engineering</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Tourism Management">Tourism Management</option>
+                            <option value="Hospitality Management">Hospitality Management</option>
+                            <option value="Business Administration">Business Administration</option>
+                            <option value="Accountancy">Accountancy</option>
+                            <option value="Education">Education</option>
+                            <option value="Criminology">Criminology</option>
+                        </select>
+                    </div>
+
+                    <!-- Student ID -->
+                    <div class="form-group" id="studentIDField" style="display: none;">
+                        <label for="studentID">Student ID</label>
+                        <input type="text" class="form-control" id="studentID" name="studentID">
+                    </div>
+
+                    <!-- Company -->
+                    <div class="form-group" id="companyField">
+                        <label for="company">Company</label>
+                        <input type="text" class="form-control" id="company" name="company">
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required readonly>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="text" class="form-control" id="password" name="password" readonly>
+                    </div>
+
+                    <!-- User Type -->
+                    <div class="form-group">
+                        <label for="user_type">User Type</label>
+                        <select class="form-control" id="user_type" name="user_type" required>
+                            <option value="Admin">Admin</option>
+                            <option value="OJT Student">OJT Student</option>
+                            <option value="OJT Coordinator">OJT Coordinator</option>
+                            <option value="OJT Supervisor">OJT Supervisor</option>
+                            <option value="Registrar">Registrar</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+                <button type="button" class="btn btn-primary" id="saveChangesButton">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

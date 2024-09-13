@@ -136,11 +136,13 @@
     <script src="functions/add-users/studID.js" defer></script>
     <script src="functions/add-users/user-type.js" defer></script>
     <script src="functions/manage-users/table-actions.js" defer></script>
+    <script src="functions/manage-users/edit-email.js" defer></script>
+    <script src="functions/manage-users/edit-studID.js" defer></script>
     <script src="functions/admin-profile/drag_drop.js" defer></script>
     <!--END::FUNCTION-->
 
     <!--START::CRUD AJAX FUNCTIONS-->
-    <script src="crud-ajax/manage-users/create-users.js" defer></script>
+    <script src="crud-ajax/add-users/create-users.js" defer></script>
     <script src="crud-ajax/manage-users/retrieve-tableData.js" defer></script>
     <script src="crud-ajax/admin-profile/create_profile.js" defer></script>
     <script src="crud-ajax/manage-users/update-users.js" defer></script>

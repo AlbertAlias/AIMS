@@ -3,7 +3,6 @@ session_start();
 
 // Check if user is logged in and is a student
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'OJT Student') {
-    // Redirect to login if not a student
     header('Location: login.php');
     exit();
 }
@@ -15,45 +14,91 @@ if (!isset($_SESSION['department'])) {
 }
 
 $department = $_SESSION['department'];
+
+// Map session department values to folder names
+switch ($department) {
+    case 'Information Technology':
+        $folder = 'IT';
+        $dashboard_page = 'it-dashboard.php';
+        break;
+    case 'Computer Science':
+        $folder = 'CS';
+        $dashboard_page = 'cs-dashboard.php';
+        break;
+    case 'Computer Engineering':
+        $folder = 'CpE';
+        $dashboard_page = 'cpe-dashboard.php';
+        break;
+    case 'Tourism Management':
+        $folder = 'TM';
+        $dashboard_page = 'tm-dashboard.php';
+        break;
+    case 'Hospitality Management':
+        $folder = 'HM';
+        $dashboard_page = 'hm-dashboard.php';
+        break;
+    case 'Business Administration':
+        $folder = 'BA';
+        $dashboard_page = 'ba-dashboard.php';
+        break;
+    case 'Accountancy':
+        $folder = 'A';
+        $dashboard_page = 'a-dashboard.php';
+        break;
+    case 'Education':
+        $folder = 'EDUC';
+        $dashboard_page = 'educ-dashboard.php';
+        break;
+    case 'Criminology':
+        $folder = 'CRIM';
+        $dashboard_page = 'crim-dashboard.php';
+        break;
+    default:
+        echo 'Invalid department';
+        exit();
+}
+
+// Set the page based on GET request or default to the department's dashboard
+$page = isset($_GET['page']) ? $_GET['page'] : $dashboard_page;
 ?>
 
 <!-- Page Wrapper -->
 <div id="wrapper">
 
-    <!-- Sidebar-->
+    <!-- Sidebar -->
     <?php
     // Include the sidebar based on the department
-    switch ($department) {
-        case 'Information Technology':
+    switch ($folder) {
+        case 'IT':
             include('IT/components/it-sidebar.php');
             break;
-        case 'Computer Science':
+        case 'CS':
             include('CS/components/cs-sidebar.php');
             break;
-        case 'Computer Engineering':
+        case 'CpE':
             include('CpE/components/cpe-sidebar.php');
             break;
-        case 'Tourism Management':
+        case 'TM':
             include('TM/components/tm-sidebar.php');
             break;
-        case 'Hospitality Management':
+        case 'HM':
             include('HM/components/hm-sidebar.php');
             break;
-        case 'Business Administration':
+        case 'BA':
             include('BA/components/ba-sidebar.php');
             break;
-        case 'Accountancy':
+        case 'A':
             include('A/components/a-sidebar.php');
             break;
-        case 'Education':
+        case 'EDUC':
             include('EDUC/components/educ-sidebar.php');
             break;
-        case 'Criminology':
+        case 'CRIM':
             include('CRIM/components/crim-sidebar.php');
             break;
         default:
             echo 'Invalid department';
-            break;
+            exit();
     }
     ?>
 
@@ -124,16 +169,19 @@ $department = $_SESSION['department'];
         ?>
 
         <!-- Main Content -->
-        <div class="" id="content">
+        <div id="content">
 
             <!-- Begin Page Content -->
             <div id="page-content" style="width: 100%;">
                 <?php
-                // Ensure $page is set before including
-                if (isset($page) && file_exists($page)) {
-                    include($page);
+                // Map the department folder to page path
+                $pagePath = "{$folder}/pages/{$page}";
+                
+                // Check if the file exists before including
+                if (file_exists($pagePath)) {
+                    include($pagePath);
                 } else {
-                    echo '';
+                    echo 'Page not found in: ' . $pagePath;
                 }
                 ?>
             </div>
