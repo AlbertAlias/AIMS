@@ -13,6 +13,8 @@
         'pages/admin-dashboard.php',
         'pages/add-users.php',
         'pages/manage-users.php',
+        'pages/departments.php',
+        'pages/coordinators.php',
         'pages/admin-profile.php',
     ]; // Add more pages as needed
     if (!in_array($page, $allowed_pages)) {
@@ -41,6 +43,8 @@
     <!-- STYLES -->
     <link rel="stylesheet" href="../assets/css/admin-profile.css">
     <link rel="stylesheet" href="../assets/css/manage-users.css">
+    <link rel="stylesheet" href="../assets/css/departments.css">
+    <link rel="stylesheet" href="../assets/css/coordinators.css">
     <!-- <link rel="stylesheet" href="assets/css/datatable.css"> -->
     <!-- <link rel="stylesheet" href="assets/css/ownTable.css"> -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -118,6 +122,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.js" defer></script>
     <!-- BOOTSTRAP CDN LINK -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-md5/0.7.3/md5.min.js"></script>
     <!--START:FONT AWESOME ICON LINK-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/29c04b1733.js" defer crossorigin="anonymous"></script>
@@ -138,14 +143,20 @@
     <script src="functions/manage-users/table-actions.js" defer></script>
     <script src="functions/manage-users/edit-email.js" defer></script>
     <script src="functions/manage-users/edit-studID.js" defer></script>
+    <script src="functions/add-depts/add-deptDisplay.js" defer></script>
+    <script src="functions/add-coor/add-coorDisplay.js" defer></script>
+    <script src="functions/add-coor/coor-email.js" defer></script>
+    <script src="functions/add-coor/contact-number.js" defer></script>
     <script src="functions/admin-profile/drag_drop.js" defer></script>
     <!--END::FUNCTION-->
 
     <!--START::CRUD AJAX FUNCTIONS-->
     <script src="crud-ajax/add-users/create-users.js" defer></script>
     <script src="crud-ajax/manage-users/retrieve-tableData.js" defer></script>
-    <script src="crud-ajax/admin-profile/create_profile.js" defer></script>
     <script src="crud-ajax/manage-users/update-users.js" defer></script>
+    <script src="crud-ajax/add-depts/add-depts.js" defer></script>
+    <script src="crud-ajax/add-coor/add-coor.js" defer></script>
+    <script src="crud-ajax/admin-profile/create_profile.js" defer></script>
     <!--END::CRUD AJAX FUNCTIONS-->
 
     <script>

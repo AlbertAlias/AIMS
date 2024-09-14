@@ -3,7 +3,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon">
-        <img src="../img/esyatek-logo.png" alt="Logo" width="50">
+        <img src="../img/esyatek-logo.png" alt="Logo" width="70">
         </div>
         <div class="sidebar-brand-text mx-1">AIMS</div>
         
@@ -31,6 +31,20 @@
         <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/manage-users.php')">
             <i class="fa-solid fa-users-gear"></i>
             <span class="">Manage Users</span>
+        </a>
+    </li>
+
+    <li class="nav-item align-items-center justify-content-center <?php echo $current_page === 'pages/departments.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
+        <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/departments.php')">
+            <i class="fa-solid fa-scroll"></i>
+            <span class="">Departments</span>
+        </a>
+    </li>
+
+    <li class="nav-item align-items-center justify-content-center <?php echo $current_page === 'pages/coordinators.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
+        <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/coordinators.php')">
+            <i class="fa-solid fa-address-card"></i>
+            <span class="">Coordinators</span>
         </a>
     </li>
 
