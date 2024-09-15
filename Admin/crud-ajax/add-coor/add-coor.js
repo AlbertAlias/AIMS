@@ -1,130 +1,155 @@
-// Function to load and display coordinators
-function loadCoordinators() {
-    fetch('controller/add-coor/retrieve-coor.php')
-        .then(response => response.json())
-        .then(data => {
-            if (Array.isArray(data)) {
-                const coordinatorInfo = document.getElementById('coordinatorInfo');
-                coordinatorInfo.innerHTML = data.map(coordinator => `
-                    <button class="btn btn-outline-secondary d-block mb-2 w-100" data-id="${coordinator.id}">
-                        ${coordinator.last_name}, ${coordinator.first_name}
-                    </button>
-                `).join('');
-
-                // Add event listeners to each coordinator button
-                coordinatorInfo.querySelectorAll('button').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const coordinatorId = this.getAttribute('data-id');
-                        fetchCoordinatorDetails(coordinatorId);
-                    });
+$(document).ready(function () {
+    function populateDepartments() {
+        $.ajax({
+            url: 'controller/add-coor/retrieve-coor.php', // The PHP file to fetch departments
+            type: 'GET',
+            dataType: 'json', // Expecting JSON response
+            success: function (data) {
+                // Clear existing options
+                $('#department').empty();
+                // Add default option
+                $('#department').append('<option selected disabled>Choose Department</option>');
+    
+                // Populate options with department names
+                $.each(data, function (index, department) {
+                    $('#department').append('<option value="' + department + '">' + department + '</option>');
                 });
-            } else {
-                document.getElementById('coordinatorInfo').innerHTML = '<p class="text-danger">No coordinators found.</p>';
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX Error: ', error);
+                alert('An error occurred while fetching departments.');
             }
-        })
-        .catch(error => {
-            document.getElementById('coordinatorInfo').innerHTML = `<p class="text-danger">Error loading coordinators: ${error.message}</p>`;
         });
-}
+    }    
 
-// Function to fetch and display coordinator details
-function fetchCoordinatorDetails(id) {
-    fetch(`controller/add-coor/retrieve-coor.php?id=${id}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data); // Add this line to check the retrieved data
-            if (data) {
-                // Populate form with coordinator details
-                document.getElementById('last-name').value = data.last_name || '';
-                document.getElementById('first-name').value = data.first_name || '';
-                document.getElementById('middle-name').value = data.middle_name || '';
-                document.getElementById('suffix').value = data.suffix || '';
-                document.getElementById('gender').value = data.gender || '';
-                document.getElementById('address').value = data.address || '';
-                document.getElementById('birthdate').value = data.birthdate || '';
-                document.getElementById('civil-status').value = data.civil_status || '';
-                document.getElementById('personal-email').value = data.personal_email || '';
-                document.getElementById('contact-number').value = data.contact_number || '';
-                document.getElementById('department').value = data.department || '';
+    // Call the function to populate the departments when the document is ready
+    populateDepartments();
 
-                // Enable form fields
-                document.querySelectorAll('#coordinatorForm input, #coordinatorForm select').forEach(el => el.disabled = false);
+    function loadCoordinators() {
+        $.ajax({
+            url: 'controller/add-coor/retrieve-coor.php', // PHP file to retrieve coordinator information
+            type: 'GET',
+            dataType: 'json', // Expecting JSON response
+            success: function (data) {
+                // Debugging: Log the data
+                console.log('Coordinator Data:', data);
 
-                // Show buttons
-                document.getElementById('submitBtn').style.display = 'inline-block';
-                document.getElementById('cancelBtn').style.display = 'inline-block';
-                document.getElementById('deleteBtn').style.display = 'inline-block';
-            } else {
-                alert('Coordinator details not found.');
+                // Clear existing content
+                $('#coordinatorInfo').empty();
+
+                // Check if coordinators exist
+                if (Array.isArray(data) && data.length > 0) {
+                    // Loop through the data to create buttons with last_name, first_name
+                    $.each(data, function (index, coordinator) {
+                        var coordinatorFullName = coordinator.last_name + ', ' + coordinator.first_name;
+                        var buttonHtml = '<button class="btn btn-outline-secondary d-block mb-2 w-100" data-id="' + coordinator.id + '">' + coordinatorFullName + '</button>';
+                        $('#coordinatorInfo').append(buttonHtml);
+                    });
+                } else {
+                    $('#coordinatorInfo').append('<p>No coordinators found.</p>');
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX Error: ', error);
+                alert('An error occurred while retrieving coordinators.');
             }
-        })
-        .catch(error => {
-            alert(`Error fetching coordinator details: ${error.message}`);
         });
-}
+    }
 
-// Function to handle form submission
-document.getElementById('coordinatorForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+    // Call the function when the document is ready
+    loadCoordinators();
+
+    // Event listener for unlocking forms when any coordinator button is clicked
+    $('#coordinatorInfo').on('click', 'button[data-id]', function () {
+        var coordinatorId = $(this).data('id');
     
-    const formData = new FormData(this);
-    const data = Object.fromEntries(formData.entries());
+        // Unlock the forms
+        unlockForms();
     
-    fetch('controller/add-coor/create-coor.php', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.success) {
-            alert('Coordinator details saved successfully.');
-            loadCoordinators();
-        } else {
-            alert(`Error saving coordinator details: ${result.message}`);
-        }
-    })
-    .catch(error => {
-        alert(`Error saving coordinator details: ${error.message}`);
+        // AJAX request to fetch coordinator data based on the coordinatorId
+        $.ajax({
+            url: 'controller/add-coor/retrieve-coor.php', // PHP file to fetch coordinator data
+            type: 'GET',
+            data: { id: coordinatorId }, // Send coordinatorId as a query parameter
+            dataType: 'json',
+            success: function (response) {
+                console.log('Coordinator Details:', response); // Debugging output
+    
+                if (response.success) {
+                    var coordinator = response.data;
+    
+                    // Populate coordinatorForm with the retrieved data
+                    $('#coordinator_id').val(coordinator.id);
+                    $('#last_name').val(coordinator.last_name);
+                    $('#first_name').val(coordinator.first_name);
+                    $('#middle_name').val(coordinator.middle_name);
+                    $('#suffix').val(coordinator.suffix);
+                    $('#gender').val(coordinator.gender);
+                    $('#address').val(coordinator.address);
+                    $('#birthdate').val(coordinator.birthdate);
+                    $('#civil_status').val(coordinator.civil_status);
+                    $('#personal_email').val(coordinator.personal_email);
+                    $('#contact_number').val(coordinator.contact_number);
+                    $('#department').val(coordinator.department);
+    
+                    // Populate accountInfoForm with the retrieved data
+                    $('#account_email').val(coordinator.account_email);
+                    $('#password').val(coordinator.password); // You might want to handle password differently
+                } else {
+                    alert('Coordinator data could not be retrieved: ' + response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX Error: ', error);
+                alert('An error occurred while retrieving coordinator data.');
+            }
+        });
+    });
+
+
+    // Handle form submission when 'Submit' button is clicked
+    $('#submitBtn').on('click', function (e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        // Get the phone number value and prepend '+63'
+        var contactNumber = $('#contact_number').val();
+        var contactNumberWithPrefix = '+63' + contactNumber;
+
+        // Update the contact_number input field with the new value
+        $('#contact_number').val(contactNumberWithPrefix);
+
+        // Collect form data from both forms
+        var formData = $('#coordinatorForm, #accountInfoForm').serialize();
+
+        var coordinatorId = $('#coordinator_id').val();
+
+        // AJAX request to send the data to the server
+        $.ajax({
+            url: coordinatorId ? 'controller/add-coor/update-coor.php' : 'controller/add-coor/create-coor.php', // Use update or add endpoint
+            type: 'POST',
+            data: formData,
+            dataType: 'json', // Expecting JSON response
+            success: function (response) {
+                console.log('Response:', response); // Log the response for debugging
+                if (response.success) {
+                    alert('Coordinator added successfully!');
+                    loadCoordinators(); // Reload coordinators list
+                    disableFormElements(); // Lock the forms after submission
+                    
+                    // Reset and lock forms after submission
+                    $('#coordinatorForm')[0].reset(); // Reset coordinatorForm
+                    $('#accountInfoForm')[0].reset(); // Reset accountInfoForm
+                    disableFormElements(); // Call the function to disable the forms after submission
+                } else {
+                    alert('Failed to add coordinator: ' + response.message);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX Error: ', error);
+                alert('An error occurred while processing the request.');
+            }
+        });
+
+        loadCoordinators();
     });
 });
-
-// Cancel button event handler
-document.getElementById('cancelBtn').addEventListener('click', function() {
-    // Clear form fields and disable them
-    document.querySelectorAll('#coordinatorForm input, #coordinatorForm select').forEach(el => {
-        el.value = '';
-        el.disabled = true;
-    });
-
-    // Hide buttons
-    document.getElementById('submitBtn').style.display = 'none';
-    document.getElementById('cancelBtn').style.display = 'none';
-    document.getElementById('deleteBtn').style.display = 'none';
-});
-
-// Delete button event handler
-document.getElementById('deleteBtn').addEventListener('click', function() {
-    const id = document.getElementById('coordinatorId').value; // You need to handle how you get this ID
-    
-    fetch(`controller/add-coor/delete-coor.php?id=${id}`, {
-        method: 'DELETE'
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.success) {
-            alert('Coordinator deleted successfully.');
-            loadCoordinators();
-        } else {
-            alert(`Error deleting coordinator: ${result.message}`);
-        }
-    })
-    .catch(error => {
-        alert(`Error deleting coordinator: ${error.message}`);
-    });
-});
-
-// Initial load of coordinators
-document.addEventListener('DOMContentLoaded', loadCoordinators);
