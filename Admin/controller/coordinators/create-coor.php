@@ -1,8 +1,9 @@
 <?php
-include '../../../dbconn.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
-// Debugging: Log POST data
-file_put_contents('debug.log', print_r($_POST, true));
+include '../../../dbconn.php';
 
 // Check if data is posted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -16,10 +17,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $birthdate = mysqli_real_escape_string($conn, $_POST['birthdate']);
     $civilStatus = mysqli_real_escape_string($conn, $_POST['civil_status']);
     $personalEmail = mysqli_real_escape_string($conn, $_POST['personal_email']);
-    $contactNumber = mysqli_real_escape_string($conn, $_POST['contact_number']); // Ensure this includes '+63'
+    $contactNumber = mysqli_real_escape_string($conn, $_POST['contact_number']);
     $department = mysqli_real_escape_string($conn, $_POST['department']);
     $accountEmail = mysqli_real_escape_string($conn, $_POST['account_email']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
+
+    // Remove leading '0' if present
+    if (substr($contactNumber, 0, 1) === '0') {
+        $contactNumber = substr($contactNumber, 1);
+    }
 
     // Hash the password using bcrypt
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);

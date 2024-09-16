@@ -154,7 +154,10 @@
     <script src="crud-ajax/manage-users/retrieve-tableData.js" defer></script>
     <script src="crud-ajax/manage-users/update-users.js" defer></script>
     <script src="crud-ajax/add-depts/add-depts.js" defer></script>
-    <script src="crud-ajax/add-coor/add-coor.js" defer></script>
+    <script src="crud-ajax/coordinators/create-coor.js" defer></script>
+    <script src="crud-ajax/coordinators/retrieve-coor.js" defer></script>
+    <script src="crud-ajax/coordinators/retrieve-depts.js" defer></script>
+    <script src="crud-ajax/coordinators/update-coor.js" defer></script>
     <script src="crud-ajax/admin-profile/create_profile.js" defer></script>
     <!--END::CRUD AJAX FUNCTIONS-->
 

@@ -47,8 +47,8 @@
                             <label for="gender" class="form-label required-asterisk">Gender</label>
                             <select class="form-select" id="gender" name="gender" required disabled>
                                 <option selected disabled>Choose Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
                             </select>
                         </div>
                     </div>
@@ -70,9 +70,9 @@
                             <label for="civilStatus" class="form-label required-asterisk">Civil Status</label>
                             <select class="form-select" id="civil_status" name="civil_status" required disabled>
                                 <option selected disabled>Choose Status</option>
-                                <option value="single">Single</option>
-                                <option value="married">Married</option>
-                                <option value="divorced">Divorced</option>
+                                <option value="Single">Single</option>
+                                <option value="Married">Married</option>
+                                <option value="Divorced">Divorced</option>
                             </select>
                         </div>
                         <!-- Email -->
