@@ -102,6 +102,7 @@
                     <div class="row">
                         <div class="col-md-12 text-end">
                             <button type="button" id="cancelBtn" class="btn btn-secondary" style="display: none;">Cancel</button>
+                            <button type="button" id="updateBtn" class="btn btn-primary" style="display: none;">Update</button>
                             <button type="submit" id="submitBtn" class="btn btn-success" disabled>Submit</button>
                         </div>
                     </div>

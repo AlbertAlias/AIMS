@@ -1,9 +1,16 @@
 <?php
+// Enable error reporting for debugging
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 include '../../../dbconn.php';
 
-// Check if data is posted
+// Check if POST request
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Collect the form data and sanitize input to prevent SQL injection
+    header('Content-Type: application/json'); // Set response type to JSON
+
+    // Sanitize and collect form data
     $id = mysqli_real_escape_string($conn, $_POST['id']);
     $lastName = mysqli_real_escape_string($conn, $_POST['last_name']);
     $firstName = mysqli_real_escape_string($conn, $_POST['first_name']);
@@ -17,22 +24,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $contactNumber = mysqli_real_escape_string($conn, $_POST['contact_number']);
     $department = mysqli_real_escape_string($conn, $_POST['department']);
     $accountEmail = mysqli_real_escape_string($conn, $_POST['account_email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
-
-    // If password needs to be updated, hash it, otherwise, skip hashing
-    if (!empty($password)) {
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-        $passwordUpdate = "password = '$hashedPassword',";
-    } else {
-        $passwordUpdate = ""; // Don't include password update if it's empty
+    
+    // Prepare password query part if password is provided
+    $passwordQuery = "";
+    if (!empty($_POST['password'])) {
+        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+        $passwordQuery = "password = '$password'";
     }
 
-    // Remove leading '0' if present in contact number
+    // Remove leading '0' from contact number
     if (substr($contactNumber, 0, 1) === '0') {
         $contactNumber = substr($contactNumber, 1);
     }
 
-    // SQL query to update the coordinator's data
+    // Construct SQL update query
     $query = "UPDATE coordinators 
               SET last_name = '$lastName', 
                   first_name = '$firstName', 
@@ -45,19 +50,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   personal_email = '$personalEmail', 
                   contact_number = '$contactNumber', 
                   department = '$department', 
-                  account_email = '$accountEmail',
-                  $passwordUpdate
+                  account_email = '$accountEmail'"
+              . ($passwordQuery ? ", $passwordQuery" : "") . " 
               WHERE id = '$id'";
 
+    // Execute query and return JSON response
     if (mysqli_query($conn, $query)) {
-        // Return success response
         echo json_encode(['success' => true]);
     } else {
-        // Return failure response with detailed error message
         echo json_encode(['success' => false, 'message' => 'Error: ' . mysqli_error($conn)]);
     }
 
-    // Close connection
+    // Close database connection
     mysqli_close($conn);
 }
 ?>
