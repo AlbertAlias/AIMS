@@ -11,7 +11,7 @@ $(document).ready(function() {
 
                 response.forEach(function(coordinator) {
                     // Create a button for each coordinator
-                    let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 coordinator-btn" data-id="${coordinator.id}">${coordinator.last_name}</button>`;
+                    let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 coordinator-btn" data-id="${coordinator.id}">${coordinator.first_name}</button>`;
                     coordinatorInfo.append(btn);
                 });
             },
@@ -68,7 +68,7 @@ $(document).ready(function() {
                 $('#submitBtn').prop('disabled', false);
 
                 // Load departments and select the user's department
-                loadDepartments(response.department);
+                loadDepartments(response.department, true);
             },
             error: function(xhr, status, error) {
                 console.error('Error retrieving coordinator details:', error);

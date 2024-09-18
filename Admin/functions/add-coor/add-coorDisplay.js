@@ -26,12 +26,6 @@ function unlockAndResetForms() {
     if (cancelBtn) cancelBtn.style.display = 'inline-block';
 }
 
-// Event listener for unlocking and resetting forms when "Add Coordinator" is clicked
-document.getElementById('addCoordinatorsBtn').addEventListener('click', function() {
-    unlockAndResetForms();
-});
-
-
 function disableAndResetForms() {
     const coordinatorForm = document.getElementById('coordinatorForm');
     const accountInfoForm = document.getElementById('accountInfoForm');
@@ -61,6 +55,7 @@ function disableAndResetForms() {
 // Event listener for unlocking forms when "Add Coordinator" is clicked
 document.getElementById('addCoordinatorsBtn').addEventListener('click', function() {
     unlockAndResetForms();
+    loadDepartments(null, true);
 });
 
 // Event listener for unlocking forms when any coordinator button is clicked
@@ -82,8 +77,3 @@ document.getElementById('cancelBtn').addEventListener('click', function() {
     // Hide the "Cancel" button
     this.style.display = 'none';
 });
-
-// Expose functions to the global scope
-window.enableFormElements = enableFormElements;
-window.disableFormElements = disableFormElements;
-window.resetFormElements = resetFormElements;

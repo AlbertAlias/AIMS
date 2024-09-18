@@ -94,7 +94,7 @@
                         <div class="col-md-7">
                             <label for="department" class="form-label required-asterisk">Department</label>
                             <select class="form-select" id="department" name="department" required disabled>
-                                <option selected disabled>Choose Department</option>
+                                <option selected>Choose Department</option>
                                 <!-- Options will be dynamically populated here -->
                             </select>
                         </div>

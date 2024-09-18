@@ -5,44 +5,54 @@ error_reporting(E_ALL);
 
 include '../../../dbconn.php';
 
-// Check if data is posted
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Collect the form data and sanitize input to prevent SQL injection
-    $lastName = mysqli_real_escape_string($conn, $_POST['last_name']);
-    $firstName = mysqli_real_escape_string($conn, $_POST['first_name']);
-    $middleName = mysqli_real_escape_string($conn, $_POST['middle_name']);
-    $suffix = mysqli_real_escape_string($conn, $_POST['suffix']);
-    $gender = mysqli_real_escape_string($conn, $_POST['gender']);
-    $address = mysqli_real_escape_string($conn, $_POST['address']);
-    $birthdate = mysqli_real_escape_string($conn, $_POST['birthdate']);
-    $civilStatus = mysqli_real_escape_string($conn, $_POST['civil_status']);
-    $personalEmail = mysqli_real_escape_string($conn, $_POST['personal_email']);
-    $contactNumber = mysqli_real_escape_string($conn, $_POST['contact_number']);
-    $department = mysqli_real_escape_string($conn, $_POST['department']);
-    $accountEmail = mysqli_real_escape_string($conn, $_POST['account_email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get the form data with default values if not set
+    $id = isset($_POST['id']) ? $_POST['id'] : null;
+    $lastName = isset($_POST['last_name']) ? $_POST['last_name'] : null;
+    $firstName = isset($_POST['first_name']) ? $_POST['first_name'] : null;
+    $middleName = isset($_POST['middle_name']) ? $_POST['middle_name'] : null;
+    $suffix = isset($_POST['suffix']) ? $_POST['suffix'] : null;
+    $gender = isset($_POST['gender']) ? $_POST['gender'] : null;
+    $address = isset($_POST['address']) ? $_POST['address'] : null;
+    $birthdate = isset($_POST['birthdate']) ? $_POST['birthdate'] : null;
+    $civilStatus = isset($_POST['civil_status']) ? $_POST['civil_status'] : null;
+    $personalEmail = isset($_POST['personal_email']) ? $_POST['personal_email'] : null;
+    $contactNumber = isset($_POST['contact_number']) ? $_POST['contact_number'] : null;
+    $department = isset($_POST['department']) ? $_POST['department'] : null;
+    $accountEmail = isset($_POST['account_email']) ? $_POST['account_email'] : null;
+    $password = isset($_POST['password']) ? $_POST['password'] : null;
 
-    // Remove leading '0' if present
-    if (substr($contactNumber, 0, 1) === '0') {
-        $contactNumber = substr($contactNumber, 1);
+    // Validate inputs (basic validation for example purposes)
+    if (empty($lastName) || empty($firstName) || empty($gender) || empty($address) || empty($birthdate) || empty($civilStatus) || empty($personalEmail) || empty($contactNumber) || empty($department) || empty($accountEmail) || empty($password)) {
+        echo json_encode(['success' => false, 'message' => 'All fields are required.']);
+        exit;
     }
 
     // Hash the password using bcrypt
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-    // SQL query to insert coordinator data into the database
-    $query = "INSERT INTO coordinators (last_name, first_name, middle_name, suffix, gender, address, birthdate, civil_status, personal_email, contact_number, department, account_email, password)
-              VALUES ('$lastName', '$firstName', '$middleName', '$suffix', '$gender', '$address', '$birthdate', '$civilStatus', '$personalEmail', '$contactNumber', '$department', '$accountEmail', '$hashedPassword')";
+    // Prepare an SQL statement to insert the coordinator data
+    $stmt = $conn->prepare("INSERT INTO coordinators (last_name, first_name, middle_name, suffix, gender, address, birthdate, civil_status, personal_email, contact_number, department, account_email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-    if (mysqli_query($conn, $query)) {
-        // Return success response
-        echo json_encode(['success' => true]);
-    } else {
-        // Return failure response with detailed error message
-        echo json_encode(['success' => false, 'message' => 'Error: ' . mysqli_error($conn)]);
+    if ($stmt === false) {
+        echo json_encode(['success' => false, 'message' => 'Failed to prepare the SQL statement.']);
+        exit;
     }
 
-    // Close connection
-    mysqli_close($conn);
+    // Bind parameters to the SQL statement
+    $stmt->bind_param('sssssssssssss', $lastName, $firstName, $middleName, $suffix, $gender, $address, $birthdate, $civilStatus, $personalEmail, $contactNumber, $department, $accountEmail, $hashedPassword);
+
+    // Execute the SQL statement
+    if ($stmt->execute()) {
+        echo json_encode(['success' => true, 'message' => 'Coordinator added successfully!']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Failed to execute the SQL statement.']);
+    }
+
+    // Close the statement and the database connection
+    $stmt->close();
+    $conn->close();
+} else {
+    echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
 }
 ?>
