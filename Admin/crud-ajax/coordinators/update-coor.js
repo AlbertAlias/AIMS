@@ -3,18 +3,26 @@ document.addEventListener('DOMContentLoaded', function () {
     const coordinatorForm = document.getElementById('coordinatorForm');
     const accountInfoForm = document.getElementById('accountInfoForm');
 
-    // Function to handle the update operation via AJAX
+    if (!updateBtn) {
+        console.error('Update button not found.');
+        return;
+    }
+    if (!coordinatorForm || !(coordinatorForm instanceof HTMLFormElement)) {
+        console.error('Coordinator form is missing or not an HTMLFormElement.');
+        return;
+    }
+    if (!accountInfoForm || !(accountInfoForm instanceof HTMLFormElement)) {
+        console.error('Account info form is missing or not an HTMLFormElement.');
+        return;
+    }
+
     function updateCoordinator(event) {
         event.preventDefault();
 
-        // FormData for both forms
         const coordinatorData = new FormData(coordinatorForm);
         const accountData = new FormData(accountInfoForm);
 
-        // Create an object to store combined data
         const combinedData = new FormData();
-
-        // Append all data from both forms to the combinedData
         for (const [key, value] of coordinatorData.entries()) {
             combinedData.append(key, value);
         }
@@ -22,7 +30,6 @@ document.addEventListener('DOMContentLoaded', function () {
             combinedData.append(key, value);
         }
 
-        // AJAX request to submit the data to update-coor.php
         fetch('controller/coordinators/update-coor.php', {
             method: 'POST',
             body: combinedData
@@ -42,6 +49,5 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Attach event listener to the update button
     updateBtn.addEventListener('click', updateCoordinator);
 });

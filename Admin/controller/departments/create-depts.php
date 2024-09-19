@@ -3,10 +3,8 @@ header('Content-Type: application/json');
 include '../../../dbconn.php';
 
 // Retrieve the POST data
-$data = json_decode(file_get_contents('php://input'), true);
-
-$departmentName = $data['departmentName'] ?? '';
-$departmentHead = $data['departmentHead'] ?? '';
+$departmentName = $_POST['departmentName'] ?? '';
+$departmentHead = $_POST['departmentHead'] ?? '';
 
 // Basic validation
 if (empty($departmentName) || empty($departmentHead)) {

@@ -9600,7 +9600,7 @@ a:focus {
     width: 13rem !important;
   }
   .sidebar .nav-item .collapse {
-    position: relative;
+    position: fixed;
     left: 0;
     z-index: 1;
     top: 0;

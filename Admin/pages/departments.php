@@ -16,18 +16,20 @@
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Add Department</h5>
                 <p class="text-gray-800 fs-5 mb-3">Department Information</p>
                 <form id="departmentForm">
+                    <input type="hidden" id="departmentId" name="id"> <!-- Hidden input for department ID -->
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="departmentName" class="form-label">Department Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="departmentName" required disabled>
+                            <input type="text" class="form-control" id="departmentName" name="departmentName" required disabled>
                         </div>
                         <div class="col-md-6">
                             <label for="departmentHead" class="form-label">Department Head <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="departmentHead" required disabled>
+                            <input type="text" class="form-control" id="departmentHead" name="departmentHead" required disabled>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success me-2">Submit</button>
-                    <button type="button" id="cancelEditBtn" class="btn btn-secondary me-2" style="display: none;">Cancel</button>
+                    <button type="button" id="updateBtn" class="btn btn-primary" style="display: none;">Update</button>
+                    <button type="button" id="cancelEditBtn" class="btn btn-secondary" style="display: none;">Cancel</button>
                     <button type="button" id="deleteDeptBtn" class="btn btn-danger" style="display: none;">Delete</button>
                 </form>
             </div>

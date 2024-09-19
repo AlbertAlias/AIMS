@@ -1,51 +1,28 @@
 <?php
-header('Content-Type: application/json');
-include '../../../dbconn.php';
+include '../../../dbconn.php'; // Adjust to your database connection file
 
-// Retrieve the POST data
-$data = json_decode(file_get_contents('php://input'), true);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id = $_POST['id'] ?? ''; // Get department ID
+    $name = $_POST['departmentName'] ?? ''; // Get department name
+    $head = $_POST['departmentHead'] ?? ''; // Get department head (if needed)
 
-$id = $data['id'] ?? null;
-$departmentName = $data['departmentName'] ?? '';
-$departmentHead = $data['departmentHead'] ?? '';
+    // Check if required fields are provided
+    if (empty($id) || empty($name)) {
+        echo json_encode(['success' => false, 'message' => 'Missing required fields.']);
+        exit;
+    }
 
-// Basic validation
-if (empty($id) || empty($departmentName) || empty($departmentHead)) {
-    echo json_encode([
-        'success' => false,
-        'message' => 'Please fill in all fields.',
-    ]);
-    exit;
-}
-
-// Prepare SQL query
-$sql = "UPDATE departments SET department_name = ?, department_head = ? WHERE id = ?";
-$stmt = $conn->prepare($sql);
-
-if ($stmt) {
-    $stmt->bind_param("ssi", $departmentName, $departmentHead, $id);
+    $query = "UPDATE departments SET department_name = ?, department_head = ? WHERE id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('ssi', $name, $head, $id);
 
     if ($stmt->execute()) {
-        echo json_encode([
-            'success' => true,
-            'id' => $id,
-            'departmentName' => htmlspecialchars($departmentName),
-            'departmentHead' => htmlspecialchars($departmentHead),
-        ]);
+        echo json_encode(['success' => true]);
     } else {
-        echo json_encode([
-            'success' => false,
-            'message' => 'Failed to update data.',
-        ]);
+        echo json_encode(['success' => false, 'message' => $stmt->error]);
     }
 
     $stmt->close();
-} else {
-    echo json_encode([
-        'success' => false,
-        'message' => 'Failed to prepare SQL query.',
-    ]);
+    $conn->close();
 }
-
-$conn->close();
 ?>

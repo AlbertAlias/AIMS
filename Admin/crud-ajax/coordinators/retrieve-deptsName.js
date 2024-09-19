@@ -1,7 +1,7 @@
 // Populate departments in the department select field
 function loadDepartments(selectedDepartment, isEnabled = false) {  // Added isEnabled argument
     $.ajax({
-        url: 'controller/coordinators/retrieve-depts.php',
+        url: 'controller/coordinators/retrieve-deptsName.php',
         method: 'GET',
         dataType: 'json',
         success: function(response) {

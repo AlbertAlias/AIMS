@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const departmentForm = document.getElementById('departmentForm');
+    if (!departmentForm) return; // Exit if departmentForm is not found
     const addDepartmentsBtn = document.getElementById('addDepartmentsBtn');
     const departmentInfo = document.getElementById('departmentInfo');
     const submitBtn = departmentForm.querySelector('button[type="submit"]');
