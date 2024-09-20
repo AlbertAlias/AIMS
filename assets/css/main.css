@@ -9211,8 +9211,10 @@ a:focus {
   align-items: center;
   justify-content: center;
 }
+
+/* DASHBOARD CONTAINER BORDER */
 .border-left-primary {
-  border-left: 0.25rem solid #4e73df !important;
+  border-left: 0.35rem solid #4e73df !important;
 }
 .border-bottom-primary {
   border-bottom: 0.25rem solid #4e73df !important;
@@ -9259,6 +9261,8 @@ a:focus {
 .border-bottom-dark {
   border-bottom: 0.25rem solid #5a5c69 !important;
 }
+/* DASHBOARD CONTAINER BORDER */
+
 .progress-sm {
   height: 0.5rem;
 }
