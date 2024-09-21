@@ -3,24 +3,24 @@
         <!-- Left square container -->
         <div class="col-md-4 col-lg-3">
             <div class="bg-light rounded-3 shadow px-4 py-4 d-flex flex-column" style="min-height: 200px;">
-                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Coordinators</h5>
-                <div id="coordinatorInfo" class="text-gray-800">
+                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Interns</h5>
+                <div id="internsInfo" class="text-gray-800">
                     <!-- Coordinator information will be displayed here -->
                 </div>
-                <button id="addCoordinatorsBtn" data-id="1" class="btn btn-success mt-3">Add Coordinator</button>
+                <button id="addInternsBtn" data-id="1" class="btn btn-success mt-3">Add Interns</button>
             </div>
         </div>
 
         <!-- Middle rectangle container -->
         <div class="col-md-4 col-lg-6">
             <div class="bg-light rounded-3 shadow px-4 py-4 d-flex flex-column" style="min-height: 200px;">
-                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Add Coordinator</h5>
+                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Add Interns</h5>
                 <p class="text-gray-800 fs-5 mb-3">Personal Information</p>
-                <form id="coordinatorForm">
+                <form id="internsForm">
                     <div class="row mb-3">
                         <!-- Last Name -->
                         <div class="col-md-5">
-                            <input type="hidden" id="coordinator_id" name="id">
+                            <input type="hidden" id="interns_id" name="id">
                             <label for="lastName" class="form-label required-asterisk">Last Name</label>
                             <input type="text" class="form-control" id="last_name" name="last_name" required disabled>
                         </div>
@@ -81,7 +81,7 @@
                             <input type="email" class="form-control" id="personal_email" name="personal_email" required disabled>
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <div class="row mb-3 border-bottom border-dark pb-3 mb-2">
                         <!-- Contact Number -->
                         <div class="col-md-5">
                             <label for="contactNumber" class="form-label">Contact Number</label>
@@ -99,6 +99,39 @@
                             </select>
                         </div>
                     </div>
+
+                    <p class="text-gray-800 fs-5 mb-3">Internship Information</p>
+
+                    <div class="row mb-3">
+                        <!-- Coordinator Name -->
+                        <div class="col-md-8">
+                            <label for="coordinatorName" class="form-label required-asterisk">Coordinator Name</label>
+                            <input type="text" class="form-control" id="coordinator_name" name="coordinator_name" required disabled>
+                        </div>
+
+                        <!-- Hours Needed -->
+                        <div class="col-md-4">
+                            <label for="hoursNeeded" class="form-label required-asterisk">Hours Needed</label>
+                            <input type="text" class="form-control" id="hourse_needed" name="hours_needed" required disabled>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row mb-3">
+                        <!-- Coordinator Email -->
+                        <div class="col-md-7">
+                            <label for="coordinatorEmail" class="form-label required-asterisk">Coordinator Email</label>
+                            <input type="text" class="form-control" id="coordinator_email" name="coordinator_email" required disabled>
+                        </div>
+
+                        <!-- Internship Status -->
+                        <div class="col-md-5">
+                            <label for="internshipStatus" class="form-label required-asterisk">Internship Status</label>
+                            <input type="text" class="form-control" id="internship_status" name="internship_status" required disabled>
+                        </div>
+                    </div>
+                    
                     <div class="row">
                         <div class="col-md-12 text-end">
                             <button type="button" id="cancelBtn" class="btn btn-secondary" style="display: none;">Cancel</button>

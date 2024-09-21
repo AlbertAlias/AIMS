@@ -15,36 +15,43 @@
     <!-- Nav Item - Dashboard -->
     <li class="nav-item align-items-center justify-content-center <?php echo $current_page === 'pages/admin-dashboard.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
         <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/admin-dashboard.php')">
-            <i class="fa-solid fa-qrcode"></i>
+            <i class="fa-solid fa-qrcode fs-4"></i>
             <span class="">Dashboard</span>
         </a>
     </li>
 
     <li class="nav-item align-items-center justify-content-center <?php echo $current_page === 'pages/add-users.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
         <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/add-users.php')">
-            <i class="fa-solid fa-user-plus"></i>
+            <i class="fa-solid fa-user-plus fs-4"></i>
             <span class="">Add Users</span>
         </a>
     </li>
 
     <li class="nav-item align-items-center justify-content-center <?php echo $current_page === 'pages/manage-users.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
         <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/manage-users.php')">
-            <i class="fa-solid fa-users-gear"></i>
+            <i class="fa-solid fa-users-gear fs-4"></i>
             <span class="">Manage Users</span>
         </a>
     </li>
 
     <li class="nav-item align-items-center justify-content-center <?php echo $current_page === 'pages/departments.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
         <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/departments.php')">
-            <i class="fa-solid fa-scroll"></i>
+            <i class="fa-solid fa-scroll fs-4"></i>
             <span class="">Departments</span>
         </a>
     </li>
 
     <li class="nav-item align-items-center justify-content-center <?php echo $current_page === 'pages/coordinators.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
         <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/coordinators.php')">
-            <i class="fa-solid fa-address-card"></i>
-            <span class="">Coordinators</span>
+            <i class="fa-solid fa-users fs-4"></i>
+            <span>Coordinators</span>
+        </a>
+    </li>
+
+    <li class="nav-item align-items-center justify-content-center <?php echo $current_page === 'pages/interns.php' ? 'active' : ''; ?>" style="margin-top: 5px;">
+        <a class="nav-link" href="javascript:void(0);" onclick="loadPage('pages/interns.php')">
+            <i class="fa-solid fa-user-graduate fs-4"></i>
+            <span class="">Interns</span>
         </a>
     </li>
 

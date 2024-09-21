@@ -15,6 +15,7 @@
         'pages/manage-users.php',
         'pages/departments.php',
         'pages/coordinators.php',
+        'pages/interns.php',
         'pages/admin-profile.php',
     ]; // Add more pages as needed
     if (!in_array($page, $allowed_pages)) {
@@ -95,7 +96,7 @@
             <?php include('components/admin-header.php'); ?>
 
             <!-- Main Content -->
-            <div class="" id="content">
+            <div id="content">
 
                 <!-- Begin Page Content -->
                 <div id="page-content" style="width: 100%;">
@@ -136,38 +137,11 @@
     <!-- <script src="js/sb-admin-2.js"></script> -->
 
     <!--START::FUNCTIONS-->
-    <!-- <script src="functions/add-users/email.js" defer></script>
-    <script src="functions/add-users/studForm-display.js" defer></script>
-    <script src="functions/add-users/studID.js" defer></script>
-    <script src="functions/add-users/user-type.js" defer></script>
-    <script src="functions/manage-users/table-actions.js" defer></script>
-    <script src="functions/manage-users/edit-email.js" defer></script>
-    <script src="functions/manage-users/edit-studID.js" defer></script>
-    <script src="functions/add-depts/add-deptDisplay.js" defer></script>
-    <script src="functions/add-coor/add-coorDisplay.js" defer></script>
-    <script src="functions/add-coor/coor-email.js" defer></script>
-    <script src="functions/add-coor/contact-number.js" defer></script>
-    <script src="functions/admin-profile/drag_drop.js" defer></script> -->
+
     <!--END::FUNCTION-->
 
-    <!--START::CRUD AJAX FUNCTIONS-->
-    <!-- <script src="crud-ajax/add-users/create-users.js" defer></script>
-    <script src="crud-ajax/manage-users/retrieve-tableData.js" defer></script>
-    <script src="crud-ajax/manage-users/update-users.js" defer></script> -->
-    <!-- <script src="crud-ajax/departments/add-depts.js" defer></script> -->
-    <!-- <script src="crud-ajax/departments/create-depts.js" defer></script>
-    <script src="crud-ajax/departments/retrieve-depts.js" defer></script>
-    <script src="crud-ajax/departments/update-depts.js" defer></script>
-    <script src="crud-ajax/departments/delete-depts.js" defer></script>
-    <script src="crud-ajax/coordinators/create-coor.js" defer></script>
-    <script src="crud-ajax/coordinators/retrieve-coor.js" defer></script>
-    <script src="crud-ajax/coordinators/retrieve-deptsName.js" defer></script>
-    <script src="crud-ajax/coordinators/update-coor.js" defer></script>
-    <script src="crud-ajax/admin-profile/create_profile.js" defer></script> -->
-    <!--END::CRUD AJAX FUNCTIONS-->
-
     <!--START::FUNCTIONS-->
-    <?php if (strpos($page, 'add-users') !== false || $page === 'pages/admin-dashboard.php'): ?>
+    <?php if (strpos($page, 'add-users') !== false): ?>
         <script src="functions/add-users/email.js" defer></script>
         <script src="functions/add-users/studForm-display.js" defer></script>
         <script src="functions/add-users/studID.js" defer></script>
@@ -177,43 +151,61 @@
         <script src="functions/manage-users/edit-studID.js" defer></script>
     <?php endif; ?>
 
-    <?php if (strpos($page, 'departments') !== false || $page === 'pages/admin-dashboard.php'): ?>
+    <?php if (strpos($page, 'departments') !== false): ?>
         <script src="functions/add-depts/add-deptDisplay.js" defer></script>
     <?php endif; ?>
 
-    <?php if (strpos($page, 'coordinators') !== false || $page === 'pages/admin-dashboard.php'): ?>
+    <?php if (strpos($page, 'coordinators') !== false): ?>
         <script src="functions/add-coor/add-coorDisplay.js" defer></script>
         <script src="functions/add-coor/coor-email.js" defer></script>
         <script src="functions/add-coor/contact-number.js" defer></script>
     <?php endif; ?>
 
-    <?php if (strpos($page, 'admin-profile') !== false || $page === 'pages/admin-dashboard.php'): ?>
+    <?php if (strpos($page, 'interns') !== false): ?>
+        <script src="functions/interns/add-internDisplay.js" defer></script>
+        <script src="functions/interns/coor-email.js" defer></script>
+    <?php endif; ?>
+
+    <?php if (strpos($page, 'admin-profile') !== false): ?>
         <script src="functions/admin-profile/drag_drop.js" defer></script>
     <?php endif; ?>
     <!--END::FUNCTIONS-->
 
     <!--START::CRUD AJAX FUNCTIONS-->
-    <?php if (strpos($page, 'add-users') !== false || $page === 'pages/admin-dashboard.php'): ?>
+    <?php if ($page === 'pages/admin-dashboard.php'): ?>
+        <script src="crud-ajax/dashboards/retrieve-deptCounts.js" defer></script>
+        <script src="crud-ajax/dashboards/retrieve-coorCounts.js" defer></script>
+    <?php endif; ?>
+
+    <?php if (strpos($page, 'add-users') !== false): ?>
         <script src="crud-ajax/add-users/create-users.js" defer></script>
         <script src="crud-ajax/manage-users/retrieve-tableData.js" defer></script>
         <script src="crud-ajax/manage-users/update-users.js" defer></script>
     <?php endif; ?>
 
-    <?php if (strpos($page, 'departments') !== false || $page === 'pages/admin-dashboard.php'): ?>
+    <?php if (strpos($page, 'departments') !== false): ?>
         <script src="crud-ajax/departments/create-depts.js" defer></script>
         <script src="crud-ajax/departments/retrieve-depts.js" defer></script>
         <script src="crud-ajax/departments/update-depts.js" defer></script>
         <script src="crud-ajax/departments/delete-depts.js" defer></script>
     <?php endif; ?>
 
-    <?php if (strpos($page, 'coordinators') !== false || $page === 'pages/admin-dashboard.php'): ?>
+    <?php if (strpos($page, 'coordinators') !== false): ?>
         <script src="crud-ajax/coordinators/create-coor.js" defer></script>
         <script src="crud-ajax/coordinators/retrieve-coor.js" defer></script>
         <script src="crud-ajax/coordinators/retrieve-deptsName.js" defer></script>
         <script src="crud-ajax/coordinators/update-coor.js" defer></script>
     <?php endif; ?>
 
-    <?php if (strpos($page, 'admin-profile') !== false || $page === 'pages/admin-dashboard.php'): ?>
+    <?php if (strpos($page, 'interns') !== false): ?>
+        <script src="crud-ajax/interns/create-interns.js" defer></script>
+        <script src="crud-ajax/interns/retrieve-deptsName.js" defer></script>
+        <!-- <script src="crud-ajax/coordinators/retrieve-coor.js" defer></script>
+        <script src="crud-ajax/coordinators/retrieve-deptsName.js" defer></script>
+        <script src="crud-ajax/coordinators/update-coor.js" defer></script> -->
+    <?php endif; ?>
+
+    <?php if (strpos($page, 'admin-profile') !== false): ?>
         <script src="crud-ajax/admin-profile/create_profile.js" defer></script>
     <?php endif; ?>
     <!--END::CRUD AJAX FUNCTIONS-->

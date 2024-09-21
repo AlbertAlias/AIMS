@@ -2,7 +2,7 @@
     <div class="row g-4">
         <!-- Left square container (smaller width) -->
         <div class="col-md-4 col-lg-3">
-            <div class="bg-light rounded-3 shadow-sm px-4 py-4 d-flex flex-column position-relative" style="min-height: 300px;">
+            <div class="bg-light rounded-3 shadow px-4 py-4 d-flex flex-column position-relative" style="min-height: 300px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Departments</h5>
                 <div id="departmentInfo" class="text-gray-800">
                     <!-- Department information will be displayed here -->
@@ -12,7 +12,7 @@
         </div>
         <!-- Right rectangle container (larger width) -->
         <div class="col-md-8 col-lg-9">
-            <div class="bg-light rounded-3 shadow-sm px-4 py-4 d-flex flex-column" style="min-height: 300px;">
+            <div class="bg-light rounded-3 shadow px-4 py-4 d-flex flex-column" style="min-height: 300px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Add Department</h5>
                 <p class="text-gray-800 fs-5 mb-3">Department Information</p>
                 <form id="departmentForm">

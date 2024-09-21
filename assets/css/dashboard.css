@@ -2,3 +2,9 @@
     color: #b0b0b0; /* Lighter dark color */
     font-size: 1.5rem; /* Adjust size as needed */
 }
+
+.fixed-width {
+    width: 50px; /* Adjust as needed */
+    display: inline-block;
+    text-align: center; /* Center the text if desired */
+}
