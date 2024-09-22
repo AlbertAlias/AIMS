@@ -7,68 +7,51 @@ include '../../../dbconn.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the form data with default values if not set
-    $lastName = $_POST['last_name'] ?? null;
-    $firstName = $_POST['first_name'] ?? null;
-    $middleName = $_POST['middle_name'] ?? null;
-    $suffix = $_POST['suffix'] ?? null;
-    $gender = $_POST['gender'] ?? null;
-    $address = $_POST['address'] ?? null;
-    $birthdate = $_POST['birthdate'] ?? null;
-    $civilStatus = $_POST['civil_status'] ?? null;
-    $personalEmail = $_POST['personal_email'] ?? null;
-    $contactNumber = $_POST['contact_number'] ?? null;
-    $department = $_POST['department'] ?? null;
-    $coordinatorName = $_POST['coordinator_name'] ?? null;
-    $hoursNeeded = $_POST['hours_needed'] ?? null;
-    $coordinatorEmail = $_POST['coordinator_email'] ?? null;
-    $internshipStatus = $_POST['internship_status'] ?? null;
-    $accountEmail = $_POST['account_email'] ?? null;
-    $password = $_POST['password'] ?? null;
+    $last_name = isset($_POST['last_name']) ? $_POST['last_name'] : null;
+    $first_name = isset($_POST['first_name']) ? $_POST['first_name'] : null;
+    $middle_name = isset($_POST['middle_name']) ? $_POST['middle_name'] : null;
+    $suffix = isset($_POST['suffix']) ? $_POST['suffix'] : null;
+    $gender = isset($_POST['gender']) ? $_POST['gender'] : null;
+    $address = isset($_POST['address']) ? $_POST['address'] : null;
+    $birthdate = isset($_POST['birthdate']) ? $_POST['birthdate'] : null;
+    $civil_status = isset($_POST['civil_status']) ? $_POST['civil_status'] : null;
+    $personal_email = isset($_POST['personal_email']) ? $_POST['personal_email'] : null;
+    $contact_number = isset($_POST['contact_number']) ? $_POST['contact_number'] : null;
+    $studentID = isset($_POST['studentID']) ? $_POST['studentID'] : null;
+    $department = isset($_POST['department']) ? $_POST['department'] : null;
+    $coordinator_name = isset($_POST['coordinator_name']) ? $_POST['coordinator_name'] : null;
+    $hours_needed = isset($_POST['hours_needed']) ? $_POST['hours_needed'] : null;
+    $coordinator_email = isset($_POST['coordinator_email']) ? $_POST['coordinator_email'] : null;
+    $internship_status = isset($_POST['internship_status']) ? $_POST['internship_status'] : null;
+    $account_email = isset($_POST['account_email']) ? $_POST['account_email'] : null;
+    $password = isset($_POST['password']) ? $_POST['password'] : null;
 
     // Validate required fields
-    if (
-        empty($lastName) || empty($firstName) || empty($gender) || 
-        empty($address) || empty($birthdate) || empty($civilStatus) || 
-        empty($personalEmail) || empty($contactNumber) || empty($department) || 
-        empty($coordinatorName) || empty($hoursNeeded) || empty($coordinatorEmail) || 
-        empty($internshipStatus) || empty($accountEmail) || empty($password)
-    ) {
-        echo json_encode(['success' => false, 'message' => 'All fields are required.']);
+    if (empty($last_name) || empty($first_name) || empty($middle_name) || empty($gender) ||
+        empty($address) || empty($birthdate) || empty($civil_status) || empty($personal_email) ||
+        empty($contact_number) || empty($studentID) || empty($department) || empty($coordinator_name) ||
+        empty($hours_needed) || empty($coordinator_email) || empty($internship_status) || empty($account_email) ||
+        empty($password)) {
+        echo json_encode(['success' => false, 'message' => 'All fields except suffix are required.']);
         exit;
     }
 
-    // Hash the password using bcrypt
-    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+    // Prepare the SQL statement
+    $stmt = $conn->prepare("INSERT INTO interns (last_name, first_name, middle_name, suffix, gender, address, birthdate, civil_status, personal_email, contact_number, studentID, department, coordinator_name, hours_needed, coordinator_email, internship_status, account_email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    
+    // Bind parameters
+    $stmt->bind_param("ssssssssssssssssss", $last_name, $first_name, $middle_name, $suffix, $gender, $address, $birthdate, $civil_status, $personal_email, $contact_number, $studentID, $department, $coordinator_name, $hours_needed, $coordinator_email, $internship_status, $account_email, $password);
 
-    // Prepare the SQL statement to insert the intern data
-    $stmt = $conn->prepare("INSERT INTO interns 
-        (last_name, first_name, middle_name, suffix, gender, address, birthdate, civil_status, personal_email, contact_number, department, coordinator_name, hours_needed, coordinator_email, internship_status, account_email, password) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-    if ($stmt === false) {
-        echo json_encode(['success' => false, 'message' => 'Failed to prepare the SQL statement.']);
-        exit;
-    }
-
-    // Bind parameters to the SQL statement
-    $stmt->bind_param('sssssssssssssssss', 
-        $lastName, $firstName, $middleName, $suffix, $gender, 
-        $address, $birthdate, $civilStatus, $personalEmail, $contactNumber, 
-        $department, $coordinatorName, $hoursNeeded, $coordinatorEmail, 
-        $internshipStatus, $accountEmail, $hashedPassword
-    );
-
-    // Execute the SQL statement
+    // Execute the query
     if ($stmt->execute()) {
-        echo json_encode(['success' => true, 'message' => 'Intern added successfully!']);
+        echo json_encode(['message' => 'Intern added successfully.']);
     } else {
-        echo json_encode(['success' => false, 'message' => 'Failed to execute the SQL statement.']);
+        http_response_code(500);
+        echo json_encode(['message' => 'Error occurred while adding intern.']);
     }
 
     // Close the statement and connection
     $stmt->close();
     $conn->close();
-} else {
-    echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
 }
 ?>

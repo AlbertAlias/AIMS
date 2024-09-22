@@ -20,7 +20,7 @@
                     <div class="row mb-3">
                         <!-- Last Name -->
                         <div class="col-md-5">
-                            <input type="hidden" id="interns_id" name="id">
+                            <input type="hidden" id="internID" name="id">
                             <label for="lastName" class="form-label required-asterisk">Last Name</label>
                             <input type="text" class="form-control" id="last_name" name="last_name" required disabled>
                         </div>
@@ -83,15 +83,20 @@
                     </div>
                     <div class="row mb-3 border-bottom border-dark pb-3 mb-2">
                         <!-- Contact Number -->
-                        <div class="col-md-5">
+                        <div class="col-md-4">
                             <label for="contactNumber" class="form-label">Contact Number</label>
                             <div class="input-group">
                                 <span class="input-group-text m-0 px-2">+63</span>
                                 <input type="tel" class="form-control" id="contact_number" name="contact_number" placeholder="" pattern="[1-9]{10}" maxlength="10" title="Please enter a valid 10-digit phone number" disabled>
                             </div>
                         </div>
+                        <!-- Student ID -->
+                        <div class="col-md-3">
+                            <label for="studentID" class="form-label">Student ID</label>
+                            <input type="text" class="form-control" id="studentID" name="studentID" disabled>
+                        </div>
                         <!-- Department -->
-                        <div class="col-md-7">
+                        <div class="col-md-5">
                             <label for="department" class="form-label required-asterisk">Department</label>
                             <select class="form-select" id="department" name="department" required disabled>
                                 <option selected>Choose Department</option>
@@ -112,7 +117,7 @@
                         <!-- Hours Needed -->
                         <div class="col-md-4">
                             <label for="hoursNeeded" class="form-label required-asterisk">Hours Needed</label>
-                            <input type="text" class="form-control" id="hourse_needed" name="hours_needed" required disabled>
+                            <input type="text" class="form-control" id="hours_needed" name="hours_needed" required disabled>
                         </div>
 
 
@@ -128,7 +133,12 @@
                         <!-- Internship Status -->
                         <div class="col-md-5">
                             <label for="internshipStatus" class="form-label required-asterisk">Internship Status</label>
-                            <input type="text" class="form-control" id="internship_status" name="internship_status" required disabled>
+                            <select class="form-select" id="internship_status" name="internship_status" required disabled>
+                                <option selected disabled>Select Internship Status</option>
+                                <option value="Ongoing">Ongoing</option>
+                                <option value="Cancelled">Cancelled</option>
+                                <option value="Done">Done</option>
+                            </select>
                         </div>
                     </div>
                     

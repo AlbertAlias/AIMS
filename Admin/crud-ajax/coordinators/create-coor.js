@@ -7,13 +7,6 @@ $(document).ready(function () {
         var formData = $(this).serialize() + '&' + $('#accountInfoForm').serialize();
         console.log('Form Data:', formData); // Log form data to check if all fields are included
 
-        // Handle the contact number prefix
-        var contactNumber = $('#contact_number').val();
-        if (contactNumber.length === 10 && contactNumber[0] !== '0') {
-            contactNumber = '0' + contactNumber;
-            $('#contact_number').val(contactNumber);
-        }
-
         $.ajax({
             url: 'controller/coordinators/create-coor.php',
             type: 'POST',

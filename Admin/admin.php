@@ -163,7 +163,9 @@
 
     <?php if (strpos($page, 'interns') !== false): ?>
         <script src="functions/interns/add-internDisplay.js" defer></script>
-        <script src="functions/interns/coor-email.js" defer></script>
+        <script src="functions/interns/intern-email.js" defer></script>
+        <script src="functions/interns/studID.js" defer></script>
+        <script src="functions/interns/internPass.js" defer></script>
     <?php endif; ?>
 
     <?php if (strpos($page, 'admin-profile') !== false): ?>
@@ -175,6 +177,7 @@
     <?php if ($page === 'pages/admin-dashboard.php'): ?>
         <script src="crud-ajax/dashboards/retrieve-deptCounts.js" defer></script>
         <script src="crud-ajax/dashboards/retrieve-coorCounts.js" defer></script>
+        <script src="crud-ajax/dashboards/retrieve-internCounts.js" defer></script>
     <?php endif; ?>
 
     <?php if (strpos($page, 'add-users') !== false): ?>
@@ -200,9 +203,8 @@
     <?php if (strpos($page, 'interns') !== false): ?>
         <script src="crud-ajax/interns/create-interns.js" defer></script>
         <script src="crud-ajax/interns/retrieve-deptsName.js" defer></script>
-        <!-- <script src="crud-ajax/coordinators/retrieve-coor.js" defer></script>
-        <script src="crud-ajax/coordinators/retrieve-deptsName.js" defer></script>
-        <script src="crud-ajax/coordinators/update-coor.js" defer></script> -->
+        <script src="crud-ajax/interns/retrieve-interns.js" defer></script>
+        <script src="crud-ajax/interns/update-interns.js" defer></script>
     <?php endif; ?>
 
     <?php if (strpos($page, 'admin-profile') !== false): ?>

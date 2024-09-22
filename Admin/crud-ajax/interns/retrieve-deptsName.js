@@ -1,7 +1,6 @@
-// Populate departments in the department select field
-function loadDepartments(selectedDepartment, isEnabled = false) {  // Added isEnabled argument
+function loadDepartments(selectedDepartment, isEnabled = false) {
     $.ajax({
-        url: 'controller/coordinators/retrieve-deptsName.php',
+        url: 'controller/interns/retrieve-deptsName.php',
         method: 'GET',
         dataType: 'json',
         success: function(response) {
@@ -11,7 +10,7 @@ function loadDepartments(selectedDepartment, isEnabled = false) {  // Added isEn
             // Append the default "Choose Department" option
             departmentSelect.append('<option selected disabled>Choose Department</option>');
 
-            // Check if departments key exists and is an array
+            // Populate the department options
             if (Array.isArray(response.departments)) {
                 response.departments.forEach(function(department) {
                     let selected = department.department_name == selectedDepartment ? 'selected' : '';
@@ -23,7 +22,6 @@ function loadDepartments(selectedDepartment, isEnabled = false) {  // Added isEn
 
             // Enable or disable the select based on isEnabled parameter
             departmentSelect.prop('disabled', !isEnabled);  // Disable by default unless explicitly enabled
-            console.log('Department select enabled:', isEnabled);
         },
         error: function(xhr, status, error) {
             console.error('Error retrieving departments:', error);
@@ -31,13 +29,41 @@ function loadDepartments(selectedDepartment, isEnabled = false) {  // Added isEn
     });
 }
 
-// Event listener for the "Add Coordinator" button to enable department select
-$('#addCoordinatorsBtn').on('click', function() {
-    // When adding a coordinator, load departments and enable the select
-    loadDepartments(null, true);  // Enable the department select
+// Function to load coordinator details based on the selected department
+function loadCoorInfo(departmentName) {
+    $.ajax({
+        url: 'controller/interns/retrieve-coor-info.php',
+        method: 'GET',
+        data: { department: departmentName },
+        dataType: 'json',
+        success: function(response) {
+            if (response.success) {
+                let coordinatorName = response.coordinator.last_name + ', ' + response.coordinator.first_name;
+                $('#coordinator_name').val(coordinatorName);
+                $('#coordinator_email').val(response.coordinator.personal_email);
+            } else {
+                console.error('Coordinator not found for this department');
+                $('#coordinator_name').val('');
+                $('#coordinator_email').val('');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error retrieving coordinator info:', error);
+            console.error('Response text:', xhr.responseText);  // Show the raw response for debugging
+        }
+    });
+}
+
+
+// Event listener for department select change
+$('#department').on('change', function() {
+    let selectedDepartment = $(this).val();
+    if (selectedDepartment) {
+        loadCoorInfo(selectedDepartment);  // Fetch and load coordinator details
+    }
 });
 
 // Call the function to load departments on page load, but keep it disabled
 $(document).ready(function() {
-    loadDepartments();  // Keep the department select disabled by default
+    loadDepartments();  // Load the departments initially
 });
