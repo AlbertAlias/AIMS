@@ -4,7 +4,7 @@ $(document).ready(function () {
         e.preventDefault(); // Prevent the default form submission
 
         // Prepare the form data
-        var formData = $(this).serialize() + '&' + $('#accountInfoForm').serialize();
+        var formData = $(this).serialize() + '&' + $('#coor_accountForm').serialize();
         console.log('Form Data:', formData); // Log form data to check if all fields are included
 
         $.ajax({
@@ -20,7 +20,7 @@ $(document).ready(function () {
                     
                     // Clear the form inputs
                     $('#coordinatorForm')[0].reset();
-                    $('#accountInfoForm')[0].reset();
+                    $('#coor_accountForm')[0].reset();
                 } else {
                     alert('Failed to add coordinator: ' + response.message);
                 }

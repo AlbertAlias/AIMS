@@ -8,20 +8,28 @@ $(document).ready(function() {
             success: function(response) {
                 let internsInfo = $('#internsInfo');
                 internsInfo.empty();  // Clear the div before populating
-
-                response.forEach(function(intern) {
-                    // Create a button for each intern
-                    let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 intern-btn" data-id="${intern.id}">
-                                    ${intern.last_name}, ${intern.first_name}
-                                </button>`;
-                    internsInfo.append(btn);
-                });
+    
+                if (response.error) {
+                    internsInfo.append(`<p>${response.error}</p>`);
+                } else {
+                    response.forEach(function(intern) {
+                        console.log(intern);
+                        // Create a button for each intern
+                        let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 intern-btn" data-id="${intern.id}">
+                                        ${intern.last_name}, ${intern.first_name}
+                                    </button>`;
+                        internsInfo.append(btn);
+                    });
+                }
             },
             error: function(xhr, status, error) {
                 console.error('Failed to load interns:', error);
             }
         });
     };
+    
+    loadInterns();
+    
 
     // Attach loadInternDetails to the window object
     window.loadInternDetails = function(id) {
@@ -37,19 +45,19 @@ $(document).ready(function() {
                 }
 
                 $('#interns_id').val(response.id);
-                $('#first_name').val(response.first_name).prop('disabled', false);
-                $('#last_name').val(response.last_name).prop('disabled', false);
-                $('#middle_name').val(response.middle_name).prop('disabled', false);
-                $('#suffix').val(response.suffix).prop('disabled', false);
-                $('#address').val(response.address).prop('disabled', false);
-                $('#birthdate').val(response.birthdate).prop('disabled', false);
-                $('#personal_email').val(response.personal_email).prop('disabled', false);
-                $('#contact_number').val(response.contact_number).prop('disabled', false);
-                $('#gender').val(response.gender).prop('disabled', false);
-                $('#civil_status').val(response.civil_status).prop('disabled', false);
-                $('#account_email').val(response.account_email).prop('disabled', true); // Lock the account email
-                $('#password').val(response.password).prop('disabled', true); // Lock the hashed password
-                $('#submitBtn').prop('disabled', false);
+                $('#intern_first_name').val(response.first_name).prop('disabled', false);
+                $('#intern_last_name').val(response.last_name).prop('disabled', false);
+                $('#intern_middle_name').val(response.middle_name).prop('disabled', false);
+                $('#intern_suffix').val(response.suffix).prop('disabled', false);
+                $('#intern_address').val(response.address).prop('disabled', false);
+                $('#intern_birthdate').val(response.birthdate).prop('disabled', false);
+                $('#intern_personal_email').val(response.personal_email).prop('disabled', false);
+                $('#intern_contact_number').val(response.contact_number).prop('disabled', false);
+                $('#intern_gender').val(response.gender).prop('disabled', false);
+                $('#intern_civil_status').val(response.civil_status).prop('disabled', false);
+                $('#intern_account_email').val(response.account_email).prop('disabled', true); // Lock the account email
+                $('#intern_password').val(response.password).prop('disabled', true); // Lock the hashed password
+                $('#internSubmitBtn').prop('disabled', false);
                 loadDepartments(response.department, true);
 
                 // Set the missing fields and keep them locked
@@ -64,6 +72,4 @@ $(document).ready(function() {
             }
         });
     };
-
-    loadInterns();
 });

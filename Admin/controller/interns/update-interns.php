@@ -8,13 +8,25 @@ header('Content-Type: application/json');
 // Initialize response array
 $response = ['success' => false, 'message' => ''];
 
+// Log errors and suppress direct output
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+error_log('Starting intern update process...');
+
 // Check if the required POST data is received
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve data from POST request
-    $id = (int)$_POST['id'];  // Force ID to be an integer
-    error_log("Received ID: " . $id); // Log the received ID
+    $id = (int)$_POST['id'];
+    $birthdate = $_POST['birthdate'];
 
-    // Check if intern exists
+    // Ensure the date is valid (in case it's empty or invalid)
+    if (!$birthdate || $birthdate == '0000-00-00') {
+        $response['message'] = 'Invalid birthdate provided.';
+        echo json_encode($response);
+        exit;
+    }
+
+    // Check if the intern exists
     $checkSql = "SELECT * FROM interns WHERE id = ?";
     if ($checkStmt = $conn->prepare($checkSql)) {
         $checkStmt->bind_param("i", $id);
@@ -23,40 +35,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($checkResult->num_rows === 0) {
             $response['message'] = 'No intern found with that ID.';
-            error_log("No intern found with ID: " . $id); // Log the failure
             echo json_encode($response);
             exit;
         }
         $checkStmt->close();
     } else {
         $response['message'] = 'Error preparing check statement: ' . $conn->error;
-        error_log("Error preparing check statement: " . $conn->error);
         echo json_encode($response);
         exit;
     }
 
-    // Retrieve the other fields
-    $last_name = $_POST['last_name'];
-    $first_name = $_POST['first_name'];
-    $middle_name = $_POST['middle_name'];
-    $suffix = $_POST['suffix'];
-    $gender = $_POST['gender'];
-    $address = $_POST['address'];
-    $birthdate = $_POST['birthdate'];
-    $civil_status = $_POST['civil_status'];
-    $personal_email = $_POST['personal_email'];
-    $contact_number = $_POST['contact_number'];
+    // Retrieve other fields
+    $last_name = $_POST['intern_last_name'];
+    $first_name = $_POST['intern_first_name'];
+    $middle_name = $_POST['intern_middle_name'];
+    $suffix = $_POST['intern_suffix'];
+    $gender = $_POST['intern_gender'];
+    $address = $_POST['intern_address'];
+    $civil_status = $_POST['intern_civil_status'];
+    $personal_email = $_POST['intern_personal_email'];
+    $contact_number = $_POST['intern_contact_number'];
     $studentID = $_POST['studentID'];
-    $department = $_POST['department'];
+    $department = $_POST['intern_department'];
     $coordinator_name = $_POST['coordinator_name'];
     $hours_needed = $_POST['hours_needed'];
     $coordinator_email = $_POST['coordinator_email'];
     $internship_status = $_POST['internship_status'];
-    $account_email = $_POST['account_email'];
-    $password = $_POST['password'];
+    $account_email = $_POST['intern_account_email'];
+    $password = $_POST['intern_password'];
 
-    // Hash the password using bcrypt
-    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+    // Hash the password using bcrypt if it's not empty
+    $hashed_password = empty($password) ? null : password_hash($password, PASSWORD_BCRYPT);
 
     // Prepare SQL query for updating intern information
     $sql = "UPDATE interns SET 
@@ -111,24 +120,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $response['success'] = true;
                 $response['message'] = 'Intern updated successfully!';
             } else {
-                $response['message'] = 'No changes made to the intern data.';
+                $response['message'] = 'No changes made to the intern.';
             }
         } else {
-            $response['message'] = 'Error executing query: ' . $stmt->error;
-            error_log("Error executing query: " . $stmt->error);
+            $response['message'] = 'Error executing update: ' . $stmt->error;
         }
-
-        // Close the statement
         $stmt->close();
     } else {
         $response['message'] = 'Error preparing statement: ' . $conn->error;
-        error_log("Error preparing statement: " . $conn->error);
     }
+} else {
+    $response['message'] = 'Invalid request method.';
 }
 
-// Close the database connection
-$conn->close();
-
-// Return JSON response
 echo json_encode($response);
+exit;
 ?>

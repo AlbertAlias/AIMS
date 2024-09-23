@@ -8,19 +8,19 @@ include '../../../dbconn.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the form data with default values if not set
     $id = isset($_POST['id']) ? $_POST['id'] : null;
-    $lastName = isset($_POST['last_name']) ? $_POST['last_name'] : null;
-    $firstName = isset($_POST['first_name']) ? $_POST['first_name'] : null;
-    $middleName = isset($_POST['middle_name']) ? $_POST['middle_name'] : null;
-    $suffix = isset($_POST['suffix']) ? $_POST['suffix'] : null;
-    $gender = isset($_POST['gender']) ? $_POST['gender'] : null;
-    $address = isset($_POST['address']) ? $_POST['address'] : null;
-    $birthdate = isset($_POST['birthdate']) ? $_POST['birthdate'] : null;
-    $civilStatus = isset($_POST['civil_status']) ? $_POST['civil_status'] : null;
-    $personalEmail = isset($_POST['personal_email']) ? $_POST['personal_email'] : null;
-    $contactNumber = isset($_POST['contact_number']) ? $_POST['contact_number'] : null;
-    $department = isset($_POST['department']) ? $_POST['department'] : null;
-    $accountEmail = isset($_POST['account_email']) ? $_POST['account_email'] : null;
-    $password = isset($_POST['password']) ? $_POST['password'] : null;
+    $lastName = isset($_POST['coor_last_name']) ? $_POST['coor_last_name'] : null;
+    $firstName = isset($_POST['coor_first_name']) ? $_POST['coor_first_name'] : null;
+    $middleName = isset($_POST['coor_middle_name']) ? $_POST['coor_middle_name'] : null;
+    $suffix = isset($_POST['coor_suffix']) ? $_POST['coor_suffix'] : null;
+    $gender = isset($_POST['coor_gender']) ? $_POST['coor_gender'] : null;
+    $address = isset($_POST['coor_address']) ? $_POST['coor_address'] : null;
+    $birthdate = isset($_POST['coor_birthdate']) ? $_POST['coor_birthdate'] : null;
+    $civilStatus = isset($_POST['coor_civil_status']) ? $_POST['coor_civil_status'] : null;
+    $personalEmail = isset($_POST['coor_personal_email']) ? $_POST['coor_personal_email'] : null;
+    $contactNumber = isset($_POST['coor_contact_number']) ? $_POST['coor_contact_number'] : null;
+    $department = isset($_POST['coor_department']) ? $_POST['coor_department'] : null;
+    $accountEmail = isset($_POST['coor_account_email']) ? $_POST['coor_account_email'] : null;
+    $password = isset($_POST['coor_password']) ? $_POST['coor_password'] : null;
 
     // Validate inputs (basic validation for example purposes)
     if (empty($lastName) || empty($firstName) || empty($gender) || empty($address) || empty($birthdate) || empty($civilStatus) || empty($personalEmail) || empty($contactNumber) || empty($department) || empty($accountEmail) || empty($password)) {

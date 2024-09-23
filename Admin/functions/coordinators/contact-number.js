@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const contactNumberInput = document.getElementById('contact_number');
+    const contactNumberInput = document.getElementById('coor_contact_number');
 
     if (contactNumberInput) {
         contactNumberInput.addEventListener('input', function (e) {

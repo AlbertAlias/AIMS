@@ -1,4 +1,4 @@
-<div class="container-fluid bg-light p-0 m-0">
+<div class="container-fluid bg-light p-0 m-0" id="departments" style="display: none;">
     <div class="row g-4">
         <!-- Left square container (smaller width) -->
         <div class="col-md-4 col-lg-3">

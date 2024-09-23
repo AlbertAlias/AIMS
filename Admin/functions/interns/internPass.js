@@ -1,7 +1,7 @@
 // Function to update the password field based on birthdate
 function updatePasswordFromBirthdate() {
-    const birthdateInput = document.getElementById('birthdate');
-    const passwordInput = document.getElementById('password');
+    const birthdateInput = document.getElementById('intern_birthdate');
+    const passwordInput = document.getElementById('intern_password');
 
     if (birthdateInput && passwordInput) {
         const birthdate = new Date(birthdateInput.value);
@@ -17,4 +17,4 @@ function updatePasswordFromBirthdate() {
 }
 
 // Add event listener for birthdate change
-document.getElementById('birthdate').addEventListener('change', updatePasswordFromBirthdate);
+document.getElementById('intern_birthdate').addEventListener('change', updatePasswordFromBirthdate);

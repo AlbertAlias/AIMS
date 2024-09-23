@@ -1,11 +1,20 @@
 $(document).ready(function () {
+    let isSubmitting = false;
+
     $('#internsForm').on('submit', function (e) {
         e.preventDefault();
 
-        $('#accountInfoForm input:disabled').prop('disabled', false);
+        if (isSubmitting) {
+            return; // Prevent additional form submissions if one is already in progress
+        }
+
+        isSubmitting = true;
+        $('#internSubmitBtn').prop('disabled', true);  // Disable the button
+
+        $('#intern_accountForm input:disabled').prop('disabled', false);
         $('#internsForm input:disabled, #internsForm select:disabled').prop('disabled', false);
 
-        var formData = $(this).serialize() + '&' + $('#accountInfoForm').serialize();
+        var formData = $(this).serialize() + '&' + $('#intern_accountForm').serialize();
         console.log('Form Data:', formData);
 
         $.ajax({
@@ -32,7 +41,11 @@ $(document).ready(function () {
                 disableAndResetForms();
                 $('#internsForm input').prop('disabled', true);
                 $('#internsForm select').prop('disabled', true);
-                $('#accountInfoForm input').prop('disabled', true);
+                $('#intern_accountForm input').prop('disabled', true);
+
+                // Re-enable the submit button after the AJAX request is done
+                $('#internSubmitBtn').prop('disabled', false);
+                isSubmitting = false;  // Allow form submission again
             }
         });
     });

@@ -22,18 +22,15 @@ $(document).ready(function() {
 
                     // Redirect based on user type and department
                     if (user_type === 'Admin') {
-                        window.location.href = '../Admin/admin.php?page=pages/admin-dashboard.php';
-                    } else if (user_type === 'OJT Student') {
+                        window.location.href = '../Admin/admin.php';
+                    } else if (user_type === 'Sub-Admin') {
+                        window.location.href = '../Admin/admin.php';
+                    } else if (user_type === 'Intern') {
                         // Store department information in sessionStorage
                         sessionStorage.setItem('department', department);
-
-                        // Redirect to student.php
                         window.location.href = '../Student/student.php';
-                    } else if (user_type === 'OJT Coordinator') {
-                        // Store department information in sessionStorage
+                    } else if (user_type === 'Coordinator') {
                         sessionStorage.setItem('department', department);
-
-                        // Redirect to coordinator.php
                         window.location.href = '../Coordinator/coordinator.php';
                     } else {
                         alert('Invalid user type.');
@@ -47,7 +44,6 @@ $(document).ready(function() {
                 }
             },
             error: function(xhr, status, error) {
-                // Handle any errors here
                 console.error(xhr.responseText);
                 alert('An error occurred while processing your request.');
             }

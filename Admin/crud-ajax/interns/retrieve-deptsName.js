@@ -4,7 +4,7 @@ function loadDepartments(selectedDepartment, isEnabled = false) {
         method: 'GET',
         dataType: 'json',
         success: function(response) {
-            let departmentSelect = $('#department');
+            let departmentSelect = $('#intern_department');
             departmentSelect.empty();  // Clear the select field
 
             // Append the default "Choose Department" option
@@ -56,7 +56,7 @@ function loadCoorInfo(departmentName) {
 
 
 // Event listener for department select change
-$('#department').on('change', function() {
+$('#intern_department').on('change', function() {
     let selectedDepartment = $(this).val();
     if (selectedDepartment) {
         loadCoorInfo(selectedDepartment);  // Fetch and load coordinator details

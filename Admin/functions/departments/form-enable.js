@@ -9,12 +9,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to enable form for adding a department
     function enableFormForAdd() {
         if (departmentForm) {
-            departmentForm.querySelectorAll('input, button').forEach(el => el.disabled = false);
-            submitBtn.style.display = 'inline-block';
-            updateBtn.style.display = 'none';
-            cancelEditBtn.style.display = 'inline-block';
-            deleteDeptBtn.style.display = 'none';
-            console.log('Form enabled for adding');
+            departmentForm.reset(); // Reset the form fields
+            departmentForm.querySelectorAll('input, button').forEach(el => el.disabled = false); // Enable all fields and buttons
+            submitBtn.style.display = 'inline-block'; // Ensure submit button is visible
+            updateBtn.style.display = 'none'; // Hide update button
+            cancelEditBtn.style.display = 'none'; // Show cancel button
+            deleteDeptBtn.style.display = 'none'; // Hide delete button
+            console.log('Form reset and enabled for adding');
         }
     }
 
@@ -52,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (addDepartmentsBtn) {
         addDepartmentsBtn.addEventListener('click', function() {
             enableFormForAdd();
+            cancelEditBtn.style.display = 'inline-block'; // Hide cancel button
         });
     }
 

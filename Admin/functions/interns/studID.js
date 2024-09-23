@@ -17,11 +17,11 @@ $(document).ready(function() {
 
         // Populate and lock account_email only if a valid student ID is provided
         if (value.length > 1) {
-            $('#account_email').val(value + '@aims.edu.ph').prop('disabled', true);
+            $('#intern_account_email').val(value + '@aims.edu.ph').prop('disabled', true);
         } else if (value.length === 0) {
-            $('#account_email').val('');  // Clear the email field if no student ID is present
+            $('#intern_account_email').val('');  // Clear the email field if no student ID is present
             // Optionally, decide if you want to keep it locked or unlocked when the student ID is cleared
-            $('#account_email').prop('disabled', true); // Keep it locked regardless of the student ID
+            $('#intern_account_email').prop('disabled', true); // Keep it locked regardless of the student ID
         }
     }
 

@@ -47,27 +47,27 @@ $(document).ready(function() {
 
                 // Populate Personal Information form (coordinatorForm)
                 $('#coordinator_id').val(response.id);
-                $('#first_name').val(response.first_name).prop('disabled', false);
-                $('#last_name').val(response.last_name).prop('disabled', false);
-                $('#middle_name').val(response.middle_name).prop('disabled', false);
-                $('#suffix').val(response.suffix).prop('disabled', false);
-                $('#address').val(response.address).prop('disabled', false);
-                $('#birthdate').val(response.birthdate).prop('disabled', false);
-                $('#personal_email').val(response.personal_email).prop('disabled', false);
-                $('#contact_number').val(response.contact_number).prop('disabled', false);
+                $('#coor_first_name').val(response.first_name).prop('disabled', false);
+                $('#coor_last_name').val(response.last_name).prop('disabled', false);
+                $('#coor_middle_name').val(response.middle_name).prop('disabled', false);
+                $('#coor_suffix').val(response.suffix).prop('disabled', false);
+                $('#coor_address').val(response.address).prop('disabled', false);
+                $('#coor_birthdate').val(response.birthdate).prop('disabled', false);
+                $('#coor_personal_email').val(response.personal_email).prop('disabled', false);
+                $('#coor_contact_number').val(response.contact_number).prop('disabled', false);
 
                 // Select the correct gender
-                $('#gender').val(response.gender).prop('disabled', false);
+                $('#coor_gender').val(response.gender).prop('disabled', false);
 
                 // Select the correct civil status
-                $('#civil_status').val(response.civil_status).prop('disabled', false);
+                $('#coor_civil_status').val(response.civil_status).prop('disabled', false);
 
-                // Populate Account Information form (accountInfoForm)
-                $('#account_email').val(response.account_email).prop('disabled', false);
-                $('#password').val(response.password).prop('disabled', false);
+                // Populate Account Information form (coor_accountForm)
+                $('#coor_account_email').val(response.account_email).prop('disabled', false);
+                $('#coor_password').val(response.password).prop('disabled', false);
 
                 // Enable submit button for the form
-                $('#submitBtn').prop('disabled', false);
+                $('#coorSubmitBtn').prop('disabled', false);
 
                 // Load departments and select the user's department
                 loadDepartments(response.department, true);

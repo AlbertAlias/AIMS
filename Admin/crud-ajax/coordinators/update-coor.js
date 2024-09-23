@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const updateBtn = document.getElementById('updateBtn');
+    const coorUpdateBtn = document.getElementById('coorUpdateBtn');
     const coordinatorForm = document.getElementById('coordinatorForm');
-    const accountInfoForm = document.getElementById('accountInfoForm');
+    const coor_accountForm = document.getElementById('coor_accountForm');
 
-    if (!updateBtn) {
+    if (!coorUpdateBtn) {
         console.error('Update button not found.');
         return;
     }
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error('Coordinator form is missing or not an HTMLFormElement.');
         return;
     }
-    if (!accountInfoForm || !(accountInfoForm instanceof HTMLFormElement)) {
+    if (!coor_accountForm || !(coor_accountForm instanceof HTMLFormElement)) {
         console.error('Account info form is missing or not an HTMLFormElement.');
         return;
     }
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
 
         const coordinatorData = new FormData(coordinatorForm);
-        const accountData = new FormData(accountInfoForm);
+        const accountData = new FormData(coor_accountForm);
 
         const combinedData = new FormData();
         for (const [key, value] of coordinatorData.entries()) {
@@ -49,5 +49,5 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    updateBtn.addEventListener('click', updateCoordinator);
+    coorUpdateBtn.addEventListener('click', updateCoordinator);
 });

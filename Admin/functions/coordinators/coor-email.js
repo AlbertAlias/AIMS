@@ -17,5 +17,5 @@ function updateEmailField(inputId) {
 
 $(document).ready(function() {
     // Initialize the email field function
-    updateEmailField('#account_email');
+    updateEmailField('#coor_account_email');
 });

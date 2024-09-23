@@ -5,7 +5,7 @@ function loadDepartments(selectedDepartment, isEnabled = false) {  // Added isEn
         method: 'GET',
         dataType: 'json',
         success: function(response) {
-            let departmentSelect = $('#department');
+            let departmentSelect = $('#coor_department');
             departmentSelect.empty();  // Clear the select field
 
             // Append the default "Choose Department" option

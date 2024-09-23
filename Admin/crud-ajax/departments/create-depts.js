@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (submitBtn) {
         submitBtn.addEventListener('click', function(event) {
-            event.preventDefault();
+            event.preventDefault(); // Prevent form from submitting the default way
             const formData = new FormData(departmentForm);
             
             fetch('controller/departments/create-depts.php', {
@@ -15,7 +15,8 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 if (data.success) {
                     alert('Department created successfully.');
-                    // Optionally, you can refresh the list of departments or clear the form
+                    // Reset and lock the form, hide cancel button, and lock submit button
+                    resetAndLockForm();
                 } else {
                     alert('Error creating department: ' + data.message);
                 }
