@@ -23,17 +23,8 @@ $(document).ready(function() {
         });
     };
 
-    // Call loadCoordinators to load the data when the page is ready
-    loadCoordinators();
-
-    // Event handler for clicking a coordinator button
-    $('#coordinatorInfo').on('click', '.coordinator-btn', function() {
-        let coordinatorId = $(this).data('id');
-        loadCoordinatorDetails(coordinatorId);  // Fetch coordinator details when a button is clicked
-    });
-
-    // Function to load coordinator details into the form
-    function loadCoordinatorDetails(id) {
+    // Assign loadCoordinatorDetails to the global scope
+    window.loadCoordinatorDetails = function(id) {
         $.ajax({
             url: 'controller/coordinators/retrieve-coor-details.php',
             method: 'GET',
@@ -46,7 +37,7 @@ $(document).ready(function() {
                 }
 
                 // Populate Personal Information form (coordinatorForm)
-                $('#coordinator_id').val(response.id);
+                $('#coordinatorId').val(response.id);
                 $('#coor_first_name').val(response.first_name).prop('disabled', false);
                 $('#coor_last_name').val(response.last_name).prop('disabled', false);
                 $('#coor_middle_name').val(response.middle_name).prop('disabled', false);
@@ -76,5 +67,8 @@ $(document).ready(function() {
                 console.error('Error retrieving coordinator details:', error);
             }
         });
-    }    
+    };
+
+    // Call loadCoordinators to load the data when the page is ready
+    loadCoordinators();
 });

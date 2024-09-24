@@ -1,9 +1,9 @@
 <?php
-// delete-depts.php
-include '../../../dbconn.php'; // Adjust to your database connection file
+header('Content-Type: application/json');
+include '../../../dbconn.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
-$id = $data['id']; // Expecting JSON data with an 'id' field
+$id = $data['id'];
 
 $query = "DELETE FROM departments WHERE id = ?";
 $stmt = $conn->prepare($query);
@@ -18,4 +18,3 @@ if ($stmt->execute()) {
 $stmt->close();
 $conn->close();
 ?>
-\

@@ -16,7 +16,7 @@
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Add Department</h5>
                 <p class="text-gray-800 fs-5 mb-3">Department Information</p>
                 <form id="departmentForm">
-                    <input type="hidden" id="departmentId" name="id"> <!-- Hidden input for department ID -->
+                    <input type="hidden" id="departmentId" name="id">
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="departmentName" class="form-label">Department Name <span class="text-danger">*</span></label>
@@ -29,8 +29,8 @@
                     </div>
                     <button type="submit" class="btn btn-success me-2">Submit</button>
                     <button type="button" id="updateBtn" class="btn btn-primary" style="display: none;">Update</button>
-                    <button type="button" id="cancelEditBtn" class="btn btn-secondary" style="display: none;">Cancel</button>
                     <button type="button" id="deleteDeptBtn" class="btn btn-danger" style="display: none;">Delete</button>
+                    <button type="button" id="cancelEditBtn" class="btn btn-secondary" style="display: none;">Cancel</button>
                 </form>
             </div>
         </div>

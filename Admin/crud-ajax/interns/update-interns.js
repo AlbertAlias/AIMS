@@ -35,8 +35,8 @@ $(document).ready(function () {
             intern_password: $('#intern_password').val()
         };
 
-        // Log the data to be sent
-        console.log('Data to be sent:', data);
+        // Disable the update button to prevent multiple clicks
+        $(this).prop('disabled', true);
 
         // Perform AJAX call
         $.ajax({
@@ -45,7 +45,6 @@ $(document).ready(function () {
             data: data,
             dataType: 'json', // Expect JSON response from the server
             success: function (response) {
-                console.log(response);
                 if (response.success) {
                     alert('Intern updated successfully!');
                     disableAndResetForms();
@@ -56,6 +55,10 @@ $(document).ready(function () {
             error: function (xhr, status, error) {
                 console.error('AJAX Error:', error);
                 alert('An error occurred while updating intern data. Please try again.');
+            },
+            complete: function () {
+                // Re-enable the update button
+                $('#internUpdateBtn').prop('disabled', false);
             }
         });
     });

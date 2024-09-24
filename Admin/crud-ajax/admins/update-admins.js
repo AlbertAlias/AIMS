@@ -28,9 +28,9 @@ $(document).ready(function() {
             method: 'POST',
             data: data,
             success: function(response) {
-                console.log(response);
+                // console.log(response);
                 if (response.success) {
-                    alert('Intern updated successfully!');
+                    alert('Admin updated successfully!');
                     disableAndResetForms();
                 } else {
                     alert('Error: ' + response.message);
@@ -38,7 +38,7 @@ $(document).ready(function() {
             },
             error: function(xhr, status, error) {
                 console.error('AJAX Error:', error);
-                alert('An error occurred while updating intern data. Please try again.');
+                alert('An error occurred while updating admin data. Please try again.');
             }
         });
     });

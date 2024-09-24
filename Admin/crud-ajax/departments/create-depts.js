@@ -4,25 +4,76 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (submitBtn) {
         submitBtn.addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent form from submitting the default way
+            event.preventDefault();
             const formData = new FormData(departmentForm);
             
+            submitBtn.disabled = true;
+
             fetch('controller/departments/create-depts.php', {
                 method: 'POST',
                 body: formData
             })
             .then(response => response.json())
             .then(data => {
+                submitBtn.disabled = false;
+
                 if (data.success) {
-                    alert('Department created successfully.');
-                    // Reset and lock the form, hide cancel button, and lock submit button
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Department created successfully',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#b9f6ca',
+                        iconColor: '#2e7d32',
+                        color: '#155724',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
+
+                    // Call fetchDepartments to refresh the list
+                    if (typeof window.refreshDepartmentList === 'function') {
+                        window.refreshDepartmentList();
+                    }
+
                     resetAndLockForm();
                 } else {
-                    alert('Error creating department: ' + data.message);
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Error: ' + data.message,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#f8bbd0',
+                        iconColor: '#c62828',
+                        color: '#721c24',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
                 }
             })
             .catch(error => {
+                // Re-enable the submit button in case of an error
+                submitBtn.disabled = false;
                 console.error('Error:', error);
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'An unexpected error occurred',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#f8bbd0',
+                    iconColor: '#c62828',
+                    color: '#721c24',
+                    customClass: {
+                        popup: 'mt-5'
+                    }
+                });
             });
         });
     }

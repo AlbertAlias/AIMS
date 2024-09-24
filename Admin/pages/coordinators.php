@@ -20,7 +20,7 @@
                     <div class="row mb-3">
                         <!-- Last Name -->
                         <div class="col-md-5">
-                            <input type="hidden" id="coordinator_id" name="id">
+                            <input type="hidden" id="coordinatorId" name="coordinatorId">
                             <label for="coor_last_name" class="form-label required-asterisk">Last Name</label>
                             <input type="text" class="form-control" id="coor_last_name" name="coor_last_name" required disabled>
                         </div>
@@ -102,6 +102,7 @@
                     <div class="row">
                         <div class="col-md-12 text-end">
                             <button type="button" id="coorCancelBtn" class="btn btn-secondary" style="display: none;">Cancel</button>
+                            <button type="button" id="coorDeleteBtn" class="btn btn-danger" style="display: none;">Delete</button>
                             <button type="button" id="coorUpdateBtn" class="btn btn-primary" style="display: none;">Update</button>
                             <button type="submit" id="coorSubmitBtn" class="btn btn-success" disabled>Submit</button>
                         </div>

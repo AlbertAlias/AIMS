@@ -1,16 +1,20 @@
 $(document).ready(function () {
     let isSubmitting = false;
 
-    $('#internsForm').on('submit', function (e) {
+    // Remove any previous submit event listener and add a new one
+    $('#internsForm').off('submit').on('submit', function (e) {
         e.preventDefault();
 
+        // If already submitting, do not proceed
         if (isSubmitting) {
-            return; // Prevent additional form submissions if one is already in progress
+            return;
         }
 
+        // Set the isSubmitting flag to true
         isSubmitting = true;
-        $('#internSubmitBtn').prop('disabled', true);  // Disable the button
+        $('#internSubmitBtn').prop('disabled', true);
 
+        // Enable the necessary fields
         $('#intern_accountForm input:disabled').prop('disabled', false);
         $('#internsForm input:disabled, #internsForm select:disabled').prop('disabled', false);
 
@@ -25,7 +29,22 @@ $(document).ready(function () {
             success: function (response) {
                 console.log('AJAX response:', response);
                 if (response.success) {
-                    alert('Intern added successfully!');
+                    // SweetAlert for successful intern creation
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Coordinator created successfully',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#b9f6ca',
+                        iconColor: '#2e7d32',
+                        color: '#155724',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
+
                     disableAndResetForms();
                     loadInterns();
                 } else {
@@ -42,10 +61,8 @@ $(document).ready(function () {
                 $('#internsForm input').prop('disabled', true);
                 $('#internsForm select').prop('disabled', true);
                 $('#intern_accountForm input').prop('disabled', true);
-
-                // Re-enable the submit button after the AJAX request is done
                 $('#internSubmitBtn').prop('disabled', false);
-                isSubmitting = false;  // Allow form submission again
+                isSubmitting = false; // Reset the submitting flag
             }
         });
     });

@@ -26,7 +26,22 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 if (data.success) {
                     console.log('Department updated successfully');
-                    alert('Department updated successfully.');
+
+                    // SweetAlert2 toast for success with light green container
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-right',
+                        icon: 'success',
+                        title: 'Department updated successfully',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#b9f6ca', // Light green container background
+                        iconColor: '#2e7d32', // Darker green icon
+                        color: '#155724',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
 
                     // Call the function to refresh the department list
                     if (typeof refreshDepartmentList === 'function') {
@@ -43,11 +58,42 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 } else {
                     console.error('Error updating department: ' + data.message);
-                    alert('Error updating department: ' + data.message);
+
+                    // SweetAlert2 toast for error with darker red container
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-right',
+                        icon: 'error',
+                        title: 'Error: ' + data.message,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#f8bbd0', // Darker red container background
+                        iconColor: '#c62828', // Darker red icon
+                        color: '#721c24',
+                        customClass: {
+                            popup: 'mt-5' // Bootstrap margin-top of 4
+                        }
+                    });
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
+
+                // SweetAlert2 toast for unexpected errors with darker red container
+                Swal.fire({
+                    toast: true,
+                    position: 'top-right',
+                    icon: 'error',
+                    title: 'An unexpected error occurred',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#f8bbd0', // Darker red container background
+                    iconColor: '#c62828', // Darker red icon
+                    color: '#721c24',
+                    customClass: {
+                        popup: 'mt-5' // Bootstrap margin-top of 4
+                    }
+                });
             });
         });
     } else {

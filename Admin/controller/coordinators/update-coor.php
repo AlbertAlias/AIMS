@@ -1,5 +1,4 @@
 <?php
-// Enable error reporting for debugging
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -10,8 +9,11 @@ include '../../../dbconn.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('Content-Type: application/json'); // Set response type to JSON
 
+    // Initialize response array
+    $response = ['success' => false, 'message' => ''];
+
     // Sanitize and collect form data
-    $id = mysqli_real_escape_string($conn, $_POST['id']);
+    $id = mysqli_real_escape_string($conn, $_POST['coordinatorId']); // Use the hidden input's name
     $lastName = mysqli_real_escape_string($conn, $_POST['coor_last_name']);
     $firstName = mysqli_real_escape_string($conn, $_POST['coor_first_name']);
     $middleName = mysqli_real_escape_string($conn, $_POST['coor_middle_name']);
@@ -20,16 +22,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $address = mysqli_real_escape_string($conn, $_POST['coor_address']);
     $birthdate = mysqli_real_escape_string($conn, $_POST['coor_birthdate']);
     $civilStatus = mysqli_real_escape_string($conn, $_POST['coor_civil_status']);
-    $personalEmail = mysqli_real_escape_string($conn, $_POST['cooor_personal_email']);
+    $personalEmail = mysqli_real_escape_string($conn, $_POST['coor_personal_email']);
     $contactNumber = mysqli_real_escape_string($conn, $_POST['coor_contact_number']);
     $department = mysqli_real_escape_string($conn, $_POST['coor_department']);
     $accountEmail = mysqli_real_escape_string($conn, $_POST['coor_account_email']);
     
     // Prepare password query part if password is provided
     $passwordQuery = "";
-    if (!empty($_POST['coor_password'])) {
+    if (!empty($_POST['coor_password'])) { // Change to check the correct input name
         $password = password_hash($_POST['coor_password'], PASSWORD_BCRYPT);
-        $passwordQuery = "coor_password = '$password'";
+        $passwordQuery = "password = '$password'";
     }
 
     // Remove leading '0' from contact number
@@ -54,14 +56,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               . ($passwordQuery ? ", $passwordQuery" : "") . " 
               WHERE id = '$id'";
 
+    // Debugging line to check the SQL query
+    error_log($query); // Log the SQL query to the PHP error log
+
     // Execute query and return JSON response
     if (mysqli_query($conn, $query)) {
-        echo json_encode(['success' => true]);
+        $response['success'] = true;
+        $response['message'] = 'Coordinator updated successfully.';
     } else {
-        echo json_encode(['success' => false, 'message' => 'Error: ' . mysqli_error($conn)]);
+        $response['message'] = 'Error updating coordinator: ' . mysqli_error($conn);
     }
 
-    // Close database connection
-    mysqli_close($conn);
+    echo json_encode($response); // Send JSON response
+    exit; // Exit to prevent further output
 }
+
+// If not a POST request, return an error response
+http_response_code(405); // Method Not Allowed
+echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
+exit;
 ?>

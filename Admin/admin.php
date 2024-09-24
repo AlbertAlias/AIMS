@@ -25,11 +25,11 @@ ini_set('display_errors', 1);
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- STYLES -->
-    <link rel="stylesheet" href="../assets/css/admin-profile.css">
-    <link rel="stylesheet" href="../assets/css/manage-users.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/departments.css">
     <link rel="stylesheet" href="../assets/css/coordinators.css">
-    <link rel="stylesheet" href="../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../assets/css/admin-profile.css">
+    <link rel="stylesheet" href="../assets/css/manage-users.css">
     <!-- <link rel="stylesheet" href="assets/css/datatable.css"> -->
     <!-- <link rel="stylesheet" href="assets/css/ownTable.css"> -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -85,7 +85,7 @@ ini_set('display_errors', 1);
                 <div id="page-content" style="width: 100%;">
                     <?php include "pages/dashboard.php"; ?>
                     <?php include "pages/departments.php"; ?>
-                    <?php include "./pages/coordinators.php"; ?>
+                    <?php include "pages/coordinators.php"; ?>
                     <?php include "pages/interns.php"; ?>
                     <?php include "pages/sub-admins.php"; ?>
                 </div>
@@ -158,6 +158,7 @@ ini_set('display_errors', 1);
         <script src="crud-ajax/coordinators/retrieve-coor.js" defer></script>
         <script src="crud-ajax/coordinators/retrieve-deptsName.js" defer></script>
         <script src="crud-ajax/coordinators/update-coor.js" defer></script>
+        <script src="crud-ajax/coordinators/delete-coor.js" defer></script>
 
         <script src="crud-ajax/interns/create-interns.js" defer></script>
         <script src="crud-ajax/interns/retrieve-deptsName.js" defer></script>
