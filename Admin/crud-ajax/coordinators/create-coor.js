@@ -1,93 +1,106 @@
-$(document).ready(function () {
-    $('#coordinatorForm').off('submit').on('submit', function (e) {
-        e.preventDefault(); // Prevent the default form submission
+document.getElementById('adminSubmitBtn').addEventListener('click', function (event) {
+    event.preventDefault(); // Prevent default form submission
 
-        // Prepare the form data
-        var formData = $(this).serialize() + '&' + $('#coor_accountForm').serialize();
-        console.log('Form Data:', formData); // Log form data to check if all fields are included
+    // Gather input values
+    const adminID = document.getElementById('adminID').value;
+    const adminLastName = document.getElementById('admin_last_name').value;
+    const adminFirstName = document.getElementById('admin_first_name').value;
+    const adminMiddleName = document.getElementById('admin_middle_name').value; // Optional
+    const adminSuffix = document.getElementById('admin_suffix').value; // Optional
+    const adminGender = document.getElementById('admin_gender').value;
+    const adminAddress = document.getElementById('admin_address').value;
+    const adminBirthdate = document.getElementById('admin_birthdate').value;
+    const adminCivilStatus = document.getElementById('admin_civil_status').value;
+    const adminContactNumber = document.getElementById('admin_contact_number').value;
+    const adminPersonalEmail = document.getElementById('admin_personal_email').value;
+    const adminAccountEmail = document.getElementById('admin_account_email').value;
+    const adminPassword = document.getElementById('admin_password').value;
+    const role = document.getElementById('role').value;
 
-        // Disable the submit button to prevent multiple submissions
-        $('#coorSubmitBtn').prop('disabled', true);
+    // Prepare data for AJAX request
+    const data = {
+        id: adminID,
+        admin_last_name: adminLastName,
+        admin_first_name: adminFirstName,
+        admin_middle_name: adminMiddleName, // Optional, can be null if not provided
+        admin_suffix: adminSuffix, // Optional, can be null if not provided
+        admin_gender: adminGender,
+        admin_address: adminAddress,
+        admin_birthdate: adminBirthdate,
+        admin_civil_status: adminCivilStatus,
+        admin_contact_number: adminContactNumber,
+        admin_personal_email: adminPersonalEmail,
+        admin_account_email: adminAccountEmail,
+        admin_password: adminPassword, // Plain text to be hashed server-side
+        role: role
+    };
 
-        // Lock the form fields after submission
-        $('#coordinatorForm input, #coordinatorForm select').prop('disabled', true);
-        $('#coor_accountForm input').prop('disabled', true);
-
-        // Reset the form before making the AJAX request
-        $('#coordinatorForm')[0].reset();
-        $('#coor_accountForm')[0].reset();
-
-        $.ajax({
-            url: 'controller/coordinators/create-coor.php',
-            type: 'POST',
-            data: formData,
-            dataType: 'json',
-            success: function (response) {
-                // Check the response for success or failure
-                if (response.success) {
-                    // Show success SweetAlert
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Coordinator created successfully',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        background: '#b9f6ca',
-                        iconColor: '#2e7d32',
-                        color: '#155724',
-                        customClass: {
-                            popup: 'mt-5'
-                        }
-                    }).then(() => {
-                        loadCoordinators(); // Refresh the list of coordinators
-                        disableAndResetForms(); // Call the function to disable and reset forms
-                    });
-                } else {
-                    // Show error SweetAlert
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'error',
-                        title: 'Error: ' + response.message,
-                        showConfirmButton: false,
-                        timer: 3000,
-                        background: '#f8bbd0',
-                        iconColor: '#c62828',
-                        color: '#721c24',
-                        customClass: {
-                            popup: 'mt-5'
-                        }
-                    }).then(() => {
-                        // Re-enable the submit button if there's an error
-                        $('#coorSubmitBtn').prop('disabled', false);
-                    });
+    // Perform the AJAX request using Fetch API
+    fetch('controller/admins/create-admins.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        return response.text(); // Get raw response as text
+    })
+    .then(rawResponse => {
+        console.log('Raw Response:', rawResponse); // Log raw response for debugging
+        return JSON.parse(rawResponse); // Parse it to JSON
+    })
+    .then(data => {
+        if (data.success) {
+            // SweetAlert for success
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Admin added successfully!',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#b9f6ca',
+                iconColor: '#2e7d32',
+                color: '#155724',
+                customClass: {
+                    popup: 'mt-5'
                 }
-            },
-            error: function (xhr, status, error) {
-                console.error('AJAX Error:', error);
-                console.log('Response Text:', xhr.responseText); // Log response text for debugging
-                Swal.fire({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'error',
-                    title: 'An error occurred while processing the request',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    background: '#f8bbd0',
-                    iconColor: '#c62828',
-                    color: '#721c24',
-                    customClass: {
-                        popup: 'mt-5'
-                    }
-                }).then(() => {
-                    // Re-enable the submit button in case of an error
-                    $('#coorSubmitBtn').prop('disabled', false);
-                });
-            },
-            complete: function() {
-                // Re-enable the submit button after the request is complete
-                $('#coorSubmitBtn').prop('disabled', false);
+            });
+            disableAndResetForms();
+        } else {
+            // SweetAlert for error (email already exists or general error)
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: data.message,
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#f8d7da',
+                iconColor: '#721c24',
+                color: '#721c24',
+                customClass: {
+                    popup: 'mt-5'
+                }
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // SweetAlert for AJAX request error
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'There was an error with the AJAX request.',
+            showConfirmButton: false,
+            timer: 3000,
+            background: '#f8d7da',
+            iconColor: '#721c24',
+            color: '#721c24',
+            customClass: {
+                popup: 'mt-5'
             }
         });
     });

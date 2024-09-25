@@ -87,7 +87,7 @@
                     <div class="row mb-3">
                         <!-- Email -->
                         <div class="col-md-12">
-                            <label for="admin_personal_email" class="form-label required-asterisk">Email</label>
+                            <label for="admin_personal_email" class="form-label required-asterisk">Personal Email</label>
                             <input type="email" class="form-control" id="admin_personal_email" name="admin_personal_email" required disabled>
                         </div>
                     </div>

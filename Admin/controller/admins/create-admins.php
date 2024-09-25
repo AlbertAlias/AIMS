@@ -1,49 +1,52 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 include '../../../dbconn.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the form data
-    $last_name = isset($_POST['admin_last_name']) ? $_POST['admin_last_name'] : null;
-    $first_name = isset($_POST['admin_first_name']) ? $_POST['admin_first_name'] : null;
-    $middle_name = isset($_POST['admin_middle_name']) ? $_POST['admin_middle_name'] : null;
-    $suffix = isset($_POST['admin_suffix']) ? $_POST['admin_suffix'] : null;
-    $gender = isset($_POST['admin_gender']) ? $_POST['admin_gender'] : null;
-    $address = isset($_POST['admin_address']) ? $_POST['admin_address'] : null;
-    $birthdate = isset($_POST['admin_birthdate']) ? $_POST['admin_birthdate'] : null;
-    $civil_status = isset($_POST['admin_civil_status']) ? $_POST['admin_civil_status'] : null;
-    $personal_email = isset($_POST['admin_personal_email']) ? $_POST['admin_personal_email'] : null;
-    $contact_number = isset($_POST['admin_contact_number']) ? $_POST['admin_contact_number'] : null;
-    $account_email = isset($_POST['admin_account_email']) ? $_POST['admin_account_email'] : null;
-    $password = isset($_POST['admin_password']) ? $_POST['admin_password'] : null;
-    $role = isset($_POST['role']) ? $_POST['role'] : null;
-
-    // Validate required fields
-    if (empty($last_name) || empty($first_name) || empty($gender) || empty($address) ||
-        empty($birthdate) || empty($civil_status) || empty($personal_email) ||
-        empty($contact_number) || empty($account_email) || empty($password) || empty($role)) {
-        echo json_encode(['success' => false, 'message' => 'All fields except suffix are required.']);
-        exit;
-    }
-
-    // Prepare the SQL statement
-    $stmt = $conn->prepare("INSERT INTO admins (last_name, first_name, middle_name, suffix, gender, address, birthdate, civil_status, personal_email, contact_number, account_email, password, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    // Get the posted JSON data
+    $data = json_decode(file_get_contents('php://input'), true);
     
-    // Bind parameters
-    $stmt->bind_param("sssssssssssss", $last_name, $first_name, $middle_name, $suffix, $gender, $address, $birthdate, $civil_status, $personal_email, $contact_number, $account_email, $password, $role);
+    // Extract data
+    $adminLastName = $data['admin_last_name'];
+    $adminFirstName = $data['admin_first_name'];
+    $adminMiddleName = isset($data['admin_middle_name']) ? $data['admin_middle_name'] : null;
+    $adminSuffix = isset($data['admin_suffix']) ? $data['admin_suffix'] : null;
+    $adminGender = $data['admin_gender'];
+    $adminAddress = $data['admin_address'];
+    $adminBirthdate = $data['admin_birthdate'];
+    $adminCivilStatus = $data['admin_civil_status'];
+    $adminContactNumber = $data['admin_contact_number'];
+    $adminPersonalEmail = $data['admin_personal_email'];
+    $adminAccountEmail = $data['admin_account_email'];
+    $adminPassword = password_hash($data['admin_password'], PASSWORD_BCRYPT); // Hash the password
+    $role = $data['role'];
 
-    // Execute the query
-    if ($stmt->execute()) {
-        echo json_encode(['success' => true, 'message' => 'Admin added successfully.']);
-    } else {
-        http_response_code(500);
-        echo json_encode(['success' => false, 'message' => 'Error occurred while adding admin.']);
+    // Check for existing personal_email
+    $checkEmailStmt = $conn->prepare("SELECT COUNT(*) FROM admins WHERE personal_email = ?");
+    $checkEmailStmt->bind_param("s", $adminPersonalEmail);
+    $checkEmailStmt->execute();
+    $checkEmailStmt->bind_result($emailCount);
+    $checkEmailStmt->fetch();
+    $checkEmailStmt->close();
+
+    if ($emailCount > 0) {
+        echo json_encode(['success' => false, 'message' => 'Email already exists.']);
+        exit; // Stop further execution
     }
 
-    // Close the statement and connection
+    // Prepare and bind your SQL statement
+    $stmt = $conn->prepare("INSERT INTO admins (last_name, first_name, middle_name, suffix, gender, address, birthdate, civil_status, contact_number, personal_email, account_email, password, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssssssssss", $adminLastName, $adminFirstName, $adminMiddleName, $adminSuffix, $adminGender, $adminAddress, $adminBirthdate, $adminCivilStatus, $adminContactNumber, $adminPersonalEmail, $adminAccountEmail, $adminPassword, $role);
+
+    // Execute and check for success
+    if ($stmt->execute()) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Error adding admin: ' . $stmt->error]);
+    }
+
     $stmt->close();
     $conn->close();
 }
