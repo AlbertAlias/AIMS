@@ -1,131 +1,107 @@
-document.getElementById('adminSubmitBtn').addEventListener('click', function (event) {
-    event.preventDefault(); // Prevent default form submission
+// Function to show Update button and hide Submit button
+function showUpdateButton() {
+    const adminUpdateBtn = document.getElementById('adminUpdateBtn');
+    const adminSubmitBtn = document.getElementById('adminSubmitBtn');
 
-    // Gather input values
-    const adminID = document.getElementById('adminID').value;
-    const adminLastName = document.getElementById('admin_last_name').value;
-    const adminFirstName = document.getElementById('admin_first_name').value;
-    const adminMiddleName = document.getElementById('admin_middle_name').value; // Optional
-    const adminSuffix = document.getElementById('admin_suffix').value; // Optional
-    const adminGender = document.getElementById('admin_gender').value;
-    const adminAddress = document.getElementById('admin_address').value;
-    const adminBirthdate = document.getElementById('admin_birthdate').value;
-    const adminCivilStatus = document.getElementById('admin_civil_status').value;
-    const adminContactNumber = document.getElementById('admin_contact_number').value;
-    const adminPersonalEmail = document.getElementById('admin_personal_email').value;
-    const adminAccountEmail = document.getElementById('admin_account_email').value;
-    const adminPassword = document.getElementById('admin_password').value;
-    const role = document.getElementById('role').value;
+    if (adminUpdateBtn) adminUpdateBtn.style.display = 'inline-block'; // Show the update button
+    if (adminSubmitBtn) adminSubmitBtn.style.display = 'none';         // Hide the submit button
+}
 
-    // Validate required fields
-    const isValid = validateForm([adminLastName, adminFirstName, adminGender, adminAddress, adminBirthdate, adminCivilStatus, adminContactNumber, adminPersonalEmail, adminAccountEmail, adminPassword, role]);
-    if (!isValid) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Error!',
-            text: 'Please fill out all required fields.',
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            background: '#f8d7da',
-            iconColor: '#721c24',
-            color: '#721c24',
-            customClass: {
-                popup: 'mt-5'
-            }
+// Function to enable all fields except the locked ones
+function unlockAndResetForms() {
+    const adminsForm = document.getElementById('adminsForm');
+    const admin_accountForm = document.getElementById('admin_accountForm');
+
+    if (adminsForm) {
+        adminsForm.reset();
+        document.querySelectorAll('#adminsForm input, #adminsForm select').forEach(el => {
+            // Unlock all fields
+            el.disabled = false;
         });
-        return; // Stop further execution
     }
 
-    // Prepare data for AJAX request
-    const data = {
-        id: adminID,
-        admin_last_name: adminLastName,
-        admin_first_name: adminFirstName,
-        admin_middle_name: adminMiddleName, // Optional, can be null if not provided
-        admin_suffix: adminSuffix, // Optional, can be null if not provided
-        admin_gender: adminGender,
-        admin_address: adminAddress,
-        admin_birthdate: adminBirthdate,
-        admin_civil_status: adminCivilStatus,
-        admin_contact_number: adminContactNumber,
-        admin_personal_email: adminPersonalEmail,
-        admin_account_email: adminAccountEmail,
-        admin_password: adminPassword, // Plain text to be hashed server-side
-        role: role
-    };
-
-    // Perform the AJAX request using Fetch API
-    fetch('controller/admins/create-admins.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.text()) // Get raw response as text
-    .then(rawResponse => {
-        console.log('Raw Response:', rawResponse); // Log raw response for debugging
-        return JSON.parse(rawResponse); // Parse it to JSON
-    })
-    .then(data => {
-        if (data.success) {
-            // SweetAlert for success
-            Swal.fire({
-                toast: true,
-                position: 'top-end',
-                icon: 'success',
-                title: 'Admin added successfully!',
-                showConfirmButton: false,
-                timer: 3000,
-                background: '#b9f6ca',
-                iconColor: '#2e7d32',
-                color: '#155724',
-                customClass: {
-                    popup: 'mt-5'
-                }
-            });
-            disableAndResetForms();
-        } else {
-            // SweetAlert for error (email already exists or general error)
-            Swal.fire({
-                toast: true,
-                position: 'top-end',
-                icon: 'error',
-                title: data.message,
-                showConfirmButton: false,
-                timer: 3000,
-                background: '#f8d7da',
-                iconColor: '#721c24',
-                color: '#721c24',
-                customClass: {
-                    popup: 'mt-5'
-                }
-            });
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        // SweetAlert for AJAX request error
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: 'error',
-            title: 'There was an error with the AJAX request.',
-            showConfirmButton: false,
-            timer: 3000,
-            background: '#f8d7da',
-            iconColor: '#721c24',
-            color: '#721c24',
-            customClass: {
-                popup: 'mt-5'
-            }
+    if (admin_accountForm) {
+        admin_accountForm.reset();
+        document.querySelectorAll('#admin_accountForm input, #admin_accountForm select').forEach(el => {
+            // Unlock all fields
+            el.disabled = false;
         });
-    });
+    }
+
+    const adminSubmitBtn = document.getElementById('adminSubmitBtn');
+    const adminCancelBtn = document.getElementById('adminCancelBtn');
+
+    if (adminSubmitBtn) {
+        adminSubmitBtn.disabled = false;
+        adminSubmitBtn.style.display = 'inline-block';
+    }
+
+    if (adminCancelBtn) adminCancelBtn.style.display = 'inline-block';
+}
+
+// Function to disable all fields and reset forms
+function disableAndResetForms() {
+    const adminsForm = document.getElementById('adminsForm');
+    const admin_accountForm = document.getElementById('admin_accountForm');
+
+    if (adminsForm) {
+        adminsForm.reset();
+        document.querySelectorAll('#adminsForm input, #adminsForm select').forEach(el => {
+            el.disabled = true; // Disable all fields
+        });
+    }
+
+    if (admin_accountForm) {
+        admin_accountForm.reset();
+        document.querySelectorAll('#admin_accountForm input').forEach(el => {
+            el.disabled = true; // Lock the account info fields
+        });
+    }
+
+    const adminSubmitBtn = document.getElementById('adminSubmitBtn');
+    const adminCancelBtn = document.getElementById('adminCancelBtn');
+    const adminUpdateBtn = document.getElementById('adminUpdateBtn'); // Get the update button
+
+    if (adminSubmitBtn) {
+        adminSubmitBtn.disabled = true;
+        adminSubmitBtn.style.display = 'inline-block'; // Hide the submit button
+    }
+
+    if (adminCancelBtn) {
+        adminCancelBtn.style.display = 'none'; // Hide the cancel button
+    }
+
+    if (adminUpdateBtn) {
+        adminUpdateBtn.style.display = 'none'; // Hide the update button
+    }
+}
+
+// Event listeners for form actions
+document.getElementById('addAdminsBtn').addEventListener('click', function() {
+    console.log('Add Admin button clicked');
+    unlockAndResetForms();
+    
+    const adminUpdateBtn = document.getElementById('adminUpdateBtn');
+    const adminSubmitBtn = document.getElementById('adminSubmitBtn');
+
+    if (adminUpdateBtn) adminUpdateBtn.style.display = 'none';
+    if (adminSubmitBtn) adminSubmitBtn.style.display = 'inline-block';
 });
 
-// Function to validate required fields
-function validateForm(fields) {
-    return fields.every(field => field.trim() !== ''); // Ensure all required fields are filled
-}
+document.getElementById('adminsInfo').addEventListener('click', function(event) {
+    if (event.target && event.target.matches('button[data-id]')) {
+        const adminID = event.target.getAttribute('data-id');
+        document.getElementById('adminID').value = adminID; // Set the admin ID
+        console.log('Selected Admin ID:', adminID); // Check if ID is correctly set
+        unlockAndResetForms();
+        showUpdateButton();
+        loadAdminDetails(adminID);
+    }
+});
+
+document.getElementById('adminCancelBtn').addEventListener('click', function() {
+    disableAndResetForms();
+    console.log('Cancel button clicked');
+    this.style.display = 'none';
+    document.getElementById('adminUpdateBtn').style.display = 'none';
+});

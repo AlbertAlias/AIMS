@@ -110,7 +110,7 @@
             'functions/admins/form-enable.js',
             'functions/admins/intern-email.js',
             'crud-ajax/admins/create-admins.js',
-            // 'crud-ajax/admins/retrieve-admins.js',
+            'crud-ajax/admins/retrieve-admins.js',
             // 'crud-ajax/admins/update-admins.js'
         ]
         // adminProfile: [
