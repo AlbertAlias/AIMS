@@ -1,119 +1,92 @@
 <?php
-// Include database connection
-require_once '../../../dbconn.php';
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// Set the content type to JSON
+include '../../../dbconn.php'; // Include your MySQLi database connection
+
+// Return the response as JSON
 header('Content-Type: application/json');
 
-// Initialize response array
-$response = ['success' => false, 'message' => ''];
+$response = array();
 
-// Check if the required POST data is received
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve data from POST request
-    $id = (int)$_POST['id'];  // Force ID to be an integer
-    error_log("Received ID: " . $id); // Log the received ID
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Use the null coalescing operator to avoid undefined array keys
+    $id = $_POST['id'] ?? null;
+    $last_name = $_POST['admin_last_name'] ?? null;
+    $first_name = $_POST['admin_first_name'] ?? null;
+    $middle_name = $_POST['admin_middle_name'] ?? null;
+    $suffix = $_POST['admin_suffix'] ?? null;
+    $gender = $_POST['admin_gender'] ?? null;
+    $address = $_POST['admin_address'] ?? null;
+    $birthdate = $_POST['admin_birthdate'] ?? null;
+    $civil_status = $_POST['admin_civil_status'] ?? null;
+    $contact_number = $_POST['admin_contact_number'] ?? null;
+    $personal_email = $_POST['admin_personal_email'] ?? null;
+    $account_email = $_POST['admin_account_email'] ?? null;
+    $password = !empty($_POST['admin_password']) ? password_hash($_POST['admin_password'], PASSWORD_BCRYPT) : null; // Hash password if provided
+    $role = $_POST['role'] ?? null;
 
-    // Check if intern exists
-    $checkSql = "SELECT * FROM admins WHERE id = ?";
-    if ($checkStmt = $conn->prepare($checkSql)) {
-        $checkStmt->bind_param("i", $id);
-        $checkStmt->execute();
-        $checkResult = $checkStmt->get_result();
-
-        if ($checkResult->num_rows === 0) {
-            $response['message'] = 'No intern found with that ID.';
-            error_log("No adminn found with ID: " . $id); // Log the failure
-            echo json_encode($response);
-            exit;
-        }
-        $checkStmt->close();
-    } else {
-        $response['message'] = 'Error preparing check statement: ' . $conn->error;
-        error_log("Error preparing check statement: " . $conn->error);
+    // Validate required fields
+    if (!$id || !$last_name || !$first_name || !$gender || !$address || !$birthdate || !$civil_status || !$contact_number || !$personal_email || !$account_email || !$password || !$role) {
+        $response['success'] = false;
+        $response['error'] = 'Missing required fields.';
         echo json_encode($response);
         exit;
     }
 
-    // Retrieve the other fields
-    $last_name = $_POST['admin_last_name'];
-    $first_name = $_POST['admin_first_name'];
-    $middle_name = $_POST['admin_middle_name'];
-    $suffix = $_POST['admin_suffix'];
-    $gender = $_POST['admin_gender'];
-    $address = $_POST['admin-address'];
-    $birthdate = $_POST['admin_birthdate'];
-    $civil_status = $_POST['admin_civil_status'];
-    $contact_number = $_POST['admin_contact_number'];
-    $personal_email = $_POST['admin_personal_email'];
-    $account_email = $_POST['admin_account_email'];
-    $password = $_POST['admin_password'];
-    $role = $_POST['role'];
-
-    // Hash the password using bcrypt
-    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-
-    // Prepare SQL query for updating intern information
-    $sql = "UPDATE admins SET 
-                last_name = ?, 
-                first_name = ?, 
-                middle_name = ?, 
-                suffix = ?, 
-                gender = ?, 
-                address = ?, 
-                birthdate = ?, 
-                civil_status = ?,
-                contact_number = ?, 
-                personal_email = ?, 
-                account_email = ?, 
-                password = ? ,
-                role = ?
-            WHERE id = ?";
-
-    // Prepare the statement
-    if ($stmt = $conn->prepare($sql)) {
-        // Bind parameters
-        $stmt->bind_param("sssssssssssssi", 
-            $last_name, 
-            $first_name, 
-            $middle_name, 
-            $suffix, 
-            $gender, 
-            $address, 
-            $birthdate, 
-            $civil_status, 
-            $contact_number, 
-            $personal_email, 
-            $account_email, 
-            $hashed_password, 
-            $role,
-            $id
-        );
-
-        // Execute the statement
-        if ($stmt->execute()) {
-            if ($stmt->affected_rows > 0) {
-                $response['success'] = true;
-                $response['message'] = 'Admin updated successfully!';
-            } else {
-                $response['message'] = 'No changes made to the admin data.';
-            }
-        } else {
-            $response['message'] = 'Error executing query: ' . $stmt->error;
-            error_log("Error executing query: " . $stmt->error);
+    // Check if the MySQLi connection is defined and properly set up
+    if (isset($conn)) {
+        // Prepare the SQL statement
+        $sql = "UPDATE admins SET last_name = ?, first_name = ?, middle_name = ?, suffix = ?, gender = ?, address = ?, birthdate = ?, civil_status = ?, contact_number = ?, personal_email = ?, account_email = ?, role = ?";
+        
+        // Conditionally append password to the query if provided
+        if ($password !== null) {
+            $sql .= ", password = ?";
         }
+        
+        $sql .= " WHERE id = ?";
 
-        // Close the statement
-        $stmt->close();
+        // Prepare the statement
+        $stmt = $conn->prepare($sql);
+        
+        if ($stmt) {
+            // Conditionally bind parameters based on whether the password is provided
+            if ($password !== null) {
+                $stmt->bind_param(
+                    "ssssssssssssi", 
+                    $last_name, $first_name, $middle_name, $suffix, $gender, $address, $birthdate, $civil_status, 
+                    $contact_number, $personal_email, $account_email, $role, $password, $id
+                );
+            } else {
+                $stmt->bind_param(
+                    "ssssssssssss", 
+                    $last_name, $first_name, $middle_name, $suffix, $gender, $address, $birthdate, $civil_status, 
+                    $contact_number, $personal_email, $account_email, $role, $id
+                );
+            }
+
+            // Execute the statement
+            if ($stmt->execute()) {
+                $response['success'] = true;
+            } else {
+                $response['success'] = false;
+                $response['error'] = 'Failed to update admin details: ' . $stmt->error;
+            }
+
+            // Close the statement
+            $stmt->close();
+        } else {
+            $response['success'] = false;
+            $response['error'] = 'Failed to prepare the statement: ' . $conn->error;
+        }
     } else {
-        $response['message'] = 'Error preparing statement: ' . $conn->error;
-        error_log("Error preparing statement: " . $conn->error);
+        $response['success'] = false;
+        $response['error'] = 'Database connection error.';
     }
+} else {
+    $response['success'] = false;
+    $response['error'] = 'Invalid request method.';
 }
 
-// Close the database connection
-$conn->close();
-
-// Return JSON response
 echo json_encode($response);
 ?>

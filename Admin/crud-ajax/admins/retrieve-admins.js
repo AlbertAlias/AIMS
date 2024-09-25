@@ -16,6 +16,12 @@ $(document).ready(function() {
                                 </button>`;
                     adminsInfo.append(btn);
                 });
+
+                // Attach event listeners to the dynamically created buttons
+                $('.intern-btn').on('click', function() {
+                    const adminId = $(this).data('id'); // Get the data-id of the clicked button
+                    window.loadAdminDetails(adminId);   // Call the function to load admin details
+                });
             },
             error: function(xhr, status, error) {
                 console.error('Failed to load admins:', error);
@@ -23,7 +29,7 @@ $(document).ready(function() {
         });
     };
 
-    // Attach loadAdminDetails to the window object
+    // Function to load admin details based on the id
     window.loadAdminDetails = function(id) {
         $.ajax({
             url: 'controller/admins/retrieve-admin-details.php',
@@ -56,7 +62,9 @@ $(document).ready(function() {
     
                 console.log('Setting role to:', response.role);
                 $('#role').val(response.role).prop('disabled', false);
-                $('#internSubmitBtn').prop('disabled', false);
+
+                // Call to show the update button and cancel button
+                showUpdateButton(); // Call this to show the appropriate buttons
             },
             error: function(xhr, status, error) {
                 console.error('Error retrieving admin details:', error);
@@ -64,5 +72,5 @@ $(document).ready(function() {
         });
     };
 
-    loadAdmins();
+    loadAdmins(); // Call the function to load admins on page load
 });

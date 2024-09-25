@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    // Event listener for the Update button
-    $('#internUpdateBtn').on('click', function () {
+    // Remove any existing click event handlers for the update button
+    $('#internUpdateBtn').off('click').on('click', function () {
         console.log('Update button clicked');
 
         const internID = $('#internID').val(); // Ensure you're using the correct ID

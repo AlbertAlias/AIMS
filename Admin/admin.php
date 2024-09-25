@@ -136,6 +136,7 @@ ini_set('display_errors', 1);
         <script src="functions/interns/internPass.js" defer></script>
 
         <script src="functions/admins/form-enable.js" defer></script>
+        <script src="functions/admins/intern-email.js" defer></script>
         <!-- <script src="functions/interns/intern-email.js" defer></script>
         <script src="functions/interns/studID.js" defer></script>
         <script src="functions/interns/internPass.js" defer></script> -->

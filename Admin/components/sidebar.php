@@ -3,7 +3,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon">
-        <img src="../img/esyatek-logo.png" alt="Logo" width="70">
+            <img src="../img/esyatek-logo.png" alt="Logo" width="70">
         </div>
         <div class="sidebar-brand-text mx-1">AIMS</div>
     </a>
@@ -108,6 +108,7 @@
         ],
         subAdmins: [
             'functions/admins/form-enable.js',
+            'functions/admins/intern-email.js',
             'crud-ajax/admins/create-admins.js',
             'crud-ajax/admins/retrieve-admins.js',
             'crud-ajax/admins/update-admins.js'

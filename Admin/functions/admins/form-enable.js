@@ -1,105 +1,134 @@
-// Function to show Update button and hide Submit button
-function showUpdateButton() {
-    const internUpdateBtn = document.getElementById('internUpdateBtn');
-    const internSubmitBtn = document.getElementById('internSubmitBtn');
+// Ensure the script runs only on the Sub-Admins page
+if (document.getElementById('adminsForm')) {
+    // Function to show Update button and hide Submit button
+    function showUpdateButton() {
+        const adminUpdateBtn = document.getElementById('adminUpdateBtn');
+        const adminSubmitBtn = document.getElementById('adminSubmitBtn');
+        const adminCancelBtn = document.getElementById('adminCancelBtn');
 
-    if (internUpdateBtn) internUpdateBtn.style.display = 'inline-block'; // Show the update button
-    if (internSubmitBtn) internSubmitBtn.style.display = 'none';         // Hide the submit button
-}
-
-// Function to enable all fields in both forms
-function unlockAndResetForms() {
-    const adminsForm = document.getElementById('adminsForm');
-    const admin_accountForm = document.getElementById('admin_accountForm');
-
-    if (adminsForm) {
-        adminsForm.reset();
-        document.querySelectorAll('#adminsForm input, #adminsForm select').forEach(el => {
-            el.disabled = false; // Enable all fields
-        });
+        if (adminUpdateBtn) {
+            adminUpdateBtn.style.display = 'inline-block';  // Show the update button
+            adminUpdateBtn.disabled = false;  // Enable the update button
+        }
+        if (adminSubmitBtn) {
+            adminSubmitBtn.style.display = 'none';  // Hide the submit button
+        }
+        if (adminCancelBtn) {
+            adminCancelBtn.style.display = 'inline-block'; // Show the cancel button
+        }
     }
 
-    if (admin_accountForm) {
-        admin_accountForm.reset();
-        document.querySelectorAll('#admin_accountForm input, #admin_accountForm select').forEach(el => {
-            el.disabled = false; // Enable all account info fields
-        });
+    // Function to enable and reset forms
+    function unlockAndResetForms() {
+        const adminsForm = document.getElementById('adminsForm');
+        const admin_accountForm = document.getElementById('admin_accountForm');
+
+        if (adminsForm) {
+            adminsForm.reset();
+            document.querySelectorAll('#adminsForm input, #adminsForm select').forEach(el => el.disabled = false);
+        }
+
+        if (admin_accountForm) {
+            admin_accountForm.reset();
+            document.querySelectorAll('#admin_accountForm input').forEach(el => el.disabled = false);
+            document.querySelectorAll('#admin_accountForm select').forEach(el => el.disabled = false); // Unlock select fields
+        }
+
+        const adminSubmitBtn = document.getElementById('adminSubmitBtn');
+        const adminCancelBtn = document.getElementById('adminCancelBtn');
+        
+        if (adminSubmitBtn) {
+            adminSubmitBtn.disabled = false;
+            adminSubmitBtn.style.display = 'inline-block'; // Show submit button
+            console.log("adminSubmitBtn displayed"); // Debugging log
+        }
+
+        if (adminCancelBtn) {
+            adminCancelBtn.style.display = 'inline-block';
+            console.log("adminCancelBtn displayed"); // Debugging log
+        }
     }
 
-    const internSubmitBtn = document.getElementById('internSubmitBtn');
-    const internCancelBtn = document.getElementById('internCancelBtn');
+    // Disable and reset forms function
+    function disableAndResetForms() {
+        const adminsForm = document.getElementById('adminsForm');
+        const admin_accountForm = document.getElementById('admin_accountForm');
+    
+        if (adminsForm) {
+            adminsForm.reset();
+            document.querySelectorAll('#adminsForm input, #adminsForm select').forEach(el => el.disabled = true);
+        }
+    
+        if (admin_accountForm) {
+            admin_accountForm.reset();
+            document.querySelectorAll('#admin_accountForm input').forEach(el => el.disabled = true);
+            document.querySelectorAll('#admin_accountForm select').forEach(el => el.disabled = true); // Lock select fields
+        }
+    
+        const adminSubmitBtn = document.getElementById('adminSubmitBtn');
+        const adminCancelBtn = document.getElementById('adminCancelBtn');
+    
+        if (adminSubmitBtn) {
+            adminSubmitBtn.disabled = true; // Only disable, do not hide
+        }
+    
+        if (adminCancelBtn) {
+            adminCancelBtn.style.display = 'none'; // Hide cancel button
+            console.log("adminCancelBtn hidden"); // Debugging log
+        }
+    }    
 
-    if (internSubmitBtn) {
-        internSubmitBtn.disabled = false;
-        internSubmitBtn.style.display = 'inline-block';
-    }
-
-    if (internCancelBtn) internCancelBtn.style.display = 'inline-block';
-}
-
-// Function to disable all fields and reset forms
-function disableAndResetForms() {
-    const adminsForm = document.getElementById('adminsForm');
-    const admin_accountForm = document.getElementById('admin_accountForm');
-
-    if (adminsForm) {
-        adminsForm.reset();
-        document.querySelectorAll('#adminsForm input, #adminsForm select').forEach(el => {
-            el.disabled = true; // Disable all fields
-        });
-    }
-
-    if (admin_accountForm) {
-        admin_accountForm.reset();
-        document.querySelectorAll('#admin_accountForm input, #admin_accountForm select').forEach(el => {
-            el.disabled = true; // Lock all account info fields
-        });
-    }
-
-    const internSubmitBtn = document.getElementById('internSubmitBtn');
-    const internCancelBtn = document.getElementById('internCancelBtn');
-    const internUpdateBtn = document.getElementById('internUpdateBtn');
-
-    if (internSubmitBtn) {
-        internSubmitBtn.disabled = true;
-        internSubmitBtn.style.display = 'inline-block'; 
-    }
-
-    if (internCancelBtn) {
-        internCancelBtn.style.display = 'none'; // Hide the cancel button
-    }
-
-    if (internUpdateBtn) {
-        internUpdateBtn.style.display = 'none'; // Hide the update button
-    }
-}
-
-// Event listeners for form actions
-document.getElementById('addAdminsBtn').addEventListener('click', function() {
-    console.log('Add Admins button clicked');
-    unlockAndResetForms();
-
-    const internUpdateBtn = document.getElementById('internUpdateBtn');
-    const internSubmitBtn = document.getElementById('internSubmitBtn');
-
-    if (internUpdateBtn) internUpdateBtn.style.display = 'none';
-    if (internSubmitBtn) internSubmitBtn.style.display = 'inline-block';
-});
-
-document.getElementById('adminsInfo').addEventListener('click', function(event) {
-    if (event.target && event.target.matches('button[data-id]')) {
-        const adminID = event.target.getAttribute('data-id');
-        document.getElementById('adminID').value = adminID; // Set the admin ID
-        console.log('Selected Admin ID:', adminID); // Check if ID is correctly set
+    document.getElementById('addAdminsBtn').addEventListener('click', function() {
         unlockAndResetForms();
-        showUpdateButton();
-        loadAdminDetails(adminID); // Function to load the admin details
-    }
-});
+        
+        const adminUpdateBtn = document.getElementById('adminUpdateBtn');
+        const adminSubmitBtn = document.getElementById('adminSubmitBtn');
+        const adminDeleteBtn = document.getElementById('adminDeleteBtn'); // Ensure this button exists
 
-document.getElementById('internCancelBtn').addEventListener('click', function() {
-    disableAndResetForms();
-    console.log('Cancel button clicked');
-    this.style.display = 'none';
-    document.getElementById('internUpdateBtn').style.display = 'none';
-});
+        if (adminUpdateBtn) {
+            adminUpdateBtn.style.display = 'none';  // Hide the update button
+            console.log("adminUpdateBtn hidden"); // Debugging log
+        }
+        if (adminSubmitBtn) {
+            adminSubmitBtn.style.display = 'inline-block';  // Show the submit button
+            console.log("adminSubmitBtn displayed"); // Debugging log
+        }
+        if (adminDeleteBtn) {
+            adminDeleteBtn.style.display = 'none';  // Hide the delete button
+            console.log("adminDeleteBtn hidden"); // Debugging log
+        }
+    });
+
+    document.getElementById('adminCancelBtn').addEventListener('click', function() {
+        disableAndResetForms();  // Lock forms when "Cancel" is clicked
+        this.style.display = 'none'; // Hide the cancel button
+        console.log("adminCancelBtn hidden"); // Debugging log
+
+        const adminUpdateBtn = document.getElementById('adminUpdateBtn');
+        if (adminUpdateBtn) {
+            adminUpdateBtn.style.display = 'none'; // Hide the update button
+            console.log("adminUpdateBtn hidden from cancel"); // Debugging log
+        }
+
+        const adminDeleteBtn = document.getElementById('adminDeleteBtn');
+        if (adminDeleteBtn) {
+            adminDeleteBtn.style.display = 'none'; // Ensure this button is hidden
+            console.log("adminDeleteBtn hidden from cancel"); // Debugging log
+        }
+
+        // Show adminSubmitBtn as inline-block
+        const adminSubmitBtn = document.getElementById('adminSubmitBtn');
+        if (adminSubmitBtn) {
+            adminSubmitBtn.style.display = 'inline-block'; // Make submit button visible
+            console.log("adminSubmitBtn displayed from cancel"); // Debugging log
+        }
+    });
+
+    // Event listener for the intern buttons
+    document.querySelectorAll('.intern-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const adminId = this.getAttribute('data-id'); // Get the admin ID
+            loadAdminDetails(adminId); // Load the admin details
+        });
+    });
+}
