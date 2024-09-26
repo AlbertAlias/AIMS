@@ -3,9 +3,9 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon">
-            <img src="../img/esyatek-logo.png" alt="Logo" width="70">
+            <img src="../img/esyatek-logo-1.png" alt="Logo" width="55">
         </div>
-        <div class="sidebar-brand-text mx-1">AIMS</div>
+        <!-- <div class="sidebar-brand-text mx-1">AIMS</div> -->
     </a>
 
     <!-- Divider -->
@@ -111,7 +111,8 @@
             'functions/admins/intern-email.js',
             'crud-ajax/admins/create-admins.js',
             'crud-ajax/admins/retrieve-admins.js',
-            // 'crud-ajax/admins/update-admins.js'
+            'crud-ajax/admins/retrieve-admin-details.js',
+            'crud-ajax/admins/update-admins.js'
         ]
         // adminProfile: [
         //     'functions/admin-profile/drag_drop.js',

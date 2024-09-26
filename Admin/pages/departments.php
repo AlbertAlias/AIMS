@@ -27,7 +27,7 @@
                             <input type="text" class="form-control" id="departmentHead" name="departmentHead" required disabled>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-success me-2">Submit</button>
+                    <button type="submit" id="submitBtn" class="btn btn-success me-2">Submit</button>
                     <button type="button" id="updateBtn" class="btn btn-primary" style="display: none;">Update</button>
                     <button type="button" id="deleteDeptBtn" class="btn btn-danger" style="display: none;">Delete</button>
                     <button type="button" id="cancelEditBtn" class="btn btn-secondary" style="display: none;">Cancel</button>

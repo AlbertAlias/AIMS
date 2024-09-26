@@ -21,13 +21,13 @@
                         <!-- Last Name -->
                         <div class="col-md-5">
                             <input type="hidden" id="coordinatorId" name="coordinatorId">
-                            <label for="coor_last_name" class="form-label required-asterisk">Last Name</label>
+                            <label for="coor_last_name" class="form-label required-asterisk">Last Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="coor_last_name" name="coor_last_name" required disabled>
                         </div>
 
                         <!-- First Name -->
                         <div class="col-md-7">
-                            <label for="coor_first_name" class="form-label required-asterisk">First Name</label>
+                            <label for="coor_first_name" class="form-label required-asterisk">First Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="coor_first_name" name="coor_first_name" required disabled>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                         </div>
                         <!-- Gender -->
                         <div class="col-md-4">
-                            <label for="coor_gender" class="form-label required-asterisk">Gender</label>
+                            <label for="coor_gender" class="form-label required-asterisk">Gender <span class="text-danger">*</span></label>
                             <select class="form-select" id="coor_gender" name="coor_gender" required disabled>
                                 <option selected disabled>Choose Gender</option>
                                 <option value="Male">Male</option>
@@ -55,19 +55,19 @@
                     <div class="row mb-3">
                         <!-- Address -->
                         <div class="col-md-8">
-                            <label for="coor_address" class="form-label required-asterisk">Address</label>
+                            <label for="coor_address" class="form-label required-asterisk">Address <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="coor_address" name="coor_address" required disabled>
                         </div>
                         <!-- Birthdate -->
                         <div class="col-md-4">
-                            <label for="coor_birthdate" class="form-label required-asterisk">Birthdate</label>
+                            <label for="coor_birthdate" class="form-label required-asterisk">Birthdate <span class="text-danger">*</span></label>
                             <input type="date" class="form-control" id="coor_birthdate" name="coor_birthdate" required disabled>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <!-- Civil Status -->
                         <div class="col-md-4">
-                            <label for="coor_civil_status" class="form-label required-asterisk">Civil Status</label>
+                            <label for="coor_civil_status" class="form-label required-asterisk">Civil Status <span class="text-danger">*</span></label>
                             <select class="form-select" id="coor_civil_status" name="coor_civil_status" required disabled>
                                 <option selected disabled>Choose Status</option>
                                 <option value="Single">Single</option>
@@ -77,14 +77,14 @@
                         </div>
                         <!-- Email -->
                         <div class="col-md-8">
-                            <label for="coor_personal_email" class="form-label required-asterisk">Email</label>
+                            <label for="coor_personal_email" class="form-label required-asterisk">Email <span class="text-danger">*</span></label>
                             <input type="email" class="form-control" id="coor_personal_email" name="coor_personal_email" required disabled>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <!-- Contact Number -->
                         <div class="col-md-5">
-                            <label for="coor_contact_number" class="form-label">Contact Number</label>
+                            <label for="coor_contact_number" class="form-label">Contact Number <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <span class="input-group-text m-0 px-2">+63</span>
                                 <input type="tel" class="form-control" id="coor_contact_number" name="coor_contact_number" placeholder="" pattern="[1-9]{10}" maxlength="10" title="Please enter a valid 10-digit phone number" disabled>
@@ -92,7 +92,7 @@
                         </div>
                         <!-- Department -->
                         <div class="col-md-7">
-                            <label for="coor_department" class="form-label required-asterisk">Department</label>
+                            <label for="coor_department" class="form-label required-asterisk">Department <span class="text-danger">*</span></label>
                             <select class="form-select" id="coor_department" name="coor_department" required disabled>
                                 <option selected>Choose Department</option>
                                 <!-- Options will be dynamically populated here -->
@@ -118,11 +118,11 @@
                 <div class="text-gray-800">
                     <form id="coor_accountForm">
                         <div class="mb-3">
-                            <label for="coor_account_email" class="form-label required-asterisk">Account Email</label>
+                            <label for="coor_account_email" class="form-label required-asterisk">Account Email <span class="text-danger">*</span></label>
                             <input type="email" class="form-control" id="coor_account_email" name="coor_account_email" required disabled>
                         </div>
                         <div class="mb-3">
-                            <label for="coor_password" class="form-label required-asterisk">Password</label>
+                            <label for="coor_password" class="form-label required-asterisk">Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control" id="coor_password" name="coor_password" required disabled>
                         </div>
                     </form>

@@ -24,8 +24,12 @@ $(document).ready(function() {
                 $('#admin_civil_status').val(response.civil_status).prop('disabled', false);
                 $('#admin_contact_number').val(response.contact_number).prop('disabled', false);
                 $('#admin_personal_email').val(response.personal_email).prop('disabled', false);
-                $('#admin_account_email').val(response.account_email).prop('disabled', true); // Lock the account email
-                $('#admin_password').val(response.password).prop('disabled', true); // Lock the hashed password
+                $('#admin_account_email').val(response.account_email).prop('disabled', false);
+                $('#admin_password').val(response.password).prop('disabled', false);
+                
+                // Correctly populate the role select field
+                $('#role').val(response.role).prop('disabled', false);
+
                 $('#adminUpdateBtn').prop('disabled', false);
             },
             error: function(xhr, status, error) {

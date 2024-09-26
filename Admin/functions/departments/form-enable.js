@@ -6,14 +6,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const cancelEditBtn = document.getElementById('cancelEditBtn');
     const deleteDeptBtn = document.getElementById('deleteDeptBtn');
 
+    submitBtn.disabled = true;
+
     // Function to enable form for adding a department
     function enableFormForAdd() {
         if (departmentForm) {
             departmentForm.reset(); // Reset the form fields
             departmentForm.querySelectorAll('input, button').forEach(el => el.disabled = false); // Enable all fields and buttons
-            submitBtn.style.display = 'inline-block'; // Ensure submit button is visible
+            submitBtn.disabled = false; // Enable the submit button
             updateBtn.style.display = 'none'; // Hide update button
-            cancelEditBtn.style.display = 'none'; // Show cancel button
+            cancelEditBtn.style.display = 'inline-block'; // Show cancel button
             deleteDeptBtn.style.display = 'none'; // Hide delete button
             console.log('Form reset and enabled for adding');
         }

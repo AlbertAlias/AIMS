@@ -1,63 +1,70 @@
-document.getElementById('adminSubmitBtn').addEventListener('click', function (event) {
-    event.preventDefault(); // Prevent default form submission
+document.getElementById('coorSubmitBtn').addEventListener('click', function (event) {
+    event.preventDefault();
 
-    // Gather input values
-    const adminID = document.getElementById('adminID').value;
-    const adminLastName = document.getElementById('admin_last_name').value;
-    const adminFirstName = document.getElementById('admin_first_name').value;
-    const adminMiddleName = document.getElementById('admin_middle_name').value; // Optional
-    const adminSuffix = document.getElementById('admin_suffix').value; // Optional
-    const adminGender = document.getElementById('admin_gender').value;
-    const adminAddress = document.getElementById('admin_address').value;
-    const adminBirthdate = document.getElementById('admin_birthdate').value;
-    const adminCivilStatus = document.getElementById('admin_civil_status').value;
-    const adminContactNumber = document.getElementById('admin_contact_number').value;
-    const adminPersonalEmail = document.getElementById('admin_personal_email').value;
-    const adminAccountEmail = document.getElementById('admin_account_email').value;
-    const adminPassword = document.getElementById('admin_password').value;
-    const role = document.getElementById('role').value;
+    const lastName = document.getElementById('coor_last_name').value;
+    const firstName = document.getElementById('coor_first_name').value;
+    const gender = document.getElementById('coor_gender').value;
+    const address = document.getElementById('coor_address').value;
+    const birthdate = document.getElementById('coor_birthdate').value;
+    const civilStatus = document.getElementById('coor_civil_status').value;
+    const personalEmail = document.getElementById('coor_personal_email').value;
+    const contactNumber = document.getElementById('coor_contact_number').value;
+    const department = document.getElementById('coor_department').value;
+    const accountEmail = document.getElementById('coor_account_email').value;
+    const password = document.getElementById('coor_password').value;
 
-    // Prepare data for AJAX request
+    // Check for empty required fields
+    if (!lastName || !firstName || !gender || !address || !birthdate || !civilStatus ||
+        !personalEmail || !contactNumber || !department || !accountEmail || !password) {
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'Please fill in all required fields.',
+            showConfirmButton: false,
+            timer: 3000,
+            background: '#f8d7da',
+            iconColor: '#721c24',
+            color: '#721c24',
+            customClass: {
+                popup: 'mt-5'
+            }
+        });
+        return;
+    }
+
     const data = {
-        id: adminID,
-        admin_last_name: adminLastName,
-        admin_first_name: adminFirstName,
-        admin_middle_name: adminMiddleName, // Optional, can be null if not provided
-        admin_suffix: adminSuffix, // Optional, can be null if not provided
-        admin_gender: adminGender,
-        admin_address: adminAddress,
-        admin_birthdate: adminBirthdate,
-        admin_civil_status: adminCivilStatus,
-        admin_contact_number: adminContactNumber,
-        admin_personal_email: adminPersonalEmail,
-        admin_account_email: adminAccountEmail,
-        admin_password: adminPassword, // Plain text to be hashed server-side
-        role: role
+        last_name: lastName,
+        first_name: firstName,
+        middle_name: document.getElementById('coor_middle_name').value,
+        suffix: document.getElementById('coor_suffix').value,
+        gender: gender,
+        address: address,
+        birthdate: birthdate,
+        civil_status: civilStatus,
+        personal_email: personalEmail,
+        contact_number: contactNumber,
+        department: department,
+        account_email: accountEmail,
+        password: password
     };
 
-    // Perform the AJAX request using Fetch API
-    fetch('controller/admins/create-admins.php', {
+    fetch('controller/coordinators/create-coor.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(data)
     })
-    .then(response => {
-        return response.text(); // Get raw response as text
-    })
-    .then(rawResponse => {
-        console.log('Raw Response:', rawResponse); // Log raw response for debugging
-        return JSON.parse(rawResponse); // Parse it to JSON
-    })
+    .then(response => response.text())
+    .then(rawResponse => JSON.parse(rawResponse))
     .then(data => {
         if (data.success) {
-            // SweetAlert for success
             Swal.fire({
                 toast: true,
                 position: 'top-end',
                 icon: 'success',
-                title: 'Admin added successfully!',
+                title: 'Coordinator added successfully!',
                 showConfirmButton: false,
                 timer: 3000,
                 background: '#b9f6ca',
@@ -69,7 +76,6 @@ document.getElementById('adminSubmitBtn').addEventListener('click', function (ev
             });
             disableAndResetForms();
         } else {
-            // SweetAlert for error (email already exists or general error)
             Swal.fire({
                 toast: true,
                 position: 'top-end',
@@ -88,7 +94,6 @@ document.getElementById('adminSubmitBtn').addEventListener('click', function (ev
     })
     .catch(error => {
         console.error('Error:', error);
-        // SweetAlert for AJAX request error
         Swal.fire({
             toast: true,
             position: 'top-end',

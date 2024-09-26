@@ -137,9 +137,6 @@ ini_set('display_errors', 1);
 
         <script src="functions/admins/form-enable.js" defer></script>
         <script src="functions/admins/intern-email.js" defer></script>
-        <!-- <script src="functions/interns/intern-email.js" defer></script>
-        <script src="functions/interns/studID.js" defer></script>
-        <script src="functions/interns/internPass.js" defer></script> -->
 
         <!-- <script src="functions/admin-profile/drag_drop.js" defer></script> -->
     <!--END::FUNCTIONS-->
@@ -168,7 +165,8 @@ ini_set('display_errors', 1);
 
         <script src="crud-ajax/admins/create-admins.js" defer></script>
         <script src="crud-ajax/admins/retrieve-admins.js" defer></script>
-        <!-- <script src="crud-ajax/admins/update-admins.js" defer></script> -->
+        <script src="crud-ajax/admins/retrieve-admin-details.js" defer></script>
+        <script src="crud-ajax/admins/update-admins.js" defer></script>
 
         <!-- <script src="crud-ajax/admin-profile/create_profile.js" defer></script> -->
     <!--END::CRUD AJAX FUNCTIONS-->

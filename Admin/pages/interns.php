@@ -21,13 +21,13 @@
                         <!-- Last Name -->
                         <div class="col-md-5">
                             <input type="hidden" id="internID" name="id">
-                            <label for="intern_last_name" class="form-label required-asterisk">Last Name</label>
+                            <label for="intern_last_name" class="form-label required-asterisk">Last Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="intern_last_name" name="intern_last_name" required disabled>
                         </div>
 
                         <!-- First Name -->
                         <div class="col-md-7">
-                            <label for="intern_first_name" class="form-label required-asterisk">First Name</label>
+                            <label for="intern_first_name" class="form-label required-asterisk">First Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="intern_first_name" name="intern_first_name" required disabled>
                         </div>
                     </div>
@@ -44,7 +44,7 @@
                         </div>
                         <!-- Gender -->
                         <div class="col-md-4">
-                            <label for="intern_gender" class="form-label required-asterisk">Gender</label>
+                            <label for="intern_gender" class="form-label required-asterisk">Gender <span class="text-danger">*</span></label>
                             <select class="form-select" id="intern_gender" name="intern_gender" required disabled>
                                 <option selected disabled>Choose Gender</option>
                                 <option value="Male">Male</option>
@@ -55,19 +55,19 @@
                     <div class="row mb-3">
                         <!-- Address -->
                         <div class="col-md-8">
-                            <label for="intern_address" class="form-label required-asterisk">Address</label>
+                            <label for="intern_address" class="form-label required-asterisk">Address <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="intern_address" name="intern_address" required disabled>
                         </div>
                         <!-- Birthdate -->
                         <div class="col-md-4">
-                            <label for="intern_birthdate" class="form-label required-asterisk">Birthdate</label>
+                            <label for="intern_birthdate" class="form-label required-asterisk">Birthdate <span class="text-danger">*</span></label>
                             <input type="date" class="form-control" id="intern_birthdate" name="intern_birthdate" required disabled>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <!-- Civil Status -->
                         <div class="col-md-4">
-                            <label for="intern_civil_status" class="form-label required-asterisk">Civil Status</label>
+                            <label for="intern_civil_status" class="form-label required-asterisk">Civil Status <span class="text-danger">*</span></label>
                             <select class="form-select" id="intern_civil_status" name="intern_civil_status" required disabled>
                                 <option selected disabled>Choose Status</option>
                                 <option value="Single">Single</option>
@@ -77,27 +77,27 @@
                         </div>
                         <!-- Email -->
                         <div class="col-md-8">
-                            <label for="intern_personal_email" class="form-label required-asterisk">Email</label>
+                            <label for="intern_personal_email" class="form-label required-asterisk">Email <span class="text-danger">*</span></label>
                             <input type="email" class="form-control" id="intern_personal_email" name="intern_personal_email" required disabled>
                         </div>
                     </div>
                     <div class="row mb-3 border-bottom border-dark pb-3 mb-2">
                         <!-- Contact Number -->
                         <div class="col-md-4">
-                            <label for="intern_contact_number" class="form-label">Contact Number</label>
+                            <label for="intern_contact_number" class="form-label">Contact Number <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <span class="input-group-text m-0 px-2">+63</span>
-                                <input type="tel" class="form-control" id="intern_contact_number" name="intern_contact_number" placeholder="" pattern="[1-9]{10}" maxlength="10" title="Please enter a valid 10-digit phone number" disabled>
+                                <input type="tel" class="form-control" id="intern_contact_number" name="intern_contact_number" placeholder="" pattern="[1-9]{10}" maxlength="10" title="Please enter a valid 10-digit phone number" required disabled>
                             </div>
                         </div>
                         <!-- Student ID -->
                         <div class="col-md-3">
-                            <label for="studentID" class="form-label">Student ID</label>
-                            <input type="text" class="form-control" id="studentID" name="studentID" disabled>
+                            <label for="studentID" class="form-label">Student ID <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="studentID" name="studentID" required disabled>
                         </div>
                         <!-- Department -->
                         <div class="col-md-5">
-                            <label for="intern_department" class="form-label required-asterisk">Department</label>
+                            <label for="intern_department" class="form-label required-asterisk">Department <span class="text-danger">*</span></label>
                             <select class="form-select" id="intern_department" name="intern_department" required disabled>
                                 <option selected>Choose Department</option>
                                 <!-- Options will be dynamically populated here -->
@@ -110,29 +110,27 @@
                     <div class="row mb-3">
                         <!-- Coordinator Name -->
                         <div class="col-md-8">
-                            <label for="coordinatorName" class="form-label required-asterisk">Coordinator Name</label>
+                            <label for="coordinatorName" class="form-label required-asterisk">Coordinator Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="coordinator_name" name="coordinator_name" required disabled>
                         </div>
 
                         <!-- Hours Needed -->
                         <div class="col-md-4">
-                            <label for="hoursNeeded" class="form-label required-asterisk">Hours Needed</label>
+                            <label for="hoursNeeded" class="form-label required-asterisk">Hours Needed <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="hours_needed" name="hours_needed" required disabled>
                         </div>
-
-
                     </div>
 
                     <div class="row mb-3">
                         <!-- Coordinator Email -->
                         <div class="col-md-7">
-                            <label for="coordinatorEmail" class="form-label required-asterisk">Coordinator Email</label>
+                            <label for="coordinatorEmail" class="form-label required-asterisk">Coordinator Email <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="coordinator_email" name="coordinator_email" required disabled>
                         </div>
 
                         <!-- Internship Status -->
                         <div class="col-md-5">
-                            <label for="internship_status" class="form-label required-asterisk">Internship Status</label>
+                            <label for="internship_status" class="form-label required-asterisk">Internship Status <span class="text-danger">*</span></label>
                             <select class="form-select" id="internship_status" name="internship_status" required disabled>
                                 <option selected disabled>Select Internship Status</option>
                                 <option value="Ongoing">Ongoing</option>
@@ -160,11 +158,11 @@
                 <div class="text-gray-800">
                     <form id="intern_accountForm">
                         <div class="mb-3">
-                            <label for="intern_account_email" class="form-label required-asterisk">Account Email</label>
+                            <label for="intern_account_email" class="form-label required-asterisk">Account Email <span class="text-danger">*</span></label>
                             <input type="email" class="form-control" id="intern_account_email" name="intern_account_email" required disabled>
                         </div>
                         <div class="mb-3">
-                            <label for="intern_password" class="form-label required-asterisk">Password</label>
+                            <label for="intern_password" class="form-label required-asterisk">Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control" id="intern_password" name="intern_password" required disabled>
                         </div>
                     </form>

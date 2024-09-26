@@ -53,8 +53,8 @@ function disableAndResetForms() {
 
     if (admin_accountForm) {
         admin_accountForm.reset();
-        document.querySelectorAll('#admin_accountForm input').forEach(el => {
-            el.disabled = true; // Lock the account info fields
+        document.querySelectorAll('#admin_accountForm input, #admin_accountForm select').forEach(el => {
+            el.disabled = true; // Lock all fields including account info and role
         });
     }
 

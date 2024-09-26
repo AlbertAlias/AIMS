@@ -6,7 +6,6 @@ error_reporting(E_ALL);
 include '../../../dbconn.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the form data with default values if not set
     $id = isset($_POST['id']) ? $_POST['id'] : null;
     $lastName = isset($_POST['coor_last_name']) ? $_POST['coor_last_name'] : null;
     $firstName = isset($_POST['coor_first_name']) ? $_POST['coor_first_name'] : null;
@@ -22,16 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $accountEmail = isset($_POST['coor_account_email']) ? $_POST['coor_account_email'] : null;
     $password = isset($_POST['coor_password']) ? $_POST['coor_password'] : null;
 
-    // Validate inputs (basic validation for example purposes)
     if (empty($lastName) || empty($firstName) || empty($gender) || empty($address) || empty($birthdate) || empty($civilStatus) || empty($personalEmail) || empty($contactNumber) || empty($department) || empty($accountEmail) || empty($password)) {
         echo json_encode(['success' => false, 'message' => 'All fields are required.']);
         exit;
     }
 
-    // Hash the password using bcrypt
     $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-    // Prepare an SQL statement to insert the coordinator data
     $stmt = $conn->prepare("INSERT INTO coordinators (last_name, first_name, middle_name, suffix, gender, address, birthdate, civil_status, personal_email, contact_number, department, account_email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
     if ($stmt === false) {
@@ -39,17 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Bind parameters to the SQL statement
     $stmt->bind_param('sssssssssssss', $lastName, $firstName, $middleName, $suffix, $gender, $address, $birthdate, $civilStatus, $personalEmail, $contactNumber, $department, $accountEmail, $hashedPassword);
 
-    // Execute the SQL statement
     if ($stmt->execute()) {
         echo json_encode(['success' => true, 'message' => 'Coordinator added successfully!']);
     } else {
         echo json_encode(['success' => false, 'message' => 'Failed to execute the SQL statement.']);
     }
 
-    // Close the statement and the database connection
     $stmt->close();
     $conn->close();
 } else {

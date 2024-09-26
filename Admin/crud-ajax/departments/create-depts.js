@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                     });
 
-                    // Call fetchDepartments to refresh the list
                     if (typeof window.refreshDepartmentList === 'function') {
                         window.refreshDepartmentList();
                     }
@@ -57,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             })
             .catch(error => {
-                // Re-enable the submit button in case of an error
                 submitBtn.disabled = false;
                 console.error('Error:', error);
                 Swal.fire({
