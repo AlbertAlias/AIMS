@@ -1,4 +1,4 @@
-<div class="container-fluid" id="dashboard" style="display: none;">
+<div class="container-fluid p-0 m-0" id="dashboard" style="display: none;">
 
     <div class="row">
         <!-- First Row of 4 Containers -->

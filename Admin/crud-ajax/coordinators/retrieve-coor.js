@@ -17,7 +17,7 @@ $(document).ready(function() {
 
                 $('.coordinator-btn').on('click', function() {
                     const id = $(this).data('id');
-                    window.loadCoorInfo(id); // Call the function to load coordinator info
+                    window.loadCoorInfo(id);
                 });
             },
             error: function(xhr, status, error) {
@@ -37,7 +37,7 @@ $(document).ready(function() {
                     console.error('Error:', response.error);
                     return;
                 }
-
+    
                 $('#coorID').val(response.id);
                 $('#coor_last_name').val(response.last_name).prop('disabled', false);
                 $('#coor_first_name').val(response.first_name).prop('disabled', false);
@@ -49,7 +49,12 @@ $(document).ready(function() {
                 $('#coor_civil_status').val(response.civil_status).prop('disabled', false);
                 $('#coor_personal_email').val(response.personal_email).prop('disabled', false);
                 $('#coor_contact_number').val(response.contact_number).prop('disabled', false);
-                loadDepartments(response.department, true);
+    
+                // Enable the department select and set the value
+                const departmentSelect = $('#coor_department');
+                departmentSelect.prop('disabled', false); // Enable it
+                departmentSelect.val(response.department); // Set the selected value
+    
                 $('#coor_account_email').val(response.account_email).prop('disabled', false);
                 $('#coor_password').val(response.password).prop('disabled', false);
                 $('#coorSubmitBtn').prop('disabled', false);
@@ -58,7 +63,7 @@ $(document).ready(function() {
                 console.error('Error retrieving coordinator details:', error);
             }
         });
-    };
+    };    
 
     loadCoordinators();
 });

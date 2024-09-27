@@ -8,20 +8,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     submitBtn.disabled = true;
 
-    // Function to enable form for adding a department
     function enableFormForAdd() {
         if (departmentForm) {
-            departmentForm.reset(); // Reset the form fields
-            departmentForm.querySelectorAll('input, button').forEach(el => el.disabled = false); // Enable all fields and buttons
-            submitBtn.disabled = false; // Enable the submit button
-            updateBtn.style.display = 'none'; // Hide update button
-            cancelEditBtn.style.display = 'inline-block'; // Show cancel button
-            deleteDeptBtn.style.display = 'none'; // Hide delete button
+            departmentForm.reset();
+            departmentForm.querySelectorAll('input, button').forEach(el => el.disabled = false);
+            submitBtn.disabled = false;
+            submitBtn.style.display = 'inline-block';
+            updateBtn.style.display = 'none';
+            cancelEditBtn.style.display = 'inline-block';
+            deleteDeptBtn.style.display = 'none';
             console.log('Form reset and enabled for adding');
         }
     }
 
-    // Function to enable form for updating a department
     function enableFormForUpdate(department) {
         if (departmentForm) {
             departmentForm.querySelectorAll('input, button').forEach(el => el.disabled = false);
@@ -38,35 +37,31 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Function to reset and lock the form after update
     function resetAndLockForm() {
         if (departmentForm) {
             departmentForm.reset();
             departmentForm.querySelectorAll('input, button').forEach(el => el.disabled = true);
-            submitBtn.style.display = 'inline-block'; // Show submit button for new entry
-            updateBtn.style.display = 'none'; // Hide update button
-            cancelEditBtn.style.display = 'none'; // Hide cancel button
-            deleteDeptBtn.style.display = 'none'; // Hide delete button
+            submitBtn.style.display = 'inline-block';
+            updateBtn.style.display = 'none';
+            cancelEditBtn.style.display = 'none';
+            deleteDeptBtn.style.display = 'none';
             console.log('Form reset and locked');
         }
     }
 
-    // Event listener for 'Add Departments' button
     if (addDepartmentsBtn) {
         addDepartmentsBtn.addEventListener('click', function() {
             enableFormForAdd();
-            cancelEditBtn.style.display = 'inline-block'; // Hide cancel button
+            cancelEditBtn.style.display = 'inline-block';
         });
     }
 
-    // Event listener for 'Cancel' button
     if (cancelEditBtn) {
         cancelEditBtn.addEventListener('click', function() {
             resetAndLockForm();
         });
     }
 
-    // Event listener for clicking department buttons
     document.getElementById('departmentInfo').addEventListener('click', function(event) {
         if (event.target && event.target.classList.contains('coordinator-btn')) {
             const departmentId = event.target.getAttribute('data-id');
@@ -80,6 +75,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Make resetAndLockForm globally accessible
     window.resetAndLockForm = resetAndLockForm;
 });
