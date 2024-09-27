@@ -1,73 +1,111 @@
-function createAdmin() {
-    // Capture form inputs
-    const formData = {
-        last_name: $("#admin_last_name").val().trim(),
-        first_name: $("#admin_first_name").val().trim(),
-        middle_name: $("#admin_middle_name").val().trim(),
-        suffix: $("#admin_suffix").val().trim(),
-        gender: $("#admin_gender").val(),
-        address: $("#admin_address").val().trim(),
-        birthdate: $("#admin_birthdate").val(),
-        civil_status: $("#admin_civil_status").val(),
-        contact_number: $("#admin_contact_number").val().trim(),
-        personal_email: $("#admin_personal_email").val().trim(),
-        account_email: $("#admin_account_email").val().trim(),
-        password: $("#admin_password").val(),
-        role: $("#role").val()
-    };
+document.getElementById('adminSubmitBtn').addEventListener('click', function (event) {
+    event.preventDefault();
 
-    // Simple client-side validation
-    if (Object.values(formData).some(value => !value)) {
+    const lastName = document.getElementById('admin_last_name').value;
+    const firstName = document.getElementById('admin_first_name').value;
+    const gender = document.getElementById('admin_gender').value;
+    const address = document.getElementById('admin_address').value;
+    const birthdate = document.getElementById('admin_birthdate').value;
+    const civilStatus = document.getElementById('admin_civil_status').value;
+    const personalEmail = document.getElementById('admin_personal_email').value;
+    const contactNumber = document.getElementById('admin_contact_number').value;
+    const accountEmail = document.getElementById('admin_account_email').value;
+    const password = document.getElementById('admin_password').value;
+    const role = document.getElementById('role').value;
+
+    if (!lastName || !firstName || !gender || !address || !birthdate || !civilStatus ||
+        !personalEmail || !contactNumber || !accountEmail || !password || !role) {
         Swal.fire({
-            icon: 'warning',
-            title: 'Incomplete Fields',
-            text: 'Please fill in all required fields.',
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'Please fill in all required fields.',
+            showConfirmButton: false,
+            timer: 3000,
+            background: '#f8d7da',
+            iconColor: '#721c24',
+            color: '#721c24',
+            customClass: {
+                popup: 'mt-5'
+            }
         });
         return;
     }
 
-    // Disable the submit button to prevent multiple submissions
-    $("#adminSubmitBtn").attr("disabled", true).text("Submitting...");
+    const data = {
+        last_name: lastName,
+        first_name: firstName,
+        middle_name: document.getElementById('admin_middle_name').value,
+        suffix: document.getElementById('admin_suffix').value,
+        gender: gender,
+        address: address,
+        birthdate: birthdate,
+        civil_status: civilStatus,
+        personal_email: personalEmail,
+        contact_number: contactNumber,
+        account_email: accountEmail,
+        password: password,
+        role: role
+    };
 
-    // Perform the AJAX request
-    $.ajax({
-        type: 'POST',
-        url: 'controller1.php',  // Replace with your PHP file
-        data: { action: 'create_admin', ...formData },
-        dataType: 'json',  // Expecting JSON response
-        success: function(response) {
-            if (response.exists) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Admin Exists',
-                    text: 'An admin with this email already exists. Please try a different email.',
-                });
-            } else if (response.success) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Admin Added',
-                    text: 'The admin has been added successfully!',
-                });
-                disableAndResetAdminForms(); // Reset and lock forms after successful creation
-                retrieveAdmins(); // Retrieve the list of admins
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: response.message || 'Failed to create admin. Please try again.',
-                });
-            }
+    fetch('controller/admins/create-admins.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
         },
-        error: function(xhr, status, error) {
+        body: JSON.stringify(data)
+    })
+    .then(response => response.text())
+    .then(rawResponse => JSON.parse(rawResponse))
+    .then(data => {
+        if (data.success) {
             Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Failed to create admin. Please try again later.',
+                toast: true,
+                position: 'top-end',
+                icon: 'success',
+                title: 'Admin added successfully!',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#b9f6ca',
+                iconColor: '#2e7d32',
+                color: '#155724',
+                customClass: {
+                    popup: 'mt-5'
+                }
             });
-            console.error('Error creating admin:', error);
-        },
-        complete: function() {
-            $("#adminSubmitBtn").attr("disabled", false).text("Submit");
+            disableAndResetForms();
+        } else {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: data.message,
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#f8d7da',
+                iconColor: '#721c24',
+                color: '#721c24',
+                customClass: {
+                    popup: 'mt-5'
+                }
+            });
         }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'There was an error with the AJAX request.',
+            showConfirmButton: false,
+            timer: 3000,
+            background: '#f8d7da',
+            iconColor: '#721c24',
+            color: '#721c24',
+            customClass: {
+                popup: 'mt-5'
+            }
+        });
     });
-}
+});

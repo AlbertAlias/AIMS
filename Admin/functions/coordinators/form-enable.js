@@ -1,18 +1,15 @@
-// Ensure the script runs only on the Coordinators page
 if (document.getElementById('coordinatorForm')) {
-    // Function to show Update button and hide Submit button
     function showUpdateButton() {
         const coorUpdateBtn = document.getElementById('coorUpdateBtn');
         const coorSubmitBtn = document.getElementById('coorSubmitBtn');
 
         if (coorUpdateBtn) {
-            coorUpdateBtn.style.display = 'inline-block';  // Show the update button
-            coorUpdateBtn.disabled = false;  // Enable the update button
+            coorUpdateBtn.style.display = 'inline-block';
+            coorUpdateBtn.disabled = false;
         }
-        if (coorSubmitBtn) coorSubmitBtn.style.display = 'none';        // Hide the submit button
+        if (coorSubmitBtn) coorSubmitBtn.style.display = 'none';
     }
 
-    // Function to enable both coordinator and account information forms
     function unlockAndResetForms() {
         const coordinatorForm = document.getElementById('coordinatorForm');
         const coor_accountForm = document.getElementById('coor_accountForm');
@@ -54,8 +51,8 @@ if (document.getElementById('coordinatorForm')) {
     
         const coorDepartmentSelect = document.getElementById('coor_department');
         if (coorDepartmentSelect) {
-            coorDepartmentSelect.selectedIndex = 0;  // Reset the select to the default "Choose Department"
-            coorDepartmentSelect.disabled = true;    // Disable the department select
+            coorDepartmentSelect.selectedIndex = 0;
+            coorDepartmentSelect.disabled = true;
         }
     
         const coorSubmitBtn = document.getElementById('coorSubmitBtn');
@@ -77,9 +74,9 @@ if (document.getElementById('coordinatorForm')) {
         const coorSubmitBtn = document.getElementById('coorSubmitBtn');
         const coorDeleteBtn = document.getElementById('coorDeleteBtn');
 
-        if (coorUpdateBtn) coorUpdateBtn.style.display = 'none';  // Hide the update button
-        if (coorSubmitBtn) coorSubmitBtn.style.display = 'inline-block';  // Show the submit button
-        if (coorDeleteBtn) coorDeleteBtn.style.display = 'none';  // Show the submit button
+        if (coorUpdateBtn) coorUpdateBtn.style.display = 'none';
+        if (coorSubmitBtn) coorSubmitBtn.style.display = 'inline-block';
+        if (coorDeleteBtn) coorDeleteBtn.style.display = 'none';
     });
 
     document.getElementById('coordinatorInfo').addEventListener('click', function(event) {
@@ -87,22 +84,24 @@ if (document.getElementById('coordinatorForm')) {
             unlockAndResetForms();
             showUpdateButton();
             
-            // Show the delete button
             const coorDeleteBtn = document.getElementById('coorDeleteBtn');
             if (coorDeleteBtn) {
-                console.log('Displaying delete button'); // Log for debugging
+                console.log('Displaying delete button');
                 coorDeleteBtn.style.display = 'inline-block';
             }
         
-            const coordinatorId = event.target.getAttribute('data-id');
-            document.getElementById('coordinatorId').value = coordinatorId; // Set the hidden input
-            console.log('Selected Coordinator ID:', coordinatorId);
-            loadCoordinatorDetails(coordinatorId);
+            const coorID = event.target.getAttribute('data-id');
+            const coorIDElement = document.getElementById('coorID');
+            if (coorIDElement) {
+                coorIDElement.value = coorID; // Set value only if coorIDElement exists
+            }
+            console.log('Selected Coordinator ID:', coorID);
+            loadCoorInfo(coorID);
         }
     });       
 
     document.getElementById('coorCancelBtn').addEventListener('click', function() {
-        disableAndResetForms();  // Lock forms when "Cancel" is clicked
+        disableAndResetForms();
         this.style.display = 'none';
         document.getElementById('coorUpdateBtn').style.display = 'none';
         document.getElementById('coorDeleteBtn').style.display = 'none';

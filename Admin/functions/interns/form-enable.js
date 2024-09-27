@@ -1,13 +1,11 @@
-// Function to show Update button and hide Submit button
 function showUpdateButton() {
     const internUpdateBtn = document.getElementById('internUpdateBtn');
     const internSubmitBtn = document.getElementById('internSubmitBtn');
 
-    if (internUpdateBtn) internUpdateBtn.style.display = 'inline-block'; // Show the update button
-    if (internSubmitBtn) internSubmitBtn.style.display = 'none';         // Hide the submit button
+    if (internUpdateBtn) internUpdateBtn.style.display = 'inline-block';
+    if (internSubmitBtn) internSubmitBtn.style.display = 'none';
 }
 
-// Function to enable all fields except the locked ones
 function unlockAndResetForms() {
     const internsForm = document.getElementById('internsForm');
     const intern_accountForm = document.getElementById('intern_accountForm');
@@ -41,50 +39,48 @@ function unlockAndResetForms() {
     if (internCancelBtn) internCancelBtn.style.display = 'inline-block';
 }
 
-// Function to disable all fields and reset forms
 function disableAndResetForms() {
     const internsForm = document.getElementById('internsForm');
     const intern_accountForm = document.getElementById('intern_accountForm');
 
     if (internsForm) {
         internsForm.reset();
-        // Reset the department select specifically
+
         const departmentSelect = document.getElementById('intern_department');
         if (departmentSelect) {
-            departmentSelect.selectedIndex = 0; // Reset to the first option or set as needed
+            departmentSelect.selectedIndex = 0;
         }
 
         document.querySelectorAll('#internsForm input, #internsForm select').forEach(el => {
-            el.disabled = true; // Disable all fields
+            el.disabled = true;
         });
     }
 
     if (intern_accountForm) {
         intern_accountForm.reset();
         document.querySelectorAll('#intern_accountForm input').forEach(el => {
-            el.disabled = true; // Lock the account info fields
+            el.disabled = true;
         });
     }
 
     const internSubmitBtn = document.getElementById('internSubmitBtn');
     const internCancelBtn = document.getElementById('internCancelBtn');
-    const internUpdateBtn = document.getElementById('internUpdateBtn'); // Get the update button
+    const internUpdateBtn = document.getElementById('internUpdateBtn');
 
     if (internSubmitBtn) {
         internSubmitBtn.disabled = true;
-        internSubmitBtn.style.display = 'inline-block'; // Hide the submit button
+        internSubmitBtn.style.display = 'inline-block';
     }
 
     if (internCancelBtn) {
-        internCancelBtn.style.display = 'none'; // Hide the cancel button
+        internCancelBtn.style.display = 'none';
     }
 
     if (internUpdateBtn) {
-        internUpdateBtn.style.display = 'none'; // Hide the update button
+        internUpdateBtn.style.display = 'none';
     }
 }
 
-// Event listeners for form actions
 document.getElementById('addInternsBtn').addEventListener('click', function() {
     console.log('Add Interns button clicked');
     unlockAndResetForms();
@@ -101,11 +97,11 @@ document.getElementById('addInternsBtn').addEventListener('click', function() {
 document.getElementById('internsInfo').addEventListener('click', function(event) {
     if (event.target && event.target.matches('button[data-id]')) {
         const internID = event.target.getAttribute('data-id');
-        document.getElementById('internID').value = internID; // Set the intern ID
-        console.log('Selected Intern ID:', internID); // Check if ID is correctly set
+        document.getElementById('internID').value = internID;
+        console.log('Selected Intern ID:', internID);
         unlockAndResetForms();
         showUpdateButton();
-        loadInternDetails(internID);
+        loadInternInfo(internID);
     }
 });
 

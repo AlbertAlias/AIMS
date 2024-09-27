@@ -1,4 +1,6 @@
-function loadDepartments(selectedDepartment, isEnabled = false) {
+var selectedDepartment;
+
+function loadDepartments() {
     $.ajax({
         url: 'controller/interns/retrieve-deptsName.php',
         method: 'GET',
@@ -13,15 +15,12 @@ function loadDepartments(selectedDepartment, isEnabled = false) {
             // Populate the department options
             if (Array.isArray(response.departments)) {
                 response.departments.forEach(function(department) {
-                    let selected = department.department_name == selectedDepartment ? 'selected' : '';
+                    let selected = department.department_name === selectedDepartment ? 'selected' : '';
                     departmentSelect.append(`<option value="${department.department_name}" ${selected}>${department.department_name}</option>`);
                 });
             } else {
                 console.error('Invalid response structure:', response);
             }
-
-            // Enable or disable the select based on isEnabled parameter
-            departmentSelect.prop('disabled', !isEnabled);  // Disable by default unless explicitly enabled
         },
         error: function(xhr, status, error) {
             console.error('Error retrieving departments:', error);
@@ -54,16 +53,14 @@ function loadCoorInfo(departmentName) {
     });
 }
 
-
 // Event listener for department select change
 $('#intern_department').on('change', function() {
-    let selectedDepartment = $(this).val();
+    selectedDepartment = $(this).val(); // No 'let' keyword here
     if (selectedDepartment) {
         loadCoorInfo(selectedDepartment);  // Fetch and load coordinator details
     }
 });
 
-// Call the function to load departments on page load, but keep it disabled
 $(document).ready(function() {
-    loadDepartments();  // Load the departments initially
+    loadDepartments(); 
 });

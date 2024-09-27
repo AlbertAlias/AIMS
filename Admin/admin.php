@@ -164,17 +164,8 @@ ini_set('display_errors', 1);
         <script src="crud-ajax/interns/update-interns.js" defer></script>
 
         <script src="crud-ajax/admins/create-admins.js" defer></script>
-        <script src="crud-ajax/admins/retrieve-admins.js" defer></script>
         <script src="crud-ajax/admins/retrieve-admin-details.js" defer></script>
         <script src="crud-ajax/admins/update-admins.js" defer></script>
-
-        <!-- <script src="crud-ajax/admin-profile/create_profile.js" defer></script> -->
     <!--END::CRUD AJAX FUNCTIONS-->
-
-    <script>
-        // function loadPage(page) {
-        //     window.location.href = 'admin.php?page=' + page;
-        // }
-    </script>
 </body>
 </html>

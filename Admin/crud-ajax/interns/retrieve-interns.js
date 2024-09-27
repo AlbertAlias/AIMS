@@ -32,9 +32,9 @@ $(document).ready(function() {
     
 
     // Attach loadInternDetails to the window object
-    window.loadInternDetails = function(id) {
+    window.loadInternInfo = function(id) {
         $.ajax({
-            url: 'controller/interns/retrieve-intern-details.php',
+            url: 'controller/interns/retrieve-intern-info.php',
             method: 'GET',
             data: { id: id },
             dataType: 'json',
@@ -55,12 +55,10 @@ $(document).ready(function() {
                 $('#intern_contact_number').val(response.contact_number).prop('disabled', false);
                 $('#intern_gender').val(response.gender).prop('disabled', false);
                 $('#intern_civil_status').val(response.civil_status).prop('disabled', false);
-                $('#intern_account_email').val(response.account_email).prop('disabled', true); // Lock the account email
-                $('#intern_password').val(response.password).prop('disabled', true); // Lock the hashed password
+                $('#intern_account_email').val(response.account_email).prop('disabled', true);
+                $('#intern_password').val(response.password).prop('disabled', true);
                 $('#internSubmitBtn').prop('disabled', false);
                 loadDepartments(response.department, true);
-
-                // Set the missing fields and keep them locked
                 $('#studentID').val(response.studentID).prop('disabled', false); // Load student ID
                 $('#coordinator_name').val(response.coordinator_name).prop('disabled', true); // Lock the coordinator name
                 $('#hours_needed').val(response.hours_needed).prop('disabled', false); // Lock hours needed

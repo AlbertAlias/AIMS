@@ -1,5 +1,32 @@
 $(document).ready(function() {
-    // Attach loadAdminDetails to the window object
+    window.loadAdmins = function() {
+        $.ajax({
+            url: 'controller/admins/retrieve-admins.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                if (response.success) {
+                    let adminsInfo = $('#adminsInfo');
+                    adminsInfo.empty();
+
+                    response.admins.forEach(function(admin) {
+                        let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 admin-btn" data-id="${admin.id}">
+                                    ${admin.last_name}, ${admin.first_name}
+                                </button>`;
+                        adminsInfo.append(btn);
+                    });
+                } else {
+                    console.error('Failed to load admins:', response.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Failed to load admins:', error);
+            }
+        });
+    };
+
+    loadAdmins();
+
     window.loadAdminDetails = function(id) {
         $.ajax({
             url: 'controller/admins/retrieve-admin-details.php',
@@ -26,10 +53,7 @@ $(document).ready(function() {
                 $('#admin_personal_email').val(response.personal_email).prop('disabled', false);
                 $('#admin_account_email').val(response.account_email).prop('disabled', false);
                 $('#admin_password').val(response.password).prop('disabled', false);
-                
-                // Correctly populate the role select field
                 $('#role').val(response.role).prop('disabled', false);
-
                 $('#adminUpdateBtn').prop('disabled', false);
             },
             error: function(xhr, status, error) {
@@ -37,4 +61,7 @@ $(document).ready(function() {
             }
         });
     };
+
+    // Expose the function for updating the admin list
+    window.refreshAdminList = loadAdmins;
 });

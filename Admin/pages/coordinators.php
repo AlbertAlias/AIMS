@@ -1,6 +1,5 @@
 <div class="container-fluid bg-light p-0 m-0" id="coordinators" style="display: none;">
     <div class="row g-4">
-        <!-- Left square container -->
         <div class="col-md-4 col-lg-3">
             <div class="bg-light rounded-3 shadow px-4 py-4 d-flex flex-column" style="min-height: 200px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Coordinators</h5>
@@ -11,7 +10,6 @@
             </div>
         </div>
 
-        <!-- Middle rectangle container -->
         <div class="col-md-4 col-lg-6">
             <div class="bg-light rounded-3 shadow px-4 py-4 d-flex flex-column" style="min-height: 200px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Add Coordinator</h5>
@@ -20,7 +18,7 @@
                     <div class="row mb-3">
                         <!-- Last Name -->
                         <div class="col-md-5">
-                            <input type="hidden" id="coordinatorId" name="coordinatorId">
+                            <input type="hidden" id="coorID" name="coorID">
                             <label for="coor_last_name" class="form-label required-asterisk">Last Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="coor_last_name" name="coor_last_name" required disabled>
                         </div>
@@ -101,17 +99,16 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-end">
-                            <button type="button" id="coorCancelBtn" class="btn btn-secondary" style="display: none;">Cancel</button>
-                            <button type="button" id="coorDeleteBtn" class="btn btn-danger" style="display: none;">Delete</button>
-                            <button type="button" id="coorUpdateBtn" class="btn btn-primary" style="display: none;">Update</button>
-                            <button type="submit" id="coorSubmitBtn" class="btn btn-success" disabled>Submit</button>
+                            <button type="button" id="coorCancelBtn" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
+                            <button type="button" id="coorDeleteBtn" class="btn btn-danger" style="display: none;"><i class="fa-solid fa-trash"></i> Delete</button>
+                            <button type="button" id="coorUpdateBtn" class="btn btn-primary" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> Update</button>
+                            <button type="submit" id="coorSubmitBtn" class="btn btn-success" disabled><i class="fa-solid fa-check-to-slot"></i> Submit</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
 
-        <!-- Right square container -->
         <div class="col-md-4 col-lg-3">
             <div class="bg-light rounded-3 shadow px-4 py-4 d-flex flex-column" style="min-height: 200px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Account Information</h5>

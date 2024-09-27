@@ -5,37 +5,46 @@ error_reporting(E_ALL);
 
 include '../../../dbconn.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = isset($_POST['id']) ? $_POST['id'] : null;
-    $lastName = isset($_POST['coor_last_name']) ? $_POST['coor_last_name'] : null;
-    $firstName = isset($_POST['coor_first_name']) ? $_POST['coor_first_name'] : null;
-    $middleName = isset($_POST['coor_middle_name']) ? $_POST['coor_middle_name'] : null;
-    $suffix = isset($_POST['coor_suffix']) ? $_POST['coor_suffix'] : null;
-    $gender = isset($_POST['coor_gender']) ? $_POST['coor_gender'] : null;
-    $address = isset($_POST['coor_address']) ? $_POST['coor_address'] : null;
-    $birthdate = isset($_POST['coor_birthdate']) ? $_POST['coor_birthdate'] : null;
-    $civilStatus = isset($_POST['coor_civil_status']) ? $_POST['coor_civil_status'] : null;
-    $personalEmail = isset($_POST['coor_personal_email']) ? $_POST['coor_personal_email'] : null;
-    $contactNumber = isset($_POST['coor_contact_number']) ? $_POST['coor_contact_number'] : null;
-    $department = isset($_POST['coor_department']) ? $_POST['coor_department'] : null;
-    $accountEmail = isset($_POST['coor_account_email']) ? $_POST['coor_account_email'] : null;
-    $password = isset($_POST['coor_password']) ? $_POST['coor_password'] : null;
+header('Content-Type: application/json'); // Set header for JSON response
 
-    if (empty($lastName) || empty($firstName) || empty($gender) || empty($address) || empty($birthdate) || empty($civilStatus) || empty($personalEmail) || empty($contactNumber) || empty($department) || empty($accountEmail) || empty($password)) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    // Validate fields
+    if (empty($data['last_name']) || empty($data['first_name']) || empty($data['gender']) ||
+        empty($data['address']) || empty($data['birthdate']) || empty($data['civil_status']) ||
+        empty($data['personal_email']) || empty($data['contact_number']) || empty($data['department']) ||
+        empty($data['account_email']) || empty($data['password'])) {
         echo json_encode(['success' => false, 'message' => 'All fields are required.']);
         exit;
     }
 
-    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+    // Check for duplicate account email
+    $stmt = $conn->prepare("SELECT * FROM coordinators WHERE account_email = ?");
+    $stmt->bind_param("s", $data['account_email']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        echo json_encode(['success' => false, 'message' => 'Coordinator with this email already exists.']);
+        exit;
+    }
+    $stmt->close();
 
+    // Hash the password
+    $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
+
+    // Prepare SQL query
     $stmt = $conn->prepare("INSERT INTO coordinators (last_name, first_name, middle_name, suffix, gender, address, birthdate, civil_status, personal_email, contact_number, department, account_email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
+    // Check if statement preparation failed
     if ($stmt === false) {
         echo json_encode(['success' => false, 'message' => 'Failed to prepare the SQL statement.']);
         exit;
     }
 
-    $stmt->bind_param('sssssssssssss', $lastName, $firstName, $middleName, $suffix, $gender, $address, $birthdate, $civilStatus, $personalEmail, $contactNumber, $department, $accountEmail, $hashedPassword);
+    // Bind parameters and execute
+    $stmt->bind_param('sssssssssssss', $data['last_name'], $data['first_name'], $data['middle_name'], $data['suffix'], $data['gender'], $data['address'], $data['birthdate'], $data['civil_status'], $data['personal_email'], $data['contact_number'], $data['department'], $data['account_email'], $hashedPassword);
 
     if ($stmt->execute()) {
         echo json_encode(['success' => true, 'message' => 'Coordinator added successfully!']);

@@ -157,15 +157,15 @@
 
     // Show the selected section
     var activeSection = document.getElementById(sectionID);
-    if (activeSection) {
-        activeSection.style.display = 'block';
-        loadScripts(scriptsMap[sectionID] || []); // Load the scripts for the active section
+        if (activeSection) {
+            activeSection.style.display = 'block';
+            loadScripts(scriptsMap[sectionID] || []); // Load the scripts for the active section
+        }
     }
-}
 
-// Set default section on page load
-window.onload = function() {
-    showSection(null, 'dashboard'); // Default section
-};
+    // Set default section on page load
+    window.onload = function() {
+        showSection(null, 'dashboard'); // Default section
+    };
 </script>
 

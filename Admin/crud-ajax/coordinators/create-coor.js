@@ -1,21 +1,28 @@
 document.getElementById('coorSubmitBtn').addEventListener('click', function (event) {
     event.preventDefault();
 
-    const lastName = document.getElementById('coor_last_name').value;
-    const firstName = document.getElementById('coor_first_name').value;
+    const coorSubmitBtn = document.getElementById('coorSubmitBtn');
+
+    // Check if button is already disabled to prevent double submission
+    if (coorSubmitBtn.disabled) return;
+
+    coorSubmitBtn.disabled = true; // Disable the button to prevent double submission.
+
+    const last_name = document.getElementById('coor_last_name').value;
+    const first_name = document.getElementById('coor_first_name').value;
     const gender = document.getElementById('coor_gender').value;
     const address = document.getElementById('coor_address').value;
     const birthdate = document.getElementById('coor_birthdate').value;
-    const civilStatus = document.getElementById('coor_civil_status').value;
-    const personalEmail = document.getElementById('coor_personal_email').value;
-    const contactNumber = document.getElementById('coor_contact_number').value;
+    const civil_status = document.getElementById('coor_civil_status').value;
+    const personal_email = document.getElementById('coor_personal_email').value;
+    const contact_number = document.getElementById('coor_contact_number').value;
     const department = document.getElementById('coor_department').value;
-    const accountEmail = document.getElementById('coor_account_email').value;
+    const account_email = document.getElementById('coor_account_email').value;
     const password = document.getElementById('coor_password').value;
 
     // Check for empty required fields
-    if (!lastName || !firstName || !gender || !address || !birthdate || !civilStatus ||
-        !personalEmail || !contactNumber || !department || !accountEmail || !password) {
+    if (!last_name || !first_name || !gender || !address || !birthdate || !civil_status ||
+        !personal_email || !contact_number || !department || !account_email || !password) {
         Swal.fire({
             toast: true,
             position: 'top-end',
@@ -30,23 +37,24 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
                 popup: 'mt-5'
             }
         });
+        coorSubmitBtn.disabled = false; // Re-enable button if validation fails
         return;
     }
 
     const data = {
-        last_name: lastName,
-        first_name: firstName,
+        last_name,
+        first_name,
         middle_name: document.getElementById('coor_middle_name').value,
         suffix: document.getElementById('coor_suffix').value,
-        gender: gender,
-        address: address,
-        birthdate: birthdate,
-        civil_status: civilStatus,
-        personal_email: personalEmail,
-        contact_number: contactNumber,
-        department: department,
-        account_email: accountEmail,
-        password: password
+        gender,
+        address,
+        birthdate,
+        civil_status,
+        personal_email,
+        contact_number,
+        department,
+        account_email,
+        password
     };
 
     fetch('controller/coordinators/create-coor.php', {
@@ -54,10 +62,9 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data) // Send JSON-encoded data
     })
-    .then(response => response.text())
-    .then(rawResponse => JSON.parse(rawResponse))
+    .then(response => response.json())
     .then(data => {
         if (data.success) {
             Swal.fire({
@@ -75,6 +82,10 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
                 }
             });
             disableAndResetForms();
+
+            // Call the function to dynamically load the updated list of coordinators
+            window.loadCoordinators(); // Update this line
+
         } else {
             Swal.fire({
                 toast: true,
@@ -91,6 +102,7 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
                 }
             });
         }
+        coorSubmitBtn.disabled = false; // Re-enable after submission completes
     })
     .catch(error => {
         console.error('Error:', error);
@@ -108,5 +120,6 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
                 popup: 'mt-5'
             }
         });
+        coorSubmitBtn.disabled = false; // Re-enable if AJAX request fails
     });
 });

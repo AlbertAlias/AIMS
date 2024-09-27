@@ -27,10 +27,10 @@
                             <input type="text" class="form-control" id="departmentHead" name="departmentHead" required disabled>
                         </div>
                     </div>
-                    <button type="submit" id="submitBtn" class="btn btn-success me-2">Submit</button>
-                    <button type="button" id="updateBtn" class="btn btn-primary" style="display: none;">Update</button>
-                    <button type="button" id="deleteDeptBtn" class="btn btn-danger" style="display: none;">Delete</button>
-                    <button type="button" id="cancelEditBtn" class="btn btn-secondary" style="display: none;">Cancel</button>
+                    <button type="submit" id="submitBtn" class="btn btn-success me-2"><i class="fa-solid fa-check-to-slot"></i> Submit</button>
+                    <button type="button" id="updateBtn" class="btn btn-primary" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> Update</button>
+                    <button type="button" id="deleteDeptBtn" class="btn btn-danger" style="display: none;"><i class="fa-solid fa-trash"></i> Delete</button>
+                    <button type="button" id="cancelEditBtn" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
                 </form>
             </div>
         </div>

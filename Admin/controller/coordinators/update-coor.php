@@ -1,78 +1,81 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+require_once '../../../dbconn.php';
+header('Content-Type: application/json');
 
-include '../../../dbconn.php';
+$response = ['success' => false, 'message' => ''];
 
-// Check if POST request
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    header('Content-Type: application/json'); // Set response type to JSON
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+error_log('Starting coordinator update process...');
 
-    // Initialize response array
-    $response = ['success' => false, 'message' => ''];
-
-    // Sanitize and collect form data
-    $id = mysqli_real_escape_string($conn, $_POST['coordinatorId']); // Use the hidden input's name
-    $lastName = mysqli_real_escape_string($conn, $_POST['coor_last_name']);
-    $firstName = mysqli_real_escape_string($conn, $_POST['coor_first_name']);
-    $middleName = mysqli_real_escape_string($conn, $_POST['coor_middle_name']);
-    $suffix = mysqli_real_escape_string($conn, $_POST['coor_suffix']);
-    $gender = mysqli_real_escape_string($conn, $_POST['coor_gender']);
-    $address = mysqli_real_escape_string($conn, $_POST['coor_address']);
-    $birthdate = mysqli_real_escape_string($conn, $_POST['coor_birthdate']);
-    $civilStatus = mysqli_real_escape_string($conn, $_POST['coor_civil_status']);
-    $personalEmail = mysqli_real_escape_string($conn, $_POST['coor_personal_email']);
-    $contactNumber = mysqli_real_escape_string($conn, $_POST['coor_contact_number']);
-    $department = mysqli_real_escape_string($conn, $_POST['coor_department']);
-    $accountEmail = mysqli_real_escape_string($conn, $_POST['coor_account_email']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id = (int)$_POST['id'];
     
-    // Prepare password query part if password is provided
-    $passwordQuery = "";
-    if (!empty($_POST['coor_password'])) { // Change to check the correct input name
-        $password = password_hash($_POST['coor_password'], PASSWORD_BCRYPT);
-        $passwordQuery = "password = '$password'";
-    }
+    error_log("Checking for coordinator ID: $id");
 
-    // Remove leading '0' from contact number
-    if (substr($contactNumber, 0, 1) === '0') {
-        $contactNumber = substr($contactNumber, 1);
-    }
+    $checkSql = "SELECT * FROM coordinators WHERE id = ?";
+    if ($checkStmt = $conn->prepare($checkSql)) {
+        $checkStmt->bind_param("i", $id);
+        $checkStmt->execute();
+        $checkResult = $checkStmt->get_result();
 
-    // Construct SQL update query
-    $query = "UPDATE coordinators 
-              SET last_name = '$lastName', 
-                  first_name = '$firstName', 
-                  middle_name = '$middleName', 
-                  suffix = '$suffix', 
-                  gender = '$gender', 
-                  address = '$address', 
-                  birthdate = '$birthdate', 
-                  civil_status = '$civilStatus', 
-                  personal_email = '$personalEmail', 
-                  contact_number = '$contactNumber', 
-                  department = '$department', 
-                  account_email = '$accountEmail'"
-              . ($passwordQuery ? ", $passwordQuery" : "") . " 
-              WHERE id = '$id'";
-
-    // Debugging line to check the SQL query
-    error_log($query); // Log the SQL query to the PHP error log
-
-    // Execute query and return JSON response
-    if (mysqli_query($conn, $query)) {
-        $response['success'] = true;
-        $response['message'] = 'Coordinator updated successfully.';
+        if ($checkResult->num_rows === 0) {
+            $response['message'] = 'No coordinator found with that ID.';
+            echo json_encode($response);
+            exit;
+        }
+        $checkStmt->close();
     } else {
-        $response['message'] = 'Error updating coordinator: ' . mysqli_error($conn);
+        $response['message'] = 'Error preparing check statement: ' . $conn->error;
+        echo json_encode($response);
+        exit;
     }
 
-    echo json_encode($response); // Send JSON response
-    exit; // Exit to prevent further output
+    $last_name = $_POST['coor_last_name'];
+    $first_name = $_POST['coor_first_name'];
+    $middle_name = $_POST['coor_middle_name'];
+    $suffix = $_POST['coor_suffix'];
+    $gender = $_POST['coor_gender'];
+    $address = $_POST['coor_address'];
+    $birthdate = $_POST['coor_birthdate'];
+    $civil_status = $_POST['coor_civil_status'];
+    $personal_email = $_POST['coor_personal_email'];
+    $contact_number = $_POST['coor_contact_number'];
+    $department = $_POST['coor_department'];
+    $account_email = $_POST['coor_account_email'];
+    $password = $_POST['coor_password'];
+
+    $hashed_password = empty($password) ? null : password_hash($password, PASSWORD_BCRYPT);
+
+    $sql = "UPDATE coordinators SET last_name = ?, first_name = ?, middle_name = ?, suffix = ?, gender = ?, 
+                address = ?, birthdate = ?, civil_status = ?, personal_email = ?, contact_number = ?, 
+                department = ?, account_email = ?, password = ? 
+            WHERE id = ?";
+
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param("sssssssssssssi", $last_name, $first_name, $middle_name, 
+            $suffix, $gender, $address, $birthdate, $civil_status, $personal_email, $contact_number, 
+            $department, $account_email, $hashed_password, $id
+        );
+
+        if ($stmt->execute()) {
+            if ($stmt->affected_rows > 0) {
+                $response['success'] = true;
+                $response['message'] = 'Coordinator updated successfully!';
+            } else {
+                $response['message'] = 'No changes made to the coordinator.';
+            }
+        } else {
+            $response['message'] = 'Error executing update: ' . $stmt->error;
+        }
+        $stmt->close();
+    } else {
+        $response['message'] = 'Error preparing statement: ' . $conn->error;
+    }
+} else {
+    $response['message'] = 'Invalid request method.';
 }
 
-// If not a POST request, return an error response
-http_response_code(405); // Method Not Allowed
-echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
+echo json_encode($response);
 exit;
 ?>

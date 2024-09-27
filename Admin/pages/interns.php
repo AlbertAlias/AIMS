@@ -142,9 +142,9 @@
                     
                     <div class="row">
                         <div class="col-md-12 text-end">
-                            <button type="button" id="internCancelBtn" class="btn btn-secondary" style="display: none;">Cancel</button>
-                            <button type="button" id="internUpdateBtn" class="btn btn-primary" style="display: none;">Update</button>
-                            <button type="submit" id="internSubmitBtn" class="btn btn-success" disabled>Submit</button>
+                            <button type="button" id="internCancelBtn" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
+                            <button type="button" id="internUpdateBtn" class="btn btn-primary" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> Update</button>
+                            <button type="submit" id="internSubmitBtn" class="btn btn-success" disabled><i class="fa-solid fa-check-to-slot"></i> Submit</button>
                         </div>
                     </div>
                 </form>

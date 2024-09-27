@@ -111,7 +111,8 @@ document.getElementById('internSubmitBtn').addEventListener('click', function (e
     }
 
     const data = {
-        last_name: lastName, first_name: firstName,
+        last_name: lastName,
+        first_name: firstName,
         middle_name: document.getElementById('intern_middle_name').value,
         suffix: document.getElementById('intern_suffix').value,
         gender: gender,

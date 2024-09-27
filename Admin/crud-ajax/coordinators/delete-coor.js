@@ -1,11 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const coorDeleteBtn = document.getElementById('coorDeleteBtn');
+    const deleteBtn = document.getElementById('coorDeleteBtn');
     const coordinatorForm = document.getElementById('coordinatorForm');
-    const coorUpdateBtn = document.getElementById('coorUpdateBtn'); // Reference to the update button
 
-    if (coorDeleteBtn) {
-        coorDeleteBtn.addEventListener('click', function() {
-            const coorId = coordinatorForm.querySelector('#coordinatorId').value;
+    if (deleteBtn) {
+        deleteBtn.addEventListener('click', function() {
+            const coorId = coordinatorForm.querySelector('#coorID').value;
 
             Swal.fire({
                 title: 'Are you sure?',
@@ -27,6 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     })
                     .then(response => response.text())
                     .then(text => {
+                        console.log('Raw response:', text);
                         const data = JSON.parse(text);
                         if (data.success) {
                             Swal.fire({
@@ -44,17 +44,17 @@ document.addEventListener('DOMContentLoaded', function() {
                                 }
                             });
 
-                            // Refresh the coordinator list
-                            window.loadCoordinators();
+                            if (typeof window.loadCoordinators === 'function') {
+                                window.loadCoordinators();
+                            }
 
-                            // Call functions to reset and lock the forms
                             if (typeof window.disableAndResetForms === 'function') {
                                 window.disableAndResetForms();
                             }
 
-                            // Hide the delete and update buttons
-                            if (coorUpdateBtn) coorUpdateBtn.style.display = 'none'; // Hide the update button
-                            coorDeleteBtn.style.display = 'none'; // Hide the delete button
+                            document.getElementById('coorDeleteBtn').style.display = 'none';
+                            document.getElementById('coorUpdateBtn').style.display = 'none';
+
                         } else {
                             Swal.fire({
                                 icon: 'error',

@@ -5,8 +5,7 @@ error_reporting(E_ALL);
 header('Content-Type: application/json');
 include '../../../dbconn.php';
 
-// Adjust SQL query according to the actual table schema
-$sql = "SELECT id, last_name, first_name FROM admins"; // Adjust field names if needed
+$sql = "SELECT id, last_name, first_name FROM admins";
 $result = $conn->query($sql);
 
 $response = [];
