@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    // Function to load and display interns in buttons
     window.loadInterns = function() {
         $.ajax({
             url: 'controller/interns/retrieve-interns.php',
@@ -7,14 +6,12 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(response) {
                 let internsInfo = $('#internsInfo');
-                internsInfo.empty();  // Clear the div before populating
-    
+                internsInfo.empty();
                 if (response.error) {
                     internsInfo.append(`<p>${response.error}</p>`);
                 } else {
                     response.forEach(function(intern) {
                         console.log(intern);
-                        // Create a button for each intern
                         let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 intern-btn" data-id="${intern.id}">
                                         ${intern.last_name}, ${intern.first_name}
                                     </button>`;
@@ -30,8 +27,6 @@ $(document).ready(function() {
     
     loadInterns();
     
-
-    // Attach loadInternDetails to the window object
     window.loadInternInfo = function(id) {
         $.ajax({
             url: 'controller/interns/retrieve-intern-info.php',
@@ -58,16 +53,26 @@ $(document).ready(function() {
                 $('#intern_account_email').val(response.account_email).prop('disabled', true);
                 $('#intern_password').val(response.password).prop('disabled', true);
                 $('#internSubmitBtn').prop('disabled', false);
-                loadDepartments(response.department, true);
-                $('#studentID').val(response.studentID).prop('disabled', false); // Load student ID
-                $('#coordinator_name').val(response.coordinator_name).prop('disabled', true); // Lock the coordinator name
-                $('#hours_needed').val(response.hours_needed).prop('disabled', false); // Lock hours needed
-                $('#coordinator_email').val(response.coordinator_email).prop('disabled', true); // Lock coordinator email
-                $('#internship_status').val(response.internship_status).prop('disabled', false); // Lock internship status
+                
+                const departmentSelect = $('#intern_department');
+                departmentSelect.prop('disabled', false);
+                departmentSelect.val(response.department);
+
+                $('#studentID').val(response.studentID).prop('disabled', false);
+                $('#coordinator_name').val(response.coordinator_name).prop('disabled', true);
+                $('#hours_needed').val(response.hours_needed).prop('disabled', false);
+                $('#coordinator_email').val(response.coordinator_email).prop('disabled', true);
+                $('#internship_status').val(response.internship_status).prop('disabled', false);
             },
             error: function(xhr, status, error) {
-                console.error('Error retrieving intern details:', error);
+                console.error('Failed to load interns:', error);
+                console.error('Response:', xhr.responseText);
             }
         });
     };
+
+    $(document).on('click', '.intern-btn', function() {
+        let internId = $(this).data('id');
+        loadInternInfo(internId);
+    });
 });

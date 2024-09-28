@@ -5,39 +5,51 @@ error_reporting(E_ALL);
 
 include '../../../dbconn.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = isset($_POST['id']) ? $_POST['id'] : null;
-    $lastName = isset($_POST['last_name']) ? $_POST['last_name'] : null;
-    $firstName = isset($_POST['first_name']) ? $_POST['first_name'] : null;
-    $middleName = isset($_POST['middle_name']) ? $_POST['middle_name'] : null;
-    $suffix = isset($_POST['suffix']) ? $_POST['suffix'] : null;
-    $gender = isset($_POST['gender']) ? $_POST['gender'] : null;
-    $address = isset($_POST['address']) ? $_POST['address'] : null;
-    $birthdate = isset($_POST['birthdate']) ? $_POST['birthdate'] : null;
-    $civilStatus = isset($_POST['civil_status']) ? $_POST['civil_status'] : null;
-    $personalEmail = isset($_POST['personal_email']) ? $_POST['personal_email'] : null;
-    $contactNumber = isset($_POST['contact_number']) ? $_POST['contact_number'] : null;
-    $accountEmail = isset($_POST['account_email']) ? $_POST['account_email'] : null;
-    $password = isset($_POST['password']) ? $_POST['password'] : null;
-    $role = isset($_POST['role']) ? $_POST['role'] : null;
+header('Content-Type: application/json'); // Set header for JSON response
 
-    if (empty($lastName) || empty($firstName) || empty($gender) || empty($address) || empty($birthdate) ||
-        empty($civilStatus) || empty($personalEmail) || empty($contactNumber) || empty($accountEmail) ||
-        empty($password) || empty($role)) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    // Validate fields
+    if (empty($data['last_name']) || empty($data['first_name']) || empty($data['gender']) ||
+        empty($data['address']) || empty($data['birthdate']) || empty($data['civil_status']) ||
+        empty($data['contact_number']) || empty($data['personal_email']) ||
+        empty($data['account_email']) || empty($data['password']) || empty($data['role'])) {
         echo json_encode(['success' => false, 'message' => 'All fields are required.']);
         exit;
     }
 
-    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+    // Check for duplicate account email
+    $stmt = $conn->prepare("SELECT * FROM admins WHERE account_email = ?");
+    $stmt->bind_param("s", $data['account_email']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        echo json_encode(['success' => false, 'message' => 'Admin with this email already exists.']);
+        exit;
+    }
+    $stmt->close();
 
-    $stmt = $conn->prepare("INSERT INTO admins (last_name, first_name, middle_name, suffix, gender, address, birthdate, civil_status, personal_email, contact_number, account_email, password, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
 
+    // Prepare SQL query
+    $stmt = $conn->prepare("INSERT INTO admins (last_name, first_name, middle_name, suffix, gender,
+    address, birthdate, civil_status, contact_number, personal_email, account_email, password, role)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+    // Check if statement preparation failed
     if ($stmt === false) {
         echo json_encode(['success' => false, 'message' => 'Failed to prepare the SQL statement.']);
         exit;
     }
 
-    $stmt->bind_param('sssssssssssss', $lastName, $firstName, $middleName, $suffix, $gender, $address, $birthdate, $civilStatus, $personalEmail, $contactNumber, $accountEmail, $hashedPassword, $role);
+    // Bind parameters and execute
+    $stmt->bind_param(
+        'sssssssssssss', $data['last_name'], $data['first_name'], $data['middle_name'],
+        $data['suffix'], $data['gender'], $data['address'], $data['birthdate'], $data['civil_status'],
+        $data['contact_number'], $data['personal_email'], $data['account_email'], $hashedPassword,
+        $data['role'],);
 
     if ($stmt->execute()) {
         echo json_encode(['success' => true, 'message' => 'Admin added successfully!']);

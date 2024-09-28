@@ -8,7 +8,9 @@ header('Content-Type: application/json');
 
 if (isset($_GET['id'])) {
     $admin_id = intval($_GET['id']);
-    $query = "SELECT id, last_name, first_name, middle_name, suffix, gender, address, birthdate, civil_status, contact_number, personal_email, account_email, password, role FROM admins WHERE id = ?";
+    $query = "SELECT id, last_name, first_name, middle_name, suffix, gender, address,
+        birthdate,civil_status, contact_number, personal_email, account_email, password,
+        role FROM admins WHERE id = ?";
     
     if ($stmt = $conn->prepare($query)) {
         $stmt->bind_param("i", $admin_id);

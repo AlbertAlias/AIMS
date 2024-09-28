@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let value = e.target.value.replace(/\D/g, ''); // Only digits
 
             if (value.length > 10) {
-                value = value.slice(0, 10); // Limit to 10 digits
+                value = value.slice(0, 10);
             }
 
             if (value.charAt(0) === '0') {

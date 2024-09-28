@@ -6,7 +6,6 @@ function loadDepartments() {
         success: function(response) {
             let departmentSelect = $('#coor_department');
             departmentSelect.empty();
-
             departmentSelect.append('<option selected disabled>Choose Department</option>');
 
             if (Array.isArray(response.departments)) {

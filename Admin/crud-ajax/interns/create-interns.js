@@ -1,98 +1,29 @@
-$(document).ready(function () {
-    let isSubmitting = false;
-
-    // Remove any previous submit event listener and add a new one
-    $('#internsForm').off('submit').on('submit', function (e) {
-        e.preventDefault();
-
-        // If already submitting, do not proceed
-        if (isSubmitting) {
-            return;
-        }
-
-        // Set the isSubmitting flag to true
-        isSubmitting = true;
-        $('#internSubmitBtn').prop('disabled', true);
-
-        // Enable the necessary fields
-        $('#intern_accountForm input:disabled').prop('disabled', false);
-        $('#internsForm input:disabled, #internsForm select:disabled').prop('disabled', false);
-
-        var formData = $(this).serialize() + '&' + $('#intern_accountForm').serialize();
-        console.log('Form Data:', formData);
-
-        $.ajax({
-            url: 'controller/interns/create-interns.php',
-            type: 'POST',
-            data: formData,
-            dataType: 'json',
-            success: function (response) {
-                console.log('AJAX response:', response);
-                if (response.success) {
-                    // SweetAlert for successful intern creation
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Coordinator created successfully',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        background: '#b9f6ca',
-                        iconColor: '#2e7d32',
-                        color: '#155724',
-                        customClass: {
-                            popup: 'mt-5'
-                        }
-                    });
-
-                    disableAndResetForms();
-                    loadInterns();
-                } else {
-                    alert('Failed to add intern: ' + response.message);
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error('AJAX Error:', error);
-                console.log('Response Text:', xhr.responseText);
-                alert('An error occurred while processing the request: ' + xhr.responseText);
-            },
-            complete: function () {
-                disableAndResetForms();
-                $('#internsForm input').prop('disabled', true);
-                $('#internsForm select').prop('disabled', true);
-                $('#intern_accountForm input').prop('disabled', true);
-                $('#internSubmitBtn').prop('disabled', false);
-                isSubmitting = false; // Reset the submitting flag
-            }
-        });
-    });
-});
-
-
 document.getElementById('internSubmitBtn').addEventListener('click', function (event) {
     event.preventDefault();
+    const internSubmitBtn = document.getElementById('internSubmitBtn');
 
-    const lastName = document.getElementById('intern_last_name').value;
-    const firstName = document.getElementById('intern_first_name').value;
+    if (internSubmitBtn.disabled) return;
+    internSubmitBtn.disabled = true;
+    const last_name = document.getElementById('intern_last_name').value;
+    const first_name = document.getElementById('intern_first_name').value;
     const gender = document.getElementById('intern_gender').value;
     const address = document.getElementById('intern_address').value;
     const birthdate = document.getElementById('intern_birthdate').value;
-    const civilStatus = document.getElementById('intern_civil_status').value;
-    const personalEmail = document.getElementById('intern_personal_email').value;
-    const contactNumber = document.getElementById('intern_contact_number').value;
-    const studentId = document.getElementById('studentID').value;
+    const civil_status = document.getElementById('intern_civil_status').value;
+    const personal_email = document.getElementById('intern_personal_email').value;
+    const contact_number = document.getElementById('intern_contact_number').value;
+    const studentID = document.getElementById('studentID').value;
     const department = document.getElementById('intern_department').value;
-    const coorName = document.getElementById('coordinator_name').value;
-    const hoursNeeded = document.getElementById('hours_needed').value;
-    const coorEmail = document.getElementById('coordinator_email').value;
-    const internStatus = document.getElementById('internship_status').value;
-    const accountEmail = document.getElementById('intern_account_email').value;
+    const coordinator_name = document.getElementById('coordinator_name').value;
+    const hours_needed = document.getElementById('hours_needed').value;
+    const coordinator_email = document.getElementById('coordinator_email').value;
+    const internship_status = document.getElementById('internship_status').value;
+    const account_email = document.getElementById('intern_account_email').value;
     const password = document.getElementById('intern_password').value;
 
-    // Check for empty required fields
-    if (!lastName || !firstName || !gender || !address || !birthdate || !civilStatus ||
-        !personalEmail || !contactNumber || !studentId || !coorName || !hoursNeeded ||
-        !coorEmail || !internStatus || !department || !accountEmail || !password) {
+    if (!last_name || !first_name || !gender || !address || !birthdate || !civil_status ||
+        !personal_email || !contact_number || !studentID || !department || !coordinator_name ||
+        !hours_needed || !coordinator_email || !internship_status || !account_email || !password) {
         Swal.fire({
             toast: true,
             position: 'top-end',
@@ -107,28 +38,29 @@ document.getElementById('internSubmitBtn').addEventListener('click', function (e
                 popup: 'mt-5'
             }
         });
+        internSubmitBtn.disabled = false;
         return;
     }
 
     const data = {
-        last_name: lastName,
-        first_name: firstName,
+        last_name,
+        first_name,
         middle_name: document.getElementById('intern_middle_name').value,
         suffix: document.getElementById('intern_suffix').value,
-        gender: gender,
-        address: address,
-        birthdate: birthdate,
-        civil_status: civilStatus,
-        personal_email: personalEmail,
-        contact_number: contactNumber,
-        studentID: studentId,
-        department: department,
-        coordinator_name: coorName,
-        hours_needed: hoursNeeded,
-        coordinator_email: coorEmail,
-        internship_status: internStatus,
-        account_email: accountEmail,
-        password: password
+        gender,
+        address,
+        birthdate,
+        civil_status,
+        personal_email,
+        contact_number,
+        studentID,
+        department,
+        coordinator_name,
+        hours_needed,
+        coordinator_email,
+        internship_status,
+        account_email,
+        password
     };
 
     fetch('controller/interns/create-interns.php', {
@@ -138,8 +70,7 @@ document.getElementById('internSubmitBtn').addEventListener('click', function (e
         },
         body: JSON.stringify(data)
     })
-    .then(response => response.text())
-    .then(rawResponse => JSON.parse(rawResponse))
+    .then(response => response.json())
     .then(data => {
         if (data.success) {
             Swal.fire({
@@ -157,6 +88,7 @@ document.getElementById('internSubmitBtn').addEventListener('click', function (e
                 }
             });
             disableAndResetForms();
+            window.loadInterns();
         } else {
             Swal.fire({
                 toast: true,
@@ -173,6 +105,7 @@ document.getElementById('internSubmitBtn').addEventListener('click', function (e
                 }
             });
         }
+        internSubmitBtn.disabled = false;
     })
     .catch(error => {
         console.error('Error:', error);
@@ -190,5 +123,6 @@ document.getElementById('internSubmitBtn').addEventListener('click', function (e
                 popup: 'mt-5'
             }
         });
+        internSubmitBtn.disabled = false;
     });
 });

@@ -20,9 +20,8 @@ if ($result) {
         echo json_encode(['error' => 'No interns found']);
     }
 } else {
-    // Log the actual SQL error and return a generic error message
     error_log("Database query failed: " . $conn->error);
-    echo json_encode(['error' => 'Failed to retrieve interns']);
+    echo json_encode(['error' => 'Failed to retrieve interns: ' . $conn->error]);
 }
 
 $conn->close();

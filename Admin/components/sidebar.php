@@ -15,14 +15,14 @@
     <li class="nav-item align-items-center justify-content-center" style="margin-top: 5px;">
         <a class="nav-link menu-link" href="#" onclick="showSection(event, 'dashboard');">
             <i class="fa-solid fa-qrcode fs-4"></i>
-            <span class="">Dashboard</span>
+            <span>Dashboard</span>
         </a>
     </li>
 
     <li class="nav-item align-items-center justify-content-center" style="margin-top: 5px;">
         <a class="nav-link menu-link" href="#" onclick="showSection(event, 'departments');">
             <i class="fa-solid fa-scroll fs-4"></i>
-            <span class="">Departments</span>
+            <span>Departments</span>
         </a>
     </li>
 
@@ -36,14 +36,14 @@
     <li class="nav-item align-items-center justify-content-center" style="margin-top: 5px;">
         <a class="nav-link menu-link" href="#" onclick="showSection(event, 'interns');">
             <i class="fa-solid fa-user-graduate fs-4"></i>
-            <span class="">Interns</span>
+            <span>Interns</span>
         </a>
     </li>
 
     <li class="nav-item align-items-center justify-content-center" style="margin-top: 5px;">
         <a class="nav-link menu-link" href="#" onclick="showSection(event, 'sub-admins');">
             <i class="fa-solid fa-user-shield fs-4"></i>
-            <span class="">Admins</span>
+            <span>Admins</span>
         </a>
     </li>
 
@@ -52,7 +52,7 @@
     
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        <button class="rounded-circle border-0 fs-5" id="sidebarToggle"></button>
     </div>
 </ul>
 
@@ -113,19 +113,16 @@
             'crud-ajax/admins/retrieve-admins.js',
             'crud-ajax/admins/retrieve-admin-details.js',
             'crud-ajax/admins/update-admins.js'
+        ],
+        profile: [
+            ''
         ]
-        // adminProfile: [
-        //     'functions/admin-profile/drag_drop.js',
-        //     'crud-ajax/admin-profile/create_profile.js'
-        // ]
     };
 
     function loadScripts(scripts) {
-        // Remove previously loaded scripts
         const existingScripts = document.querySelectorAll('script[data-dynamic="true"]');
         existingScripts.forEach(script => script.remove());
 
-        // Dynamically load the required scripts for the selected section
         scripts.forEach(function(src) {
             const script = document.createElement('script');
             script.src = src;
@@ -136,11 +133,9 @@
     }
 
     function showSection(event, sectionID) {
-    // If there's no event target (i.e., on page load), skip the closest logic
     if (event && event.target) {
         const clickedLink = event.target.closest('.menu-link');
         if (clickedLink) {
-            // Update the active link
             var menuLinks = document.querySelectorAll('.menu-link');
             menuLinks.forEach(function(link) {
                 link.classList.remove('active');
@@ -149,23 +144,20 @@
         }
     }
 
-    // Hide all sections
-    var sections = document.querySelectorAll('#dashboard, #departments, #coordinators, #interns, #sub-admins');
+    var sections = document.querySelectorAll('#dashboard, #departments, #coordinators, #interns, #sub-admins, #profile');
     sections.forEach(function(section) {
         section.style.display = 'none';
     });
 
-    // Show the selected section
     var activeSection = document.getElementById(sectionID);
         if (activeSection) {
             activeSection.style.display = 'block';
-            loadScripts(scriptsMap[sectionID] || []); // Load the scripts for the active section
+            loadScripts(scriptsMap[sectionID] || []);
         }
     }
 
-    // Set default section on page load
     window.onload = function() {
-        showSection(null, 'dashboard'); // Default section
+        showSection(null, 'dashboard');
     };
 </script>
 

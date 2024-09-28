@@ -35,7 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
 
     // Prepare SQL query
-    $stmt = $conn->prepare("INSERT INTO coordinators (last_name, first_name, middle_name, suffix, gender, address, birthdate, civil_status, personal_email, contact_number, department, account_email, password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO coordinators (last_name, first_name, middle_name, suffix, gender,
+    address, birthdate, civil_status, personal_email, contact_number, department, account_email, password)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
     // Check if statement preparation failed
     if ($stmt === false) {
@@ -44,7 +46,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Bind parameters and execute
-    $stmt->bind_param('sssssssssssss', $data['last_name'], $data['first_name'], $data['middle_name'], $data['suffix'], $data['gender'], $data['address'], $data['birthdate'], $data['civil_status'], $data['personal_email'], $data['contact_number'], $data['department'], $data['account_email'], $hashedPassword);
+    $stmt->bind_param(
+        'sssssssssssss', $data['last_name'], $data['first_name'], $data['middle_name'],
+        $data['suffix'], $data['gender'], $data['address'], $data['birthdate'], $data['civil_status'],
+        $data['personal_email'], $data['contact_number'], $data['department'], $data['account_email'],
+        $hashedPassword);
 
     if ($stmt->execute()) {
         echo json_encode(['success' => true, 'message' => 'Coordinator added successfully!']);

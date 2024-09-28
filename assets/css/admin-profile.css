@@ -1,45 +1,9 @@
-.upload-area {
-    border: 4px dashed lightgray;
-    border-radius: 8px;
-    height: 200px;
-    width: 340px;
+.dashed-border {
+    border: 2px dashed rgb(9, 135, 40); /* Dashed black border */
+    width: 150px; /* Set width for the border container */
+    height: 140px; /* Set height for the border container */
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    position: relative;
-    background-color: #f8f9fa;
-    margin: auto;
-    text-align: center;
-    font-size: 1.1rem;
-}
-.upload-area i {
-    font-size: 3rem;
-    color: #007bff;
-}
-.upload-area .text {
-    margin-top: 15px;
-    margin-left: 5px;
-    margin-right: 5px;
-    color: #6c757d;
-}
-.upload-btn {
-    display: block;
-    width: 200px;
-    margin: 10px auto;
-    text-align: center;
-}
-.upload-btn button {
-    border-radius: 50px;
-    padding: 10px 20px;
-    font-size: 16px;
-}
-@media (max-width: 576px) {
-    .upload-area {
-        height: 150px;
-        width: 150px;
-    }
-    .upload-btn button {
-        width: 150px;
-    }
+    align-items: center;
+    border-radius: 50%; /* Makes the border circular */
 }

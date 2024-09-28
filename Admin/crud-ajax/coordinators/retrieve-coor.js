@@ -52,8 +52,8 @@ $(document).ready(function() {
     
                 // Enable the department select and set the value
                 const departmentSelect = $('#coor_department');
-                departmentSelect.prop('disabled', false); // Enable it
-                departmentSelect.val(response.department); // Set the selected value
+                departmentSelect.prop('disabled', false);
+                departmentSelect.val(response.department);
     
                 $('#coor_account_email').val(response.account_email).prop('disabled', false);
                 $('#coor_password').val(response.password).prop('disabled', false);

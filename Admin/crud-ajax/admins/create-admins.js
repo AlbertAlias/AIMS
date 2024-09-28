@@ -1,20 +1,24 @@
 document.getElementById('adminSubmitBtn').addEventListener('click', function (event) {
     event.preventDefault();
-
-    const lastName = document.getElementById('admin_last_name').value;
-    const firstName = document.getElementById('admin_first_name').value;
+    const adminSubmitBtn = document.getElementById('adminSubmitBtn');
+    
+    if (adminSubmitBtn.disabled) return;
+    adminSubmitBtn.disabled = true;
+    const last_name = document.getElementById('admin_last_name').value;
+    const first_name = document.getElementById('admin_first_name').value;
     const gender = document.getElementById('admin_gender').value;
     const address = document.getElementById('admin_address').value;
     const birthdate = document.getElementById('admin_birthdate').value;
-    const civilStatus = document.getElementById('admin_civil_status').value;
-    const personalEmail = document.getElementById('admin_personal_email').value;
-    const contactNumber = document.getElementById('admin_contact_number').value;
-    const accountEmail = document.getElementById('admin_account_email').value;
+    const civil_status = document.getElementById('admin_civil_status').value;
+    const contact_number = document.getElementById('admin_contact_number').value;
+    const personal_email = document.getElementById('admin_personal_email').value;
+    const account_email = document.getElementById('admin_account_email').value;
     const password = document.getElementById('admin_password').value;
     const role = document.getElementById('role').value;
 
-    if (!lastName || !firstName || !gender || !address || !birthdate || !civilStatus ||
-        !personalEmail || !contactNumber || !accountEmail || !password || !role) {
+    // Check for empty required fields
+    if (!last_name || !first_name || !gender || !address || !birthdate || !civil_status ||
+        !contact_number || !personal_email || !account_email || !password || !role) {
         Swal.fire({
             toast: true,
             position: 'top-end',
@@ -29,23 +33,24 @@ document.getElementById('adminSubmitBtn').addEventListener('click', function (ev
                 popup: 'mt-5'
             }
         });
+        adminSubmitBtn.disabled = false;
         return;
     }
 
     const data = {
-        last_name: lastName,
-        first_name: firstName,
+        last_name,
+        first_name,
         middle_name: document.getElementById('admin_middle_name').value,
         suffix: document.getElementById('admin_suffix').value,
-        gender: gender,
-        address: address,
-        birthdate: birthdate,
-        civil_status: civilStatus,
-        personal_email: personalEmail,
-        contact_number: contactNumber,
-        account_email: accountEmail,
-        password: password,
-        role: role
+        gender,
+        address,
+        birthdate,
+        civil_status,
+        contact_number,
+        personal_email,
+        account_email,
+        password,
+        role
     };
 
     fetch('controller/admins/create-admins.php', {
@@ -55,8 +60,7 @@ document.getElementById('adminSubmitBtn').addEventListener('click', function (ev
         },
         body: JSON.stringify(data)
     })
-    .then(response => response.text())
-    .then(rawResponse => JSON.parse(rawResponse))
+    .then(response => response.json())
     .then(data => {
         if (data.success) {
             Swal.fire({
@@ -74,6 +78,8 @@ document.getElementById('adminSubmitBtn').addEventListener('click', function (ev
                 }
             });
             disableAndResetForms();
+
+            window.loadAdmins();
         } else {
             Swal.fire({
                 toast: true,
@@ -90,6 +96,7 @@ document.getElementById('adminSubmitBtn').addEventListener('click', function (ev
                 }
             });
         }
+        adminSubmitBtn.disabled = false;
     })
     .catch(error => {
         console.error('Error:', error);
@@ -107,5 +114,6 @@ document.getElementById('adminSubmitBtn').addEventListener('click', function (ev
                 popup: 'mt-5'
             }
         });
+        adminSubmitBtn.disabled = false;
     });
 });

@@ -1,16 +1,14 @@
 <?php
-ini_set('display_errors', 0); // Do not display errors
-ini_set('log_errors', 1);     // Log errors to the server logs
-error_reporting(E_ALL);       // Report all errors
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+error_reporting(E_ALL);
 
-header('Content-Type: application/json');  // Ensure the correct content type
+header('Content-Type: application/json');
 require_once '../../../dbconn.php';
 
-// Check if 'department' parameter exists
 if (isset($_GET['department'])) {
     $department = $_GET['department'];
 
-    // Query to fetch coordinator info based on department
     $sql = "SELECT first_name, last_name, personal_email FROM coordinators WHERE department = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('s', $department);

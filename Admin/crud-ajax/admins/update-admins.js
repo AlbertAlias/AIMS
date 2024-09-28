@@ -1,52 +1,118 @@
 $(document).ready(function () {
-    // Remove any existing click event handlers for the update button
     $('#adminUpdateBtn').off('click').on('click', function () {
         console.log('Update button clicked');
+        const adminID = $('#adminID').val();
+        const lastName = $('#admin_last_name').val();
+        const firstName = $('#admin_first_name').val();
+        const gender = $('#admin_gender').val();
+        const address = $('#admin_address').val();
+        const birthdate = $('#admin_birthdate').val();
+        const civilStatus = $('#admin_civil_status').val();
+        const contactNumber = $('#admin_contact_number').val();
+        const personalEmail = $('#admin_personal_email').val();
+        const accountEmail = $('#admin_account_email').val();
+        const password = $('#admin_password').val();
+        const role = $('#role').val();
 
-        const adminID = $('#adminID').val(); // Ensure you're using the correct ID
+        // Check for required fields
+        if (!lastName || !firstName || !gender || !address || !birthdate || !civilStatus ||
+            !contactNumber || !personalEmail || !accountEmail || !role) {
+            Swal.fire({
+                toast: true,
+                position: 'top-right',
+                icon: 'error',
+                title: 'Please fill in all required fields.',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#ffcccb',
+                iconColor: '#c0392b',
+                color: '#721c24',
+                customClass: {
+                    popup: 'mt-5'
+                }
+            });
+            return;
+        }
 
-        // Collect the form data
         const data = {
             id: adminID,
-            admin_last_name: $('#admin_last_name').val(),
-            admin_first_name: $('#admin_first_name').val(),
+            admin_last_name: lastName,
+            admin_first_name: firstName,
             admin_middle_name: $('#admin_middle_name').val(),
             admin_suffix: $('#admin_suffix').val(),
-            admin_gender: $('#admin_gender').val(),
-            admin_address: $('#admin_address').val(),
-            admin_birthdate: $('#admin_birthdate').val(),
-            admin_civil_status: $('#admin_civil_status').val(),
-            admin_personal_email: $('#admin_personal_email').val(),
-            admin_contact_number: $('#admin_contact_number').val(),
-            admin_account_email: $('#admin_account_email').val(),
-            admin_password: $('#admin_password').val(),
-            role: $('#role').val()
+            admin_gender: gender,
+            admin_address: address,
+            admin_birthdate: birthdate,
+            admin_civil_status: civilStatus,
+            admin_contact_number: contactNumber,
+            admin_personal_email: personalEmail,
+            admin_account_email: accountEmail,
+            admin_password: password,
+            role: role
         };
 
-        // Disable the update button to prevent multiple clicks
         $(this).prop('disabled', true);
 
-        // Perform AJAX call
         $.ajax({
             url: 'controller/admins/update-admins.php',
             method: 'POST',
             data: data,
-            dataType: 'json', // Expect JSON response from the server
+            dataType: 'json',
             success: function (response) {
                 if (response.success) {
-                    alert('Admin updated successfully!');
-                    disableAndResetForms(); // Ensure this function exists to handle resetting forms
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-right',
+                        icon: 'success',
+                        title: 'Admin updated successfully!',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#b9f6ca',
+                        iconColor: '#2e7d32',
+                        color: '#155724',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
+                    $('#adminDeleteBtn').hide();
+                    $('#adminUpdateBtn').hide();
+                    loadAdmins();
+                    disableAndResetForms();
                 } else {
-                    alert('Error: ' + response.message);
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-right',
+                        icon: 'error',
+                        title: 'Error: ' + response.message,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#ffcccb',
+                        iconColor: '#c0392b',
+                        color: '#721c24',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
                 }
             },
             error: function (xhr, status, error) {
                 console.error('AJAX Error:', error);
-                console.error('Response Text:', xhr.responseText); // Log the raw response
-                alert('An error occurred while updating admin data. Please try again.');
+                Swal.fire({
+                    toast: true,
+                    position: 'top-right',
+                    icon: 'error',
+                    title: 'An error occurred while updating admins data. Please try again.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#ffcccb',
+                    iconColor: '#c0392b',
+                    color: '#721c24',
+                    customClass: {
+                        popup: 'mt-5'
+                    }
+                });
             },
             complete: function () {
-                // Re-enable the update button
                 $('#adminUpdateBtn').prop('disabled', false);
             }
         });

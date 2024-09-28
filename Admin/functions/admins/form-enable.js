@@ -46,7 +46,13 @@ if (document.getElementById('adminsForm')) {
     
         if (admin_accountForm) {
             admin_accountForm.reset();
-            document.querySelectorAll('#admin_accountForm input').forEach(el => el.disabled = true);
+            document.querySelectorAll('#admin_accountForm input, #admin_accountForm select').forEach(el => el.disabled = true);
+        }
+    
+        const adminDepartmentSelect = document.getElementById('admin_department');
+        if (adminDepartmentSelect) {
+            adminDepartmentSelect.selectedIndex = 0;
+            adminDepartmentSelect.disabled = true;
         }
     
         const adminSubmitBtn = document.getElementById('adminSubmitBtn');
@@ -78,15 +84,17 @@ if (document.getElementById('adminsForm')) {
             unlockAndResetForms();
             showUpdateButton();
             
-            // Show the delete button
-            // const adminDeleteBtn = document.getElementById('adminDeleteBtn');
-            // if (adminDeleteBtn) {
-            //     console.log('Displaying delete button');
-            //     adminDeleteBtn.style.display = 'inline-block';
-            // }
+            const adminDeleteBtn = document.getElementById('adminDeleteBtn');
+            if (adminDeleteBtn) {
+                console.log('Displaying delete button');
+                adminDeleteBtn.style.display = 'inline-block';
+            }
         
             const adminID = event.target.getAttribute('data-id');
-            document.getElementById('adminID').value = adminID;
+            const adminIDElement = document.getElementById('adminID');
+            if (adminIDElement) {
+                adminIDElement.value = adminID; // Set value only if adminIDElement exists
+            }
             console.log('Selected Admin ID:', adminID);
             loadAdminDetails(adminID);
         }
@@ -96,6 +104,6 @@ if (document.getElementById('adminsForm')) {
         disableAndResetForms();
         this.style.display = 'none';
         document.getElementById('adminUpdateBtn').style.display = 'none';
-        // document.getElementById('adminDeleteBtn').style.display = 'none';
+        document.getElementById('adminDeleteBtn').style.display = 'none';
     });
 }

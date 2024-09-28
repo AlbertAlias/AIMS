@@ -1,63 +1,129 @@
 $(document).ready(function () {
-    // Remove any existing click event handlers for the update button
     $('#internUpdateBtn').off('click').on('click', function () {
         console.log('Update button clicked');
 
-        const internID = $('#internID').val(); // Ensure you're using the correct ID
-
-        // Validate the birthdate format
+        const internID = $('#internID').val();
+        const lastName = $('#intern_last_name').val();
+        const firstName = $('#intern_first_name').val();
+        const gender = $('#intern_gender').val();
+        const address = $('#intern_address').val();
         const birthdate = $('#intern_birthdate').val();
-        if (!birthdate || birthdate === "0000-00-00") {
-            alert("Invalid birthdate. Please enter a valid date.");
+        const civilStatus = $('#intern_civil_status').val();
+        const personalEmail = $('#intern_personal_email').val();
+        const contactNumber = $('#intern_contact_number').val();
+        const studentID = $('#studentID').val();
+        const department = $('#intern_department').val();
+        const coordinator_name = $('#coordinator_name').val();
+        const hours_needed = $('#hours_needed').val();
+        const coordinator_email = $('#coordinator_email').val();
+        const internship_status = $('#internship_status').val();
+        const accountEmail = $('#intern_account_email').val();
+        const password = $('#intern_password').val();
+
+        if (!lastName || !firstName || !gender || !address || !birthdate || !civilStatus || !personalEmail || 
+            !contactNumber || !studentID || !department || !coordinator_name || !hours_needed || !coordinator_email ||
+            !internship_status || !accountEmail) {
+            Swal.fire({
+                toast: true,
+                position: 'top-right',
+                icon: 'error',
+                title: 'Please fill in all required fields.',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#ffcccb',
+                iconColor: '#c0392b',
+                color: '#721c24',
+                customClass: {
+                    popup: 'mt-5'
+                }
+            });
             return;
         }
 
-        // Collect the form data
         const data = {
             id: internID,
-            intern_last_name: $('#intern_last_name').val(),
-            intern_first_name: $('#intern_first_name').val(),
+            intern_last_name: lastName,
+            intern_first_name: firstName,
             intern_middle_name: $('#intern_middle_name').val(),
             intern_suffix: $('#intern_suffix').val(),
-            intern_gender: $('#intern_gender').val(),
-            intern_address: $('#intern_address').val(),
-            birthdate: birthdate,
-            intern_civil_status: $('#intern_civil_status').val(),
-            intern_personal_email: $('#intern_personal_email').val(),
-            intern_contact_number: $('#intern_contact_number').val(),
-            studentID: $('#studentID').val(),
-            intern_department: $('#intern_department').val(),
-            coordinator_name: $('#coordinator_name').val(),
-            hours_needed: $('#hours_needed').val(),
-            coordinator_email: $('#coordinator_email').val(),
-            internship_status: $('#internship_status').val(),
-            intern_account_email: $('#intern_account_email').val(),
-            intern_password: $('#intern_password').val()
+            intern_gender: gender,
+            intern_address: address,
+            intern_birthdate: birthdate,
+            intern_civil_status: civilStatus,
+            intern_personal_email: personalEmail,
+            intern_contact_number: contactNumber,
+            studentID: studentID,
+            intern_department: department,
+            coordinator_name: coordinator_name,
+            hours_needed: hours_needed,
+            coordinator_email: coordinator_email,
+            internship_status: internship_status,
+            intern_account_email: accountEmail,
+            intern_password: password
         };
 
-        // Disable the update button to prevent multiple clicks
         $(this).prop('disabled', true);
 
-        // Perform AJAX call
         $.ajax({
             url: 'controller/interns/update-interns.php',
             method: 'POST',
             data: data,
-            dataType: 'json', // Expect JSON response from the server
+            dataType: 'json',
             success: function (response) {
                 if (response.success) {
-                    alert('Intern updated successfully!');
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-right',
+                        icon: 'success',
+                        title: 'Intern updated successfully!',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#b9f6ca',
+                        iconColor: '#2e7d32',
+                        color: '#155724',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
+                    $('#internDeleteBtn').hide();
+                    $('#internUpdateBtn').hide();
+                    loadInterns();
                     disableAndResetForms();
                 } else {
-                    alert('Error: ' + response.message);
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-right',
+                        icon: 'error',
+                        title: 'Error: ' + response.message,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#ffcccb',
+                        iconColor: '#c0392b',
+                        color: '#721c24',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
                 }
             },
             error: function (xhr, status, error) {
                 console.error('AJAX Error:', error);
-                alert('An error occurred while updating intern data. Please try again.');
+                Swal.fire({
+                    toast: true,
+                    position: 'top-right',
+                    icon: 'error',
+                    title: 'An error occurred while updating intern data. Please try again.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#ffcccb',
+                    iconColor: '#c0392b',
+                    color: '#721c24',
+                    customClass: {
+                        popup: 'mt-5'
+                    }
+                });
             },
             complete: function () {
-                // Re-enable the update button
                 $('#internUpdateBtn').prop('disabled', false);
             }
         });

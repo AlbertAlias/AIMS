@@ -12,7 +12,7 @@ $(document).ready(function() {
                     response.admins.forEach(function(admin) {
                         let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 admin-btn" data-id="${admin.id}">
                                     ${admin.last_name}, ${admin.first_name}
-                                </button>`;
+                                    </button>`;
                         adminsInfo.append(btn);
                     });
                 } else {
@@ -26,6 +26,11 @@ $(document).ready(function() {
     };
 
     loadAdmins();
+
+    $(document).on('click', '.admin-btn', function() {
+        const adminId = $(this).data('id');
+        window.loadAdminDetails(adminId);
+    });
 
     window.loadAdminDetails = function(id) {
         $.ajax({

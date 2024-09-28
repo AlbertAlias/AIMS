@@ -28,8 +28,9 @@ ini_set('display_errors', 1);
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/departments.css">
     <link rel="stylesheet" href="../assets/css/coordinators.css">
-    <link rel="stylesheet" href="../assets/css/admin-profile.css">
     <link rel="stylesheet" href="../assets/css/manage-users.css">
+    <link rel="stylesheet" href="../assets/css/admin-profile.css">
+
     <!-- <link rel="stylesheet" href="assets/css/datatable.css"> -->
     <!-- <link rel="stylesheet" href="assets/css/ownTable.css"> -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -88,6 +89,7 @@ ini_set('display_errors', 1);
                     <?php include "pages/coordinators.php"; ?>
                     <?php include "pages/interns.php"; ?>
                     <?php include "pages/sub-admins.php"; ?>
+                    <?php include "pages/admin-profile.php"; ?>
                 </div>
 
                 <!-- Content Row -->
@@ -137,8 +139,6 @@ ini_set('display_errors', 1);
 
         <script src="functions/admins/form-enable.js" defer></script>
         <script src="functions/admins/intern-email.js" defer></script>
-
-        <!-- <script src="functions/admin-profile/drag_drop.js" defer></script> -->
     <!--END::FUNCTIONS-->
 
     <!--START::CRUD AJAX FUNCTIONS-->
@@ -166,6 +166,9 @@ ini_set('display_errors', 1);
         <script src="crud-ajax/admins/create-admins.js" defer></script>
         <script src="crud-ajax/admins/retrieve-admin-details.js" defer></script>
         <script src="crud-ajax/admins/update-admins.js" defer></script>
+
+        <script src="crud-ajax/profile/retrieve-admins-initials.js" defer></script>
+        <script src="crud-ajax/profile/retrieve-admin-users.js" defer></script>
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>
 </html>
