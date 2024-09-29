@@ -5,7 +5,10 @@ error_reporting(E_ALL);
 header('Content-Type: application/json');
 include '../../../dbconn.php';
 
-$sql = "SELECT id, last_name, first_name FROM admins";
+$sql = "SELECT a.id, u.last_name, u.first_name
+        FROM admins a
+        JOIN users u ON a.user_id = u.id";
+
 $result = $conn->query($sql);
 
 $response = [];

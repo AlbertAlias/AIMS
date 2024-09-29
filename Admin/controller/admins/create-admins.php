@@ -10,51 +10,65 @@ header('Content-Type: application/json'); // Set header for JSON response
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
 
-    // Validate fields
+    // Validate required fields
     if (empty($data['last_name']) || empty($data['first_name']) || empty($data['gender']) ||
         empty($data['address']) || empty($data['birthdate']) || empty($data['civil_status']) ||
         empty($data['contact_number']) || empty($data['personal_email']) ||
-        empty($data['account_email']) || empty($data['password']) || empty($data['role'])) {
+        empty($data['account_email']) || empty($data['password']) || empty($data['user_type'])) {
         echo json_encode(['success' => false, 'message' => 'All fields are required.']);
         exit;
     }
 
-    // Check for duplicate account email
-    $stmt = $conn->prepare("SELECT * FROM admins WHERE account_email = ?");
+    // Check for duplicate account email in the users table
+    $stmt = $conn->prepare("SELECT * FROM users WHERE account_email = ?");
     $stmt->bind_param("s", $data['account_email']);
     $stmt->execute();
     $result = $stmt->get_result();
     
     if ($result->num_rows > 0) {
-        echo json_encode(['success' => false, 'message' => 'Admin with this email already exists.']);
+        echo json_encode(['success' => false, 'message' => 'User with this email already exists.']);
         exit;
     }
     $stmt->close();
 
     $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
 
-    // Prepare SQL query
-    $stmt = $conn->prepare("INSERT INTO admins (last_name, first_name, middle_name, suffix, gender,
-    address, birthdate, civil_status, contact_number, personal_email, account_email, password, role)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-    // Check if statement preparation failed
+    // Insert into the users table
+    $stmt = $conn->prepare("INSERT INTO users (last_name, first_name, middle_name, suffix, gender, address, birthdate, civil_status, contact_number, personal_email, account_email, password, user_type)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     if ($stmt === false) {
-        echo json_encode(['success' => false, 'message' => 'Failed to prepare the SQL statement.']);
+        echo json_encode(['success' => false, 'message' => 'Failed to prepare the SQL statement for users.']);
         exit;
     }
 
-    // Bind parameters and execute
-    $stmt->bind_param(
-        'sssssssssssss', $data['last_name'], $data['first_name'], $data['middle_name'],
-        $data['suffix'], $data['gender'], $data['address'], $data['birthdate'], $data['civil_status'],
+    $stmt->bind_param('sssssssssssss',
+        $data['last_name'], $data['first_name'], $data['middle_name'], $data['suffix'],
+        $data['gender'], $data['address'], $data['birthdate'], $data['civil_status'],
         $data['contact_number'], $data['personal_email'], $data['account_email'], $hashedPassword,
-        $data['role'],);
+        $data['user_type']
+    );
 
     if ($stmt->execute()) {
-        echo json_encode(['success' => true, 'message' => 'Admin added successfully!']);
+        $user_id = $stmt->insert_id;
+
+        // Insert into the admins table
+        if ($data['user_type'] === 'admin' || $data['user_type'] === 'sub-admin') {
+            $stmt_admin = $conn->prepare("INSERT INTO admins (user_id) VALUES (?)");
+            $stmt_admin->bind_param("i", $user_id);
+
+            if ($stmt_admin->execute()) {
+                echo json_encode(['success' => true, 'message' => 'Admin added successfully!']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Failed to insert into admins table.']);
+            }
+
+            $stmt_admin->close();
+        } else {
+            echo json_encode(['success' => true, 'message' => 'User added successfully without admin role.']);
+        }
+
     } else {
-        echo json_encode(['success' => false, 'message' => 'Failed to execute the SQL statement.']);
+        echo json_encode(['success' => false, 'message' => 'Failed to execute the SQL statement for users.']);
     }
 
     $stmt->close();

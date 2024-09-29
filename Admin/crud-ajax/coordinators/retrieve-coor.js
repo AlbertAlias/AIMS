@@ -1,32 +1,34 @@
 $(document).ready(function() {
-    window.loadCoordinators = function() {
+    window.loadCoor = function() {
         $.ajax({
             url: 'controller/coordinators/retrieve-coor.php',
             method: 'GET',
             dataType: 'json',
             success: function(response) {
-                let coordinatorInfo = $('#coordinatorInfo');
-                coordinatorInfo.empty();
+                if (response.success) {
+                    let coordinatorInfo = $('#coordinatorInfo');
+                    coordinatorInfo.empty();
 
-                response.forEach(function(coordinator) {
-                    let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 coordinator-btn" data-id="${coordinator.id}">
+                    response.coordinators.forEach(function(coordinator) {
+                        let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 coor-btn" data-id="${coordinator.id}">
                                     ${coordinator.last_name}, ${coordinator.first_name}
-                                </button>`;
-                    coordinatorInfo.append(btn);
-                });
-
-                $('.coordinator-btn').on('click', function() {
-                    const id = $(this).data('id');
-                    window.loadCoorInfo(id);
-                });
+                                    </button>`;
+                        coordinatorInfo.append(btn);
+                    });
+                } else {
+                    console.error('Failed to load coordinator:', response.message);
+                }
             },
             error: function(xhr, status, error) {
-                console.error('Failed to load coordinators:', error);
+                console.error('Failed to load coordinator:', error);
             }
         });
     };
 
-    window.loadCoorInfo = function(id) {
+    loadCoor();
+
+    window.loadCoorDetails = function(id) {
+        console.log('Loading coordinator details for ID:', id);
         $.ajax({
             url: 'controller/coordinators/retrieve-coor-info.php',
             method: 'GET',
@@ -37,7 +39,8 @@ $(document).ready(function() {
                     console.error('Error:', response.error);
                     return;
                 }
-    
+
+                // Populate the form with coordinator details
                 $('#coorID').val(response.id);
                 $('#coor_last_name').val(response.last_name).prop('disabled', false);
                 $('#coor_first_name').val(response.first_name).prop('disabled', false);
@@ -49,21 +52,22 @@ $(document).ready(function() {
                 $('#coor_civil_status').val(response.civil_status).prop('disabled', false);
                 $('#coor_personal_email').val(response.personal_email).prop('disabled', false);
                 $('#coor_contact_number').val(response.contact_number).prop('disabled', false);
-    
-                // Enable the department select and set the value
-                const departmentSelect = $('#coor_department');
-                departmentSelect.prop('disabled', false);
-                departmentSelect.val(response.department);
-    
+                $('#coor_department').val(response.department_id).prop('disabled', false);
                 $('#coor_account_email').val(response.account_email).prop('disabled', false);
                 $('#coor_password').val(response.password).prop('disabled', false);
-                $('#coorSubmitBtn').prop('disabled', false);
+                $('#coorUpdateBtn').prop('disabled', false);
             },
             error: function(xhr, status, error) {
                 console.error('Error retrieving coordinator details:', error);
             }
         });
-    };    
+    };
 
-    loadCoordinators();
+    $(document).on('click', '.coor-btn', function() {
+        const coorId = $(this).data('id');
+        window.loadCoorDetails(coorId);
+    });
+    
+    // Expose the function for updating the coordinator list
+    window.refreshCoorList = loadCoor;
 });

@@ -4,8 +4,11 @@ document.getElementById('adminSubmitBtn').addEventListener('click', function (ev
     
     if (adminSubmitBtn.disabled) return;
     adminSubmitBtn.disabled = true;
+    
     const last_name = document.getElementById('admin_last_name').value;
     const first_name = document.getElementById('admin_first_name').value;
+    const middle_name = document.getElementById('admin_middle_name').value;
+    const suffix = document.getElementById('admin_suffix').value;
     const gender = document.getElementById('admin_gender').value;
     const address = document.getElementById('admin_address').value;
     const birthdate = document.getElementById('admin_birthdate').value;
@@ -14,11 +17,11 @@ document.getElementById('adminSubmitBtn').addEventListener('click', function (ev
     const personal_email = document.getElementById('admin_personal_email').value;
     const account_email = document.getElementById('admin_account_email').value;
     const password = document.getElementById('admin_password').value;
-    const role = document.getElementById('role').value;
+    const user_type = document.getElementById('user_type').value;
 
     // Check for empty required fields
     if (!last_name || !first_name || !gender || !address || !birthdate || !civil_status ||
-        !contact_number || !personal_email || !account_email || !password || !role) {
+        !contact_number || !personal_email || !account_email || !password || !user_type) {
         Swal.fire({
             toast: true,
             position: 'top-end',
@@ -40,8 +43,8 @@ document.getElementById('adminSubmitBtn').addEventListener('click', function (ev
     const data = {
         last_name,
         first_name,
-        middle_name: document.getElementById('admin_middle_name').value,
-        suffix: document.getElementById('admin_suffix').value,
+        middle_name,
+        suffix,
         gender,
         address,
         birthdate,
@@ -50,7 +53,7 @@ document.getElementById('adminSubmitBtn').addEventListener('click', function (ev
         personal_email,
         account_email,
         password,
-        role
+        user_type
     };
 
     fetch('controller/admins/create-admins.php', {

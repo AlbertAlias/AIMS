@@ -12,11 +12,11 @@ $(document).ready(function () {
         const personalEmail = $('#admin_personal_email').val();
         const accountEmail = $('#admin_account_email').val();
         const password = $('#admin_password').val();
-        const role = $('#role').val();
+        const userType = $('#user_type').val(); // Update here
 
         // Check for required fields
         if (!lastName || !firstName || !gender || !address || !birthdate || !civilStatus ||
-            !contactNumber || !personalEmail || !accountEmail || !role) {
+            !contactNumber || !personalEmail || !accountEmail || !userType) { // Update here
             Swal.fire({
                 toast: true,
                 position: 'top-right',
@@ -48,7 +48,7 @@ $(document).ready(function () {
             admin_personal_email: personalEmail,
             admin_account_email: accountEmail,
             admin_password: password,
-            role: role
+            user_type: userType // Update here
         };
 
         $(this).prop('disabled', true);

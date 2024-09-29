@@ -58,7 +58,7 @@ $(document).ready(function() {
                 $('#admin_personal_email').val(response.personal_email).prop('disabled', false);
                 $('#admin_account_email').val(response.account_email).prop('disabled', false);
                 $('#admin_password').val(response.password).prop('disabled', false);
-                $('#role').val(response.role).prop('disabled', false);
+                $('#user_type').val(response.role).prop('disabled', false);
                 $('#adminUpdateBtn').prop('disabled', false);
             },
             error: function(xhr, status, error) {

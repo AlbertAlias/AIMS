@@ -114,11 +114,11 @@
                             <input type="password" class="form-control" id="admin_password" name="admin_password" required disabled>
                         </div>
                         <div class="mb-3">
-                            <label for="role" class="form-label required-asterisk">Role <span class="text-danger">*</span></label>
-                            <select class="form-select" id="role" name="role" required disabled>
+                            <label for="user_type" class="form-label required-asterisk">Role <span class="text-danger">*</span></label>
+                            <select class="form-select" id="user_type" name="user_type" required disabled>
                                 <option selected disabled>Choose Role</option>
-                                <option value="Admin">Admin</option>
-                                <option value="Sub-Admin">Sub-admin</option>
+                                <option value="admin">Admin</option>
+                                <option value="sub-admin">Sub-admin</option>
                             </select>
                         </div>
                     </form>

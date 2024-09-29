@@ -10,19 +10,21 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
 
     const last_name = document.getElementById('coor_last_name').value;
     const first_name = document.getElementById('coor_first_name').value;
+    const middle_name = document.getElementById('coor_middle_name').value;
+    const suffix = document.getElementById('coor_suffix').value;
     const gender = document.getElementById('coor_gender').value;
     const address = document.getElementById('coor_address').value;
     const birthdate = document.getElementById('coor_birthdate').value;
     const civil_status = document.getElementById('coor_civil_status').value;
     const personal_email = document.getElementById('coor_personal_email').value;
     const contact_number = document.getElementById('coor_contact_number').value;
-    const department = document.getElementById('coor_department').value;
+    const department_id = document.getElementById('coor_department').value; // Updated to department_id
     const account_email = document.getElementById('coor_account_email').value;
     const password = document.getElementById('coor_password').value;
 
     // Check for empty required fields
     if (!last_name || !first_name || !gender || !address || !birthdate || !civil_status ||
-        !personal_email || !contact_number || !department || !account_email || !password) {
+        !personal_email || !contact_number || !department_id || !account_email || !password) {
         Swal.fire({
             toast: true,
             position: 'top-end',
@@ -44,15 +46,15 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
     const data = {
         last_name,
         first_name,
-        middle_name: document.getElementById('coor_middle_name').value,
-        suffix: document.getElementById('coor_suffix').value,
+        middle_name,
+        suffix,
         gender,
         address,
         birthdate,
         civil_status,
         personal_email,
         contact_number,
-        department,
+        department_id, // Send department_id instead of department
         account_email,
         password
     };
@@ -64,7 +66,10 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
         },
         body: JSON.stringify(data) // Send JSON-encoded data
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log(response); // Log the full response
+        return response.json();
+    })
     .then(data => {
         if (data.success) {
             Swal.fire({
@@ -82,10 +87,7 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
                 }
             });
             disableAndResetForms();
-
-            // Call the function to dynamically load the updated list of coordinators
-            window.loadCoordinators(); // Update this line
-
+            window.loadCoor(); // Call to update the list of coordinators
         } else {
             Swal.fire({
                 toast: true,

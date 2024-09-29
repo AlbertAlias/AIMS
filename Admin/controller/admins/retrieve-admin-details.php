@@ -8,9 +8,10 @@ header('Content-Type: application/json');
 
 if (isset($_GET['id'])) {
     $admin_id = intval($_GET['id']);
-    $query = "SELECT id, last_name, first_name, middle_name, suffix, gender, address,
-        birthdate,civil_status, contact_number, personal_email, account_email, password,
-        role FROM admins WHERE id = ?";
+    $query = "SELECT u.id, u.last_name, u.first_name, u.middle_name, u.suffix, u.gender, u.address,
+        u.birthdate, u.civil_status, u.contact_number, u.personal_email, u.account_email, u.password,
+        u.user_type
+        FROM users u JOIN admins a ON u.id = a.user_id WHERE a.id = ?";
     
     if ($stmt = $conn->prepare($query)) {
         $stmt->bind_param("i", $admin_id);

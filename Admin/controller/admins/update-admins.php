@@ -44,20 +44,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $personal_email = $_POST['admin_personal_email'];
     $account_email = $_POST['admin_account_email'];
     $password = $_POST['admin_password'];
-    $role = $_POST['role'];
+    $user_type = $_POST['user_type']; // Update here
 
     $hashed_password = empty($password) ? null : password_hash($password, PASSWORD_BCRYPT);
 
-    // Updated SQL query with proper placeholders
-    $sql = "UPDATE admins SET last_name = ?, first_name = ?, middle_name = ?, suffix = ?, 
+    // Updated SQL query to change role to user_type
+    $sql = "UPDATE users SET last_name = ?, first_name = ?, middle_name = ?, suffix = ?, 
             gender = ?, address = ?, birthdate = ?, civil_status = ?, contact_number = ?,
-            personal_email = ?, account_email = ?, password = ?, role = ? WHERE id = ?";
+            personal_email = ?, account_email = ?, password = ?, user_type = ? WHERE id = ?";
 
     if ($stmt = $conn->prepare($sql)) {
         // Bind parameters including hashed password
         $stmt->bind_param("sssssssssssssi", $last_name, $first_name, $middle_name, 
-            $suffix, $gender, $address, $birthdate, $civil_status, $contact_number, $personal_email,
-            $account_email, $hashed_password, $role, $id
+            $suffix, $gender, $address, $birthdate, $civil_status, $contact_number, 
+            $personal_email, $account_email, $hashed_password, $user_type, $id
         );
 
         if ($stmt->execute()) {

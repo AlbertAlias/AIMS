@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     console.error('Error updating department: ' + data.message);
 
-                    // SweetAlert2 toast for error with darker red container
+                    // SweetAlert2 toast for error with darker red containerz
                     Swal.fire({
                         toast: true,
                         position: 'top-right',

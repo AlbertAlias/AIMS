@@ -10,7 +10,7 @@ function loadDepartments() {
 
             if (Array.isArray(response.departments)) {
                 response.departments.forEach(function(department) {
-                    departmentSelect.append(`<option value="${department.department_name}">${department.department_name}</option>`);
+                    departmentSelect.append(`<option value="${department.id}">${department.department_name}</option>`); // Updated to use 'id'
                 });
             } else {
                 console.error('Invalid response structure:', response);

@@ -18,7 +18,7 @@
                     <div class="row mb-3">
                         <!-- Last Name -->
                         <div class="col-md-5">
-                            <input type="hidden" id="coorID" name="coorID">
+                            <input type="hidden" id="coorID" name="id">
                             <label for="coor_last_name" class="form-label required-asterisk">Last Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="coor_last_name" name="coor_last_name" required disabled>
                         </div>

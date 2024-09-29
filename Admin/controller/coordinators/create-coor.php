@@ -5,26 +5,32 @@ error_reporting(E_ALL);
 
 include '../../../dbconn.php';
 
-header('Content-Type: application/json'); // Set header for JSON response
+header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
 
-    // Validate fields
-    if (empty($data['last_name']) || empty($data['first_name']) || empty($data['gender']) ||
-        empty($data['address']) || empty($data['birthdate']) || empty($data['civil_status']) ||
-        empty($data['personal_email']) || empty($data['contact_number']) || empty($data['department']) ||
-        empty($data['account_email']) || empty($data['password'])) {
-        echo json_encode(['success' => false, 'message' => 'All fields are required.']);
+    // Validate all fields
+    $required_fields = ['last_name', 'first_name', 'gender', 'address', 'birthdate', 'civil_status', 'personal_email', 'contact_number', 'department_id', 'account_email', 'password'];
+    foreach ($required_fields as $field) {
+        if (empty($data[$field])) {
+            echo json_encode(['success' => false, 'message' => 'All fields are required.']);
+            exit;
+        }
+    }
+
+    // Validate email format
+    if (!filter_var($data['personal_email'], FILTER_VALIDATE_EMAIL)) {
+        echo json_encode(['success' => false, 'message' => 'Invalid email format.']);
         exit;
     }
 
     // Check for duplicate account email
-    $stmt = $conn->prepare("SELECT * FROM coordinators WHERE account_email = ?");
+    $stmt = $conn->prepare("SELECT * FROM users WHERE account_email = ?");
     $stmt->bind_param("s", $data['account_email']);
     $stmt->execute();
     $result = $stmt->get_result();
-    
+
     if ($result->num_rows > 0) {
         echo json_encode(['success' => false, 'message' => 'Coordinator with this email already exists.']);
         exit;
@@ -34,33 +40,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Hash the password
     $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
 
-    // Prepare SQL query
-    $stmt = $conn->prepare("INSERT INTO coordinators (last_name, first_name, middle_name, suffix, gender,
-    address, birthdate, civil_status, personal_email, contact_number, department, account_email, password)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-    // Check if statement preparation failed
-    if ($stmt === false) {
+    // Insert into users table
+    $stmt = $conn->prepare("INSERT INTO users (last_name, first_name, middle_name, suffix, gender, address, birthdate, civil_status, personal_email, contact_number, account_email, password, user_type, department_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'coordinator', ?)");
+    
+    if (!$stmt) {
         echo json_encode(['success' => false, 'message' => 'Failed to prepare the SQL statement.']);
         exit;
     }
 
-    // Bind parameters and execute
     $stmt->bind_param(
-        'sssssssssssss', $data['last_name'], $data['first_name'], $data['middle_name'],
-        $data['suffix'], $data['gender'], $data['address'], $data['birthdate'], $data['civil_status'],
-        $data['personal_email'], $data['contact_number'], $data['department'], $data['account_email'],
-        $hashedPassword);
+        'sssssssssssss',
+        $data['last_name'], $data['first_name'], $data['middle_name'], $data['suffix'],
+        $data['gender'], $data['address'], $data['birthdate'], $data['civil_status'],
+        $data['personal_email'], $data['contact_number'], $data['account_email'], $hashedPassword,
+        $data['department_id']
+    );
 
     if ($stmt->execute()) {
-        echo json_encode(['success' => true, 'message' => 'Coordinator added successfully!']);
+        $user_id = $stmt->insert_id;
+
+        // Insert into coordinators table
+        $stmt->close();
+        $stmt = $conn->prepare("INSERT INTO coordinators (user_id, department_id) VALUES (?, ?)");
+        if (!$stmt) {
+            echo json_encode(['success' => false, 'message' => 'Failed to prepare the coordinator insert statement.']);
+            exit;
+        }
+
+        $stmt->bind_param("ii", $user_id, $data['department_id']);
+
+        if ($stmt->execute()) {
+            echo json_encode(['success' => true, 'message' => 'Coordinator added successfully!']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Failed to add coordinator record. Error: ' . $stmt->error]);
+        }
+        $stmt->close();
     } else {
         echo json_encode(['success' => false, 'message' => 'Failed to execute the SQL statement.']);
     }
 
-    $stmt->close();
     $conn->close();
 } else {
     echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
 }
-?>
