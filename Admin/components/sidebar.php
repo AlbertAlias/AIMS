@@ -56,7 +56,6 @@
     </div>
 </ul>
 
-
     <!-- Nav Item - Manage Users -->
     <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseAddUser" aria-expanded="true" aria-controls="collapseAddUser">
@@ -73,65 +72,6 @@
     </li> -->
 
     <script>
-    const scriptsMap = {
-        dashboard: [
-            'crud-ajax/dashboard/retrieve-deptCounts.js',
-            'crud-ajax/dashboard/retrieve-coorCounts.js',
-            'crud-ajax/dashboard/retrieve-internCounts.js',
-            'crud-ajax/dashboard/retrieve-adminCounts.js'
-        ],
-        departments: [
-            'functions/departments/form-enable.js',
-            'crud-ajax/departments/create-depts.js',
-            'crud-ajax/departments/retrieve-depts.js',
-            'crud-ajax/departments/update-depts.js',
-            'crud-ajax/departments/delete-depts.js'
-        ],
-        coordinators: [
-            'functions/coordinators/form-enable.js',
-            'functions/coordinators/coor-email.js',
-            'functions/coordinators/contact-number.js',
-            'crud-ajax/coordinators/create-coor.js',
-            'crud-ajax/coordinators/retrieve-coor.js',
-            'crud-ajax/coordinators/retrieve-deptsName.js',
-            'crud-ajax/coordinators/update-coor.js'
-        ],
-        interns: [
-            'functions/interns/form-enable.js',
-            'functions/interns/intern-email.js',
-            'functions/interns/studID.js',
-            'functions/interns/internPass.js',
-            'crud-ajax/interns/create-interns.js',
-            'crud-ajax/interns/retrieve-deptsName.js',
-            'crud-ajax/interns/retrieve-interns.js',
-            'crud-ajax/interns/update-interns.js'
-        ],
-        subAdmins: [
-            'functions/admins/form-enable.js',
-            'functions/admins/intern-email.js',
-            'crud-ajax/admins/create-admins.js',
-            'crud-ajax/admins/retrieve-admins.js',
-            'crud-ajax/admins/retrieve-admin-details.js',
-            'crud-ajax/admins/update-admins.js'
-        ],
-        profile: [
-            ''
-        ]
-    };
-
-    function loadScripts(scripts) {
-        const existingScripts = document.querySelectorAll('script[data-dynamic="true"]');
-        existingScripts.forEach(script => script.remove());
-
-        scripts.forEach(function(src) {
-            const script = document.createElement('script');
-            script.src = src;
-            script.defer = true;
-            script.setAttribute('data-dynamic', 'true');
-            document.body.appendChild(script);
-        });
-    }
-
     function showSection(event, sectionID) {
     if (event && event.target) {
         const clickedLink = event.target.closest('.menu-link');
@@ -152,7 +92,6 @@
     var activeSection = document.getElementById(sectionID);
         if (activeSection) {
             activeSection.style.display = 'block';
-            loadScripts(scriptsMap[sectionID] || []);
         }
     }
 
@@ -160,4 +99,3 @@
         showSection(null, 'dashboard');
     };
 </script>
-

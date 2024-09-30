@@ -6,7 +6,13 @@ if (isset($_SESSION['email'])) {
     $email = $_SESSION['email'];
 
     // Prepare and execute the query
-    $stmt = $conn->prepare("SELECT first_name, last_name FROM admins WHERE account_email = ?");
+    $stmt = $conn->prepare(
+        "SELECT users.first_name, users.last_name 
+                FROM admins 
+                INNER JOIN users ON admins.user_id = users.id 
+                WHERE users.account_email = ?
+    ");
+    
     $stmt->bind_param('s', $email);
     $stmt->execute();
     $stmt->bind_result($first_name, $last_name);

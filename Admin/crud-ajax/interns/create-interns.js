@@ -4,8 +4,11 @@ document.getElementById('internSubmitBtn').addEventListener('click', function (e
 
     if (internSubmitBtn.disabled) return;
     internSubmitBtn.disabled = true;
+
     const last_name = document.getElementById('intern_last_name').value;
     const first_name = document.getElementById('intern_first_name').value;
+    const middle_name = document.getElementById('intern_middle_name').value;
+    const suffix = document.getElementById('intern_suffix').value;
     const gender = document.getElementById('intern_gender').value;
     const address = document.getElementById('intern_address').value;
     const birthdate = document.getElementById('intern_birthdate').value;
@@ -45,8 +48,8 @@ document.getElementById('internSubmitBtn').addEventListener('click', function (e
     const data = {
         last_name,
         first_name,
-        middle_name: document.getElementById('intern_middle_name').value,
-        suffix: document.getElementById('intern_suffix').value,
+        middle_name,
+        suffix,
         gender,
         address,
         birthdate,

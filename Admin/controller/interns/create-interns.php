@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Check for duplicate account email
-    $stmt = $conn->prepare("SELECT * FROM interns WHERE account_email = ?");
+    $stmt = $conn->prepare("SELECT * FROM users WHERE account_email = ?");
     $stmt->bind_param("s", $data['account_email']);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -51,15 +51,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data['contact_number'], $data['studentID'], $data['department'], $data['coordinator_name'], 
         $data['hours_needed'], $data['coordinator_email'], $data['internship_status'],
         $data['account_email'], $hashedPassword);
-    if ($stmt->execute()) {
-        echo json_encode(['success' => true, 'message' => 'Intern added successfully!']);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Failed to execute the SQL statement.']);
-    }
+        
+        if (!$stmt->execute()) {
+            echo json_encode(['success' => false, 'message' => 'Failed to add user.']);
+            exit;
+        }
+        
+        $user_id = $stmt->insert_id;
+        $stmt->close();
 
-    $stmt->close();
-    $conn->close();
-} else {
-    echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
-}
+        $stmt = $conn->prepare(
+            "INSERT INTO interns (user_id, studentID, internship_status, coordinator_name, 
+            coordinator_email, hours_needed) VALUES (?, ?, ?, ?, ?, ?)"
+        );
+
+        $stmt->bind_param(
+            'issssi', 
+            $user_id, $data['studentID'], $data['internship_status'], 
+            $data['coordinator_name'], $data['coordinator_email'], $data['hours_needed']
+        );
+        
+        if ($stmt->execute()) {
+            echo json_encode(['success' => true, 'message' => 'Intern added successfully!']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Failed to add intern.']);
+        }
+
+        $stmt->close();
+        $conn->close();
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
+    }
 ?>

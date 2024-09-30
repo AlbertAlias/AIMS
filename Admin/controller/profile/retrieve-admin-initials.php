@@ -2,7 +2,6 @@
 include('../../../dbconn.php');
 session_start();
 
-// Check if user email is set in session
 if (!isset($_SESSION['email'])) {
     echo json_encode(['error' => 'User not logged in']);
     exit();
@@ -11,7 +10,11 @@ if (!isset($_SESSION['email'])) {
 $accountEmail = $_SESSION['email'];
 
 // Prepare SQL to fetch the admin's first and last name
-$sql = "SELECT first_name, last_name FROM admins WHERE account_email = ?";
+$sql = "SELECT u.first_name, u.last_name 
+        FROM admins a
+        JOIN users u ON a.user_id = u.id
+        WHERE u.account_email = ?";
+
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $accountEmail);
 

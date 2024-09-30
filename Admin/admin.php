@@ -126,18 +126,18 @@ ini_set('display_errors', 1);
     <!-- <script src="js/sb-admin-2.js"></script> -->
 
     <!--START::FUNCTIONS-->
-        <script src="functions/departments/form-enable.js" defer></script>
+        <script src="functions/departments/dept-form-enable.js" defer></script>
 
-        <script src="functions/coordinators/form-enable.js" defer></script>
+        <script src="functions/coordinators/coor-form-enable.js" defer></script>
         <script src="functions/coordinators/coor-email.js" defer></script>
         <script src="functions/coordinators/contact-number.js" defer></script>
 
-        <script src="functions/interns/form-enable.js" defer></script>
+        <script src="functions/interns/intern-form-enable.js" defer></script>
         <script src="functions/interns/intern-email.js" defer></script>
         <script src="functions/interns/studID.js" defer></script>
         <script src="functions/interns/internPass.js" defer></script>
 
-        <script src="functions/admins/form-enable.js" defer></script>
+        <script src="functions/admins/admin-form-enable.js" defer></script>
         <script src="functions/admins/intern-email.js" defer></script>
     <!--END::FUNCTIONS-->
 

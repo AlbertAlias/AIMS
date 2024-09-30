@@ -1,3 +1,5 @@
+let currentSelectedDepartment;
+
 function loadDepartments() {
     $.ajax({
         url: 'controller/interns/retrieve-deptsName.php',
@@ -48,12 +50,15 @@ function loadCoorInfo(departmentName) {
 }
 
 $('#intern_department').on('change', function() {
-    selectedDepartment = $(this).val();
-    if (selectedDepartment) {
-        loadCoorInfo(selectedDepartment);
+    currentSelectedDepartment = $(this).val(); // Update the variable here
+    if (currentSelectedDepartment) {
+        loadCoorInfo(currentSelectedDepartment);
     }
 });
 
-$(document).ready(function() {
-    loadDepartments(); 
-});
+// $(document).ready(function() {
+//     if (!$('#intern_department').data('loaded')) {
+//         loadDepartments(); 
+//         $('#intern_department').data('loaded', true); // Mark as loaded to prevent re-triggering
+//     }
+// });

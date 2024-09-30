@@ -86,5 +86,87 @@
             </div>
         </div>
     </div>
-
 </div>
+
+<!-- <script>
+    $(document).ready(function() {
+        function fetchAdminCount() {
+            $.ajax({
+                url: '../controller/dashboards/retrieve-adminCounts.php',
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#num-admins').text(data.count);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching admin count:', error);
+                    $('#num-admins').text('0');
+                }
+            });
+        }
+
+        fetchAdminCount();
+    });
+
+    $(document).ready(function() {
+        function fetchCoordinatorCount() {
+            $.ajax({
+                url: '../controller/dashboards/retrieve-coorCounts.php',
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#num-coordinators').text(data.count);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching coordinator count:', error);
+                    $('#num-coordinators').text('0'); // Fallback in case of error
+                }
+            });
+        }
+
+        fetchCoordinatorCount(); // Call the function to fetch count
+    });
+
+    $(document).ready(function() {
+        function updateDepartmentCount() {
+            $.ajax({
+                url: '../controller/dashboards/retrieve-deptCounts.php',
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log("AJAX Success:", data);
+                    if (data.count !== undefined) {
+                        $('#num-departments').text(data.count);
+                    } else {
+                        $('#num-departments').text('0');
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.error("AJAX Error:", textStatus, errorThrown);
+                    $('#num-departments').text('0');
+                }
+            });
+        }
+
+        updateDepartmentCount();
+    });
+
+    $(document).ready(function() {
+        function fetchInternCount() {
+            $.ajax({
+                url: '../controller/dashboards/retrieve-internCounts.php',
+                method: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    $('#num-interns').text(data.count);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching intern count:', error);
+                    $('#num-interns').text('0');
+                }
+            });
+        }
+
+        fetchInternCount();
+    });
+</script> -->
