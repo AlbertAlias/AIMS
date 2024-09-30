@@ -10,8 +10,9 @@ function loadDepartments() {
 
             if (Array.isArray(response.departments)) {
                 response.departments.forEach(function(department) {
-                    departmentSelect.append(`<option value="${department.id}">${department.department_name}</option>`); // Updated to use 'id'
+                    departmentSelect.append(`<option value="${department.id}">${department.department_name}</option>`);
                 });
+                departmentSelect.prop('disabled', false); // Enable the select element after loading departments
             } else {
                 console.error('Invalid response structure:', response);
             }
@@ -21,7 +22,3 @@ function loadDepartments() {
         }
     });
 }
-
-$(document).ready(function() {
-    loadDepartments(); 
-});

@@ -1,12 +1,13 @@
 $(document).ready(function () {
     $('#coorUpdateBtn').off('click').on('click', function () {
+        $('#coordinatorForm input, #coordinatorForm select').prop('disabled', false);
         console.log('Update button clicked');
 
         const coorID = $('#coorID').val();
-        
-        // Get form values
         const lastName = $('#coor_last_name').val();
         const firstName = $('#coor_first_name').val();
+        const middleName = $('#coor_middle_name').val();
+        const suffix = $('#coor_suffix').val();
         const gender = $('#coor_gender').val();
         const address = $('#coor_address').val();
         const birthdate = $('#coor_birthdate').val();
@@ -15,9 +16,9 @@ $(document).ready(function () {
         const contactNumber = $('#coor_contact_number').val();
         const accountEmail = $('#coor_account_email').val();
         const password = $('#coor_password').val();
+        const departmentID = $('#coor_department').val();
 
-        // Check for required fields
-        if (!lastName || !firstName || !gender || !address || !birthdate || !civilStatus || !personalEmail || !contactNumber || !accountEmail) {
+        if (!lastName || !firstName || !gender || !address || !birthdate || !civilStatus || !personalEmail || !contactNumber || !accountEmail || !departmentID) {
             Swal.fire({
                 toast: true,
                 position: 'top-right',
@@ -25,22 +26,23 @@ $(document).ready(function () {
                 title: 'Please fill in all required fields.',
                 showConfirmButton: false,
                 timer: 3000,
-                background: '#ffcccb', // Light red container background
-                iconColor: '#c0392b', // Darker red icon
+                background: '#ffcccb',
+                iconColor: '#c0392b',
                 color: '#721c24',
                 customClass: {
                     popup: 'mt-5'
                 }
             });
-            return; // Exit the function if validation fails
+            $('#coordinatorForm input, #coordinatorForm select').prop('disabled', true);
+            return;
         }
 
         const data = {
             id: coorID,
             coor_last_name: lastName,
             coor_first_name: firstName,
-            coor_middle_name: $('#coor_middle_name').val(), // Optional
-            coor_suffix: $('#coor_suffix').val(), // Optional
+            coor_middle_name: middleName,
+            coor_suffix: suffix,
             coor_gender: gender,
             coor_address: address,
             coor_birthdate: birthdate,
@@ -48,7 +50,8 @@ $(document).ready(function () {
             coor_personal_email: personalEmail,
             coor_contact_number: contactNumber,
             coor_account_email: accountEmail,
-            coor_password: password
+            coor_password: password,
+            coor_department: departmentID
         };
 
         $(this).prop('disabled', true);
@@ -76,8 +79,8 @@ $(document).ready(function () {
                     });
                     $('#coorDeleteBtn').hide();
                     $('#coorUpdateBtn').hide();
-                    loadCoordinators();
-                    disableAndResetForms();
+                    window.loadCoor();
+                    resetAndLockForms() // Lock and reset the form after successful update
                 } else {
                     Swal.fire({
                         toast: true,

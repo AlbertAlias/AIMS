@@ -27,7 +27,13 @@ $(document).ready(function() {
 
     loadCoor();
 
+    // Flag to prevent double clicks
+    let isLoadingDetails = false;
+
     window.loadCoorDetails = function(id) {
+        if (isLoadingDetails) return; // Prevent further calls while loading
+        isLoadingDetails = true; // Set the flag to true
+
         console.log('Loading coordinator details for ID:', id);
         $.ajax({
             url: 'controller/coordinators/retrieve-coor-info.php',
@@ -35,6 +41,8 @@ $(document).ready(function() {
             data: { id: id },
             dataType: 'json',
             success: function(response) {
+                console.log('Coordinator Details:', response);
+
                 if (response.error) {
                     console.error('Error:', response.error);
                     return;
@@ -59,15 +67,23 @@ $(document).ready(function() {
             },
             error: function(xhr, status, error) {
                 console.error('Error retrieving coordinator details:', error);
+            },
+            complete: function() {
+                isLoadingDetails = false; // Reset the flag after completion
             }
         });
     };
 
-    $(document).on('click', '.coor-btn', function() {
+    // Ensure that loadDepartments is defined somewhere in your code
+    loadDepartments(); // Load departments when the document is ready
+
+    // Use .one to bind the event handler so it only triggers once per button
+    $(document).on('click', '.coor-btn', function(e) {
+        e.preventDefault(); // Prevent default action if inside a form
         const coorId = $(this).data('id');
         window.loadCoorDetails(coorId);
     });
-    
+
     // Expose the function for updating the coordinator list
     window.refreshCoorList = loadCoor;
 });

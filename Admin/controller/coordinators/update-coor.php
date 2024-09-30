@@ -7,90 +7,72 @@ $response = ['success' => false, 'message' => ''];
 // Set error reporting and logging
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
-error_log('Starting admin update process...');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = (int)$_POST['id'];
 
-    error_log("Checking for admin ID: $id");
-
-    // Check if the admin exists
-    $checkSql = "SELECT * FROM admins WHERE id = ?";
-    if ($checkStmt = $conn->prepare($checkSql)) {
-        $checkStmt->bind_param("i", $id);
-        $checkStmt->execute();
-        $checkResult = $checkStmt->get_result();
-
-        if ($checkResult->num_rows === 0) {
-            $response['message'] = 'No admin found with that ID.';
-            echo json_encode($response);
-            exit;
-        }
-        $checkStmt->close();
-    } else {
-        $response['message'] = 'Error preparing check statement: ' . $conn->error;
-        echo json_encode($response);
-        exit;
-    }
-
     // Retrieve form data
-    $last_name = $_POST['admin_last_name'];
-    $first_name = $_POST['admin_first_name'];
-    $middle_name = $_POST['admin_middle_name'];
-    $suffix = $_POST['admin_suffix'];
-    $gender = $_POST['admin_gender'];
-    $address = $_POST['admin_address'];
-    $birthdate = $_POST['admin_birthdate'];
-    $civil_status = $_POST['admin_civil_status'];
-    $contact_number = $_POST['admin_contact_number'];
-    $personal_email = $_POST['admin_personal_email'];
-    $account_email = $_POST['admin_account_email'];
-    $password = $_POST['admin_password'];
-    $role = $_POST['role'];
+    $last_name = $_POST['coor_last_name'];
+    $first_name = $_POST['coor_first_name'];
+    $middle_name = $_POST['coor_middle_name'];
+    $suffix = $_POST['coor_suffix'];
+    $gender = $_POST['coor_gender'];
+    $address = $_POST['coor_address'];
+    $birthdate = $_POST['coor_birthdate'];
+    $civil_status = $_POST['coor_civil_status'];
+    $contact_number = $_POST['coor_contact_number'];
+    $personal_email = $_POST['coor_personal_email'];
+    $account_email = $_POST['coor_account_email'];
+    $password = $_POST['coor_password']; // This may be optional
+    $department_id = (int)$_POST['coor_department']; // Coordinator's department
 
     // Hash the password if provided
     $hashed_password = empty($password) ? null : password_hash($password, PASSWORD_BCRYPT);
 
-    // Update query
-    $sql = "UPDATE admins SET last_name = ?, first_name = ?, middle_name = ?, suffix = ?, gender = ?, 
-            address = ?, birthdate = ?, civil_status = ?, contact_number = ?, personal_email = ?, 
-            account_email = ?, role = ?";
+    // Start a transaction to update both `users` and `coordinators` tables
+    $conn->begin_transaction();
 
-    // Append password only if it is provided
-    if ($hashed_password !== null) {
-        $sql .= ", password = ?";
-    }
+    try {
+        // Update the user details
+        $user_sql = "UPDATE users SET last_name = ?, first_name = ?, middle_name = ?, suffix = ?, gender = ?, 
+                     address = ?, birthdate = ?, civil_status = ?, contact_number = ?, personal_email = ?, 
+                     account_email = ?";
 
-    $sql .= " WHERE id = ?";
-
-    // Prepare the SQL statement
-    if ($stmt = $conn->prepare($sql)) {
-        // Bind parameters based on whether the password is provided
+        // Append password update only if provided
         if ($hashed_password !== null) {
-            $stmt->bind_param("sssssssssssssi", $last_name, $first_name, $middle_name, $suffix, $gender,
-                $address, $birthdate, $civil_status, $contact_number, $personal_email, $account_email, $role,
-                $hashed_password, $id);
-        } else {
-            $stmt->bind_param("ssssssssssssi", $last_name, $first_name, $middle_name, $suffix, $gender,
-                $address, $birthdate, $civil_status, $contact_number, $personal_email, $account_email, $role,
-                $id);
+            $user_sql .= ", password = ?";
         }
+        $user_sql .= " WHERE id = ?";
 
-        // Execute the query
-        if ($stmt->execute()) {
-            if ($stmt->affected_rows > 0) {
-                $response['success'] = true;
-                $response['message'] = 'Admin updated successfully!';
-            } else {
-                $response['message'] = 'No changes made to the admin.';
-            }
+        $stmt = $conn->prepare($user_sql);
+        if ($hashed_password !== null) {
+            $stmt->bind_param("ssssssssssssi", $last_name, $first_name, $middle_name, $suffix, $gender, 
+                              $address, $birthdate, $civil_status, $contact_number, $personal_email, 
+                              $account_email, $hashed_password, $id);
         } else {
-            $response['message'] = 'Error executing update: ' . $stmt->error;
+            $stmt->bind_param("sssssssssssi", $last_name, $first_name, $middle_name, $suffix, $gender, 
+                              $address, $birthdate, $civil_status, $contact_number, $personal_email, 
+                              $account_email, $id);
         }
-        $stmt->close();
-    } else {
-        $response['message'] = 'Error preparing statement: ' . $conn->error;
+        $stmt->execute();
+
+        // Update the coordinator-specific details
+        $coor_sql = "UPDATE coordinators SET department_id = ? WHERE user_id = ?";
+        $coor_stmt = $conn->prepare($coor_sql);
+        $coor_stmt->bind_param("ii", $department_id, $id);
+        $coor_stmt->execute();
+
+        $conn->commit();
+        $response['success'] = true;
+        $response['message'] = 'Coordinator updated successfully!';
+
+    } catch (Exception $e) {
+        $conn->rollback();
+        $response['message'] = 'Error updating coordinator: ' . $e->getMessage();
     }
+
+    $stmt->close();
+    $coor_stmt->close();
 } else {
     $response['message'] = 'Invalid request method.';
 }

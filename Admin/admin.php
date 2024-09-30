@@ -109,66 +109,50 @@ ini_set('display_errors', 1);
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- JQUERY CDN Link -->
-    <script src="https://code.jquery.com/jquery-3.7.1.js" defer></script>
-    <!-- BOOTSTRAP CDN LINK -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
-    <!--START:FONT AWESOME ICON LINK-->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://kit.fontawesome.com/29c04b1733.js" defer crossorigin="anonymous"></script>
-    <!--END:FONT AWESOME ICON LINK-->
-
-    
-    <!-- DataTables CDN Link -->
-    <!-- <script src="https://cdn.datatables.net/2.1.5/js/dataTables.js"></script> -->
-    <!-- Custom scripts for all pages-->
-    <script src="../js/sidebar.js" defer></script>
-    <!-- <script src="js/sb-admin-2.js"></script> -->
-
-    <!--START::FUNCTIONS-->
-        <script src="functions/departments/dept-form-enable.js" defer></script>
-
-        <script src="functions/coordinators/coor-form-enable.js" defer></script>
-        <script src="functions/coordinators/coor-email.js" defer></script>
-        <script src="functions/coordinators/contact-number.js" defer></script>
-
-        <script src="functions/interns/intern-form-enable.js" defer></script>
-        <script src="functions/interns/intern-email.js" defer></script>
-        <script src="functions/interns/studID.js" defer></script>
-        <script src="functions/interns/internPass.js" defer></script>
-
-        <script src="functions/admins/admin-form-enable.js" defer></script>
-        <script src="functions/admins/intern-email.js" defer></script>
-    <!--END::FUNCTIONS-->
+    <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
+    <script src="../js/sidebar.js"></script>
 
     <!--START::CRUD AJAX FUNCTIONS-->
-        <script src="crud-ajax/dashboard/retrieve-deptCounts.js" defer></script>
-        <script src="crud-ajax/dashboard/retrieve-coorCounts.js" defer></script>
-        <script src="crud-ajax/dashboard/retrieve-internCounts.js" defer></script>
-        <script src="crud-ajax/dashboard/retrieve-adminCounts.js" defer></script>
+    <script src="crud-ajax/dashboard/retrieve-deptCounts.js"></script>
+    <script src="crud-ajax/dashboard/retrieve-coorCounts.js"></script>
+    <script src="crud-ajax/dashboard/retrieve-internCounts.js"></script>
+    <script src="crud-ajax/dashboard/retrieve-adminCounts.js"></script>
 
-        <script src="crud-ajax/departments/create-depts.js" defer></script>
-        <script src="crud-ajax/departments/retrieve-depts.js" defer></script>
-        <script src="crud-ajax/departments/update-depts.js" defer></script>
-        <script src="crud-ajax/departments/delete-depts.js" defer></script>
+    <script src="functions/departments/dept-form-enable.js"></script>
+    <script src="crud-ajax/departments/create-depts.js"></script>
+    <script src="crud-ajax/departments/retrieve-depts.js"></script>
+    <script src="crud-ajax/departments/update-depts.js"></script>
+    <script src="crud-ajax/departments/delete-depts.js"></script>
 
-        <script src="crud-ajax/coordinators/create-coor.js" defer></script>
-        <script src="crud-ajax/coordinators/retrieve-coor.js" defer></script>
-        <script src="crud-ajax/coordinators/retrieve-deptsName.js" defer></script>
-        <script src="crud-ajax/coordinators/update-coor.js" defer></script>
-        <script src="crud-ajax/coordinators/delete-coor.js" defer></script>
+    <script src="crud-ajax/coordinators/retrieve-coor-deptsName.js"></script>
+    <script src="functions/coordinators/coor-form-enable.js"></script>
+    <script src="crud-ajax/coordinators/retrieve-coor.js"></script>
+    <script src="crud-ajax/coordinators/create-coor.js"></script>
+    <script src="functions/coordinators/coor-email.js"></script>
+    <script src="functions/coordinators/contact-number.js"></script>
+    <script src="crud-ajax/coordinators/update-coor.js"></script>
+    <script src="crud-ajax/coordinators/delete-coor.js"></script>
 
-        <script src="crud-ajax/interns/create-interns.js" defer></script>
-        <script src="crud-ajax/interns/retrieve-deptsName.js" defer></script>
-        <script src="crud-ajax/interns/retrieve-interns.js" defer></script>
-        <script src="crud-ajax/interns/update-interns.js" defer></script>
+    <script src="crud-ajax/interns/intern-retrieve-deptsName.js"></script>
+    <script src="crud-ajax/interns/retrieve-interns.js"></script>
+    <script src="functions/interns/intern-form-enable.js"></script>
+    <script src="crud-ajax/interns/create-interns.js"></script>
+    <script src="functions/interns/intern-email.js"></script>
+    <script src="functions/interns/studID.js"></script>
+    <script src="functions/interns/internPass.js"></script>
+    <script src="crud-ajax/interns/update-interns.js"></script>
 
-        <script src="crud-ajax/admins/create-admins.js" defer></script>
-        <script src="crud-ajax/admins/retrieve-admin-details.js" defer></script>
-        <script src="crud-ajax/admins/update-admins.js" defer></script>
+    <script src="crud-ajax/admins/create-admins.js"></script>
+    <script src="crud-ajax/admins/retrieve-admin-details.js"></script>
+    <script src="functions/admins/admin-form-enable.js"></script>
+    <script src="functions/admins/intern-email.js"></script>
+    <script src="crud-ajax/admins/update-admins.js"></script>
 
-        <script src="crud-ajax/profile/retrieve-admins-initials.js" defer></script>
-        <script src="crud-ajax/profile/retrieve-admin-users.js" defer></script>
+    <script src="crud-ajax/profile/retrieve-admins-initials.js"></script>
+    <script src="crud-ajax/profile/retrieve-admin-users.js"></script>
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>
 </html>
