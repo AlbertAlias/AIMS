@@ -6,6 +6,8 @@ error_reporting(E_ALL);
 header('Content-Type: application/json');
 include '../../../dbconn.php';
 
+error_log(print_r($_POST, true));
+
 $sql = "SELECT u.id, u.last_name, u.first_name
         FROM users u
         JOIN coordinators c ON u.id = c.user_id

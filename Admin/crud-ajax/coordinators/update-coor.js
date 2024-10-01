@@ -18,25 +18,7 @@ $(document).ready(function () {
         const password = $('#coor_password').val();
         const departmentID = $('#coor_department').val();
 
-        if (!lastName || !firstName || !gender || !address || !birthdate || !civilStatus || !personalEmail || !contactNumber || !accountEmail || !departmentID) {
-            Swal.fire({
-                toast: true,
-                position: 'top-right',
-                icon: 'error',
-                title: 'Please fill in all required fields.',
-                showConfirmButton: false,
-                timer: 3000,
-                background: '#ffcccb',
-                iconColor: '#c0392b',
-                color: '#721c24',
-                customClass: {
-                    popup: 'mt-5'
-                }
-            });
-            $('#coordinatorForm input, #coordinatorForm select').prop('disabled', true);
-            return;
-        }
-
+        // Remove validation for required fields
         const data = {
             id: coorID,
             coor_last_name: lastName,
@@ -77,10 +59,10 @@ $(document).ready(function () {
                             popup: 'mt-5'
                         }
                     });
+                    resetAndLockForms(); // Lock and reset the form after successful update
                     $('#coorDeleteBtn').hide();
                     $('#coorUpdateBtn').hide();
                     window.loadCoor();
-                    resetAndLockForms() // Lock and reset the form after successful update
                 } else {
                     Swal.fire({
                         toast: true,

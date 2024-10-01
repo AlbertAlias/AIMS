@@ -86,7 +86,7 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
                     popup: 'mt-5'
                 }
             });
-            disableAndResetForms();
+            resetAndLockForms(); // Call resetAndLockForms() from coor-form-enable.js
             window.loadCoor(); // Call to update the list of coordinators
         } else {
             Swal.fire({

@@ -20,21 +20,18 @@ ini_set('display_errors', 1);
 
     <title>Admin</title>
     
-    <!-- Custom styles for this template-->
     <link href="../assets/css/main.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" 
+                rel="stylesheet">
 
-    <!-- STYLES -->
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/departments.css">
     <link rel="stylesheet" href="../assets/css/coordinators.css">
     <link rel="stylesheet" href="../assets/css/manage-users.css">
     <link rel="stylesheet" href="../assets/css/admin-profile.css">
-
-    <!-- <link rel="stylesheet" href="assets/css/datatable.css"> -->
-    <!-- <link rel="stylesheet" href="assets/css/ownTable.css"> -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+                integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <style>
         html, body {
@@ -110,7 +107,8 @@ ini_set('display_errors', 1);
     </a>
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
     <script src="../js/sidebar.js"></script>
@@ -136,9 +134,9 @@ ini_set('display_errors', 1);
     <script src="crud-ajax/coordinators/update-coor.js"></script>
     <script src="crud-ajax/coordinators/delete-coor.js"></script>
 
-    <script src="crud-ajax/interns/intern-retrieve-deptsName.js"></script>
-    <script src="crud-ajax/interns/retrieve-interns.js"></script>
     <script src="functions/interns/intern-form-enable.js"></script>
+    <script src="crud-ajax/interns/retrieve-intern-deptsName.js"></script>
+    <script src="crud-ajax/interns/retrieve-interns.js"></script>
     <script src="crud-ajax/interns/create-interns.js"></script>
     <script src="functions/interns/intern-email.js"></script>
     <script src="functions/interns/studID.js"></script>

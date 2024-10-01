@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2024 at 01:38 PM
+-- Generation Time: Oct 01, 2024 at 04:30 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -56,7 +56,7 @@ CREATE TABLE `coordinators` (
 --
 
 INSERT INTO `coordinators` (`id`, `user_id`, `department_id`) VALUES
-(2, 3, 1);
+(5, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -131,7 +131,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `last_name`, `first_name`, `middle_name`, `suffix`, `gender`, `address`, `birthdate`, `civil_status`, `personal_email`, `contact_number`, `account_email`, `password`, `user_type`, `department_id`) VALUES
 (1, 'Tuazon', 'Rozaida', 'C.', '', 'Female', 'Santa Rosa', '2024-09-29', 'Married', 'aida@gmail.com', '9984513284', 'admin@aims.edu.ph', '$2y$10$MLK4DiuPdjybdiqRnKcKWOdN2DawBtSyi25rC77TYHJnpk42w6t1a', 'admin', NULL),
-(3, 'Escuton', 'Darle Joy', 'B.', '', 'Female', 'Santa Rosa', '2024-09-29', 'Married', 'darle@gmail.com', '9948532844', 'acoor@aims.edu.ph', '$2y$10$/QugG/jU4yY55d77tXcbueQTNBCy7ym5oeoum6GDiq4wD0c9FYC.y', 'coordinator', NULL);
+(6, 'Escuton', 'Darle Joy', 'B.', '', 'Female', 'Santa Rosa', '2024-09-29', 'Married', 'darle@gmail.com', '9856123644', 'acoor@aims.edu.ph', '$2y$10$/xEOkTvhCen0whSqextMC.FfX389AJZwkgQJOOqadIABgp5iUz1jW', 'coordinator', 1);
 
 --
 -- Indexes for dumped tables
@@ -188,13 +188,13 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `coordinators`
 --
 ALTER TABLE `coordinators`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `interns`
@@ -206,7 +206,7 @@ ALTER TABLE `interns`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables

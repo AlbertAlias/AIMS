@@ -11,9 +11,9 @@
     // }
     
     if ($conn->connect_error) {
-        error_log("Database connection failed: " . $conn->connect_error);  // Log the error
+        error_log("Database connection failed: " . $conn->connect_error);
         header('Content-Type: application/json');
-        echo json_encode(['success' => false, 'message' => 'Database connection failed']);  // Send a JSON response
+        echo json_encode(['success' => false, 'message' => 'Database connection failed']);
         exit();
     }
 ?>

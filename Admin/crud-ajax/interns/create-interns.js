@@ -16,16 +16,16 @@ document.getElementById('internSubmitBtn').addEventListener('click', function (e
     const personal_email = document.getElementById('intern_personal_email').value;
     const contact_number = document.getElementById('intern_contact_number').value;
     const studentID = document.getElementById('studentID').value;
-    const department = document.getElementById('intern_department').value;
+    const department_id = document.getElementById('intern_department').value;
     const coordinator_name = document.getElementById('coordinator_name').value;
-    const hours_needed = document.getElementById('hours_needed').value;
     const coordinator_email = document.getElementById('coordinator_email').value;
     const internship_status = document.getElementById('internship_status').value;
+    const hours_needed = document.getElementById('hours_needed').value;
     const account_email = document.getElementById('intern_account_email').value;
     const password = document.getElementById('intern_password').value;
 
     if (!last_name || !first_name || !gender || !address || !birthdate || !civil_status ||
-        !personal_email || !contact_number || !studentID || !department || !coordinator_name ||
+        !personal_email || !contact_number || !studentID || !department_id || !coordinator_name ||
         !hours_needed || !coordinator_email || !internship_status || !account_email || !password) {
         Swal.fire({
             toast: true,
@@ -57,11 +57,11 @@ document.getElementById('internSubmitBtn').addEventListener('click', function (e
         personal_email,
         contact_number,
         studentID,
-        department,
+        department_id,
         coordinator_name,
-        hours_needed,
         coordinator_email,
         internship_status,
+        hours_needed,
         account_email,
         password
     };
