@@ -1,95 +1,118 @@
 <?php
-require_once '../../../dbconn.php';
+include '../../../dbconn.php';
 header('Content-Type: application/json');
 
-$response = ['success' => false, 'message' => ''];
+$data = $_POST;
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-error_log('Starting intern update process...');
+$response = [];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = (int)$_POST['id'];
-    $birthdate = $_POST['intern_birthdate'];
+// Required fields for validation
+$requiredFields = [
+    'id', 'intern_last_name', 'intern_first_name', 'intern_gender', 
+    'intern_address', 'intern_birthdate', 'intern_civil_status', 
+    'intern_personal_email', 'intern_contact_number', 'studentID', 
+    'hours_needed', 'internship_status'
+];
 
-    // Validate birthdate
-    if (empty($birthdate) || $birthdate === '0000-00-00' || !DateTime::createFromFormat('Y-m-d', $birthdate)) {
-        $response['message'] = 'Invalid birthdate provided.';
+// Check if required fields are filled
+foreach ($requiredFields as $field) {
+    if (empty($data[$field])) {
+        $response['success'] = false;
+        $response['message'] = "Field '$field' is required.";
         echo json_encode($response);
         exit;
     }
-
-    error_log("Checking for intern ID: $id");
-    // Check for intern existence
-    $checkSql = "SELECT * FROM interns WHERE id = ?";
-    if ($checkStmt = $conn->prepare($checkSql)) {
-        $checkStmt->bind_param("i", $id);
-        $checkStmt->execute();
-        $checkResult = $checkStmt->get_result();
-
-        if ($checkResult->num_rows === 0) {
-            $response['message'] = 'No intern found with that ID.';
-            echo json_encode($response);
-            exit;
-        }
-        $checkStmt->close();
-    } else {
-        $response['message'] = 'Error preparing check statement: ' . $conn->error;
-        echo json_encode($response);
-        exit;
-    }
-
-    // Collect data
-    $last_name = $_POST['intern_last_name'];
-    $first_name = $_POST['intern_first_name'];
-    $middle_name = $_POST['intern_middle_name'];
-    $suffix = $_POST['intern_suffix'];
-    $gender = $_POST['intern_gender'];
-    $address = $_POST['intern_address'];
-    $civil_status = $_POST['intern_civil_status'];
-    $personal_email = $_POST['intern_personal_email'];
-    $contact_number = $_POST['intern_contact_number'];
-    $studentID = $_POST['studentID'];
-    $department = $_POST['intern_department'];
-    $coordinator_name = $_POST['coordinator_name'];
-    $hours_needed = $_POST['hours_needed'];
-    $coordinator_email = $_POST['coordinator_email'];
-    $internship_status = $_POST['internship_status'];
-    $account_email = $_POST['intern_account_email'];
-    $password = $_POST['intern_password'];
-
-    $hashed_password = empty($password) ? null : password_hash($password, PASSWORD_BCRYPT);
-
-    // Updated SQL query with proper placeholders
-    $sql = "UPDATE interns SET last_name = ?, first_name = ?, middle_name = ?, suffix = ?, 
-            gender = ?, address = ?, birthdate = ?, civil_status = ?, personal_email = ?, 
-            contact_number = ?, studentID = ?, department = ?, coordinator_name = ?, 
-            hours_needed = ?, coordinator_email = ?, internship_status = ?, 
-            account_email = ?, password = ? WHERE id = ?";
-
-    if ($stmt = $conn->prepare($sql)) {
-        // Bind parameters including hashed password
-        $stmt->bind_param("ssssssssssssssssssi", $last_name, $first_name, $middle_name, 
-            $suffix, $gender, $address, $birthdate, $civil_status, $personal_email, 
-            $contact_number, $studentID, $department, $coordinator_name, 
-            $hours_needed, $coordinator_email, $internship_status, $account_email, 
-            $hashed_password, $id
-        );
-
-        if ($stmt->execute()) {
-            $response['success'] = true;
-            $response['message'] = 'Intern updated successfully!';
-        } else {
-            $response['message'] = 'Error executing update: ' . $stmt->error;
-        }
-        $stmt->close();
-    } else {
-        $response['message'] = 'Error preparing statement: ' . $conn->error;
-    }
-} else {
-    $response['message'] = 'Invalid request method.';
 }
 
+// Extract values from the POST data, checking if keys exist
+$userID = $data['id'];
+$internLastName = $data['intern_last_name'];
+$internFirstName = $data['intern_first_name'];
+$internMiddleName = $data['intern_middle_name'] ?? null; // Use null if not set
+$internSuffix = $data['intern_suffix'] ?? null; // Use null if not set
+$internGender = $data['intern_gender'];
+$internAddress = $data['intern_address'];
+$internBirthdate = $data['intern_birthdate'];
+$internCivilStatus = $data['intern_civil_status'];
+$internPersonalEmail = $data['intern_personal_email'];
+$internContactNumber = $data['intern_contact_number'];
+$studentID = $data['studentID'];
+$coordinatorName = $data['coordinator_name'] ?? null; // Optional
+$coordinatorEmail = $data['coordinator_email'] ?? null; // Optional
+$hoursNeeded = $data['hours_needed'];
+$internshipStatus = $data['internship_status'];
+$accountEmail = $data['intern_account_email'] ?? null; // Optional
+$password = !empty($data['intern_password']) ? password_hash($data['intern_password'], PASSWORD_BCRYPT) : null; // Use bcrypt for hashing
+
+// Start transaction
+$conn->begin_transaction();
+
+try {
+    // Update users table
+    $stmt = $conn->prepare("UPDATE users SET 
+        last_name = ?, 
+        first_name = ?, 
+        middle_name = ?, 
+        suffix = ?, 
+        gender = ?, 
+        address = ?, 
+        birthdate = ?, 
+        civil_status = ?, 
+        personal_email = ?, 
+        contact_number = ?, 
+        account_email = ?, 
+        password = ? 
+        WHERE id = ?");
+
+    $stmt->bind_param("ssssssssssssi", 
+        $internLastName, $internFirstName, $internMiddleName, 
+        $internSuffix, $internGender, $internAddress, $internBirthdate, 
+        $internCivilStatus, $internPersonalEmail, $internContactNumber, 
+        $accountEmail, $password, $userID);
+    
+    if (!$stmt->execute()) {
+        throw new Exception("Failed to update user.");
+    }
+
+    // Update interns table
+    $stmt = $conn->prepare("UPDATE interns SET 
+        studentID = ?, 
+        internship_status = ?, 
+        coordinator_name = ?, 
+        coordinator_email = ?, 
+        hours_needed = ? 
+        WHERE user_id = ?");
+    
+    // Adjust binding based on optional values
+    $stmt->bind_param("sssssi", 
+        $studentID, 
+        $internshipStatus, 
+        $coordinatorName, 
+        $coordinatorEmail, 
+        $hoursNeeded, 
+        $userID);
+    
+    if (!$stmt->execute()) {
+        throw new Exception("Failed to update intern.");
+    }
+
+    // Commit transaction
+    $conn->commit();
+
+    // Success response
+    $response['success'] = true;
+    $response['message'] = 'Intern updated successfully!';
+} catch (Exception $e) {
+    // Rollback transaction in case of error
+    $conn->rollback();
+    
+    // Error response
+    $response['success'] = false;
+    $response['message'] = 'Error occurred: ' . $e->getMessage();
+}
+
+// Close the statement and connection
+$stmt->close();
+$conn->close();
+
 echo json_encode($response);
-exit;
-?>

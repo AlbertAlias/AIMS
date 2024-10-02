@@ -7,7 +7,11 @@ ini_set('error_log', '/path/to/your/php-error.log');  // Set your path to error 
 header('Content-Type: application/json');
 require_once '../../../dbconn.php';
 
-$query = "SELECT id, last_name, first_name FROM interns";
+$query = "SELECT interns.id, users.last_name, users.first_name, interns.studentID, interns.internship_status, users.personal_email
+        FROM interns
+        INNER JOIN users ON interns.user_id = users.id
+        WHERE users.user_type = 'intern'";
+
 $result = $conn->query($query);
 
 $interns = [];
