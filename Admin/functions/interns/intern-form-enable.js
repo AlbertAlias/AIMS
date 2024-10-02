@@ -1,168 +1,127 @@
+document.addEventListener('DOMContentLoaded', function() {
+    // Get references to the buttons and the form
+    const addInternsBtn = document.getElementById('addInternsBtn');
+    const internsForm = document.getElementById('internsForm');
+    const internCancelBtn = document.getElementById('internCancelBtn');
+    const submitBtn = document.getElementById('internSubmitBtn');
 
+    // Function to unlock inputs and reset their states
+    function unlockAndResetForms() {
+        const fieldsToUnlock = [
+            'intern_last_name', 'intern_first_name', 'intern_middle_name',
+            'intern_suffix', 'intern_gender', 'intern_address',
+            'intern_birthdate', 'intern_civil_status', 'intern_personal_email',
+            'intern_contact_number', 'studentID', 'intern_department',
+            'hours_needed', 'internship_status'
+        ];
 
-// let isUpdating = false;
+        fieldsToUnlock.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                field.disabled = false; // Enable the field
+                // Only reset input fields, not select fields
+                if (field.tagName !== 'SELECT') {
+                    field.value = ''; // Reset the field value only for input fields
+                }
+            }
+        });
 
-// if (document.getElementById('internsForm')) {
-//     function showUpdateButton() {
-//         const internUpdateBtn = document.getElementById('internUpdateBtn');
-//         const internCancelBtn = document.getElementById('internCancelBtn');
-//         const internSubmitBtn = document.getElementById('internSubmitBtn');
+        // Enable the Submit button
+        if (submitBtn) {
+            submitBtn.disabled = false; // Enable the Submit button
+        }
 
-//         if (internUpdateBtn) {
-//             internUpdateBtn.style.display = 'inline-block';
-//             internUpdateBtn.disabled = false; // Initially enable the button
-//         }
+        // Show the cancel and update buttons
+        internCancelBtn.style.display = 'inline-block';
+        document.getElementById('internUpdateBtn').style.display = 'none';
+    }
 
-//         if (internCancelBtn) {
-//             internCancelBtn.style.display = 'inline-block';
-//             internCancelBtn.disabled = false; // Initially enable the button
-//         }
+    // Function to reset and lock inputs and selects
+    function resetAndLockForms() {
+        const fieldsToLock = [
+            'intern_last_name', 'intern_first_name', 'intern_middle_name',
+            'intern_suffix', 'intern_gender', 'intern_address',
+            'intern_birthdate', 'intern_civil_status', 'intern_personal_email',
+            'intern_contact_number', 'studentID', 'intern_department',
+            'coordinator_name', 'coordinator_email',
+            'hours_needed', 'internship_status'
+        ];
 
-//         if (internSubmitBtn) internSubmitBtn.style.display = 'none';
-//     }
+        // Reset unlocked fields and lock all fields
+        fieldsToLock.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                // Reset the field value if it's an input field
+                if (field.tagName !== 'SELECT') {
+                    field.value = ''; // Reset the field value only for input fields
+                }
+                field.disabled = true; // Disable the field
+            }
+        });
 
-//     function toggleUpdateButton() {
-//         if (!isUpdating) return;
+        // Disable the Submit button
+        if (submitBtn) {
+            submitBtn.disabled = true; // Disable the Submit button
+        }
 
-//         const requiredFields = [
-//             '#intern_last_name',
-//             '#intern_first_name',
-//             '#intern_gender',
-//             '#intern_address',
-//             '#intern_birthdate',
-//             '#intern_civil_status',
-//             '#intern_personal_email',
-//             '#intern_contact_number',
-//             '#studentID',
-//             '#intern_department',
-//             '#coordinator_name',
-//             '#hours_needed',
-//             '#coordinator_email',
-//             '#internship_status'
-//         ];
+        // Hide the cancel and update buttons
+        internCancelBtn.style.display = 'none';
+        document.getElementById('internUpdateBtn').style.display = 'none';
+    }
 
-//         const internUpdateBtn = document.getElementById('internUpdateBtn');
-//         const internCancelBtn = document.getElementById('internCancelBtn');
-//         let allFilled = requiredFields.every(selector => $(selector).val().trim() !== '');
+    // Function to disable and reset unlocked fields upon successful submission
+    function disableAndResetForms() {
+        const fieldsToReset = [
+            'intern_last_name', 'intern_first_name', 'intern_middle_name',
+            'intern_suffix', 'intern_gender', 'intern_address',
+            'intern_birthdate', 'intern_civil_status', 'intern_personal_email',
+            'intern_contact_number', 'studentID', 'intern_department',
+            'hours_needed', 'internship_status', 'coordinator_name', 'coordinator_email'
+        ];
+    
+        // Reset unlocked fields and lock them
+        fieldsToReset.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                // Reset the field value based on its type
+                if (field.tagName === 'SELECT') {
+                    field.selectedIndex = 0; // Reset select to the first option (assumes first is disabled)
+                } else {
+                    field.value = ''; // Reset the field value for input fields
+                }
+                field.disabled = true; // Disable the field
+            }
+        });
+    
+        // Reset and lock account fields
+        const accountFields = [
+            'intern_account_email', 'intern_password'
+        ];
+    
+        accountFields.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                field.value = ''; // Reset the field value
+                field.disabled = true; // Disable the field
+            }
+        });
+    
+        // Disable the Submit button
+        if (submitBtn) {
+            submitBtn.disabled = true; // Disable the Submit button
+        }
+    
+        // Hide the cancel and update buttons
+        internCancelBtn.style.display = 'none';
+        document.getElementById('internUpdateBtn').style.display = 'none';
+    }
 
-//         internUpdateBtn.disabled = !allFilled; // Disable button if any required field is empty
-//         internCancelBtn.disabled = !allFilled; // Disable cancel button if any required field is empty
-//     }
+    // Event listener for the Add Interns button
+    addInternsBtn.addEventListener('click', unlockAndResetForms);
 
-//     function unlockAndResetForms() {
-//         const internsForm = document.getElementById('internsForm');
-//         const intern_accountForm = document.getElementById('intern_accountForm');
+    // Event listener for the Cancel button
+    internCancelBtn.addEventListener('click', resetAndLockForms);
 
-//         if (internsForm) {
-//             internsForm.reset();
-//             document.querySelectorAll('#internsForm input, #internsForm select').forEach(el => {
-//                 el.disabled = false;
-//                 $(el).on('input change', toggleUpdateButton); // Add event listeners
-//             });
-//         }
-
-//         if (intern_accountForm) {
-//             intern_accountForm.reset();
-//             document.querySelectorAll('#intern_accountForm input').forEach(el => el.disabled = false);
-//         }
-
-//         const internDepartmentSelect = document.getElementById('intern_department');
-//         if (internDepartmentSelect) {
-//             internDepartmentSelect.disabled = false; // Unlock the department select
-//             internDepartmentSelect.selectedIndex = 0; // Reset to default option
-//         }
-
-//         const internSubmitBtn = document.getElementById('internSubmitBtn');
-//         const internCancelBtn = document.getElementById('internCancelBtn');
-//         const internUpdateBtn = document.getElementById('internUpdateBtn');
-
-//         if (internSubmitBtn) {
-//             internSubmitBtn.disabled = false;
-//             internSubmitBtn.style.display = 'inline-block';
-//         }
-
-//         if (internCancelBtn) {
-//             internCancelBtn.style.display = 'inline-block'; // Show the cancel button
-//             internCancelBtn.disabled = false; // Enable the cancel button
-//         }
-
-//         toggleUpdateButton(); // Check button state when unlocking
-//     }
-
-//     function resetAndLockForms() {
-//         const internsForm = document.getElementById('internsForm');
-//         const intern_accountForm = document.getElementById('intern_accountForm');
-
-//         // Reset and disable the interns form
-//         if (internsForm) {
-//             internsForm.reset();
-//             document.querySelectorAll('#internsForm input, #internsForm select').forEach(el => el.disabled = true);
-//         }
-
-//         // Reset and disable the account form
-//         if (intern_accountForm) {
-//             intern_accountForm.reset();
-//             document.querySelectorAll('#intern_accountForm input').forEach(el => el.disabled = true);
-//         }
-
-//         const internDepartmentSelect = document.getElementById('intern_department');
-//         if (internDepartmentSelect) {
-//             internDepartmentSelect.selectedIndex = 0; // Reset to default option
-//             internDepartmentSelect.disabled = true; // Lock the department select
-//         }
-
-//         // Handle buttons' visibility and state
-//         const internSubmitBtn = document.getElementById('internSubmitBtn');
-//         const internCancelBtn = document.getElementById('internCancelBtn');
-//         const internUpdateBtn = document.getElementById('internUpdateBtn');
-
-//         if (internUpdateBtn) {
-//             internUpdateBtn.style.display = 'none';
-//         }
-
-//         if (internSubmitBtn) {
-//             internSubmitBtn.disabled = true; // Keep the submit button disabled
-//             internSubmitBtn.style.display = 'inline-block'; // Show the submit button
-//         }
-
-//         if (internCancelBtn) {
-//             internCancelBtn.style.display = 'none'; // Hide the cancel button after form lock
-//         }
-//     }
-
-//     document.addEventListener('DOMContentLoaded', function() {
-//         resetAndLockForms();
-//     });
-
-//     document.getElementById('addInternsBtn').addEventListener('click', function() {
-//         unlockAndResetForms();
-
-//         isUpdating = false;
-//         const internUpdateBtn = document.getElementById('internUpdateBtn');
-//         const internSubmitBtn = document.getElementById('internSubmitBtn');
-
-//         if (internUpdateBtn) internUpdateBtn.style.display = 'none';
-//         if (internSubmitBtn) internSubmitBtn.style.display = 'inline-block';
-//     });
-
-//     document.getElementById('internsInfo').addEventListener('click', function(event) {
-//         if (event.target && event.target.matches('button[data-id]')) {
-//             unlockAndResetForms();
-//             showUpdateButton();
-//             isUpdating = true;
-//         }
-//     });
-
-//     // Event listener for the cancel button
-//     const internCancelBtn = document.getElementById('internCancelBtn');
-//     if (internCancelBtn) {
-//         internCancelBtn.addEventListener('click', function() {
-//             resetAndLockForms(); // Lock the form when cancel button is clicked
-//         });
-//     }
-
-//     // Initialize toggleUpdateButton on form inputs
-//     document.querySelectorAll('#internsForm input, #internsForm select').forEach(el => {
-//         $(el).on('input change', toggleUpdateButton);
-//     });
-// }
+    // Expose the disableAndResetForms function to be called from create-interns.js
+    window.disableAndResetForms = disableAndResetForms;
+});

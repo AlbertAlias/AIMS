@@ -41,7 +41,7 @@ document.getElementById('internSubmitBtn').addEventListener('click', function (e
                 popup: 'mt-5'
             }
         });
-        internSubmitBtn.disabled = false;
+        internSubmitBtn.disabled = false; // Re-enable the submit button
         return;
     }
 
@@ -90,14 +90,17 @@ document.getElementById('internSubmitBtn').addEventListener('click', function (e
                     popup: 'mt-5'
                 }
             });
-            disableAndResetForms();
-            window.loadInterns();
+            disableAndResetForms(); // Call this to reset and lock the forms
+            window.setTimeout(() => {
+                // Optionally redirect to the interns list or refresh the page
+                // location.reload(); // Uncomment to refresh
+            }, 3000);
         } else {
             Swal.fire({
                 toast: true,
                 position: 'top-end',
                 icon: 'error',
-                title: data.message,
+                title: 'Intern with this email already exists.',
                 showConfirmButton: false,
                 timer: 3000,
                 background: '#f8d7da',
@@ -107,16 +110,16 @@ document.getElementById('internSubmitBtn').addEventListener('click', function (e
                     popup: 'mt-5'
                 }
             });
+            internSubmitBtn.disabled = false; // Re-enable the submit button
         }
-        internSubmitBtn.disabled = false;
     })
-    .catch(error => {
+    .catch((error) => {
         console.error('Error:', error);
         Swal.fire({
             toast: true,
             position: 'top-end',
             icon: 'error',
-            title: 'There was an error with the AJAX request.',
+            title: 'An error occurred. Please try again.',
             showConfirmButton: false,
             timer: 3000,
             background: '#f8d7da',
@@ -126,6 +129,6 @@ document.getElementById('internSubmitBtn').addEventListener('click', function (e
                 popup: 'mt-5'
             }
         });
-        internSubmitBtn.disabled = false;
+        internSubmitBtn.disabled = false; // Re-enable the submit button
     });
 });
