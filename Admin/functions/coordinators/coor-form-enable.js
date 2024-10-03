@@ -8,12 +8,12 @@ if (document.getElementById('coordinatorForm')) {
 
         if (coorUpdateBtn) {
             coorUpdateBtn.style.display = 'inline-block';
-            coorUpdateBtn.disabled = false; // Initially enable the button
+            coorUpdateBtn.disabled = false;
         }
 
         if (coorDeleteBtn) {
             coorDeleteBtn.style.display = 'inline-block';
-            coorDeleteBtn.disabled = false; // Initially enable the button
+            coorDeleteBtn.disabled = false;
         }
 
         if (coorSubmitBtn) coorSubmitBtn.style.display = 'none';
@@ -39,96 +39,93 @@ if (document.getElementById('coordinatorForm')) {
         const coorDeleteBtn = document.getElementById('coorDeleteBtn');
         let allFilled = requiredFields.every(selector => $(selector).val().trim() !== '');
 
-        coorUpdateBtn.disabled = !allFilled; // Disable button if any required field is empty
-        coorDeleteBtn.disabled = !allFilled; // Disable delete button if any required field is empty
+        coorUpdateBtn.disabled = !allFilled;
+        coorDeleteBtn.disabled = !allFilled;
     }
 
     function unlockAndResetForms() {
         const coordinatorForm = document.getElementById('coordinatorForm');
         const coor_accountForm = document.getElementById('coor_accountForm');
-
+    
         if (coordinatorForm) {
             coordinatorForm.reset();
             document.querySelectorAll('#coordinatorForm input, #coordinatorForm select').forEach(el => {
                 el.disabled = false;
-                $(el).on('input change', toggleUpdateButton); // Add event listeners
+                $(el).on('input change', toggleUpdateButton);
             });
         }
-
+    
         if (coor_accountForm) {
             coor_accountForm.reset();
             document.querySelectorAll('#coor_accountForm input').forEach(el => el.disabled = false);
         }
-
-        const coorDepartmentSelect = document.getElementById('#coor_department');
+    
+        const coorDepartmentSelect = document.getElementById('coor_department');
         if (coorDepartmentSelect) {
-            coorDepartmentSelect.disabled = false; // Unlock the department select
-            coorDepartmentSelect.selectedIndex = 0; // Reset to default option
+            coorDepartmentSelect.disabled = false;
+            coorDepartmentSelect.selectedIndex = 0;
         }
-
+    
         const coorSubmitBtn = document.getElementById('coorSubmitBtn');
         const coorCancelBtn = document.getElementById('coorCancelBtn');
         const coorUpdateBtn = document.getElementById('coorUpdateBtn');
         const coorDeleteBtn = document.getElementById('coorDeleteBtn');
-
+    
         if (coorSubmitBtn) {
-            coorSubmitBtn.disabled = false;
+            coorSubmitBtn.disabled = false; // Allow submission
             coorSubmitBtn.style.display = 'inline-block';
         }
-
+    
         if (coorCancelBtn) {
-            coorCancelBtn.style.display = 'inline-block'; // Show the cancel button
-            coorCancelBtn.disabled = false; // Enable the cancel button
+            coorCancelBtn.style.display = 'inline-block';
+            coorCancelBtn.disabled = false;
         }
-
-        toggleUpdateButton(); // Check button state when unlocking
-    }
+    
+        toggleUpdateButton();
+    }    
 
     function resetAndLockForms() {
         const coordinatorForm = document.getElementById('coordinatorForm');
         const coor_accountForm = document.getElementById('coor_accountForm');
-
-        // Reset and disable the coordinator form
+    
         if (coordinatorForm) {
             coordinatorForm.reset();
             document.querySelectorAll('#coordinatorForm input, #coordinatorForm select').forEach(el => el.disabled = true);
         }
-
-        // Reset and disable the account form
+    
         if (coor_accountForm) {
             coor_accountForm.reset();
             document.querySelectorAll('#coor_accountForm input').forEach(el => el.disabled = true);
         }
-
-        const coorDepartmentSelect = document.getElementById('#coor_department');
+    
+        const coorDepartmentSelect = document.getElementById('coor_department');
         if (coorDepartmentSelect) {
-            coorDepartmentSelect.selectedIndex = 0; // Reset to default option
-            coorDepartmentSelect.disabled = true; // Lock the department select
+            coorDepartmentSelect.selectedIndex = 0;
+            coorDepartmentSelect.disabled = true;
         }
-
-        // Handle buttons' visibility and state
+    
         const coorSubmitBtn = document.getElementById('coorSubmitBtn');
         const coorCancelBtn = document.getElementById('coorCancelBtn');
         const coorUpdateBtn = document.getElementById('coorUpdateBtn');
         const coorDeleteBtn = document.getElementById('coorDeleteBtn');
-
+    
         if (coorUpdateBtn) {
             coorUpdateBtn.style.display = 'none';
         }
-
+    
         if (coorDeleteBtn) {
-            coorDeleteBtn.style.display = 'none'; // Initially hide delete button
+            coorDeleteBtn.style.display = 'none';
         }
-
+    
         if (coorSubmitBtn) {
-            coorSubmitBtn.disabled = true; // Keep the submit button disabled
-            coorSubmitBtn.style.display = 'inline-block'; // Show the submit button
+            coorSubmitBtn.disabled = true; // Disable by default
+            coorSubmitBtn.style.display = 'inline-block';
         }
-
+    
         if (coorCancelBtn) {
-            coorCancelBtn.style.display = 'none'; // Hide the cancel button after form lock
+            coorCancelBtn.style.display = 'none';
         }
-    }
+    }            
 
     document.addEventListener('DOMContentLoaded', function() {
         resetAndLockForms();
@@ -136,7 +133,7 @@ if (document.getElementById('coordinatorForm')) {
 
     document.getElementById('addCoordinatorsBtn').addEventListener('click', function() {
         unlockAndResetForms();
-        loadDepartments(); // Assuming this function populates department options
+        loadDepartments();
 
         isUpdating = false;
         const coorUpdateBtn = document.getElementById('coorUpdateBtn');
@@ -145,7 +142,7 @@ if (document.getElementById('coordinatorForm')) {
 
         if (coorUpdateBtn) coorUpdateBtn.style.display = 'none';
         if (coorSubmitBtn) coorSubmitBtn.style.display = 'inline-block';
-        if (coorDeleteBtn) coorDeleteBtn.style.display = 'none'; // Hide delete button on add
+        if (coorDeleteBtn) coorDeleteBtn.style.display = 'none';
     });
 
     document.getElementById('coordinatorInfo').addEventListener('click', function(event) {
@@ -156,15 +153,13 @@ if (document.getElementById('coordinatorForm')) {
         }
     });
 
-    // Event listener for the cancel button
     const coorCancelBtn = document.getElementById('coorCancelBtn');
     if (coorCancelBtn) {
         coorCancelBtn.addEventListener('click', function() {
-            resetAndLockForms(); // Lock the form when cancel button is clicked
+            resetAndLockForms();
         });
     }
 
-    // Initialize toggleUpdateButton on form inputs
     document.querySelectorAll('#coordinatorForm input, #coordinatorForm select').forEach(el => {
         $(el).on('input change', toggleUpdateButton);
     });

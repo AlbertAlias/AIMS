@@ -12,7 +12,6 @@ function loadDepartments() {
                 response.departments.forEach(function(department) {
                     departmentSelect.append(`<option value="${department.id}">${department.department_name}</option>`);
                 });
-                departmentSelect.prop('disabled', false); // Enable the select element after loading departments
             } else {
                 console.error('Invalid response structure:', response);
             }
@@ -22,3 +21,4 @@ function loadDepartments() {
         }
     });
 }
+// departmentSelect.prop('disabled', true);

@@ -3,10 +3,8 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
 
     const coorSubmitBtn = document.getElementById('coorSubmitBtn');
 
-    // Check if button is already disabled to prevent double submission
+    // Prevent double submission
     if (coorSubmitBtn.disabled) return;
-
-    coorSubmitBtn.disabled = true; // Disable the button to prevent double submission.
 
     const last_name = document.getElementById('coor_last_name').value;
     const first_name = document.getElementById('coor_first_name').value;
@@ -18,11 +16,11 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
     const civil_status = document.getElementById('coor_civil_status').value;
     const personal_email = document.getElementById('coor_personal_email').value;
     const contact_number = document.getElementById('coor_contact_number').value;
-    const department_id = document.getElementById('coor_department').value; // Updated to department_id
+    const department_id = document.getElementById('coor_department').value;
     const account_email = document.getElementById('coor_account_email').value;
     const password = document.getElementById('coor_password').value;
 
-    // Check for empty required fields
+    // Validation for required fields
     if (!last_name || !first_name || !gender || !address || !birthdate || !civil_status ||
         !personal_email || !contact_number || !department_id || !account_email || !password) {
         Swal.fire({
@@ -39,7 +37,6 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
                 popup: 'mt-5'
             }
         });
-        coorSubmitBtn.disabled = false; // Re-enable button if validation fails
         return;
     }
 
@@ -54,7 +51,7 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
         civil_status,
         personal_email,
         contact_number,
-        department_id, // Send department_id instead of department
+        department_id,
         account_email,
         password
     };
@@ -64,12 +61,9 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data) // Send JSON-encoded data
+        body: JSON.stringify(data)
     })
-    .then(response => {
-        console.log(response); // Log the full response
-        return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
         if (data.success) {
             Swal.fire({
@@ -86,8 +80,9 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
                     popup: 'mt-5'
                 }
             });
-            resetAndLockForms(); // Call resetAndLockForms() from coor-form-enable.js
-            window.loadCoor(); // Call to update the list of coordinators
+            resetAndLockForms();
+            window.loadCoor();
+            coorSubmitBtn.disabled = true; // Disable only after successful submission
         } else {
             Swal.fire({
                 toast: true,
@@ -104,7 +99,6 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
                 }
             });
         }
-        coorSubmitBtn.disabled = false; // Re-enable after submission completes
     })
     .catch(error => {
         console.error('Error:', error);
@@ -122,6 +116,5 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
                 popup: 'mt-5'
             }
         });
-        coorSubmitBtn.disabled = false; // Re-enable if AJAX request fails
     });
 });

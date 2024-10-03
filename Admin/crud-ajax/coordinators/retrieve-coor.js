@@ -11,7 +11,7 @@ $(document).ready(function() {
 
                     response.coordinators.forEach(function(coordinator) {
                         let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 coor-btn" data-id="${coordinator.id}">
-                                    ${coordinator.last_name}, ${coordinator.first_name}
+                                    ${coordinator.last_name}, ${coordinator.first_name}, |
                                     </button>`;
                         coordinatorInfo.append(btn);
                     });
