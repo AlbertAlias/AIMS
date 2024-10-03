@@ -1,10 +1,10 @@
 document.getElementById('adminSubmitBtn').addEventListener('click', function (event) {
     event.preventDefault();
     const adminSubmitBtn = document.getElementById('adminSubmitBtn');
-    
+
     if (adminSubmitBtn.disabled) return;
     adminSubmitBtn.disabled = true;
-    
+
     const last_name = document.getElementById('admin_last_name').value;
     const first_name = document.getElementById('admin_first_name').value;
     const middle_name = document.getElementById('admin_middle_name').value;
@@ -81,7 +81,6 @@ document.getElementById('adminSubmitBtn').addEventListener('click', function (ev
                 }
             });
             disableAndResetForms();
-
             window.loadAdmins();
         } else {
             Swal.fire({

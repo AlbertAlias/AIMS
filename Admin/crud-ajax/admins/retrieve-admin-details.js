@@ -43,8 +43,7 @@ $(document).ready(function() {
                     console.error('Error:', response.error);
                     return;
                 }
-
-                // Populate the form with admin details
+    
                 $('#adminID').val(response.id);
                 $('#admin_last_name').val(response.last_name).prop('disabled', false);
                 $('#admin_first_name').val(response.first_name).prop('disabled', false);
@@ -58,7 +57,7 @@ $(document).ready(function() {
                 $('#admin_personal_email').val(response.personal_email).prop('disabled', false);
                 $('#admin_account_email').val(response.account_email).prop('disabled', false);
                 $('#admin_password').val(response.password).prop('disabled', false);
-                $('#user_type').val(response.role).prop('disabled', false);
+                $('#user_type').val(response.user_type).prop('disabled', false);
                 $('#adminUpdateBtn').prop('disabled', false);
             },
             error: function(xhr, status, error) {
@@ -67,6 +66,5 @@ $(document).ready(function() {
         });
     };
 
-    // Expose the function for updating the admin list
     window.refreshAdminList = loadAdmins;
 });

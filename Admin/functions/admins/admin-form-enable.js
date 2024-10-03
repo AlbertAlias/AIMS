@@ -1,109 +1,165 @@
-if (document.getElementById('adminsForm')) {
-    function showUpdateButton() {
-        const adminUpdateBtn = document.getElementById('adminUpdateBtn');
-        const adminSubmitBtn = document.getElementById('adminSubmitBtn');
+document.addEventListener('DOMContentLoaded', function() {
+    // Get references to the buttons and the form
+    const addAdminsBtn = document.getElementById('addAdminsBtn');
+    const adminCancelBtn = document.getElementById('adminCancelBtn');
+    const submitBtn = document.getElementById('adminSubmitBtn');
+    const updateBtn = document.getElementById('adminUpdateBtn');
+    const adminsInfo = document.getElementById('adminsInfo'); // Get reference to the adminsInfo container
+    let selectedAdmin = null; // To keep track of the selected admin
 
-        if (adminUpdateBtn) {
-            adminUpdateBtn.style.display = 'inline-block';
-            adminUpdateBtn.disabled = false;
-        }
-        if (adminSubmitBtn) adminSubmitBtn.style.display = 'none';
-    }
-
+    // Function to unlock inputs and reset their states
     function unlockAndResetForms() {
-        const adminsForm = document.getElementById('adminsForm');
-        const admin_accountForm = document.getElementById('admin_accountForm');
+        const fieldsToUnlock = [
+            'admin_last_name', 'admin_first_name', 'admin_middle_name',
+            'admin_suffix', 'admin_gender', 'admin_address',
+            'admin_birthdate', 'admin_civil_status', 'admin_personal_email',
+            'admin_contact_number', 'admin_account_email', 'admin_password', 'user_type'
+        ];
+    
+        fieldsToUnlock.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                field.disabled = false; // Enable the field
+                if (field.tagName === 'SELECT') {
+                    field.selectedIndex = 0; // Reset select to the first option
+                } else {
+                    field.value = ''; // Reset the field value only for input fields
+                }
+            }
+        });
+    
+        // Enable the Submit button
+        if (submitBtn) {
+            submitBtn.disabled = false; // Enable the Submit button
+            submitBtn.style.display = 'inline-block'; // Ensure the Submit button is displayed
+        }
+    
+        // Show the Cancel button and ensure the Update button is hidden
+        adminCancelBtn.style.display = 'inline-block'; // Show the cancel button
+        updateBtn.style.display = 'none'; // Hide the update button
+    }        
 
-        if (adminsForm) {
-            adminsForm.reset();
-            document.querySelectorAll('#adminsForm input, #adminsForm select').forEach(el => el.disabled = false);
-        }
-
-        if (admin_accountForm) {
-            admin_accountForm.reset();
-            document.querySelectorAll('#admin_accountForm input, #admin_accountForm select').forEach(el => el.disabled = false);
-        }
-
-        const adminSubmitBtn = document.getElementById('adminSubmitBtn');
-        const adminCancelBtn = document.getElementById('adminCancelBtn');
-        
-        if (adminSubmitBtn) {
-            adminSubmitBtn.disabled = false;
-            adminSubmitBtn.style.display = 'inline-block';
-        }
-
-        if (adminCancelBtn) adminCancelBtn.style.display = 'inline-block';
-    }
-
-    function disableAndResetForms() {
-        const adminsForm = document.getElementById('adminsForm');
-        const admin_accountForm = document.getElementById('admin_accountForm');
+    // Function to reset and lock inputs and selects
+    function resetAndLockForms() {
+        const fieldsToLock = [
+            'admin_last_name', 'admin_first_name', 'admin_middle_name',
+            'admin_suffix', 'admin_gender', 'admin_address',
+            'admin_birthdate', 'admin_civil_status', 'admin_personal_email',
+            'admin_contact_number', 'admin_account_email', 'admin_password', 'user_type'
+        ];
     
-        if (adminsForm) {
-            adminsForm.reset();
-            document.querySelectorAll('#adminsForm input, #adminsForm select').forEach(el => el.disabled = true);
+        fieldsToLock.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                if (field.tagName === 'SELECT') {
+                    field.selectedIndex = 0; // Reset select to the first option
+                } else {
+                    field.value = ''; // Reset input fields
+                }
+                field.disabled = true; // Disable the field
+            }
+        });
+    
+        // Disable the Submit button
+        if (submitBtn) {
+            submitBtn.disabled = true; // Disable the Submit button
         }
     
-        if (admin_accountForm) {
-            admin_accountForm.reset();
-            document.querySelectorAll('#admin_accountForm input, #admin_accountForm select').forEach(el => el.disabled = true);
-        }
-    
-        const adminDepartmentSelect = document.getElementById('admin_department');
-        if (adminDepartmentSelect) {
-            adminDepartmentSelect.selectedIndex = 0;
-            adminDepartmentSelect.disabled = true;
-        }
-    
-        const adminSubmitBtn = document.getElementById('adminSubmitBtn');
-        const adminCancelBtn = document.getElementById('adminCancelBtn');
-    
-        if (adminSubmitBtn) {
-            adminSubmitBtn.disabled = true;
-            adminSubmitBtn.style.display = 'inline-block';
-        }
-    
-        if (adminCancelBtn) adminCancelBtn.style.display = 'none';
+        // Hide the cancel and update buttons
+        adminCancelBtn.style.display = 'none';
+        updateBtn.style.display = 'none';
     }    
 
-    document.getElementById('addAdminsBtn').addEventListener('click', function() {
-        unlockAndResetForms();
-        loadDepartments(null, true);
-
-        const adminUpdateBtn = document.getElementById('adminUpdateBtn');
-        const adminSubmitBtn = document.getElementById('adminSubmitBtn');
-        const adminDeleteBtn = document.getElementById('adminDeleteBtn');
-
-        if (adminUpdateBtn) adminUpdateBtn.style.display = 'none';
-        if (adminSubmitBtn) adminSubmitBtn.style.display = 'inline-block';
-        if (adminDeleteBtn) adminDeleteBtn.style.display = 'none';
-    });
-
-    document.getElementById('adminsInfo').addEventListener('click', function(event) {
-        if (event.target && event.target.matches('button[data-id]')) {
-            unlockAndResetForms();
-            showUpdateButton();
-            
-            const adminDeleteBtn = document.getElementById('adminDeleteBtn');
-            if (adminDeleteBtn) {
-                console.log('Displaying delete button');
-                adminDeleteBtn.style.display = 'inline-block';
+    // Function to disable and reset unlocked fields upon successful submission
+    function disableAndResetForms() {
+        const fieldsToReset = [
+            'admin_last_name', 'admin_first_name', 'admin_middle_name',
+            'admin_suffix', 'admin_gender', 'admin_address',
+            'admin_birthdate', 'admin_civil_status', 'admin_personal_email',
+            'admin_contact_number', 'admin_account_email', 'admin_password', 'user_type'
+        ];
+    
+        // Reset and lock fields
+        fieldsToReset.forEach(fieldId => {
+            const field = document.getElementById(fieldId);
+            if (field) {
+                if (field.tagName === 'SELECT') {
+                    field.selectedIndex = 0; // Reset select to the first option
+                } else {
+                    field.value = ''; // Reset input fields
+                }
+                field.disabled = true; // Disable the field
             }
-        
-            const adminID = event.target.getAttribute('data-id');
-            const adminIDElement = document.getElementById('adminID');
-            if (adminIDElement) {
-                adminIDElement.value = adminID; // Set value only if adminIDElement exists
-            }
-            console.log('Selected Admin ID:', adminID);
-            loadAdminDetails(adminID);
+        });
+    
+        // Disable the submit button
+        if (submitBtn) {
+            submitBtn.disabled = true; // Disable the Submit button
         }
-    });       
+    
+        // Hide the cancel and update buttons
+        adminCancelBtn.style.display = 'none';
+        updateBtn.style.display = 'none';
+    }
 
-    document.getElementById('adminCancelBtn').addEventListener('click', function() {
-        disableAndResetForms();
-        this.style.display = 'none';
-        document.getElementById('adminUpdateBtn').style.display = 'none';
-        document.getElementById('adminDeleteBtn').style.display = 'none';
-    });
-}
+    // Function to validate the form
+    window.validateForm = function() {
+        const requiredFields = [
+            'admin_last_name', 
+            'admin_first_name', 
+            'admin_gender',           
+            'admin_address',        
+            'admin_birthdate',        
+            'admin_civil_status',     
+            'admin_contact_number',    
+            'admin_personal_email'
+        ];
+
+        for (let fieldId of requiredFields) {
+            const field = document.getElementById(fieldId);
+            if (!field || field.value.trim() === '') {
+                return false; // If any required field is empty
+            }
+        }
+        return true; // All required fields are filled
+    };
+
+    // Function to handle the admin button click
+    function handleAdminButtonClick(event) {
+        if (event.target && event.target.classList.contains('admin-btn')) {
+            selectedAdmin = event.target.dataset.id; // Store selected admin ID
+            unlockAndResetForms();
+            // Show the update button and hide the submit button
+            submitBtn.style.display = 'none'; // Hide the submit button
+            updateBtn.style.display = 'inline-block'; // Show the update button
+        }
+    }
+
+    // Use event delegation to listen for clicks on dynamically created admin buttons
+    if (adminsInfo) {
+        adminsInfo.addEventListener('click', handleAdminButtonClick);
+    } else {
+        console.error('adminsInfo element not found');
+    }
+
+    if (addAdminsBtn) {
+        // Event listener for the Add Admins button
+        addAdminsBtn.addEventListener('click', unlockAndResetForms);
+    } else {
+        console.error('addAdminsBtn element not found');
+    }
+
+    if (adminCancelBtn) {
+        // Event listener for the Cancel button
+        adminCancelBtn.addEventListener('click', function() {
+            resetAndLockForms(); // Reset and lock all fields
+            submitBtn.disabled = true; // Keep the Submit button disabled
+            submitBtn.style.display = 'inline-block'; // Show the Submit button
+        });
+    } else {
+        console.error('adminCancelBtn element not found');
+    }
+
+    // Expose the disableAndResetForms function to be called from create-admins.js
+    window.disableAndResetForms = disableAndResetForms;
+});
