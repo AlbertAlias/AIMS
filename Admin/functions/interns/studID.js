@@ -27,6 +27,8 @@ $(document).ready(function() {
 
     $('#studentID').on('input', function() {
         formatStudentID($(this));
+        const accountEmailInput = $('#intern_account_email');
+        console.log('Account Email Value:', accountEmailInput.val());
     });
 
     // Prevent the user from typing more than 7 digits

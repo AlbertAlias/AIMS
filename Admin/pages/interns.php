@@ -81,7 +81,7 @@
                             <input type="email" class="form-control" id="intern_personal_email" name="intern_personal_email" required disabled>
                         </div>
                     </div>
-                    <div class="row mb-3 border-bottom border-dark pb-3 mb-2">
+                    <div class="row mb-3 pb-3 mb-2">
                         <!-- Contact Number -->
                         <div class="col-md-4">
                             <label for="intern_contact_number" class="form-label">Contact Number <span class="text-danger">*</span></label>
@@ -101,41 +101,6 @@
                             <select class="form-select" id="intern_department" name="intern_department" required disabled>
                                 <option selected>Choose Department</option>
                                 <!-- Options will be dynamically populated here -->
-                            </select>
-                        </div>
-                    </div>
-
-                    <p class="text-gray-800 fs-5 mb-3">Internship Information</p>
-
-                    <div class="row mb-3">
-                        <!-- Coordinator Name -->
-                        <div class="col-md-8">
-                            <label for="coordinatorName" class="form-label required-asterisk">Coordinator Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="coordinator_name" name="coordinator_name" required disabled>
-                        </div>
-
-                        <!-- Hours Needed -->
-                        <div class="col-md-4">
-                            <label for="hoursNeeded" class="form-label required-asterisk">Hours Needed <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="hours_needed" name="hours_needed" required disabled>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <!-- Coordinator Email -->
-                        <div class="col-md-7">
-                            <label for="coordinatorEmail" class="form-label required-asterisk">Coordinator Email <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="coordinator_email" name="coordinator_email" required disabled>
-                        </div>
-
-                        <!-- Internship Status -->
-                        <div class="col-md-5">
-                            <label for="internship_status" class="form-label required-asterisk">Internship Status <span class="text-danger">*</span></label>
-                            <select class="form-select" id="internship_status" name="internship_status" required disabled>
-                                <option selected disabled>Select Internship Status</option>
-                                <option value="Ongoing">Ongoing</option>
-                                <option value="Cancelled">Cancelled</option>
-                                <option value="Done">Done</option>
                             </select>
                         </div>
                     </div>

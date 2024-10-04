@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
         // Hide the cancel and update buttons
         adminCancelBtn.style.display = 'none';
-        updateBtn.style.display = 'none';
+        adminUpdateBtn.style.display = 'none';
     }
 
     // Function to validate the form

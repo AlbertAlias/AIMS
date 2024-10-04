@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     if (data.success && Array.isArray(data.departments)) {
                         departmentInfo.innerHTML = data.departments.map(dept => 
                             `<button class="btn btn-outline-secondary d-block mb-2 w-100 coordinator-btn" data-id="${dept.id}" data-head="${dept.head}">
-                                ${dept.name}
+                                ${dept.name}<br>${dept.head}
                             </button>`
                         ).join('');
                     } else {

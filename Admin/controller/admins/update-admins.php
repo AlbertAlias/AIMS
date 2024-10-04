@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     error_log("Checking for admin ID: $id");
 
     // Check for admin existence
-    $checkSql = "SELECT * FROM admins WHERE id = ?";
+    $checkSql = "SELECT * FROM admins WHERE user_id = ?";
     if ($checkStmt = $conn->prepare($checkSql)) {
         $checkStmt->bind_param("i", $id);
         $checkStmt->execute();

@@ -134,11 +134,10 @@ ini_set('display_errors', 1);
     <script src="crud-ajax/coordinators/update-coor.js"></script>
     <script src="crud-ajax/coordinators/delete-coor.js"></script>
 
-    <script src="functions/interns/intern-form-enable.js"></script>
-    <script src="crud-ajax/interns/retrieve-intern-deptsName.js"></script>
     <script src="crud-ajax/interns/retrieve-interns.js"></script>
+    <script src="crud-ajax/interns/retrieve-intern-deptsName.js"></script>
+    <script src="functions/interns/intern-form-enable.js"></script>
     <script src="crud-ajax/interns/retrieve-intern-info.js"></script>
-    <script src="crud-ajax/interns/retrieve-coor-details.js"></script>
     <script src="crud-ajax/interns/create-interns.js"></script>
     <script src="functions/interns/intern-email.js"></script>
     <script src="functions/interns/studID.js"></script>

@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         toast: true,
                         position: 'top-end',
                         icon: 'error',
-                        title: 'Error: ' + data.message,
+                        title: data.message,
                         showConfirmButton: false,
                         timer: 3000,
                         background: '#f8bbd0',

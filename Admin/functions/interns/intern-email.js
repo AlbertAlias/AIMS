@@ -16,6 +16,5 @@ function updateEmailField(inputId) {
 }
 
 $(document).ready(function() {
-    // Initialize the email field function
-    updateEmailField('#account_email');
+    updateEmailField('#intern_account_email');
 });

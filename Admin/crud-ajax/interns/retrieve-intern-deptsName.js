@@ -7,7 +7,6 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.success) {
                     let options = '';
-                    // Add default option
                     options += '<option selected disabled>Choose Department</option>'; 
                     response.data.forEach(function (department) {
                         options += `<option value="${department.id}">${department.department_name}</option>`;

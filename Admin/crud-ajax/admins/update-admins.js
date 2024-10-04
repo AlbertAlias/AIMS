@@ -76,6 +76,7 @@ $(document).ready(function () {
                     });
                     $('#adminDeleteBtn').hide();
                     $('#adminUpdateBtn').hide();
+                    $('#adminSubmitBtn').show().prop('disabled', true);
                     loadAdmins();
                     disableAndResetForms();
                 } else {

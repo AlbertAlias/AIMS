@@ -10,7 +10,7 @@ $departmentHead = $_POST['departmentHead'] ?? '';
 if (empty($departmentName) || empty($departmentHead)) {
     echo json_encode([
         'success' => false,
-        'message' => 'Please fill in all fields.',
+        'message' => 'Please fill in all required fields.',
     ]);
     exit;
 }
