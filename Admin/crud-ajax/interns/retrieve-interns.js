@@ -24,3 +24,7 @@ function fetchInterns() {
         }
     });
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    fetchInterns();
+});

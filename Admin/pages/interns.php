@@ -81,7 +81,7 @@
                             <input type="email" class="form-control" id="intern_personal_email" name="intern_personal_email" required disabled>
                         </div>
                     </div>
-                    <div class="row mb-3 pb-3 mb-2">
+                    <div class="row mb-3">
                         <!-- Contact Number -->
                         <div class="col-md-4">
                             <label for="intern_contact_number" class="form-label">Contact Number <span class="text-danger">*</span></label>

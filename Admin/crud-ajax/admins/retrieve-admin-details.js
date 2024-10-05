@@ -55,8 +55,8 @@ $(document).ready(function() {
                 $('#admin_civil_status').val(response.civil_status).prop('disabled', false);
                 $('#admin_contact_number').val(response.contact_number).prop('disabled', false);
                 $('#admin_personal_email').val(response.personal_email).prop('disabled', false);
-                $('#admin_account_email').val(response.account_email).prop('disabled', false);
-                $('#admin_password').val(response.password).prop('disabled', false);
+                $('#admin_account_email').val(response.account_email).prop('disabled', true);
+                $('#admin_password').val(response.password).prop('disabled', true);
                 $('#user_type').val(response.user_type).prop('disabled', false);
                 $('#adminUpdateBtn').prop('disabled', false);
             },

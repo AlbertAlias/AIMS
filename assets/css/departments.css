@@ -1,31 +1,24 @@
-/* .custom-container {
-    background-color: #f8f9fa;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
+#departmentInfo {
+    max-height: 410px;
+    padding-right: 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
-.header-text {
-    margin: 0;
-    font-weight: bold;
-    color: #6c757d;
-    border-bottom: 2px solid #343a40;
-    padding-bottom: 10px;
+.position-relative {
+    position: relative; /* Make the container position relative */
 }
 
-.header-subtext {
-    color: #6c757d;
-    font-size: 1.25rem;
-    margin-top: 5px;
+.search-icon {
+    position: absolute; /* Position the icon absolutely */
+    right: 10px; /* Adjust as needed to position it within the input */
+    top: 50%; /* Center it vertically */
+    transform: translateY(-50%); /* Adjust for perfect centering */
+    color: gray; /* Optional: Change the color of the icon */
+    pointer-events: none; /* Prevent clicks on the icon */
 }
 
-.square-container {
-    min-height: 200px;
+#searchDepartments {
+    padding-right: 2.5rem; /* Space for the icon */
+    padding-left: 0.5rem; /* Adjust this value to reduce space on the left */
 }
-
-.rectangle-container {
-    min-height: 200px;
-} */

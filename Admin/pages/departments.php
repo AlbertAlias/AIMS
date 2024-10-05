@@ -4,6 +4,10 @@
         <div class="col-md-4 col-lg-3">
             <div class="bg-light rounded-3 shadow px-4 py-4 d-flex flex-column position-relative" style="min-height: 300px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Departments</h5>
+                <div class="mb-3 position-relative">
+                    <input type="text" class="form-control" id="searchDepartments" placeholder="Search Departments...">
+                    <i class="fa-solid fa-magnifying-glass position-absolute search-icon"></i>
+                </div>
                 <div id="departmentInfo" class="text-gray-800">
                     <!-- Department information will be displayed here -->
                 </div>

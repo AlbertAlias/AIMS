@@ -14,8 +14,6 @@ $(document).ready(function () {
         const civilStatus = $('#coor_civil_status').val();
         const personalEmail = $('#coor_personal_email').val();
         const contactNumber = $('#coor_contact_number').val();
-        const accountEmail = $('#coor_account_email').val();
-        const password = $('#coor_password').val();
         const departmentID = $('#coor_department').val();
 
         // Remove validation for required fields
@@ -31,8 +29,6 @@ $(document).ready(function () {
             coor_civil_status: civilStatus,
             coor_personal_email: personalEmail,
             coor_contact_number: contactNumber,
-            coor_account_email: accountEmail,
-            coor_password: password,
             coor_department: departmentID
         };
 

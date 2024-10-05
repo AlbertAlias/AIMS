@@ -66,9 +66,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (event.target && event.target.classList.contains('coordinator-btn')) {
             const departmentId = event.target.getAttribute('data-id');
             const departmentHead = event.target.getAttribute('data-head');
+            const departmentName = event.target.innerText.split('\n')[0].trim(); // Assuming the department name is before a line break
+    
             const department = {
                 id: departmentId,
-                name: event.target.textContent.trim(),
+                name: departmentName,
                 head: departmentHead
             };
             enableFormForUpdate(department);

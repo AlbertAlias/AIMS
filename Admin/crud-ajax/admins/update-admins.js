@@ -10,13 +10,11 @@ $(document).ready(function () {
         const civilStatus = $('#admin_civil_status').val();
         const contactNumber = $('#admin_contact_number').val();
         const personalEmail = $('#admin_personal_email').val();
-        const accountEmail = $('#admin_account_email').val();
-        const password = $('#admin_password').val();
-        const userType = $('#user_type').val(); // Update here
+        const userType = $('#user_type').val();
 
         // Check for required fields
         if (!lastName || !firstName || !gender || !address || !birthdate || !civilStatus ||
-            !contactNumber || !personalEmail || !accountEmail || !userType) { // Update here
+            !contactNumber || !personalEmail || !userType) {
             Swal.fire({
                 toast: true,
                 position: 'top-right',
@@ -34,6 +32,7 @@ $(document).ready(function () {
             return;
         }
 
+        // Prepare data to be sent
         const data = {
             id: adminID,
             admin_last_name: lastName,
@@ -46,11 +45,10 @@ $(document).ready(function () {
             admin_civil_status: civilStatus,
             admin_contact_number: contactNumber,
             admin_personal_email: personalEmail,
-            admin_account_email: accountEmail,
-            admin_password: password,
-            user_type: userType // Update here
+            user_type: userType
         };
 
+        // Disable the button to prevent multiple submissions
         $(this).prop('disabled', true);
 
         $.ajax({
@@ -59,6 +57,7 @@ $(document).ready(function () {
             data: data,
             dataType: 'json',
             success: function (response) {
+                console.log(response);
                 if (response.success) {
                     Swal.fire({
                         toast: true,
@@ -97,12 +96,12 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status, error) {
-                console.error('AJAX Error:', error);
+                console.error('AJAX Error:', xhr.responseText);
                 Swal.fire({
                     toast: true,
                     position: 'top-right',
                     icon: 'error',
-                    title: 'An error occurred while updating admins data. Please try again.',
+                    title: 'An error occurred while updating admin data. Please try again.',
                     showConfirmButton: false,
                     timer: 3000,
                     background: '#ffcccb',

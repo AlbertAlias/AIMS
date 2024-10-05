@@ -82,7 +82,7 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
             });
             resetAndLockForms();
             window.loadCoor();
-            coorSubmitBtn.disabled = true; // Disable only after successful submission
+            coorSubmitBtn.disabled = true;
         } else {
             Swal.fire({
                 toast: true,

@@ -93,7 +93,7 @@ $(document).ready(function() {
                         toast: true,
                         position: 'top-end',
                         icon: 'error',
-                        title: 'Invalid Email',
+                        title: 'Email Not Does Not Exist',
                         showConfirmButton: false,
                         timer: 3000,
                         background: '#ffebee',

@@ -22,8 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $civil_status = $_POST['coor_civil_status'];
     $contact_number = $_POST['coor_contact_number'];
     $personal_email = $_POST['coor_personal_email'];
-    $account_email = $_POST['coor_account_email'];
-    $password = $_POST['coor_password']; // This may be optional
     $department_id = (int)$_POST['coor_department']; // Coordinator's department
 
     // Hash the password if provided
@@ -33,27 +31,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conn->begin_transaction();
 
     try {
-        // Update the user details
+        // Update the user details (excluding account_email and password)
         $user_sql = "UPDATE users SET last_name = ?, first_name = ?, middle_name = ?, suffix = ?, gender = ?, 
-                     address = ?, birthdate = ?, civil_status = ?, contact_number = ?, personal_email = ?, 
-                     account_email = ?";
-
-        // Append password update only if provided
-        if ($hashed_password !== null) {
-            $user_sql .= ", password = ?";
-        }
-        $user_sql .= " WHERE id = ?";
+                     address = ?, birthdate = ?, civil_status = ?, contact_number = ?, personal_email = ?
+                     WHERE id = ?";
 
         $stmt = $conn->prepare($user_sql);
-        if ($hashed_password !== null) {
-            $stmt->bind_param("ssssssssssssi", $last_name, $first_name, $middle_name, $suffix, $gender, 
-                              $address, $birthdate, $civil_status, $contact_number, $personal_email, 
-                              $account_email, $hashed_password, $id);
-        } else {
-            $stmt->bind_param("sssssssssssi", $last_name, $first_name, $middle_name, $suffix, $gender, 
-                              $address, $birthdate, $civil_status, $contact_number, $personal_email, 
-                              $account_email, $id);
-        }
+        $stmt->bind_param("ssssssssssi", $last_name, $first_name, $middle_name, $suffix, $gender, 
+                          $address, $birthdate, $civil_status, $contact_number, $personal_email, $id);
         $stmt->execute();
 
         // Update the coordinator-specific details
