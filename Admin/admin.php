@@ -27,6 +27,7 @@ ini_set('display_errors', 1);
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/departments.css">
     <link rel="stylesheet" href="../assets/css/coordinators.css">
+    <link rel="stylesheet" href="../assets/css/interns.css">
     <link rel="stylesheet" href="../assets/css/manage-users.css">
     <link rel="stylesheet" href="../assets/css/admin-profile.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -128,6 +129,7 @@ ini_set('display_errors', 1);
     <script src="crud-ajax/coordinators/retrieve-coor-deptsName.js"></script>
     <script src="functions/coordinators/coor-form-enable.js"></script>
     <script src="crud-ajax/coordinators/retrieve-coor.js"></script>
+    <script src="crud-ajax/coordinators/retrieve-coor-info.js"></script>
     <script src="crud-ajax/coordinators/create-coor.js"></script>
     <script src="functions/coordinators/coor-email.js"></script>
     <script src="functions/coordinators/contact-number.js"></script>
@@ -146,6 +148,7 @@ ini_set('display_errors', 1);
 
     <script src="crud-ajax/admins/create-admins.js"></script>
     <script src="crud-ajax/admins/retrieve-admin-details.js"></script>
+    <script src="crud-ajax/admins/retrieve-admins.js"></script>
     <script src="functions/admins/admin-form-enable.js"></script>
     <script src="functions/admins/intern-email.js"></script>
     <script src="crud-ajax/admins/update-admins.js"></script>

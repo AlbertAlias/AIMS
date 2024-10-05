@@ -1,4 +1,4 @@
-#coordinatorInfo {
+#adminsInfo {
     max-height: 410px;
     padding-right: 8px;
     overflow-y: auto;
@@ -18,7 +18,7 @@
     pointer-events: none; /* Prevent clicks on the icon */
 }
 
-#searchCoordinators {
+#searchAdmins {
     padding-right: 2.5rem; /* Space for the icon */
     padding-left: 0.5rem; /* Adjust this value to reduce space on the left */
 }

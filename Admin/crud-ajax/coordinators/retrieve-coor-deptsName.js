@@ -21,4 +21,3 @@ function loadDepartments() {
         }
     });
 }
-// departmentSelect.prop('disabled', true);

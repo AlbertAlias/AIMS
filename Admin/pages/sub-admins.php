@@ -3,6 +3,10 @@
         <div class="col-md-4 col-lg-3">
             <div class="bg-light rounded-3 shadow px-4 py-4 d-flex flex-column" style="min-height: 200px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Admins</h5>
+                <div class="mb-3 position-relative">
+                    <input type="text" class="form-control" id="searchAdmins" placeholder="Search Admin...">
+                    <i class="fa-solid fa-magnifying-glass position-absolute search-icon"></i>
+                </div>
                 <div id="adminsInfo" class="text-gray-800">
                     <!-- Admin information will be displayed here -->
                 </div>
