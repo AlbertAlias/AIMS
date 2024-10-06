@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const internsInfo = document.getElementById('internsInfo');
     const searchInput = document.getElementById('searchInterns');
 
-    function fetchInterns() {
+    window.fetchInterns = function() {
         fetch('controller/interns/retrieve-interns.php')
             .then(response => response.json())
             .then(interns => {
@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
             .catch(error => {
                 console.error('Failed to load interns:', error);
             });
-    }
+    };
 
     function updateInternList(interns) {
         internsInfo.innerHTML = interns.map(intern => {
@@ -35,5 +35,5 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     // Fetch interns on page load
-    fetchInterns();
+    window.fetchInterns();
 });

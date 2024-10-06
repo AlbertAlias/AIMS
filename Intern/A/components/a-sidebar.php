@@ -3,9 +3,9 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon">
-            <img src="../../img/esyatek-a-logo.png" alt="Logo" width="60">
+            <img src="../../img/esyatek-a-logo.png" alt="Logo" width="55">
         </div>
-        <div class="sidebar-brand-text mx-1">AIMS</div>
+        <!-- <div class="sidebar-brand-text mx-1">AIMS</div> -->
     </a>
 
     <!-- Divider -->
@@ -15,14 +15,21 @@
     <li class="nav-item align-items-center justify-content-center" style="margin-top: 5px;">
         <a class="nav-link menu-link" href="#" onclick="showSection(event, 'dashboard');">
             <i class="fa-solid fa-qrcode fs-4"></i>
-            <span class="">Dashboard</span>
+            <span>Dashboard</span>
+        </a>
+    </li>
+
+    <li class="nav-item align-items-center justify-content-center" style="margin-top: 5px;">
+        <a class="nav-link menu-link" href="#" onclick="showSection(event, 'weekly-reports');">
+            <i class="fa-solid fa-scroll fs-4"></i>
+            <span>Reports</span>
         </a>
     </li>
 
     <li class="nav-item align-items-center justify-content-center" style="margin-top: 5px;">
         <a class="nav-link menu-link" href="#" onclick="showSection(event, 'requirements');">
-            <i class="fa-solid fa-scroll fs-4"></i>
-            <span class="">Requirements</span>
+            <i class="fa-solid fa-user-graduate fs-4"></i>
+            <span>Requirement</span>
         </a>
     </li>
 
@@ -31,48 +38,30 @@
     
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        <button class="rounded-circle border-0 fs-5" id="sidebarToggle"></button>
     </div>
 </ul>
 
-<script>
-    // const scriptsMap = {
-    //     dashboard: [
-    //         'crud-ajax/dashboard/retrieve-deptCounts.js',
-    //         'crud-ajax/dashboard/retrieve-coorCounts.js',
-    //         'crud-ajax/dashboard/retrieve-internCounts.js',
-    //         'crud-ajax/dashboard/retrieve-adminCounts.js'
-    //     ],
-    //     departments: [
-    //         'functions/departments/form-enable.js',
-    //         'crud-ajax/departments/create-depts.js',
-    //         'crud-ajax/departments/retrieve-depts.js',
-    //         'crud-ajax/departments/update-depts.js',
-    //         'crud-ajax/departments/delete-depts.js'
-    //     ]
-    // };
+    <!-- Nav Item - Manage Users -->
+    <!-- <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseAddUser" aria-expanded="true" aria-controls="collapseAddUser">
+            <i class="fa-solid fa-user-gear"></i>
+            <span class="text-black">Manage Users</span>
+            <i class="fas fa-chevron-right rotate-icon" style="margin-top: 6px; float: right; transition: transform 0.2s ease-in-out;"></i>
+        </a>
+        <div class="collapse" id="collapseAddUser" aria-labelledby="headingAddUser" data-bs-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item">Add Users</a>
+                <a class="collapse-item">View Users</a>
+            </div>
+        </div>
+    </li> -->
 
-    function loadScripts(scripts) {
-        // Remove previously loaded scripts
-        const existingScripts = document.querySelectorAll('script[data-dynamic="true"]');
-        existingScripts.forEach(script => script.remove());
-
-        // Dynamically load the required scripts for the selected section
-        scripts.forEach(function(src) {
-            const script = document.createElement('script');
-            script.src = src;
-            script.defer = true;
-            script.setAttribute('data-dynamic', 'true');
-            document.body.appendChild(script);
-        });
-    }
-
+    <script>
     function showSection(event, sectionID) {
-    // If there's no event target (i.e., on page load), skip the closest logic
     if (event && event.target) {
         const clickedLink = event.target.closest('.menu-link');
         if (clickedLink) {
-            // Update the active link
             var menuLinks = document.querySelectorAll('.menu-link');
             menuLinks.forEach(function(link) {
                 link.classList.remove('active');
@@ -81,22 +70,19 @@
         }
     }
 
-    // Hide all sections
-    var sections = document.querySelectorAll('#dashboard, #departments, #coordinators, #interns, #sub-admins');
-        sections.forEach(function(section) {
-            section.style.display = 'none';
-        });
+    var sections = document.querySelectorAll('#dashboard, #weekly-reports, #requirements');
+    sections.forEach(function(section) {
+        section.style.display = 'none';
+    });
 
-        // Show the selected section
-        var activeSection = document.getElementById(sectionID);
-        if (activeSection) {
-            activeSection.style.display = 'block';
-            loadScripts(scriptsMap[sectionID] || []); // Load the scripts for the active section
-        }
+    var activeSection = document.getElementById(sectionID);
+    if (activeSection) {
+        activeSection.style.display = 'block';
     }
+}
 
-    // Set default section on page load
+
     window.onload = function() {
-        showSection(null, 'dashboard'); // Default section
+        showSection(null, 'dashboard');
     };
-    </script>
+</script>

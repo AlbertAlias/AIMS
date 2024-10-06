@@ -21,6 +21,10 @@ if (!isset($_SESSION['email'])) {
     <title>Accountancy</title>
     
     <link href="../../assets/css/main.css" rel="stylesheet">
+
+    <link href="../../assets/intern-css/A-css/dashboard.css" rel="stylesheet">
+    <link href="../../assets/intern-css/A-css/requirements.css" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -73,8 +77,9 @@ if (!isset($_SESSION['email'])) {
 
                 <!-- Begin Page Content -->
                 <div id="page-content" style="width: 100%;">
-                    <h1>Welcome to Department A</h1>
-                    
+                    <?php include "pages/dashboard.php"; ?>
+                    <?php include "pages/weekly-reports.php"; ?>
+                    <?php include "pages/requirements.php"; ?>
                 </div>
 
                 <!-- Content Row -->
@@ -90,5 +95,9 @@ if (!isset($_SESSION['email'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/29c04b1733.js" defer crossorigin="anonymous"></script>
     <script src="../../js/sidebar.js" defer></script>
+
+    <script src="crud-ajax/weekly-reports/create-reports.js"></script>
+
+    <script src="crud-ajax/requirements/create-requirements.js"></script>
 </body>
 </html>
