@@ -1,9 +1,0 @@
-.dashed-border {
-    border: 2px dashed rgb(9, 135, 40); /* Dashed black border */
-    width: 150px; /* Set width for the border container */
-    height: 140px; /* Set height for the border container */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%; /* Makes the border circular */
-}

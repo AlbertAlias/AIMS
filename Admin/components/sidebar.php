@@ -72,30 +72,44 @@
     </li> -->
 
     <script>
-    function showSection(event, sectionID) {
-    if (event && event.target) {
-        const clickedLink = event.target.closest('.menu-link');
-        if (clickedLink) {
-            var menuLinks = document.querySelectorAll('.menu-link');
-            menuLinks.forEach(function(link) {
-                link.classList.remove('active');
+        function showSection(event, sectionID) {
+            if (event && event.target) {
+                const clickedLink = event.target.closest('.menu-link');
+                if (clickedLink) {
+                    var menuLinks = document.querySelectorAll('.menu-link');
+                    menuLinks.forEach(function(link) {
+                        link.classList.remove('active');
+                    });
+                    clickedLink.classList.add('active');
+                }
+            }
+
+            var sections = document.querySelectorAll('#dashboard, #departments, #coordinators, #interns, #sub-admins, #profile');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
             });
-            clickedLink.classList.add('active');
+
+            var activeSection = document.getElementById(sectionID);
+            if (activeSection) {
+                activeSection.style.display = 'block';
+            }
+
+            var activeNavItem = document.querySelector(`#accordionSidebar a[onclick*="${sectionID}"]`)?.parentElement;
+            if (activeNavItem) {
+                var sidebarLinks = document.querySelectorAll('.nav-item');
+                sidebarLinks.forEach(function(link) {
+                    link.classList.remove('active');
+                });
+                activeNavItem.classList.add('active');
+            }
         }
-    }
 
-    var sections = document.querySelectorAll('#dashboard, #departments, #coordinators, #interns, #sub-admins, #profile');
-    sections.forEach(function(section) {
-        section.style.display = 'none';
-    });
+        window.onload = function() {
+            showSection(null, 'dashboard');
 
-    var activeSection = document.getElementById(sectionID);
-        if (activeSection) {
-            activeSection.style.display = 'block';
-        }
-    }
-
-    window.onload = function() {
-        showSection(null, 'dashboard');
-    };
-</script>
+            var dashboardLink = document.querySelector(`#accordionSidebar a[onclick*="dashboard"]`).parentElement;
+            if (dashboardLink) {
+                dashboardLink.classList.add('active');
+            }
+        };
+    </script>

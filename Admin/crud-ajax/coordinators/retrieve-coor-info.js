@@ -1,13 +1,21 @@
 $(document).ready(function() {
     let isLoadingDetails = false;
+    let currentAjaxRequest = null; // To store current AJAX request
 
     window.loadCoorDetails = function(id) {
-        if (isLoadingDetails) return; 
+        if (isLoadingDetails) return; // Prevent multiple clicks while loading
         isLoadingDetails = true;
 
         console.log('Loading coordinator details for ID:', id);
         loadDepartments(); // Load departments when fetching coordinator details
-        $.ajax({
+
+        // If there is an ongoing request, abort it
+        if (currentAjaxRequest) {
+            currentAjaxRequest.abort();
+        }
+
+        // Start new AJAX request for coordinator details
+        currentAjaxRequest = $.ajax({
             url: 'controller/coordinators/retrieve-coor-info.php',
             method: 'GET',
             data: { id: id },
@@ -37,17 +45,21 @@ $(document).ready(function() {
                 $('#coorUpdateBtn').prop('disabled', false);
             },
             error: function(xhr, status, error) {
-                console.error('Error retrieving coordinator details:', error);
+                // Only log errors if they weren't caused by an abort
+                if (status !== 'abort') {
+                    console.error('Error retrieving coordinator details:', error);
+                }
             },
             complete: function() {
-                isLoadingDetails = false; 
+                isLoadingDetails = false; // Reset loading state after the request completes
             }
         });
     };
 
+    // Handle click event for coordinator buttons
     $(document).on('click', '.coor-btn', function(e) {
         e.preventDefault();
         const coorId = $(this).data('id');
-        window.loadCoorDetails(coorId);
+        window.loadCoorDetails(coorId); // Load details for clicked coordinator
     });
 });

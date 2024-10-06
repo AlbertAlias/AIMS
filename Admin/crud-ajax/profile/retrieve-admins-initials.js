@@ -14,25 +14,22 @@ document.addEventListener("DOMContentLoaded", function () {
                     let firstName = response.first_name;
                     let lastName = response.last_name;
                     let initials = (firstName[0] + lastName[0]).toUpperCase();
-                    let backgroundColor = generateRandomColor(firstName + lastName);
-    
+                    let backgroundColor = getRandomColor(); // Change this line
+                
                     // Set the profile initials in the navbar
                     $('#profile-initials').text(initials).css('background-color', backgroundColor);
-                    
-                    // Also display initials in the dashed-border if no picture is uploaded
+                
+                    // Set initials in the placeholder
                     $('#profile-initials-placeholder').text(initials)
                         .css('background-color', backgroundColor)
-                        .css('display', 'flex')  // Ensure it's displayed as a flex container
-                        .css('align-items', 'center')  // Center the content vertically
-                        .css('justify-content', 'center') // Center the content horizontally
-                        .css('width', '155px') // Adjust as needed for sizing
-                        .css('height', '145px') // Adjust as needed for sizing
-                        .css('border-radius', '50%') // Make it circular
+                        .css('display', 'flex')
+                        .css('align-items', 'center')
+                        .css('justify-content', 'center')
+                        .css('width', '148px')
+                        .css('height', '145px')
+                        .css('border-radius', '50%')
                         .css('color', 'white')
-                        .css('font-size', '24px');
-                    
-                    // Hide the placeholder if there is a picture (add your logic for checking picture upload)
-                    // e.g., if (hasProfilePicture) { $('#profile-initials-placeholder').hide(); }
+                        .css('font-size', '64px');
                 } else {
                     console.error('Error fetching user details:', response.error);
                 }
@@ -44,17 +41,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-// Function to generate a random color based on a string
-function generateRandomColor(string) {
-    let hash = 0;
-    for (let i = 0; i < string.length; i++) {
-        hash = string.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    
-    let color = '#';
-    for (let i = 0; i < 3; i++) {
-        let value = (hash >> (i * 8)) & 0xFF;
-        color += ('00' + value.toString(16)).slice(-2);
-    }
-    return color;
+// Function to get a random color from a predefined set of darker colors
+function getRandomColor() {
+    const colors = ['red', 'blue', 'green', '#FF4500', '#800080', '#FF00FF', '#D3A300']; // Mustard Yellow
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
 }
