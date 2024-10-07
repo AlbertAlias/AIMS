@@ -50,7 +50,7 @@
 
     <!-- Second Row of 4 Containers -->
     <div class="row">
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
             <div class="card bg-light p-2 shadow" style="height: 105px;">
                 <div class="card-body text-start d-flex justify-content-between align-items-center">
                     <div>
@@ -82,6 +82,17 @@
                 <div class="card-body text-start">
                     <h4 class="card-title">Container 8</h4>
                     <p class="card-text">This is container 8.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 col-md-10 col-sm-12 mb-4">
+            <div class="card bg-light p-2 shadow">
+                <div class="card-body">
+                    <!-- <h5 class="card-title">User Type Distribution</h5> -->
+                    <div id="user-donut-chart"></div>
                 </div>
             </div>
         </div>
