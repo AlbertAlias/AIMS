@@ -1,60 +1,47 @@
-<ul class="navbar-nav sidebar sidebar-dark accordion" style="background-color: #198754;" id="accordionSidebar">
-
+<ul class="navbar-nav sidebar sidebar-dark accordion d-flex flex-column align-items-center" id="accordionSidebar" style="background-color: #198754;">
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon">
             <img src="../img/esyatek-logo-1.png" alt="Logo" width="55">
         </div>
-        <!-- <div class="sidebar-brand-text mx-1">AIMS</div> -->
     </a>
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
-    <!-- Nav Item - Dashboard -->
-    <li class="nav-item align-items-center justify-content-center" style="margin-top: 5px;">
-        <a class="nav-link menu-link" href="#" onclick="showSection(event, 'dashboard');">
-            <i class="fa-solid fa-qrcode fs-4"></i>
+    <!-- Nav Items -->
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" href="#" onclick="showSection(event, 'dashboard');">
+            <i class="fa-solid fa-qrcode"></i>
             <span>Dashboard</span>
         </a>
     </li>
-
-    <li class="nav-item align-items-center justify-content-center" style="margin-top: 5px;">
-        <a class="nav-link menu-link" href="#" onclick="showSection(event, 'departments');">
-            <i class="fa-solid fa-scroll fs-4"></i>
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" href="#" onclick="showSection(event, 'departments');">
+            <i class="fa-solid fa-scroll"></i>
             <span>Departments</span>
         </a>
     </li>
-
-    <li class="nav-item align-items-center justify-content-center" style="margin-top: 5px;">
-        <a class="nav-link menu-link" href="#" onclick="showSection(event, 'coordinators');">
-            <i class="fa-solid fa-users fs-4"></i>
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" href="#" onclick="showSection(event, 'coordinators');">
+            <i class="fa-solid fa-user-group"></i>
             <span>Coordinators</span>
         </a>
     </li>
-
-    <li class="nav-item align-items-center justify-content-center" style="margin-top: 5px;">
-        <a class="nav-link menu-link" href="#" onclick="showSection(event, 'interns');">
-            <i class="fa-solid fa-user-graduate fs-4"></i>
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" href="#" onclick="showSection(event, 'interns');">
+            <i class="fa-solid fa-user-graduate"></i>
             <span>Interns</span>
         </a>
     </li>
-
-    <li class="nav-item align-items-center justify-content-center" style="margin-top: 5px;">
-        <a class="nav-link menu-link" href="#" onclick="showSection(event, 'sub-admins');">
-            <i class="fa-solid fa-user-shield fs-4"></i>
+    <li class="nav-item">
+        <a class="nav-link d-flex align-items-center" href="#" onclick="showSection(event, 'sub-admins');">
+            <i class="fa-solid fa-user-gear"></i>
             <span>Admins</span>
         </a>
     </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-    
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0 fs-5" id="sidebarToggle"></button>
-    </div>
 </ul>
+
 
     <!-- Nav Item - Manage Users -->
     <!-- <li class="nav-item">
@@ -74,13 +61,13 @@
     <script>
         function showSection(event, sectionID) {
             if (event && event.target) {
-                const clickedLink = event.target.closest('.menu-link');
+                const clickedLink = event.target.closest('.nav-link'); // Changed from '.menu-link' to '.nav-link'
                 if (clickedLink) {
-                    var menuLinks = document.querySelectorAll('.menu-link');
-                    menuLinks.forEach(function(link) {
+                    var sidebarLinks = document.querySelectorAll('.nav-link');
+                    sidebarLinks.forEach(function(link) {
                         link.classList.remove('active');
                     });
-                    clickedLink.classList.add('active');
+                    clickedLink.classList.add('active'); // Only add 'active' to clicked nav-link
                 }
             }
 
@@ -96,11 +83,11 @@
 
             var activeNavItem = document.querySelector(`#accordionSidebar a[onclick*="${sectionID}"]`)?.parentElement;
             if (activeNavItem) {
-                var sidebarLinks = document.querySelectorAll('.nav-item');
-                sidebarLinks.forEach(function(link) {
-                    link.classList.remove('active');
+                var sidebarItems = document.querySelectorAll('.nav-item');
+                sidebarItems.forEach(function(item) {
+                    item.classList.remove('active'); // Remove active from nav-item
                 });
-                activeNavItem.classList.add('active');
+                activeNavItem.classList.add('active'); // Add active to the parent nav-item
             }
         }
 

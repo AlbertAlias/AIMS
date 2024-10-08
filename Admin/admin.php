@@ -20,7 +20,9 @@ ini_set('display_errors', 1);
 
     <title>Admin</title>
     
-    <link href="../assets/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" 
                 rel="stylesheet">
 
@@ -55,6 +57,7 @@ ini_set('display_errors', 1);
             flex-direction: column;
             flex-grow: 1;
             padding: 1rem;
+            background-color: #f8f8f8;
         }
 
         #page-content {
@@ -101,11 +104,6 @@ ini_set('display_errors', 1);
         <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
 
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
