@@ -21,6 +21,8 @@ if (!isset($_SESSION['email'])) {
     <title>Accountancy</title>
     
     <link href="../../assets/css/main.css" rel="stylesheet">
+    <link href="../../assets/css/sidebar.css" rel="stylesheet">
+    <link href="../../assets/css/header.css" rel="stylesheet">
 
     <link href="../../assets/intern-css/A-css/dashboard.css" rel="stylesheet">
     <link href="../../assets/intern-css/A-css/requirements.css" rel="stylesheet">

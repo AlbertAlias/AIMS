@@ -1,45 +1,36 @@
-<ul class="navbar-nav sidebar sidebar-dark accordion" style="background-color: #198754;" id="accordionSidebar">
-
+<ul class="navbar-nav sidebar sidebar-dark accordion d-flex flex-column align-items-center" id="accordionSidebar" style="background-color: #198754;">
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon">
             <img src="../../img/esyatek-a-logo.png" alt="Logo" width="55">
         </div>
-        <!-- <div class="sidebar-brand-text mx-1">AIMS</div> -->
     </a>
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item align-items-center justify-content-center" style="margin-top: 5px;">
-        <a class="nav-link menu-link" href="#" onclick="showSection(event, 'dashboard');">
-            <i class="fa-solid fa-qrcode fs-4"></i>
+    <li class="nav-item" style="margin-top: 5px;">
+        <a class="nav-link  d-flex align-items-center" href="#" onclick="showSection(event, 'dashboard');">
+            <i class="fa-solid fa-qrcode"></i>
             <span>Dashboard</span>
         </a>
     </li>
 
-    <li class="nav-item align-items-center justify-content-center" style="margin-top: 5px;">
-        <a class="nav-link menu-link" href="#" onclick="showSection(event, 'weekly-reports');">
+    <li class="nav-item" style="margin-top: 5px;">
+        <a class="nav-link  d-flex align-items-center" href="#" onclick="showSection(event, 'weekly-reports');">
             <i class="fa-solid fa-scroll fs-4"></i>
             <span>Reports</span>
         </a>
     </li>
 
-    <li class="nav-item align-items-center justify-content-center" style="margin-top: 5px;">
-        <a class="nav-link menu-link" href="#" onclick="showSection(event, 'requirements');">
-            <i class="fa-solid fa-user-graduate fs-4"></i>
+    <li class="nav-item" style="margin-top: 5px;">
+        <a class="nav-link  d-flex align-items-center" href="#" onclick="showSection(event, 'requirements');">
+            <i class="fa-solid fa-user-graduate"></i>
             <span>Requirement</span>
         </a>
     </li>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-    
-    <!-- Sidebar Toggler (Sidebar) -->
-    <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0 fs-5" id="sidebarToggle"></button>
-    </div>
 </ul>
 
     <!-- Nav Item - Manage Users -->
@@ -58,31 +49,44 @@
     </li> -->
 
     <script>
-    function showSection(event, sectionID) {
-    if (event && event.target) {
-        const clickedLink = event.target.closest('.menu-link');
-        if (clickedLink) {
-            var menuLinks = document.querySelectorAll('.menu-link');
-            menuLinks.forEach(function(link) {
-                link.classList.remove('active');
+        function showSection(event, sectionID) {
+            if (event && event.target) {
+                const clickedLink = event.target.closest('.nav-link'); // Changed from '.menu-link' to '.nav-link'
+                if (clickedLink) {
+                    var sidebarLinks = document.querySelectorAll('.nav-link');
+                    sidebarLinks.forEach(function(link) {
+                        link.classList.remove('active');
+                    });
+                    clickedLink.classList.add('active'); // Only add 'active' to clicked nav-link
+                }
+            }
+
+            var sections = document.querySelectorAll('#dashboard, #weekly-reports, #requirements');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
             });
-            clickedLink.classList.add('active');
+
+            var activeSection = document.getElementById(sectionID);
+            if (activeSection) {
+                activeSection.style.display = 'block';
+            }
+
+            var activeNavItem = document.querySelector(`#accordionSidebar a[onclick*="${sectionID}"]`)?.parentElement;
+            if (activeNavItem) {
+                var sidebarItems = document.querySelectorAll('.nav-item');
+                sidebarItems.forEach(function(item) {
+                    item.classList.remove('active'); // Remove active from nav-item
+                });
+                activeNavItem.classList.add('active'); // Add active to the parent nav-item
+            }
         }
-    }
 
-    var sections = document.querySelectorAll('#dashboard, #weekly-reports, #requirements');
-    sections.forEach(function(section) {
-        section.style.display = 'none';
-    });
+        window.onload = function() {
+            showSection(null, 'dashboard');
 
-    var activeSection = document.getElementById(sectionID);
-    if (activeSection) {
-        activeSection.style.display = 'block';
-    }
-}
-
-
-    window.onload = function() {
-        showSection(null, 'dashboard');
-    };
-</script>
+            var dashboardLink = document.querySelector(`#accordionSidebar a[onclick*="dashboard"]`).parentElement;
+            if (dashboardLink) {
+                dashboardLink.classList.add('active');
+            }
+        };
+    </script>

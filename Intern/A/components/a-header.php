@@ -1,13 +1,16 @@
 <nav class="navbar navbar-expand navbar-light bg-white topbar m-0 p-0 px-2 static-top shadow">
-    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-        <i class="fa fa-bars"></i>
-    </button>
+    <!-- Add icon button on the left side -->
+    <div class="d-flex align-items-center">
+        <button id="sidebarToggle" class="btn btn-link d-none d-md-block me-3">
+            <i class="fa-solid fa-bars fs-4" style="color: #198754;"></i>
+        </button>
+    </div>
 
     <div id="welcomeAdmin" class="text-dark ml-3">
         <!-- This will be updated by JS -->
     </div>
 
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav ms-auto"> <!-- Change ml-auto to ms-auto for Bootstrap 5 -->
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
