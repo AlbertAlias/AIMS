@@ -21,8 +21,9 @@ ini_set('display_errors', 1);
     <title>Admin</title>
     
     <link rel="stylesheet" href="../assets/css/main.css">
-    <link rel="stylesheet" href="../assets/css/sidebar.css">
-    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/newsidebar.css">
+    <!-- <link rel="stylesheet" href="../assets/css/oldsidebar.css"> -->
+    <!-- <link rel="stylesheet" href="../assets/css/header.css"> -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" 
                 rel="stylesheet">
 
@@ -43,25 +44,28 @@ ini_set('display_errors', 1);
         }
 
         #wrapper {
-            height: 100%;
+            display: flex;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
         }
 
         #content-wrapper {
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
+            background-color: #f8f8f8;
         }
 
         #content {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
             padding: 1rem;
+            flex-grow: 1;
             background-color: #f8f8f8;
         }
 
         #page-content {
             flex-grow: 1;
+            padding: 10px;
         }
     </style>
 </head>

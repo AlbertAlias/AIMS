@@ -1,102 +1,71 @@
-<ul class="navbar-nav sidebar sidebar-dark accordion d-flex flex-column align-items-center" id="accordionSidebar" style="background-color: #198754;">
-    <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
-        <div class="sidebar-brand-icon">
-            <img src="../img/esyatek-logo-1.png" alt="Logo" width="55">
-        </div>
-    </a>
+<div class="sidebar-container d-flex flex-column p-0 m-0">
+    <!-- Header -->
+    <div class="sidebar-header d-flex flex-column align-items-center">
+        <img src="../img/esyatek-logo-1.png" alt="Logo" width="45">
+    </div>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
-
-    <!-- Nav Items -->
-    <li class="nav-item">
-        <a class="nav-link d-flex align-items-center" href="#" onclick="showSection(event, 'dashboard');">
+    <nav>
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'dashboard')">
             <i class="fa-solid fa-qrcode"></i>
-            <span>Dashboard</span>
+            Dashboard
         </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link d-flex align-items-center" href="#" onclick="showSection(event, 'departments');">
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'departments')">
             <i class="fa-solid fa-scroll"></i>
-            <span>Departments</span>
+            Departments
         </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link d-flex align-items-center" href="#" onclick="showSection(event, 'coordinators');">
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'coordinators')">
             <i class="fa-solid fa-user-group"></i>
-            <span>Coordinators</span>
+            Coordinators
         </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link d-flex align-items-center" href="#" onclick="showSection(event, 'interns');">
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'interns')">
             <i class="fa-solid fa-user-graduate"></i>
-            <span>Interns</span>
+            Interns
         </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link d-flex align-items-center" href="#" onclick="showSection(event, 'sub-admins');">
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'sub-admins')">
             <i class="fa-solid fa-user-gear"></i>
-            <span>Admins</span>
+            Admins
         </a>
-    </li>
-</ul>
+    </nav>
 
 
-    <!-- Nav Item - Manage Users -->
-    <!-- <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseAddUser" aria-expanded="true" aria-controls="collapseAddUser">
-            <i class="fa-solid fa-user-gear"></i>
-            <span class="text-black">Manage Users</span>
-            <i class="fas fa-chevron-right rotate-icon" style="margin-top: 6px; float: right; transition: transform 0.2s ease-in-out;"></i>
-        </a>
-        <div class="collapse" id="collapseAddUser" aria-labelledby="headingAddUser" data-bs-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item">Add Users</a>
-                <a class="collapse-item">View Users</a>
-            </div>
-        </div>
-    </li> -->
+    <!-- Footer or other content at the bottom -->
+    <div class="sidebar-footer">
+        © 2024 Your Company
+    </div>
+</div>
 
-    <script>
-        function showSection(event, sectionID) {
-            if (event && event.target) {
-                const clickedLink = event.target.closest('.nav-link'); // Changed from '.menu-link' to '.nav-link'
-                if (clickedLink) {
-                    var sidebarLinks = document.querySelectorAll('.nav-link');
-                    sidebarLinks.forEach(function(link) {
-                        link.classList.remove('active');
-                    });
-                    clickedLink.classList.add('active'); // Only add 'active' to clicked nav-link
-                }
-            }
+<script>
+    function showSection(event, sectionID) {
+        // Remove 'active' class from all links (both sidebar and header)
+        document.querySelectorAll('.sidebar-link, .menu-link').forEach(link => {
+            link.classList.remove('active');
+        });
 
-            var sections = document.querySelectorAll('#dashboard, #departments, #coordinators, #interns, #sub-admins, #profile');
-            sections.forEach(function(section) {
-                section.style.display = 'none';
-            });
-
-            var activeSection = document.getElementById(sectionID);
-            if (activeSection) {
-                activeSection.style.display = 'block';
-            }
-
-            var activeNavItem = document.querySelector(`#accordionSidebar a[onclick*="${sectionID}"]`)?.parentElement;
-            if (activeNavItem) {
-                var sidebarItems = document.querySelectorAll('.nav-item');
-                sidebarItems.forEach(function(item) {
-                    item.classList.remove('active'); // Remove active from nav-item
-                });
-                activeNavItem.classList.add('active'); // Add active to the parent nav-item
+        // Mark clicked link as active
+        if (event && event.target) {
+            const clickedLink = event.target.closest('.sidebar-link, .menu-link');
+            if (clickedLink) {
+                clickedLink.classList.add('active');
             }
         }
 
-        window.onload = function() {
-            showSection(null, 'dashboard');
+        // Hide all sections
+        document.querySelectorAll('#dashboard, #departments, #coordinators, #interns, #sub-admins, #profile').forEach(section => {
+            section.style.display = 'none';
+        });
 
-            var dashboardLink = document.querySelector(`#accordionSidebar a[onclick*="dashboard"]`).parentElement;
-            if (dashboardLink) {
-                dashboardLink.classList.add('active');
-            }
-        };
-    </script>
+        // Show the active section
+        const activeSection = document.getElementById(sectionID);
+        if (activeSection) {
+            activeSection.style.display = 'block';
+        }
+    }
+
+    window.onload = function() {
+        // Set the dashboard as the default active section and link
+        showSection(null, 'dashboard'); 
+
+        // Mark the dashboard link as active on load
+        document.querySelector('a[href="#"][onclick*="dashboard"]').classList.add('active');
+    };
+</script>

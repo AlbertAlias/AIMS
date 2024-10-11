@@ -1,4 +1,4 @@
-<div class="container-fluid p-0 m-0" id="profile">
+<div class="container-fluid p-0 m-0" id="profile" style="display: none;">
     <div class="row">
         <!-- Profile Picture Section -->
         <div class="col-md-3 col-12 mb-3">
