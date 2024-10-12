@@ -14,11 +14,11 @@
     $coorId = $_GET['id'];
 
     // Query to retrieve full user details for the coordinator
-    $sql = "SELECT u.id, u.last_name, u.first_name, u.middle_name, u.suffix, u.gender, u.address, u.birthdate,
-        u.civil_status, u.personal_email, u.contact_number, u.account_email, u.password, u.department_id
-        FROM users u
-        JOIN coordinators c ON u.id = c.user_id
-        WHERE u.id = ? AND u.user_type = 'coordinator'";
+    $sql = "SELECT u.id, u.last_name, u.first_name, u.middle_name, u.suffix, u.address, u.civil_status, u.personal_email,
+                u.account_email, u.password, u.department_id, u.employee_number
+            FROM users u
+            JOIN coordinators c ON u.id = c.user_id
+            WHERE u.id = ? AND u.user_type = 'coordinator'";
 
     $stmt = $conn->prepare($sql);
 

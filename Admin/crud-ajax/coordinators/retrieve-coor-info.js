@@ -33,12 +33,9 @@ $(document).ready(function() {
                 $('#coor_first_name').val(response.first_name).prop('disabled', false);
                 $('#coor_middle_name').val(response.middle_name).prop('disabled', false);
                 $('#coor_suffix').val(response.suffix).prop('disabled', false);
-                $('#coor_gender').val(response.gender).prop('disabled', false);
                 $('#coor_address').val(response.address).prop('disabled', false);
-                $('#coor_birthdate').val(response.birthdate).prop('disabled', false);
-                $('#coor_civil_status').val(response.civil_status).prop('disabled', false);
                 $('#coor_personal_email').val(response.personal_email).prop('disabled', false);
-                $('#coor_contact_number').val(response.contact_number).prop('disabled', false);
+                $('#coor_employee_number').val(response.employee_number).prop('disabled', false);  // New field
                 $('#coor_department').val(response.department_id).prop('disabled', false);
                 $('#coor_account_email').val(response.account_email).prop('disabled', true);
                 $('#coor_password').val(response.password).prop('disabled', true);

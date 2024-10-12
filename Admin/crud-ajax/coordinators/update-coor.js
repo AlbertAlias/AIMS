@@ -8,27 +8,20 @@ $(document).ready(function () {
         const firstName = $('#coor_first_name').val();
         const middleName = $('#coor_middle_name').val();
         const suffix = $('#coor_suffix').val();
-        const gender = $('#coor_gender').val();
         const address = $('#coor_address').val();
-        const birthdate = $('#coor_birthdate').val();
-        const civilStatus = $('#coor_civil_status').val();
         const personalEmail = $('#coor_personal_email').val();
-        const contactNumber = $('#coor_contact_number').val();
+        const employeeNumber = $('#coor_employee_number').val();
         const departmentID = $('#coor_department').val();
 
-        // Remove validation for required fields
         const data = {
             id: coorID,
             coor_last_name: lastName,
             coor_first_name: firstName,
             coor_middle_name: middleName,
             coor_suffix: suffix,
-            coor_gender: gender,
             coor_address: address,
-            coor_birthdate: birthdate,
-            coor_civil_status: civilStatus,
             coor_personal_email: personalEmail,
-            coor_contact_number: contactNumber,
+            coor_employee_number: employeeNumber,
             coor_department: departmentID
         };
 
