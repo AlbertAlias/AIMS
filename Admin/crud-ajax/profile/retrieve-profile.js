@@ -12,7 +12,7 @@ function retrieveProfilePicture(userId) {
         data: { user_id: userId }, // Send the user ID as data
         dataType: 'json',
         success: function(response) {
-            if (response.profile_picture) {
+            if (response && response.profile_picture) {
                 // Hide initials placeholder
                 $('#profile-initials-placeholder').hide();
                 
@@ -30,7 +30,8 @@ function retrieveProfilePicture(userId) {
                     'color': 'transparent' // Hide the initials text
                 });
             } else {
-                console.error('Error fetching profile picture:', response.error);
+                console.warn('No profile picture found, displaying initials instead.');
+                $('#profile-initials-placeholder').show(); // Show initials if picture is missing
             }
         },
         error: function() {

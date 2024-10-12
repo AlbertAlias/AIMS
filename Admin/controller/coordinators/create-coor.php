@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents('php://input'), true);
 
     // Validate all fields
-    $required_fields = ['last_name', 'first_name', 'gender', 'address', 'birthdate', 'civil_status', 'personal_email', 'contact_number', 'department_id', 'account_email', 'password'];
+    $required_fields = ['last_name', 'first_name', 'address', 'civil_status',  'personal_email', 'employee_number',  'department_id', 'account_email', 'password'];
     foreach ($required_fields as $field) {
         if (empty($data[$field])) {
             echo json_encode(['success' => false, 'message' => 'All fields are required.']);
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
 
     // Insert into users table
-    $stmt = $conn->prepare("INSERT INTO users (last_name, first_name, middle_name, suffix, gender, address, birthdate, civil_status, personal_email, contact_number, account_email, password, user_type, department_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'coordinator', ?)");
+    $stmt = $conn->prepare("INSERT INTO users (last_name, first_name, middle_name, suffix, address, civil_status, personal_email, employee_number, account_email, password, user_type, department_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'coordinator', ?)");
     
     if (!$stmt) {
         echo json_encode(['success' => false, 'message' => 'Failed to prepare the SQL statement.']);
@@ -49,11 +49,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $stmt->bind_param(
-        'sssssssssssss',
+        'sssssssssss',
         $data['last_name'], $data['first_name'], $data['middle_name'], $data['suffix'],
-        $data['gender'], $data['address'], $data['birthdate'], $data['civil_status'],
-        $data['personal_email'], $data['contact_number'], $data['account_email'], $hashedPassword,
-        $data['department_id']
+        $data['address'], $data['civil_status'], $data['personal_email'], $data['employee_number'], 
+        $data['account_email'], $hashedPassword, $data['department_id']
     );
 
     if ($stmt->execute()) {

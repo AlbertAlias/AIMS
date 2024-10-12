@@ -10,19 +10,17 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
     const first_name = document.getElementById('coor_first_name').value;
     const middle_name = document.getElementById('coor_middle_name').value;
     const suffix = document.getElementById('coor_suffix').value;
-    const gender = document.getElementById('coor_gender').value;
+    const employee_number = document.getElementById('coor_employee_number').value; // New field
     const address = document.getElementById('coor_address').value;
-    const birthdate = document.getElementById('coor_birthdate').value;
     const civil_status = document.getElementById('coor_civil_status').value;
     const personal_email = document.getElementById('coor_personal_email').value;
-    const contact_number = document.getElementById('coor_contact_number').value;
     const department_id = document.getElementById('coor_department').value;
     const account_email = document.getElementById('coor_account_email').value;
     const password = document.getElementById('coor_password').value;
 
     // Validation for required fields
-    if (!last_name || !first_name || !gender || !address || !birthdate || !civil_status ||
-        !personal_email || !contact_number || !department_id || !account_email || !password) {
+    if (!last_name || !first_name || !employee_number || !address || !civil_status ||
+        !personal_email || !department_id || !account_email || !password) {
         Swal.fire({
             toast: true,
             position: 'top-end',
@@ -45,12 +43,10 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
         first_name,
         middle_name,
         suffix,
-        gender,
+        employee_number, // New field
         address,
-        birthdate,
         civil_status,
         personal_email,
-        contact_number,
         department_id,
         account_email,
         password

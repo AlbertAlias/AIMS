@@ -1,6 +1,6 @@
 $(document).ready(function() {
     $('#loginForm').on('submit', function(e) {
-        e.preventDefault(); // Prevent the form from submitting normally
+        e.preventDefault(); // Prevent form submission
 
         // Get form data
         var email = $('#email').val();
@@ -34,13 +34,42 @@ $(document).ready(function() {
                             popup: 'mt-5'
                         }
                     }).then(function() {
-                        // After the alert is shown, perform the redirection based on user type or department
+                        // Redirection logic based on user type and department
                         if (user_type === 'Admin' || user_type === 'Sub-Admin') {
                             window.location.href = '../Admin/admin.php';
                         } else if (user_type === 'Coordinator') {
-                            window.location.href = '../Coordinator/coordinator.php';
+                            switch (department) {
+                                case 'Accountancy':
+                                    window.location.href = '../Coordinator/A/acoor.php';
+                                    break;
+                                case 'Business Administration':
+                                    window.location.href = '../Coordinator/BA/bacoor.php';
+                                    break;
+                                case 'Computer Engineering':
+                                    window.location.href = '../Coordinator/CpE/cpecoor.php';
+                                    break;
+                                case 'Computer Science':
+                                    window.location.href = '../Coordinator/CS/cscoor.php';
+                                    break;
+                                case 'Criminology':
+                                    window.location.href = '../Coordinator/CRIM/crimcoor.php';
+                                    break;
+                                case 'Education':
+                                    window.location.href = '../Coordinator/EDUC/educcoor.php';
+                                    break;
+                                case 'Hospitality Management':
+                                    window.location.href = '../Coordinator/HM/hmcoor.php';
+                                    break;
+                                case 'Information Technology':
+                                    window.location.href = '../Coordinator/IT/itcoor.php';
+                                    break;
+                                case 'Tourism Management':
+                                    window.location.href = '../Coordinator/TM/tmcoor.php';
+                                    break;
+                                default:
+                                    alert('Invalid department.');
+                            }
                         } else if (user_type === 'Intern') {
-                            // Redirect based on the intern's department
                             switch (department) {
                                 case 'Accountancy':
                                     window.location.href = '../Intern/A/a.php';
@@ -51,20 +80,17 @@ $(document).ready(function() {
                                 case 'Computer Engineering':
                                     window.location.href = '../Intern/CpE/cpe.php';
                                     break;
+                                case 'Information Technology':
+                                    window.location.href = '../Intern/IT/it.php';
+                                    break;
                                 case 'Criminology':
                                     window.location.href = '../Intern/CRIM/crim.php';
-                                    break;
-                                case 'Computer Science':
-                                    window.location.href = '../Intern/CS/cs.php';
                                     break;
                                 case 'Education':
                                     window.location.href = '../Intern/EDUC/educ.php';
                                     break;
                                 case 'Hospitality Management':
                                     window.location.href = '../Intern/HM/hm.php';
-                                    break;
-                                case 'Information Technology':
-                                    window.location.href = '../Intern/IT/it.php';
                                     break;
                                 case 'Tourism Management':
                                     window.location.href = '../Intern/TM/tm.php';
@@ -76,52 +102,8 @@ $(document).ready(function() {
                             alert('Invalid user type or department.');
                         }
                     });
-                } else if (response.status === 'invalid_email_format') {
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'error',
-                        title: 'Invalid Email Format',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        background: '#ffebee',
-                        iconColor: '#c62828',
-                        color: '#d32f2f'
-                    });
-                } else if (response.status === 'email_not_found') {
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'error',
-                        title: 'Email Not Does Not Exist',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        background: '#ffebee',
-                        iconColor: '#c62828',
-                        color: '#d32f2f'
-                    });
-                } else if (response.status === 'password_not_found') {
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'error',
-                        title: 'Invalid Password',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        background: '#ffebee',
-                        iconColor: '#c62828',
-                        color: '#d32f2f'
-                    });
                 } else {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'An unknown error occurred. Please try again later.',
-                        background: '#ffebee',
-                        iconColor: '#c62828',
-                        color: '#d32f2f'
-                    });
+                    handleLoginErrors(response);
                 }
             },
             error: function(xhr, status, error) {
@@ -135,7 +117,58 @@ $(document).ready(function() {
                     iconColor: '#c62828',
                     color: '#d32f2f'
                 });
-            }            
+            }
         });
     });
+
+    // Handle login errors
+    function handleLoginErrors(response) {
+        if (response.status === 'invalid_email_format') {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: 'Invalid Email Format',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#ffebee',
+                iconColor: '#c62828',
+                color: '#d32f2f'
+            });
+        } else if (response.status === 'email_not_found') {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: 'Email Does Not Exist',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#ffebee',
+                iconColor: '#c62828',
+                color: '#d32f2f'
+            });
+        } else if (response.status === 'password_not_found') {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: 'Invalid Password',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#ffebee',
+                iconColor: '#c62828',
+                color: '#d32f2f'
+            });
+        } else {
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: 'Error',
+                text: 'An unknown error occurred. Please try again later.',
+                background: '#ffebee',
+                iconColor: '#c62828',
+                color: '#d32f2f'
+            });
+        }
+    }
 });

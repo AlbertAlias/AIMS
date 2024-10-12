@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
             success: function (response) {
                 console.log(response);
                 
-                if (response.first_name && response.last_name) {
+                if (response && response.first_name && response.last_name) {
                     let firstName = response.first_name;
                     let lastName = response.last_name;
                     let initials = (firstName[0] + lastName[0]).toUpperCase();
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         .css('color', 'white')
                         .css('font-size', '64px');
                 } else {
-                    console.error('Error fetching user details:', response.error);
+                    console.error('No user found or user data is incomplete');
                 }
             },
             error: function () {

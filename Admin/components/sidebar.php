@@ -1,4 +1,4 @@
-<div class="sidebar-container d-flex flex-column p-0 m-0">
+<div class="sidebar-container d-none d-md-flex flex-column p-0 m-0">
     <!-- Header -->
     <div class="sidebar-header d-flex flex-column align-items-center">
         <img src="../img/esyatek-logo-1.png" alt="Logo" width="45">
@@ -7,31 +7,25 @@
     <nav>
         <a href="#" class="sidebar-link" onclick="showSection(event, 'dashboard')">
             <i class="fa-solid fa-qrcode"></i>
-            Dashboard
+            <span>Dashboard</span>
         </a>
         <a href="#" class="sidebar-link" onclick="showSection(event, 'departments')">
             <i class="fa-solid fa-scroll"></i>
-            Departments
+            <span>Departments</span>
         </a>
         <a href="#" class="sidebar-link" onclick="showSection(event, 'coordinators')">
             <i class="fa-solid fa-user-group"></i>
-            Coordinators
+            <span>Coordinators</span>
         </a>
         <a href="#" class="sidebar-link" onclick="showSection(event, 'interns')">
             <i class="fa-solid fa-user-graduate"></i>
-            Interns
+            <span>Interns</span>
         </a>
         <a href="#" class="sidebar-link" onclick="showSection(event, 'sub-admins')">
             <i class="fa-solid fa-user-gear"></i>
-            Admins
+            <span>Admins</span>
         </a>
     </nav>
-
-
-    <!-- Footer or other content at the bottom -->
-    <div class="sidebar-footer">
-        © 2024 Your Company
-    </div>
 </div>
 
 <script>

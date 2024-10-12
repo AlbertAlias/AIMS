@@ -2,7 +2,7 @@
     <div class="row g-4">
         <!-- Left square container -->
         <div class="col-md-4 col-lg-3">
-            <div class="bg-light rounded-3 shadow px-4 py-4 d-flex flex-column" style="min-height: 200px;">
+            <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Interns</h5>
                 <div class="mb-3 position-relative">
                     <input type="text" class="form-control" id="searchInterns" placeholder="Search Intern...">
@@ -17,7 +17,7 @@
 
         <!-- Middle rectangle container -->
         <div class="col-md-4 col-lg-6">
-            <div class="bg-light rounded-3 shadow px-4 py-4 d-flex flex-column" style="min-height: 200px;">
+            <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Add Interns</h5>
                 <p class="text-gray-800 fs-5 mb-3">Personal Information</p>
                 <form id="internsForm">
@@ -122,7 +122,7 @@
 
         <!-- Right square container -->
         <div class="col-md-4 col-lg-3">
-            <div class="bg-light rounded-3 shadow px-4 py-4 d-flex flex-column" style="min-height: 200px;">
+            <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Account Information</h5>
                 <div class="text-gray-800">
                     <form id="intern_accountForm">

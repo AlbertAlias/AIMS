@@ -4,13 +4,13 @@ $(document).ready(function() {
         type: 'GET',
         dataType: 'json',
         success: function(response) {
-            if (response.status === 'success') {
+            if (response && response.status === 'success') {
                 $('#welcomeAdmin').html(`
                     <span class="fw-bold text-dark bg-light">Welcome Admin,</span> 
                     <span>${response.first_name} ${response.last_name}</span>
                 `);
             } else {
-                console.error('Failed to retrieve user details.');
+                console.error('Failed to retrieve user details. Response:', response);
             }
         },
         error: function(xhr, status, error) {

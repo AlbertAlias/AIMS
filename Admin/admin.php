@@ -21,17 +21,14 @@ ini_set('display_errors', 1);
     <title>Admin</title>
     
     <link rel="stylesheet" href="../assets/css/main.css">
-    <link rel="stylesheet" href="../assets/css/newsidebar.css">
-    <!-- <link rel="stylesheet" href="../assets/css/oldsidebar.css"> -->
-    <!-- <link rel="stylesheet" href="../assets/css/header.css"> -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" 
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
                 rel="stylesheet">
 
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/departments.css">
     <link rel="stylesheet" href="../assets/css/coordinators.css">
     <link rel="stylesheet" href="../assets/css/interns.css">
-    <link rel="stylesheet" href="../assets/css/manage-users.css">
     <link rel="stylesheet" href="../assets/css/admin-profile.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 

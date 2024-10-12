@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand navbar-light bg-white topbar m-0 p-0 px-2 static-top shadow">
+<nav class="navbar navbar-expand navbar-light bg-white topbar m-0 p-0 px-2 static-top" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
     <!-- Add icon button on the left side -->
     <div class="d-flex align-items-center">
-        <button id="sidebarToggle" class="btn btn-link d-none d-md-block me-3">
+        <button id="sidebar-toggle" class="btn btn-link me-3">
             <i class="fa-solid fa-bars fs-4" style="color: #198754;"></i>
         </button>
     </div>
