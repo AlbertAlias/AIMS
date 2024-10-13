@@ -9,19 +9,15 @@ document.getElementById('adminSubmitBtn').addEventListener('click', function (ev
     const first_name = document.getElementById('admin_first_name').value;
     const middle_name = document.getElementById('admin_middle_name').value;
     const suffix = document.getElementById('admin_suffix').value;
-    const gender = document.getElementById('admin_gender').value;
     const address = document.getElementById('admin_address').value;
-    const birthdate = document.getElementById('admin_birthdate').value;
-    const civil_status = document.getElementById('admin_civil_status').value;
-    const contact_number = document.getElementById('admin_contact_number').value;
+    const employee_number = document.getElementById('admin_employee_number').value;
     const personal_email = document.getElementById('admin_personal_email').value;
     const account_email = document.getElementById('admin_account_email').value;
     const password = document.getElementById('admin_password').value;
     const user_type = document.getElementById('user_type').value;
 
     // Check for empty required fields
-    if (!last_name || !first_name || !gender || !address || !birthdate || !civil_status ||
-        !contact_number || !personal_email || !account_email || !password || !user_type) {
+    if (!last_name || !first_name || !employee_number || !address || !personal_email || !account_email || !password || !user_type) {
         Swal.fire({
             toast: true,
             position: 'top-end',
@@ -45,11 +41,8 @@ document.getElementById('adminSubmitBtn').addEventListener('click', function (ev
         first_name,
         middle_name,
         suffix,
-        gender,
         address,
-        birthdate,
-        civil_status,
-        contact_number,
+        employee_number,
         personal_email,
         account_email,
         password,

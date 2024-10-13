@@ -49,12 +49,10 @@ $(document).ready(function() {
                 $('#admin_first_name').val(response.first_name).prop('disabled', false);
                 $('#admin_middle_name').val(response.middle_name).prop('disabled', false);
                 $('#admin_suffix').val(response.suffix).prop('disabled', false);
-                $('#admin_gender').val(response.gender).prop('disabled', false);
                 $('#admin_address').val(response.address).prop('disabled', false);
-                $('#admin_birthdate').val(response.birthdate).prop('disabled', false);
                 $('#admin_civil_status').val(response.civil_status).prop('disabled', false);
-                $('#admin_contact_number').val(response.contact_number).prop('disabled', false);
                 $('#admin_personal_email').val(response.personal_email).prop('disabled', false);
+                $('#admin_employee_number').val(response.employee_number).prop('disabled', false);  // New employee number field
                 $('#admin_account_email').val(response.account_email).prop('disabled', true);
                 $('#admin_password').val(response.password).prop('disabled', true);
                 $('#user_type').val(response.user_type).prop('disabled', false);

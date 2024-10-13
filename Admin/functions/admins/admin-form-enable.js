@@ -10,10 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to unlock inputs and reset their states
     function unlockAndResetForms() {
         const fieldsToUnlock = [
-            'admin_last_name', 'admin_first_name', 'admin_middle_name',
-            'admin_suffix', 'admin_gender', 'admin_address',
-            'admin_birthdate', 'admin_civil_status', 'admin_personal_email',
-            'admin_contact_number', 'admin_account_email', 'admin_password', 'user_type'
+            'admin_last_name', 'admin_first_name', 'admin_middle_name', 'admin_suffix', 'admin_address', 'admin_civil_status', 
+            'admin_personal_email', 'admin_employee_number', 'admin_account_email', 'admin_password', 'user_type'
         ];
     
         fieldsToUnlock.forEach(fieldId => {
@@ -42,10 +40,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to reset and lock inputs and selects
     function resetAndLockForms() {
         const fieldsToLock = [
-            'admin_last_name', 'admin_first_name', 'admin_middle_name',
-            'admin_suffix', 'admin_gender', 'admin_address',
-            'admin_birthdate', 'admin_civil_status', 'admin_personal_email',
-            'admin_contact_number', 'admin_account_email', 'admin_password', 'user_type'
+            'admin_last_name', 'admin_first_name', 'admin_middle_name', 'admin_suffix', 'admin_address', 'admin_civil_status', 
+            'admin_personal_email', 'admin_employee_number', 'admin_account_email', 'admin_password', 'user_type'
         ];
     
         fieldsToLock.forEach(fieldId => {
@@ -73,10 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to disable and reset unlocked fields upon successful submission
     function disableAndResetForms() {
         const fieldsToReset = [
-            'admin_last_name', 'admin_first_name', 'admin_middle_name',
-            'admin_suffix', 'admin_gender', 'admin_address',
-            'admin_birthdate', 'admin_civil_status', 'admin_personal_email',
-            'admin_contact_number', 'admin_account_email', 'admin_password', 'user_type'
+            'admin_last_name', 'admin_first_name', 'admin_middle_name', 'admin_suffix', 'admin_address', 'admin_civil_status', 
+            'admin_personal_email', 'admin_employee_number', 'admin_account_email', 'admin_password', 'user_type'
         ];
     
         // Reset and lock fields
@@ -105,14 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Function to validate the form
     window.validateForm = function() {
         const requiredFields = [
-            'admin_last_name', 
-            'admin_first_name', 
-            'admin_gender',           
-            'admin_address',        
-            'admin_birthdate',        
-            'admin_civil_status',     
-            'admin_contact_number',    
-            'admin_personal_email'
+            'admin_last_name', 'admin_first_name', 'admin_address', 'admin_civil_status', 'admin_employee_number', 'admin_personal_email'
         ];
 
         for (let fieldId of requiredFields) {

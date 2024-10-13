@@ -4,17 +4,14 @@ $(document).ready(function () {
         const adminID = $('#adminID').val();
         const lastName = $('#admin_last_name').val();
         const firstName = $('#admin_first_name').val();
-        const gender = $('#admin_gender').val();
         const address = $('#admin_address').val();
-        const birthdate = $('#admin_birthdate').val();
         const civilStatus = $('#admin_civil_status').val();
-        const contactNumber = $('#admin_contact_number').val();
         const personalEmail = $('#admin_personal_email').val();
+        const employeeNumber = $('#admin_employee_number').val();
         const userType = $('#user_type').val();
 
         // Check for required fields
-        if (!lastName || !firstName || !gender || !address || !birthdate || !civilStatus ||
-            !contactNumber || !personalEmail || !userType) {
+        if (!lastName || !firstName || !address || !civilStatus || !personalEmail || !employeeNumber || !userType) {
             Swal.fire({
                 toast: true,
                 position: 'top-right',
@@ -39,12 +36,10 @@ $(document).ready(function () {
             admin_first_name: firstName,
             admin_middle_name: $('#admin_middle_name').val(),
             admin_suffix: $('#admin_suffix').val(),
-            admin_gender: gender,
             admin_address: address,
-            admin_birthdate: birthdate,
             admin_civil_status: civilStatus,
-            admin_contact_number: contactNumber,
             admin_personal_email: personalEmail,
+            admin_employee_number: employeeNumber,
             user_type: userType
         };
 

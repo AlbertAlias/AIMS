@@ -41,24 +41,19 @@
         $first_name = $_POST['admin_first_name'];
         $middle_name = $_POST['admin_middle_name'];
         $suffix = $_POST['admin_suffix'];
-        $gender = $_POST['admin_gender'];
         $address = $_POST['admin_address'];
-        $birthdate = $_POST['admin_birthdate'];
         $civil_status = $_POST['admin_civil_status'];
-        $contact_number = $_POST['admin_contact_number'];
+        $employee_number = $_POST['admin_employee_number'];
         $personal_email = $_POST['admin_personal_email'];
         $user_type = $_POST['user_type'];
 
         // Update the admin details without account email and password
-        $sql = "UPDATE users SET last_name = ?, first_name = ?, middle_name = ?, suffix = ?, 
-                gender = ?, address = ?, birthdate = ?, civil_status = ?, contact_number = ?,
-                personal_email = ?, user_type = ? WHERE id = ?";
+        $sql = "UPDATE users SET last_name = ?, first_name = ?, middle_name = ?, suffix = ?, address = ?, civil_status = ?, 
+        personal_email = ?, employee_number = ?, user_type = ? WHERE id = ?";
         
         $stmt = $conn->prepare($sql);
-        // Bind parameters
-        $stmt->bind_param("sssssssssssi", $last_name, $first_name, $middle_name, 
-            $suffix, $gender, $address, $birthdate, $civil_status, $contact_number, $personal_email, 
-            $user_type, $id);
+        $stmt->bind_param("sssssssssi", $last_name, $first_name, $middle_name, $suffix, $address, $civil_status, 
+        $personal_email, $employee_number, $user_type, $id);
 
         // Execute the statement
         if ($stmt->execute()) {

@@ -116,7 +116,7 @@
     <script>
         setInterval(function() {
             $.ajax({
-                url: 'controller/session-renewal.php', // This is a simple file to keep the session alive
+                url: 'controller/session-renewal.php',
                 type: 'GET',
                 success: function() {
                     console.log("Session renewed");

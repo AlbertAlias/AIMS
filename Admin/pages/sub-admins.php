@@ -26,7 +26,6 @@
                             <label for="admin_last_name" class="form-label required-asterisk">Last Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="admin_last_name" name="admin_last_name" required disabled>
                         </div>
-
                         <!-- First Name -->
                         <div class="col-md-7">
                             <label for="admin_first_name" class="form-label required-asterisk">First Name <span class="text-danger">*</span></label>
@@ -44,13 +43,14 @@
                             <label for="admin_suffix" class="form-label">Suffix</label>
                             <input type="text" class="form-control" id="admin_suffix" name="admin_suffix" disabled>
                         </div>
-                        <!-- Gender -->
+                        <!-- Civil Status -->
                         <div class="col-md-4">
-                            <label for="admin_gender" class="form-label required-asterisk">Gender <span class="text-danger">*</span></label>
-                            <select class="form-select" id="admin_gender" name="admin_gender" required disabled>
-                                <option selected disabled>Choose Gender</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
+                            <label for="admin_civil_status" class="form-label required-asterisk">Civil Status <span class="text-danger">*</span></label>
+                            <select class="form-select" id="admin_civil_status" name="admin_civil_status" required disabled>
+                                <option selected disabled>Choose Status</option>
+                                <option value="Single">Single</option>
+                                <option value="Married">Married</option>
+                                <option value="Divorced">Divorced</option>
                             </select>
                         </div>
                     </div>
@@ -62,35 +62,15 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <!-- Birthdate -->
-                        <div class="col-md-4">
-                            <label for="admin_birthdate" class="form-label required-asterisk">Birthdate <span class="text-danger">*</span></label>
-                            <input type="date" class="form-control" id="admin_birthdate" name="admin_birthdate" required disabled>
-                        </div>
-                        <!-- Civil Status -->
-                        <div class="col-md-4">
-                            <label for="admin_civil_status" class="form-label required-asterisk">Civil Status <span class="text-danger">*</span></label>
-                            <select class="form-select" id="admin_civil_status" name="admin_civil_status" required disabled>
-                                <option selected disabled>Choose Status</option>
-                                <option value="Single">Single</option>
-                                <option value="Married">Married</option>
-                                <option value="Divorced">Divorced</option>
-                            </select>
-                        </div>
-                        <!-- Contact Number -->
-                        <div class="col-md-4">
-                            <label for="admin_contact_number" class="form-label">Contact Number <span class="text-danger">*</span></label>
-                            <div class="input-group">
-                                <span class="input-group-text m-0 px-2">+63</span>
-                                <input type="tel" class="form-control" id="admin_contact_number" name="admin_contact_number" placeholder="" pattern="[1-9]{10}" maxlength="10" title="Please enter a valid 10-digit phone number" required disabled>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
                         <!-- Email -->
-                        <div class="col-md-12">
+                        <div class="col-md-7">
                             <label for="admin_personal_email" class="form-label required-asterisk">Personal Email <span class="text-danger">*</span></label>
                             <input type="email" class="form-control" id="admin_personal_email" name="admin_personal_email" required disabled>
+                        </div>
+                        <!-- Employee Number -->
+                        <div class="col-md-5">
+                            <label for="admin_employee_number" class="form-label required-asterisk">Employee Number <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="admin_employee_number" name="admin_employee_number" required disabled>
                         </div>
                     </div>
                     <div class="row">
