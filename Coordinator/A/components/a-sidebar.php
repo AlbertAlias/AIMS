@@ -9,6 +9,10 @@
             <i class="fa-solid fa-qrcode"></i>
             <span>Dashboard</span>
         </a>
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'interns')">
+            <i class="fa-solid fa-user-graduate"></i>
+            <span>Interns</span>
+        </a>
         <a href="#" class="sidebar-link" onclick="showSection(event, 'reports')">
             <i class="fa-solid fa-file-signature"></i>
             <span>Reports</span>
@@ -36,7 +40,7 @@
         }
 
         // Hide all sections
-        document.querySelectorAll('#dashboard, #reports, #requirements, #profile').forEach(section => {
+        document.querySelectorAll('#dashboard, #interns, #reports, #requirements, #profile').forEach(section => {
             section.style.display = 'none';
         });
 

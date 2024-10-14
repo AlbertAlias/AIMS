@@ -1,60 +1,3 @@
-document.getElementById("addInternsBtn").addEventListener("click", function() {
-    const internsForm = document.getElementById("internsForm");
-    const inputs = internsForm.querySelectorAll("input, select");
-
-    // Reset the form
-    inputs.forEach(input => {
-        input.value = '';
-        // Enable all fields except the email and password fields
-        if (input !== document.getElementById("intern_account_email") && input !== document.getElementById("intern_password")) {
-            input.disabled = false; // Enable other fields
-        }
-    });
-
-    // Reset account email and password fields
-    document.getElementById("intern_account_email").value = '';
-    document.getElementById("intern_password").value = '';
-    document.getElementById("intern_account_email").disabled = true; // Keep email disabled
-    document.getElementById("intern_password").disabled = true; // Keep password disabled
-
-    // Reset selects to default
-    const selects = internsForm.querySelectorAll("select");
-    selects.forEach(select => {
-        select.selectedIndex = 0; // Set selected index to the first option
-    });
-
-    // Show/Hide buttons
-    document.getElementById("internUpdateBtn").style.display = "none";
-    document.getElementById("internCancelBtn").style.display = "inline-block";
-    document.getElementById("internSubmitBtn").style.display = "inline-block";
-    document.getElementById("internSubmitBtn").disabled = false;
-});
-
-function submitResetAndLockForm() {
-    const internsForm = document.getElementById("internsForm");
-    const inputs = internsForm.querySelectorAll("input, select");
-
-    // Reset and lock all inputs and selects
-    inputs.forEach(input => {
-        input.value = ''; // Clear the input value
-        input.disabled = true; // Disable the input field
-    });
-
-    // Reset account fields
-    const accountForm = document.getElementById("intern_accountForm");
-    const accountInputs = accountForm.querySelectorAll("input");
-
-    accountInputs.forEach(input => {
-        input.value = ''; // Clear the value in account form
-    });
-
-    // Hide buttons and disable submit button
-    document.getElementById("internUpdateBtn").style.display = "none";
-    document.getElementById("internCancelBtn").style.display = "none";
-    document.getElementById("internSubmitBtn").style.display = "inline-block";
-    document.getElementById("internSubmitBtn").disabled = true;
-}
-
 function internBtnFormToggle(isEnabled) {
     const internsForm = document.getElementById("internsForm");
     const inputs = internsForm.querySelectorAll("input, select");
@@ -85,10 +28,9 @@ function internBtnFormToggle(isEnabled) {
     }
 
     // Show/Hide buttons based on whether the form is enabled or not
-    document.getElementById("internUpdateBtn").style.display = isEnabled ? "inline-block" : "none";
     document.getElementById("internCancelBtn").style.display = isEnabled ? "inline-block" : "none";
-    document.getElementById("internSubmitBtn").style.display = isEnabled ?  "none" : "inline-block";
-    document.getElementById("internSubmitBtn").disabled = !isEnabled;
+    document.getElementById("interUpdateBtn").style.display = isEnabled ?  "none" : "inline-block";
+    document.getElementById("internUpdateBtn").disabled = !isEnabled;
 }
 
 function updateFormResetAndLock() {
@@ -111,10 +53,9 @@ function updateFormResetAndLock() {
         input.value = ''; // Clear the value in account form
     });
 
-    document.getElementById("internUpdateBtn").style.display = "none";
     document.getElementById("internCancelBtn").style.display = "none";
-    document.getElementById("internSubmitBtn").style.display = "inline-block";
-    document.getElementById("internSubmitBtn").disabled = true;
+    document.getElementById("internUpdpateBtn").style.display = "inline-block";
+    document.getElementById("internUpdateBtn").disabled = true;
 }
 
 function preventRemoveUpdate() {
@@ -170,9 +111,7 @@ document.getElementById("internCancelBtn").addEventListener("click", function() 
         select.selectedIndex = 0; // Set selected index to the first option
     });
 
-    // Hide buttons as needed and display the submit button as disabled
-    document.getElementById("internUpdateBtn").style.display = "none";
     document.getElementById("internCancelBtn").style.display = "none";
-    document.getElementById("internSubmitBtn").style.display = "inline-block"; // Show submit button
-    document.getElementById("internSubmitBtn").disabled = true; // Keep submit button disabled
+    document.getElementById("internUpdateBtn").style.display = "inline-block";
+    document.getElementById("internUpdateBtn").disabled = true;
 });

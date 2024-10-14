@@ -3,6 +3,43 @@
         <!-- Left square container -->
         <div class="col-md-4 col-lg-3">
             <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Upload Intern Lists</h5>
+
+                <!-- Rectangle container with dashed green border -->
+                <div id="dropZone" class="d-flex flex-column justify-content-center align-items-center" 
+                    style="border: 2px dashed green; min-height: 150px; padding: 20px; border-radius: 10px;">
+                    <i class="fa-solid fa-cloud-arrow-up mt-3" style="font-size: 50px; color: green;"></i>
+                    <p class="text-gray-800 mt-2">Drag files to upload</p>
+                    <!-- Hidden file input -->
+                    <input type="file" id="fileInput" accept=".xlsx, .xls .csv" style="display: none;" />
+                </div>
+                <!-- Upload button -->
+                <button type="button" id="uploadButton" class="btn btn-success mt-3">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Upload Files
+                </button>
+
+                <!-- CSV Export -->
+                <button id="exportCSVButton" class="btn btn-primary mt-3">
+                    <i class="fa-solid fa-file-csv"></i> Export Template
+                </button>
+                
+                <!-- Progress Container -->
+                <div id="uploadProgress" class="mt-4" style="display: none;">
+                    <div class="d-flex align-items-center">
+                        <i class="fa-solid fa-file-csv" style="font-size: 30px; color: green;"></i>
+                        <span id="fileName" class="ms-3"></span>
+                    </div>
+                    <div class="progress mt-2">
+                        <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" 
+                            role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span id="progressPercent" class="text-end d-block mt-1"></span>
+                </div>
+            </div>
+        </div>
+        <!-- Middle square container -->
+        <div class="col-md-4 col-lg-3">
+            <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Interns</h5>
                 <div class="mb-3 position-relative">
                     <input type="text" class="form-control" id="searchInterns" placeholder="Search Intern...">
@@ -11,14 +48,14 @@
                 <div id="internsInfo" class="text-gray-800">
                     <!-- Intern information will be displayed here -->
                 </div>
-                <button id="addInternsBtn" data-id="1" class="btn btn-success mt-3">Add Interns</button>
+                
             </div>
         </div>
 
-        <!-- Middle rectangle container -->
+        <!-- Right rectangle container -->
         <div class="col-md-4 col-lg-6">
             <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Add Interns</h5>
+                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Update Intern</h5>
                 <p class="text-gray-800 fs-5 mb-3">Personal Information</p>
                 <form id="internsForm">
                     <div class="row mb-3">
@@ -108,34 +145,25 @@
                             </select>
                         </div>
                     </div>
+                    <div class="row mb-3">
+                        <h5 class="text-gray-800 fs-5 mb-3">Account Information</h5>
+                        <div class="col-md-6">
+                            <label for="intern_account_email" class="form-label required-asterisk">Account Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control" id="intern_account_email" name="intern_account_email" required disabled>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="intern_password" class="form-label required-asterisk">Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" id="intern_password" name="intern_password" required disabled>
+                        </div>
+                    </div>
                     
                     <div class="row">
                         <div class="col-md-12 text-end">
                             <button type="button" id="internCancelBtn" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
-                            <button type="button" id="internUpdateBtn" class="btn btn-primary" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> Update</button>
-                            <button type="submit" id="internSubmitBtn" class="btn btn-success" disabled><i class="fa-solid fa-check-to-slot"></i> Submit</button>
+                            <button type="button" id="internUpdateBtn" class="btn btn-primary" disabled><i class="fa-solid fa-pen-to-square"></i> Update</button>
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
-
-        <!-- Right square container -->
-        <div class="col-md-4 col-lg-3">
-            <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Account Information</h5>
-                <div class="text-gray-800">
-                    <form id="intern_accountForm">
-                        <div class="mb-3">
-                            <label for="intern_account_email" class="form-label required-asterisk">Account Email <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" id="intern_account_email" name="intern_account_email" required disabled>
-                        </div>
-                        <div class="mb-3">
-                            <label for="intern_password" class="form-label required-asterisk">Password <span class="text-danger">*</span></label>
-                            <input type="password" class="form-control" id="intern_password" name="intern_password" required disabled>
-                        </div>
-                    </form>
-                </div>
             </div>
         </div>
     </div>

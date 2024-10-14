@@ -4,7 +4,7 @@
 
     session_start();
     if (!isset($_SESSION['email'])) {
-        header('Location: ../../../index.php'); // Adjust path if needed
+        header('Location: ../../index.php'); // Adjust path if needed
         exit();
     }
 ?>
@@ -24,6 +24,7 @@
     <link href="../../assets/css/sidebar.css" rel="stylesheet">
 
     <link href="../../assets/intern-css/A-css/dashboard.css" rel="stylesheet">
+    <link href="../../assets/css/interns.css" rel="stylesheet">
     <link href="../../assets/intern-css/A-css/requirements.css" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -83,6 +84,7 @@
                 <!-- Begin Page Content -->
                 <div id="page-content" style="width: 100%;">
                     <?php include "pages/dashboard.php"; ?>
+                    <?php include "pages/interns.php"; ?>
                     <?php include "pages/weekly-reports.php"; ?>
                     <?php include "pages/requirements.php"; ?>
                 </div>
@@ -95,14 +97,27 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    <script src="https://code.jquery.com/jquery-3.7.1.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://kit.fontawesome.com/29c04b1733.js" defer crossorigin="anonymous"></script>
-    <script src="../../js/sidebar.js" defer></script>
+    <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
+    <script src="../../js/sidebar.js"></script>
 
-    <script src="crud-ajax/weekly-reports/create-reports.js"></script>
+    <!-- <script src="crud-ajax/weekly-reports/create-reports.js"></script> -->
 
-    <script src="crud-ajax/requirements/create-requirements.js"></script>
+    <!-- <script src="crud-ajax/interns/retrieve-interns.js"></script> -->
+    <!-- <script src="crud-ajax/interns/retrieve-intern-deptsName.js"></script> -->
+    <script src="functions/interns/intern-form-enable.js"></script>
+    <!-- <script src="crud-ajax/interns/retrieve-intern-info.js"></script> -->
+    <script src="crud-ajax/interns/create-generated-csv.js"></script>
+    <script src="crud-ajax/interns/create-upload-interns.js"></script>
+    <script src="functions/interns/drag-drop-files.js"></script>
+    <!-- <script src="functions/interns/intern-email.js"></script> -->
+    <!-- <script src="functions/interns/studID.js"></script> -->
+    <script src="functions/interns/internPass.js"></script>
+    <script src="crud-ajax/interns/update-interns.js"></script>
+
+    <!-- <script src="crud-ajax/requirements/create-requirements.js"></script> -->
 </body>
 </html>
