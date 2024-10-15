@@ -29,12 +29,9 @@ document.addEventListener('DOMContentLoaded', function () {
     exportButton.addEventListener('click', function () {
         console.log('Export button clicked'); // Log to check if click event is triggered
 
-        // Hide the Export button
-        exportButton.style.display = 'none';
-
         // Show the Download Progress div
         downloadProgress.style.display = 'block';
-        downloadProgress.style.backgroundColor = '#679cff83'; // Set background color
+        // downloadProgress.style.backgroundColor = '#0d6dfd67';
 
         // Get the file size before starting the download progress
         getFileSize(function (size) {

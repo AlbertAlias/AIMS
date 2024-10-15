@@ -1,12 +1,39 @@
+const cancelUploadBtn = document.getElementById('cancelUploadBtn');
+let uploadRequest; // Store the upload request to abort if needed
+
+// Function to get file size (mimicking the download file size function)
+function getFileSize(callback) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('HEAD', 'controller/interns/download-intern-xlsx.php', true); // Adjust URL for upload file
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === xhr.DONE) {
+            if (xhr.status === 200) {
+                const fileSize = xhr.getResponseHeader('Content-Length');
+                callback(fileSize);
+            } else {
+                console.error('Error fetching file size');
+                callback(null);
+            }
+        }
+    };
+    xhr.send();
+}
+
 function uploadFileWithProgress(file) {
     const formData = new FormData();
     formData.append('file', file);
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', 'controller/interns/create-upload-interns.php', true);
+    // Create a new XMLHttpRequest for the upload
+    uploadRequest = new XMLHttpRequest();
+    uploadRequest.open('POST', 'controller/interns/create-upload-interns.php', true);
+
+    // Show the upload progress UI
+    document.getElementById('uploadProgress').style.display = 'block';
+    document.getElementById('uploadfileName').innerText = file.name; // Set the file name
+    cancelUploadBtn.style.display = 'inline'; // Show the cancel button
 
     // Update progress bar during file upload
-    xhr.upload.onprogress = function(event) {
+    uploadRequest.upload.onprogress = function(event) {
         if (event.lengthComputable) {
             const percentComplete = (event.loaded / event.total) * 100;
             document.getElementById('progressBar').style.width = percentComplete + '%';
@@ -16,27 +43,42 @@ function uploadFileWithProgress(file) {
     };
 
     // Handle success or failure
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            const response = JSON.parse(xhr.responseText);
+    uploadRequest.onload = function() {
+        if (uploadRequest.status === 200) {
+            const response = JSON.parse(uploadRequest.responseText);
             if (response.success) {
                 // Update UI to show successful upload
                 document.getElementById('progressBar').classList.remove('progress-bar-striped', 'progress-bar-animated');
                 document.getElementById('progressBar').classList.add('bg-success');
-                document.getElementById('progressPercent').innerHTML = '100% <i class="fa-solid fa-check" style="color: green;"></i>';
+                document.getElementById('uploadCompleteIcon').style.display = 'inline'; // Show check icon
             } else {
                 alert('File upload failed: ' + response.message);
             }
         } else {
             alert('Error uploading file');
         }
+        cancelUploadBtn.style.display = 'none'; // Hide the cancel button after completion
     };
 
     // Handle error case
-    xhr.onerror = function() {
+    uploadRequest.onerror = function() {
         alert('Error uploading file');
+        cancelUploadBtn.style.display = 'none'; // Hide the cancel button on error
     };
 
+    // Handle the cancel button click
+    cancelUploadBtn.onclick = function() {
+        uploadRequest.abort(); // Abort the upload
+        document.getElementById('uploadProgress').style.display = 'none'; // Hide upload progress
+        cancelUploadBtn.style.display = 'none'; // Hide the cancel button
+        alert('Upload cancelled');
+    };
+
+    // Optionally, you can call getFileSize here if needed before sending the file
+    getFileSize(function(size) {
+        console.log('File size for upload: ', size); // Log the size if you need it for any logic
+    });
+
     // Send the file
-    xhr.send(formData);
+    uploadRequest.send(formData);
 }

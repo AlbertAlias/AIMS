@@ -51,17 +51,20 @@ document.addEventListener('DOMContentLoaded', function () {
     function handleFiles(files) {
         // Assuming only one file will be uploaded at a time
         const file = files[0];
-        if (file && (file.type === 'application/vnd.ms-excel' || 
-                     file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || 
-                     file.type === 'text/csv')) { 
+        // Check if the file is an .xlsx file
+        if (file && file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') { 
             // Display the file name and progress elements
             document.getElementById('uploadProgress').style.display = 'block';
-            document.getElementById('fileName').innerText = file.name;
+            const fileNameElement = document.getElementById('uploadfileName'); // Correct ID
             
+            if (fileNameElement) {
+                fileNameElement.innerText = file.name; // Updated line
+            }
+
             // Call the upload function and show progress
             uploadFileWithProgress(file);
         } else {
-            alert('Please upload a valid Excel (.xls, .xlsx) or CSV (.csv) file');
+            alert('Please upload a valid Excel (.xlsx) file');
         }
     }    
 });
