@@ -11,29 +11,51 @@
                     <i class="fa-solid fa-cloud-arrow-up mt-3" style="font-size: 50px; color: green;"></i>
                     <p class="text-gray-800 mt-2">Drag files to upload</p>
                     <!-- Hidden file input -->
-                    <input type="file" id="fileInput" accept=".xlsx, .xls .csv" style="display: none;" />
+                    <input type="file" id="fileInput" accept=".xlsx, .xls .csv" style="display: none;" disabled/>
                 </div>
                 <!-- Upload button -->
-                <button type="button" id="uploadButton" class="btn btn-success mt-3">
+                <button type="button" id="uploadButton" class="btn btn-success mt-3" disabled>
                     <i class="fa-solid fa-cloud-arrow-up"></i> Upload Files
                 </button>
 
-                <!-- CSV Export -->
-                <button id="exportCSVButton" class="btn btn-primary mt-3">
-                    <i class="fa-solid fa-file-csv"></i> Export Template
-                </button>
-                
                 <!-- Progress Container -->
                 <div id="uploadProgress" class="mt-4" style="display: none;">
                     <div class="d-flex align-items-center">
-                        <i class="fa-solid fa-file-csv" style="font-size: 30px; color: green;"></i>
-                        <span id="fileName" class="ms-3"></span>
+                        <!-- <i class="fa-solid fa-file-csv" style="font-size: 30px; color: green;"></i> -->
+                        <i class="fa-solid fa-file-excel" style="font-size: 30px; color: green;"></i>
+                        <span id="uploadfileName" class="ms-3"></span>
                     </div>
                     <div class="progress mt-2">
                         <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" 
                             role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <span id="progressPercent" class="text-end d-block mt-1"></span>
+                </div>
+
+                <!-- CSV Export Button -->
+                <button id="exportCSVBtn" class="btn btn-primary mt-2">
+                    <i class="fa-solid fa-file-excel"></i> Download Excel File
+                </button>
+
+                <!-- Download Progress -->
+                <div id="downloadProgress" class="mt-4" style="display: none; padding: 10px; border-radius: 5px;">
+                    <div class="d-flex align-items-center justify-content-between" style="width: 100%;">
+                        <div class="d-flex align-items-center flex-grow-1">
+                            <i class="fa-solid fa-file-excel" style="font-size: 30px; color: green;"></i>
+                            <div class="ms-2">
+                                <span id="downloadFileName">intern-lists_template.xlsx</span>
+                                <div class="progress mb-1" style="width: 180px; height: 15px;">
+                                    <div id="downloadProgressBar" class="progress-bar progress-bar-striped progress-bar-animated" 
+                                        role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                        <span id="downloadProgressPercent" class="text-end d-block me-1">0%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="downloadCompleteIcon" style="display: none;">
+                            <i class="fa-solid fa-check" style="font-size: 15px; color: green;"></i>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
