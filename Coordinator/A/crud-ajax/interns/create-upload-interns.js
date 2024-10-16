@@ -23,9 +23,8 @@ function uploadFileWithProgress(file) {
     const formData = new FormData();
     formData.append('file', file);
 
-    // Create a new XMLHttpRequest for the upload
     uploadRequest = new XMLHttpRequest();
-    uploadRequest.open('POST', 'controller/interns/create-upload-interns.php', true);
+    uploadRequest.open('POST', '../A/controller/interns/create-upload-interns.php', true);
 
     // Show the upload progress UI
     document.getElementById('uploadProgress').style.display = 'block';
@@ -45,14 +44,20 @@ function uploadFileWithProgress(file) {
     // Handle success or failure
     uploadRequest.onload = function() {
         if (uploadRequest.status === 200) {
-            const response = JSON.parse(uploadRequest.responseText);
-            if (response.success) {
-                // Update UI to show successful upload
-                document.getElementById('progressBar').classList.remove('progress-bar-striped', 'progress-bar-animated');
-                document.getElementById('progressBar').classList.add('bg-success');
-                document.getElementById('uploadCompleteIcon').style.display = 'inline'; // Show check icon
-            } else {
-                alert('File upload failed: ' + response.message);
+            try {
+                const response = JSON.parse(uploadRequest.responseText);
+                if (response.success) {
+                    // Handle success
+                    document.getElementById('progressBar').classList.remove('progress-bar-striped', 'progress-bar-animated');
+                    document.getElementById('progressBar').classList.add('bg-success');
+                    document.getElementById('uploadCompleteIcon').style.display = 'inline'; // Show check icon
+                } else {
+                    alert('File upload failed: ' + response.message);
+                }
+            } catch (e) {
+                console.error('Error parsing JSON response:', e);
+                console.error('Server response:', uploadRequest.responseText); // Output server response for debugging
+                alert('Unexpected server response. Please try again.');
             }
         } else {
             alert('Error uploading file');

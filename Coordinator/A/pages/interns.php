@@ -63,7 +63,7 @@
                         <span id="uploadCompleteIcon" style="display: none;">
                             <i class="fa-solid fa-check" style="font-size: 15px; color: green;"></i>
                         </span>
-                        <button id="cancelUploadBtn" class="btn btn-danger btn-sm" style="display: none;">
+                        <button id="cancelUploadBtn" style="display: none;">
                             <i class="fa-solid fa-xmark"></i>
                         </button>
                     </div>
