@@ -1,147 +1,131 @@
 <?php
-session_start();
-require_once '../../../../dbconn.php';
-require '../../../../libraries/PhpSpreadsheet-3.3.0/src/PhpSpreadsheet/IOFactory.php';
-use PhpOffice\PhpSpreadsheet\IOFactory;
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
 
-ini_set('display_errors', 0);
-error_reporting(0);
+    include '../../../../dbconn.php';
 
-$response = ['success' => false, 'message' => ''];
+    // Autoload function for PhpSpreadsheet classes
+    spl_autoload_register(function ($class) {
+        $prefix = 'PhpOffice\\PhpSpreadsheet\\';
+        $base_dir = __DIR__ . '/../../../../libraries/PhpSpreadsheet-3.3.0/src/PhpSpreadsheet/';
 
-if (isset($_SESSION['user_id'])) {
-    $userId = $_SESSION['user_id'];
-} else {
-    $response['message'] = 'User not authenticated.';
-    echo json_encode($response);
-    exit();
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
-    $file = $_FILES['file'];
-    $allowedTypes = ['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet']; // Only XLSX supported
-
-    // Check file type
-    if (in_array($file['type'], $allowedTypes)) {
-        // Move the uploaded file to a desired directory
-        $uploadDir = 'uploads/'; // Adjust as needed
-        $uploadFile = $uploadDir . basename(trim($file['name']));
-
-        if (!is_dir($uploadDir)) {
-            $response['message'] = 'Upload directory does not exist.';
-        } elseif (move_uploaded_file($file['tmp_name'], $uploadFile)) {
-            // Load the Excel file using PhpSpreadsheet
-            try {
-                $spreadsheet = IOFactory::load($uploadFile);
-                $worksheet = $spreadsheet->getActiveSheet();
-                $rows = $worksheet->toArray();
-
-                // Skip the first row if it contains headers
-                array_shift($rows);
-
-                foreach ($rows as $row) {
-                    // Check if the required number of columns are present (should be 14)
-                    if (count($row) < 14) {
-                        throw new Exception("Insufficient data in Excel row.");
-                    }
-
-                    // Extract and sanitize data
-                    $lastName = $conn->real_escape_string($row[0]);
-                    $firstName = $conn->real_escape_string($row[1]);
-                    $middleName = $conn->real_escape_string($row[2]);
-                    $suffix = $conn->real_escape_string($row[3]);
-                    $gender = $conn->real_escape_string($row[4]);
-                    $address = $conn->real_escape_string($row[5]);
-                    $birthdate = DateTime::createFromFormat('m/d/Y', $row[6])->format('Y-m-d');
-                    $civilStatus = $conn->real_escape_string($row[7]);
-                    $personalEmail = $conn->real_escape_string($row[8]);
-                    $contactNumber = $conn->real_escape_string($row[9]);
-                    $studentID = $conn->real_escape_string($row[10]);
-                    $departmentName = $conn->real_escape_string($row[11]);
-                    $accountEmail = $conn->real_escape_string($row[12]);
-                    $password = password_hash($conn->real_escape_string($row[13]), PASSWORD_BCRYPT); // Hash the password
-
-                    // Validate required fields
-                    if (empty($lastName) || empty($firstName) || empty($address) || 
-                        empty($personalEmail) || empty($contactNumber) || 
-                        empty($accountEmail) || empty($password)) {
-                        throw new Exception("Required user data is missing or invalid.");
-                    }
-
-                    // Validate department name
-                    if (empty($departmentName)) {
-                        throw new Exception("Department name is missing.");
-                    }
-
-                    // Check for existing email
-                    $emailCheck = $conn->query("SELECT id FROM users WHERE account_email = '$accountEmail'");
-                    if ($emailCheck->num_rows > 0) {
-                        throw new Exception("Account email '$accountEmail' already exists.");
-                    }
-
-                    // Get department ID
-                    $departmentIdResult = $conn->query("SELECT id FROM departments WHERE department_name = '$departmentName'");
-                    if ($departmentIdResult->num_rows > 0) {
-                        $row = $departmentIdResult->fetch_assoc();
-                        $departmentId = $row['id']; // Get the department ID
-                    } else {
-                        throw new Exception("Invalid department name: $departmentName. No matching department found.");
-                    }
-
-                    // Start a transaction to ensure data integrity
-                    $conn->begin_transaction();
-                    try {
-                        // Insert into users table with user_type set to 'intern'
-                        $sqlUser = "INSERT INTO users (last_name, first_name, middle_name, suffix, gender, address, birthdate, 
-                                                        civil_status, personal_email, contact_number, department_id, 
-                                                        account_email, password, user_type)
-                                    VALUES ('$lastName', '$firstName', '$middleName', '$suffix', '$gender', '$address', 
-                                            '$birthdate', '$civilStatus', '$personalEmail', '$contactNumber', 
-                                            '$departmentId', '$accountEmail', '$password', 'intern')";
-
-                        if ($conn->query($sqlUser) === TRUE) {
-                            $userId = $conn->insert_id; // Get the inserted user's ID
-
-                            // Insert the file upload record into the file_uploads table
-                            $sqlUpload = "INSERT INTO file_uploads (user_id, file_name, file_path) VALUES ('$userId', '{$file['name']}', '$uploadFile')";
-                            
-                            if ($conn->query($sqlUpload) === FALSE) {
-                                throw new Exception("Failed to log file upload: " . $conn->error);
-                            }
-
-                            // Insert into interns table
-                            $sqlIntern = "INSERT INTO interns (user_id, studentID) VALUES ('$userId', '$studentID')";
-                            if ($conn->query($sqlIntern) === FALSE) {
-                                throw new Exception("Failed to insert intern: " . $conn->error);
-                            }
-                        } else {
-                            throw new Exception("Failed to insert user: " . $conn->error);
-                        }
-
-                        // Commit the transaction
-                        $conn->commit();
-                    } catch (Exception $e) {
-                        $conn->rollback(); // Rollback on error
-                        $response['message'] = $e->getMessage();
-                        echo json_encode($response);
-                        exit();
-                    }
-                }
-
-                $response['success'] = true;
-                $response['message'] = 'File uploaded and processed successfully.';
-            } catch (Exception $e) {
-                $response['message'] = 'Error processing the file: ' . $e->getMessage();
+        // Check if class uses the namespace prefix for PhpSpreadsheet
+        $len = strlen($prefix);
+        if (strncmp($prefix, $class, $len) === 0) {
+            $relative_class = substr($class, $len);
+            $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
+            if (file_exists($file)) {
+                require $file;
+                return;
             }
-        } else {
-            $response['message'] = 'File upload failed.';
         }
-    } else {
-        $response['message'] = 'Invalid file type.';
-    }
-} else {
-    $response['message'] = 'No file uploaded.';
-}
 
-echo json_encode($response);
+        // Now check for Psr\SimpleCache classes
+        $psr_prefix = 'Psr\\SimpleCache\\';
+        $psr_base_dir = __DIR__ . '/../../../../libraries/Psr/simple-cache-master/src/';
+        $psr_len = strlen($psr_prefix);
+        if (strncmp($psr_prefix, $class, $psr_len) === 0) {
+            $relative_class = substr($class, $psr_len);
+            $file = $psr_base_dir . str_replace('\\', '/', $relative_class) . '.php';
+            if (file_exists($file)) {
+                require $file;
+                return;
+            }
+        }
+    });
+
+    // Use the necessary namespaces
+    use PhpOffice\PhpSpreadsheet\Spreadsheet;
+    use PhpOffice\PhpSpreadsheet\IOFactory;
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
+        $file = $_FILES['file'];
+
+        // Check for file upload errors
+        if ($file['error'] !== UPLOAD_ERR_OK) {
+            echo json_encode(['error' => 'File upload error']);
+            exit;
+        }
+
+        // Load the spreadsheet
+        try {
+            $spreadsheet = IOFactory::load($file['tmp_name']);
+        } catch (Exception $e) {
+            echo json_encode(['error' => 'Failed to load spreadsheet: ' . $e->getMessage()]);
+            exit;
+        }
+
+        $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
+
+        // Prepare SQL insert statement for users
+        $user_stmt = $conn->prepare(
+            "INSERT INTO users (last_name, first_name, middle_name, suffix, gender, address, birthdate, 
+                                    civil_status, personal_email, contact_number, account_email, password, user_type, 
+                                    department_id) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+        // Loop through each row of data
+        foreach ($sheetData as $row) {
+            // Skip the header row if it exists
+            if ($row['A'] === 'last_name') continue;
+
+            // Get and validate the password
+            $password = isset($row['N']) ? $row['N'] : ''; // Get the password
+            if (empty($password)) {
+                echo json_encode(['error' => 'Password cannot be empty for user: ' . $row['A'] . ' ' . $row['B']]);
+                exit;
+            }
+
+            // Hash the password
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+            // Insert user data
+            $user_stmt->bind_param('sssssssssssssi', 
+                $row['A'], // last_name
+                $row['B'], // first_name
+                $row['C'], // middle_name
+                $row['D'], // suffix
+                $row['E'], // gender
+                $row['F'], // address
+                $row['G'], // birthdate
+                $row['H'], // civil_status
+                $row['I'], // personal_email
+                $row['J'], // contact_number
+                $row['M'], // account_email
+                $hashedPassword, // password
+                $row['L'], // user_type
+                $row['K']  // department_id
+            );
+
+            // Execute the user insert statement and handle errors
+            if (!$user_stmt->execute()) {
+                echo json_encode(['error' => 'Failed to execute statement for user: ' . $row['A'] . ' ' . $row['B'] . '. Error: ' . $user_stmt->error]);
+                exit;
+            }
+
+            // Get the last inserted user ID
+            $user_id = $conn->insert_id;
+
+            // Now prepare to insert into the interns table
+            $intern_stmt = $conn->prepare("INSERT INTO interns (user_id, studentID) VALUES (?, ?)");
+            $studentID = isset($row['K']) ? $row['K'] : ''; // Assuming studentID is in the column corresponding to 'K'
+
+            // Bind parameters for interns table
+            $intern_stmt->bind_param('is', $user_id, $studentID); // user_id and studentID
+
+            // Execute the interns insert statement and handle errors
+            if (!$intern_stmt->execute()) {
+                echo json_encode(['error' => 'Failed to execute statement for intern: ' . $row['A'] . ' ' . $row['B'] . '. Error: ' . $intern_stmt->error]);
+                exit;
+            }
+
+            // Close the intern statement
+            $intern_stmt->close();
+        }
+
+        $user_stmt->close();
+        echo json_encode(['success' => 'Data uploaded successfully']);
+    } else {
+        echo json_encode(['error' => 'Invalid request']);
+    }
 ?>

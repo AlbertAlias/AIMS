@@ -52,7 +52,9 @@ document.addEventListener('DOMContentLoaded', function () {
         // Assuming only one file will be uploaded at a time
         const file = files[0];
         // Check if the file is an .xlsx file
-        if (file && file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') { 
+        if (file && (file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' || 
+             file.type === 'application/vnd.ms-excel' || 
+             file.name.endsWith('.csv'))) {
             // Display the file name and progress elements
             document.getElementById('uploadProgress').style.display = 'block';
             const fileNameElement = document.getElementById('uploadfileName'); // Correct ID
@@ -60,11 +62,11 @@ document.addEventListener('DOMContentLoaded', function () {
             if (fileNameElement) {
                 fileNameElement.innerText = file.name; // Updated line
             }
-
+    
             // Call the upload function and show progress
-            uploadFileWithProgress(file);
+            uploadFile(file); // Change this line to uploadFile
         } else {
-            alert('Please upload a valid Excel (.xlsx) file');
+            alert('Please upload a valid Excel (.xlsx, .xls) or CSV file');
         }
-    }    
+    }
 });
