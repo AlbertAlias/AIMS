@@ -6,19 +6,30 @@
 }
 
 .position-relative {
-    position: relative; /* Make the container position relative */
+    position: relative;
 }
 
 .search-icon {
-    position: absolute; /* Position the icon absolutely */
-    right: 10px; /* Adjust as needed to position it within the input */
-    top: 50%; /* Center it vertically */
-    transform: translateY(-50%); /* Adjust for perfect centering */
-    color: gray; /* Optional: Change the color of the icon */
-    pointer-events: none; /* Prevent clicks on the icon */
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: gray;
+    pointer-events: none;
 }
 
 #searchDepartments {
-    padding-right: 2.5rem; /* Space for the icon */
-    padding-left: 0.5rem; /* Adjust this value to reduce space on the left */
+    padding-right: 2.5rem;
+    padding-left: 0.5rem;
+}
+
+/* Adjust form for smaller screens */
+@media (max-width: 576px) {
+    #searchDepartments {
+        padding-right: 2rem; /* Adjust icon padding for smaller screens */
+    }
+
+    .btn {
+        width: 100%; /* Make buttons full width on small screens */
+        margin-top: 10px;
+    }
 }

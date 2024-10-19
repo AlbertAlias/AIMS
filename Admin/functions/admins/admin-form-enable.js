@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Get references to the buttons and the form
     const addAdminsBtn = document.getElementById('addAdminsBtn');
-    const adminCancelBtn = document.getElementById('adminCancelBtn');
+    const cancelBtn = document.getElementById('adminCancelBtn');
     const submitBtn = document.getElementById('adminSubmitBtn');
     const updateBtn = document.getElementById('adminUpdateBtn');
     const adminsInfo = document.getElementById('adminsInfo'); // Get reference to the adminsInfo container
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     
         // Show the Cancel button and ensure the Update button is hidden
-        adminCancelBtn.style.display = 'inline-block'; // Show the cancel button
+        cancelBtn.style.display = 'inline-block'; // Show the cancel button
         updateBtn.style.display = 'none'; // Hide the update button
     }        
 
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     
         // Hide the cancel and update buttons
-        adminCancelBtn.style.display = 'none';
+        cancelBtn.style.display = 'none';
         updateBtn.style.display = 'none';
     }    
 
@@ -92,8 +92,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     
         // Hide the cancel and update buttons
-        adminCancelBtn.style.display = 'none';
-        adminUpdateBtn.style.display = 'none';
+        cancelBtn.style.display = 'none';
+        updateBtn.style.display = 'none';
     }
 
     // Function to validate the form
@@ -136,15 +136,15 @@ document.addEventListener('DOMContentLoaded', function() {
         console.error('addAdminsBtn element not found');
     }
 
-    if (adminCancelBtn) {
+    if (cancelBtn) {
         // Event listener for the Cancel button
-        adminCancelBtn.addEventListener('click', function() {
+        cancelBtn.addEventListener('click', function() {
             resetAndLockForms(); // Reset and lock all fields
             submitBtn.disabled = true; // Keep the Submit button disabled
             submitBtn.style.display = 'inline-block'; // Show the Submit button
         });
     } else {
-        console.error('adminCancelBtn element not found');
+        console.error('cancelBtn element not found');
     }
 
     // Expose the disableAndResetForms function to be called from create-admins.js

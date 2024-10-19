@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const departmentForm = document.getElementById('departmentForm');
-    const updateBtn = document.getElementById('updateBtn');
+    const updateBtn = document.getElementById('deptUpdateBtn');
 
     if (!departmentForm || !(departmentForm instanceof HTMLFormElement)) {
         console.error('Department form not found or is not an HTMLFormElement.');

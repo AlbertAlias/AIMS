@@ -2,21 +2,22 @@ let isUpdating = false;
 
 if (document.getElementById('coordinatorForm')) {
     function showUpdateButton() {
-        const coorUpdateBtn = document.getElementById('coorUpdateBtn');
-        const coorDeleteBtn = document.getElementById('coorDeleteBtn');
-        const coorSubmitBtn = document.getElementById('coorSubmitBtn');
+        const updateBtn = document.getElementById('coorUpdateBtn');
+        const deleteBtn = document.getElementById('coorDeleteBtn');
+        const submitBtn = document.getElementById('coorSubmitBtn');
+        const cancelBtn = document.getElementById('coorCancelBtn');
 
-        if (coorUpdateBtn) {
-            coorUpdateBtn.style.display = 'inline-block';
-            coorUpdateBtn.disabled = false;
+        if (updateBtn) {
+            updateBtn.style.display = 'inline-block';
+            updateBtn.disabled = false;
         }
 
-        if (coorDeleteBtn) {
-            coorDeleteBtn.style.display = 'inline-block';
-            coorDeleteBtn.disabled = false;
+        if (deleteBtn) {
+            deleteBtn.style.display = 'inline-block';
+            deleteBtn.disabled = false;
         }
 
-        if (coorSubmitBtn) coorSubmitBtn.style.display = 'none';
+        if (submitBtn) submitBtn.style.display = 'none';
     }
 
     function toggleUpdateButton() {
@@ -35,12 +36,12 @@ if (document.getElementById('coordinatorForm')) {
             '#coor_department'
         ];
         
-        const coorUpdateBtn = document.getElementById('coorUpdateBtn');
-        const coorDeleteBtn = document.getElementById('coorDeleteBtn');
+        const updateBtn = document.getElementById('coorUpdateBtn');
+        const deleteBtn = document.getElementById('coorDeleteBtn');
         let allFilled = requiredFields.every(selector => $(selector).val().trim() !== '');
 
-        coorUpdateBtn.disabled = !allFilled;
-        coorDeleteBtn.disabled = !allFilled;
+        updateBtn.disabled = !allFilled;
+        deleteBtn.disabled = !allFilled;
     }
 
     function unlockAndResetForms() {
@@ -66,19 +67,19 @@ if (document.getElementById('coordinatorForm')) {
             coorDepartmentSelect.selectedIndex = 0;
         }
     
-        const coorSubmitBtn = document.getElementById('coorSubmitBtn');
-        const coorCancelBtn = document.getElementById('coorCancelBtn');
-        const coorUpdateBtn = document.getElementById('coorUpdateBtn');
-        const coorDeleteBtn = document.getElementById('coorDeleteBtn');
+        const submitBtn = document.getElementById('coorSubmitBtn');
+        const cancelBtn = document.getElementById('coorCancelBtn');
+        const updateBtn = document.getElementById('coorUpdateBtn');
+        const deleteBtn = document.getElementById('coorDeleteBtn');
     
-        if (coorSubmitBtn) {
-            coorSubmitBtn.disabled = false; // Allow submission
-            coorSubmitBtn.style.display = 'inline-block';
+        if (submitBtn) {
+            submitBtn.disabled = false; // Allow submission
+            submitBtn.style.display = 'inline-block';
         }
     
-        if (coorCancelBtn) {
-            coorCancelBtn.style.display = 'inline-block';
-            coorCancelBtn.disabled = false;
+        if (cancelBtn) {
+            cancelBtn.style.display = 'inline-block';
+            cancelBtn.disabled = false;
         }
     
         toggleUpdateButton();
@@ -104,26 +105,26 @@ if (document.getElementById('coordinatorForm')) {
             coorDepartmentSelect.disabled = true;
         }
     
-        const coorSubmitBtn = document.getElementById('coorSubmitBtn');
-        const coorCancelBtn = document.getElementById('coorCancelBtn');
-        const coorUpdateBtn = document.getElementById('coorUpdateBtn');
-        const coorDeleteBtn = document.getElementById('coorDeleteBtn');
+        const submitBtn = document.getElementById('coorSubmitBtn');
+        const cancelBtn = document.getElementById('coorCancelBtn');
+        const updateBtn = document.getElementById('coorUpdateBtn');
+        const deleteBtn = document.getElementById('coorDeleteBtn');
     
-        if (coorUpdateBtn) {
-            coorUpdateBtn.style.display = 'none';
+        if (updateBtn) {
+            updateBtn.style.display = 'none';
         }
     
-        if (coorDeleteBtn) {
-            coorDeleteBtn.style.display = 'none';
+        if (deleteBtn) {
+            deleteBtn.style.display = 'none';
         }
     
-        if (coorSubmitBtn) {
-            coorSubmitBtn.disabled = true; // Disable by default
-            coorSubmitBtn.style.display = 'inline-block';
+        if (submitBtn) {
+            submitBtn.disabled = true; // Disable by default
+            submitBtn.style.display = 'inline-block';
         }
     
-        if (coorCancelBtn) {
-            coorCancelBtn.style.display = 'none';
+        if (cancelBtn) {
+            cancelBtn.style.display = 'none';
         }
     }            
 
@@ -136,13 +137,13 @@ if (document.getElementById('coordinatorForm')) {
         loadDepartments();
 
         isUpdating = false;
-        const coorUpdateBtn = document.getElementById('coorUpdateBtn');
-        const coorSubmitBtn = document.getElementById('coorSubmitBtn');
-        const coorDeleteBtn = document.getElementById('coorDeleteBtn');
+        const updateBtn = document.getElementById('coorUpdateBtn');
+        const submitBtn = document.getElementById('coorSubmitBtn');
+        const deleteBtn = document.getElementById('coorDeleteBtn');
 
-        if (coorUpdateBtn) coorUpdateBtn.style.display = 'none';
-        if (coorSubmitBtn) coorSubmitBtn.style.display = 'inline-block';
-        if (coorDeleteBtn) coorDeleteBtn.style.display = 'none';
+        if (updateBtn) updateBtn.style.display = 'none';
+        if (submitBtn) submitBtn.style.display = 'inline-block';
+        if (deleteBtn) deleteBtn.style.display = 'none';
     });
 
     document.getElementById('coordinatorInfo').addEventListener('click', function(event) {
@@ -153,9 +154,9 @@ if (document.getElementById('coordinatorForm')) {
         }
     });
 
-    const coorCancelBtn = document.getElementById('coorCancelBtn');
-    if (coorCancelBtn) {
-        coorCancelBtn.addEventListener('click', function() {
+    const cancelBtn = document.getElementById('coorCancelBtn');
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', function() {
             resetAndLockForms();
         });
     }

@@ -21,13 +21,13 @@
     
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
                 rel="stylesheet">
 
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/departments.css">
     <link rel="stylesheet" href="../assets/css/coordinators.css">
-    <link rel="stylesheet" href="../assets/css/interns.css">
     <link rel="stylesheet" href="../assets/css/admin-profile.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
@@ -112,7 +112,7 @@
     <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
     <script src="../js/sidebar.js"></script>
 
-    <script>
+    <!-- <script>
         setInterval(function() {
             $.ajax({
                 url: 'controller/session-renewal.php',
@@ -124,14 +124,13 @@
                     console.error("Failed to renew session");
                 }
             });
-        }, 600000); // Ping every 10 minutes
-    </script>
+        }, 600000);
+    </script> -->
 
     <!--START::CRUD AJAX FUNCTIONS-->
     <script src="crud-ajax/dashboard/retrieve-users-analytics.js"></script>
     <script src="crud-ajax/dashboard/retrieve-deptCounts.js"></script>
     <script src="crud-ajax/dashboard/retrieve-coorCounts.js"></script>
-    <script src="crud-ajax/dashboard/retrieve-internCounts.js"></script>
     <script src="crud-ajax/dashboard/retrieve-adminCounts.js"></script>
 
     <script src="functions/departments/dept-form-enable.js"></script>
@@ -149,8 +148,6 @@
     <script src="functions/coordinators/contact-number.js"></script>
     <script src="crud-ajax/coordinators/update-coor.js"></script>
     <script src="crud-ajax/coordinators/delete-coor.js"></script>
-
-
 
     <script src="crud-ajax/admins/create-admins.js"></script>
     <script src="crud-ajax/admins/retrieve-admin-details.js"></script>

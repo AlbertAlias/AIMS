@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const deleteBtn = document.getElementById('deleteDeptBtn');
+    const deleteBtn = document.getElementById('deptDeleteBtn');
     const departmentForm = document.getElementById('departmentForm');
 
     if (deleteBtn) {

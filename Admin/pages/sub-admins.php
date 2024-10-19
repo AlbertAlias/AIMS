@@ -1,7 +1,8 @@
 <div class="container-fluid bg-light p-0 m-0" id="sub-admins" style="display: none;">
     <div class="row g-4">
-        <div class="col-md-4 col-lg-3">
-            <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+        <!-- Admins Column -->
+        <div class="col-12 col-md-4 col-lg-3">
+            <div class="bg-light rounded-3 p-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Admins</h5>
                 <div class="mb-3 position-relative">
                     <input type="text" class="form-control" id="searchAdmins" placeholder="Search Admin...">
@@ -10,41 +11,37 @@
                 <div id="adminsInfo" class="text-gray-800">
                     <!-- Admin information will be displayed here -->
                 </div>
-                <button id="addAdminsBtn" data-id="1" class="btn btn-success mt-3">Add Admin</button>
+                <button id="addAdminsBtn" data-id="1" class="btn btn-success mt-auto">Add Admin</button>
             </div>
         </div>
 
-        <div class="col-md-4 col-lg-6">
-            <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+        <!-- Add Admin Form Column -->
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="bg-light rounded-3 p-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Add Admin</h5>
                 <p class="text-gray-800 fs-5 mb-3">Personal Information</p>
                 <form id="adminsForm">
                     <div class="row mb-3">
-                        <!-- Last Name -->
-                        <div class="col-md-5">
-                            <input type="hidden" id="adminID" name="id">
+                        <div class="col-md-6">
+                            <input type="hidden" id="adminID" name="adminID">
                             <label for="admin_last_name" class="form-label required-asterisk">Last Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="admin_last_name" name="admin_last_name" required disabled>
                         </div>
-                        <!-- First Name -->
-                        <div class="col-md-7">
+                        <div class="col-md-6">
                             <label for="admin_first_name" class="form-label required-asterisk">First Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="admin_first_name" name="admin_first_name" required disabled>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <!-- Middle Name -->
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <label for="admin_middle_name" class="form-label">Middle Name</label>
                             <input type="text" class="form-control" id="admin_middle_name" name="admin_middle_name" disabled>
                         </div>
-                        <!-- Suffix -->
                         <div class="col-md-3">
                             <label for="admin_suffix" class="form-label">Suffix</label>
                             <input type="text" class="form-control" id="admin_suffix" name="admin_suffix" disabled>
                         </div>
-                        <!-- Civil Status -->
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <label for="admin_civil_status" class="form-label required-asterisk">Civil Status <span class="text-danger">*</span></label>
                             <select class="form-select" id="admin_civil_status" name="admin_civil_status" required disabled>
                                 <option selected disabled>Choose Status</option>
@@ -55,26 +52,23 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <!-- Address -->
-                        <div class="col-md-12">
+                        <div class="col-12">
                             <label for="admin_address" class="form-label required-asterisk">Address <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="admin_address" name="admin_address" required disabled>
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <!-- Email -->
                         <div class="col-md-7">
                             <label for="admin_personal_email" class="form-label required-asterisk">Personal Email <span class="text-danger">*</span></label>
                             <input type="email" class="form-control" id="admin_personal_email" name="admin_personal_email" required disabled>
                         </div>
-                        <!-- Employee Number -->
                         <div class="col-md-5">
                             <label for="admin_employee_number" class="form-label required-asterisk">Employee Number <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="admin_employee_number" name="admin_employee_number" required disabled>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 text-end">
+                        <div class="col-12 text-end">
                             <button type="button" id="adminCancelBtn" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
                             <button type="button" id="adminUpdateBtn" class="btn btn-primary" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> Update</button>
                             <button type="submit" id="adminSubmitBtn" class="btn btn-success" disabled><i class="fa-solid fa-check-to-slot"></i> Submit</button>
@@ -84,8 +78,9 @@
             </div>
         </div>
 
-        <div class="col-md-4 col-lg-3">
-            <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+        <!-- Account Information Column -->
+        <div class="col-12 col-md-12 col-lg-3">
+            <div class="bg-light rounded-3 p-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Account Information</h5>
                 <div class="text-gray-800">
                     <form id="admin_accountForm">

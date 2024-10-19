@@ -10,7 +10,7 @@
         <!-- This will be updated by JS -->
     </div>
 
-    <ul class="navbar-nav ms-auto"> <!-- Change ml-auto to ms-auto for Bootstrap 5 -->
+    <ul class="navbar-nav ms-auto">
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
