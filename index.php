@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIMS</title>
 
-    <!-- BOOTSTRAP CDN LINK -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
     <!-- STYLES -->
     <link rel="stylesheet" href="assets/css/landing.css">
+
+    <!-- BOOTSTRAP CDN LINK -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+                integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <style>
         :root {
@@ -99,6 +101,19 @@
             z-index: 1000;
             padding: 0;
         }
+
+        #home {
+            background-color: #000; /* or any color that matches your image */
+        }
+
+        section {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        section.loaded {
+            opacity: 1;
+        }
   </style>
 </head>
 <body>
@@ -108,13 +123,14 @@
     <!--END::HEADER-->
 
     <!--START::HOME HERO SECTION -->
-    <section id="home" class="container-fluid p-0 m-0 vh-100 d-flex align-items-center justify-content-center text-light" style="background-image: url('img/esyatek-bg1.jpeg'); background-size: cover; background-position: center;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 d-flex flex-column align-items-center justify-content-center">
-                    <h1 class="display-6 fw-bold text-black d-none d-md-block">Welcome To AIMS!</h1> <!-- Hidden on screens smaller than md -->
-                    <p class="lead text-black d-none d-md-block">Where you Achieve, Inspire, Motivate, & Succeed</p> <!-- Hidden on screens smaller than md -->
-                    <a href="#department" class="btn btn-success btn-md d-none d-md-block">Tell Me More</a> <!-- Hidden on screens smaller than md -->
+    <section id="home" class="container-fluid p-0 m-0 vh-100 d-flex flex-column justify-content-end align-items-center text-light" 
+         style="background-image: url('img/esyatek-bg1.jpeg'); background-size: cover; background-position: center -80px;">
+        <div class="container text-center mb-4">
+            <div class="row justify-content-center">
+                <div class="col-md-4 d-flex flex-column align-items-center">
+                    <h1 class="display-6 fw-bold text-black">Welcome To AIMS!</h1>
+                    <p class="lead text-black">Where you Achieve, Inspire, Motivate, & Succeed</p>
+                    <a href="#department" class="btn btn-success btn-md">Tell Me More</a>
                 </div>
             </div>
         </div>
@@ -342,17 +358,31 @@
     </section>
     <!--END::ABO HERO SECTION-->
     
-
-    <!-- jQuery CDN Link -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <!-- BOOTSTRAP CDN LINK -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
 
     <!--START::LOGIN FUNCTION-->
     <script src="crud-ajax/login-users.js"></script>
     <!--END::LOGIN FUNCTION-->
+    <script src="functions/landing.js" ></script>
+
+    <script>
+        window.onload = function() {
+            const img1 = new Image();
+            img1.src = 'img/esyatek-bg1.jpeg';
+            const img2 = new Image();
+            img2.src = 'img/esyatek-bg2.jpg';
+            const img3 = new Image();
+            img3.src = 'img/esyatek-bg4.jpg';
+            
+            // Add loaded class for smooth transitions
+            document.querySelectorAll('section').forEach(section => {
+                section.classList.add('loaded');
+            });
+        };
     </script>
 </body>
 </html>
