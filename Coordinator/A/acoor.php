@@ -22,6 +22,7 @@
     
     <link href="../../assets/css/main.css" rel="stylesheet">
     <link href="../../assets/css/sidebar.css" rel="stylesheet">
+    <link  href="../../assets/css/header.css" rel="stylesheet">
 
     <!-- <link href="../../assets/intern-css/A-css/dashboard.css" rel="stylesheet"> -->
     <link href="../../assets/intern-css/A-css/interns.css" rel="stylesheet">

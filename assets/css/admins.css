@@ -22,3 +22,7 @@
     padding-right: 2.5rem; /* Space for the icon */
     padding-left: 0.5rem; /* Adjust this value to reduce space on the left */
 }
+
+.text-red {
+    color: red;
+}

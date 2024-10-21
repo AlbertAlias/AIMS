@@ -51,7 +51,7 @@ $(document).ready(function() {
     $('#searchCoordinators').on('input', function() {
         const query = $(this).val().toLowerCase().trim();
         const queryParts = query.split(' ').filter(part => part); // Split query by spaces and remove empty parts
-
+    
         // Filter coordinators based on the first name and last name
         const filteredCoordinators = window.coordinators.filter(coordinator => {
             return queryParts.every(part =>
@@ -59,27 +59,19 @@ $(document).ready(function() {
                 coordinator.last_name.toLowerCase().includes(part)
             );
         });
-
+    
         // Check if any departments match the query
         const departmentExists = window.coordinators.some(coordinator =>
-            queryParts.some(part =>
-                coordinator.department_name.toLowerCase().includes(part)
-            )
+            coordinator.department_name.toLowerCase().includes(query)
         );
-
+    
         // Logic to show messages based on what was searched
         if (filteredCoordinators.length > 0) {
             // If there are matching coordinators, display them
             updateCoordinatorList(filteredCoordinators);
-        } else if (query.length > 0) {
-            // If no matching coordinators were found
-            if (departmentExists) {
-                // If a department exists but no coordinators match
-                updateCoordinatorList([], 'No coordinators found');
-            } else {
-                // If no departments or coordinators match
-                updateCoordinatorList([], 'Coordinator does not exist');
-            }
+        } else if (query.length > 0 && !departmentExists) {
+            // If no matching coordinators and no departments exist
+            updateCoordinatorList([], 'No department coordinator found');
         } else {
             // If the search is empty, just clear the list
             updateCoordinatorList([]);

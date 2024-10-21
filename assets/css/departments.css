@@ -10,6 +10,7 @@
 }
 
 .search-icon {
+    position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
@@ -20,16 +21,4 @@
 #searchDepartments {
     padding-right: 2.5rem;
     padding-left: 0.5rem;
-}
-
-/* Adjust form for smaller screens */
-@media (max-width: 576px) {
-    #searchDepartments {
-        padding-right: 2rem; /* Adjust icon padding for smaller screens */
-    }
-
-    .btn {
-        width: 100%; /* Make buttons full width on small screens */
-        margin-top: 10px;
-    }
 }

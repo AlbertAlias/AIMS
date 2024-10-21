@@ -127,3 +127,36 @@
     border-color: rgba(255, 255, 255, 0.5); /* Slightly lighter border on hover */
     background-color: #218838; /* Lighter green color for hover state */
 }
+
+.go-back-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000; /* Ensure it’s on top */
+    width: auto;
+}
+
+.go-back-link .flipped-icon {
+    font-size: 1.3rem; /* Increase icon size */
+    color: #145c32; /* Darker green */
+    transform: scaleX(-1); /* Flips the icon horizontally */
+    margin-top: 2px;
+}
+
+.go-back-link:hover .flipped-icon {
+    color: #1a7d4d; /* Lighter green than #145c32 */
+}
+
+.go-back-link {
+    color: white; /* Change to light text */
+    border: 1px solid black; /* Add black border */
+    padding: 5px 10px; /* Add some padding for better clickability */
+    border-radius: 5px; /* Slightly round the corners */
+    text-decoration: none; /* Remove underline by default */
+}
+
+.go-back-link:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Light background on hover */
+    text-decoration: none; /* Ensure no underline on hover */
+    color: black; /* Keep the text color white on hover */
+}

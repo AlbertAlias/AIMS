@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand navbar-light bg-white topbar m-0 p-0 px-2 static-top" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+<nav class="navbar navbar-expand navbar-light bg-white topbar m-0 p-0 px-2 sticky-top" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
     <!-- Add icon button on the left side -->
     <div class="d-flex align-items-center">
         <button id="sidebar-toggle" class="btn btn-link me-3">

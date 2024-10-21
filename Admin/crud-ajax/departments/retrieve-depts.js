@@ -27,12 +27,26 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function updateDepartmentList(departments) {
+    function updateDepartmentList(departments, message = null) {
+        departmentInfo.innerHTML = ''; // Clear previous content
+
+        // If a message is provided, display it
+        if (message) {
+            departmentInfo.innerHTML = `<div class="text-danger">${message}</div>`;
+            return;
+        }
+
+        // Generate buttons for each department
         departmentInfo.innerHTML = departments.map(dept => 
             `<button class="btn btn-outline-secondary d-block mb-2 w-100 coordinator-btn" data-id="${dept.id}" data-head="${dept.head}">
                 ${dept.name}<br>${dept.head}
             </button>`
         ).join('');
+        
+        // If no departments found, display a message
+        if (departments.length === 0) {
+            updateDepartmentList([], 'No departments found.');
+        }
     }
 
     // Search functionality
@@ -41,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const filteredDepartments = window.departments.filter(dept => 
             dept.name.toLowerCase().includes(query) || dept.head.toLowerCase().includes(query)
         );
-        updateDepartmentList(filteredDepartments);
+        updateDepartmentList(filteredDepartments, filteredDepartments.length === 0 ? 'No department head found.' : null);
     });
 
     // Fetch departments on page load
