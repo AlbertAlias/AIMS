@@ -1,6 +1,4 @@
 <?php
-    ini_set('session.gc_maxlifetime', 7200);
-    session_set_cookie_params(7200);
     session_start();
     if (!isset($_SESSION['email'])) {
         header('Location: index.php');
@@ -111,21 +109,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
     <script src="../js/sidebar.js"></script>
-
-    <!-- <script>
-        setInterval(function() {
-            $.ajax({
-                url: 'controller/session-renewal.php',
-                type: 'GET',
-                success: function() {
-                    console.log("Session renewed");
-                },
-                error: function() {
-                    console.error("Failed to renew session");
-                }
-            });
-        }, 600000);
-    </script> -->
 
     <!--START::CRUD AJAX FUNCTIONS-->
     <script src="crud-ajax/dashboard/retrieve-users-analytics.js"></script>

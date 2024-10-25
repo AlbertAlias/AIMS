@@ -4,7 +4,7 @@
             <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <div>
                     <div class="card-title fs-6">Departments</div>
-                    <div id="num-departments" class="h2">0</div>
+                    <div id="num-depts" class="h2">0</div>
                 </div>
                 <div>
                     <i class="fa-solid fa-scroll fa-2x"></i>
@@ -16,7 +16,7 @@
             <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <div>
                     <div class="card-title fs-6">Coordinators</div>
-                    <div id="num-departments" class="h2">0</div>
+                    <div id="num-coor" class="h2">0</div>
                 </div>
                 <div>
                     <i class="fa-solid fa-users fa-2x"></i>
@@ -27,7 +27,7 @@
             <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <div>
                     <div class="card-title fs-6">Admins</div>
-                    <div id="num-departments" class="h2">0</div>
+                    <div id="num-admins" class="h2">0</div>
                 </div>
                 <div>
                     <i class="fa-solid fa-user-shield fa-2x"></i>
