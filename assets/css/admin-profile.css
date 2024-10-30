@@ -1,0 +1,42 @@
+.list-group-item.active {
+    background-color: #198754 !important;
+    color: white;
+    border: none !important;
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
+}
+
+.form-label i {
+    width: 24px; /* Set a fixed width for uniformity */
+    margin-right: 20px; /* Space between the icon and the text */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+span[id^="users-"] {
+    display: inline-block;
+}
+
+.edit-icon {
+    background-color: #6c6c6c; /* Slightly lighter dark gray */
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.edit-icon i {
+    color: #ffffff; /* Light color for the icon */
+    font-size: 16px; /* Adjust icon size */
+}
+
+.edit-icon:hover {
+    background-color: #d3d3d3; /* Light gray on hover */
+}

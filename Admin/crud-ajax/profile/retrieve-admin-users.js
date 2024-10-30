@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    // Existing function to retrieve admin user details
     $.ajax({
         url: 'controller/profile/retrieve-admin-users.php',
         type: 'GET',
@@ -6,9 +7,11 @@ $(document).ready(function() {
         success: function(response) {
             if (response && response.status === 'success') {
                 $('#welcomeAdmin').html(`
-                    <span class="fw-bold text-dark bg-light">Welcome Admin,</span> 
+                    <span class="fw-bold text-dark bg-light">Welcome</span> 
                     <span>${response.first_name} ${response.last_name}</span>
                 `);
+                // New functionality to display user's full name below the profile picture
+                $('#user-name').html(`${response.first_name} ${response.last_name}`);
             } else if (response.status === 'expired') {
                 alert('Session expired. Please log in again.');
                 window.location.href = 'index.php'; // Redirect to login page
