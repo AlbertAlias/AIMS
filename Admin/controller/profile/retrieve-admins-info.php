@@ -5,7 +5,7 @@ $request = json_decode(file_get_contents("php://input"));
 $user_id = $request->user_id ?? null;
 
 if ($user_id) {
-    $stmt = $conn->prepare("SELECT last_name, first_name, middle_name, suffix, address, birthdate, civil_status, personal_email 
+    $stmt = $conn->prepare("SELECT last_name, first_name, middle_name, suffix, address, birthdate, civil_status, personal_email, account_email 
                             FROM users WHERE id = ?");
     $stmt->bind_param("i", $user_id);
     $stmt->execute();

@@ -1,6 +1,24 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Initialize fetching user info and event listeners
     fetchUserInfo();
+
+    // Select all edit icons
+const editIcons = document.querySelectorAll('.edit-icon');
+
+    editIcons.forEach((icon) => {
+        icon.addEventListener('click', function () {
+            // Toggle active class on the clicked icon
+            icon.classList.toggle('active');
+            
+            // If this is the password edit icon, toggle visibility of password fields
+            if (icon.id === 'password-edit-icon') {
+                const passwordChangeFields = document.getElementById('password-change-fields');
+                passwordChangeFields.style.display = passwordChangeFields.style.display === 'none' ? 'block' : 'none';
+            }
+        });
+    });
 });
+
 
 function fetchUserInfo() {
     const userId = document.getElementById('camera-icon').getAttribute('data-user-id');
@@ -23,8 +41,29 @@ function fetchUserInfo() {
 }
 
 function displayUserInfo(user) {
-    document.getElementById('users-name').innerText = user.first_name ? `${user.last_name} ${user.first_name} ${user.middle_name} ${user.suffix}` : "";
-    document.getElementById('users-location').innerText = user.address || '';
-    document.getElementById('users-civil-status').innerText = user.civil_status || '';
-    document.getElementById('users-email').innerText = user.personal_email || '';
+    // Check and display user details if elements are present
+    const userNameEl = document.getElementById('users-name');
+    const userLocationEl = document.getElementById('users-location');
+    const userStatusEl = document.getElementById('users-civil-status');
+    const userEmailEl = document.getElementById('users-email');
+    const userUsernameEl = document.getElementById('users-username');
+    const userMaskedEmailEl = document.getElementById('users-masked-email');
+    
+    if (userNameEl) userNameEl.innerText = user.first_name ? `${user.last_name} ${user.first_name} ${user.middle_name} ${user.suffix}` : "";
+    if (userLocationEl) userLocationEl.innerText = user.address || '';
+    if (userStatusEl) userStatusEl.innerText = user.civil_status || '';
+    if (userEmailEl) userEmailEl.innerText = user.personal_email || '';
+    if (userUsernameEl) userUsernameEl.innerText = user.account_email || ''; // Display the username
+
+    // Format and display the email for the account section if element is present
+    if (userMaskedEmailEl && user.account_email) {
+        const emailParts = user.account_email.split("@");
+        if (emailParts[0].length > 2) {
+            const maskedEmailName = emailParts[0][0] + "*".repeat(emailParts[0].length - 2) + emailParts[0].slice(-1);
+            userMaskedEmailEl.innerText = `${maskedEmailName}@${emailParts[1]}`;
+        } else {
+            // If the email name is too short to mask, display it as is
+            userMaskedEmailEl.innerText = user.account_email;
+        }
+    }
 }

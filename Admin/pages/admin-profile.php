@@ -12,13 +12,11 @@
                         <input type="file" id="profile-picture-input" accept="image/png, image/jpeg" style="display: none;">
                     </div>
 
-                    <div id="user-name" class="text-center mt-2" style="font-size: 24px;"></div>
-
                     <!-- Sidebar Navigation -->
-                    <div class="mt-4 w-100">
+                    <div class="mt-3 w-100">
                         <div class="list-group">
                             <a href="#profile-info" class="list-group-item list-group-item-action active">Profile</a>
-                            <a href="#password-info" class="list-group-item list-group-item-action">Password</a>
+                            <a href="#account-info" class="list-group-item list-group-item-action">Account</a>
                         </div>
                     </div>
                 </div>
@@ -27,58 +25,82 @@
                 <div class="col-md-8 py-3">
                     <!-- Personal Information Section -->
                     <div id="profile-info" style="display: block;">
-                        <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Personal Information</h5>
+                        <h6 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Personal Information</h6>
                         <form>
                             <div class="mt-2 mb-3 d-flex justify-content-between align-items-center">
                                 <label class="form-label" for="user-name">
                                     <i class="fa-solid fa-user fa-lg" style="color: #198754;"></i>
                                     <span id="users-name"></span>
                                 </label>
-                                <div class="edit-icon">
-                                    <i class="fa-solid fa-pen"></i>
-                                </div>
+                                <button type="button" id="editBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button type="submit" id="updateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
                             </div>
                             <div class="mb-3 d-flex justify-content-between align-items-center">
                                 <label class="form-label" for="location">
                                     <i class="fa-solid fa-location-dot fa-lg" style="color: #198754;"></i>
                                     <span id="users-location"></span>
                                 </label>
-                                <div class="edit-icon">
-                                    <i class="fa-solid fa-pen"></i>
-                                </div>
+                                <button type="button" id="editBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button type="submit" id="updateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
                             </div>
                             <div class="mb-3 d-flex justify-content-between align-items-center">
                                 <label class="form-label" for="civil-status">
                                     <i class="fa-solid fa-heart fa-lg" style="color: #198754;"></i>
                                     <span id="users-civil-status"></span>
                                 </label>
-                                <div class="edit-icon">
-                                    <i class="fa-solid fa-pen"></i>
-                                </div>
+                                <button type="button" id="editBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button type="submit" id="updateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <label class="form-label" for="email">
                                     <i class="fa-solid fa-envelope fa-lg" style="color: #198754;"></i>
                                     <span id="users-email"></span>
                                 </label>
-                                <div class="edit-icon">
-                                    <i class="fa-solid fa-pen"></i>
-                                </div>
+                                <button type="button" id="editBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button type="submit" id="updateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
                             </div>
                         </form>
                     </div>
 
                     <!-- Password Change Section -->
-                    <div id="password-info" style="display: none;">
-                        <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Change Password</h5>
+                    <div id="account-info" style="display: none;">
+                        <h6 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Password Settings</h6>
                         <form>
-                            <div class="mb-3">
-                                <label class="form-label">Email:</label>
-                                <input type="email" class="form-control" style="display: none;">
+                            <div class="mt-2 mb-2 d-flex justify-content-between align-items-center">
+                                <label class="form-label">
+                                    <i class="fa-solid fa-envelope fa-lg" style="color: #198754;"></i>
+                                    <span id="users-masked-email"></span> <!-- Display the masked email -->
+                                </label>
+                                <button type="button" id="editBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button type="submit" id="updateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
                             </div>
-                            <div class="mb-3">
-                                <label class="form-label">Password:</label>
-                                <input type="password" class="form-control" style="display: none;">
+
+                            <!-- Password Display and Edit Section -->
+                            <div class="mb-3 d-flex justify-content-between align-items-center">
+                                <label class="form-label">
+                                    <i class="fa-solid fa-key fa-lg" style="color: #198754;"></i>
+                                    <span class="form-control-plaintext">********</span>
+                                </label>
+                                <button type="button" id="editBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button type="submit" id="updateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
+                            </div>
+
+                            <!-- New Password Input Fields (Initially Hidden) -->
+                            <div id="password-change-fields" class="border-top border-dark pt-2 mt-2" style="display: none;">
+                                <div class="mb-3">
+                                    <label for="old-password" class="form-label">Old Password</label>
+                                    <input type="password" id="old-password" class="form-control" placeholder="Enter old password">
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 mb-2">
+                                        <label for="new-password" class="form-label">New Password</label>
+                                        <input type="password" id="new-password" class="form-control" placeholder="Enter new password">
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="confirm-password" class="form-label">Confirm Password</label>
+                                        <input type="password" id="confirm-password" class="form-control" placeholder="Confirm new password">
+                                    </div>
+                                </div>
                             </div>
                         </form>
                     </div>

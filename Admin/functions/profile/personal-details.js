@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Set the active links
     const profileInfo = document.getElementById('profile-info');
-    const passwordInfo = document.getElementById('password-info');
+    const passwordInfo = document.getElementById('account-info');
     const personalDetailsLink = document.querySelector('a[href="#profile-info"]');
-    const passwordLink = document.querySelector('a[href="#password-info"]');
+    const passwordLink = document.querySelector('a[href="#account-info"]');
 
     // Show personal details by default (HTML handles it now, so this is no longer needed)
     // profileInfo.style.display = 'block'; // Remove this line
