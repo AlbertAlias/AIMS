@@ -32,74 +32,86 @@
                                     <i class="fa-solid fa-user fa-lg" style="color: #198754;"></i>
                                     <span id="users-name"></span>
                                 </label>
-                                <button type="button" id="editBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
-                                <button type="submit" id="updateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
+                                <button type="button" id="namEditBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button type="submit" id="nameUpdateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
                             </div>
                             <div class="mb-3 d-flex justify-content-between align-items-center">
                                 <label class="form-label" for="location">
                                     <i class="fa-solid fa-location-dot fa-lg" style="color: #198754;"></i>
                                     <span id="users-location"></span>
                                 </label>
-                                <button type="button" id="editBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
-                                <button type="submit" id="updateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
+                                <button type="button" id="locEditBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button type="submit" id="locUpdateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
                             </div>
                             <div class="mb-3 d-flex justify-content-between align-items-center">
                                 <label class="form-label" for="civil-status">
                                     <i class="fa-solid fa-heart fa-lg" style="color: #198754;"></i>
                                     <span id="users-civil-status"></span>
                                 </label>
-                                <button type="button" id="editBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
-                                <button type="submit" id="updateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
+                                <button type="button" id="civilEditBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button type="submit" id="civilUpdateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <label class="form-label" for="email">
                                     <i class="fa-solid fa-envelope fa-lg" style="color: #198754;"></i>
                                     <span id="users-email"></span>
                                 </label>
-                                <button type="button" id="editBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
-                                <button type="submit" id="updateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
+                                <button type="button" id="emailEditBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button type="submit" id="emailUpdateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
                             </div>
                         </form>
                     </div>
 
                     <!-- Password Change Section -->
                     <div id="account-info" style="display: none;">
-                        <h6 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Password Settings</h6>
+                        <h6 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Account Settings</h6>
                         <form>
-                            <div class="mt-2 mb-2 d-flex justify-content-between align-items-center">
-                                <label class="form-label">
-                                    <i class="fa-solid fa-envelope fa-lg" style="color: #198754;"></i>
-                                    <span id="users-masked-email"></span> <!-- Display the masked email -->
-                                </label>
-                                <button type="button" id="editBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
-                                <button type="submit" id="updateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
-                            </div>
-
-                            <!-- Password Display and Edit Section -->
+                            <!-- Account Email (New Section) -->
                             <div class="mb-3 d-flex justify-content-between align-items-center">
-                                <label class="form-label">
-                                    <i class="fa-solid fa-key fa-lg" style="color: #198754;"></i>
-                                    <span class="form-control-plaintext">********</span>
+                                <label class="form-label" for="account-email">
+                                    <i class="fa-solid fa-envelope fa-lg" style="color: #198754;"></i>
+                                    <span id="users-account-email"></span>
+                                    <input type="email" id="account-email-input" class="form-control" style="display: none;" value="">
                                 </label>
-                                <button type="button" id="editBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
-                                <button type="submit" id="updateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
+                                <button type="button" id="editAccountEmailBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button type="submit" id="saveAccountEmailBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check"></i> Save</button>
                             </div>
 
-                            <!-- New Password Input Fields (Initially Hidden) -->
-                            <div id="password-change-fields" class="border-top border-dark pt-2 mt-2" style="display: none;">
-                                <div class="mb-3">
-                                    <label for="old-password" class="form-label">Old Password</label>
-                                    <input type="password" id="old-password" class="form-control" placeholder="Enter old password">
+                            <!-- Password Settings -->
+                            <div class="d-flex justify-content-between align-items-center">
+                                <label class="form-label">
+                                    <i class="fa-solid fa-key fa-lg" style="color: #198754;"></i> 
+                                    <span class="password-dots">●●●●●●●●●●</span>
+                                </label>
+                                <button type="button" id="changePasswordBtn" class="btn btn-sm btn-success">
+                                    <i class="fa-solid fa-pen fa-lg me-1"></i> Change Password
+                                </button>
+                            </div>
+
+                            <!-- Hidden Password Input Fields -->
+                            <div id="passwordFields" style="display: none;">
+                                <!-- Old Password (not full width) -->
+                                <div class="mb-2">
+                                    <label for="oldPassword" class="form-label small">Old Password</label>
+                                    <input type="password" id="oldPassword" class="form-control form-control-sm w-75"> <!-- Reduced width to 75% -->
                                 </div>
-                                <div class="row">
-                                    <div class="col-6 mb-2">
-                                        <label for="new-password" class="form-label">New Password</label>
-                                        <input type="password" id="new-password" class="form-control" placeholder="Enter new password">
+
+                                <!-- New Password and Confirm Password side by side -->
+                                <div class="row g-2">
+                                    <div class="col">
+                                        <label for="newPassword" class="form-label small">New Password</label>
+                                        <input type="password" id="newPassword" class="form-control form-control-sm">
                                     </div>
-                                    <div class="col-6">
-                                        <label for="confirm-password" class="form-label">Confirm Password</label>
-                                        <input type="password" id="confirm-password" class="form-control" placeholder="Confirm new password">
+                                    <div class="col">
+                                        <label for="confirmPassword" class="form-label small">Confirm Password</label>
+                                        <input type="password" id="confirmPassword" class="form-control form-control-sm">
                                     </div>
+                                </div>
+                                
+                                <!-- Button Container -->
+                                <div class="d-flex justify-content-end mt-2">
+                                    <button type="button" id="passCancelBtn" class="btn btn-secondary me-2"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
+                                    <button type="submit" id="passSubmitBtn" class="btn btn-primary"><i class="fa-solid fa-check-to-slot"></i> Submit</button>
                                 </div>
                             </div>
                         </form>

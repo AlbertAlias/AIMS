@@ -20,3 +20,13 @@
 span[id^="users-"] {
     display: inline-block;
 }
+
+.password-dots {
+    display: inline;
+    font-size: 0.85em; /* Adjust this size as needed */
+}
+
+.btn {
+    display: inline-flex; /* Ensure the button is always inline-flex */
+    align-items: center;  /* Center align items in the button */
+}

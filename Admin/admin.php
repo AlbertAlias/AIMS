@@ -89,12 +89,6 @@
                     <?php include "pages/sub-admins.php"; ?>
                     <?php include "pages/admin-profile.php"; ?>
                 </div>
-
-                <!-- Content Row -->
-                <!-- <div class="row">
-                    <div class="col-lg-6 mb-4"></div>
-                </div> -->
-
             </div>
             <!-- End of Main Content -->
         </div>
@@ -145,6 +139,7 @@
     <script src="crud-ajax/profile/retrieve-admin-users.js"></script>
     <script src="crud-ajax/profile/retrieve-admins-info.js"></script>
     <script src="functions/profile/personal-details.js"></script>
+    <script src="functions/profile/edit-profile-info.js"></script>
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>
 </html>
