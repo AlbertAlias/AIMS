@@ -68,10 +68,10 @@
                         <form>
                             <!-- Account Email (New Section) -->
                             <div class="mb-3 d-flex justify-content-between align-items-center">
-                                <label class="form-label" for="account-email">
+                                <label class="form-label" for="account-email" style="flex-grow: 1;">
                                     <i class="fa-solid fa-envelope fa-lg" style="color: #198754;"></i>
                                     <span id="users-account-email"></span>
-                                    <input type="email" id="account-email-input" class="form-control" style="display: none;" value="">
+                                    <input type="email" id="account-email-input" class="form-control form-control-sm" style="display: none;" value="">
                                 </label>
                                 <button type="button" id="editAccountEmailBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
                                 <button type="submit" id="saveAccountEmailBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check"></i> Save</button>
