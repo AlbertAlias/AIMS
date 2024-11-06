@@ -79,13 +79,9 @@
 
                             <!-- Password Settings -->
                             <div class="d-flex justify-content-between align-items-center">
-                                <label class="form-label">
-                                    <i class="fa-solid fa-key fa-lg" style="color: #198754;"></i> 
-                                    <span class="password-dots">●●●●●●●●●●</span>
-                                </label>
                                 <button type="button" id="changePasswordBtn" class="btn btn-sm btn-success">
-                                    <i class="fa-solid fa-pen fa-lg me-1"></i> Change Password
-                                </button>
+                                    <i class="fa-solid fa-key fa-lg"></i> Change Password
+                                </button> 
                             </div>
 
                             <!-- Hidden Password Input Fields -->
@@ -122,86 +118,56 @@
     </div>
 </div>
 
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editForm">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="editInput" />
+                    </div>
+                    <!-- Right-align Save button -->
+                    <div class="text-end">
+                        <button type="button" class="btn btn-sm btn-primary" id="saveEditBtn">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!-- <form id="editProfileForm">
-    <div class="row mb-3">
-        <div class="col-md-5">
-            <label for="last_name" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="last_name" name="last_name" value="" required>
-        </div>
-        <div class="col-md-7">
-            <label for="first_name" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="first_name" name="first_name" value="" required>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-5">
-            <label for="middle_name" class="form-label">Middle Name</label>
-            <input type="text" class="form-control" id="middle_name" name="middle_name" value="">
-        </div>
-        <div class="col-md-3">
-            <label for="suffix" class="form-label">Suffix</label>
-            <input type="text" class="form-control" id="suffix" name="suffix" value="">
-        </div>
-        <div class="col-md-4">
-            <label for="gender" class="form-label">Gender</label>
-            <select class="form-select" id="gender" name="gender">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-            </select>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-12">
-            <label for="address" class="form-label">Address</label>
-            <input type="text" class="form-control" id="address" name="address" value="" required>
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="changePasswordForm">
+                    <div class="mb-3 position-relative">
+                        <label for="modalOldPassword" class="form-label">Old Password</label>
+                        <input type="password" id="modalOldPassword" class="form-control">
+                        <span id="oldPasswordFeedback" class="position-absolute"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modalNewPassword" class="form-label">New Password</label>
+                        <input type="password" id="modalNewPassword" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="modalConfirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" id="modalConfirmPassword" class="form-control">
+                        <div id="passwordFeedback" class="text-center mt-2"></div>
+                    </div>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-    <div class="row mb-3">
-        <div class="col-md-4">
-            <label for="birthdate" class="form-label">Birthdate</label>
-            <input type="date" class="form-control" id="birthdate" name="birthdate" value="" required>
-        </div>
-        <div class="col-md-4">
-            <label for="civil_status" class="form-label">Civil Status</label>
-            <select class="form-select" id="civil_status" name="civil_status">
-                <option value="Single">Single</option>
-                <option value="Married">Married</option>
-                <option value="Divorced">Divorced</option>
-            </select>
-        </div>
-        <div class="col-md-4">
-            <label for="contact_number" class="form-label">Contact Number</label>
-            <input type="tel" class="form-control" id="contact_number" name="contact_number" pattern="[0-9]{10}" maxlength="10" required>
-        </div>
-    </div>
-
-    <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Account Information</h5>
-    <div class="row mb-3">
-        <div class="col-md-12">
-            <label for="account_email" class="form-label">Account Email</label>
-            <input type="email" class="form-control" id="account_email" name="account_email" required>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-        </div>
-        <div class="col-md-6">
-            <label for="user_type" class="form-label">Role</label>
-            <select class="form-select" id="user_type" name="user_type">
-                <option value="admin">Admin</option>
-                <option value="sub-admin">Sub-admin</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12 text-end">
-            <button type="button" class="btn btn-secondary" id="cancelEdit"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
-            <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-check-to-slot"></i> Save</button>
-            <button type="button" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i> Edit</button>
-        </div>
-    </div>
-</form> -->
+</div>

@@ -1,31 +1,40 @@
-document.getElementById("changePasswordBtn").addEventListener("click", function() {
-    const passwordFields = document.getElementById("passwordFields");
-    const passwordLabel = this.parentElement.querySelector("label"); // Label with dots
-    const changePasswordBtn = document.getElementById("changePasswordBtn"); // Change Password button
+document.addEventListener("DOMContentLoaded", function() {
+    // Get modal and input elements
+    const editModal = new bootstrap.Modal(document.getElementById("editModal"));
+    const editInput = document.getElementById("editInput");
 
-    if (passwordFields.style.display === "block") {
-        // Hide password input fields and show dots and Change Password button
-        passwordFields.style.display = "none";
-        passwordLabel.style.display = "flex"; // Use flex to keep items aligned properly
-        changePasswordBtn.style.display = "inline-flex"; // Ensure the button is displayed properly
-    } else {
-        // Hide dots and Change Password button, show password input fields
-        passwordLabel.style.display = "none";
-        passwordFields.style.display = "block";
-        changePasswordBtn.style.display = "none"; // Hide button when editing
-    }
-});
+    // Add click listeners for each edit button
+    document.getElementById("namEditBtn").addEventListener("click", function() {
+        editModal.show();
+        editInput.value = document.getElementById("users-name").textContent;
+        document.getElementById("editModalLabel").textContent = "Edit Name";
+    });
 
-// New event listener for the passCancelBtn
-document.getElementById("passCancelBtn").addEventListener("click", function() {
-    const passwordFields = document.getElementById("passwordFields");
-    const passwordLabel = document.querySelector("label span.password-dots").parentElement; // Get the label containing dots
-    const changePasswordBtn = document.getElementById("changePasswordBtn");
+    document.getElementById("locEditBtn").addEventListener("click", function() {
+        editModal.show();
+        editInput.value = document.getElementById("users-location").textContent;
+        document.getElementById("editModalLabel").textContent = "Edit Location";
+    });
 
-    // Hide password input fields
-    passwordFields.style.display = "none";
-    
-    // Show the label with the dots and Change Password button
-    passwordLabel.style.display = "flex"; // Make sure the label is visible
-    changePasswordBtn.style.display = "inline-flex"; // Keep button styled correctly
+    document.getElementById("civilEditBtn").addEventListener("click", function() {
+        editModal.show();
+        editInput.value = document.getElementById("users-civil-status").textContent;
+        document.getElementById("editModalLabel").textContent = "Edit Civil Status";
+    });
+
+    document.getElementById("emailEditBtn").addEventListener("click", function() {
+        editModal.show();
+        editInput.value = document.getElementById("users-email").textContent;
+        document.getElementById("editModalLabel").textContent = "Edit Email";
+    });
+
+    // Save changes from the modal
+    document.getElementById("saveEditBtn").addEventListener("click", function() {
+        // Get updated value
+        const updatedValue = editInput.value;
+
+        // Use a switch case or if-else to update the appropriate field
+        // Here you might want to save the updated value to the backend using an AJAX request
+        editModal.hide();
+    });
 });

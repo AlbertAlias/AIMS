@@ -30,3 +30,19 @@ span[id^="users-"] {
     display: inline-flex; /* Ensure the button is always inline-flex */
     align-items: center;  /* Center align items in the button */
 }
+
+#oldPasswordFeedback {
+    position: absolute;
+    top: 5px;   /* Adjust this to move the feedback above the input */
+    right: 0;     /* Align the feedback message to the right side */
+    font-size: 12px; /* Smaller font size for the feedback */
+    font-weight: bold;
+}
+
+#passwordFeedback {
+    position: absolute;
+    top: -20px;  /* Adjust to position above the input field */
+    right: 0;
+    font-size: 12px;
+    font-weight: bold;
+}
