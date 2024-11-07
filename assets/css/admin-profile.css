@@ -41,8 +41,8 @@ span[id^="users-"] {
 
 #passwordFeedback {
     position: absolute;
-    top: -20px;  /* Adjust to position above the input field */
-    right: 0;
+    top: 195px;  /* Position feedback above the Confirm Password field */
+    right: 20px;
     font-size: 12px;
     font-weight: bold;
 }

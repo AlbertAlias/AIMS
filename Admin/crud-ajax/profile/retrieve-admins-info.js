@@ -40,37 +40,45 @@ document.addEventListener("DOMContentLoaded", function () {
             feedbackEl.style.color = '';  // Reset color
         });
     }
+});
 
-    // Event listener for new password confirmation
-    const newPasswordInput = document.getElementById("newPassword");
-    const confirmPasswordInput = document.getElementById("confirmPassword");
+document.addEventListener("DOMContentLoaded", function () {
+    // References to new and confirm password fields in the modal
+    const newPasswordInput = document.getElementById("modalNewPassword");
+    const confirmPasswordInput = document.getElementById("modalConfirmPassword");
     const passwordFeedback = document.getElementById("passwordFeedback");
 
+    // Add event listeners for input in new and confirm password fields
     if (newPasswordInput && confirmPasswordInput) {
-        confirmPasswordInput.addEventListener("input", function () {
-            verifyPasswordMatch(newPasswordInput.value, confirmPasswordInput.value);
-        });
+        newPasswordInput.addEventListener("input", checkPasswordMatch);
+        confirmPasswordInput.addEventListener("input", checkPasswordMatch);
 
-        // Hide feedback on blur (when focus is lost)
+        // Clear feedback when focus is lost from the confirmPasswordInput field
         confirmPasswordInput.addEventListener("blur", function () {
             passwordFeedback.innerText = '';  // Clear feedback
             passwordFeedback.style.color = '';  // Reset color
         });
     }
 
-    // Password matching function
-    function verifyPasswordMatch(newPassword, confirmPassword) {
-        if (newPassword === confirmPassword && newPassword !== '') {
-            passwordFeedback.innerText = "Password Match";
-            passwordFeedback.style.color = "green";  // Show success (green)
-        } else if (newPassword !== confirmPassword && confirmPassword !== '') {
-            passwordFeedback.innerText = "Passwords do not match";
-            passwordFeedback.style.color = "red";  // Show error (red)
+    // Function to verify if new password and confirm password match
+    function checkPasswordMatch() {
+        const newPassword = newPasswordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+
+        if (newPassword && confirmPassword) {
+            if (newPassword === confirmPassword) {
+                passwordFeedback.innerText = "Password Match";
+                passwordFeedback.style.color = "green";  // Success message in green
+            } else {
+                passwordFeedback.innerText = "Passwords doesn't match";
+                passwordFeedback.style.color = "red";  // Error message in red
+            }
         } else {
-            passwordFeedback.innerText = '';  // Clear feedback when both fields are empty
+            passwordFeedback.innerText = '';  // Clear feedback if one or both fields are empty
         }
     }
 });
+
 
 function maskEmail(email) {
     if (!email || email.length < 3) return email;

@@ -32,7 +32,7 @@
                                     <i class="fa-solid fa-user fa-lg" style="color: #198754;"></i>
                                     <span id="users-name"></span>
                                 </label>
-                                <button type="button" id="namEditBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button type="button" id="nameEditBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
                                 <button type="submit" id="nameUpdateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
                             </div>
                             <div class="mb-3 d-flex justify-content-between align-items-center">
@@ -127,10 +127,33 @@
             </div>
             <div class="modal-body">
                 <form id="editForm">
-                    <div class="mb-3">
-                        <input type="text" class="form-control" id="editInput" />
+                    <div id="nameFields" style="display: none;">
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" id="lastName" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="firstName" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="middleName" class="form-label">Middle Name</label>
+                            <input type="text" class="form-control" id="middleName" />
+                        </div>
                     </div>
-                    <!-- Right-align Save button -->
+
+                    <div class="mb-3" id="locationField" style="display: none;">
+                        <input type="text" class="form-control" id="locationInput" />
+                    </div>
+
+                    <div class="mb-3" id="civilStatusField" style="display: none;">
+                        <input type="text" class="form-control" id="civilStatusInput" />
+                    </div>
+
+                    <div class="mb-3" id="emailField" style="display: none;">
+                        <input type="email" class="form-control" id="emailInput" />
+                    </div>
+
                     <div class="text-end">
                         <button type="button" class="btn btn-sm btn-primary" id="saveEditBtn">Save</button>
                     </div>
@@ -161,7 +184,7 @@
                     <div class="mb-3">
                         <label for="modalConfirmPassword" class="form-label">Confirm Password</label>
                         <input type="password" id="modalConfirmPassword" class="form-control">
-                        <div id="passwordFeedback" class="text-center mt-2"></div>
+                        <span id="passwordFeedback" class="position-absolute"></span>
                     </div>
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary">Submit</button>
