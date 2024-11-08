@@ -140,7 +140,6 @@
     <script src="crud-ajax/profile/retrieve-admins-info.js"></script>
     <script src="crud-ajax/profile/update-admins-info.js"></script>
     <script src="functions/profile/personal-details.js"></script>
-    <script src="functions/profile/edit-profile-info.js"></script>
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>
 </html>

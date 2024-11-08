@@ -1,6 +1,6 @@
 $(document).ready(function() {
     // Trigger file input click on camera icon click
-    $('#camera-icon').click(function() {
+    $('#user-profile').click(function() {
         $('#profile-picture-input').click(); 
     });
 
@@ -11,7 +11,7 @@ $(document).ready(function() {
         formData.append('profile_picture', file);
 
         // Dynamically get the user ID from the camera icon's data attribute
-        var userId = $('#camera-icon').data('user-id');
+        var userId = $('#user-profile').data('user-id');
         console.log("User ID:", userId); // Debugging log
         formData.append('user_id', userId); // Use the user ID
 

@@ -8,7 +8,7 @@
                     <div style="position: relative;">
                         <img id="profile-picture" src="" alt="Profile Picture" class="rounded-circle" style="display: none; width: 148px; height: 145px; object-fit: cover;">
                         <span id="profile-initials-placeholder" class="initials-placeholder" style="display: none;"></span>
-                        <i class="fa-solid fa-camera" id="camera-icon" data-user-id="<?php echo $_SESSION['user_id']; ?>" style="position: absolute; bottom: 8px; right: 6px; font-size: 20px; color: white; background-color: dimgray; border-radius: 50%; padding: 6px;"></i>
+                        <i class="fa-solid fa-camera" id="user-profile" data-user-id="<?php echo $_SESSION['user_id']; ?>" style="position: absolute; bottom: 8px; right: 6px; font-size: 20px; color: white; background-color: dimgray; border-radius: 50%; padding: 6px;"></i>
                         <input type="file" id="profile-picture-input" accept="image/png, image/jpeg" style="display: none;">
                     </div>
 
@@ -32,32 +32,36 @@
                                     <i class="fa-solid fa-user fa-lg" style="color: #198754;"></i>
                                     <span id="users-name"></span>
                                 </label>
-                                <button type="button" id="nameEditBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
-                                <button type="submit" id="nameUpdateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
+                                <button type="button" id="nameEditBtn" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#editNameModal">
+                                    <i class="fa-solid fa-pen"></i> Edit
+                                </button>
                             </div>
                             <div class="mb-3 d-flex justify-content-between align-items-center">
                                 <label class="form-label" for="location">
                                     <i class="fa-solid fa-location-dot fa-lg" style="color: #198754;"></i>
                                     <span id="users-location"></span>
                                 </label>
-                                <button type="button" id="locEditBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
-                                <button type="submit" id="locUpdateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
+                                <button type="button" id="locEditBtn" class="btn btn-sm btn-success">
+                                    <i class="fa-solid fa-pen"></i> Edit
+                                </button>
                             </div>
                             <div class="mb-3 d-flex justify-content-between align-items-center">
                                 <label class="form-label" for="civil-status">
                                     <i class="fa-solid fa-heart fa-lg" style="color: #198754;"></i>
                                     <span id="users-civil-status"></span>
                                 </label>
-                                <button type="button" id="civilEditBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
-                                <button type="submit" id="civilUpdateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
+                                <button type="button" id="civilEditBtn" class="btn btn-sm btn-success">
+                                    <i class="fa-solid fa-pen"></i> Edit
+                                </button>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
                                 <label class="form-label" for="email">
                                     <i class="fa-solid fa-envelope fa-lg" style="color: #198754;"></i>
                                     <span id="users-email"></span>
                                 </label>
-                                <button type="button" id="emailEditBtn" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i> Edit</button>
-                                <button type="submit" id="emailUpdateBtn" class="btn btn-sm btn-primary" style="display: none;"><i class="fa-solid fa-check-to-slot"></i> Save</button>
+                                <button type="button" id="emailEditBtn" class="btn btn-sm btn-success">
+                                    <i class="fa-solid fa-pen"></i> Edit
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -118,44 +122,86 @@
     </div>
 </div>
 
-<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+<div class="modal fade" id="editNameModal" tabindex="-1" aria-labelledby="editNameModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Information</h5>
+                <h5 class="modal-title" id="editNameModalLabel">Edit Name</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="editForm">
-                    <div id="nameFields" style="display: none;">
-                        <div class="mb-3">
-                            <label for="lastName" class="form-label">Last Name</label>
-                            <input type="text" class="form-control" id="lastName" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="firstName" class="form-label">First Name</label>
-                            <input type="text" class="form-control" id="firstName" />
-                        </div>
-                        <div class="mb-3">
-                            <label for="middleName" class="form-label">Middle Name</label>
-                            <input type="text" class="form-control" id="middleName" />
-                        </div>
+                <form id="editNameForm">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="lastName" placeholder="Last Name">
                     </div>
-
-                    <div class="mb-3" id="locationField" style="display: none;">
-                        <input type="text" class="form-control" id="locationInput" />
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="firstName" placeholder="First Name">
                     </div>
-
-                    <div class="mb-3" id="civilStatusField" style="display: none;">
-                        <input type="text" class="form-control" id="civilStatusInput" />
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="middleName" placeholder="Middle Name">
                     </div>
-
-                    <div class="mb-3" id="emailField" style="display: none;">
-                        <input type="email" class="form-control" id="emailInput" />
-                    </div>
-
                     <div class="text-end">
-                        <button type="button" class="btn btn-sm btn-primary" id="saveEditBtn">Save</button>
+                        <button type="button" class="btn btn-sm btn-primary" id="updateNameBtn">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="locationModalLabel">Edit Location</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <input type="text" id="locationInput" class="form-control" placeholder="Enter new location">
+                </div>
+                <div class="text-end">
+                    <button type="button" id="locUpdateBtn" class="btn btn-sm btn-primary">Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editCivilStatusModal" tabindex="-1" aria-labelledby="editCivilStatusModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editCivilStatusModalLabel">Edit Civil Status</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <input type="text" id="civilStatusInput" class="form-control" placeholder="Enter new civil status">
+                </div>
+                <div class="text-end">
+                    <button type="button" id="saveCivilStatusBtn" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="emailEditModal" tabindex="-1" aria-labelledby="emailEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="emailEditModalLabel">Edit Email</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="emailEditForm">
+                    <div class="mb-3">
+                        <!-- Input field for email -->
+                        <input type="email" class="form-control" id="newEmail" required>
+                    </div>
+                    <div class="text-end">
+                        <button type="button" id="updateEmailBtn" class="btn btn-sm btn-primary">Update</button>
                     </div>
                 </form>
             </div>

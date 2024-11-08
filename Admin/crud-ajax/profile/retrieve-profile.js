@@ -1,6 +1,6 @@
 $(document).ready(function() {
     // Dynamically retrieve and display the uploaded profile picture on page load
-    let userId = $('#camera-icon').data('user-id'); // Get user ID from the camera icon's data attribute
+    let userId = $('#user-profile').data('user-id'); // Get user ID from the camera icon's data attribute
     retrieveProfilePicture(userId);
 });
 
