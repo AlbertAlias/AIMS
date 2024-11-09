@@ -17,9 +17,9 @@
     justify-content: center;
 }
 
-span[id^="users-"] {
+/* span[id^="users-"] {
     display: inline-block;
-}
+} */
 
 .password-dots {
     display: inline;
@@ -32,7 +32,6 @@ span[id^="users-"] {
 }
 
 #oldPasswordFeedback {
-    position: absolute;
     top: 5px;   /* Adjust this to move the feedback above the input */
     right: 0;     /* Align the feedback message to the right side */
     font-size: 12px; /* Smaller font size for the feedback */
@@ -40,7 +39,6 @@ span[id^="users-"] {
 }
 
 #passwordFeedback {
-    position: absolute;
     top: 195px;  /* Position feedback above the Confirm Password field */
     right: 20px;
     font-size: 12px;

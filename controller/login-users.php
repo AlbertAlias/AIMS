@@ -13,7 +13,7 @@
             exit();
         }
 
-        session_start();
+        session_start(); // Start session
 
         // Check if the email exists in the users table
         $stmt = $conn->prepare("SELECT u.id, u.password, u.account_email, u.user_type, d.department_name 
