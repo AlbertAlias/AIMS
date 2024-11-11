@@ -20,8 +20,8 @@
 }
 
 #profile-picture {
-    width: 140px;
-    height: 140px;
+    width: 145px;
+    height: 145px;
     object-fit: cover;
     border-radius: 50%;
 }
