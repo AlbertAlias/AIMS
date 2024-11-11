@@ -1,5 +1,15 @@
-$(document).ready(function () {
-    $('#coorUpdateBtn').off('click').on('click', function () {
+$(document).ready(function() {
+    // Intercept Enter key press
+    $('#coordinatorForm').on('keypress', function(event) {
+        if (event.which === 13) {  // 13 is the Enter key
+            event.preventDefault();  // Prevent form submission on Enter key
+
+            // Trigger the update button click
+            $('#coorUpdateBtn').click();
+        }
+    });
+
+    $('#coorUpdateBtn').off('click').on('click', function() {
         $('#coordinatorForm input, #coordinatorForm select').prop('disabled', false);
         console.log('Update button clicked');
 

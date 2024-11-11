@@ -1,11 +1,30 @@
 document.addEventListener('DOMContentLoaded', function() {
     const departmentForm = document.getElementById('departmentForm');
     const updateBtn = document.getElementById('deptUpdateBtn');
+    const departmentNameInput = document.getElementById('departmentName');
+    const departmentHeadInput = document.getElementById('departmentHead');
 
     if (!departmentForm || !(departmentForm instanceof HTMLFormElement)) {
         console.error('Department form not found or is not an HTMLFormElement.');
         return;
     }
+
+    // Function to trigger the Update button click
+    function triggerUpdateButtonClick() {
+        if (updateBtn && updateBtn.style.display !== 'none') {
+            updateBtn.click();
+        }
+    }
+
+    // Event listener to handle Enter key press
+    [departmentNameInput, departmentHeadInput].forEach(inputField => {
+        inputField.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent form submission on Enter
+                triggerUpdateButtonClick(); // Trigger update button click
+            }
+        });
+    });
 
     if (updateBtn) {
         updateBtn.addEventListener('click', function(event) {
@@ -27,7 +46,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data.success) {
                     console.log('Department updated successfully');
 
-                    // SweetAlert2 toast for success with light green container
                     Swal.fire({
                         toast: true,
                         position: 'top-right',
@@ -35,31 +53,24 @@ document.addEventListener('DOMContentLoaded', function() {
                         title: 'Department updated successfully',
                         showConfirmButton: false,
                         timer: 3000,
-                        background: '#b9f6ca', // Light green container background
-                        iconColor: '#2e7d32', // Darker green icon
+                        background: '#b9f6ca',
+                        iconColor: '#2e7d32',
                         color: '#155724',
                         customClass: {
                             popup: 'mt-5'
                         }
                     });
 
-                    // Call the function to refresh the department list
                     if (typeof refreshDepartmentList === 'function') {
                         refreshDepartmentList();
-                    } else {
-                        console.error('refreshDepartmentList function is not available');
                     }
 
                     if (typeof window.resetAndLockForm === 'function') {
-                        console.log('Calling resetAndLockForm');
                         window.resetAndLockForm();
-                    } else {
-                        console.error('resetAndLockForm function is not available');
                     }
                 } else {
                     console.error('Error updating department: ' + data.message);
 
-                    // SweetAlert2 toast for error with darker red containerz
                     Swal.fire({
                         toast: true,
                         position: 'top-right',
@@ -67,11 +78,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         title: 'Error: ' + data.message,
                         showConfirmButton: false,
                         timer: 3000,
-                        background: '#f8bbd0', // Darker red container background
-                        iconColor: '#c62828', // Darker red icon
+                        background: '#f8bbd0',
+                        iconColor: '#c62828',
                         color: '#721c24',
                         customClass: {
-                            popup: 'mt-5' // Bootstrap margin-top of 4
+                            popup: 'mt-5'
                         }
                     });
                 }
@@ -79,7 +90,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => {
                 console.error('Error:', error);
 
-                // SweetAlert2 toast for unexpected errors with darker red container
                 Swal.fire({
                     toast: true,
                     position: 'top-right',
@@ -87,11 +97,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     title: 'An unexpected error occurred',
                     showConfirmButton: false,
                     timer: 3000,
-                    background: '#f8bbd0', // Darker red container background
-                    iconColor: '#c62828', // Darker red icon
+                    background: '#f8bbd0',
+                    iconColor: '#c62828',
                     color: '#721c24',
                     customClass: {
-                        popup: 'mt-5' // Bootstrap margin-top of 4
+                        popup: 'mt-5'
                     }
                 });
             });

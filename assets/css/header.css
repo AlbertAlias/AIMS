@@ -77,3 +77,19 @@
     height: 2rem;
     width: 2rem;
 }
+
+#profile-container {
+    width: 40px; /* Or 40px for header */
+    height: 40px; /* Or 40px for header */
+    background-color: #dedede;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#default-header-icon {
+    font-size: 30px; /* Reduced for smaller container */
+    transform: translateY(5px); /* Adjust downward if needed */
+}

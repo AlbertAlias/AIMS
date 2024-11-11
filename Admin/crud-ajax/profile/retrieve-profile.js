@@ -13,9 +13,8 @@ function retrieveProfilePicture(userId) {
         dataType: 'json',
         success: function(response) {
             if (response && response.profile_picture) {
-                // Hide initials placeholder
-                $('#profile-initials-placeholder').hide();
-                
+                // Hide default profile icon and show the uploaded image
+                $('#default-profile-icon').hide();
                 // Construct the image path
                 let imagePath = 'controller/profile/uploads/' + response.profile_picture;
                 
@@ -31,7 +30,8 @@ function retrieveProfilePicture(userId) {
                 });
             } else {
                 console.warn('No profile picture found, displaying initials instead.');
-                $('#profile-initials-placeholder').show(); // Show initials if picture is missing
+                $('#default-profile-icon').show(); // Show the default icon if no picture is found
+                $('#profile-picture').hide(); // Hide the profile picture if it doesn't exist
             }
         },
         error: function() {

@@ -15,8 +15,8 @@
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="d-flex align-items-center">
-                    <div id="profile-initials" class="img-profile rounded-circle" style="width: 40px; height: 40px; background-color: #ccc; color: white; display: flex; align-items: center; justify-content: center; font-size: 18px;">
-                         <!-- This will be updated by JS -->
+                    <div id="profile-container" class="img-profile rounded-circle">
+                        <i class="fa-solid fa-user" id="default-header-icon" style="color: gray;"></i>
                     </div>
                 </div>
             </a>

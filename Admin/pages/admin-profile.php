@@ -3,15 +3,15 @@
     <div class="col-md-9 col-12">
         <div class="bg-light rounded-3 px-2" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
             <div class="row">
-                <!-- Profile Picture Section on the Left Side -->
                 <div class="col-md-4 d-flex flex-column align-items-center py-4" style="border-right: 2px solid #ddd;">
-                    <div style="position: relative;">
-                        <img id="profile-picture" src="" alt="Profile Picture" class="rounded-circle" style="display: none; width: 148px; height: 145px; object-fit: cover;">
-                        <span id="profile-initials-placeholder" class="initials-placeholder" style="display: none;"></span>
-                        <i class="fa-solid fa-camera" id="user-profile" data-user-id="<?php echo $_SESSION['user_id']; ?>" style="position: absolute; bottom: 8px; right: 6px; font-size: 20px; color: white; background-color: dimgray; border-radius: 50%; padding: 6px;"></i>
+                    <div class="profile-wrapper" style="position: relative;">
+                        <div id="profile-picture-container">
+                            <i class="fa-solid fa-user" id="default-profile-icon" style="color: gray;"></i>
+                            <img id="profile-picture" src="" alt="Profile Picture" class="rounded-circle" style="display: none;">
+                        </div>
+                        <i class="fa-solid fa-camera" id="user-profile" data-user-id="<?php echo $_SESSION['user_id']; ?>"></i>
                         <input type="file" id="profile-picture-input" accept="image/png, image/jpeg" style="display: none;">
                     </div>
-
                     <!-- Sidebar Navigation -->
                     <div class="mt-3 w-100">
                         <div class="list-group">

@@ -1,3 +1,48 @@
+.profile-wrapper {
+    position: relative; /* Enables absolute positioning within the wrapper */
+    display: inline-block; /* Shrinks wrapper size to fit the profile picture container */
+}
+
+#profile-picture-container {
+    width: 150px;
+    height: 150px;
+    background-color: #dedede;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#default-profile-icon {
+    font-size: 130px; /* Reduce icon size */
+    transform: translateY(20px); /* Adjust downward if needed */
+}
+
+#profile-picture {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#user-profile {
+    position: absolute;
+    top: 73%; /* Position below the profile picture container */
+    right: 25px; /* Align it to the right edge */
+    font-size: 20px;
+    color: white;
+    background-color: rgb(143, 143, 143);
+    border-radius: 50%;
+    padding: 6px;
+    cursor: pointer;
+    transform: translateX(50%); /* Slightly shift to center it horizontally on the right side */
+}
+
+#user-profile:hover {
+    background-color: rgb(170, 170, 170);
+}
+
 .list-group-item.active {
     background-color: #198754 !important;
     color: white;
@@ -17,30 +62,20 @@
     justify-content: center;
 }
 
-/* span[id^="users-"] {
-    display: inline-block;
-} */
-
-.password-dots {
-    display: inline;
-    font-size: 0.85em; /* Adjust this size as needed */
-}
-
-.btn {
-    display: inline-flex; /* Ensure the button is always inline-flex */
-    align-items: center;  /* Center align items in the button */
-}
-
 #oldPasswordFeedback {
-    top: 5px;   /* Adjust this to move the feedback above the input */
-    right: 0;     /* Align the feedback message to the right side */
-    font-size: 12px; /* Smaller font size for the feedback */
+    top: 5px;
+    right: 0;
+    font-size: 12px;
     font-weight: bold;
 }
 
 #passwordFeedback {
-    top: 195px;  /* Position feedback above the Confirm Password field */
+    top: 195px;
     right: 20px;
     font-size: 12px;
     font-weight: bold;
+}
+
+.modal-backdrop.show {
+    background-color: rgba(0, 0, 0, 0.5);
 }

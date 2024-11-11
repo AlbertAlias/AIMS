@@ -1,4 +1,12 @@
 $(document).ready(function () {
+    // Prevent the Enter key from submitting the form
+    $('#adminsForm').on('keypress', function (e) {
+        if (e.which === 13) {  // Enter key code
+            e.preventDefault();
+            $('#adminUpdateBtn').click();  // Trigger the Update button click manually
+        }
+    });
+
     $('#adminUpdateBtn').off('click').on('click', function () {
         console.log('Update button clicked');
         const adminID = $('#adminID').val();
