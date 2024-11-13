@@ -4,6 +4,8 @@
         header('Location: index.php');
         exit();
     }
+    $developerEmail = 'admin@aims.edu.ph';
+    $isDeveloper = $_SESSION['email'] === $developerEmail;
 ?>
 
 <!DOCTYPE html>
@@ -86,6 +88,7 @@
                     <?php include "pages/dashboard.php"; ?>
                     <?php include "pages/departments.php"; ?>
                     <?php include "pages/coordinators.php"; ?>
+                    <?php include "pages/interns.php"; ?>
                     <?php include "pages/sub-admins.php"; ?>
                     <?php include "pages/admin-profile.php"; ?>
                 </div>
@@ -125,6 +128,17 @@
     <script src="functions/coordinators/contact-number.js"></script>
     <script src="crud-ajax/coordinators/update-coor.js"></script>
     <script src="crud-ajax/coordinators/delete-coor.js"></script>
+
+    <!-- <script src="crud-ajax/interns/retrieve-interns.js"></script> -->
+    <!-- <script src="crud-ajax/interns/retrieve-intern-deptsName.js"></script> -->
+    <script src="functions/interns/intern-form-enable.js"></script>
+    <!-- <script src="crud-ajax/interns/retrieve-intern-info.js"></script> -->
+    <script src="crud-ajax/interns/create-upload-interns.js"></script>
+    <script src="functions/interns/drag-drop-files.js"></script>
+    <!-- <script src="functions/interns/intern-email.js"></script> -->
+    <!-- <script src="functions/interns/studID.js"></script> -->
+    <script src="functions/interns/internPass.js"></script>
+    <script src="crud-ajax/interns/update-interns.js"></script>
 
     <script src="crud-ajax/admins/create-admins.js"></script>
     <script src="crud-ajax/admins/retrieve-admin-details.js"></script>
