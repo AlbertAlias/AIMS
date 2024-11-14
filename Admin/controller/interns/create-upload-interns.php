@@ -2,12 +2,11 @@
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 
-    include '../../../../dbconn.php';
+    include '../../../dbconn.php';
 
     spl_autoload_register(function ($class) {
         $prefix = 'PhpOffice\\PhpSpreadsheet\\';
-        $base_dir = __DIR__ . '/../../../../libraries/PhpSpreadsheet-3.3.0/src/PhpSpreadsheet/';
-
+        $base_dir = __DIR__ . '/../../../libraries/PhpSpreadsheet-3.3.0/src/PhpSpreadsheet/';
         $len = strlen($prefix);
         if (strncmp($prefix, $class, $len) === 0) {
             $relative_class = substr($class, $len);
@@ -19,7 +18,7 @@
         }
 
         $psr_prefix = 'Psr\\SimpleCache\\';
-        $psr_base_dir = __DIR__ . '/../../../../libraries/Psr/simple-cache-master/src/';
+        $psr_base_dir = __DIR__ . '/../../../libraries/Psr/simple-cache-master/src/';
         $psr_len = strlen($psr_prefix);
         if (strncmp($psr_prefix, $class, $psr_len) === 0) {
             $relative_class = substr($class, $psr_len);
@@ -69,42 +68,59 @@
             if ($row['A'] == 'last_name' || (empty(array_filter($row, fn($value) => !is_null($value) && trim($value) !== '')))) {
                 continue;
             }
-            
+
             // Data extraction with null checks and trimming of whitespace
             $last_name = isset($row['A']) && trim($row['A']) !== '' ? $conn->real_escape_string(trim($row['A'])) : null;
             $first_name = isset($row['B']) && trim($row['B']) !== '' ? $conn->real_escape_string(trim($row['B'])) : null;
-            $middle_name = isset($row['C']) && trim($row['C']) !== '' ? $conn->real_escape_string(trim($row['C'])) : null;
-            $suffix = isset($row['D']) && trim($row['D']) !== '' ? $conn->real_escape_string(trim($row['D'])) : null;
             $gender = isset($row['E']) && trim($row['E']) !== '' ? $conn->real_escape_string(trim($row['E'])) : null;
-            $address = isset($row['F']) && trim($row['F']) !== '' ? $conn->real_escape_string(trim($row['F'])) : null;
-            $birthdate = isset($row['G']) && trim($row['G']) !== '' ? date('Y-m-d', strtotime($row['G'])) : null;
-            $civil_status = isset($row['H']) && trim($row['H']) !== '' ? $conn->real_escape_string(trim($row['H'])) : null;
-            $personal_email = isset($row['I']) && trim($row['I']) !== '' ? $conn->real_escape_string(trim($row['I'])) : null;
-            $contact_number = isset($row['J']) && trim($row['J']) !== '' ? $conn->real_escape_string(trim($row['J'])) : null;
             $studentID = isset($row['K']) && trim($row['K']) !== '' ? $conn->real_escape_string(trim($row['K'])) : null;
             $department_name = isset($row['L']) && trim($row['L']) !== '' ? trim($row['L']) : null;
             $department_id = $department_map[$department_name] ?? null;
-            $account_email = isset($row['M']) && trim($row['M']) !== '' ? $conn->real_escape_string(trim($row['M'])) : null;
+            $username = isset($row['M']) && trim($row['M']) !== '' ? $conn->real_escape_string(trim($row['M'])) : null;
             $password = isset($row['N']) && trim($row['N']) !== '' ? password_hash(trim($row['N']), PASSWORD_BCRYPT) : null;
             $user_type = 'intern';
         
             // Check if required fields are present
-            if ($last_name && $first_name && $account_email && $password) {
-                // Insert into users table
-                $sql = "INSERT INTO users (last_name, first_name, middle_name, suffix, gender, address, birthdate, civil_status, personal_email, contact_number, department_id, account_email, password, user_type) 
-                        VALUES ('$last_name', '$first_name', '$middle_name', '$suffix', '$gender', '$address', '$birthdate', '$civil_status', '$personal_email', '$contact_number', '$department_id', '$account_email', '$password', '$user_type')";
-        
-                if ($conn->query($sql) === TRUE) {
-                    $user_id = $conn->insert_id;
-        
-                    // Insert into interns table
-                    $sql_interns = "INSERT INTO interns (user_id, studentID) VALUES ($user_id, '$studentID')";
-                    if ($conn->query($sql_interns) !== TRUE) {
-                        echo json_encode(['error' => 'Error inserting into interns table: ' . $conn->error]);
+            if ($last_name && $first_name && $username && $password) {
+                // Fetch coordinator's initials
+                $coor_sql = "SELECT last_name, first_name FROM coordinators WHERE department_id = $department_id LIMIT 1";
+                $coor_result = $conn->query($coor_sql);
+                if ($coor_result->num_rows > 0) {
+                    $coor_row = $coor_result->fetch_assoc();
+                    $coor_last_name = $coor_row['last_name'];
+                    $coor_first_name = $coor_row['first_name'];
+
+                    // Generate intern_id using the coordinator's initials
+                    $intern_id = strtoupper(substr($coor_last_name, 0, 1) . substr($coor_first_name, 0, 1) . str_pad(rand(1, 999), 3, '0', STR_PAD_LEFT));
+
+                    // Insert into users table
+                    $sql = "INSERT INTO users (last_name, first_name, gender, department_id, username, password, user_type) 
+                            VALUES ('$last_name', '$first_name', '$gender', '$department_id', '$username', '$password', '$user_type')";
+            
+                    if ($conn->query($sql) === TRUE) {
+                        $user_id = $conn->insert_id;
+
+                        // Insert into interns table with intern_id
+                        $sql_interns = "INSERT INTO interns (user_id, studentID, intern_id) VALUES ($user_id, '$studentID', '$intern_id')";
+                        if ($conn->query($sql_interns) !== TRUE) {
+                            echo json_encode(['error' => 'Error inserting into interns table: ' . $conn->error]);
+                            exit;
+                        }
+
+                        // Insert intern_id into coordinators table
+                        $intern_id = strtoupper(substr($coor_last_name, 0, 1) . substr($coor_first_name, 0, 1));
+
+                        $sql_coor = "UPDATE coordinators SET intern_id = '$intern_id' WHERE department_id = $department_id";
+                        if ($conn->query($sql_coor) !== TRUE) {
+                            echo json_encode(['error' => 'Error updating coordinators table: ' . $conn->error]);
+                            exit;
+                        }
+                    } else {
+                        echo json_encode(['error' => 'Error inserting into users table: ' . $conn->error]);
                         exit;
                     }
                 } else {
-                    echo json_encode(['error' => 'Error inserting into users table: ' . $conn->error]);
+                    echo json_encode(['error' => 'Coordinator not found for department: ' . $department_name]);
                     exit;
                 }
             } else {
