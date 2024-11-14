@@ -2,18 +2,18 @@
 session_start();
 require '../../../dbconn.php';
 
-if (isset($_SESSION['email'])) {
-    $email = $_SESSION['email'];
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
 
     // Prepare and execute the query
     $stmt = $conn->prepare(
         "SELECT users.first_name, users.last_name 
                 FROM admins 
                 INNER JOIN users ON admins.user_id = users.id 
-                WHERE users.account_email = ?
+                WHERE users.username = ?
     ");
     
-    $stmt->bind_param('s', $email);
+    $stmt->bind_param('s', $username);
     $stmt->execute();
     $stmt->bind_result($first_name, $last_name);
     $stmt->fetch();

@@ -3,7 +3,7 @@ $(document).ready(function() {
         e.preventDefault(); // Prevent form submission
 
         // Get form data
-        var email = $('#email').val();
+        var username = $('#username').val();
         var password = $('#password').val();
 
         // AJAX request
@@ -11,7 +11,7 @@ $(document).ready(function() {
             url: '../controller/login-users.php',
             type: 'POST',
             data: {
-                email: email,
+                username: username,
                 password: password
             },
             dataType: 'json',

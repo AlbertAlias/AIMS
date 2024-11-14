@@ -70,14 +70,14 @@
                     <div id="account-info" style="display: none;">
                         <h6 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Account Settings</h6>
                         <form>
-                            <!-- Account Email (New Section) -->
+                            <!-- Username (New Section) -->
                             <div class="mb-3 d-flex justify-content-between align-items-center">
-                                <label class="form-label" for="account-email" style="flex-grow: 1;">
+                                <label class="form-label" for="username" style="flex-grow: 1;">
                                     <i class="fa-solid fa-envelope fa-lg" style="color: #198754;"></i>
-                                    <span id="users-account-email"></span>
-                                    <input type="email" id="account-email-input" class="form-control form-control-sm" style="display: none;" value="">
+                                    <span id="users-username"></span>
+                                    <input type="text" id="username-input" class="form-control form-control-sm" style="display: none;" value="">
                                 </label>
-                                <button type="button" id="editAccountEmailBtn" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#editAccountEmailModal">
+                                <button type="button" id="editUsernameBtn" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#editUsernameModal">
                                     <i class="fa-solid fa-pen"></i> Edit
                                 </button>
                             </div>
@@ -192,16 +192,16 @@
     </div>
 </div>
 
-<!-- Modal for Account Email -->
-<div class="modal fade" id="editAccountEmailModal" tabindex="-1" aria-labelledby="editAccountEmailModalLabel" aria-hidden="true">
+<!-- Modal for Username -->
+<div class="modal fade" id="editUsernameModal" tabindex="-1" aria-labelledby="editUsernameModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editAccountEmailModalLabel">Edit Account Email</h5>
+                <h5 class="modal-title" id="editUsernameModalLabel">Edit Username</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="email" class="form-control" id="editAccountEmailInput" placeholder="Enter new account email">
+                <input type="text" class="form-control" id="editUsernameInput" placeholder="Enter new username">
                 <div class="d-flex justify-content-end mt-3">
                     <button type="button" class="btn btn-sm btn-primary">Update</button>
                 </div>

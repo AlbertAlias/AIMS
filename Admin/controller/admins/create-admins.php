@@ -10,25 +10,25 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $data = json_decode(file_get_contents('php://input'), true);
 
-        if (empty($data['last_name']) || empty($data['first_name']) || empty($data['employee_number']) || empty($data['address']) || empty($data['personal_email']) || empty($data['account_email']) || empty($data['password']) || empty($data['user_type'])) {
+        if (empty($data['last_name']) || empty($data['first_name']) || empty($data['employee_number']) || empty($data['address']) || empty($data['personal_email']) || empty($data['username']) || empty($data['password']) || empty($data['user_type'])) {
             echo json_encode(['success' => false, 'message' => 'All fields are required.']);
             exit;
         }
 
-        $stmt = $conn->prepare("SELECT * FROM users WHERE account_email = ?");
-        $stmt->bind_param("s", $data['account_email']);
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->bind_param("s", $data['username']);
         $stmt->execute();
         $result = $stmt->get_result();
         
         if ($result->num_rows > 0) {
-            echo json_encode(['success' => false, 'message' => 'User with this email already exists.']);
+            echo json_encode(['success' => false, 'message' => 'User with this username already exists.']);
             exit;
         }
         $stmt->close();
 
         $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
 
-        $stmt = $conn->prepare("INSERT INTO users (last_name, first_name, middle_name, suffix, address, employee_number, personal_email, account_email, password, user_type)
+        $stmt = $conn->prepare("INSERT INTO users (last_name, first_name, middle_name, suffix, address, employee_number, personal_email, username, password, user_type)
                                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         if ($stmt === false) {
             echo json_encode(['success' => false, 'message' => 'Failed to prepare the SQL statement for users.']);
@@ -37,7 +37,7 @@
 
         $stmt->bind_param('ssssssssss',
             $data['last_name'], $data['first_name'], $data['middle_name'], $data['suffix'],
-            $data['address'], $data['employee_number'], $data['personal_email'], $data['account_email'], $hashedPassword,
+            $data['address'], $data['employee_number'], $data['personal_email'], $data['username'], $hashedPassword,
             $data['user_type']
         );
 

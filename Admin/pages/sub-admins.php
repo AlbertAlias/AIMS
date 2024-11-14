@@ -85,8 +85,8 @@
                 <div class="text-gray-800">
                     <form id="admin_accountForm">
                         <div class="mb-3">
-                            <label for="admin_account_email" class="form-label required-asterisk">Account Email <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" id="admin_account_email" name="admin_account_email" required disabled>
+                            <label for="admin_username" class="form-label required-asterisk">Username <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="admin_username" name="admin_username" required disabled>
                         </div>
                         <div class="mb-3">
                             <label for="admin_password" class="form-label required-asterisk">Password <span class="text-danger">*</span></label>

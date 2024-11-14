@@ -37,7 +37,7 @@ $(document).ready(function() {
                 $('#coor_personal_email').val(response.personal_email).prop('disabled', false);
                 $('#coor_employee_number').val(response.employee_number).prop('disabled', false);  // New field
                 $('#coor_department').val(response.department_id).prop('disabled', false);
-                $('#coor_account_email').val(response.account_email).prop('disabled', true);
+                $('#coor_username').val(response.username).prop('disabled', true);
                 $('#coor_password').val(response.password).prop('disabled', true);
                 $('#coorUpdateBtn').prop('disabled', false);
             },

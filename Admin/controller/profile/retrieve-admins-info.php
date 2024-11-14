@@ -3,20 +3,20 @@
     require '../../../dbconn.php';
 
     // Ensure the user is logged in
-    if (!isset($_SESSION['email'])) {
+    if (!isset($_SESSION['username'])) {
         echo json_encode(['status' => 'error', 'message' => 'User not logged in']);
         exit();
     }
 
-    $user_email = $_SESSION['email'];
+    $user_username = $_SESSION['username'];
 
     // Check if oldPassword is being sent (indicating password verification request)
     if (isset($_POST['oldPassword'])) {
         $old_password = $_POST['oldPassword']; // Get the old password from the form
 
         // Fetch the hashed password from the database
-        $stmt = $conn->prepare("SELECT password FROM users WHERE account_email = ?");
-        $stmt->bind_param('s', $user_email);
+        $stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
+        $stmt->bind_param('s', $user_username);
         $stmt->execute();
         $stmt->store_result();
 
@@ -37,13 +37,13 @@
     }
 
     // If not a password verification request, fetch user details
-    $stmt = $conn->prepare("SELECT last_name, first_name, middle_name, suffix, address, civil_status, personal_email, account_email, password FROM users WHERE account_email = ?");
-    $stmt->bind_param('s', $user_email);
+    $stmt = $conn->prepare("SELECT last_name, first_name, middle_name, suffix, address, civil_status, personal_email, username, password FROM users WHERE username = ?");
+    $stmt->bind_param('s', $user_username);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($last_name, $first_name, $middle_name, $suffix, $address, $civil_status, $personal_email, $account_email, $hashed_password);
+        $stmt->bind_result($last_name, $first_name, $middle_name, $suffix, $address, $civil_status, $personal_email, $username, $hashed_password);
         $stmt->fetch();
 
         // Combine names and handle the suffix being optional
@@ -68,7 +68,7 @@
             'address' => $address,
             'civil_status' => $civil_status,
             'personal_email' => $personal_email,
-            'account_email' => $account_email
+            'username' => $username
         ]);
     } else {
         echo json_encode(['status' => 'error', 'message' => 'User not found']);

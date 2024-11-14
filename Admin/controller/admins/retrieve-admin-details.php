@@ -9,7 +9,7 @@
     if (isset($_GET['id'])) {
         $admin_id = intval($_GET['id']);
         $query = "SELECT u.id, u.last_name, u.first_name, u.middle_name, u.suffix, u.address, u.civil_status, u.personal_email, 
-                        u.account_email, u.password, u.user_type, u.employee_number
+                        u.username, u.password, u.user_type, u.employee_number
                 FROM users u JOIN admins a ON u.id = a.user_id WHERE a.id = ?";
         
         if ($stmt = $conn->prepare($query)) {

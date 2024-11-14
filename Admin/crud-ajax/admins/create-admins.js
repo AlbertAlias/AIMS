@@ -12,12 +12,12 @@ document.getElementById('adminSubmitBtn').addEventListener('click', function (ev
     const address = document.getElementById('admin_address').value;
     const employee_number = document.getElementById('admin_employee_number').value;
     const personal_email = document.getElementById('admin_personal_email').value;
-    const account_email = document.getElementById('admin_account_email').value;
+    const username = document.getElementById('admin_username').value;
     const password = document.getElementById('admin_password').value;
     const user_type = document.getElementById('user_type').value;
 
     // Check for empty required fields
-    if (!last_name || !first_name || !employee_number || !address || !personal_email || !account_email || !password || !user_type) {
+    if (!last_name || !first_name || !employee_number || !address || !personal_email || !username || !password || !user_type) {
         Swal.fire({
             toast: true,
             position: 'top-end',
@@ -44,7 +44,7 @@ document.getElementById('adminSubmitBtn').addEventListener('click', function (ev
         address,
         employee_number,
         personal_email,
-        account_email,
+        username,
         password,
         user_type
     };

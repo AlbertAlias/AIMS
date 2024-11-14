@@ -10,17 +10,18 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
     const first_name = document.getElementById('coor_first_name').value;
     const middle_name = document.getElementById('coor_middle_name').value;
     const suffix = document.getElementById('coor_suffix').value;
-    const employee_number = document.getElementById('coor_employee_number').value; // New field
+    const employee_number = document.getElementById('coor_employee_number').value;
     const address = document.getElementById('coor_address').value;
     const civil_status = document.getElementById('coor_civil_status').value;
     const personal_email = document.getElementById('coor_personal_email').value;
+    const coor_code = document.getElementById('coor_code').value;
     const department_id = document.getElementById('coor_department').value;
-    const account_email = document.getElementById('coor_account_email').value;
+    const username = document.getElementById('coor_username').value;
     const password = document.getElementById('coor_password').value;
 
     // Validation for required fields
     if (!last_name || !first_name || !employee_number || !address || !civil_status ||
-        !personal_email || !department_id || !account_email || !password) {
+        !personal_email || !coor_code || !department_id || !username || !password) {
         Swal.fire({
             toast: true,
             position: 'top-end',
@@ -43,12 +44,13 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
         first_name,
         middle_name,
         suffix,
-        employee_number, // New field
+        employee_number,
         address,
         civil_status,
         personal_email,
+        coor_code,
         department_id,
-        account_email,
+        username,
         password
     };
 
@@ -59,7 +61,12 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
         },
         body: JSON.stringify(data)
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
         if (data.success) {
             Swal.fire({
@@ -78,7 +85,6 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
             });
             resetAndLockForms();
             window.loadCoor();
-            coorSubmitBtn.disabled = true;
         } else {
             Swal.fire({
                 toast: true,
@@ -87,8 +93,8 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
                 title: data.message,
                 showConfirmButton: false,
                 timer: 3000,
-                background: '#f8d7da',
-                iconColor: '#721c24',
+                background: '#f8bbd0',
+                iconColor: '#c62828',
                 color: '#721c24',
                 customClass: {
                     popup: 'mt-5'
@@ -105,8 +111,8 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
             title: 'There was an error with the AJAX request.',
             showConfirmButton: false,
             timer: 3000,
-            background: '#f8d7da',
-            iconColor: '#721c24',
+            background: '#f8bbd0',
+            iconColor: '#c62828',
             color: '#721c24',
             customClass: {
                 popup: 'mt-5'

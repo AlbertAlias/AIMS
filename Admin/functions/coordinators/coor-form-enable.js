@@ -32,7 +32,7 @@ if (document.getElementById('coordinatorForm')) {
             '#coor_civil_status',
             '#coor_personal_email',
             '#coor_contact_number',
-            '#coor_account_email',
+            '#coor_username',
             '#coor_department'
         ];
         
@@ -51,8 +51,10 @@ if (document.getElementById('coordinatorForm')) {
         if (coordinatorForm) {
             coordinatorForm.reset();
             document.querySelectorAll('#coordinatorForm input, #coordinatorForm select').forEach(el => {
-                el.disabled = false;
-                $(el).on('input change', toggleUpdateButton);
+                if (el.id !== 'coor_code') { // Exclude coor_code from being enabled
+                    el.disabled = false;
+                    $(el).on('input change', toggleUpdateButton);
+                }
             });
         }
     
@@ -119,7 +121,7 @@ if (document.getElementById('coordinatorForm')) {
         }
     
         if (submitBtn) {
-            submitBtn.disabled = true; // Disable by default
+            submitBtn.disabled = true;
             submitBtn.style.display = 'inline-block';
         }
     

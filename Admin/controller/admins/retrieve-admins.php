@@ -6,13 +6,13 @@
     header('Content-Type: application/json');
     include '../../../dbconn.php';
 
-    // Use the session email to exclude the logged-in user
-    $loggedInEmail = $_SESSION['email'];
+    // Use the session username to exclude the logged-in user
+    $loggedInEmail = $_SESSION['username'];
 
     $sql = "SELECT a.id, u.last_name, u.first_name
             FROM admins a
             JOIN users u ON a.user_id = u.id
-            WHERE u.account_email != ?";
+            WHERE u.username != ?";
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $loggedInEmail); // Exclude the logged-in email

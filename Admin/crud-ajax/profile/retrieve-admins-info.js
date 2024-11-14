@@ -3,7 +3,7 @@ $(document).ready(function() {
     $.ajax({
         url: 'controller/profile/retrieve-admins-info.php',
         type: 'POST',
-        data: { email: '<?php echo $_SESSION["email"]; ?>' },
+        data: { username: '<?php echo $_SESSION["username"]; ?>' },
         success: function(response) {
             var userInfo = JSON.parse(response);
             if (userInfo.status === 'success') {
@@ -12,7 +12,7 @@ $(document).ready(function() {
                 $('#users-location').text(userInfo.address);
                 $('#users-civil-status').text(userInfo.civil_status);
                 $('#users-email').text(userInfo.personal_email);
-                $('#users-account-email').text(userInfo.account_email);
+                $('#users-username').text(userInfo.username);
 
                 // Populate modal fields with user information
                 $('#editLastNameInput').val(userInfo.last_name);
@@ -22,7 +22,7 @@ $(document).ready(function() {
                 $('#editLocationInput').val(userInfo.address);
                 $('#editCivilStatusInput').val(userInfo.civil_status);
                 $('#editEmailInput').val(userInfo.personal_email);
-                $('#editAccountEmailInput').val(userInfo.account_email);
+                $('#editUsernameInput').val(userInfo.username);
             } else {
                 $('#users-name').text('User not found');
             }

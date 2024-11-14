@@ -37,8 +37,8 @@
                     <!-- Login Form -->
                     <form id="loginForm">
                         <div class="form-control-wrapper">
-                            <input type="email" class="form-control" id="email" placeholder=" " required>
-                            <label for="email">Email</label>
+                            <input type="text" class="form-control" id="username" placeholder=" " required>
+                            <label for="username">Username</label>
                         </div>
                         <div class="form-control-wrapper password-wrapper">
                             <input type="password" class="form-control" id="password" placeholder=" " required>

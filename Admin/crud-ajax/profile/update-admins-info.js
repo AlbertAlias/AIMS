@@ -7,7 +7,7 @@ $(document).ready(function() {
         var location = $('#editLocationInput').val();
         var civilStatus = $('#editCivilStatusInput').val();
         var personalEmail = $('#editEmailInput').val();
-        var accountEmail = $('#editAccountEmailInput').val();
+        var userName = $('#editUsernameInput').val();
         
         if (lastName == "" || firstName == "") {
             Swal.fire({
@@ -29,7 +29,7 @@ $(document).ready(function() {
                 address: location,
                 civil_status: civilStatus,
                 personal_email: personalEmail,
-                account_email: accountEmail
+                username: userName
             },
             success: function(response) {
                 var res = JSON.parse(response);
@@ -53,7 +53,7 @@ $(document).ready(function() {
                     $('#editLocationModal').modal('hide');
                     $('#editCivilStatusModal').modal('hide');
                     $('#editEmailModal').modal('hide');
-                    $('#editAccountEmailModal').modal('hide');
+                    $('#editUsernameModal').modal('hide');
                     // Refresh user info
                     refreshUserInfo();
                     loadAdmins();
@@ -81,7 +81,7 @@ function refreshUserInfo() {
     $.ajax({
         url: 'controller/profile/retrieve-admins-info.php',
         type: 'POST',
-        data: { email: '<?php echo $_SESSION["email"]; ?>' },
+        data: { username: '<?php echo $_SESSION["username"]; ?>' },
         success: function(response) {
             var userInfo = JSON.parse(response);
             if (userInfo.status === 'success') {
@@ -89,7 +89,7 @@ function refreshUserInfo() {
                 $('#users-location').text(userInfo.address);
                 $('#users-civil-status').text(userInfo.civil_status);
                 $('#users-email').text(userInfo.personal_email);
-                $('#users-account-email').text(userInfo.account_email);
+                $('#users-username').text(userInfo.username);
                 $('#welcomeAdmin').html(`
                     <span class="fw-bold text-dark bg-light">Welcome</span> 
                     <span>${userInfo.last_name} ${userInfo.first_name}</span>

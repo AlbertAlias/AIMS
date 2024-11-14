@@ -23,13 +23,4 @@ document.addEventListener('DOMContentLoaded', function() {
         passwordLink.classList.add('active');
         personalDetailsLink.classList.remove('active');
     });
-
-    // Automatically append @aims.edu.ph when user types @
-    const emailInput = document.getElementById('editAccountEmailInput');
-    emailInput.addEventListener('input', function(e) {
-        const value = e.target.value;
-        if (value.includes('@') && !value.includes('@aims.edu.ph')) {
-            e.target.value = value.split('@')[0] + '@aims.edu.ph';
-        }
-    });
 });

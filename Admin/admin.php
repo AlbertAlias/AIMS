@@ -1,11 +1,11 @@
 <?php
     session_start();
-    if (!isset($_SESSION['email'])) {
+    if (!isset($_SESSION['username'])) {
         header('Location: index.php');
         exit();
     }
-    $developerEmail = 'admin@aims.edu.ph';
-    $isDeveloper = $_SESSION['email'] === $developerEmail;
+    $developerUsername = 'admin';
+    $isDeveloper = $_SESSION['username'] === $developerUsername;
 ?>
 
 <!DOCTYPE html>
@@ -124,10 +124,10 @@
     <script src="crud-ajax/coordinators/retrieve-coor.js"></script>
     <script src="crud-ajax/coordinators/retrieve-coor-info.js"></script>
     <script src="crud-ajax/coordinators/create-coor.js"></script>
-    <script src="functions/coordinators/coor-email.js"></script>
     <script src="functions/coordinators/contact-number.js"></script>
     <script src="crud-ajax/coordinators/update-coor.js"></script>
     <script src="crud-ajax/coordinators/delete-coor.js"></script>
+    <script src="functions/coordinators/coor_code.js"></script>
 
     <!-- <script src="crud-ajax/interns/retrieve-interns.js"></script> -->
     <!-- <script src="crud-ajax/interns/retrieve-intern-deptsName.js"></script> -->
@@ -144,7 +144,6 @@
     <script src="crud-ajax/admins/retrieve-admin-details.js"></script>
     <script src="crud-ajax/admins/retrieve-admins.js"></script>
     <script src="functions/admins/admin-form-enable.js"></script>
-    <script src="functions/admins/intern-email.js"></script>
     <script src="crud-ajax/admins/update-admins.js"></script>
 
     <script src="crud-ajax/profile/retrieve-profile.js"></script>
