@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2024 at 11:34 AM
+-- Generation Time: Nov 15, 2024 at 09:38 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -49,23 +49,24 @@ INSERT INTO `admins` (`id`, `user_id`) VALUES
 CREATE TABLE `coordinators` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `department_id` int(11) DEFAULT NULL
+  `department_id` int(11) DEFAULT NULL,
+  `coor_code` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `coordinators`
 --
 
-INSERT INTO `coordinators` (`id`, `user_id`, `department_id`) VALUES
-(30, 93, 1),
-(31, 94, 2),
-(32, 95, 3),
-(33, 96, 5),
-(34, 97, 4),
-(35, 98, 6),
-(36, 99, 7),
-(37, 100, 8),
-(38, 101, 9);
+INSERT INTO `coordinators` (`id`, `user_id`, `department_id`, `coor_code`) VALUES
+(43, 306, 1, 'VJ'),
+(44, 307, 2, 'AL'),
+(45, 308, 3, 'PJ'),
+(46, 309, 5, 'OC'),
+(47, 310, 4, 'JJ'),
+(48, 311, 6, 'CP'),
+(49, 312, 7, 'RG'),
+(53, 316, 8, 'OC'),
+(54, 317, 9, 'DM');
 
 -- --------------------------------------------------------
 
@@ -117,23 +118,24 @@ CREATE TABLE `file_uploads` (
 CREATE TABLE `interns` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `studentID` varchar(20) NOT NULL
+  `studentID` varchar(20) NOT NULL,
+  `intern_id` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `interns`
 --
 
-INSERT INTO `interns` (`id`, `user_id`, `studentID`) VALUES
-(193, 281, '1-434245'),
-(194, 282, '1-210154'),
-(195, 283, '1-210155'),
-(196, 284, '1-210156'),
-(197, 285, '1-210157'),
-(198, 286, '1-210158'),
-(199, 287, '1-210159'),
-(200, 288, '1-210160'),
-(201, 289, '1-210161');
+INSERT INTO `interns` (`id`, `user_id`, `studentID`, `intern_id`) VALUES
+(316, 424, '1-210153', 'JV001'),
+(317, 425, '1-210154', 'LA001'),
+(318, 426, '1-210155', 'JP001'),
+(319, 427, '1-210156', 'JJ001'),
+(320, 428, '1-210157', 'CO001'),
+(321, 429, '1-210158', 'PC001'),
+(322, 430, '1-210159', 'GR001'),
+(323, 431, '1-210160', 'CO001'),
+(324, 432, '1-210161', 'CD001');
 
 -- --------------------------------------------------------
 
@@ -156,7 +158,7 @@ CREATE TABLE `users` (
   `contact_number` varchar(15) DEFAULT NULL,
   `employee_number` varchar(20) DEFAULT NULL,
   `department_id` int(11) DEFAULT NULL,
-  `account_email` varchar(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
   `user_type` enum('admin','sub-admin','coordinator','intern') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -165,27 +167,27 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `profile_picture`, `last_name`, `first_name`, `middle_name`, `suffix`, `gender`, `address`, `birthdate`, `civil_status`, `personal_email`, `contact_number`, `employee_number`, `department_id`, `account_email`, `password`, `user_type`) VALUES
-(71, 'profile_6731dce0ebd3e4.17567049.jpg', 'Custodio', 'Bryan', 'Guevarra', '', NULL, 'Santa Rosa', NULL, 'Single', 'bry@gmail.com', NULL, '1', NULL, 'admin@aims.edu.ph', '$2y$10$uiOHQagRVCjOMjKu1swvhusyQUG5CAF90LmQK4PCXdrLVzav8zqB2', 'admin'),
-(73, 'profile_672b0ebf027c79.63551893.jpeg', 'Balauag', 'George', '', '', NULL, 'Cabuyao', NULL, 'Single', 'geo@gmail.com', NULL, '2', NULL, 'subadmin@aims.edu.ph', '$2y$10$gmcPNp7CBsTrw/L4.PzjuekkrqUUu7VcQccA4qUmeddQAL6dlXcXW', 'sub-admin'),
-(93, NULL, 'Veron', 'Jeffrey', '', '', NULL, 'Santa Rosa', NULL, 'Married', 'jeff@gmail.com', NULL, '3', 1, 'acoor@aims.edu.ph', '$2y$10$y3JvAbhtgWE7wWyHZVn6N.5dbjI47hljubltghWxA0HIPAowj0otm', 'coordinator'),
-(94, NULL, 'Atienza', 'Leo', '', '', NULL, 'Santa Rosa', NULL, 'Married', 'leo@gmail.com', NULL, '4', 2, 'bacoor@aims.edu.ph', '$2y$10$iTHbeGl9mFjQNMBIN72ns.dJn35lUbSfuLwG5yBWswxXmyeGmL2DW', 'coordinator'),
-(95, NULL, 'Payos', 'John Paul', '', '', NULL, 'Santa Rosa', NULL, 'Single', 'jp@gmail.com', NULL, '5', 3, 'cpecoor@aims.edu.ph', '$2y$10$hRW.gNhmFYq8xvOccA2KiOPSMt.Kof0BSpaQ6bPjLuTy9Ma9KfFGS', 'coordinator'),
-(96, NULL, 'Oliva', 'Catherine', '', '', NULL, 'Santa Rosa', NULL, 'Single', 'cath@gmail.com', NULL, '6', 5, 'cscoor@aims.edu.ph', '$2y$10$dsOMCwhikOZ/ZLnZpKdHzeqfmZV6gL3TJPPtpiFhJHcr1SWGEVUJ6', 'coordinator'),
-(97, NULL, 'Jasmin', 'Jose Mari', '', '', NULL, 'Santa Rosa', NULL, 'Married', 'jm@gmail.com', NULL, '7', 4, 'crimcoor@aims.edu.ph', '$2y$10$G.2zxG.xCWk7X5YdxaJ5SelXaAcgm3dx96tEwcBPqbFGw0VNhw8jK', 'coordinator'),
-(98, NULL, 'Cera', 'Pauline', 'Diola', '', NULL, 'Santa Rosa', NULL, 'Married', 'pau@gmail.com', NULL, '8', 6, 'educcoor@aims.edu.ph', '$2y$10$9B.SsXavy1OEtATweUQNDOgi6PaFXptBbfLwT4PG3EmjZzMYPRJpy', 'coordinator'),
-(99, NULL, 'Ramos', 'Grace', '', '', NULL, 'Santa Rosa', NULL, 'Married', 'grace@gmail.com', NULL, '9', 7, 'hmcoor@aims.edu.ph', '$2y$10$MjZVKqpw/FFACoXrfxoWl.kLyxvZ74pPHMX2XxAjy40b35AIpd/Na', 'coordinator'),
-(100, NULL, 'Oliva', 'Catherine', '', '', NULL, 'Santa Rosa', NULL, 'Single', 'cath@gmail.com', NULL, '10', 8, 'itcoor@aims.edu.ph', '$2y$10$W/U9e0qFssc7djsb0Zo4fuOJwmyDzhVETkvGxaPeBfDMrSiEIzHtG', 'coordinator'),
-(101, NULL, 'De Guzman', 'Marie Charlene', '', '', NULL, 'Santa Rosa', NULL, 'Married', 'char@gmail.com', NULL, '11', 9, 'tmcoor@aims.edu.ph', '$2y$10$JIbuyrTMKn1yNdO5M.JQiOULD04NIXhqiWbtqUnfk2n1KdsH195gu', 'coordinator'),
-(281, NULL, 'Alias', 'Albert', 'Dela Pena', '', 'Male', 'Cabuyao', '1999-10-10', 'Single', 'al@gmail.com', '97326549821', NULL, 1, '1-434245@aims.edu.ph', '$2y$10$WAH5L9BJ/AcuTh4XF4hyHuHNT2hp1EMBvdUg.8UmMMboTC52MbiFe', 'intern'),
-(282, NULL, 'Arroyo', 'Justin', 'Mangahis', '', 'Male', 'Santa Rosa', '2003-08-21', 'Single', 'dyastin@gmail.com', '97335849832', NULL, 2, '1-210154@aims.edu.ph', '$2y$10$jPXGjWEZdutnNbDVJQ9ICer7VmPECkYhRWFytDFL9lPqOFP5c0nnG', 'intern'),
-(283, NULL, 'Balauag', 'George', '', '', 'Male', 'Santa Rosa', '2003-01-17', 'Single', 'geo@gmail.com', '97368413876', NULL, 3, '1-210155@aims.edu.ph', '$2y$10$QB8B1XMsbKRKmCdy/aZlOezjqrThY.BsZB7lJFW9/ZSfkAUhx3Ij2', 'intern'),
-(284, NULL, 'Bascon', 'Zach', '', '', 'Male', 'Santa Rosa', '2024-10-14', 'Single', 'zach@gmail.com', '97379419934', NULL, 4, '1-210156@aims.edu.ph', '$2y$10$9qyzltjjWaECLv1tMj8mFeBo4Qlt9QskkMi2kqGvnW2XNPtQJBaG.', 'intern'),
-(285, NULL, 'Coronel', 'Mark Aldwin', '', '', 'Male', 'Santa Rosa', '2024-10-14', 'Single', 'ryker@gmai.com', '97326546134', NULL, 5, '1-210157@aims.edu.ph', '$2y$10$pKUWBhcuXQRt.geaJS0XW.QIhUVrDJB2hSPpYdzvuygdwOxgYjd26', 'intern'),
-(286, NULL, 'Custodio', 'Bryan', '', '', 'Male', 'Santa Rosa', '2024-10-14', 'Single', 'bry@gmail.com', '97326549347', NULL, 6, '1-210158@aims.edu.ph', '$2y$10$LY4SSnCnpKOFfQw9I1qOJejD7Qxnup/Wm54vRuZAYOZ5EOw90sNpq', 'intern'),
-(287, NULL, 'Diaz', 'Francis', '', '', 'Male', 'Santa Rosa', '2024-10-14', 'Single', 'cis@gmail.com', '97326549691', NULL, 7, '1-210159@aims.edu.ph', '$2y$10$UuCLc3xOBOBT7ZxcrbYuhOxdX.TDl/esXLmqs1qSBjkaqcGFzYbqy', 'intern'),
-(288, NULL, 'Lawas', 'James Nathaniel', '', '', 'Male', 'Santa Rosa', '2024-10-14', 'Single', 'james@gmail.com', '97326549167', NULL, 8, '1-210160@aims.edu.ph', '$2y$10$mEuOpqsKQ.EYN0HrsXaWXuQ4wRB6pQBP3MsvzLD2qyUYGkjfzp7aS', 'intern'),
-(289, NULL, 'Paronable', 'Wilford', '', '', 'Male', 'Santa Rosa', '2024-10-14', 'Single', 'ford@gmail.com', '97326549639', NULL, 9, '1-210161@aims.edu.ph', '$2y$10$j/HnlhF4.WWooih7Z7.3UeHJiaZv5P/kyOElTi.lxFvISR0RY3vza', 'intern');
+INSERT INTO `users` (`id`, `profile_picture`, `last_name`, `first_name`, `middle_name`, `suffix`, `gender`, `address`, `birthdate`, `civil_status`, `personal_email`, `contact_number`, `employee_number`, `department_id`, `username`, `password`, `user_type`) VALUES
+(71, 'profile_6734598a0ee648.89908834.jpg', 'Custodio', 'Bryan', 'Guevarra', '', NULL, 'Santa Rosa', NULL, 'Single', 'bry@gmail.com', NULL, '1', NULL, 'admin', '$2y$10$uiOHQagRVCjOMjKu1swvhusyQUG5CAF90LmQK4PCXdrLVzav8zqB2', 'admin'),
+(73, 'profile_672b0ebf027c79.63551893.jpeg', 'Balauag', 'George', '', '', NULL, 'Cabuyao', NULL, 'Single', 'geo@gmail.com', NULL, '2', NULL, 'subadmin', '$2y$10$gmcPNp7CBsTrw/L4.PzjuekkrqUUu7VcQccA4qUmeddQAL6dlXcXW', 'sub-admin'),
+(306, NULL, 'Veron', 'Jeffrey', '', '', NULL, 'Santa Rosa', NULL, 'Single', 'jeff@gmail.com', NULL, '1', 1, 'acoor', '$2y$10$bPPpQY69DMd0VUmxUaVS6ekXH6Te.V5C.Pr80wdgPDpoQTomKHAoK', 'coordinator'),
+(307, NULL, 'Atienza', 'Leo', '', '', NULL, 'Santa Rosa', NULL, 'Single', 'leo@gmail.com', NULL, '2', 2, 'bacoor', '$2y$10$r6P8Ia8mZTbgfXB9A2PleeH/2i8YPCesxw658XzIdBTY4DE4l0Ap6', 'coordinator'),
+(308, NULL, 'Payos', 'John Paul', '', '', NULL, 'Santa Rosa', NULL, 'Single', 'jp@gmail.com', NULL, '3', 3, 'cpecoor', '$2y$10$vEFtVFkgaELlVXzMsKusz.PdfCGHScH5eK.D3fDqrPFCu3.iWplIO', 'coordinator'),
+(309, NULL, 'Oliva', 'Catherine', '', '', NULL, 'Santa Rosa', NULL, 'Single', 'cath@gmail.com', NULL, '4', 5, 'cscoor', '$2y$10$KqacfJvznemq7IT4KzwAE.RWKqR67SNNvckCbN7N3yqlkHdnofwge', 'coordinator'),
+(310, NULL, 'Jasmin', 'Jose Mari', '', '', NULL, 'Santa Rosa', NULL, 'Single', 'jose@gmail.com', NULL, '5', 4, 'crimcoor', '$2y$10$87E4N7LLG4XD6WyUcRwVvuNOdgh5xVHbfs1PbpQ0FgTthQQhTKstm', 'coordinator'),
+(311, NULL, 'Cera', 'Pauline', 'Diola', '', NULL, 'Santa Rosa', NULL, 'Single', 'pau@gmail.com', NULL, '6', 6, 'educcoor', '$2y$10$Hf20y2aWcJpkBIG4u6835u4b2yHUsIHZuyw0qdm2H0GsIU4RjaSha', 'coordinator'),
+(312, NULL, 'Ramos', 'Grace', '', '', NULL, 'Santa Rosa', NULL, 'Single', 'grace@gmail.com', NULL, '7', 7, 'hmcoor', '$2y$10$iGz0hbEFrZLbs2D/2CsjjeWfI8SsJ4n9mP38a56pnFClaQXgeXeHy', 'coordinator'),
+(316, NULL, 'Oliva', 'Catherine', '', '', NULL, 'Santa Rosa', NULL, 'Single', 'cath@gmail.com', NULL, '8', 8, 'itcoor', '$2y$10$7upxOqyqlSmjYmR.VcU6WO6GdR43VFejGIFRo3OR7nNzYGYJ5TaES', 'coordinator'),
+(317, NULL, 'De Guzman', 'Marie Charlene', '', '', NULL, 'Santa Rosa', NULL, 'Single', 'char@gmail.com', NULL, '9', 9, 'tmcoor', '$2y$10$d.p.YA7jQqugWixniKR7R.PgZx.4Aj4VyFnIFaDtjBlgAjSfuPscu', 'coordinator'),
+(424, NULL, 'Alias', 'Albert', NULL, NULL, 'Male', '', NULL, '', '', NULL, NULL, 1, 'AA1210153', '$2y$10$AhkjUic1ts3PotJ4ic89weB0e1tmqMB0d164gqtkzn69eRtYgujKS', 'intern'),
+(425, NULL, 'Arroyo', 'Justin', NULL, NULL, 'Male', '', NULL, '', '', NULL, NULL, 2, 'AJ1210154', '$2y$10$8cRLeJywbbthUkh9Ku4vdeH8mwrgUCZaVF/2kaf1mRVhnoJ0JZtKi', 'intern'),
+(426, NULL, 'Balauag', 'George', NULL, NULL, 'Male', '', NULL, '', '', NULL, NULL, 3, 'BG1210155', '$2y$10$jMXr6T26lWT4g7t2Y6rDYelrYxhKOUAbfhcMWyAMIJqCMseDvo11W', 'intern'),
+(427, NULL, 'Casulla', 'Jello Mark Andrei', NULL, NULL, 'Male', '', NULL, '', '', NULL, NULL, 4, 'CJ1210156', '$2y$10$dlwJDXA8CcebeAJZ7KQbu.gkmOLqG0qT48Y5J1IU31MshnABYof3G', 'intern'),
+(428, NULL, 'Talibsao', 'Jay Tee', NULL, NULL, 'Male', '', NULL, '', '', NULL, NULL, 5, 'TJ1210157', '$2y$10$QoqJuCo2ZQmUw/YNsVZxNO/SkUQ8JNpGjff3wZZUPi8am5YAAx2cG', 'intern'),
+(429, NULL, 'Custodio', 'Bryan', NULL, NULL, 'Male', '', NULL, '', '', NULL, NULL, 6, 'CB1210158', '$2y$10$ETEq88ezspDMe0l3hH3peuIP4x.BxsJTJzvtK9fM3S5lY6NJt1NFy', 'intern'),
+(430, NULL, 'De Chavez', 'Lian James', NULL, NULL, 'Male', '', NULL, '', '', NULL, NULL, 7, 'DL1210159', '$2y$10$gAyXUrGnJTcrE6yOKySL1enON46e1m.mPoEOJ50nu/b61Fjk2MeGy', 'intern'),
+(431, NULL, 'Barria', 'Carl', NULL, NULL, 'Male', '', NULL, '', '', NULL, NULL, 8, 'BC1210160', '$2y$10$P0m7cZ/qCvGROwrzE3r2lukDYfZMJeSF9HonfCHZq023gKZpZIgZG', 'intern'),
+(432, NULL, 'Redondo', 'Ronan', NULL, NULL, 'Male', '', NULL, '', '', NULL, NULL, 9, 'RR1210161', '$2y$10$8.HQuRsxoByK.Ax7HYYOaOyov7uxkAfH22KoU1fjFQEPx/iifi69q', 'intern');
 
 --
 -- Indexes for dumped tables
@@ -232,7 +234,7 @@ ALTER TABLE `interns`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `account_email` (`account_email`),
+  ADD UNIQUE KEY `account_email` (`username`),
   ADD KEY `department_id` (`department_id`);
 
 --
@@ -249,7 +251,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `coordinators`
 --
 ALTER TABLE `coordinators`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `departments`
@@ -267,13 +269,13 @@ ALTER TABLE `file_uploads`
 -- AUTO_INCREMENT for table `interns`
 --
 ALTER TABLE `interns`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=325;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=291;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=433;
 
 --
 -- Constraints for dumped tables
