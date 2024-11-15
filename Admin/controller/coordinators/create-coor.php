@@ -19,19 +19,15 @@
             }
         }
 
-        // Check if the coor_code already exists in the department with the same name
+        // Check if the coor_code and department_id combination already exists
         $stmt = $conn->prepare("SELECT * FROM coordinators WHERE coor_code = ? AND department_id = ?");
         $stmt->bind_param("si", $data['coor_code'], $data['department_id']);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            // Check if the name matches with the existing coordinator's name
-            $existing_coordinator = $result->fetch_assoc();
-            if ($existing_coordinator['last_name'] !== $data['last_name'] || $existing_coordinator['first_name'] !== $data['first_name']) {
-                echo json_encode(['success' => false, 'message' => 'This coordinator code is already assigned to another coordinator with a different name in this department.']);
-                exit;
-            }
+            echo json_encode(['success' => false, 'message' => 'This coordinator code is already assigned to this department.']);
+            exit;
         }
         $stmt->close();
 

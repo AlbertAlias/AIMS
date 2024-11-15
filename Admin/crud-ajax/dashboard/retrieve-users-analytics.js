@@ -3,7 +3,7 @@ $(document).ready(function() {
 
     function renderChart(data) {
         const series = [];
-        const categories = ['Admin', 'Sub-Admin', 'Coordinator'];
+        const categories = ['Admin', 'Sub-Admin', 'Coordinator', 'Intern'];
 
         categories.forEach(category => {
             series.push(data[category.toLowerCase()] || 0);

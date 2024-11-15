@@ -39,6 +39,7 @@ $(document).ready(function() {
                 $('#coor_department').val(response.department_id).prop('disabled', false);
                 $('#coor_username').val(response.username).prop('disabled', true);
                 $('#coor_password').val(response.password).prop('disabled', true);
+                $('#coor_code').val(response.coor_code).prop('disabled', true);
                 $('#coorUpdateBtn').prop('disabled', false);
             },
             error: function(xhr, status, error) {

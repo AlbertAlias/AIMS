@@ -111,6 +111,7 @@
     <script src="crud-ajax/dashboard/retrieve-users-analytics.js"></script>
     <script src="crud-ajax/dashboard/retrieve-deptCounts.js"></script>
     <script src="crud-ajax/dashboard/retrieve-coorCounts.js"></script>
+    <script src="crud-ajax/dashboard/retrieve-internCounts.js"></script>
     <script src="crud-ajax/dashboard/retrieve-adminCounts.js"></script>
 
     <script src="functions/departments/dept-form-enable.js"></script>

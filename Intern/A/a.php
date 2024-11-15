@@ -3,7 +3,7 @@
     ini_set('display_errors', 1);
 
     session_start();
-    if (!isset($_SESSION['email'])) {
+    if (!isset($_SESSION['username'])) {
         header('Location: ../../../index.php'); // Adjust path if needed
         exit();
     }
