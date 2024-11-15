@@ -36,28 +36,19 @@
         exit();
     }
 
-    // If not a password verification request, fetch user details
-    $stmt = $conn->prepare("SELECT last_name, first_name, middle_name, suffix, address, civil_status, personal_email, username, password FROM users WHERE username = ?");
+    $stmt = $conn->prepare("SELECT last_name, first_name, middle_name, suffix, address, civil_status, personal_email, username FROM users WHERE username = ?");
     $stmt->bind_param('s', $user_username);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($last_name, $first_name, $middle_name, $suffix, $address, $civil_status, $personal_email, $username, $hashed_password);
+        $stmt->bind_result($last_name, $first_name, $middle_name, $suffix, $address, $civil_status, $personal_email, $username);
         $stmt->fetch();
 
-        // Combine names and handle the suffix being optional
         $full_name = $last_name . ', ' . $first_name;
+        if ($middle_name) $full_name .= ' ' . $middle_name;
+        if ($suffix) $full_name .= ' ' . $suffix;
 
-        if ($middle_name) {
-            $full_name .= ' ' . $middle_name;
-        }
-
-        if ($suffix) {
-            $full_name .= ' ' . $suffix;
-        }
-
-        // Return all user details including the new fields
         echo json_encode([
             'status' => 'success',
             'full_name' => $full_name,

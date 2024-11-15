@@ -32,6 +32,11 @@ $(document).ready(function() {
         }
     });
 
+    $(document).ready(function () {
+        // Fetch user info when the page loads
+        refreshUserInfo();
+    });    
+
     // Event listener for the old password input change
     $('#modalOldPassword').on('input', function() {
         var oldPassword = $(this).val(); // Get the value entered in the old password input

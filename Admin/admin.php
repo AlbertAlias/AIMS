@@ -149,7 +149,7 @@
 
     <script src="crud-ajax/profile/retrieve-profile.js"></script>
     <script src="crud-ajax/profile/create-profile.js"></script>
-    <script src="crud-ajax/profile/retrieve-admin-users.js"></script>
+    <!-- <script src="crud-ajax/profile/retrieve-admin-users.js"></script> -->
     <script src="crud-ajax/profile/retrieve-admins-info.js"></script>
     <script src="crud-ajax/profile/update-admins-info.js"></script>
     <script src="functions/profile/profile-details.js"></script>
