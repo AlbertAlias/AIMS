@@ -133,7 +133,6 @@
 
     <script src="crud-ajax/interns/retrieve-interns.js"></script>
     <script src="crud-ajax/interns/retrieve-intern-deptsName.js"></script>
-    <script src="functions/interns/intern-form-enable.js"></script>
     <script src="crud-ajax/interns/retrieve-intern-info.js"></script>
     <script src="crud-ajax/interns/create-upload-interns.js"></script>
     <script src="functions/interns/drag-drop-files.js"></script>

@@ -1,72 +1,75 @@
 <?php
-    require '../../../dbconn.php';
-
+    require_once '../../../dbconn.php';
     header('Content-Type: application/json');
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'update_intern') {
-        $id = $_POST['id'];
-        $lastName = $_POST['intern_last_name'];
-        $firstName = $_POST['intern_first_name'];
-        $middleName = $_POST['intern_middle_name'];
-        $suffix = $_POST['intern_suffix'];
+    $response = ['success' => false, 'message' => ''];
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Retrieve the data from the POST request
+        $id = (int)$_POST['id'];
+        $last_name = $_POST['intern_last_name'];
+        $first_name = $_POST['intern_first_name'];
         $gender = $_POST['intern_gender'];
-        $address = $_POST['intern_address'];
-        $birthdate = $_POST['intern_birthdate'];
-        $civilStatus = $_POST['intern_civil_status'];
-        $personalEmail = $_POST['intern_personal_email'];
-        $contactNumber = $_POST['intern_contact_number'];
-        $studentID = $_POST['studentID'];
-        $accountEmail = $_POST['intern_account_email'];
-        $departmentId = $_POST['intern_department'];
-        $password = isset($_POST['intern_password']) ? password_hash($_POST['intern_password'], PASSWORD_BCRYPT) : null;
+        $student_id = $_POST['studentID'];
+        $department_id = (int)$_POST['intern_department'];  // department_id sent from frontend
+        $username = $_POST['intern_username'];
+        $password = password_hash($_POST['intern_password'], PASSWORD_BCRYPT);
 
-        // Check if email already exists for other interns
-        $emailCheckQuery = "SELECT COUNT(*) FROM users WHERE account_email = ? AND id != ?";
-        $emailCheckStmt = $conn->prepare($emailCheckQuery);
-        $emailCheckStmt->bind_param("si", $accountEmail, $id);
-        $emailCheckStmt->execute();
-        $emailCheckStmt->bind_result($emailCount);
-        $emailCheckStmt->fetch();
-        $emailCheckStmt->close();
+        // Validate that the department_id exists in the departments table
+        $department_sql = "SELECT id FROM departments WHERE id = ?";
+        $stmt = $conn->prepare($department_sql);
+        $stmt->bind_param("i", $department_id);
+        $stmt->execute();
+        $stmt->bind_result($valid_id);
+        $stmt->fetch();
+        $stmt->close();
 
-        if ($emailCount > 0) {
-            echo json_encode(['success' => false, 'message' => 'Email already in use.']);
+        if (!$valid_id) {
+            $response['message'] = 'Invalid department ID provided: ' . $department_id;
+            echo json_encode($response);
             exit;
         }
 
-        // Prepare the SQL update statement for the users table
-        $updateQuery = "UPDATE users SET last_name=?, first_name=?, middle_name=?, suffix=?, gender=?, address=?, birthdate=?, civil_status=?, personal_email=?, contact_number=?, account_email=?, department_id=?";
-        
-        $params = [$lastName, $firstName, $middleName, $suffix, $gender, $address, $birthdate, $civilStatus, $personalEmail, $contactNumber, $accountEmail, $departmentId];
+        // Begin transaction
+        $conn->begin_transaction();
 
-        // Only add password if it's provided
-        if (isset($_POST['intern_password']) && $_POST['intern_password'] !== '') {
-            $updateQuery .= ", password=?";
-            $params[] = $password;
+        try {
+            // Update the user data in the 'users' table (including department_id)
+            $user_sql = "UPDATE users SET last_name = ?, first_name = ?, gender = ?, username = ?, password = ?, department_id = ? WHERE id = ?";
+            $stmt = $conn->prepare($user_sql);
+            if ($stmt === false) {
+                throw new Exception('Failed to prepare user update statement');
+            }
+            $stmt->bind_param("ssssssi", $last_name, $first_name, $gender, $username, $password, $department_id, $id);
+            $stmt->execute();
+
+            // Update the intern data in the 'interns' table (without changing department_id)
+            $intern_sql = "UPDATE interns SET studentID = ? WHERE user_id = ?";
+            $intern_stmt = $conn->prepare($intern_sql);
+            if ($intern_stmt === false) {
+                throw new Exception('Failed to prepare intern update statement');
+            }
+            $intern_stmt->bind_param("si", $student_id, $id);
+            $intern_stmt->execute();
+
+            // Commit the transaction if everything went well
+            $conn->commit();
+
+            $response['success'] = true;
+            $response['message'] = 'Intern updated successfully!';
+        } catch (Exception $e) {
+            // Rollback the transaction in case of an error
+            $conn->rollback();
+            $response['message'] = 'Error updating intern: ' . $e->getMessage();
         }
-        $updateQuery .= " WHERE id=?";
-        $params[] = $id;
 
-        $stmt = $conn->prepare($updateQuery);
-        $stmt->bind_param(str_repeat("s", count($params) - 1) . "i", ...$params);
-
-        // Execute the statement
-        if ($stmt->execute()) {
-            // Update the intern record
-            $stmtIntern = $conn->prepare("UPDATE interns SET studentID=? WHERE user_id=?");
-            $stmtIntern->bind_param("si", $studentID, $id);
-            $stmtIntern->execute();
-
-            echo json_encode(['success' => true]);
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Failed to update intern information.']);
-        }
-
-        $stmt->close();
-        $stmtIntern->close();
+        // Close the statements
+        if (isset($stmt)) $stmt->close();
+        if (isset($intern_stmt)) $intern_stmt->close();
     } else {
-        echo json_encode(['success' => false, 'message' => 'Invalid request.']);
+        $response['message'] = 'Invalid request method.';
     }
 
-    $conn->close();
+    echo json_encode($response);
+    exit;
 ?>

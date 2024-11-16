@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                    <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Account Information</h5>
+                        <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Account Information</h5>
                         <div class="col-md-6">
                             <label for="intern_username" class="form-label required-asterisk">Username <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="intern_username" name="intern_username" required disabled>

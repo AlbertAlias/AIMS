@@ -33,8 +33,10 @@ $(document).ready(function () {
                 $("#intern_gender").val(response.gender || "").prop("disabled", false);
                 $("#studentID").val(response.studentID || "").prop("disabled", false);
                 $("#intern_department").val(response.department_id || "").prop("disabled", false);
-                $("#intern_username").val(response.username || "").prop("disabled", true);
-                $("#intern_password").val(response.password || "").prop("disabled", true);
+                $("#intern_username").val(response.username || "").prop("disabled", false);
+                $("#intern_password").val(response.password || "").prop("disabled", false);
+                $("#internCancelBtn").show();
+                $("#internUpdateBtn").prop("disabled", false);
             },
             error: function (xhr, status, error) {
                 if (status !== "abort") {
@@ -47,10 +49,19 @@ $(document).ready(function () {
         });
     };
 
-    // Click event for buttons
+    // Click event for intern buttons
     $(document).on("click", ".intern-btn", function (e) {
         e.preventDefault();
         const internId = $(this).data("id");
         window.loadInternDetails(internId);
+    });
+
+    // Click event for cancel button
+    $(document).on("click", "#internCancelBtn", function () {
+        // Reset the form and hide the cancel button
+        $("#internsForm")[0].reset();
+        $("#internCancelBtn").hide();
+        $("#internUpdateBtn").prop("disabled", true);
+        $("#internsForm input, #internsForm select").prop("disabled", true);
     });
 });
