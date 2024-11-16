@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="../assets/css/dashboard.css">
     <link rel="stylesheet" href="../assets/css/departments.css">
     <link rel="stylesheet" href="../assets/css/coordinators.css">
+    <link rel="stylesheet" href="../assets/css/interns.css">
     <link rel="stylesheet" href="../assets/css/admin-profile.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
                 integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -130,15 +131,12 @@
     <script src="crud-ajax/coordinators/delete-coor.js"></script>
     <script src="functions/coordinators/coor_code.js"></script>
 
-    <!-- <script src="crud-ajax/interns/retrieve-interns.js"></script> -->
-    <!-- <script src="crud-ajax/interns/retrieve-intern-deptsName.js"></script> -->
+    <script src="crud-ajax/interns/retrieve-interns.js"></script>
+    <script src="crud-ajax/interns/retrieve-intern-deptsName.js"></script>
     <script src="functions/interns/intern-form-enable.js"></script>
-    <!-- <script src="crud-ajax/interns/retrieve-intern-info.js"></script> -->
+    <script src="crud-ajax/interns/retrieve-intern-info.js"></script>
     <script src="crud-ajax/interns/create-upload-interns.js"></script>
     <script src="functions/interns/drag-drop-files.js"></script>
-    <!-- <script src="functions/interns/intern-email.js"></script> -->
-    <!-- <script src="functions/interns/studID.js"></script> -->
-    <script src="functions/interns/internPass.js"></script>
     <script src="crud-ajax/interns/update-interns.js"></script>
 
     <script src="crud-ajax/admins/create-admins.js"></script>
@@ -149,7 +147,6 @@
 
     <script src="crud-ajax/profile/retrieve-profile.js"></script>
     <script src="crud-ajax/profile/create-profile.js"></script>
-    <!-- <script src="crud-ajax/profile/retrieve-admin-users.js"></script> -->
     <script src="crud-ajax/profile/retrieve-admins-info.js"></script>
     <script src="crud-ajax/profile/update-admins-info.js"></script>
     <script src="functions/profile/profile-details.js"></script>

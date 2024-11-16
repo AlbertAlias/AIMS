@@ -24,25 +24,78 @@ function uploadFile(file) {
             return xhr;
         },
         success: function (response) {
-            // Handle success response
             let res;
             try {
                 res = JSON.parse(response); // Parse the response
                 if (res.error) {
-                    alert(res.error);
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'error',
+                        title: res.error,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#f8bbd0',
+                        iconColor: '#c62828',
+                        color: '#721c24',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
                 } else {
-                    alert(res.success);
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Intern lists uploaded successfully',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#b9f6ca',
+                        iconColor: '#2e7d32',
+                        color: '#155724',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
+
                     // Optionally reset the upload progress
                     $('#uploadProgress').hide();
                     $('#progressBar').css('width', '0%');
                     $('#uploadfileName').text('');
+                    window.fetchInterns();
                 }
             } catch (e) {
-                alert('Error parsing response: ' + e.message);
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Error parsing response: ' + e.message,
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#f8bbd0',
+                    iconColor: '#c62828',
+                    color: '#721c24',
+                    customClass: {
+                        popup: 'mt-5'
+                    }
+                });
             }
         },
         error: function (jqXHR, textStatus, errorThrown) {
-            alert('Error: ' + textStatus);
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: 'Error: ' + textStatus,
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#f8bbd0',
+                iconColor: '#c62828',
+                color: '#721c24',
+                customClass: {
+                    popup: 'mt-5'
+                }
+            });
         }
     });
 }

@@ -7,7 +7,7 @@ document.getElementById("internUpdateBtn").addEventListener("click", function ()
 
     // Ensure the department, email, and password fields are sent
     formData.append("intern_department", document.getElementById("intern_department").value);
-    formData.append("intern_account_email", document.getElementById("intern_account_email").value);
+    formData.append("intern_username", document.getElementById("intern_username").value);
     formData.append("intern_password", document.getElementById("intern_password").value);
 
     // Add action to the formData

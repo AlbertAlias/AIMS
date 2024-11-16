@@ -50,7 +50,6 @@
 
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
 
-        // Department mapping
         $department_map = [
             'Accountancy' => 1,
             'Business Administration' => 2,
@@ -70,15 +69,15 @@
             }
 
             // Extract and clean data
-            $intern_id = isset($row['A']) ? trim($row['A']) : null;  // intern_id in column A
-            $last_name = isset($row['B']) ? trim($row['B']) : null;   // last_name in column B
-            $first_name = isset($row['C']) ? trim($row['C']) : null;  // first_name in column C
-            $gender = isset($row['D']) ? trim($row['D']) : null;      // gender in column D
-            $studentID = isset($row['E']) ? trim($row['E']) : null;   // studentID in column E
-            $department_name = isset($row['F']) ? trim($row['F']) : null;  // department in column F
+            $intern_id = isset($row['A']) ? trim($row['A']) : null;
+            $last_name = isset($row['B']) ? trim($row['B']) : null;
+            $first_name = isset($row['C']) ? trim($row['C']) : null;
+            $gender = isset($row['D']) ? trim($row['D']) : null;
+            $studentID = isset($row['E']) ? trim($row['E']) : null;
+            $department_name = isset($row['F']) ? trim($row['F']) : null;
             $department_id = isset($department_map[$department_name]) ? $department_map[$department_name] : null;
-            $username = isset($row['G']) ? trim($row['G']) : null;  // username in column G
-            $password = isset($row['H']) ? password_hash(trim($row['H']), PASSWORD_BCRYPT) : null;  // password in column H
+            $username = isset($row['G']) ? trim($row['G']) : null;
+            $password = isset($row['H']) ? password_hash(trim($row['H']), PASSWORD_BCRYPT) : null;
             $user_type = 'intern';
 
             // Log the row for debugging

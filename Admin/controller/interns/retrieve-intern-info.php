@@ -1,31 +1,29 @@
 <?php
-    include '../../../dbconn.php';
+include '../../../dbconn.php';
 
-    if (isset($_GET['id'])) {
-        $internId = $_GET['id'];
+if (isset($_GET['id'])) {
+    $internId = $_GET['id'];
 
-        $sql = "SELECT u.id, u.last_name, u.first_name, u.middle_name, u.suffix, u.gender, 
-                    u.address, u.birthdate, u.civil_status, u.personal_email, u.contact_number,
-                    u.account_email, u.password, i.studentID, u.department_id
-                FROM users u
-                JOIN interns i ON u.id = i.user_id
-                WHERE i.id = ?";
-        
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $internId);
-        $stmt->execute();
-        $result = $stmt->get_result();
+    $sql = " SELECT u.id, u.last_name, u.first_name, u.gender, u.username, i.intern_id, i.studentID, u.department_id, u.password
+        FROM users u
+        JOIN interns i ON u.id = i.user_id
+        WHERE i.id = ?
+    ";
 
-        if ($result->num_rows > 0) {
-            $intern = $result->fetch_assoc();
-            echo json_encode($intern);
-        } else {
-            echo json_encode(['error' => 'Intern not found']);
-        }
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $internId);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        $stmt->close();
-        $conn->close();
+    if ($result->num_rows > 0) {
+        $intern = $result->fetch_assoc();
+        echo json_encode($intern);
     } else {
-        echo json_encode(['error' => 'No intern ID provided']);
+        echo json_encode(['error' => 'Intern not found']);
     }
-?>
+
+    $stmt->close();
+    $conn->close();
+} else {
+    echo json_encode(['error' => 'No intern ID provided']);
+}

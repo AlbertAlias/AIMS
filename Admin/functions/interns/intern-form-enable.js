@@ -1,117 +1,76 @@
-function internBtnFormToggle(isEnabled) {
+document.addEventListener("DOMContentLoaded", function () {
     const internsForm = document.getElementById("internsForm");
-    const inputs = internsForm.querySelectorAll("input, select");
+    const internCancelBtn = document.getElementById("internCancelBtn");
+    const internUpdateBtn = document.getElementById("internUpdateBtn");
+    const internsInfo = document.getElementById("internsInfo");
 
-    // Reset values if disabling the form
-    if (!isEnabled) {
-        inputs.forEach(input => {
-            input.value = ''; // Clear values
-            input.disabled = true; // Disable all fields
+    // Enable all inputs and selects in the form
+    function enableFormInputs() {
+        const inputs = internsForm.querySelectorAll("input, select");
+        inputs.forEach((input) => {
+            input.disabled = false; // Enable inputs and selects
         });
+        internUpdateBtn.disabled = false; // Enable update button
+    }
 
-        // Reset selects to default
-        const selects = internsForm.querySelectorAll("select");
-        selects.forEach(select => {
-            select.selectedIndex = 0; // Set selected index to the first option
+    // Disable all inputs and selects in the form
+    function disableFormInputs() {
+        const inputs = internsForm.querySelectorAll("input, select");
+        inputs.forEach((input) => {
+            input.disabled = true; // Disable inputs and selects
         });
+        internUpdateBtn.disabled = true; // Disable update button
+    }
 
-        // Reset account email and password fields
-        document.getElementById("intern_account_email").value = '';
-        document.getElementById("intern_password").value = '';
-    } else {
-        // Enable fields except account email and password
-        inputs.forEach(input => {
-            if (input !== document.getElementById("intern_account_email") && input !== document.getElementById("intern_password")) {
-                input.disabled = false; // Enable other fields
+    // Reset the form inputs and selects to their default state
+    function resetFormInputs() {
+        const inputs = internsForm.querySelectorAll("input, select");
+        inputs.forEach((input) => {
+            if (input.tagName === "SELECT") {
+                input.selectedIndex = 0; // Reset selects to the first option
+            } else {
+                input.value = ""; // Clear text, email, date, etc.
             }
         });
     }
 
-    // Show/Hide buttons based on whether the form is enabled or not
-    document.getElementById("internCancelBtn").style.display = isEnabled ? "inline-block" : "none";
-    document.getElementById("interUpdateBtn").style.display = isEnabled ?  "none" : "inline-block";
-    document.getElementById("internUpdateBtn").disabled = !isEnabled;
-}
+    // Populate the form fields with the selected intern's data
+    function populateForm(intern) {
+        document.getElementById("internID").value = intern.id || "";
+        document.getElementById("intern_intern_id").value = intern.intern_id || "";
+        document.getElementById("intern_last_name").value = intern.last_name || "";
+        document.getElementById("intern_first_name").value = intern.first_name || "";
+        document.getElementById("intern_gender").value = intern.gender || "";
+        document.getElementById("studentID").value = intern.student_id || "";
+        document.getElementById("intern_department").value = intern.department_id || "";
+        document.getElementById("intern_username").value = intern.username || "";
+        document.getElementById("intern_password").value = intern.password || "";
+    }
 
-function updateFormResetAndLock() {
-    const internsForm = document.getElementById("internsForm");
-    const inputs = internsForm.querySelectorAll("input, select");
+    // Event delegation to handle clicks on dynamically generated intern buttons
+    internsInfo.addEventListener("click", function (e) {
+        if (e.target.classList.contains("intern-btn")) {
+            const internId = e.target.getAttribute("data-id");
 
-    // Reset and lock unlocked fields in the internsForm
-    inputs.forEach(input => {
-        if (!input.disabled) {
-            input.value = ''; // Clear the value
-            input.disabled = true; // Lock the field
+            // Simulate fetching intern data from `window.interns` or server
+            const intern = window.interns.find((intern) => intern.id == internId);
+
+            if (intern) {
+                populateForm(intern); // Populate form with intern data
+                enableFormInputs(); // Enable form inputs
+                internCancelBtn.style.display = "inline-block"; // Show cancel button
+            }
         }
     });
 
-    // Reset values in the intern_accountForm
-    const accountForm = document.getElementById("intern_accountForm");
-    const accountInputs = accountForm.querySelectorAll("input");
-
-    accountInputs.forEach(input => {
-        input.value = ''; // Clear the value in account form
+    // Cancel button functionality
+    internCancelBtn.addEventListener("click", function () {
+        resetFormInputs(); // Reset form inputs to their default state
+        disableFormInputs(); // Disable form inputs
+        internCancelBtn.style.display = "none"; // Hide cancel button
     });
 
-    document.getElementById("internCancelBtn").style.display = "none";
-    document.getElementById("internUpdpateBtn").style.display = "inline-block";
-    document.getElementById("internUpdateBtn").disabled = true;
-}
-
-function preventRemoveUpdate() {
-    const requiredFields = document.querySelectorAll("#internsForm input[required], #internsForm select[required]");
-    let allFieldsFilled = true;
-
-    // Check if any required field is empty
-    requiredFields.forEach(field => {
-        if (!field.value || field.value === "Choose Gender" || field.value === "Choose Status" || field.value === "Choose Department") {
-            allFieldsFilled = false;
-        }
-    });
-
-    // Enable or disable the Update button based on the field's values
-    const updateBtn = document.getElementById("internUpdateBtn");
-    updateBtn.disabled = !allFieldsFilled;
-}
-
-// Add event listeners to required fields to check on input change
-function setupFieldListeners() {
-    const requiredFields = document.querySelectorAll("#internsForm input[required], #internsForm select[required]");
-    
-    requiredFields.forEach(field => {
-        field.addEventListener("input", preventRemoveUpdate);
-        field.addEventListener("change", preventRemoveUpdate);  // For select fields
-    });
-}
-
-// Call this function when the form is loaded or populated with intern data
-setupFieldListeners();
-
-document.getElementById("internCancelBtn").addEventListener("click", function() {
-    const internsForm = document.getElementById("internsForm");
-    const inputs = internsForm.querySelectorAll("input, select");
-
-    // Reset values on cancel
-    inputs.forEach(input => {
-        input.value = '';
-        input.disabled = true; // Disable all form inputs on cancel
-    });
-
-    // Reset account fields
-    const accountForm = document.getElementById("intern_accountForm");
-    const accountInputs = accountForm.querySelectorAll("input");
-
-    accountInputs.forEach(input => {
-        input.value = '';
-    });
-
-    // Reset selects to default
-    const selects = internsForm.querySelectorAll("select");
-    selects.forEach(select => {
-        select.selectedIndex = 0; // Set selected index to the first option
-    });
-
-    document.getElementById("internCancelBtn").style.display = "none";
-    document.getElementById("internUpdateBtn").style.display = "inline-block";
-    document.getElementById("internUpdateBtn").disabled = true;
+    // Initial state
+    disableFormInputs();
+    internCancelBtn.style.display = "none"; // Hide cancel button by default
 });
