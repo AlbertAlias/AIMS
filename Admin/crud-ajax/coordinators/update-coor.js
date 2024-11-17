@@ -22,6 +22,8 @@ $(document).ready(function() {
         const personalEmail = $('#coor_personal_email').val();
         const employeeNumber = $('#coor_employee_number').val();
         const departmentID = $('#coor_department').val();
+        const username = $('#coor_username').val();
+        const password = $('#coor_password').val();
 
         const data = {
             id: coorID,
@@ -32,8 +34,13 @@ $(document).ready(function() {
             coor_address: address,
             coor_personal_email: personalEmail,
             coor_employee_number: employeeNumber,
-            coor_department: departmentID
+            coor_department: departmentID,
+            coor_username: username,
         };
+
+        if (password) {
+            data.coor_password = password;
+        }
 
         $(this).prop('disabled', true);
 
@@ -58,7 +65,7 @@ $(document).ready(function() {
                             popup: 'mt-5'
                         }
                     });
-                    resetAndLockForms(); // Lock and reset the form after successful update
+                    resetAndLockForms();
                     $('#coorDeleteBtn').hide();
                     $('#coorUpdateBtn').hide();
                     window.loadCoor();

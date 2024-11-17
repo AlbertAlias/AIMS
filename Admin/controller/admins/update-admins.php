@@ -15,6 +15,9 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = (int)$_POST['id'];
+        $username = $_POST['admin_username'];
+        $password = $_POST['admin_password']; // New field
+
         error_log("Checking for admin ID: $id");
 
         // Check for admin existence
@@ -47,13 +50,22 @@
         $personal_email = $_POST['admin_personal_email'];
         $user_type = $_POST['user_type'];
 
-        // Update the admin details without account email and password
+        // Hash the password if provided
+        $hashed_password = !empty($password) ? password_hash($password, PASSWORD_BCRYPT) : null;
+
+        // Update the admin details
         $sql = "UPDATE users SET last_name = ?, first_name = ?, middle_name = ?, suffix = ?, address = ?, civil_status = ?, 
-        personal_email = ?, employee_number = ?, user_type = ? WHERE id = ?";
+        personal_email = ?, employee_number = ?, user_type = ?, username = ?" . 
+        ($hashed_password ? ", password = ?" : "") . " WHERE id = ?";
         
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sssssssssi", $last_name, $first_name, $middle_name, $suffix, $address, $civil_status, 
-        $personal_email, $employee_number, $user_type, $id);
+        if ($hashed_password) {
+            $stmt->bind_param("sssssssssssi", $last_name, $first_name, $middle_name, $suffix, $address, $civil_status, 
+            $personal_email, $employee_number, $user_type, $username, $hashed_password, $id);
+        } else {
+            $stmt->bind_param("ssssssssssi", $last_name, $first_name, $middle_name, $suffix, $address, $civil_status, 
+            $personal_email, $employee_number, $user_type, $username, $id);
+        }
 
         // Execute the statement
         if ($stmt->execute()) {

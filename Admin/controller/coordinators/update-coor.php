@@ -14,16 +14,27 @@
         $personal_email = $_POST['coor_personal_email'];
         $employee_number = $_POST['coor_employee_number'];
         $department_id = (int)$_POST['coor_department'];
+        $username = $_POST['coor_username'];
+        $password = isset($_POST['coor_password']) ? $_POST['coor_password'] : null;
 
         $conn->begin_transaction();
 
         try {
             $user_sql = "UPDATE users SET last_name = ?, first_name = ?, middle_name = ?, suffix = ?, 
-                        address = ?, personal_email = ?, employee_number = ? WHERE id = ?";
+                        address = ?, personal_email = ?, employee_number = ?, username = ? WHERE id = ?";
 
             $stmt = $conn->prepare($user_sql);
-            $stmt->bind_param("sssssssi", $last_name, $first_name, $middle_name, $suffix, $address, $personal_email, $employee_number, $id);
+            $stmt->bind_param("ssssssssi", $last_name, $first_name, $middle_name, $suffix, $address, $personal_email, $employee_number, $username, $id);
             $stmt->execute();
+
+            if (!empty($password)) {
+                $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+                $password_sql = "UPDATE users SET password = ? WHERE id = ?";
+                $password_stmt = $conn->prepare($password_sql);
+                $password_stmt->bind_param("si", $hashed_password, $id);
+                $password_stmt->execute();
+                $password_stmt->close();
+            }
 
             $coor_sql = "UPDATE coordinators SET department_id = ? WHERE user_id = ?";
             $coor_stmt = $conn->prepare($coor_sql);

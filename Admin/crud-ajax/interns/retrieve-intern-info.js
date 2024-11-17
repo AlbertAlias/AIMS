@@ -34,7 +34,7 @@ $(document).ready(function () {
                 $("#studentID").val(response.studentID || "").prop("disabled", false);
                 $("#intern_department").val(response.department_id || "").prop("disabled", false);
                 $("#intern_username").val(response.username || "").prop("disabled", false);
-                $("#intern_password").val(response.password || "").prop("disabled", false);
+                $("#intern_password").val("").prop("disabled", false);
                 $("#internCancelBtn").show();
                 $("#internUpdateBtn").prop("disabled", false);
             },

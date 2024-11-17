@@ -1,43 +1,40 @@
-<header class="header sticky-top py-1">
+<nav class="navbar navbar-expand-lg navbar-light bg-transparent fixed-top topbar m-0 p-0 px-2">
     <div class="container-fluid">
-        <div class="d-flex justify-content-between align-items-center py-1">
-            <!-- Logo -->
-            <a href="#" class="navbar-brand ms-3">
-                <img src="img/esyatek-logo.png" alt="Logo" width="50" loading="lazy">
-            </a>
-
-            <!-- Centered Navigation Links (visible on larger screens) -->
-            <nav class="d-none d-md-flex mx-auto gap-3" role="navigation">
-                <a href="#home" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">Home</a>
-                <a href="#department" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">Department</a>
-                <a href="#company" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">Company</a>
-                <a href="#about" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">About</a>
-                <a href="#contact" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">Contact</a>
-            </nav>
-
-            <!-- Right-Aligned: Sign In Button and Hamburger Menu Toggle -->
-            <div class="d-flex align-items-center">
-                <!-- Sign In Button (visible on larger screens) -->
-                <a href="pages/login.php" class="btn btn-success fs-6 fw-semibold text-dark me-2 border-1 border-light d-none d-md-inline">Sign in</a>
-
-                <!-- Hamburger Menu Toggle Button (visible on smaller screens) -->
-                <button class="navbar-toggler d-md-none me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa-solid fa-bars fs-4 text-success"></i>
-                </button>
-            </div>
+        <!-- Left: Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="img/esyatek-logo.png" alt="Logo" width="50" loading="lazy">
+        </a>
+        
+        <!-- Center: Navigation links -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <!-- Custom Hamburger Icon -->
+            <i class="fa-solid fa-bars fs-4 text-success"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#department" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">Department</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#company" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">Company</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">Contact</a>
+                </li>
+                <!-- Right: Sign in button inside hamburger -->
+                <li class="nav-item">
+                    <a href="pages/login.php" class="btn btn-success fs-6 fw-semibold text-dark me-2 border-1 border-light d-block d-lg-none">Sign in</a>
+                </li>
+            </ul>
         </div>
 
-        <!-- Collapsible Navigation Links and Sign In Button (visible on smaller screens) -->
-        <div class="collapse navbar-collapse d-md-none" id="navbarNav">
-            <nav class="d-flex flex-column align-items-center gap-3 py-3" role="navigation">
-                <a href="#home" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">Home</a>
-                <a href="#department" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">Department</a>
-                <a href="#company" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">Company</a>
-                <a href="#about" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">About</a>
-                <a href="#contact" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">Contact</a>
-                <!-- Sign In Button (visible on smaller screens) -->
-                <a href="pages/login.php" class="btn btn-success fs-6 fw-semibold text-light border-1 border-light mt-2">Sign in</a>
-            </nav>
-        </div>
+        <!-- Right: Sign in button for large screens -->
+        <a href="pages/login.php" class="btn btn-success fs-6 fw-semibold text-dark me-2 border-1 border-light d-none d-lg-inline">Sign in</a>
     </div>
-</header>
+</nav>

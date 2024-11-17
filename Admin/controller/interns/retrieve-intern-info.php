@@ -4,11 +4,10 @@ include '../../../dbconn.php';
 if (isset($_GET['id'])) {
     $internId = $_GET['id'];
 
-    $sql = " SELECT u.id, u.last_name, u.first_name, u.gender, u.username, i.intern_id, i.studentID, u.department_id, u.password
+    $sql = "SELECT u.id, u.last_name, u.first_name, u.gender, u.username, i.intern_id, i.studentID, u.department_id
         FROM users u
         JOIN interns i ON u.id = i.user_id
-        WHERE i.id = ?
-    ";
+        WHERE i.id = ?";
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $internId);

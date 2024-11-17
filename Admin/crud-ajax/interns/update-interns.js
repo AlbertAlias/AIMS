@@ -8,7 +8,7 @@ $(document).ready(function() {
         const internFirstName = $('#intern_first_name').val();
         const internGender = $('#intern_gender').val();
         const studentID = $('#studentID').val();
-        const internDepartment = $('#intern_department').val();  // department_id (e.g., 1)
+        const internDepartment = $('#intern_department').val();
         const internUsername = $('#intern_username').val();
         const internPassword = $('#intern_password').val();
 
@@ -21,7 +21,7 @@ $(document).ready(function() {
             intern_first_name: internFirstName,
             intern_gender: internGender,
             studentID: studentID,
-            intern_department: internDepartment,  // Now passing department ID
+            intern_department: internDepartment,
             intern_username: internUsername,
             intern_password: internPassword
         };
@@ -49,10 +49,10 @@ $(document).ready(function() {
                             popup: 'mt-5'
                         }
                     });
-                    resetAndLockForms(); // Lock and reset the form after successful update
-                    $('#internUpdateBtn').prop('disabled', true); // Disable the update button
-                    $('#internCancelBtn').hide(); // Hide the cancel button
-                    window.loadIntern(); // Reload intern data (optional, if needed)
+                    resetAndLockForms();
+                    $('#internUpdateBtn').prop('disabled', true);
+                    $('#internCancelBtn').hide();
+                    window.loadIntern();
                 } else {
                     Swal.fire({
                         toast: true,

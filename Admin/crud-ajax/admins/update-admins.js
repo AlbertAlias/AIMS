@@ -17,6 +17,8 @@ $(document).ready(function () {
         const personalEmail = $('#admin_personal_email').val();
         const employeeNumber = $('#admin_employee_number').val();
         const userType = $('#user_type').val();
+        const username = $('#admin_username').val();
+        const password = $('#admin_password').val();
 
         // Check for required fields
         if (!lastName || !firstName || !address || !civilStatus || !personalEmail || !employeeNumber || !userType) {
@@ -37,7 +39,6 @@ $(document).ready(function () {
             return;
         }
 
-        // Prepare data to be sent
         const data = {
             id: adminID,
             admin_last_name: lastName,
@@ -48,6 +49,8 @@ $(document).ready(function () {
             admin_civil_status: civilStatus,
             admin_personal_email: personalEmail,
             admin_employee_number: employeeNumber,
+            admin_username: username,
+            admin_password: password,
             user_type: userType
         };
 

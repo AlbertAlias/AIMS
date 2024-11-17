@@ -67,8 +67,6 @@
 
                         <!-- No Account Link -->
                         <p class="no-account-text">Don't have an account? Ask your Department Coordinator</p>
-
-                        
                     </form>
                 </div>
             </div>
@@ -88,5 +86,27 @@
     
     <script src="../crud-ajax/login-users.js"></script>
     <script src="../functions/login.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Check for remember me cookie and populate the form
+            if (document.cookie.indexOf('username=') !== -1) {
+                var username = getCookie('username');
+                $('#username').val(username);
+                $('#rememberMe').prop('checked', true);
+            }
+
+            // Function to retrieve cookies
+            function getCookie(name) {
+                var nameEQ = name + "=";
+                var ca = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i].trim();
+                    if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            }
+        });
+    </script>
 </body>
 </html>

@@ -5,6 +5,7 @@ $(document).ready(function() {
         // Get form data
         var username = $('#username').val();
         var password = $('#password').val();
+        var rememberMe = $('#rememberMe').prop('checked');
 
         // AJAX request
         $.ajax({
@@ -12,7 +13,8 @@ $(document).ready(function() {
             type: 'POST',
             data: {
                 username: username,
-                password: password
+                password: password,
+                rememberMe: rememberMe
             },
             dataType: 'json',
             success: function(response) {
