@@ -1,0 +1,176 @@
+/* 1ST CONTAINER START */
+.circle-card {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    font-size: 2rem;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+.circle-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.circle-button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.circle-button:hover .circle-card {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.circle-button.active .circle-card {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+/* 1ST CONTAINER END */
+
+/* 2ND CONTAINER START */
+#card-container {
+    min-height: 532px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-content {
+    position: absolute;
+    height: 100%;
+    background: transparent;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    border-radius: 10px;
+    margin-left: 30%;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.card-content.active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.card-content .card-image {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 9px;
+}
+
+/* Responsive adjustments for card content and image */
+@media (max-width: 768px) {
+    .card-content {
+        width: 80%; /* Reduce card width */
+        height: 80%; /* Reduce card height */
+        margin-left: 10%; /* Center card on smaller screens */
+    }
+
+    .card-content .card-image {
+        border-radius: 8px; /* Smaller rounded corners */
+    }
+}
+
+@media (max-width: 576px) {
+    .card-content {
+        width: 90%; /* Increase width for very small screens */
+        height: 70%; /* Adjust height for very small screens */
+        margin-left: 0; /* Fully center the card */
+    }
+
+    .card-content .card-image {
+        border-radius: 6px; /* Further adjust corners for small screens */
+    }
+}
+
+.card-content.exit {
+    transform: translateY(100%); /* Slide out downward */
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.3s ease;
+}
+/* 2ND CONTAINER END */
+
+/* RESPONSIVENESS START */
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .circle-card {
+        width: 100px; /* Smaller size */
+        height: 100px;
+        font-size: 1.5rem; /* Adjust font size */
+    }
+
+    .circle-img {
+        width: 100px; /* Match circle-card size */
+        height: 100px;
+    }
+
+    #card-container {
+        min-height: 400px; /* Reduce container height */
+    }
+
+    .card-content {
+        width: 80%; /* Reduce card width */
+        height: 80%; /* Reduce card height */
+        margin-left: 10%; /* Center the card */
+    }
+
+    .card-content h3 {
+        font-size: 1.5rem; /* Adjust heading size */
+    }
+
+    .card-content p {
+        font-size: 1rem; /* Adjust paragraph size */
+    }
+
+    .col-md-6 {
+        min-height: 400px; /* Adjust column height */
+    }
+}
+
+@media (max-width: 576px) {
+    .circle-card {
+        width: 80px; /* Further smaller size */
+        height: 80px;
+        font-size: 1.2rem; /* Further adjust font size */
+    }
+
+    .circle-img {
+        width: 80px; /* Match circle-card size */
+        height: 80px;
+    }
+
+    #card-container {
+        min-height: 300px; /* Further reduce container height */
+    }
+
+    .card-content {
+        width: 90%; /* Increase width for smaller screens */
+        height: 70%; /* Adjust card height */
+        margin-left: 0; /* Center the card */
+    }
+
+    .card-content h3 {
+        font-size: 1.2rem; /* Further adjust heading size */
+    }
+
+    .card-content p {
+        font-size: 0.9rem; /* Further adjust paragraph size */
+    }
+
+    .col-md-6 {
+        min-height: 300px; /* Further adjust column height */
+    }
+}
+/* RESPONSIVENESS END */

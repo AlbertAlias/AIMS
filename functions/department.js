@@ -30,3 +30,4 @@ document.querySelectorAll('.circle-button').forEach(button => {
 // Set default active states
 document.querySelector('.circle-button[data-card="card-a"]').classList.add('active');
 document.getElementById('card-a').classList.add('active');
+

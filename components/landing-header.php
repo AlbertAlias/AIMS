@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-transparent fixed-top topbar m-0 p-0 px-2">
+<nav class="navbar navbar-expand-lg navbar-light  fixed-top topbar m-0 p-0 px-2" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
     <div class="container-fluid">
         <!-- Left: Logo -->
         <a class="navbar-brand d-flex align-items-center" href="#">
