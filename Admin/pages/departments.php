@@ -20,7 +20,7 @@
             <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 150px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Add Department</h5>
                 <p class="text-gray-800 fs-5 mb-3">Department Information</p>
-                <form id="departmentForm">
+                <form id="departmentForm" enctype="multipart/form-data">
                     <input type="hidden" id="departmentId" name="id">
                     <div class="row mb-3">
                         <div class="col-12 col-md-6">
@@ -32,6 +32,18 @@
                             <input type="text" class="form-control" id="departmentHead" name="departmentHead" required disabled>
                         </div>
                     </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-6">
+                            <label for="logoImage" class="form-label">Logo </label>
+                            <input type="file" class="form-control" id="logoImage" name="logoImage">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="departmentImage" class="form-label">Department </label>
+                            <input type="file" class="form-control" id="departmentImage" name="departmentImage">
+                        </div>
+                    </div>
+
                     <button type="submit" id="deptSubmitBtn" class="btn btn-success me-2" disabled><i class="fa-solid fa-check-to-slot"></i> Submit</button>
                     <button type="button" id="deptUpdateBtn" class="btn btn-primary" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> Update</button>
                     <button type="button" id="deptDeleteBtn" class="btn btn-danger" style="display: none;"><i class="fa-solid fa-trash"></i> Delete</button>

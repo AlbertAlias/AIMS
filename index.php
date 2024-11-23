@@ -46,7 +46,7 @@
                         <div class="row justify-content-center mb-4">
                             <!-- Circle Card 1 -->
                             <div class="col-4 mb-3">
-                                <button class="circle-button active" data-card="card-a">
+                                <button class="circle-button active" data-card="card-accountancy">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-a-logo.png" alt="" class="circle-img">
                                     </div>
@@ -54,7 +54,7 @@
                             </div>
                             <!-- Circle Card 2 -->
                             <div class="col-4 mb-3">
-                                <button class="circle-button" data-card="card-ba">
+                                <button class="circle-button" data-card="card-business-administration">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-ba-logo.png" alt="" class="circle-img">
                                     </div>
@@ -62,7 +62,7 @@
                             </div>
                             <!-- Circle Card 3 -->
                             <div class="col-4">
-                                <button class="circle-button" data-card="card-cpe">
+                                <button class="circle-button" data-card="card-computer-engineering">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-cpe-logo.png" alt="" class="circle-img">
                                     </div>
@@ -73,7 +73,7 @@
                         <div class="row justify-content-center mb-4">
                             <!-- Circle Card 4 -->
                             <div class="col-4 mb-3">
-                                <button class="circle-button" data-card="card-crim">
+                                <button class="circle-button" data-card="card-criminology">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-crim-logo.png" alt="" class="circle-img">
                                     </div>
@@ -81,7 +81,7 @@
                             </div>
                             <!-- Circle Card 5 -->
                             <div class="col-4 mb-3">
-                                <button class="circle-button" data-card="card-cs">
+                                <button class="circle-button" data-card="card-computer-science">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-cs-logo.png" alt="" class="circle-img">
                                     </div>
@@ -89,7 +89,7 @@
                             </div>
                             <!-- Circle Card 6 -->
                             <div class="col-4">
-                                <button class="circle-button" data-card="card-educ">
+                                <button class="circle-button" data-card="card-education">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-educ-logo.png" alt="" class="circle-img">
                                     </div>
@@ -100,7 +100,7 @@
                         <div class="row justify-content-center">
                             <!-- Circle Card 7 -->
                             <div class="col-4 mb-3">
-                                <button class="circle-button" data-card="card-hm">
+                                <button class="circle-button" data-card="card-hospitality-management">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-hm-logo.jpg" alt="" class="circle-img">
                                     </div>
@@ -108,7 +108,7 @@
                             </div>
                             <!-- Circle Card 8 -->
                             <div class="col-4 mb-3">
-                                <button class="circle-button" data-card="card-it">
+                                <button class="circle-button" data-card="card-information-technology">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-it-logo.png" alt="" class="circle-img">
                                     </div>
@@ -116,7 +116,7 @@
                             </div>
                             <!-- Circle Card 9 -->
                             <div class="col-4">
-                                <button class="circle-button" data-card="card-tm">
+                                <button class="circle-button" data-card="card-tourism-management">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-tm-logo.png" alt="" class="circle-img">
                                     </div>
@@ -130,41 +130,49 @@
                 <div class="col-12 col-md-6 d-flex align-items-center justify-content-center ">
                     <div class="container text-center position-relative overflow-hidden" id="card-container">
                         <!-- Card A -->
-                        <div class="card-content active" id="card-a">
-                            <img src="img/a-card.jpg" alt="Card A Image" class="card-image">
-                            <div class="card-back" style="background-color: pink;"></div>
+                        <div class="card-content active" id="card-accountancy">
+                            <div class="card-front"></div>
+                            <div class="card-back"></div>
                         </div>
                         <!-- Card B -->
-                        <div class="card-content" id="card-ba">
-                            <img src="img/ba-card.jpg" alt="Card A Image" class="card-image">
+                        <div class="card-content" id="card-business-administration">
+                            <div class="card-front"></div>
+                            <div class="card-back"></div>
                         </div>
                         <!-- Card C -->
-                        <div class="card-content" id="card-cpe">
-                            <img src="img/a-card.jpg" alt="Card A Image" class="card-image">
+                        <div class="card-content" id="card-computer-engineering">
+                            <div class="card-front"></div>
+                            <div class="card-back"></div>
                         </div>
                         <!-- Card D -->
-                        <div class="card-content" id="card-crim">
-                            <img src="img/ba-card.jpg" alt="Card A Image" class="card-image">
+                        <div class="card-content" id="card-criminology">
+                            <div class="card-front"></div>
+                            <div class="card-back"></div>
                         </div>
                         <!-- Card E -->
-                        <div class="card-content" id="card-cs">
-                            <img src="img/educ-card.jpg" alt="Card A Image" class="card-image">
+                        <div class="card-content" id="card-computer-science">
+                            <div class="card-front"></div>
+                            <div class="card-back"></div>
                         </div>
                         <!-- Card F -->
-                        <div class="card-content" id="card-educ">
-                            <img src="img/educ-card.jpg" alt="Card A Image" class="card-image">
+                        <div class="card-content" id="card-education">
+                            <div class="card-front"></div>
+                            <div class="card-back"></div>
                         </div>
                         <!-- Card G -->
-                        <div class="card-content" id="card-hm">
-                            <img src="img/hm-card.jpg" alt="Card A Image" class="card-image">
+                        <div class="card-content" id="card-hospitality-management">
+                            <div class="card-front"></div>
+                            <div class="card-back"></div>
                         </div>
                         <!-- Card H -->
-                        <div class="card-content" id="card-it">
-                            <img src="img/hm-card.jpg" alt="Card A Image" class="card-image">
+                        <div class="card-content" id="card-information-technology">
+                            <div class="card-front"></div>
+                            <div class="card-back"></div>
                         </div>
                         <!-- Card I -->
-                        <div class="card-content" id="card-tm">
-                            <img src="img/tm-card.jpg" alt="Card A Image" class="card-image">
+                        <div class="card-content" id="card-tourism-management">
+                            <div class="card-front"></div>
+                            <div class="card-back"></div>
                         </div>
                     </div>
                 </div>
@@ -206,6 +214,7 @@
     <script src="functions/landing-header.js"></script>
     <script src="functions/department.js"></script>
 
+    <script src="crud-ajax/retrieve-depts-card.js"></script>
 
 </body>
 </html>
