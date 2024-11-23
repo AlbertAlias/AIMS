@@ -132,6 +132,7 @@
                         <!-- Card A -->
                         <div class="card-content active" id="card-a">
                             <img src="img/a-card.jpg" alt="Card A Image" class="card-image">
+                            <div class="card-back" style="background-color: pink;"></div>
                         </div>
                         <!-- Card B -->
                         <div class="card-content" id="card-ba">
@@ -139,15 +140,15 @@
                         </div>
                         <!-- Card C -->
                         <div class="card-content" id="card-cpe">
-                            <img src="img/try-card.jpg" alt="Card A Image" class="card-image">
+                            <img src="img/a-card.jpg" alt="Card A Image" class="card-image">
                         </div>
                         <!-- Card D -->
                         <div class="card-content" id="card-crim">
-                            <img src="img/try-card.jpg" alt="Card A Image" class="card-image">
+                            <img src="img/ba-card.jpg" alt="Card A Image" class="card-image">
                         </div>
                         <!-- Card E -->
                         <div class="card-content" id="card-cs">
-                            <img src="img/try-card.jpg" alt="Card A Image" class="card-image">
+                            <img src="img/educ-card.jpg" alt="Card A Image" class="card-image">
                         </div>
                         <!-- Card F -->
                         <div class="card-content" id="card-educ">
@@ -159,7 +160,7 @@
                         </div>
                         <!-- Card H -->
                         <div class="card-content" id="card-it">
-                            <img src="img/try-card.jpg" alt="Card A Image" class="card-image">
+                            <img src="img/hm-card.jpg" alt="Card A Image" class="card-image">
                         </div>
                         <!-- Card I -->
                         <div class="card-content" id="card-tm">
@@ -173,139 +174,7 @@
 
     <!-- COMPANY SECTION -->
     <section id="company" class="p-0 m-0 vh-100 d-flex flex-column justify-content-center align-items-center text-light">
-        <div class="container">
-            <!-- Row with two columns for department sections -->
-            <div class="row p-0 m-0 flex-column flex-md-row align-items-center h-100 mt-4">
-                <!-- First container for the first department -->
-                <div class="col-12 col-md-6 d-flex align-items-center justify-content-center ">
-                    <div class="container text-center position-relative overflow-hidden" id="card-container">
-                        <!-- Card A -->
-                        <div class="card-content active" id="card-a">
-                            <img src="img/a-card.jpg" alt="Card A Image" class="card-image">
-                        </div>
-                        <!-- Card B -->
-                        <div class="card-content" id="card-ba">
-                            <img src="img/ba-card.jpg" alt="Card A Image" class="card-image">
-                        </div>
-                        <!-- Card C -->
-                        <div class="card-content" id="card-cpe">
-                            <img src="img/try-card.jpg" alt="Card A Image" class="card-image">
-                        </div>
-                        <!-- Card D -->
-                        <div class="card-content" id="card-crim">
-                            <img src="img/try-card.jpg" alt="Card A Image" class="card-image">
-                        </div>
-                        <!-- Card E -->
-                        <div class="card-content" id="card-cs">
-                            <img src="img/try-card.jpg" alt="Card A Image" class="card-image">
-                        </div>
-                        <!-- Card F -->
-                        <div class="card-content" id="card-educ">
-                            <img src="img/educ-card.jpg" alt="Card A Image" class="card-image">
-                        </div>
-                        <!-- Card G -->
-                        <div class="card-content" id="card-hm">
-                            <img src="img/hm-card.jpg" alt="Card A Image" class="card-image">
-                        </div>
-                        <!-- Card H -->
-                        <div class="card-content" id="card-it">
-                            <img src="img/try-card.jpg" alt="Card A Image" class="card-image">
-                        </div>
-                        <!-- Card I -->
-                        <div class="card-content" id="card-tm">
-                            <img src="img/tm-card.jpg" alt="Card A Image" class="card-image">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Second container for the second department -->
-                <div class="col-12 col-md-6 d-flex align-items-center justify-content-center ">
-                    <div class="container text-center">
-                        <!-- Row for the circle card containers -->
-                        <div class="row justify-content-center mb-4">
-                            <!-- Circle Card 1 -->
-                            <div class="col-4 mb-3">
-                                <button class="circle-button active" data-card="card-a">
-                                    <div class="circle-card d-flex justify-content-center align-items-center">
-                                        <img src="img/esyatek-a-logo.png" alt="" class="circle-img">
-                                    </div>
-                                </button>
-                            </div>
-                            <!-- Circle Card 2 -->
-                            <div class="col-4 mb-3">
-                                <button class="circle-button" data-card="card-ba">
-                                    <div class="circle-card d-flex justify-content-center align-items-center">
-                                        <img src="img/esyatek-ba-logo.png" alt="" class="circle-img">
-                                    </div>
-                                </button>
-                            </div>
-                            <!-- Circle Card 3 -->
-                            <div class="col-4">
-                                <button class="circle-button" data-card="card-cpe">
-                                    <div class="circle-card d-flex justify-content-center align-items-center">
-                                        <img src="img/esyatek-cpe-logo.png" alt="" class="circle-img">
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="row justify-content-center mb-4">
-                            <!-- Circle Card 4 -->
-                            <div class="col-4 mb-3">
-                                <button class="circle-button" data-card="card-crim">
-                                    <div class="circle-card d-flex justify-content-center align-items-center">
-                                        <img src="img/esyatek-crim-logo.png" alt="" class="circle-img">
-                                    </div>
-                                </button>
-                            </div>
-                            <!-- Circle Card 5 -->
-                            <div class="col-4 mb-3">
-                                <button class="circle-button" data-card="card-cs">
-                                    <div class="circle-card d-flex justify-content-center align-items-center">
-                                        <img src="img/esyatek-cs-logo.png" alt="" class="circle-img">
-                                    </div>
-                                </button>
-                            </div>
-                            <!-- Circle Card 6 -->
-                            <div class="col-4">
-                                <button class="circle-button" data-card="card-educ">
-                                    <div class="circle-card d-flex justify-content-center align-items-center">
-                                        <img src="img/esyatek-educ-logo.png" alt="" class="circle-img">
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-
-                        <div class="row justify-content-center">
-                            <!-- Circle Card 7 -->
-                            <div class="col-4 mb-3">
-                                <button class="circle-button" data-card="card-hm">
-                                    <div class="circle-card d-flex justify-content-center align-items-center">
-                                        <img src="img/esyatek-hm-logo.jpg" alt="" class="circle-img">
-                                    </div>
-                                </button>
-                            </div>
-                            <!-- Circle Card 8 -->
-                            <div class="col-4 mb-3">
-                                <button class="circle-button" data-card="card-it">
-                                    <div class="circle-card d-flex justify-content-center align-items-center">
-                                        <img src="img/esyatek-it-logo.png" alt="" class="circle-img">
-                                    </div>
-                                </button>
-                            </div>
-                            <!-- Circle Card 9 -->
-                            <div class="col-4">
-                                <button class="circle-button" data-card="card-tm">
-                                    <div class="circle-card d-flex justify-content-center align-items-center">
-                                        <img src="img/esyatek-tm-logo.png" alt="" class="circle-img">
-                                    </div>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
     </section>
 
     <!-- ABOUT SECTION -->

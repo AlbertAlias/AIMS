@@ -43,11 +43,12 @@
 .card-content {
     position: absolute;
     height: 100%;
+    width: 65%;
     background: transparent;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     border-radius: 10px;
-    margin-left: 30%;
-    transform: translateX(100%);
+    margin-left: 25%;
+    transform: translateX(100%) rotateY(0deg);
     opacity: 0;
     transition: transform 0.5s ease, opacity 0.5s ease;
     z-index: 1;
@@ -55,19 +56,49 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    perspective: 1000px; /* Set perspective to create the 3D effect */
 }
 
 .card-content.active {
-    transform: translateX(0);
+    transform: translateX(0) rotateY(0deg);
     opacity: 1;
 }
 
+.card-content.flipped {
+    transform: rotateY(180deg); /* Flip the card */
+}
+
 .card-content .card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-    max-height: 100%;
-    object-fit: contain;
-    border-radius: 9px;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the card area */
+    border-radius: 10px; /* Match card's rounded corners */
+    z-index: -1; /* Place the image behind other content */
+}
+
+.card-content .card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.card-content.flipped .card-back {
+    opacity: 1;
+}
+
+.card-content.exit {
+    transform: translateY(100%); /* Slide out downward */
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.3s ease;
 }
 
 /* Responsive adjustments for card content and image */

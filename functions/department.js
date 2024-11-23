@@ -1,3 +1,11 @@
+document.querySelectorAll('.card-content').forEach(card => {
+    card.addEventListener('click', () => {
+        // Toggle the flipped class on the clicked card
+        card.classList.toggle('flipped');
+    });
+});
+
+
 document.querySelectorAll('.circle-button').forEach(button => {
     button.addEventListener('click', () => {
         const cardId = button.getAttribute('data-card');
@@ -30,4 +38,3 @@ document.querySelectorAll('.circle-button').forEach(button => {
 // Set default active states
 document.querySelector('.circle-button[data-card="card-a"]').classList.add('active');
 document.getElementById('card-a').classList.add('active');
-
