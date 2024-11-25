@@ -40,28 +40,25 @@
             <!-- Row with two columns for department sections -->
             <div class="row p-0 m-0 flex-column flex-md-row align-items-center h-100 mt-4">
                 <!-- First container for the first department -->
-                <div class="col-12 col-md-6 d-flex align-items-center justify-content-center ">
+                <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
                     <div class="container text-center">
-                        <!-- Row for the circle card containers -->
+                        <!-- Circle Cards Section -->
                         <div class="row justify-content-center mb-4">
-                            <!-- Circle Card 1 -->
-                            <div class="col-4 mb-3">
+                            <div class="col-4 col-sm-3 col-md-4 mb-3">
                                 <button class="circle-button active" data-card="card-accountancy">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-a-logo.png" alt="" class="circle-img">
                                     </div>
                                 </button>
                             </div>
-                            <!-- Circle Card 2 -->
-                            <div class="col-4 mb-3">
+                            <div class="col-4 col-sm-3 col-md-4 mb-3">
                                 <button class="circle-button" data-card="card-business-administration">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-ba-logo.png" alt="" class="circle-img">
                                     </div>
                                 </button>
                             </div>
-                            <!-- Circle Card 3 -->
-                            <div class="col-4">
+                            <div class="col-4 col-sm-3 col-md-4 mb-3">
                                 <button class="circle-button" data-card="card-computer-engineering">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-cpe-logo.png" alt="" class="circle-img">
@@ -70,25 +67,23 @@
                             </div>
                         </div>
 
+                        <!-- Additional rows for circle cards -->
                         <div class="row justify-content-center mb-4">
-                            <!-- Circle Card 4 -->
-                            <div class="col-4 mb-3">
+                            <div class="col-4 col-sm-3 col-md-4 mb-3">
                                 <button class="circle-button" data-card="card-criminology">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-crim-logo.png" alt="" class="circle-img">
                                     </div>
                                 </button>
                             </div>
-                            <!-- Circle Card 5 -->
-                            <div class="col-4 mb-3">
+                            <div class="col-4 col-sm-3 col-md-4 mb-3">
                                 <button class="circle-button" data-card="card-computer-science">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-cs-logo.png" alt="" class="circle-img">
                                     </div>
                                 </button>
                             </div>
-                            <!-- Circle Card 6 -->
-                            <div class="col-4">
+                            <div class="col-4 col-sm-3 col-md-4 mb-3">
                                 <button class="circle-button" data-card="card-education">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-educ-logo.png" alt="" class="circle-img">
@@ -97,25 +92,23 @@
                             </div>
                         </div>
 
+                        <!-- Final row -->
                         <div class="row justify-content-center">
-                            <!-- Circle Card 7 -->
-                            <div class="col-4 mb-3">
+                            <div class="col-4 col-sm-3 col-md-4 mb-3">
                                 <button class="circle-button" data-card="card-hospitality-management">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-hm-logo.jpg" alt="" class="circle-img">
                                     </div>
                                 </button>
                             </div>
-                            <!-- Circle Card 8 -->
-                            <div class="col-4 mb-3">
+                            <div class="col-4 col-sm-3 col-md-4 mb-3">
                                 <button class="circle-button" data-card="card-information-technology">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-it-logo.png" alt="" class="circle-img">
                                     </div>
                                 </button>
                             </div>
-                            <!-- Circle Card 9 -->
-                            <div class="col-4">
+                            <div class="col-4 col-sm-3 col-md-4">
                                 <button class="circle-button" data-card="card-tourism-management">
                                     <div class="circle-card d-flex justify-content-center align-items-center">
                                         <img src="img/esyatek-tm-logo.png" alt="" class="circle-img">
@@ -131,48 +124,31 @@
                     <div class="container text-center position-relative overflow-hidden" id="card-container">
                         <!-- Card A -->
                         <div class="card-content active" id="card-accountancy">
-                            <div class="card-front"></div>
-                            <div class="card-back"></div>
+                            <img src="img/a-card.jpg" alt="">
                         </div>
-                        <!-- Card B -->
                         <div class="card-content" id="card-business-administration">
-                            <div class="card-front"></div>
-                            <div class="card-back"></div>
+                            <img src="img/ba-card.jpg" alt="">
                         </div>
-                        <!-- Card C -->
                         <div class="card-content" id="card-computer-engineering">
-                            <div class="card-front"></div>
-                            <div class="card-back"></div>
+                            <img src="img/a-card.jpg" alt="">
                         </div>
-                        <!-- Card D -->
                         <div class="card-content" id="card-criminology">
-                            <div class="card-front"></div>
-                            <div class="card-back"></div>
+                            <img src="img/ba-card.jpg" alt="">
                         </div>
-                        <!-- Card E -->
                         <div class="card-content" id="card-computer-science">
-                            <div class="card-front"></div>
-                            <div class="card-back"></div>
+                            <img src="img/a-card.jpg" alt="">
                         </div>
-                        <!-- Card F -->
                         <div class="card-content" id="card-education">
-                            <div class="card-front"></div>
-                            <div class="card-back"></div>
+                            <img src="img/educ-card.jpg" alt="">
                         </div>
-                        <!-- Card G -->
                         <div class="card-content" id="card-hospitality-management">
-                            <div class="card-front"></div>
-                            <div class="card-back"></div>
+                            <img src="img/hm-card.jpg" alt="">
                         </div>
-                        <!-- Card H -->
                         <div class="card-content" id="card-information-technology">
-                            <div class="card-front"></div>
-                            <div class="card-back"></div>
+                            <img src="img/educ-card.jpg" alt="">
                         </div>
-                        <!-- Card I -->
                         <div class="card-content" id="card-tourism-management">
-                            <div class="card-front"></div>
-                            <div class="card-back"></div>
+                            <img src="img/tm-card.jpg" alt="">
                         </div>
                     </div>
                 </div>
@@ -212,9 +188,6 @@
     <script src="crud-ajax/login-users.js"></script>
     <!--END::LOGIN FUNCTION-->
     <script src="functions/landing-header.js"></script>
-    <script src="functions/department.js"></script>
-
-    <script src="crud-ajax/retrieve-depts-card.js"></script>
-
+    <script src="functions/dept-card.js"></script>
 </body>
 </html>
