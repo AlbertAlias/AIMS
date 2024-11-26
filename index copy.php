@@ -22,7 +22,7 @@
 
     <!--START::HOME HERO SECTION -->
     <section id="home" class="container-fluid p-0 m-0 vh-100 d-flex flex-column justify-content-end align-items-center text-light" 
-        style="background-image: url('img/esyatek-bg1.jpeg'); background-size: cover; background-position: center -80px; padding-top: 70px;">
+        style="background-image: url('img/esyatek-bg1-logo.png'); background-size: cover; background-position: center -80px; padding-top: 70px;">
         <div class="container text-center mb-4">
             <div class="row justify-content-center">
                 <div class="col-md-4 d-flex flex-column align-items-center">
@@ -34,6 +34,128 @@
         </div>
     </section>
     <!--END::HOME HERO SECTION-->
+
+    <!-- DEPARTMENT SECTION -->
+    <section id="department" class="p-0 m-0 vh-100 d-flex flex-column justify-content-center align-items-center text-light">
+        <div class="container">
+            <!-- Row with two columns for department sections -->
+            <div class="row p-0 m-0 flex-column flex-md-row align-items-center h-100 mt-4">
+                <!-- First container for the first department -->
+                <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
+                    <div class="container text-center">
+                        <!-- Circle Cards Section -->
+                        <div class="row justify-content-center mb-4">
+                            <div class="col-4 col-sm-3 col-md-4 mb-3">
+                                <button class="circle-button active" data-card="card-accountancy">
+                                    <div class="circle-card d-flex justify-content-center align-items-center">
+                                        <img src="img/esyatek-a-logo.png" alt="" class="circle-img">
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="col-4 col-sm-3 col-md-4 mb-3">
+                                <button class="circle-button" data-card="card-business-administration">
+                                    <div class="circle-card d-flex justify-content-center align-items-center">
+                                        <img src="img/esyatek-ba-logo.png" alt="" class="circle-img">
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="col-4 col-sm-3 col-md-4 mb-3">
+                                <button class="circle-button" data-card="card-computer-engineering">
+                                    <div class="circle-card d-flex justify-content-center align-items-center">
+                                        <img src="img/esyatek-cpe-logo.png" alt="" class="circle-img">
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Additional rows for circle cards -->
+                        <div class="row justify-content-center mb-4">
+                            <div class="col-4 col-sm-3 col-md-4 mb-3">
+                                <button class="circle-button" data-card="card-criminology">
+                                    <div class="circle-card d-flex justify-content-center align-items-center">
+                                        <img src="img/esyatek-crim-logo.png" alt="" class="circle-img">
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="col-4 col-sm-3 col-md-4 mb-3">
+                                <button class="circle-button" data-card="card-computer-science">
+                                    <div class="circle-card d-flex justify-content-center align-items-center">
+                                        <img src="img/esyatek-cs-logo.png" alt="" class="circle-img">
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="col-4 col-sm-3 col-md-4 mb-3">
+                                <button class="circle-button" data-card="card-education">
+                                    <div class="circle-card d-flex justify-content-center align-items-center">
+                                        <img src="img/esyatek-educ-logo.png" alt="" class="circle-img">
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Final row -->
+                        <div class="row justify-content-center">
+                            <div class="col-4 col-sm-3 col-md-4 mb-3">
+                                <button class="circle-button" data-card="card-hospitality-management">
+                                    <div class="circle-card d-flex justify-content-center align-items-center">
+                                        <img src="img/esyatek-hm-logo.jpg" alt="" class="circle-img">
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="col-4 col-sm-3 col-md-4 mb-3">
+                                <button class="circle-button" data-card="card-information-technology">
+                                    <div class="circle-card d-flex justify-content-center align-items-center">
+                                        <img src="img/esyatek-it-logo.png" alt="" class="circle-img">
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="col-4 col-sm-3 col-md-4">
+                                <button class="circle-button" data-card="card-tourism-management">
+                                    <div class="circle-card d-flex justify-content-center align-items-center">
+                                        <img src="img/esyatek-tm-logo.png" alt="" class="circle-img">
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second container for the second department -->
+                <div class="col-12 col-md-6 d-flex align-items-center justify-content-center ">
+                    <div class="container text-center position-relative overflow-hidden" id="card-container">
+                        <!-- Card A -->
+                        <div class="card-content active" id="card-accountancy">
+                            <img src="img/a-card.jpg" alt="">
+                        </div>
+                        <div class="card-content" id="card-business-administration">
+                            <img src="img/ba-card.jpg" alt="">
+                        </div>
+                        <div class="card-content" id="card-computer-engineering">
+                            <img src="img/a-card.jpg" alt="">
+                        </div>
+                        <div class="card-content" id="card-criminology">
+                            <img src="img/ba-card.jpg" alt="">
+                        </div>
+                        <div class="card-content" id="card-computer-science">
+                            <img src="img/a-card.jpg" alt="">
+                        </div>
+                        <div class="card-content" id="card-education">
+                            <img src="img/educ-card.jpg" alt="">
+                        </div>
+                        <div class="card-content" id="card-hospitality-management">
+                            <img src="img/hm-card.jpg" alt="">
+                        </div>
+                        <div class="card-content" id="card-information-technology">
+                            <img src="img/educ-card.jpg" alt="">
+                        </div>
+                        <div class="card-content" id="card-tourism-management">
+                            <img src="img/tm-card.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     <!--START::DEPT HERO SECTION -->
