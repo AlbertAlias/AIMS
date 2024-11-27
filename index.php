@@ -34,76 +34,76 @@
 
     <!-- DEPARTMENT SECTION -->
     <section class="dept-section" id="department">
-        <div class="row mt-5">
+        <div class="row">
             <div class="card-container col-12">
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front">
-                            <img src="img/a-card.jpg" alt="Card Image" class="card-image">
+                        <div class="card-front" style="background-image: url('img/a-card.jpg');">
+                            <!-- <img src="img/a-card.jpg" alt="Card Image" class="card-image"> -->
                         </div>
                         <div class="card-back" style="background-color: skyblue;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front">
-                            <img src="img/ba-card.jpg" alt="Card Image" class="card-image">
+                        <div class="card-front" style="background-image: url('img/ba-card.jpg');">
+                            <!-- <img src="img/ba-card.jpg" alt="Card Image" class="card-image"> -->
                         </div>
                         <div class="card-back" style="background-color: gold;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front">
-                            <img src="img/tm-card.jpg" alt="Card Image" class="card-image">
+                        <div class="card-front" style="background-image: url('img/tm-card.jpg');">
+                            <!-- <img src="img/tm-card.jpg" alt="Card Image" class="card-image"> -->
                         </div>
                         <div class="card-back" style="background-color: lightgray;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front">
-                            <img src="img/hm-card.jpg" alt="Card Image" class="card-image">
+                        <div class="card-front" style="background-image: url('img/hm-card.jpg');">
+                            <!-- <img src="img/hm-card.jpg" alt="Card Image" class="card-image"> -->
                         </div>
                         <div class="card-back" style="background-color: violet;"></div>
                     </div>
                 </div>
                 <div class="card active">
                     <div class="card-inner">
-                        <div class="card-front">
-                            <img src="img/ba-card.jpg" alt="Card Image" class="card-image">
+                        <div class="card-front" style="background-image: url('img/ba-card.jpg');">
+                            <!-- <img src="img/ba-card.jpg" alt="Card Image" class="card-image"> -->
                         </div>
                         <div class="card-back" style="background-color: pink;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front">
-                            <img src="img/educ-card.jpg" alt="Card Image" class="card-image">
+                        <div class="card-front" style="background-image: url('img/educ-card.jpg');">
+                            <!-- <img src="img/educ-card.jpg" alt="Card Image" class="card-image"> -->
                         </div>
                         <div class="card-back" style="background-color: red;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front">
-                            <img src="img/hm-card.jpg" alt="Card Image" class="card-image">
+                        <div class="card-front" style="background-image: url('img/hm-card.jpg');">
+                            <!-- <img src="img/hm-card.jpg" alt="Card Image" class="card-image"> -->
                         </div>
                         <div class="card-back" style="background-color: orange;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front">
-                            <img src="img/a-card.jpg" alt="Card Image" class="card-image">
+                        <div class="card-front" style="background-image: url('img/a-card.jpg');">
+                            <!-- <img src="img/a-card.jpg" alt="Card Image" class="card-image"> -->
                         </div>
                         <div class="card-back" style="background-color: darkgray;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front">
-                            <img src="img/tm-card.jpg" alt="Card Image" class="card-image">
+                        <div class="card-front" style="background-image: url('img/tm-card.jpg');">
+                            <!-- <img src="img/tm-card.jpg" alt="Card Image" class="card-image"> -->
                         </div>
                         <div class="card-back" style="background-color: maroon;"></div>
                     </div>
