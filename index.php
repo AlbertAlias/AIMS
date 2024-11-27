@@ -15,6 +15,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
                 integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 </head>
 <body>
 
@@ -33,114 +34,83 @@
 
     <!-- DEPARTMENT SECTION -->
     <section class="dept-section" id="department">
-        <div class="container">
-            <div class="row">
-                <!-- Left Container with 9 Circle Buttons -->
-                <div class="col-md-6">
-                    <div class="left-container">
-                        <div class="row mb-5">
-                            <!-- Row 1 -->
-                            <div class="col-4">
-                                <button class="circle-btn active">
-                                    <img src="img/esyatek-a-logo.png" alt="Logo">
-                                </button>
-                            </div>
-                            <div class="col-4">
-                                <button class="circle-btn">
-                                    <img src="img/esyatek-ba-logo.png" alt="Logo">
-                                </button>
-                            </div>
-                            <div class="col-4">
-                                <button class="circle-btn">
-                                    <img src="img/esyatek-cpe-logo.png" alt="Logo">
-                                </button>
-                            </div>
+        <div class="row mt-5">
+            <div class="card-container col-12">
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="img/a-card.jpg" alt="Card Image" class="card-image">
                         </div>
-                        <div class="row">
-                            <!-- Row 2 -->
-                            <div class="col-4">
-                                <button class="circle-btn">
-                                    <img src="img/esyatek-cs-logo.png" alt="Logo">
-                                </button>
-                            </div>
-                            <div class="col-4">
-                                <button class="circle-btn">
-                                    <img src="img/esyatek-crim-logo.png" alt="Logo">
-                                </button>
-                            </div>
-                            <div class="col-4">
-                                <button class="circle-btn">
-                                    <img src="img/esyatek-educ-logo.png" alt="Logo">
-                                </button>
-                            </div>
-                        </div>
-                        <div class="row mt-5">
-                            <!-- Row 3 -->
-                            <div class="col-4">
-                                <button class="circle-btn">
-                                    <img src="img/esyatek-hm-logo.png" alt="Logo">
-                                </button>
-                            </div>
-                            <div class="col-4">
-                                <button class="circle-btn">
-                                    <img src="img/esyatek-it-logo.png" alt="Logo">
-                                </button>
-                            </div>
-                            <div class="col-4">
-                                <button class="circle-btn">
-                                    <img src="img/esyatek-tm-logo.png" alt="Logo">
-                                </button>
-                            </div>
-                        </div>
+                        <div class="card-back" style="background-color: skyblue;"></div>
                     </div>
                 </div>
-
-                <!-- Right Container with Vertical Rectangle Button -->
-                <div class="col-md-6">
-                    <div class="right-container">
-                        <!-- Card Containers -->
-                        <div class="card-container active" id="card-1">
-                            <div class="front">Content for Card 1</div>
-                            <div class="back">Back of Card 1</div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="img/ba-card.jpg" alt="Card Image" class="card-image">
                         </div>
-                        <div class="card-container" id="card-2">
-                            <div class="front">Content for Card 2</div>
-                            <div class="back">Back of Card 2</div>
+                        <div class="card-back" style="background-color: gold;"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="img/tm-card.jpg" alt="Card Image" class="card-image">
                         </div>
-                        <div class="card-container" id="card-3">
-                            <div class="front">Content for Card 3</div>
-                            <div class="back">Back of Card 3</div>
+                        <div class="card-back" style="background-color: lightgray;"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="img/hm-card.jpg" alt="Card Image" class="card-image">
                         </div>
-                        <div class="card-container" id="card-4">
-                            <div class="front">Content for Card 4</div>
-                            <div class="back">Back of Card 4</div>
+                        <div class="card-back" style="background-color: violet;"></div>
+                    </div>
+                </div>
+                <div class="card active">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="img/ba-card.jpg" alt="Card Image" class="card-image">
                         </div>
-                        <div class="card-container" id="card-5">
-                            <div class="front">Content for Card 5</div>
-                            <div class="back">Back of Card 5</div>
+                        <div class="card-back" style="background-color: pink;"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="img/educ-card.jpg" alt="Card Image" class="card-image">
                         </div>
-                        <div class="card-container" id="card-6">
-                            <div class="front">Content for Card 6</div>
-                            <div class="back">Back of Card 6</div>
+                        <div class="card-back" style="background-color: red;"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="img/hm-card.jpg" alt="Card Image" class="card-image">
                         </div>
-                        <div class="card-container" id="card-7">
-                            <div class="front">Content for Card 7</div>
-                            <div class="back">Back of Card 7</div>
+                        <div class="card-back" style="background-color: orange;"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="img/a-card.jpg" alt="Card Image" class="card-image">
                         </div>
-                        <div class="card-container" id="card-8">
-                            <div class="front">Content for Card 8</div>
-                            <div class="back">Back of Card 8</div>
+                        <div class="card-back" style="background-color: darkgray;"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="img/tm-card.jpg" alt="Card Image" class="card-image">
                         </div>
-                        <div class="card-container" id="card-9">
-                            <div class="front">Content for Card 9</div>
-                            <div class="back">Back of Card 9</div>
-                        </div>
+                        <div class="card-back" style="background-color: maroon;"></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
 
     <!-- COMPANY SECTION -->
     <section id="company">
@@ -163,6 +133,7 @@
                 integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
     <!--START::LOGIN FUNCTION-->
     <script src="crud-ajax/login-users.js"></script>

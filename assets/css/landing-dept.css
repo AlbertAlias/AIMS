@@ -1,121 +1,85 @@
 .dept-section {
     height: 100vh;
     background-color: #d3c8c888;
-    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.dept-section h2 {
-    font-size: 2.5rem;
-}
-
-.dept-section p {
-    font-size: 1.1rem;
-}
-
-.dept-section .btn {
-    margin-top: 20px;
-}
-
-.left-container .row {
-    display: flex;
-    justify-content: center;
-}
-
-.container {
-    margin-top: 50px;
-}
-  
-.circle-btn {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    background: none;
-    font-size: 1.2rem;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-}
-
-.circle-btn img {
-    width: 140px;
-    height: 140px;
-    object-fit: contain;
-}
-
-.circle-btn.active {
-    background-color: none;
-    transform: scale(1.1);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-}
-
-.circle-btn:hover {
-    transform: scale(1.1);
-}
-
-.right-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    background-color: none;
-    margin-left: 150px;
+    overflow: hidden;
     position: relative;
 }
 
-.card-container {
-    position: absolute;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 500px;
-    width: 370px;
-    border-radius: 20px;
+.row {
     background-color: green;
-    font-size: 1.2rem;
-    cursor: pointer;
+    overflow: hidden;
 }
 
-.card-container.active {
+.card-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    gap: 50px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    
 }
 
-.card-container .front,
-.card-container .back {
-    position: absolute;
+.card {
+    margin-top: 50px;
+    height: 450px !important;
+    width: 300px !important;
+    border-radius: 10px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    perspective: 1000px;
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.card.active {
+    height: 500px !important;
+    width: 350px !important;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.card-inner {
+    position: relative;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 15px;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
 }
 
-.card-container .back {
+/* Flip the card when it has the "flipped" class */
+.card.flipped .card-inner {
     transform: rotateY(180deg);
 }
 
-#card-1 .back { background-color: pink; }
-#card-2 .back { background-color: red; }
-#card-3 .back { background-color: orange; }
-#card-4 .back { background-color: darkgray; }
-#card-5 .back { background-color: maroon; }
-#card-6 .back { background-color: lightblue; }
-#card-7 .back { background-color: gold; }
-#card-8 .back { background-color: lightgray; }
-#card-9 .back { background-color: violet; }
+/* Front and back of the card */
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hide the back when viewing the front */
+    border-radius: 10px;
+    overflow: hidden;
+}
 
-.card-container.flipped {
-    transform: translate(-50%, -50%) rotateY(180deg);
+/* Front of the card */
+.card-front {
+    background-color: white; /* Default background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-front img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the front */
+    border-radius: 10px;
+}
+
+/* Back of the card */
+.card-back {
+    transform: rotateY(180deg); /* Position it behind the front */
 }

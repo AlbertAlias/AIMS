@@ -1,37 +1,42 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const buttons = document.querySelectorAll(".circle-btn");
-    const cards = document.querySelectorAll(".card-container");
+    const cards = document.querySelectorAll('.card'); // Get all cards
+    const totalCards = cards.length;
+    let activeIndex = 4; // Initial active card index (center one)
 
-    // Ensure the first button and card are active by default
-    buttons.forEach((btn, index) => {
-        if (index === 0) {
-            btn.classList.add("active");
-        } else {
-            btn.classList.remove("active");
-        }
-    });
+    // Function to update the active card
+    const updateCards = () => {
+        cards.forEach((card, index) => {
+            card.style.display = 'none';
+            card.classList.remove('flipped');
+            if (index === activeIndex - 1 || index === activeIndex || index === activeIndex + 1) {
+                card.style.display = 'block'; // Only show 3 cards: left, center, right
+            }
+            card.classList.remove('active');
+            if (index === activeIndex) {
+                card.classList.add('active');
+            }
+        });
+    };
 
+    // Function to set the active card by index
+    const setActiveCard = (index) => {
+        activeIndex = index;
+        updateCards();
+    };
+
+    // Add click event for each card
     cards.forEach((card, index) => {
-        if (index === 0) {
-            card.classList.add("active");
-        } else {
-            card.classList.remove("active");
-        }
-    });
-
-    // Button click logic
-    buttons.forEach((button, index) => {
-        button.addEventListener("click", () => {
-            // Reset active classes for buttons
-            buttons.forEach(btn => btn.classList.remove("active"));
-            button.classList.add("active");
-
-            // Reset active classes for card containers
-            cards.forEach(card => card.classList.remove("active"));
-            const correspondingCard = document.getElementById(`card-${index + 1}`);
-            if (correspondingCard) {
-                correspondingCard.classList.add("active");
+        card.addEventListener('click', () => {
+            if (index === activeIndex) {
+                // Flip the card only if it's the active one
+                card.classList.toggle('flipped');
+            } else {
+                // If a non-active card is clicked, make it active
+                setActiveCard(index);
             }
         });
     });
+
+    // Initial call to display the first set of cards
+    updateCards();
 });
