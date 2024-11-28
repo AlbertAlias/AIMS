@@ -25,7 +25,7 @@
                     <a href="#about" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">About</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#contact" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">Contact</a>
+                    <a href="#team" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">Team</a>
                 </li>
                 <!-- Right: Sign in button inside hamburger -->
                 <li class="nav-item">

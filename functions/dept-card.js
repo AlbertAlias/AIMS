@@ -26,7 +26,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Function to set the active card
     const setActiveCard = (index) => {
-        activeIndex = index;
+        // If the user clicks the leftmost or rightmost card, update accordingly
+        if (index === 0) {
+            activeIndex = 0;  // Set to the first card
+        } else if (index === cards.length - 1) {
+            activeIndex = cards.length - 1;  // Set to the last card
+        } else {
+            activeIndex = index;  // Otherwise, set to the clicked card
+        }
+
+        // Check for the edge cases:
+        // - If the active card is at the left edge, set the opposite side's 4th card in place.
+        if (activeIndex === 0) {
+            // Set the 4th card on the right to the left
+            activeIndex = 4;  // Bring the 4th card from the right side into the middle
+        } else if (activeIndex === cards.length - 1) {
+            // Set the 4th card on the left to the right
+            activeIndex = cards.length - 5;  // Bring the 4th card from the left side to the middle
+        }
+
         updateCards();
     };
 

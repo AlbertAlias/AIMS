@@ -7,9 +7,10 @@
     <title>AIMS</title>
 
     <!-- STYLES -->
-    <link rel="stylesheet" href="assets/css/landing-home.css">
-    <link rel="stylesheet" href="assets/css/landing-dept.css">
-    <link rel="stylesheet" href="assets/css/landing-header.css">
+    <link rel="stylesheet" href="assets/css/landing-page/landing-header.css">
+    <link rel="stylesheet" href="assets/css/landing-page/home-section.css">
+    <link rel="stylesheet" href="assets/css/landing-page/dept-section.css">
+    <link rel="stylesheet" href="assets/css/landing-page/team-section.css">
 
     <!-- BOOTSTRAP CDN LINK -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
@@ -38,73 +39,55 @@
             <div class="card-container col-12">
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/a-card.jpg');">
-                            <!-- <img src="img/a-card.jpg" alt="Card Image" class="card-image"> -->
-                        </div>
+                        <div class="card-front" style="background-image: url('img/a-card.jpg');"></div>
                         <div class="card-back" style="background-color: skyblue;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/ba-card.jpg');">
-                            <!-- <img src="img/ba-card.jpg" alt="Card Image" class="card-image"> -->
-                        </div>
+                        <div class="card-front" style="background-image: url('img/ba-card.jpg');"></div>
                         <div class="card-back" style="background-color: gold;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/tm-card.jpg');">
-                            <!-- <img src="img/tm-card.jpg" alt="Card Image" class="card-image"> -->
-                        </div>
+                        <div class="card-front" style="background-image: url('img/hm-card.jpg');"></div>
                         <div class="card-back" style="background-color: lightgray;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/hm-card.jpg');">
-                            <!-- <img src="img/hm-card.jpg" alt="Card Image" class="card-image"> -->
-                        </div>
+                        <div class="card-front" style="background-image: url('img/tm-card.jpg');"></div>
                         <div class="card-back" style="background-color: violet;"></div>
                     </div>
                 </div>
                 <div class="card active">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/ba-card.jpg');">
-                            <!-- <img src="img/ba-card.jpg" alt="Card Image" class="card-image"> -->
-                        </div>
+                        <div class="card-front" style="background-image: url('img/ba-card.jpg');"></div>
                         <div class="card-back" style="background-color: pink;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/educ-card.jpg');">
-                            <!-- <img src="img/educ-card.jpg" alt="Card Image" class="card-image"> -->
-                        </div>
+                        <div class="card-front" style="background-image: url('img/educ-card.jpg');"></div>
                         <div class="card-back" style="background-color: red;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/hm-card.jpg');">
-                            <!-- <img src="img/hm-card.jpg" alt="Card Image" class="card-image"> -->
-                        </div>
+                        <div class="card-front" style="background-image: url('img/hm-card.jpg');"></div>
                         <div class="card-back" style="background-color: orange;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/a-card.jpg');">
-                            <!-- <img src="img/a-card.jpg" alt="Card Image" class="card-image"> -->
-                        </div>
+                        <div class="card-front" style="background-image: url('img/a-card.jpg');"></div>
                         <div class="card-back" style="background-color: darkgray;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/tm-card.jpg');">
-                            <!-- <img src="img/tm-card.jpg" alt="Card Image" class="card-image"> -->
-                        </div>
+                        <div class="card-front" style="background-image: url('img/tm-card.jpg');"></div>
                         <div class="card-back" style="background-color: maroon;"></div>
                     </div>
                 </div>
@@ -122,9 +105,59 @@
         
     </section>
 
-    <!-- CONTACT SECTION -->
-    <section id="contact">
-        
+    <!-- TEAM SECTION -->
+    <section class="team-section" id="team">
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Team Member 1 -->
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="team-member">
+                        <img src="img/bry.jpg" alt="" class="img-fluid rounded-circle">
+                    </div>
+                    <div class="text-center">
+                        <h3>Bryan Custodio</h3>
+                        <p class="text-muted">Back End Developer</p>
+                        <div class="social-icons">
+                            <a href="#" class="icon instagram"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="icon facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#" class="icon gmail"><i class="fa-regular fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="team-member">
+                        <img src="img/al.heic" alt="" class="img-fluid rounded-circle">
+                    </div>
+                    <div class="text-center">
+                        <h3>Albert Alias</h3>
+                        <p class="text-muted">Full Stack Developer</p>
+                        <div class="social-icons">
+                            <a href="#" class="icon instagram"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="#" class="icon facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#" class="icon gmail"><i class="fa-regular fa-envelope"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="team-member">
+                        <img src="img/george.jpg" alt="" class="img-fluid rounded-circle">
+                    </div>
+                    <div class="text-center">
+                        <h3>George Balauag</h3>
+                        <p class="text-muted">UI Designer</p>
+                        <div class="social-icons">
+                            <div class="icon instagram"><i class="fa-brands fa-instagram"></i></div>
+                            <div class="icon facebook"><i class="fa-brands fa-facebook-f"></i></div>
+                            <div class="icon gmail"><i class="fa-regular fa-envelope"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- JS SCRIPTS -->

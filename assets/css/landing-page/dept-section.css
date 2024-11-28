@@ -1,6 +1,7 @@
 .dept-section {
     height: 100vh;
-    background-color: #d3c8c888;
+    /* background-color: #e0d5d5be; */
+    background-color: #e9e9e9;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,11 +42,12 @@
 .card.active {
     height: 480px !important;
     width: 350px !important;
-    box-shadow: rgba(0, 233, 16, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 
     transform: translateX(0) scale(1.1); /* Centered and slightly larger */
     z-index: 2; /* Make sure it's above other cards */
     opacity: 1;
+    border-radius: 10px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .card-inner {
@@ -54,10 +56,14 @@
     height: 100%;
     transform-style: preserve-3d;
     transition: transform 0.6s ease;
+    border-radius: 10px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .card.flipped .card-inner {
     transform: rotateY(180deg); /* Flips the card */
+    border-radius: 10px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 /* Front and Back faces */
@@ -87,14 +93,18 @@
 .card.left {
     transform: translateX(-30%) scale(0.9); /* Move left and scale down slightly */
     z-index: 1;
-    opacity: 0.8;
+    opacity: 1;
+    border-radius: 10px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 /* Cards to the right of the active card */
 .card.right {
     transform: translateX(30%) scale(0.9); /* Move right and scale down slightly */
     z-index: 1;
-    opacity: 0.8;
+    opacity: 1;
+    border-radius: 10px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 /* Hide cards smoothly */
@@ -102,3 +112,4 @@
     opacity: 0;
     transform: translateX(0) scale(0.8); /* Keep hidden cards small and out of view */
 }
+
