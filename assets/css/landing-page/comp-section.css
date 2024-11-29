@@ -34,7 +34,7 @@
 
 .swiper-slide img {
     width: auto;
-    height: 100px; /* Adjust height based on design */
+    height: 60px; /* Adjust height based on design */
     object-fit: contain;
 }
 
