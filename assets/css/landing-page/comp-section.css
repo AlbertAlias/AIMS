@@ -1,0 +1,44 @@
+.comp-section {
+    position: relative;
+    height: 100vh;
+    background-color: #e8e7e7;
+    background-size: cover; /* Ensures background fills the section */
+    background-position: center; /* Centers the background */
+    transition: background 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+
+.company-carousel {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 0;
+    background: rgba(196, 196, 196, 0.79); /* Optional */
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    text-align: center;
+    transition: transform 0.5s ease; /* Smooth centering animation */
+}
+
+.swiper-slide img {
+    width: auto;
+    height: 100px; /* Adjust height based on design */
+    object-fit: contain;
+}
+
+.swiper-wrapper {
+    display: flex;
+    align-items: center;
+}

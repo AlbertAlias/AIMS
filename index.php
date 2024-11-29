@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="assets/css/landing-page/landing-header.css">
     <link rel="stylesheet" href="assets/css/landing-page/home-section.css">
     <link rel="stylesheet" href="assets/css/landing-page/dept-section.css">
+    <link rel="stylesheet" href="assets/css/landing-page/comp-section.css">
+    <link rel="stylesheet" href="assets/css/landing-page/about-section.css">
     <link rel="stylesheet" href="assets/css/landing-page/team-section.css">
 
     <!-- BOOTSTRAP CDN LINK -->
@@ -95,16 +97,134 @@
         </div>
     </section>
 
-    <!-- COMPANY SECTION -->
-    <section id="company">
-        
+    <section class="comp-section" id="company">
+        <div class="swiper company-carousel">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide" data-bg="img/accenture-bg.jpg">
+                    <img src="img/accenture-logo.png">
+                </div>
+                <!-- Slide 2 -->
+                <div class="swiper-slide" data-bg="img/cognizant-bg.jpg">
+                    <img src="img/cognizant-logo.png">
+                </div>
+                <!-- Slide 3 -->
+                <div class="swiper-slide" data-bg="img/concentrix-bg.png">
+                    <img src="img/concentrix-logo.png">
+                </div>
+                <!-- Slide 4 -->
+                <div class="swiper-slide" data-bg="img/denso-bg.jpg">
+                    <img src="img/denso-logo.png">
+                </div>
+                <!-- Slide 5 -->
+                <div class="swiper-slide" data-bg="img/fujitsu-bg.jpg">
+                    <img src="img/fujitsu-logo.png">
+                </div>
+                <!-- Slide 6 -->
+                <div class="swiper-slide" data-bg="img/ibm-bg.jpg">
+                    <img src="img/ibm-logo.png">
+                </div>
+                <!-- Slide 7 -->
+                <div class="swiper-slide" data-bg="img/imi-bg.jpg">
+                    <img src="img/imi-logo.png">
+                </div>
+                <!-- Slide 8 -->
+                <div class="swiper-slide" data-bg="img/oracle-bg.jpg">
+                    <img src="img/oracle-logo.png">
+                </div>
+                <!-- Slide 9 -->
+                <div class="swiper-slide" data-bg="img/taskus-bg.jpg">
+                    <img src="img/taskus-logo.png">
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- ABOUT SECTION -->
-    <section id="about">
-        
+    <section class="about-section" id="about">
+        <div class="swiper about-carousel">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide">
+                    <div>
+                        <h2>Introduction</h2>
+                        <p>
+                            On-the-Job Training (OJT) is a training program for College of Engineering and Information Technology
+                            Education students designed to apply their knowledge and skills by immersing themselves in a working
+                            environment related to their program to be able to apply their skills and determine possible work
+                            opportunities.
+                        </p>
+                    </div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="swiper-slide">
+                    <div>
+                        <h2>Vision</h2>
+                        <p>To be the Center of Development in Engineering and Information Technology Education by 2030.</p>
+                    </div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="swiper-slide">
+                    <div>
+                        <h2>Mission</h2>
+                        <p>
+                            The College of Engineering and Information Technology Education is committed to developing assertive,
+                            competitive, and innovative professionals imbued with Asiatechian values.
+                        </p>
+                    </div>
+                </div>
+                <!-- Slide 4 -->
+                <div class="swiper-slide">
+                    <div>
+                        <h2>ASIATECH Responsibilities</h2>
+                        <ul>
+                            <li>Suggests a host company.</li>
+                            <li>Secures the approval from the host company.</li>
+                            <li>Conducts an OJT program orientation prior to OJT schedule.</li>
+                            <li>Designs a standardized training program that suits the needs of the OJT student-trainee.</li>
+                            <li>Provides a mechanism for the evaluation of the program for future enhancement.</li>
+                            <li>Assigns a qualified OJT coordinator.</li>
+                            <li>Monitors the activities of the student-trainee.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Slide 5 -->
+                <div class="swiper-slide">
+                    <div>
+                        <h2>OJT Coordinator Responsibilities</h2>
+                        <p>
+                            The monitoring and evaluation of the performance of the student trainees shall be done by the OJT
+                            coordinator assigned by the Dean. In the absence of the OJT coordinator, the Dean shall stand as
+                            the OJT coordinator.
+                        </p>
+                        <ul>
+                            <li>Liaises with the host company.</li>
+                            <li>Provides and orients the host company on the use of the evaluation and other forms.</li>
+                            <li>Coordinates with the supervisor regarding the student’s program, performance, and concerns.</li>
+                            <li>Rates the performance of the student trainee based on the OJT training grading system.</li>
+                            <li>Issues OJT Recommendation letter to student-trainee to be submitted to the host company.</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Slide 6 -->
+                <div class="swiper-slide">
+                    <div>
+                        <h2>Student Trainee Responsibilities</h2>
+                        <ul>
+                            <li>Observes the rules and regulations of the host company.</li>
+                            <li>
+                                Makes recommendations/proposals to the supervisor when necessary and upon request, regarding
+                                the problems encountered.
+                            </li>
+                            <li>Applies his/her knowledge and skills aligned with his/her program of studies.</li>
+                            <li>Completes all the requirements of the OJT program.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-
+    
     <!-- TEAM SECTION -->
     <section class="team-section" id="team">
         <div class="container">
@@ -128,7 +248,7 @@
                 <!-- Team Member 2 -->
                 <div class="col-12 col-md-4 mb-4">
                     <div class="team-member">
-                        <img src="img/al.heic" alt="" class="img-fluid rounded-circle">
+                        <img src="img/al.jpg" alt="" class="img-fluid rounded-circle">
                     </div>
                     <div class="text-center">
                         <h3>Albert Alias</h3>
@@ -173,5 +293,7 @@
     <!--END::LOGIN FUNCTION-->
     <script src="functions/landing-header.js"></script>
     <script src="functions/dept-card.js"></script>
+    <script src="functions/comp-card-logo.js"></script>
+    <script src="functions/about-carousel-info.js"></script>
 </body>
 </html>
