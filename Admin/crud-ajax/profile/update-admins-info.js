@@ -207,10 +207,6 @@ function refreshUserInfo() {
                 $('#users-civil-status').text(userInfo.civil_status);
                 $('#users-email').text(userInfo.personal_email);
                 $('#users-username').text(userInfo.username);
-                $('#welcomeAdmin').html(`
-                    <span class="fw-bold text-dark bg-light">Welcome</span> 
-                    <span>${userInfo.last_name} ${userInfo.first_name}</span>
-                `);
             } else {
                 Swal.fire({
                     toast: true,

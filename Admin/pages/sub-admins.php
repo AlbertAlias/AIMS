@@ -96,8 +96,8 @@
                             <label for="user_type" class="form-label required-asterisk">Role <span class="text-danger">*</span></label>
                             <select class="form-select" id="user_type" name="user_type" required disabled>
                                 <option selected disabled>Choose Role</option>
+                                <option value="developer">Developer</option>
                                 <option value="admin">Admin</option>
-                                <option value="sub-admin">Sub-admin</option>
                             </select>
                         </div>
                     </form>

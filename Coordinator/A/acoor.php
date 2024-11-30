@@ -25,7 +25,6 @@
     <link  href="../../assets/css/header.css" rel="stylesheet">
 
     <!-- <link href="../../assets/intern-css/A-css/dashboard.css" rel="stylesheet"> -->
-    <link href="../../assets/intern-css/A-css/interns.css" rel="stylesheet">
     <!-- <link href="../../assets/intern-css/A-css/requirements.css" rel="stylesheet"> -->
 
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -85,7 +84,6 @@
                 <!-- Begin Page Content -->
                 <div id="page-content" style="width: 100%;">
                     <?php include "pages/dashboard.php"; ?>
-                    <?php include "pages/interns.php"; ?>
                     <?php include "pages/weekly-reports.php"; ?>
                     <?php include "pages/requirements.php"; ?>
                 </div>

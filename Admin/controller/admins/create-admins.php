@@ -44,7 +44,7 @@
         if ($stmt->execute()) {
             $user_id = $stmt->insert_id;
 
-            if ($data['user_type'] === 'admin' || $data['user_type'] === 'sub-admin') {
+            if ($data['user_type'] === 'developer' || $data['user_type'] === 'admin') {
                 $stmt_admin = $conn->prepare("INSERT INTO admins (user_id) VALUES (?)");
                 $stmt_admin->bind_param("i", $user_id);
 

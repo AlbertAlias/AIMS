@@ -5,7 +5,6 @@ $(document).ready(function() {
         // Get form data
         var username = $('#username').val();
         var password = $('#password').val();
-        var rememberMe = $('#rememberMe').prop('checked');
 
         // AJAX request
         $.ajax({
@@ -13,8 +12,7 @@ $(document).ready(function() {
             type: 'POST',
             data: {
                 username: username,
-                password: password,
-                rememberMe: rememberMe
+                password: password
             },
             dataType: 'json',
             success: function(response) {
@@ -37,7 +35,7 @@ $(document).ready(function() {
                         }
                     }).then(function() {
                         // Redirection logic based on user type and department
-                        if (user_type === 'Admin' || user_type === 'Sub-Admin') {
+                        if (user_type === 'Developer' || user_type === 'Admin') {
                             window.location.href = '../Admin/admin.php';
                         } else if (user_type === 'Coordinator') {
                             switch (department) {

@@ -6,10 +6,6 @@
         </button>
     </div>
 
-    <div id="welcomeAdmin" class="text-dark ml-3">
-        <!-- This will be updated by JS -->
-    </div>
-
     <ul class="navbar-nav ms-auto">
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"

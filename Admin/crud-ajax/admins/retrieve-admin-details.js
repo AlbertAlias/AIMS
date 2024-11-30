@@ -52,7 +52,7 @@ $(document).ready(function() {
                 $('#admin_address').val(response.address).prop('disabled', false);
                 $('#admin_civil_status').val(response.civil_status).prop('disabled', false);
                 $('#admin_personal_email').val(response.personal_email).prop('disabled', false);
-                $('#admin_employee_number').val(response.employee_number).prop('disabled', false);  // New employee number field
+                $('#admin_employee_number').val(response.employee_number).prop('disabled', false);
                 $('#admin_username').val(response.username).prop('disabled', false);
                 $('#admin_password').val('').prop('disabled', false);
                 $('#user_type').val(response.user_type).prop('disabled', false);
