@@ -1,43 +1,48 @@
+.intro {
+    padding-top: 100px;
+}
+
 .about-section {
-    position: relative;
-    height: 100vh;
-    background-color: #cecece;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-.about-carousel {
-    width: 80%; /* Carousel width */
-    height: 60%; /* Carousel height */
-    position: relative;
-    background: rgba(255, 255, 255, 0.8); /* Optional background */
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
-    z-index: 10;
-}
-
-.swiper-slide {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    background-color: #f6f6f6;
+    padding: 4rem 2rem;
     text-align: center;
-    padding: 20px;
-    height: 100%;
 }
 
-.swiper-slide h2 {
-    margin-bottom: 20px;
-    font-size: 1.8rem;
+.about-section h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
     color: #333;
 }
 
-.swiper-slide p {
+.about-section h3 {
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    color: #333;
+}
+
+.about-section ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.about-section ul li {
     font-size: 1rem;
-    line-height: 1.5rem;
+    margin-bottom: 0.8rem;
     color: #555;
+}
+
+.responsibilities h3 {
+    color: #1a73e8; /* Accent color for headings */
+}
+
+@media (max-width: 768px) {
+    .about-section {
+        padding: 2rem;
+    }
+    .about-section h2 {
+        font-size: 2rem;
+    }
+    .about-section h3 {
+        font-size: 1.5rem;
+    }
 }

@@ -36,7 +36,7 @@
     </section>
 
     <!-- DEPARTMENT SECTION -->
-    <section class="dept-section" id="department">
+    <section class="dept-section p-0 m-0" id="department">
         <div class="row">
             <div class="card-container col-12">
                 <div class="card">
@@ -65,7 +65,7 @@
                 </div>
                 <div class="card active">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/ba-card.jpg');"></div>
+                        <div class="card-front" style="background-image: url('img/a-card.jpg');"></div>
                         <div class="card-back" style="background-color: pink;"></div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
         </div>
     </section>
 
-    <section class="comp-section" id="company">
+    <section class="comp-section p-0 m-0" id="company">
         <div class="swiper company-carousel">
             <div class="swiper-wrapper">
                 <!-- Slide 1 -->
@@ -141,92 +141,63 @@
     </section>
 
     <!-- ABOUT SECTION -->
-    <section class="about-section" id="about">
-        <div class="swiper about-carousel">
-            <div class="swiper-wrapper">
-                <!-- Slide 1 -->
-                <div class="swiper-slide">
-                    <div>
-                        <h2>Introduction</h2>
-                        <p>
-                            On-the-Job Training (OJT) is a training program for College of Engineering and Information Technology
-                            Education students designed to apply their knowledge and skills by immersing themselves in a working
-                            environment related to their program to be able to apply their skills and determine possible work
-                            opportunities.
-                        </p>
-                    </div>
-                </div>
-                <!-- Slide 2 -->
-                <div class="swiper-slide">
-                    <div>
-                        <h2>Vision</h2>
-                        <p>To be the Center of Development in Engineering and Information Technology Education by 2030.</p>
-                    </div>
-                </div>
-                <!-- Slide 3 -->
-                <div class="swiper-slide">
-                    <div>
-                        <h2>Mission</h2>
-                        <p>
-                            The College of Engineering and Information Technology Education is committed to developing assertive,
-                            competitive, and innovative professionals imbued with Asiatechian values.
-                        </p>
-                    </div>
-                </div>
-                <!-- Slide 4 -->
-                <div class="swiper-slide">
-                    <div>
-                        <h2>ASIATECH Responsibilities</h2>
-                        <ul>
-                            <li>Suggests a host company.</li>
-                            <li>Secures the approval from the host company.</li>
-                            <li>Conducts an OJT program orientation prior to OJT schedule.</li>
-                            <li>Designs a standardized training program that suits the needs of the OJT student-trainee.</li>
-                            <li>Provides a mechanism for the evaluation of the program for future enhancement.</li>
-                            <li>Assigns a qualified OJT coordinator.</li>
-                            <li>Monitors the activities of the student-trainee.</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Slide 5 -->
-                <div class="swiper-slide">
-                    <div>
-                        <h2>OJT Coordinator Responsibilities</h2>
-                        <p>
-                            The monitoring and evaluation of the performance of the student trainees shall be done by the OJT
-                            coordinator assigned by the Dean. In the absence of the OJT coordinator, the Dean shall stand as
-                            the OJT coordinator.
-                        </p>
-                        <ul>
-                            <li>Liaises with the host company.</li>
-                            <li>Provides and orients the host company on the use of the evaluation and other forms.</li>
-                            <li>Coordinates with the supervisor regarding the student’s program, performance, and concerns.</li>
-                            <li>Rates the performance of the student trainee based on the OJT training grading system.</li>
-                            <li>Issues OJT Recommendation letter to student-trainee to be submitted to the host company.</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Slide 6 -->
-                <div class="swiper-slide">
-                    <div>
-                        <h2>Student Trainee Responsibilities</h2>
-                        <ul>
-                            <li>Observes the rules and regulations of the host company.</li>
-                            <li>
-                                Makes recommendations/proposals to the supervisor when necessary and upon request, regarding
-                                the problems encountered.
-                            </li>
-                            <li>Applies his/her knowledge and skills aligned with his/her program of studies.</li>
-                            <li>Completes all the requirements of the OJT program.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <section class="about-section p-0 m-0" id="about">
+        <div class="intro">
+            <h2>On-the-Job Training (OJT)</h2>
+            <h3>Introduction</h3>
+            <p>On-the-Job Training (OJT) is a training program for College of Engineering and Information Technology Education students designed to apply their knowledge and skills in a real-world work environment. This helps in identifying relevant skills for curriculum updates and future employment opportunities.</p>
+        </div>
+
+        <div class="vision-mission">
+            <h3>Vision</h3>
+            <p>To be the Center of Development in Engineering and Information Technology Education by 2030</p>
+
+            <h3>Mission</h3>
+            <p>The College is committed to developing assertive, competitive, and innovative professionals imbued with Asiatechian values.</p>
+
+            <h3>Core Values</h3>
+            <ul>
+                <li>Accountable</li>
+                <li>Service-Oriented</li>
+                <li>Innovative</li>
+                <li>Adaptive</li>
+                <li>Team-Oriented</li>
+                <li>Efficient</li>
+                <li>Committed</li>
+                <li>Honest</li>
+                <li>Industrious</li>
+                <li>Articulate</li>
+                <li>Noble</li>
+            </ul>
+        </div>
+
+        <div class="responsibilities">
+            <h3>ASIATECH Responsibilities</h3>
+            <ul>
+                <li>Suggests a host company.</li>
+                <li>Secures the approval from the host company.</li>
+                <li>Conducts an OJT program orientation.</li>
+                <!-- Add more items here -->
+            </ul>
+
+            <h3>OJT Coordinator Responsibilities</h3>
+            <ul>
+                <li>Liaises with the host company.</li>
+                <li>Coordinates with supervisors.</li>
+                <!-- Add more items here -->
+            </ul>
+
+            <h3>Student Trainee Responsibilities</h3>
+            <ul>
+                <li>Observes rules and regulations.</li>
+                <li>Applies knowledge aligned with their program.</li>
+                <!-- Add more items here -->
+            </ul>
         </div>
     </section>
     
     <!-- TEAM SECTION -->
-    <section class="team-section" id="team">
+    <section class="team-section p-0 m-0" id="team">
         <div class="container">
             <div class="row justify-content-center">
                 <!-- Team Member 1 -->
