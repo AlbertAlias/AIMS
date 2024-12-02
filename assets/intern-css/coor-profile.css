@@ -1,0 +1,81 @@
+.profile-wrapper {
+    position: relative; /* Enables absolute positioning within the wrapper */
+    display: inline-block; /* Shrinks wrapper size to fit the profile picture container */
+}
+
+#profile-picture-container {
+    width: 150px;
+    height: 150px;
+    background-color: #dedede;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#default-profile-icon {
+    font-size: 130px; /* Reduce icon size */
+    transform: translateY(20px); /* Adjust downward if needed */
+}
+
+#profile-picture {
+    width: 145px;
+    height: 145px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#user-profile {
+    position: absolute;
+    top: 73%; /* Position below the profile picture container */
+    right: 25px; /* Align it to the right edge */
+    font-size: 20px;
+    color: white;
+    background-color: rgb(143, 143, 143);
+    border-radius: 50%;
+    padding: 6px;
+    cursor: pointer;
+    transform: translateX(50%); /* Slightly shift to center it horizontally on the right side */
+}
+
+#user-profile:hover {
+    background-color: rgb(170, 170, 170);
+}
+
+.list-group-item.active {
+    background-color: #198754 !important;
+    color: white;
+    border: none !important;
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
+}
+
+.form-label i {
+    width: 24px;
+    margin-right: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#oldPasswordFeedback {
+    top: 5px;
+    right: 0;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#passwordFeedback {
+    top: 195px;
+    right: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.modal-backdrop.show {
+    background-color: rgba(0, 0, 0, 0.5);
+}

@@ -16,10 +16,12 @@
         session_start(); // Start session
 
         // Check if the username exists in the users table
-        $stmt = $conn->prepare("SELECT u.id, u.password, u.username, u.user_type, d.department_name 
-                                FROM users u 
-                                LEFT JOIN departments d ON u.department_id = d.id
-                                WHERE u.username = ?");
+        $stmt = $conn->prepare("
+            SELECT u.id, u.password, u.username, u.user_type, LOWER(d.department_name) AS department_name
+            FROM users u 
+            LEFT JOIN departments d ON u.department_id = d.id
+            WHERE u.username = ?
+        ");
         $stmt->bind_param('s', $username);
         $stmt->execute();
         $stmt->store_result();

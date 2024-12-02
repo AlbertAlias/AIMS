@@ -10,18 +10,7 @@
     <link rel="stylesheet" href="../assets/css/login.css">
 
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-            background-image: url('../img/esyatek-campus.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
+        body {display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 0; background-image: url('../img/esyatek-campus.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;}
     </style>
 </head>
 <body>

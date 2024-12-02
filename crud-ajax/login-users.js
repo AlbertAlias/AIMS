@@ -17,7 +17,7 @@ $(document).ready(function() {
             dataType: 'json',
             success: function(response) {
                 if (response.status === 'success') {
-                    var user_type = response.user_type;
+                    var user_type = response.user_type.toLowerCase(); // Ensure case consistency
                     var department = response.department;
 
                     Swal.fire({
@@ -35,64 +35,69 @@ $(document).ready(function() {
                         }
                     }).then(function() {
                         // Redirection logic based on user type and department
-                        if (user_type === 'Developer' || user_type === 'Admin') {
+                        if (user_type === 'developer' || user_type === 'admin') {
                             window.location.href = '../Admin/admin.php';
-                        } else if (user_type === 'Coordinator') {
-                            switch (department) {
-                                case 'Accountancy':
+                        } else if (user_type === 'coordinator') {
+                            // Redirection for coordinators based on department
+                            switch (department.toLowerCase()) { // Ensure department comparison is case-insensitive
+                                case 'accountancy':
                                     window.location.href = '../Coordinator/A/acoor.php';
                                     break;
-                                case 'Business Administration':
+                                case 'business administration':
                                     window.location.href = '../Coordinator/BA/bacoor.php';
                                     break;
-                                case 'Computer Engineering':
+                                case 'computer engineering':
                                     window.location.href = '../Coordinator/CpE/cpecoor.php';
                                     break;
-                                case 'Computer Science':
+                                case 'computer science':
                                     window.location.href = '../Coordinator/CS/cscoor.php';
                                     break;
-                                case 'Criminology':
+                                case 'criminology':
                                     window.location.href = '../Coordinator/CRIM/crimcoor.php';
                                     break;
-                                case 'Education':
+                                case 'education':
                                     window.location.href = '../Coordinator/EDUC/educcoor.php';
                                     break;
-                                case 'Hospitality Management':
+                                case 'hospitality management':
                                     window.location.href = '../Coordinator/HM/hmcoor.php';
                                     break;
-                                case 'Information Technology':
+                                case 'information technology':
                                     window.location.href = '../Coordinator/IT/itcoor.php';
                                     break;
-                                case 'Tourism Management':
+                                case 'tourism management':
                                     window.location.href = '../Coordinator/TM/tmcoor.php';
                                     break;
                                 default:
                                     alert('Invalid department.');
                             }
-                        } else if (user_type === 'Intern') {
-                            switch (department) {
-                                case 'Accountancy':
+                        } else if (user_type === 'intern') {
+                            // Redirection for interns based on department
+                            switch (department.toLowerCase()) { // Ensure department comparison is case-insensitive
+                                case 'accountancy':
                                     window.location.href = '../Intern/A/a.php';
                                     break;
-                                case 'Business Administration':
+                                case 'business administration':
                                     window.location.href = '../Intern/BA/ba.php';
                                     break;
-                                case 'Computer Engineering':
+                                case 'computer engineering':
                                     window.location.href = '../Intern/CpE/cpe.php';
                                     break;
-                                case 'Information Technology':
-                                    window.location.href = '../Intern/IT/it.php';
+                                case 'computer science':
+                                    window.location.href = '../Intern/CS/cs.php';
                                     break;
-                                case 'Criminology':
+                                case 'criminology':
                                     window.location.href = '../Intern/CRIM/crim.php';
                                     break;
-                                case 'Education':
+                                case 'education':
                                     window.location.href = '../Intern/EDUC/educ.php';
                                     break;
-                                case 'Hospitality Management':
+                                case 'hospitality management':
                                     window.location.href = '../Intern/HM/hm.php';
                                     break;
-                                case 'Tourism Management':
+                                case 'information technology':
+                                    window.location.href = '../Intern/IT/it.php';
+                                    break;
+                                case 'tourism management':
                                     window.location.href = '../Intern/TM/tm.php';
                                     break;
                                 default:

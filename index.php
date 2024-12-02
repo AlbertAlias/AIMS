@@ -142,57 +142,50 @@
 
     <!-- ABOUT SECTION -->
     <section class="about-section p-0 m-0" id="about">
-        <div class="intro">
-            <h2>On-the-Job Training (OJT)</h2>
-            <h3>Introduction</h3>
-            <p>On-the-Job Training (OJT) is a training program for College of Engineering and Information Technology Education students designed to apply their knowledge and skills in a real-world work environment. This helps in identifying relevant skills for curriculum updates and future employment opportunities.</p>
+        <div class="feature feature-left">
+            <div class="text-container">
+                <h2>Introduction</h2>
+                <p>
+                On-the-Job Training (OJT) is a training program for College of Engineering and 
+                Information Technology Education students designed to apply their knowledge and
+                skills in a real-world work environment. This helps in identifying relevant skills 
+                for curriculum updates and future employment opportunities.
+                </p>
+            </div>
+            <div class="icon-container">
+                <img src="img/ASIATECH 2024 -.png" class="icon1">
+            </div>
         </div>
-
-        <div class="vision-mission">
-            <h3>Vision</h3>
-            <p>To be the Center of Development in Engineering and Information Technology Education by 2030</p>
-
-            <h3>Mission</h3>
-            <p>The College is committed to developing assertive, competitive, and innovative professionals imbued with Asiatechian values.</p>
-
-            <h3>Core Values</h3>
-            <ul>
-                <li>Accountable</li>
-                <li>Service-Oriented</li>
-                <li>Innovative</li>
-                <li>Adaptive</li>
-                <li>Team-Oriented</li>
-                <li>Efficient</li>
-                <li>Committed</li>
-                <li>Honest</li>
-                <li>Industrious</li>
-                <li>Articulate</li>
-                <li>Noble</li>
-            </ul>
+        <div class="feature feature-right">
+            <div class="icon-container">
+            <h2>Vision</h2>
+                <p>To be the Center of Development in Engineering and Information Technology Education by 2030</p>
+            <h2>Mission</h2>
+                <p>The College is committed to developing assertive, competitive, and innovative professionals imbued with Asiatechian values.</p>
+            <h2>Core Values</h2>
+                <p>Accountable, Service-Oriented, Innovative, Adaptive, Team-Oriented, Efficient, Committed, Honest, Industrious, Articulate, Noble</p>
+            </div>
+            <div class="text-container">
+            <img src="img/esyatek-bg2.jpg" class="icon">
+            </div>
         </div>
-
-        <div class="responsibilities">
-            <h3>ASIATECH Responsibilities</h3>
-            <ul>
-                <li>Suggests a host company.</li>
-                <li>Secures the approval from the host company.</li>
-                <li>Conducts an OJT program orientation.</li>
-                <!-- Add more items here -->
-            </ul>
-
-            <h3>OJT Coordinator Responsibilities</h3>
-            <ul>
-                <li>Liaises with the host company.</li>
-                <li>Coordinates with supervisors.</li>
-                <!-- Add more items here -->
-            </ul>
-
-            <h3>Student Trainee Responsibilities</h3>
-            <ul>
-                <li>Observes rules and regulations.</li>
-                <li>Applies knowledge aligned with their program.</li>
-                <!-- Add more items here -->
-            </ul>
+        <div class="feature feature-left">
+            <div class="text-container">
+                <h2>ASIATECH Responsibilities</h2>
+                <p>Suggests a host company, Secures the approval from the host company, Conducts an OJT program orientation prior to OJT schedule, Designs a standardized training program that suits the needs of the OJT student-trainee, Provides a mechanism for the evaluation of the program for future enhancement, Assigns a qualified OJT coordinator, Monitors the activities of the student-trainee.</p>
+            </div>
+            <div class="icon-container">
+                <img src="img/about.jpg" alt="" class="icon">
+            </div>
+        </div>
+        <div class="feature feature-right">
+            <div class="icon-container">
+            <h2>Student Trainee Responsibilities </h2>
+                <p>Observes the rules and regulations of the host company, Makes recommendations/proposals to the supervisor when necessary and upon request, regarding the problems encountered, Applies his/her knowledge and skills aligned with his/her program of studies, Completes all the requirements of the OJT program.</p>
+            </div>
+            <div class="text-container">
+            <img src="img/aboutus.jpg" alt="" class="icon">
+            </div>
         </div>
     </section>
     

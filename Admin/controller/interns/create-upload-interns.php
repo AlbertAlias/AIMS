@@ -50,17 +50,16 @@
 
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
 
-        $department_map = [
-            'Accountancy' => 1,
-            'Business Administration' => 2,
-            'Computer Engineering' => 3,
-            'Criminology' => 4,
-            'Computer Science' => 5,
-            'Education' => 6,
-            'Hospitality Management' => 7,
-            'Information Technology' => 8,
-            'Tourism Management' => 9,
-        ];
+        // Dynamically fetch the department map from the database
+        $department_map = [];
+        $sql = "SELECT department_name, id FROM departments";
+        $result = $conn->query($sql);
+
+        if ($result && $result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $department_map[$row['department_name']] = $row['id'];
+            }
+        }
 
         foreach ($sheetData as $row) {
             // Skip the header row and any empty rows

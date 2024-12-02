@@ -11,7 +11,7 @@
         $data = json_decode(file_get_contents('php://input'), true);
 
         // Validate all required fields
-        $required_fields = ['last_name', 'first_name', 'address', 'civil_status', 'personal_email', 'coor_code', 'employee_number', 'department_id', 'username', 'password'];
+        $required_fields = ['last_name', 'first_name', 'address', 'civil_status', 'personal_email', 'coor_code', 'employee_no', 'department_id', 'username', 'password'];
         foreach ($required_fields as $field) {
             if (empty($data[$field])) {
                 echo json_encode(['success' => false, 'message' => 'All fields are required.']);
@@ -52,7 +52,7 @@
         $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
 
         // Insert into users table
-        $stmt = $conn->prepare("INSERT INTO users (last_name, first_name, middle_name, suffix, address, civil_status, personal_email, employee_number, username, password, user_type, department_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'coordinator', ?)");
+        $stmt = $conn->prepare("INSERT INTO users (last_name, first_name, middle_name, suffix, address, civil_status, personal_email, employee_no, username, password, user_type, department_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'coordinator', ?)");
         if (!$stmt) {
             echo json_encode(['success' => false, 'message' => 'Failed to prepare the SQL statement.']);
             exit;
@@ -61,7 +61,7 @@
         $stmt->bind_param(
             'sssssssssss',
             $data['last_name'], $data['first_name'], $data['middle_name'], $data['suffix'],
-            $data['address'], $data['civil_status'], $data['personal_email'], $data['employee_number'], 
+            $data['address'], $data['civil_status'], $data['personal_email'], $data['employee_no'], 
             $data['username'], $hashedPassword, $data['department_id']
         );
 

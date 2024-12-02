@@ -3,23 +3,9 @@
 
     // Check if the user is logged in, if not, redirect to login page
     if (!isset($_SESSION['user_type'])) {
-        header('Location: ../index.php');
+        header('Location: index.php');
         exit();
     }
-
-    // Set session timeout (15 minutes)
-    $inactive = 60; // 15 minutes
-
-    // Check if timeout has occurred
-    if (isset($_SESSION['timeout']) && (time() - $_SESSION['timeout']) > $inactive) {
-        session_unset();     // Unset $_SESSION variables
-        session_destroy();   // Destroy session
-        header("Location: ../index.php"); // Redirect to login page
-        exit();
-    }
-
-    // Update session timeout time
-    $_SESSION['timeout'] = time();
 
     $developer = 'developer';
     $isDeveloper = $_SESSION['user_type'] === $developer;
@@ -52,35 +38,11 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
-
-        #wrapper {
-            display: flex;
-            height: 100vh;
-            margin: 0;
-            padding: 0;
-        }
-
-        #content-wrapper {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            background-color: #f8f8f8;
-        }
-
-        #content {
-            padding: 1rem;
-            flex-grow: 1;
-            background-color: #f8f8f8;
-        }
-
-        #page-content {
-            flex-grow: 1;
-            padding: 10px;
-        }
+        html, body { height: 100%; margin: 0; }
+        #wrapper { display: flex; height: 100vh; margin: 0; padding: 0; }
+        #content-wrapper { flex-grow: 1; display: flex; flex-direction: column; background-color: #f8f8f8; }
+        #content { padding: 1rem; flex-grow: 1; }
+        #page-content { flex-grow: 1; padding: 10px; }
     </style>
 </head>
 
@@ -124,48 +86,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
     <script src="../js/sidebar.js"></script>
-
-    <script>
-        var inactivityTime = function () {
-            var time;
-            var logoutTimer;
-
-            // Reset timer on activity (mouse move, key press, etc.)
-            window.onload = resetTimer;
-            document.onmousemove = resetTimer;
-            document.onkeypress = resetTimer;
-
-            // Function to log the user out
-            function logout() {
-                // SweetAlert popup for session timeout
-                Swal.fire({
-                    title: 'Session Expired',
-                    text: 'You have been inactive for too long. You will be logged out.',
-                    icon: 'warning',
-                    showCancelButton: false,
-                    confirmButtonText: 'Ok, Log me out',
-                    allowOutsideClick: false
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = '../index.php'; // Redirect to login page
-                    }
-                });
-            }
-
-            // Function to reset the inactivity timer
-            function resetTimer() {
-                clearTimeout(time);
-                clearTimeout(logoutTimer);
-                
-                // Set a new logout timer (after 15 minutes of inactivity)
-                time = setTimeout(function() {
-                    // Show SweetAlert before logging out
-                    logoutTimer = setTimeout(logout, 2000); // Timeout for SweetAlert to finish
-                }, 60000); // 15 minutes (900000 ms)
-            }
-        };
-        inactivityTime();
-    </script>
+    <script src="functions/auto-logout/session-timeout.js"></script>
 
     <!--START::CRUD AJAX FUNCTIONS-->
     <script src="crud-ajax/dashboard/retrieve-users-analytics.js"></script>
@@ -209,5 +130,6 @@
     <script src="crud-ajax/profile/update-admins-info.js"></script>
     <script src="functions/profile/profile-details.js"></script>
     <!--END::CRUD AJAX FUNCTIONS-->
+
 </body>
 </html>

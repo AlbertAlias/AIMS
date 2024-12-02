@@ -1,48 +1,110 @@
-.intro {
-    padding-top: 100px;
+.about-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 50px 20px;
+    height: 160vh;
 }
 
-.about-section {
-    background-color: #f6f6f6;
-    padding: 4rem 2rem;
+.feature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    gap: 30px;
+}
+
+.feature-left {
+    flex-direction: row;
+}
+
+.feature-right {
+    flex-direction: row-reverse;
+}
+
+.icon-container {
+    flex: 1;
     text-align: center;
 }
 
-.about-section h2 {
-    font-size: 2.5rem;
-    font-weight: bold;
+.icon {
+    max-width: 100%;
+    height: auto;
+    width: 350px;
+    border-radius: 5%;
+}
+
+.icon1 {
+    max-width: 40%;
+    height: auto;
+    width: 350px;
+    border-radius: 5%;
+}
+
+.text-container {
+    flex: 1;
+    padding: 10px;
+    text-align: left;
+    margin-top: 50px;
+}
+
+.text-container h2 {
+    font-size: 28px;
     color: #333;
+    margin-bottom: 15px;
 }
 
-.about-section h3 {
-    font-size: 1.8rem;
-    margin-top: 2rem;
-    color: #333;
-}
-
-.about-section ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.about-section ul li {
-    font-size: 1rem;
-    margin-bottom: 0.8rem;
+.text-container p {
+    font-size: 16px;
     color: #555;
+    line-height: 1.6;
 }
 
-.responsibilities h3 {
-    color: #1a73e8; /* Accent color for headings */
+/* Media Query for smaller screens */
+@media screen and (max-width: 768px) {
+    .feature {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .text-container {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .text-container h2 {
+        font-size: 24px;
+    }
+
+    .text-container p {
+        font-size: 14px;
+    }
+
+    .icon, .icon1 {
+        width: 80%;
+    }
 }
 
-@media (max-width: 768px) {
+/* Media Query for very small screens */
+@media screen and (max-width: 480px) {
+    .text-container h2 {
+        font-size: 22px;
+    }
+
+    .text-container p {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+
+    .icon, .icon1 {
+        width: 100%;
+    }
+
     .about-section {
-        padding: 2rem;
-    }
-    .about-section h2 {
-        font-size: 2rem;
-    }
-    .about-section h3 {
-        font-size: 1.5rem;
+        padding: 30px 10px;
+        gap: 15px;
     }
 }

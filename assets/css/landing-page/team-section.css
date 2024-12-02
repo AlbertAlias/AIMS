@@ -53,8 +53,8 @@
 /* Responsive columns */
 @media (max-width: 767px) {
     .team-member {
-        width: 150px;  /* Smaller size for smaller screens */
-        height: 150px;  /* Smaller size for smaller screens */
+        width: 80px;  /* Smaller size for smaller screens */
+        height: 80px;  /* Smaller size for smaller screens */
     }
 
     .text-center h3 {
