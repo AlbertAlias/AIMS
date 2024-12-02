@@ -1,12 +1,12 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
 
-session_start();
-if (!isset($_SESSION['email'])) {
-    header('Location: ../../../index.php'); // Adjust path if needed
-    exit();
-}
+    session_start();
+    if (!isset($_SESSION['username'])) {
+        header('Location: ../../index.php'); // Adjust path if needed
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -22,9 +22,9 @@ if (!isset($_SESSION['email'])) {
     
     <link href="../../assets/css/main.css" rel="stylesheet">
     <link href="../../assets/css/sidebar.css" rel="stylesheet">
+    <link href="../../assets/css/header.css" rel="stylesheet">
 
-    <link href="../../assets/intern-css/CpE-css/dashboard.css" rel="stylesheet">
-    <link href="../../assets/intern-css/CpE-css/requirements.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/intern-css/coor-profile.css">
 
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
