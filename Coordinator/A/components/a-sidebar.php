@@ -9,13 +9,17 @@
             <i class="fa-solid fa-qrcode"></i>
             <span>Dashboard</span>
         </a>
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'internlist')">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Interns Lists</span>
+        </a>
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'intern')">
+            <i class="fa-solid fa-medal"></i>
+            <span>Interns Grade</span>
+        </a>
         <a href="#" class="sidebar-link" onclick="showSection(event, 'reports')">
             <i class="fa-solid fa-file-signature"></i>
             <span>Reports</span>
-        </a>
-        <a href="#" class="sidebar-link" onclick="showSection(event, 'requirements')">
-            <i class="fa-solid fa-list-check"></i>
-            <span>Requirements</span>
         </a>
     </nav>
 </div>
@@ -36,7 +40,7 @@
         }
 
         // Hide all sections
-        document.querySelectorAll('#dashboard, #reports, #requirements, #profile').forEach(section => {
+        document.querySelectorAll('#dashboard, #reports, #intern, #internlist, #profile').forEach(section => {
             section.style.display = 'none';
         });
 

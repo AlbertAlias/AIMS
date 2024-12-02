@@ -2,7 +2,8 @@
     session_start();
 
     // Set session timeout duration (in seconds)
-    $inactive = 180; // 10 seconds for testing
+    // $inactive = 180; // 10 seconds for testing
+    $inactive = 20;
 
     // Debugging: log the current session time
     error_log("Current session timeout: " . (isset($_SESSION['timeout']) ? $_SESSION['timeout'] : 'Not set'));

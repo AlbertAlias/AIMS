@@ -1,7 +1,8 @@
 console.log("Session timeout script loaded.");
 
 function setupInactivityTimeout() {
-    const inactivityTime = 180000; // 10 seconds for testing
+    // const inactivityTime = 180000; // 10 seconds for testing
+    const inactivityTime = 20000;
     let initialIdleTimer = null;  // Timer for when user does not interact at all
     let interactionIdleTimer = null; // Timer for when user interacts and then becomes idle
 

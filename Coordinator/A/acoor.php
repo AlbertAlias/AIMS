@@ -59,8 +59,9 @@
                 <!-- Begin Page Content -->
                 <div id="page-content" style="width: 100%;">
                     <?php include "pages/dashboard.php"; ?>
-                    <?php include "pages/weekly-reports.php"; ?>
-                    <?php include "pages/requirements.php"; ?>
+                    <?php include "pages/internlist.php"; ?>
+                    <?php include "pages/reports.php"; ?>
+                    <?php include "pages/interngrade.php"; ?>
                     <?php include "pages/coor-profile.php"; ?>
                 </div>
 
@@ -78,6 +79,9 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
     <script src="../../js/sidebar.js"></script>
+
+    <script src="crud-ajax/weekly-reports/reports.js"></script>
+
 
     <script src="crud-ajax/profile/retrieve-profile.js"></script>
     <script src="crud-ajax/profile/create-profile.js"></script>
