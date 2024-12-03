@@ -19,11 +19,6 @@
                     <i class="fa-solid fa-cloud-arrow-up"></i> Upload Files
                 </button>
 
-                <!-- Archived button -->
-                <button type="button" class="btn btn-info mt-3" href="#" onclick="showSection(event, 'internlist');">
-                    <i class="fa-regular fa-eye"></i> Intern Lists
-                </button>
-
                 <!-- Progress Container -->
                 <div id="uploadProgress" class="mt-4" style="display: none;">
                     <div class="d-flex align-items-center justify-content-between" style="width: 100%;">
@@ -61,6 +56,10 @@
                 <div id="internsInfo" class="text-gray-800">
                     <!-- Intern information will be displayed here -->
                 </div>
+                <!-- See Intern Lists button -->
+                <a type="button" id="uploadButton" class="btn btn-success mt-3 text-light" href="#" onclick="showSection(event, 'internlist');">
+                    <i class="fa-solid fa-eye"></i> Intern Lists
+                </a>
             </div>
         </div>
 

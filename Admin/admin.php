@@ -95,7 +95,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
     <script src="../js/sidebar.js"></script>
-    <script src="functions/auto-logout/session-timeout.js"></script>
+    <!-- <script src="functions/auto-logout/session-timeout.js"></script> -->
 
     <!--START::CRUD AJAX FUNCTIONS-->
     <script src="crud-ajax/dashboard/retrieve-users-analytics.js"></script>
