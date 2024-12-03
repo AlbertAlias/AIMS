@@ -1,5 +1,5 @@
 <!-- Begin Page Content -->
-<div class="container-fluid bg-light p-0 m-0" id="internlist" style="display: none;">
+<div class="container-fluid bg-light p-0 m-0" id="reports" style="display: none;">
     <!-- Custom Container -->
     <div class="card shadow-sm">
         <!-- Header -->
@@ -32,19 +32,16 @@
         <div class="card-body bg-white">
             <!-- Table Placeholder -->
             <div class="table-responsive">
-                <table id="intern-lists" class="table table-hover text-center" style="width: 100%;">
+                <table id="usersTable" class="table table-hover text-center" style="width: 100%;">
                     <thead class="table-light">
                         <tr>
-                            <th>First name</th>
-                            <th>Last name</th>
-                            <th>Department</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
                             <th>Student ID</th>
-                            <th>Company</th>
-                            <th>Grade</th>
-                            <th>Actions</th>
+                            <th colspan="6">View Weekly reports</th>
                         </tr>
                     </thead>
-                    <tbody id="tdata">
+                    <tbody id="weeklytdata">
                         <!-- Data will be loaded here via AJAX -->
                     </tbody>
                 </table>
@@ -65,5 +62,25 @@
         </div>
     </div>
     <!-- End Custom Container -->
+    <!-- Weekly Reports Modal -->
+    <div class="modal fade" id="weeklyReportModal" tabindex="-1" aria-labelledby="weeklyReportModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="weeklyReportModalLabel">Weekly Report</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="reportContent" class="p-3">
+                        <!-- Weekly report content will be dynamically inserted -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="approveReport" class="btn btn-success">Approve</button>
+                    <button id="disapproveReport" class="btn btn-danger">Disapprove</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- End Page Content -->

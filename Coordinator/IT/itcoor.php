@@ -23,6 +23,9 @@
     <link href="../../assets/css/main.css" rel="stylesheet">
     <link href="../../assets/css/sidebar.css" rel="stylesheet">
     <link  href="../../assets/css/header.css" rel="stylesheet">
+    <link href="../../assets/coor/accountancy/internlist.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="../../assets/intern-css/coor-profile.css">
 
     <link rel="stylesheet" href="../../assets/intern-css/coor-profile.css">
 
@@ -59,9 +62,10 @@
                 <!-- Begin Page Content -->
                 <div id="page-content" style="width: 100%;">
                     <?php include "pages/dashboard.php"; ?>
-                    <?php include "pages/weekly-reports.php"; ?>
-                    <?php include "pages/requirements.php"; ?>
+                    <?php include "pages/internlist.php"; ?>
+                    <?php include "pages/reports.php"; ?>
                     <?php include "pages/coor-profile.php"; ?>
+                    <?php include "pages/post-requirements.php"; ?>
                 </div>
 
                 <!-- Content Row -->
@@ -77,7 +81,12 @@
             integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
-    <script src="../../js/sidebar.js" defer></script>
+    <script src="../../js/sidebar.js"></script>
+
+    <script src="crud-ajax/internlist/retrieve-internlist.js"></script>
+    
+    <!-- <script src="crud-ajax/reports/reports.js"></script> -->
+    <script src="crud-ajax/post-requirements/create-requirements.js"></script>
 
     <script src="crud-ajax/profile/retrieve-profile.js"></script>
     <script src="crud-ajax/profile/create-profile.js"></script>

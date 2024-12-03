@@ -1,6 +1,12 @@
 <!-- Begin Page Content -->
 <div class="container-fluid bg-light p-0 m-0" id="internlist" style="display: none;">
-    <!-- Custom Container -->
+    <!-- Post Requirements Button (Outside the content) -->
+    <div class="d-flex justify-content-start mb-3">
+        <button id="postRequirementsButton" class="btn btn-primary" href="#" onclick="showSection(event, 'post-requirements');">
+            Post Requirements
+        </button>
+    </div>
+
     <div class="card shadow-sm">
         <!-- Header -->
         <div class="card-header bg-light text-dark">
@@ -40,7 +46,6 @@
                             <th>Department</th>
                             <th>Student ID</th>
                             <th>Company</th>
-                            <th>Grade</th>
                             <th>Actions</th>
                         </tr>
                     </thead>

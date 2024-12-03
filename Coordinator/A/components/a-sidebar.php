@@ -40,7 +40,7 @@
         }
 
         // Hide all sections
-        document.querySelectorAll('#dashboard, #reports, #intern, #internlist, #profile').forEach(section => {
+        document.querySelectorAll('#dashboard, #internlist, #reports, #intern, #profile').forEach(section => {
             section.style.display = 'none';
         });
 

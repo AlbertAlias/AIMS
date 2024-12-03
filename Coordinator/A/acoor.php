@@ -22,7 +22,8 @@
     
     <link href="../../assets/css/main.css" rel="stylesheet">
     <link href="../../assets/css/sidebar.css" rel="stylesheet">
-    <link  href="../../assets/css/header.css" rel="stylesheet">
+    <link href="../../assets/css/header.css" rel="stylesheet">
+    <link href="../../assets/coor/accountancy/internlist.css" rel="stylesheet">
 
     <link rel="stylesheet" href="../../assets/intern-css/coor-profile.css">
 
@@ -80,8 +81,7 @@
     <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
     <script src="../../js/sidebar.js"></script>
 
-    <script src="crud-ajax/weekly-reports/reports.js"></script>
-
+    <script src="crud-ajax/internlist/retrieve-internlist.js"></script>
 
     <script src="crud-ajax/profile/retrieve-profile.js"></script>
     <script src="crud-ajax/profile/create-profile.js"></script>
