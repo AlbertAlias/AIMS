@@ -3,13 +3,20 @@
 
     // Check if the user is logged in, if not, redirect to login page
     if (!isset($_SESSION['user_type'])) {
-        header('Location: index.php');
+        header('Location: ../index.php');
         exit();
     }
 
+    // Prevent caching
+    header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+    header("Cache-Control: post-check=0, pre-check=0", false);
+    header("Pragma: no-cache");
+
+    // Your existing code
     $developer = 'developer';
     $isDeveloper = $_SESSION['user_type'] === $developer;
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +40,7 @@
     <link rel="stylesheet" href="../assets/css/coordinators.css">
     <link rel="stylesheet" href="../assets/css/interns.css">
     <link rel="stylesheet" href="../assets/css/admin-profile.css">
+    <link rel="stylesheet" href="../assets/css/internlist.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
                 integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -71,6 +79,7 @@
                     <?php include "pages/interns.php"; ?>
                     <?php include "pages/sub-admins.php"; ?>
                     <?php include "pages/admin-profile.php"; ?>
+                    <?php include "pages/internlist.php"; ?>
                 </div>
             </div>
             <!-- End of Main Content -->
@@ -129,6 +138,8 @@
     <script src="crud-ajax/profile/retrieve-admins-info.js"></script>
     <script src="crud-ajax/profile/update-admins-info.js"></script>
     <script src="functions/profile/profile-details.js"></script>
+
+    <script src="crud-ajax/internlist/retrieve-internlist.js"></script>
     <!--END::CRUD AJAX FUNCTIONS-->
 
 </body>

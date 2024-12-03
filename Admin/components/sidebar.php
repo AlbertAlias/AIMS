@@ -46,7 +46,7 @@
         }
 
         // Hide all sections
-        document.querySelectorAll('#dashboard, #departments, #coordinators, #interns, #sub-admins, #profile').forEach(section => {
+        document.querySelectorAll('#dashboard, #departments, #coordinators, #interns, #sub-admins, #profile, #internlist').forEach(section => {
             section.style.display = 'none';
         });
 

@@ -20,9 +20,8 @@
                 <a class="dropdown-item d-flex align-items-center menu-link" href="#" onclick="showSection(event, 'profile');">
                     <i class="fa-solid fa-user fa-lg fa-fw me-2" style="color: #017e3e;"></i>Profile
                 </a>
-                <a class="dropdown-item d-flex align-items-center" href="../index.php">
-                    <i class="fa-solid fa-right-from-bracket fa-lg fa-fw me-2" style="color: #017e3e;"></i>
-                    Logout
+                <a class="dropdown-item d-flex align-items-center" href="controller/auto-logout/logout.php">
+                    <i class="fa-solid fa-right-from-bracket fa-lg fa-fw me-2" style="color: #017e3e;"></i>Logout
                 </a>
             </div>
         </li>

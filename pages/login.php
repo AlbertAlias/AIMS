@@ -1,3 +1,10 @@
+<?php
+// Prevent caching
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,13 +31,13 @@
                     <img src="../img/esyatek-logo.png" alt="Esyatek Logo" class="logo img-fluid">
 
                     <!-- Login Form -->
-                    <form id="loginForm">
+                    <form id="loginForm" autocomplete="off">
                         <div class="form-control-wrapper">
-                            <input type="text" class="form-control" id="username" placeholder=" " required>
+                            <input type="text" class="form-control" id="username" placeholder=" " autocomplete="off" required>
                             <label for="username">Username</label>
                         </div>
                         <div class="form-control-wrapper password-wrapper">
-                            <input type="password" class="form-control" id="password" placeholder=" " required>
+                            <input type="password" class="form-control" id="password" placeholder=" " autocomplete="off" required>
                             <label for="password">Password</label>
                             <svg class="show-password" id="showPassword" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#404345">
                                 <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/>
@@ -72,5 +79,12 @@
     
     <script src="../crud-ajax/login-users.js"></script>
     <script src="../functions/login.js"></script>
+
+    <script>
+        history.pushState(null, null, location.href);
+        window.onpopstate = function () {
+            history.go(1);
+        };
+    </script>
 </body>
 </html>

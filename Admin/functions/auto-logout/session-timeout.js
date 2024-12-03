@@ -16,7 +16,7 @@ function setupInactivityTimeout() {
             confirmButtonText: 'Ok',
             allowOutsideClick: false
         }).then(() => {
-            window.location.href = '../index.php'; // Redirect to login page
+            window.location.href = 'controller/auto-logout/logout.php'; // Redirect to login page
         });
     }
 

@@ -19,6 +19,11 @@
                     <i class="fa-solid fa-cloud-arrow-up"></i> Upload Files
                 </button>
 
+                <!-- Archived button -->
+                <button type="button" class="btn btn-info mt-3" href="#" onclick="showSection(event, 'internlist');">
+                    <i class="fa-regular fa-eye"></i> Intern Lists
+                </button>
+
                 <!-- Progress Container -->
                 <div id="uploadProgress" class="mt-4" style="display: none;">
                     <div class="d-flex align-items-center justify-content-between" style="width: 100%;">

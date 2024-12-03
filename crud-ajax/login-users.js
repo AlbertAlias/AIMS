@@ -34,6 +34,9 @@ $(document).ready(function() {
                             popup: 'mt-5'
                         }
                     }).then(function() {
+                        // Clear form fields after login success
+                        $('#username').val('');
+                        $('#password').val('');
                         // Redirection logic based on user type and department
                         if (user_type === 'developer' || user_type === 'admin') {
                             window.location.href = '../Admin/admin.php';
