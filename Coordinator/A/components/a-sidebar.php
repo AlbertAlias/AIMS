@@ -21,6 +21,10 @@
             <i class="fa-solid fa-file-signature"></i>
             <span>Reports</span>
         </a>
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'form')">
+            <i class="fa-solid fa-file-signature"></i>
+            <span>Form</span>
+        </a>
     </nav>
 </div>
 
@@ -40,7 +44,7 @@
         }
 
         // Hide all sections
-        document.querySelectorAll('#dashboard, #internlist, #reports, #intern, #profile').forEach(section => {
+        document.querySelectorAll('#dashboard, #internlist, #reports, #intern, #form, #profile').forEach(section => {
             section.style.display = 'none';
         });
 

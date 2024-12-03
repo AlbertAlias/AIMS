@@ -25,6 +25,9 @@
     <link href="../../assets/css/header.css" rel="stylesheet">
     <link href="../../assets/coor/accountancy/internlist.css" rel="stylesheet">
 
+    <link href="../../assets/evaluation-form/evaluation.css" rel="stylesheet">
+
+
     <link rel="stylesheet" href="../../assets/intern-css/coor-profile.css">
 
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -64,6 +67,8 @@
                     <?php include "pages/reports.php"; ?>
                     <?php include "pages/interngrade.php"; ?>
                     <?php include "pages/coor-profile.php"; ?>
+                    <?php include "pages/form.php"; ?>
+
                 </div>
 
                 <!-- Content Row -->

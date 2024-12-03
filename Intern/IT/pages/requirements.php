@@ -1,31 +1,88 @@
 <div class="container-fluid bg-light p-0 m-0" id="requirements" style="display: none;">
-    <h3>Submit Requirements</h3>
-    <form id="requirements-form" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="intern-id" class="form-label">Intern ID</label>
-            <input type="text" class="form-control" id="intern-id" name="intern_id" placeholder="Enter Intern ID" required>
+    <div class="row">
+        <!-- Pending Status -->
+        <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <div>
+                <label for="medical-certification" class="form-label">Medical Certification</label>
+                <input type="file" class="form-control" id="medical-certification" name="medical_certification" required>
+                </div>
+                <div>
+                    <!-- Small Circle for Pending (Red) -->
+                    <div style="width: 15px; height: 15px; background-color: #dc3545; border-radius: 50%;"></div>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="resume" class="form-label">Resume</label>
-            <input type="file" class="form-control" id="resume" name="resume" required>
+
+        <!-- Submitted Status -->
+        <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <div>
+                <label for="medical-certification" class="form-label">Medical Certification</label>
+                <input type="file" class="form-control" id="medical-certification" name="medical_certification" required>
+                </div>
+                <div>
+                    <!-- Small Circle for Submitted (Orange) -->
+                    <div style="width: 15px; height: 15px; background-color: #fd7e14; border-radius: 50%;"></div>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="application-letter" class="form-label">Application Letter</label>
-            <input type="file" class="form-control" id="application-letter" name="application_letter" required>
+
+        <!-- Completed Status -->
+        <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <div>
+                <label for="medical-certification" class="form-label">Medical Certification</label>
+                <input type="file" class="form-control" id="medical-certification" name="medical_certification" required>
+                </div>
+                <div>
+                    <!-- Small Circle for Completed (Green) -->
+                    <div style="width: 15px; height: 15px; background-color: #28a745; border-radius: 50%;"></div>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="medical-certification" class="form-label">Medical Certification</label>
-            <input type="file" class="form-control" id="medical-certification" name="medical_certification" required>
+    </div>
+    <div class="row">
+        <!-- Pending Status -->
+        <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <div>
+                <label for="medical-certification" class="form-label">Medical Certification</label>
+                <input type="file" class="form-control" id="medical-certification" name="medical_certification" required>
+                </div>
+                <div>
+                    <!-- Small Circle for Pending (Red) -->
+                    <div style="width: 15px; height: 15px; background-color: #dc3545; border-radius: 50%;"></div>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="certification-of-completion" class="form-label">Certification of Completion</label>
-            <input type="file" class="form-control" id="certification-of-completion" name="certification_of_completion" required>
+
+        <!-- Submitted Status -->
+        <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <div>
+                <label for="medical-certification" class="form-label">Medical Certification</label>
+                <input type="file" class="form-control" id="medical-certification" name="medical_certification" required>
+                </div>
+                <div>
+                    <!-- Small Circle for Submitted (Orange) -->
+                    <div style="width: 15px; height: 15px; background-color: #fd7e14; border-radius: 50%;"></div>
+                </div>
+            </div>
         </div>
-        <div class="mb-3">
-            <label for="memorandum-of-agreement" class="form-label">Memorandum of Agreement</label>
-            <input type="file" class="form-control" id="memorandum-of-agreement" name="memorandum_of_agreement" required>
+
+        <!-- Completed Status -->
+        <div class="col-12 col-md-6 col-lg-4 mb-3">
+            <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <div>
+                <label for="medical-certification" class="form-label">Medical Certification</label>
+                <input type="file" class="form-control" id="medical-certification" name="medical_certification" required>
+                </div>
+                <div>
+                    <!-- Small Circle for Completed (Green) -->
+                    <div style="width: 15px; height: 15px; background-color: #28a745; border-radius: 50%;"></div>
+                </div>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit Requirements</button>
-    </form>
-    <div id="response-message" class="mt-3"></div>
+    </div>
 </div>

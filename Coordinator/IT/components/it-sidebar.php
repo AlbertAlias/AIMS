@@ -36,7 +36,7 @@
         }
 
         // Hide all sections
-        document.querySelectorAll('#dashboard, #internlist, #reports, #profile, #post-requirements').forEach(section => {
+        document.querySelectorAll('#dashboard, #internlist, #reports, #profile, #post-requirements, #evaluate ').forEach(section => {
             section.style.display = 'none';
         });
 

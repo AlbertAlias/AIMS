@@ -2,8 +2,8 @@
     <h3>Weekly Reports</h3>
     <form id="weekly-report-form" method="POST">
         <div class="mb-3">
-            <label for="week" class="form-label">Week</label>
-            <input type="text" class="form-control" id="week" name="week" placeholder="Week number or date range" required>
+        <label for="report-content" class="form-label">Report Content</label>
+        <textarea class="form-control" id="report-content" name="report_content" rows="5" placeholder="Enter weekly report details" required></textarea>
         </div>
         <div class="mb-3">
             <label for="report-content" class="form-label">Report Content</label>

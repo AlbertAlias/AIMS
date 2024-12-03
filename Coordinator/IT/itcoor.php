@@ -24,6 +24,9 @@
     <link href="../../assets/css/sidebar.css" rel="stylesheet">
     <link  href="../../assets/css/header.css" rel="stylesheet">
     <link href="../../assets/coor/accountancy/internlist.css" rel="stylesheet">
+    <link href="../../assets/evaluation-form/evaluation.css" rel="stylesheet">
+
+
 
     <link rel="stylesheet" href="../../assets/intern-css/coor-profile.css">
 
@@ -66,6 +69,7 @@
                     <?php include "pages/reports.php"; ?>
                     <?php include "pages/coor-profile.php"; ?>
                     <?php include "pages/post-requirements.php"; ?>
+                    <?php include "pages/form.php"; ?>
                 </div>
 
                 <!-- Content Row -->
@@ -84,6 +88,8 @@
     <script src="../../js/sidebar.js"></script>
 
     <script src="crud-ajax/internlist/retrieve-internlist.js"></script>
+    <script src="crud-ajax/internlist/evaluate.js"></script>
+
     
     <!-- <script src="crud-ajax/reports/reports.js"></script> -->
     <script src="crud-ajax/post-requirements/create-requirements.js"></script>

@@ -1,6 +1,7 @@
 let currentPage = 1;
 let pageLength = 10;
 
+
 // Show loader while fetching data
 function showLoader(isLoading) {
     if (isLoading) {

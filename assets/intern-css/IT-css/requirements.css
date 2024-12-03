@@ -1,12 +1,16 @@
-.form-section {
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+.card-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Fixed height for the chart container */
+    overflow: hidden; /* Prevent overflow of the chart */
 }
-.form-header {
-    font-weight: bold;
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+
+#users-chart {
+    width: 100%;
+    height: 100%;
+}
+
+.card i {
+    color: #198754; /* Set the icon color */
 }

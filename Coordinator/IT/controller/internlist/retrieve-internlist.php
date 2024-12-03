@@ -68,7 +68,7 @@ try {
             $html .= '<td>' . htmlspecialchars($row['department_name']) . '</td>';
             $html .= '<td>' . htmlspecialchars($row['studentID']) . '</td>';
             $html .= '<td>N/A</td>';
-            $html .= '<td><button class="btn btn-sm btn-info">View</button> <button class="btn btn-sm btn-success">Evaluate</button></td>';
+            $html .= '<td><button class="btn btn-sm btn-info">View</button></td>';
             $html .= '</tr>';
         }
     }
