@@ -57,9 +57,11 @@
 
         if ($result && $result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $department_map[$row['department_name']] = $row['id'];
+                // Normalize department names to lowercase for case-insensitive matching
+                $department_map[strtolower(trim($row['department_name']))] = $row['id'];
             }
         }
+        error_log('Department Map: ' . print_r($department_map, true));
 
         foreach ($sheetData as $row) {
             // Skip the header row and any empty rows
@@ -73,89 +75,48 @@
             $first_name = isset($row['C']) ? trim($row['C']) : null;
             $gender = isset($row['D']) ? trim($row['D']) : null;
             $studentID = isset($row['E']) ? trim($row['E']) : null;
-            $department_name = isset($row['F']) ? trim($row['F']) : null;
+            $department_name = isset($row['F']) ? strtolower(trim($row['F'])) : null; // Normalize case
             $department_id = isset($department_map[$department_name]) ? $department_map[$department_name] : null;
             $username = isset($row['G']) ? trim($row['G']) : null;
             $password = isset($row['H']) ? password_hash(trim($row['H']), PASSWORD_BCRYPT) : null;
-            $user_type = 'intern';
 
-            // Log the row for debugging
-            error_log('Processing row: ' . print_r($row, true));
+            // Debugging logs
+            error_log('Processing Row: ' . print_r($row, true));
+            error_log('Processing Department: ' . $department_name . ', Mapped ID: ' . $department_id);
 
-            // Ensure required fields are not empty
-            if ($intern_id && $last_name && $first_name && $gender && $studentID && $department_id && $username && $password) {
-                $conn->begin_transaction();
+            if (!$department_id) {
+                error_log('Invalid Department: ' . $department_name . '. Skipping row.');
+                continue;
+            }
 
+            if ($intern_id && $last_name && $first_name && $gender && $studentID && $username && $password) {
                 try {
-                    // Check if the intern_id already exists in the interns table for the same department
-                    $check_sql = "SELECT COUNT(*) FROM interns i
-                                JOIN users u ON i.user_id = u.id
-                                WHERE i.intern_id = ? AND u.department_id = ?";
-                    $stmt = $conn->prepare($check_sql);
-                    $stmt->bind_param("si", $intern_id, $department_id);  // Check if intern_id exists with the same department_id
-                    $stmt->execute();
-                    $stmt->bind_result($count);
-                    $stmt->fetch();
-                    $stmt->free_result();  // Free the result set to avoid 'Commands out of sync' error
+                    $conn->begin_transaction();
 
-                    if ($count > 0) {
-                        // If intern_id already exists in the same department, skip this row
-                        echo json_encode(['error' => 'Intern ID ' . $intern_id . ' already exists in this department']);
-                        exit;
+                    // Insert into users table
+                    $sql = "INSERT INTO users (last_name, first_name, gender, department_id, username, password, user_type) 
+                            VALUES (?, ?, ?, ?, ?, ?, 'intern')";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->bind_param("ssssss", $last_name, $first_name, $gender, $department_id, $username, $password);
+
+                    if ($stmt->execute()) {
+                        $user_id = $conn->insert_id;
+
+                        // Insert into interns table
+                        $sql_intern = "INSERT INTO interns (intern_id, studentID, user_id) VALUES (?, ?, ?)";
+                        $stmt = $conn->prepare($sql_intern);
+                        $stmt->bind_param("ssi", $intern_id, $studentID, $user_id);
+                        $stmt->execute();
                     }
 
-                    // Get coordinator's details
-                    $coor_sql = "
-                        SELECT u.last_name, u.first_name 
-                        FROM coordinators c
-                        JOIN users u ON c.user_id = u.id
-                        WHERE c.department_id = ? LIMIT 1";
-                    
-                    $stmt = $conn->prepare($coor_sql);
-                    $stmt->bind_param("i", $department_id); // Bind department_id as integer
-                    $stmt->execute();
-                    $coor_result = $stmt->get_result();
-                    
-                    // Ensure the previous query is fully processed before proceeding
-                    $stmt->free_result();  // Free result to ensure no 'Commands out of sync' error
-
-                    if ($coor_result->num_rows > 0) {
-                        $coor_row = $coor_result->fetch_assoc();
-                        $coor_last_name = $coor_row['last_name'];
-                        $coor_first_name = $coor_row['first_name'];
-
-                        // Insert intern data into users table
-                        $sql = "INSERT INTO users (last_name, first_name, gender, department_id, username, password, user_type) 
-                                VALUES (?, ?, ?, ?, ?, ?, ?)";
-                        
-                        $stmt = $conn->prepare($sql);
-                        $stmt->bind_param("sssssss", $last_name, $first_name, $gender, $department_id, $username, $password, $user_type);
-                        if ($stmt->execute()) {
-                            // Get the last inserted user ID
-                            $user_id = $conn->insert_id;
-
-                            // Insert intern data into interns table with provided intern_id
-                            $sql_intern = "INSERT INTO interns (intern_id, studentID, user_id) 
-                                        VALUES (?, ?, ?)";
-                            $stmt = $conn->prepare($sql_intern);
-                            $stmt->bind_param("ssi", $intern_id, $studentID, $user_id);
-                            $stmt->execute();
-                        }
-                    }
-
-                    // Commit transaction
                     $conn->commit();
                 } catch (Exception $e) {
-                    // Rollback if any error occurs
                     $conn->rollback();
-                    echo json_encode(['error' => 'Failed to insert data: ' . $e->getMessage()]);
-                    exit;
+                    error_log('Error inserting row: ' . $e->getMessage());
+                    continue;
                 }
             } else {
-                // Log missing fields for the row
                 error_log('Missing required fields for row: ' . print_r($row, true));
-                echo json_encode(['error' => 'Missing required fields for row', 'row' => $row]);
-                exit;
             }
         }
 
