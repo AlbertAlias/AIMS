@@ -33,7 +33,9 @@
                             </div>
                             <div class="dropdown-footer mt-2 text-center">
                                 <button class="btn btn-sm btn-primary me-2" id="applyFiltersButton">Apply Filters</button>
-                                <button class="btn btn-sm btn-warning" id="archiveButton">Archive</button>
+                                <button class="btn btn-sm btn-warning" id="archiveButton">Archive All Students</button>
+
+                                <!-- <button class="btn btn-sm btn-warning" id="archiveButton">Archive</button> -->
                             </div>
                         </div>
                     </div>

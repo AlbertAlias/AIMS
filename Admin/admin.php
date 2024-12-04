@@ -140,6 +140,8 @@
     <script src="functions/profile/profile-details.js"></script>
 
     <script src="crud-ajax/internlist/retrieve-internlist.js"></script>
+    <script src="crud-ajax/archive/archive.js"></script>
+
     <!--END::CRUD AJAX FUNCTIONS-->
 
 </body>
