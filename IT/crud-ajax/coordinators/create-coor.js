@@ -63,7 +63,7 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
                     timer: 3000
                 });
                 resetAndLockForms();
-                window.loadCoor();
+                // window.loadCoor();
             } else {
                 Swal.fire({
                     toast: true,

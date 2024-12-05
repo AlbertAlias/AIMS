@@ -89,7 +89,7 @@ $(document).ready(function() {
         } else if (user_type === 'supervisor') {
             baseUrl = '../Supervisor/supervisor.php';
         } else if (user_type === 'student') {
-            baseUrl = '../Student/' + department.toUpperCase() + '/student.php';
+            baseUrl = '../Student/student.php';
         } else if (user_type === 'registrar') {
             baseUrl = '../Registrar/registrar.php';
         } else {

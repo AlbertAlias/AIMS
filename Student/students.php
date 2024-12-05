@@ -71,11 +71,6 @@
                 <!-- Begin Page Content -->
                 <div id="page-content" style="width: 100%;">
                     <?php include "pages/dashboard.php"; ?>
-                    <?php include "pages/depts-dean.php"; ?>
-                    <?php include "pages/coordinators.php"; ?>
-                    <?php include "pages/interns.php"; ?>
-                    <?php include "pages/admin-profile.php"; ?>
-                    <?php include "pages/internlist.php"; ?>
                 </div>
             </div>
             <!-- End of Main Content -->
@@ -95,49 +90,6 @@
     <!-- <script src="crud-ajax/dashboard/retrieve-users.js"></script> -->
 
     <!--START::CRUD AJAX FUNCTIONS-->
-    <!-- <script src="crud-ajax/dashboard/retrieve-users-analytics.js"></script>
-    <script src="crud-ajax/dashboard/retrieve-deptCounts.js"></script>
-    <script src="crud-ajax/dashboard/retrieve-coorCounts.js"></script>
-    <script src="crud-ajax/dashboard/retrieve-internCounts.js"></script>
-    <script src="crud-ajax/dashboard/retrieve-adminCounts.js"></script> -->
-
-    <script src="functions/departments/dept-form-enable.js"></script>
-    <script src="crud-ajax/departments/create-depts.js"></script>
-    <!-- <script src="crud-ajax/departments/retrieve-depts.js"></script> -->
-    <script src="crud-ajax/departments/retrieve-deptsInfo.js"></script>
-    <script src="crud-ajax/departments/update-depts.js"></script>
-    <script src="crud-ajax/departments/delete-depts.js"></script>
-
-    <script src="crud-ajax/coordinators/retrieve-coor-deptsName.js"></script>
-    <script src="functions/coordinators/coor-form-enable.js"></script>
-    <!-- <script src="crud-ajax/coordinators/retrieve-coor.js"></script> -->
-    <!-- <script src="crud-ajax/coordinators/retrieve-coor-info.js"></script> -->
-    <script src="crud-ajax/coordinators/create-coor.js"></script>
-    <script src="functions/coordinators/contact-number.js"></script>
-    <script src="crud-ajax/coordinators/update-coor.js"></script>
-    <script src="crud-ajax/coordinators/delete-coor.js"></script>
-
-    <!-- <script src="crud-ajax/interns/retrieve-interns.js"></script> -->
-    <!-- <script src="crud-ajax/interns/retrieve-intern-deptsName.js"></script> -->
-    <!-- <script src="crud-ajax/interns/retrieve-intern-info.js"></script> -->
-    <script src="crud-ajax/interns/create-upload-interns.js"></script>
-    <!-- <script src="functions/interns/drag-drop-files.js"></script> -->
-    <script src="crud-ajax/interns/update-interns.js"></script>
-
-    <!-- <script src="crud-ajax/admins/create-admins.js"></script>
-    <script src="crud-ajax/admins/retrieve-admin-details.js"></script>
-    <script src="crud-ajax/admins/retrieve-admins.js"></script>
-    <script src="functions/admins/admin-form-enable.js"></script>
-    <script src="crud-ajax/admins/update-admins.js"></script> -->
-
-    <!-- <script src="crud-ajax/profile/retrieve-profile.js"></script> -->
-    <!-- <script src="crud-ajax/profile/create-profile.js"></script> -->
-    <!-- <script src="crud-ajax/profile/retrieve-admins-info.js"></script> -->
-    <!-- <script src="crud-ajax/profile/update-admins-info.js"></script> -->
-    <!-- <script src="functions/profile/profile-details.js"></script> -->
-
-    <!-- <script src="crud-ajax/internlist/retrieve-internlist.js"></script> -->
-    <script src="crud-ajax/archive/archive.js"></script>
 
     <!--END::CRUD AJAX FUNCTIONS-->
 
