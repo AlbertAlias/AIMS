@@ -12,11 +12,14 @@ try {
     // Calculate pagination
     $start = ($page - 1) * $length;
 
-    // Query to get filtered and paginated data
-    $sql = "SELECT id, employee_no, last_name, first_name, middle_name, gender, personal_email, username, user_type, department_id 
-        FROM users 
-        WHERE CONCAT_WS(' ', first_name, last_name, employee_no, personal_email, username, user_type) LIKE ? 
-        LIMIT ?, ?";
+    // Query to get filtered and paginated data, joining with dept_dean to get department name
+    $sql = "SELECT u.id, u.employee_no, u.last_name, u.first_name, u.middle_name, u.gender, 
+               u.personal_email, u.username, u.user_type, d.department_name, s.student_id
+            FROM users u
+            LEFT JOIN dept_dean d ON u.department_id = d.id
+            LEFT JOIN student s ON u.id = s.user_id
+            WHERE CONCAT_WS(' ', u.first_name, u.last_name, u.employee_no, u.personal_email, u.username, u.user_type) LIKE ? 
+            LIMIT ?, ?";
     $stmt = $conn->prepare($sql);
     $searchTerm = "%$search%";
     $stmt->bind_param('sii', $searchTerm, $start, $length);
@@ -30,8 +33,9 @@ try {
         $html .= '<td><input type="checkbox" class="userCheckbox" data-id="' . $row['id'] . '"></td>';
         $html .= '<td>' . htmlspecialchars($row['first_name']) . '</td>';
         $html .= '<td>' . htmlspecialchars($row['last_name']) . '</td>';
-        $html .= '<td>' . htmlspecialchars($row['department_id']) . '</td>';
+        $html .= '<td>' . htmlspecialchars($row['department_name']) . '</td>';
         $html .= '<td>' . htmlspecialchars($row['employee_no']) . '</td>';
+        $html .= '<td>' . htmlspecialchars($row['student_id']) . '</td>';
         $html .= '<td>' . htmlspecialchars($row['gender']) . '</td>';
         $html .= '<td>' . htmlspecialchars($row['personal_email']) . '</td>';
         $html .= '<td>' . htmlspecialchars($row['username']) . '</td>';
@@ -40,7 +44,7 @@ try {
     }
 
     // Query to get total count for pagination
-    $totalSql = "SELECT COUNT(*) AS total FROM users WHERE CONCAT_WS(' ', first_name, last_name, employee_no, personal_email, username, user_type) LIKE ?";
+    $totalSql = "SELECT COUNT(*) AS total FROM users u WHERE CONCAT_WS(' ', u.first_name, u.last_name, u.employee_no, u.personal_email, u.username, u.user_type) LIKE ?";
     $totalStmt = $conn->prepare($totalSql);
     $totalStmt->bind_param('s', $searchTerm);
     $totalStmt->execute();

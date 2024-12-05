@@ -71,7 +71,7 @@
                 <!-- Begin Page Content -->
                 <div id="page-content" style="width: 100%;">
                     <?php include "pages/dashboard.php"; ?>
-                    <?php include "pages/departments-dean.php"; ?>
+                    <?php include "pages/depts-dean.php"; ?>
                     <?php include "pages/coordinators.php"; ?>
                     <?php include "pages/interns.php"; ?>
                     <?php include "pages/admin-profile.php"; ?>
@@ -94,7 +94,6 @@
     <!-- <script src="functions/auto-logout/session-timeout.js"></script> -->
     <script src="crud-ajax/dashboard/retrieve-users.js"></script>
 
-
     <!--START::CRUD AJAX FUNCTIONS-->
     <!-- <script src="crud-ajax/dashboard/retrieve-users-analytics.js"></script>
     <script src="crud-ajax/dashboard/retrieve-deptCounts.js"></script>
@@ -104,7 +103,8 @@
 
     <script src="functions/departments/dept-form-enable.js"></script>
     <script src="crud-ajax/departments/create-depts.js"></script>
-    <!-- <script src="crud-ajax/departments/retrieve-depts.js"></script> -->
+    <script src="crud-ajax/departments/retrieve-depts.js"></script>
+    <script src="crud-ajax/departments/retrieve-deptsInfo.js"></script>
     <script src="crud-ajax/departments/update-depts.js"></script>
     <script src="crud-ajax/departments/delete-depts.js"></script>
 
@@ -116,14 +116,13 @@
     <script src="functions/coordinators/contact-number.js"></script>
     <script src="crud-ajax/coordinators/update-coor.js"></script>
     <script src="crud-ajax/coordinators/delete-coor.js"></script>
-    <!-- <script src="functions/coordinators/coor_code.js"></script> -->
 
-    <!-- <script src="crud-ajax/interns/retrieve-interns.js"></script>
-    <script src="crud-ajax/interns/retrieve-intern-deptsName.js"></script>
+    <!-- <script src="crud-ajax/interns/retrieve-interns.js"></script> -->
+    <!-- <script src="crud-ajax/interns/retrieve-intern-deptsName.js"></script> -->
     <script src="crud-ajax/interns/retrieve-intern-info.js"></script>
     <script src="crud-ajax/interns/create-upload-interns.js"></script>
     <script src="functions/interns/drag-drop-files.js"></script>
-    <script src="crud-ajax/interns/update-interns.js"></script> -->
+    <script src="crud-ajax/interns/update-interns.js"></script>
 
     <!-- <script src="crud-ajax/admins/create-admins.js"></script>
     <script src="crud-ajax/admins/retrieve-admin-details.js"></script>

@@ -35,26 +35,26 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
         $file = $_FILES['file'];
-
+    
         if ($file['error'] !== UPLOAD_ERR_OK) {
             echo json_encode(['error' => 'File upload error']);
             exit;
         }
-
+    
         try {
             $spreadsheet = IOFactory::load($file['tmp_name']);
         } catch (Exception $e) {
             echo json_encode(['error' => 'Failed to load spreadsheet: ' . $e->getMessage()]);
             exit;
         }
-
+    
         $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
-
+    
         // Dynamically fetch the department map from the database
         $department_map = [];
-        $sql = "SELECT department_name, id FROM departments";
+        $sql = "SELECT department_name, id FROM dept_dean";
         $result = $conn->query($sql);
-
+    
         if ($result && $result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 // Normalize department names to lowercase for case-insensitive matching
@@ -62,53 +62,57 @@
             }
         }
         error_log('Department Map: ' . print_r($department_map, true));
-
+    
         foreach ($sheetData as $row) {
             // Skip the header row and any empty rows
-            if ($row['A'] == 'intern_id' || (empty(array_filter($row, fn($value) => !is_null($value) && trim($value) !== '')))) {
+            if ($row['A'] == 'last_name' || (empty(array_filter($row, fn($value) => !is_null($value) && trim($value) !== '')))) {
                 continue;
             }
-
+    
             // Extract and clean data
-            $intern_id = isset($row['A']) ? trim($row['A']) : null;
-            $last_name = isset($row['B']) ? trim($row['B']) : null;
-            $first_name = isset($row['C']) ? trim($row['C']) : null;
-            $gender = isset($row['D']) ? trim($row['D']) : null;
-            $studentID = isset($row['E']) ? trim($row['E']) : null;
-            $department_name = isset($row['F']) ? strtolower(trim($row['F'])) : null; // Normalize case
+            $last_name = isset($row['A']) ? trim($row['A']) : null;
+            $first_name = isset($row['B']) ? trim($row['B']) : null;
+            $gender = isset($row['C']) ? trim($row['C']) : null;
+            $studentID = isset($row['D']) ? trim($row['D']) : null;
+            $department_name = isset($row['E']) ? strtolower(trim($row['E'])) : null; // Normalize case
             $department_id = isset($department_map[$department_name]) ? $department_map[$department_name] : null;
-            $username = isset($row['G']) ? trim($row['G']) : null;
-            $password = isset($row['H']) ? password_hash(trim($row['H']), PASSWORD_BCRYPT) : null;
-
+            $username = isset($row['F']) ? trim($row['F']) : null;
+            $password = isset($row['G']) ? password_hash(trim($row['G']), PASSWORD_BCRYPT) : null;
+    
             // Debugging logs
             error_log('Processing Row: ' . print_r($row, true));
             error_log('Processing Department: ' . $department_name . ', Mapped ID: ' . $department_id);
-
+    
             if (!$department_id) {
                 error_log('Invalid Department: ' . $department_name . '. Skipping row.');
                 continue;
             }
-
-            if ($intern_id && $last_name && $first_name && $gender && $studentID && $username && $password) {
+    
+            if ($last_name && $first_name && $gender && $studentID && $username && $password) {
                 try {
                     $conn->begin_transaction();
-
-                    // Insert into users table
-                    $sql = "INSERT INTO users (last_name, first_name, gender, department_id, username, password, user_type) 
-                            VALUES (?, ?, ?, ?, ?, ?, 'intern')";
+    
+                    // Insert into users table with department_id
+                    $sql = "INSERT INTO users (last_name, first_name, gender, studentID, department_id, username, password, user_type) 
+                            VALUES (?, ?, ?, ?, ?, ?, ?, 'intern')";
                     $stmt = $conn->prepare($sql);
-                    $stmt->bind_param("ssssss", $last_name, $first_name, $gender, $department_id, $username, $password);
-
+                    $stmt->bind_param("ssssiss", $last_name, $first_name, $gender, $studentID, $department_id, $username, $password); // Correct the bind_param to match types
+    
                     if ($stmt->execute()) {
                         $user_id = $conn->insert_id;
-
-                        // Insert into interns table
-                        $sql_intern = "INSERT INTO interns (intern_id, studentID, user_id) VALUES (?, ?, ?)";
-                        $stmt = $conn->prepare($sql_intern);
-                        $stmt->bind_param("ssi", $intern_id, $studentID, $user_id);
-                        $stmt->execute();
+                        error_log('Inserted user with ID: ' . $user_id);  // Log user ID to verify insertion
+    
+                        // Insert into student table
+                        $sql_intern = "INSERT INTO student (studentID, user_id) VALUES (?, ?)";
+                        $stmt_intern = $conn->prepare($sql_intern);
+                        $stmt_intern->bind_param("si", $studentID, $user_id);
+                        $stmt_intern->execute();
+                    } else {
+                        error_log('Error executing insert into users: ' . $stmt->error);
+                        echo json_encode(['error' => 'Failed to insert user']);
+                        exit;
                     }
-
+    
                     $conn->commit();
                 } catch (Exception $e) {
                     $conn->rollback();
@@ -119,7 +123,7 @@
                 error_log('Missing required fields for row: ' . print_r($row, true));
             }
         }
-
+    
         echo json_encode(['success' => 'Data successfully inserted into the database']);
     }
 ?>

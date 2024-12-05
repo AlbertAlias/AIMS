@@ -56,12 +56,12 @@ document.addEventListener('DOMContentLoaded', function () {
              file.type === 'application/vnd.ms-excel' || 
              file.name.endsWith('.csv'))) {
             // Display the file name and progress elements
-            document.getElementById('uploadProgress').style.display = 'block';
-            const fileNameElement = document.getElementById('uploadfileName'); // Correct ID
+            // document.getElementById('uploadProgress').style.display = 'block';
+            // const fileNameElement = document.getElementById('uploadfileName'); // Correct ID
             
-            if (fileNameElement) {
-                fileNameElement.innerText = file.name; // Updated line
-            }
+            // if (fileNameElement) {
+            //     fileNameElement.innerText = file.name; // Updated line
+            // }
     
             // Call the upload function and show progress
             uploadFile(file); // Change this line to uploadFile

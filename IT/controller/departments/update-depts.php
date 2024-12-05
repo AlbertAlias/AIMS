@@ -1,28 +1,49 @@
 <?php
-include '../../../dbconn.php'; // Adjust to your database connection file
+include '../../../dbconn.php';
+
+header('Content-Type: application/json'); // Ensure JSON response
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['id'] ?? ''; // Get department ID
-    $name = $_POST['departmentName'] ?? ''; // Get department name
-    $head = $_POST['departmentHead'] ?? ''; // Get department head (if needed)
+    $id = $_POST['id'] ?? '';
+    $department_name = $_POST['department_name'] ?? '';
+    $last_name = $_POST['last_name'] ?? '';
+    $first_name = $_POST['first_name'] ?? '';
+    $username = $_POST['username'] ?? '';
 
-    // Check if required fields are provided
-    if (empty($id) || empty($name)) {
+    // Validate required fields
+    if (empty($id) || empty($department_name) || empty($last_name) || empty($first_name) || empty($username)) {
         echo json_encode(['success' => false, 'message' => 'Missing required fields.']);
         exit;
     }
 
-    $query = "UPDATE departments SET department_name = ?, department_head = ? WHERE id = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param('ssi', $name, $head, $id);
+    // Start database transaction
+    $conn->begin_transaction();
 
-    if ($stmt->execute()) {
+    try {
+        // Update department name in dept_dean table
+        $updateDeptQuery = "UPDATE dept_dean SET department_name = ? WHERE id = ?";
+        $deptStmt = $conn->prepare($updateDeptQuery);
+        $deptStmt->bind_param('si', $department_name, $id);
+        $deptStmt->execute();
+
+        // Update dean's information in users table
+        $updateUserQuery = "UPDATE users SET last_name = ?, first_name = ?, username = ? WHERE id = (SELECT user_id FROM dept_dean WHERE id = ?)";
+        $userStmt = $conn->prepare($updateUserQuery);
+        $userStmt->bind_param('sssi', $last_name, $first_name, $username, $id);
+        $userStmt->execute();
+
+        // Commit transaction
+        $conn->commit();
         echo json_encode(['success' => true]);
-    } else {
-        echo json_encode(['success' => false, 'message' => $stmt->error]);
+    } catch (Exception $e) {
+        // Rollback on error
+        $conn->rollback();
+        echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+    } finally {
+        // Close statements and connection
+        $deptStmt->close();
+        $userStmt->close();
+        $conn->close();
     }
-
-    $stmt->close();
-    $conn->close();
 }
 ?>

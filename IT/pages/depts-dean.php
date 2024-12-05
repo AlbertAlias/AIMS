@@ -38,11 +38,11 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-12 col-md-6">
-                            <label for="username" class="form-label">username <span class="text-danger">*</span></label>
+                            <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="username" name="username" required disabled>
                         </div>
                         <div class="col-12 col-md-6">
-                            <label for="password" class="form-label">password <span class="text-danger">*</span></label>
+                            <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="password" name="password" required disabled>
                         </div>
                     </div>
