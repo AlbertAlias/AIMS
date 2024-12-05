@@ -92,7 +92,7 @@
     <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
     <script src="../assets/js/sidebar.js"></script>
     <!-- <script src="functions/auto-logout/session-timeout.js"></script> -->
-    <script src="crud-ajax/dashboard/retrieve-users.js"></script>
+    <!-- <script src="crud-ajax/dashboard/retrieve-users.js"></script> -->
 
     <!--START::CRUD AJAX FUNCTIONS-->
     <!-- <script src="crud-ajax/dashboard/retrieve-users-analytics.js"></script>
@@ -103,14 +103,14 @@
 
     <script src="functions/departments/dept-form-enable.js"></script>
     <script src="crud-ajax/departments/create-depts.js"></script>
-    <script src="crud-ajax/departments/retrieve-depts.js"></script>
+    <!-- <script src="crud-ajax/departments/retrieve-depts.js"></script> -->
     <script src="crud-ajax/departments/retrieve-deptsInfo.js"></script>
     <script src="crud-ajax/departments/update-depts.js"></script>
     <script src="crud-ajax/departments/delete-depts.js"></script>
 
     <script src="crud-ajax/coordinators/retrieve-coor-deptsName.js"></script>
     <script src="functions/coordinators/coor-form-enable.js"></script>
-    <script src="crud-ajax/coordinators/retrieve-coor.js"></script>
+    <!-- <script src="crud-ajax/coordinators/retrieve-coor.js"></script> -->
     <script src="crud-ajax/coordinators/retrieve-coor-info.js"></script>
     <script src="crud-ajax/coordinators/create-coor.js"></script>
     <script src="functions/coordinators/contact-number.js"></script>
@@ -121,7 +121,7 @@
     <!-- <script src="crud-ajax/interns/retrieve-intern-deptsName.js"></script> -->
     <script src="crud-ajax/interns/retrieve-intern-info.js"></script>
     <script src="crud-ajax/interns/create-upload-interns.js"></script>
-    <script src="functions/interns/drag-drop-files.js"></script>
+    <!-- <script src="functions/interns/drag-drop-files.js"></script> -->
     <script src="crud-ajax/interns/update-interns.js"></script>
 
     <!-- <script src="crud-ajax/admins/create-admins.js"></script>
@@ -130,11 +130,11 @@
     <script src="functions/admins/admin-form-enable.js"></script>
     <script src="crud-ajax/admins/update-admins.js"></script> -->
 
-    <script src="crud-ajax/profile/retrieve-profile.js"></script>
-    <script src="crud-ajax/profile/create-profile.js"></script>
-    <script src="crud-ajax/profile/retrieve-admins-info.js"></script>
-    <script src="crud-ajax/profile/update-admins-info.js"></script>
-    <script src="functions/profile/profile-details.js"></script>
+    <!-- <script src="crud-ajax/profile/retrieve-profile.js"></script> -->
+    <!-- <script src="crud-ajax/profile/create-profile.js"></script> -->
+    <!-- <script src="crud-ajax/profile/retrieve-admins-info.js"></script> -->
+    <!-- <script src="crud-ajax/profile/update-admins-info.js"></script> -->
+    <!-- <script src="functions/profile/profile-details.js"></script> -->
 
     <!-- <script src="crud-ajax/internlist/retrieve-internlist.js"></script> -->
     <script src="crud-ajax/archive/archive.js"></script>

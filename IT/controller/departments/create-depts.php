@@ -47,8 +47,8 @@ if ($stmt_users) {
     if ($stmt_users->execute()) {
         $user_id = $stmt_users->insert_id; // Get inserted user ID
 
-        // Now insert into dept_dean, linking to the user ID
-        $sql_dean = "INSERT INTO dept_dean (department_name, user_id) VALUES (?, ?)";
+        // Now insert into department_dean, linking to the user ID
+        $sql_dean = "INSERT INTO department_dean (department_name, user_id) VALUES (?, ?)";
         $stmt_dean = $conn->prepare($sql_dean);
 
         if ($stmt_dean) {

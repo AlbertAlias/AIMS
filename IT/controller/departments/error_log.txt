@@ -3,3 +3,8 @@ Stack trace:
 #0 C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php(52): mysqli->prepare('INSERT INTO dep...')
 #1 {main}
   thrown in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php on line 52
+[05-Dec-2024 21:29:47 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'aims_db.dept_dean' doesn't exist in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php:52
+Stack trace:
+#0 C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php(52): mysqli->prepare('INSERT INTO dep...')
+#1 {main}
+  thrown in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php on line 52

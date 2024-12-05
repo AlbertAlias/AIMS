@@ -11,13 +11,37 @@
                     <i class="fa-solid fa-cloud-arrow-up mt-3" style="font-size: 30px; color: green;"></i>
                     <p class="text-gray-800 mt-2">Drag files to upload</p>
                     <!-- Hidden file input -->
-                    <input type="file" id="fileInput" accept=".xlsx, .xls .csv" style="display: none;"/>
+                    <input type="file" id="fileInput" accept=".csv" style="display: none;"/>
                 </div>
 
                 <!-- Upload button -->
                 <button type="button" id="uploadButton" class="btn btn-success mt-3">
                     <i class="fa-solid fa-cloud-arrow-up"></i> Upload Files
                 </button>
+
+                <!-- Progress Container -->
+                <div id="uploadProgress" class="mt-4" style="display: none;">
+                    <div class="d-flex align-items-center justify-content-between" style="width: 100%;">
+                        <div class="d-flex align-items-center flex-grow-1">
+                            <i class="fa-solid fa-file-csv" style="font-size: 30px; color: green;"></i>
+                            <div class="ms-2">
+                                <span id="uploadfileName" class="text-gray-800"></span>
+                                <div class="progress mb-1" style="width: 180px; height: 15px;">
+                                    <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" 
+                                        role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                        <span id="progressPercent" class="text-end d-block me-1">0%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="uploadCompleteIcon" style="display: none;">
+                            <i class="fa-solid fa-check" style="font-size: 15px; color: green;"></i>
+                        </span>
+                        <button id="cancelUploadBtn" style="display: none;">
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
 

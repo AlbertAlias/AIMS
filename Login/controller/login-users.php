@@ -17,7 +17,7 @@ if (empty($username) || empty($password)) {
 
 // SQL Query to fetch user details based on the provided
 $query = "SELECT u.*, d.department_name FROM users u 
-          LEFT JOIN dept_dean d ON u.department_id = d.id
+          LEFT JOIN department_dean d ON u.department_id = d.id
           WHERE u.username = ? LIMIT 1";
 
 $stmt = $conn->prepare($query);
