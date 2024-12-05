@@ -29,12 +29,12 @@
                 </li>
                 <!-- Right: Sign in button inside hamburger -->
                 <li class="nav-item">
-                    <a href="../Login/login.php" class="btn btn-success fs-6 fw-semibold text-dark me-2 border-1 border-light d-block d-lg-none">Sign in</a>
+                    <a href="Login/login.php" class="btn btn-success fs-6 fw-semibold text-dark me-2 border-1 border-light d-block d-lg-none">Sign in</a>
                 </li>
             </ul>
         </div>
 
         <!-- Right: Sign in button for large screens -->
-        <a href="pages/login.php" class="btn btn-success fs-6 fw-semibold text-dark me-2 border-1 border-light d-none d-lg-inline">Sign in</a>
+        <a href="Login/login.php" class="btn btn-success fs-6 fw-semibold text-dark me-2 border-1 border-light d-none d-lg-inline">Sign in</a>
     </div>
 </nav>

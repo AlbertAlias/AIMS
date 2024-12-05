@@ -18,7 +18,7 @@
             <!-- Right-Aligned: Sign In Button and Hamburger Menu Toggle -->
             <div class="d-flex align-items-center">
                 <!-- Sign In Button (visible on larger screens) -->
-                <a href="pages/login.php" class="btn btn-success fs-6 fw-semibold text-dark me-2 border-1 border-light d-none d-md-inline">Sign in</a>
+                <a href="../Login/login.php" class="btn btn-success fs-6 fw-semibold text-dark me-2 border-1 border-light d-none d-md-inline">Sign in</a>
 
                 <!-- Hamburger Menu Toggle Button (visible on smaller screens) -->
                 <button class="navbar-toggler d-md-none me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,7 @@
                 <a href="#about" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">About</a>
                 <a href="#contact" class="nav-link fs-6 fw-semibold text-dark text-decoration-none">Contact</a>
                 <!-- Sign In Button (visible on smaller screens) -->
-                <a href="pages/login.php" class="btn btn-success fs-6 fw-semibold text-light border-1 border-light mt-2">Sign in</a>
+                <a href="../Login/login.php" class="btn btn-success fs-6 fw-semibold text-light border-1 border-light mt-2">Sign in</a>
             </nav>
         </div>
     </div>
