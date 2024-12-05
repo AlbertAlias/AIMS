@@ -71,25 +71,33 @@
         <!-- Header -->
         <div class="card-header bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <!-- Page Length Selector -->
-                <div class="d-flex align-items-center me-3 mb-2 mb-sm-0">
-                    <label for="pageLengthSelect" class="form-label mb-0 me-2">Show</label>
-                    <select id="pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                        <option value="100">100</option>
-                    </select>
-                </div>
-                
-                <!-- Search Input -->
-                <div class="ms-3 flex-shrink-1">
-                    <div class="input-group">
-                        <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
-                        <button class="btn btn-outline-secondary btn-sm" type="button">
-                            <i class="fas fa-search"></i>
-                        </button>
+                <!-- Left section (Page Length and Search) -->
+                <div class="d-flex align-items-center">
+                    <!-- Page Length Selector -->
+                    <div class="d-flex align-items-center me-3 mb-2 mb-sm-0">
+                        <label for="pageLengthSelect" class="form-label mb-0 me-2">Show</label>
+                        <select id="pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
                     </div>
+                    <!-- Search Input -->
+                    <div class="ms-3 flex-shrink-1">
+                        <div class="input-group">
+                            <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
+                            <button class="btn btn-outline-secondary btn-sm" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right section (Action buttons) -->
+                <div class="d-flex">
+                    <button class="btn btn-primary btn-sm me-2">Edit</button>
+                    <button class="btn btn-danger btn-sm">Delete</button>
                 </div>
             </div>
         </div>
@@ -101,15 +109,18 @@
                 <table id="usersTable" class="table table-hover text-center" style="width: 100%;">
                     <thead class="table-light">
                         <tr>
+                            <th>
+                                <!-- Select All Checkbox -->
+                                <input type="checkbox" id="selectAllCheckbox">
+                            </th>
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Department</th>
                             <th>Student ID</th>
-                            <th>Company</th>
-                            <th>Email</th>
-                            <th>Password</th>
+                            <th>Gender</th>
+                            <th>Personal Email</th>
+                            <th>Username</th>
                             <th>User Type</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody id="tdata">

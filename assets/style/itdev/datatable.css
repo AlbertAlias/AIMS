@@ -99,3 +99,15 @@
 .card {
     overflow: hidden; /* Hide overflow */
 }
+
+#searchInput, #pageLengthSelect {
+    max-width: 150px; /* Optional: Adjust width */
+}
+
+.card-header .btn {
+    padding: 0.25rem 0.75rem; /* Adjust the padding for buttons */
+}
+
+.card-header .d-flex {
+    gap: 10px; /* Space between the edit and delete buttons */
+}
