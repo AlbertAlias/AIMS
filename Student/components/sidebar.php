@@ -9,9 +9,13 @@
             <i class="fa-solid fa-qrcode"></i>
             <span>Dashboard</span>
         </a>
-        <a href="#" class="sidebar-link" onclick="showSection(event, 'student')">
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'requirement')">
             <i class="fa-solid fa-scroll"></i>
-            <span>Students</span>
+            <span>Requirements</span>
+        </a>
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'weeklyreport')">
+            <i class="fa-solid fa-scroll"></i>
+            <span>Reports</span>
         </a>
         <!-- <a href="#" class="sidebar-link" onclick="showSection(event, 'coordinators')">
             <i class="fa-solid fa-user-group"></i>
@@ -40,7 +44,7 @@
         }
 
         // Hide all sections
-        document.querySelectorAll('#dashboard, #profile, #student').forEach(section => {
+        document.querySelectorAll('#dashboard, #profile, #requirement, #weeklyreport').forEach(section => {
             section.style.display = 'none';
         });
 

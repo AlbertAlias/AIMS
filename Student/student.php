@@ -38,7 +38,6 @@
 
     <link rel="stylesheet" href="../assets/style/itdev/dashboard.css">
     <link rel="stylesheet" href="../assets/style/itdev/profile.css">
-    <link rel="stylesheet" href="../assets/style/coor/studentreq/studentreq.css">
 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
@@ -74,8 +73,10 @@
                 <!-- Begin Page Content -->
                 <div id="page-content" style="width: 100%;">
                     <?php include "pages/dashboard.php"; ?>
-                    <?php include "pages/coor-profile.php"; ?>
-                    <?php include "pages/studentreq.php"; ?>
+                    <?php include "pages/requirement.php"; ?>
+                    <?php include "pages/weeklyreport.php"; ?>
+
+
 
                 </div>
             </div>
@@ -101,7 +102,8 @@
     <script src="crud-ajax/profile/update-admins-info.js"></script>
     <script src="functions/profile/profile-details.js"></script>
 
-    <script src="crud_ajax/studentreq.js"></script>
+    <script src="crud_ajax/requirement.js"></script>
+    <script src="crud_ajax/weeklyreport.js"></script>
 
 
     <!--END::CRUD AJAX FUNCTIONS-->

@@ -8,3 +8,48 @@ Stack trace:
 #0 C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php(52): mysqli->prepare('INSERT INTO dep...')
 #1 {main}
   thrown in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php on line 52
+[05-Dec-2024 23:55:03 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry 'Education' for key 'department_name' in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php:57
+Stack trace:
+#0 C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php(57): mysqli_stmt->execute()
+#1 {main}
+  thrown in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php on line 57
+[05-Dec-2024 23:55:27 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry 'educ' for key 'username' in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php:47
+Stack trace:
+#0 C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php(47): mysqli_stmt->execute()
+#1 {main}
+  thrown in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php on line 47
+[05-Dec-2024 23:55:31 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry 'educ' for key 'username' in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php:47
+Stack trace:
+#0 C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php(47): mysqli_stmt->execute()
+#1 {main}
+  thrown in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php on line 47
+[05-Dec-2024 23:55:51 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry 'educ' for key 'username' in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php:47
+Stack trace:
+#0 C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php(47): mysqli_stmt->execute()
+#1 {main}
+  thrown in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php on line 47
+[05-Dec-2024 23:55:59 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry 'educ' for key 'username' in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php:47
+Stack trace:
+#0 C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php(47): mysqli_stmt->execute()
+#1 {main}
+  thrown in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php on line 47
+[05-Dec-2024 23:56:02 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry 'educ' for key 'username' in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php:47
+Stack trace:
+#0 C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php(47): mysqli_stmt->execute()
+#1 {main}
+  thrown in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php on line 47
+[05-Dec-2024 23:56:08 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry 'educ' for key 'username' in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php:47
+Stack trace:
+#0 C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php(47): mysqli_stmt->execute()
+#1 {main}
+  thrown in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php on line 47
+[05-Dec-2024 23:56:12 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry 'educ' for key 'username' in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php:47
+Stack trace:
+#0 C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php(47): mysqli_stmt->execute()
+#1 {main}
+  thrown in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php on line 47
+[05-Dec-2024 23:56:12 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry 'educ' for key 'username' in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php:47
+Stack trace:
+#0 C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php(47): mysqli_stmt->execute()
+#1 {main}
+  thrown in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php on line 47
