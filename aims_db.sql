@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2024 at 09:36 AM
+-- Generation Time: Dec 05, 2024 at 03:48 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -38,7 +38,7 @@ CREATE TABLE `coordinators` (
 --
 
 INSERT INTO `coordinators` (`id`, `user_id`, `department_id`) VALUES
-(4, 10, 14);
+(5, 16, 19);
 
 -- --------------------------------------------------------
 
@@ -57,7 +57,7 @@ CREATE TABLE `dept_dean` (
 --
 
 INSERT INTO `dept_dean` (`id`, `department_name`, `user_id`) VALUES
-(14, 'CEITE', 8);
+(19, 'CEITE', 15);
 
 -- --------------------------------------------------------
 
@@ -117,7 +117,7 @@ CREATE TABLE `users` (
   `personal_email` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `user_type` enum('it','dean','coordinator','intern','supervisor','registrar') NOT NULL,
+  `user_type` enum('it','dean','coordinator','student','supervisor','registrar') NOT NULL,
   `department_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -127,8 +127,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `employee_no`, `profile_picture`, `last_name`, `first_name`, `middle_name`, `gender`, `address`, `contact_number`, `personal_email`, `username`, `password`, `user_type`, `department_id`) VALUES
 (3, '', NULL, 'Custodio', 'Bryan', NULL, NULL, '', '', '', 'it', '$2y$10$dwY/qMJfYueBEagEJlzJ6.vHWqInONX862GfhVXURI8s.nvGDxmd2', 'it', NULL),
-(8, '', NULL, 'Tuazon', 'Rozaida', NULL, NULL, '', '', '', 'dean', '$2y$10$.uhiaJPVhy5F4EsX2nTbTetRgnah0II4YmiJOr/umD3ax6ky.qIym', 'dean', NULL),
-(10, '12345', NULL, 'bry', 'bry', 'bry', NULL, 'bry', '', 'bry@gmail.com', 'bry', '$2y$10$WiHx/7QNu0hAp8CWKRUXq.i05iY2g12/aUNqHlLXY4l6uIB3OrTH2', 'coordinator', 14);
+(15, '', NULL, 'Tuazon', 'Rozaida', NULL, NULL, '', '', '', 'aida', '$2y$10$oeM644IzXd3s9tXikb461.Xt9dtswdZ0xz2rHWOTVLtxXfOmIbvIm', 'dean', NULL),
+(16, '12345', NULL, 'bry', 'bry', 'bry', NULL, 'bry', '', 'bry@gmail.com', 'bry', '$2y$10$TQntJxSggszczYCPXs8V7O4ee2Kscn4KDzRp1TDpBPmcAgQJwxFg6', 'coordinator', 19);
 
 -- --------------------------------------------------------
 
@@ -208,13 +208,13 @@ ALTER TABLE `weekly_reports`
 -- AUTO_INCREMENT for table `coordinators`
 --
 ALTER TABLE `coordinators`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `dept_dean`
 --
 ALTER TABLE `dept_dean`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `requirements`
@@ -238,7 +238,7 @@ ALTER TABLE `supervisors`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `weekly_reports`
