@@ -11,10 +11,6 @@
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
-
-    // Your existing code
-    $developer = 'developer';
-    $isDeveloper = $_SESSION['user_type'] === $developer;
 ?>
 
 
@@ -28,6 +24,7 @@
     <meta name="author" content="">
 
     <title>Admin</title>
+    <link rel="stylesheet" href="../assets/datatable.css">
     
     <link rel="stylesheet" href="../assets/style/core-css/main.css">
     <link rel="stylesheet" href="../assets/style/core-css/sidebar.css">
@@ -77,7 +74,6 @@
                     <?php include "pages/departments-dean.php"; ?>
                     <?php include "pages/coordinators.php"; ?>
                     <?php include "pages/interns.php"; ?>
-                    <?php include "pages/sub-admins.php"; ?>
                     <?php include "pages/admin-profile.php"; ?>
                     <?php include "pages/internlist.php"; ?>
                 </div>
@@ -96,6 +92,8 @@
     <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
     <script src="../assets/js/sidebar.js"></script>
     <!-- <script src="functions/auto-logout/session-timeout.js"></script> -->
+    <script src="crud-ajax/dashboard/retrieve-users.js"></script>
+
 
     <!--START::CRUD AJAX FUNCTIONS-->
     <!-- <script src="crud-ajax/dashboard/retrieve-users-analytics.js"></script>

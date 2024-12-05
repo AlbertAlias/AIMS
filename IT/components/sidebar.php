@@ -21,12 +21,6 @@
             <i class="fa-solid fa-graduation-cap"></i>
             <span>Interns</span>
         </a>
-        <?php if ($isDeveloper): ?>
-        <a href="#" class="sidebar-link" onclick="showSection(event, 'sub-admins')">
-            <i class="fa-solid fa-user-gear"></i>
-            <span>Admins</span>
-        </a>
-        <?php endif; ?>
     </nav>
 </div>
 
