@@ -117,7 +117,7 @@ CREATE TABLE `users` (
   `personal_email` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `user_type` enum('it','dean','coordinator','student','supervisor','registrar') NOT NULL,
+  `user_type` enum('it','dean','coordinator','intern','supervisor','registrar') NOT NULL,
   `department_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

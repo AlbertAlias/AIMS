@@ -1,0 +1,5 @@
+[05-Dec-2024 16:17:37 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'user_id' in 'field list' in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php:52
+Stack trace:
+#0 C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php(52): mysqli->prepare('INSERT INTO dep...')
+#1 {main}
+  thrown in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php on line 52

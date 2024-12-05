@@ -45,14 +45,9 @@
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Account Information</h5>
                 <form id="internsForm">
                     <div class="row mb-3">
-                        <!-- Intern ID -->
-                        <div class="col-md-3">
-                            <input type="hidden" id="internID" name="id">
-                            <label for="intern_intern_id" class="form-label">Intern ID <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="intern_intern_id" name="intern_intern_id" required disabled>
-                        </div>
                         <!-- Last Name -->
                         <div class="col-md-3">
+                            <input type="hidden" id="internID" name="id">
                             <label for="intern_last_name" class="form-label required-asterisk">Last Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="intern_last_name" name="intern_last_name" required disabled>
                         </div>
@@ -72,7 +67,6 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        
                         <!-- Student ID -->
                         <div class="col-md-3">
                             <label for="studentID" class="form-label">Student ID <span class="text-danger">*</span></label>

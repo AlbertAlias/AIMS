@@ -54,7 +54,7 @@
         $department_map = [];
         $sql = "SELECT department_name, id FROM dept_dean";
         $result = $conn->query($sql);
-    
+
         if ($result && $result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 // Normalize department names to lowercase for case-insensitive matching
@@ -93,10 +93,10 @@
                     $conn->begin_transaction();
     
                     // Insert into users table with department_id
-                    $sql = "INSERT INTO users (last_name, first_name, gender, studentID, department_id, username, password, user_type) 
-                            VALUES (?, ?, ?, ?, ?, ?, ?, 'intern')";
+                    $sql = "INSERT INTO users (last_name, first_name, gender, department_id, username, password, user_type) 
+                            VALUES (?, ?, ?, ?, ?, ?, 'intern')";
                     $stmt = $conn->prepare($sql);
-                    $stmt->bind_param("ssssiss", $last_name, $first_name, $gender, $studentID, $department_id, $username, $password); // Correct the bind_param to match types
+                    $stmt->bind_param("ssssss", $last_name, $first_name, $gender, $department_id, $username, $password); // Correct parameter binding
     
                     if ($stmt->execute()) {
                         $user_id = $conn->insert_id;
