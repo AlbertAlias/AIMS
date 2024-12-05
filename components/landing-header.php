@@ -29,7 +29,7 @@
                 </li>
                 <!-- Right: Sign in button inside hamburger -->
                 <li class="nav-item">
-                    <a href="pages/login.php" class="btn btn-success fs-6 fw-semibold text-dark me-2 border-1 border-light d-block d-lg-none">Sign in</a>
+                    <a href="../Login/login.php" class="btn btn-success fs-6 fw-semibold text-dark me-2 border-1 border-light d-block d-lg-none">Sign in</a>
                 </li>
             </ul>
         </div>
