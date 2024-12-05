@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <!-- Left: Logo -->
         <a class="navbar-brand d-flex align-items-center" href="#">
-            <img src="img/esyatek-logo.png" alt="Logo" width="60" loading="lazy">
+            <img src="assets/img/esyatek-logo.png" alt="Logo" width="60" loading="lazy">
         </a>
         
         <!-- Center: Navigation links -->

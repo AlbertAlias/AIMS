@@ -1,0 +1,76 @@
+.home-section {
+  height: 100vh;
+  background-image: url('../../img/index/esyatek-bg1.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; /* Align content at the bottom */
+  text-align: center;
+  color: rgb(0, 0, 0);
+  position: relative;
+  padding-bottom: 20px; /* Add space from bottom */
+}
+
+.home-content {
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+}
+
+.home-logo {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  max-width: 75%; /* Adjust the size of the logo */
+}
+
+
+* {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* html {
+  scroll-behavior: smooth;
+} */
+
+/* section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+} */
+
+/* #company {
+  background-color: #adb5bdc3;
+}
+
+#about {
+  background-color: #c6cfd7e6;
+}
+
+#contact {
+  background-color: #ced4da;
+} */
+
+/* .custom-logo {
+  width: 55%;
+} */
+
+/* For medium screens (≥768px) */
+/* @media (max-width: 991.98px) {
+  .custom-logo {
+      width: 90%;
+  }
+} */
+
+/* For small screens (≤575px) */
+/* @media (max-width: 575.98px) {
+  .custom-logo {
+      width: 100%;
+  }
+} */

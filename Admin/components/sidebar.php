@@ -1,7 +1,7 @@
 <div class="sidebar-container d-none d-md-flex flex-column p-0 m-0">
     <!-- Header -->
     <div class="sidebar-header d-flex flex-column align-items-center">
-        <img src="../img/esyatek-logo-1.png" alt="Logo" width="45">
+        <img src="../assets/img/esyatek-logo.png" alt="Logo" width="70">
     </div>
 
     <nav>

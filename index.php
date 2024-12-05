@@ -7,12 +7,12 @@
     <title>AIMS</title>
 
     <!-- STYLES -->
-    <link rel="stylesheet" href="assets/css/landing-page/landing-header.css">
-    <link rel="stylesheet" href="assets/css/landing-page/home-section.css">
-    <link rel="stylesheet" href="assets/css/landing-page/dept-section.css">
-    <link rel="stylesheet" href="assets/css/landing-page/comp-section.css">
-    <link rel="stylesheet" href="assets/css/landing-page/about-section.css">
-    <link rel="stylesheet" href="assets/css/landing-page/team-section.css">
+    <link rel="stylesheet" href="assets/style/index/landing-header.css">
+    <link rel="stylesheet" href="assets/style/index/home-section.css">
+    <link rel="stylesheet" href="assets/style/index/dept-section.css">
+    <link rel="stylesheet" href="assets/style/index/comp-section.css">
+    <link rel="stylesheet" href="assets/style/index/about-section.css">
+    <link rel="stylesheet" href="assets/style/index/team-section.css">
 
     <!-- BOOTSTRAP CDN LINK -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
@@ -32,7 +32,7 @@
             <p class="lead">Where you Achieve, Inspire, Motivate, & Succeed</p>
             <a href="#department" class="btn btn-success btn-sm">Tell Me More</a>
         </div>
-        <img src="img/esyatek-bg1-logo.png" alt="Logo" class="home-logo">
+        <img src="assets/img/index/esyatek-bg1-logo.png" alt="Logo" class="home-logo">
     </section>
 
     <!-- DEPARTMENT SECTION -->
@@ -41,55 +41,55 @@
             <div class="card-container col-12">
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/a-card.jpg');"></div>
+                        <div class="card-front" style="background-image: url('assets/img/index/a-card.jpg');"></div>
                         <div class="card-back" style="background-color: skyblue;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/ba-card.jpg');"></div>
+                        <div class="card-front" style="background-image: url('assets/img/index/ba-card.jpg');"></div>
                         <div class="card-back" style="background-color: gold;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/hm-card.jpg');"></div>
+                        <div class="card-front" style="background-image: url('assets/img/index/hm-card.jpg');"></div>
                         <div class="card-back" style="background-color: lightgray;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/tm-card.jpg');"></div>
+                        <div class="card-front" style="background-image: url('assets/img/index/tm-card.jpg');"></div>
                         <div class="card-back" style="background-color: violet;"></div>
                     </div>
                 </div>
                 <div class="card active">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/a-card.jpg');"></div>
+                        <div class="card-front" style="background-image: url('assets/img/index/a-card.jpg');"></div>
                         <div class="card-back" style="background-color: pink;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/educ-card.jpg');"></div>
+                        <div class="card-front" style="background-image: url('assets/img/index/educ-card.jpg');"></div>
                         <div class="card-back" style="background-color: red;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/hm-card.jpg');"></div>
+                        <div class="card-front" style="background-image: url('assets/img/index/hm-card.jpg');"></div>
                         <div class="card-back" style="background-color: orange;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/a-card.jpg');"></div>
+                        <div class="card-front" style="background-image: url('assets/img/index/a-card.jpg');"></div>
                         <div class="card-back" style="background-color: darkgray;"></div>
                     </div>
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('img/tm-card.jpg');"></div>
+                        <div class="card-front" style="background-image: url('assets/img/index/tn-card.jpg');"></div>
                         <div class="card-back" style="background-color: maroon;"></div>
                     </div>
                 </div>
@@ -101,40 +101,40 @@
         <div class="swiper company-carousel">
             <div class="swiper-wrapper">
                 <!-- Slide 1 -->
-                <div class="swiper-slide" data-bg="img/accenture-bg.jpg">
-                    <img src="img/accenture-logo.png">
+                <div class="swiper-slide" data-bg="assets/img/index/accenture-bg.jpg">
+                    <img src="assets/img/index/accenture-logo.png">
                 </div>
                 <!-- Slide 2 -->
-                <div class="swiper-slide" data-bg="img/cognizant-bg.jpg">
-                    <img src="img/cognizant-logo.png">
+                <div class="swiper-slide" data-bg="assets/img/index/cognizant-bg.jpg">
+                    <img src="assets/img/index/cognizant-logo.png">
                 </div>
                 <!-- Slide 3 -->
-                <div class="swiper-slide" data-bg="img/concentrix-bg.png">
-                    <img src="img/concentrix-logo.png">
+                <div class="swiper-slide" data-bg="assets/img/index/concentrix-bg.png">
+                    <img src="assets/img/index/concentrix-logo.png">
                 </div>
                 <!-- Slide 4 -->
-                <div class="swiper-slide" data-bg="img/denso-bg.jpg">
-                    <img src="img/denso-logo.png">
+                <div class="swiper-slide" data-bg="assets/img/index/denso-bg.jpg">
+                    <img src="assets/img/index/denso-logo.png">
                 </div>
                 <!-- Slide 5 -->
-                <div class="swiper-slide" data-bg="img/fujitsu-bg.jpg">
-                    <img src="img/fujitsu-logo.png">
+                <div class="swiper-slide" data-bg="assets/img/index/fujitsu-bg.jpg">
+                    <img src="assets/img/index/fujitsu-logo.png">
                 </div>
                 <!-- Slide 6 -->
-                <div class="swiper-slide" data-bg="img/ibm-bg.jpg">
-                    <img src="img/ibm-logo.png">
+                <div class="swiper-slide" data-bg="assets/img/index/ibm-bg.jpg">
+                    <img src="assets/img/index/ibm-logo.png">
                 </div>
                 <!-- Slide 7 -->
-                <div class="swiper-slide" data-bg="img/imi-bg.jpg">
-                    <img src="img/imi-logo.png">
+                <div class="swiper-slide" data-bg="assets/img/index/imi-bg.jpg">
+                    <img src="assets/img/index/imi-logo.png">
                 </div>
                 <!-- Slide 8 -->
-                <div class="swiper-slide" data-bg="img/oracle-bg.jpg">
-                    <img src="img/oracle-logo.png">
+                <div class="swiper-slide" data-bg="assets/img/index/oracle-bg.jpg">
+                    <img src="assets/img/index/oracle-logo.png">
                 </div>
                 <!-- Slide 9 -->
-                <div class="swiper-slide" data-bg="img/taskus-bg.jpg">
-                    <img src="img/taskus-logo.png">
+                <div class="swiper-slide" data-bg="assets/img/index/taskus-bg.jpg">
+                    <img src="assets/img/index/taskus-logo.png">
                 </div>
             </div>
         </div>
@@ -153,7 +153,7 @@
                 </p>
             </div>
             <div class="icon-container">
-                <img src="img/ASIATECH 2024 -.png" class="icon1">
+                <img src="assets/img/index/esyatek-logo.png" class="icon1">
             </div>
         </div>
         <div class="feature feature-right">
@@ -166,7 +166,7 @@
                 <p>Accountable, Service-Oriented, Innovative, Adaptive, Team-Oriented, Efficient, Committed, Honest, Industrious, Articulate, Noble</p>
             </div>
             <div class="text-container">
-            <img src="img/esyatek-bg2.jpg" class="icon">
+            <img src="assets/img/index/esyatek-bg2.jpg" class="icon">
             </div>
         </div>
         <div class="feature feature-left">
@@ -175,7 +175,7 @@
                 <p>Suggests a host company, Secures the approval from the host company, Conducts an OJT program orientation prior to OJT schedule, Designs a standardized training program that suits the needs of the OJT student-trainee, Provides a mechanism for the evaluation of the program for future enhancement, Assigns a qualified OJT coordinator, Monitors the activities of the student-trainee.</p>
             </div>
             <div class="icon-container">
-                <img src="img/about.jpg" alt="" class="icon">
+                <img src="assets/img/index/about.jpg" alt="" class="icon">
             </div>
         </div>
         <div class="feature feature-right">
@@ -184,7 +184,7 @@
                 <p>Observes the rules and regulations of the host company, Makes recommendations/proposals to the supervisor when necessary and upon request, regarding the problems encountered, Applies his/her knowledge and skills aligned with his/her program of studies, Completes all the requirements of the OJT program.</p>
             </div>
             <div class="text-container">
-            <img src="img/aboutus.jpg" alt="" class="icon">
+            <img src="assets/img/index/aboutus.jpg" alt="" class="icon">
             </div>
         </div>
     </section>
@@ -196,7 +196,7 @@
                 <!-- Team Member 1 -->
                 <div class="col-12 col-md-4 mb-4">
                     <div class="team-member">
-                        <img src="img/bry.jpg" alt="" class="img-fluid rounded-circle">
+                        <img src="assets/img/index/bry.jpg" alt="" class="img-fluid rounded-circle">
                     </div>
                     <div class="text-center">
                         <h3>Bryan Custodio</h3>
@@ -212,7 +212,7 @@
                 <!-- Team Member 2 -->
                 <div class="col-12 col-md-4 mb-4">
                     <div class="team-member">
-                        <img src="img/al.jpg" alt="" class="img-fluid rounded-circle">
+                        <img src="assets/img/index/al.jpg" alt="" class="img-fluid rounded-circle">
                     </div>
                     <div class="text-center">
                         <h3>Albert Alias</h3>
@@ -228,7 +228,7 @@
                 <!-- Team Member 3 -->
                 <div class="col-12 col-md-4 mb-4">
                     <div class="team-member">
-                        <img src="img/george.jpg" alt="" class="img-fluid rounded-circle">
+                        <img src="assets/img/index/george.jpg" alt="" class="img-fluid rounded-circle">
                     </div>
                     <div class="text-center">
                         <h3>George Balauag</h3>
