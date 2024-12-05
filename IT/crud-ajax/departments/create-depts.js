@@ -1,19 +1,24 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const departmentForm = document.getElementById('departmentForm');
     const submitBtn = document.querySelector('#departmentForm button[type="submit"]');
-    
+
     if (submitBtn) {
-        submitBtn.addEventListener('click', function(event) {
+        submitBtn.addEventListener('click', function (event) {
             event.preventDefault();
             const formData = new FormData(departmentForm);
-            
+
             submitBtn.disabled = true;
 
             fetch('controller/departments/create-depts.php', {
                 method: 'POST',
                 body: formData
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 submitBtn.disabled = false;
 
@@ -22,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         toast: true,
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Department created successfully',
+                        title: 'Department Dean created successfully',
                         showConfirmButton: false,
                         timer: 3000,
                         background: '#b9f6ca',
@@ -57,12 +62,12 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 submitBtn.disabled = false;
-                console.error('Error:', error);
+                console.error('Fetch error:', error);
                 Swal.fire({
                     toast: true,
                     position: 'top-end',
                     icon: 'error',
-                    title: 'An unexpected error occurred',
+                    title: 'An unexpected error occurred: ' + error.message,
                     showConfirmButton: false,
                     timer: 3000,
                     background: '#f8bbd0',

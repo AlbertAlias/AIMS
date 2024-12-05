@@ -19,17 +19,31 @@
         <div class="col-12 col-md-6 col-lg-7">
             <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 150px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Add Department</h5>
-                <p class="text-gray-800 fs-5 mb-3">Department Information</p>
+                <p class="text-gray-800 fs-5 mb-3">Department Dean Information</p>
                 <form id="departmentForm">
                     <input type="hidden" id="departmentId" name="id">
                     <div class="row mb-3">
+                        <div class="col-12 col-md-4">
+                            <label for="department_name" class="form-label">Department name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="department_name" name="department_name" required disabled>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <label for="last_name" class="form-label">Dean Last name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" required disabled>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <label for="first_name" class="form-label">Dean First name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="first_name" name="first_name" required disabled>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
                         <div class="col-12 col-md-6">
-                            <label for="departmentName" class="form-label">Department Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="departmentName" name="departmentName" required disabled>
+                            <label for="username" class="form-label">username <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="username" name="username" required disabled>
                         </div>
                         <div class="col-12 col-md-6">
-                            <label for="departmentHead" class="form-label">Department Head <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="departmentHead" name="departmentHead" required disabled>
+                            <label for="password" class="form-label">password <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="password" name="password" required disabled>
                         </div>
                     </div>
                     <button type="submit" id="deptSubmitBtn" class="btn btn-success me-2" disabled><i class="fa-solid fa-check-to-slot"></i> Submit</button>

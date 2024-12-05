@@ -77,8 +77,8 @@ header("Pragma: no-cache");
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
     
-    <script src="../crud-ajax/login-users.js"></script>
-    <script src="../functions/login.js"></script>
+    <script src="crud-ajax/login-users.js"></script>
+    <script src="functions/login.js"></script>
 
     <script>
         history.pushState(null, null, location.href);

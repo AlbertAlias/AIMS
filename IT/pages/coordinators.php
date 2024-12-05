@@ -38,17 +38,12 @@
 
                     <div class="row mb-3">
                         <!-- Middle Name -->
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-6">
                             <label for="coor_middleName" class="form-label">Middle Name</label>
                             <input type="text" class="form-control" id="coor_middle_name" name="coor_middle_name" disabled>
                         </div>
-                        <!-- Suffix -->
-                        <div class="col-12 col-md-3">
-                            <label for="coor_suffix" class="form-label">Suffix</label>
-                            <input type="text" class="form-control" id="coor_suffix" name="coor_suffix" disabled>
-                        </div>
                         <!-- Civil Status -->
-                        <div class="col-12 col-md-5">
+                        <div class="col-12 col-md-6">
                             <label for="coor_civil_status" class="form-label required-asterisk">Civil Status <span class="text-danger">*</span></label>
                             <select class="form-select" id="coor_civil_status" name="coor_civil_status" required disabled>
                                 <option selected disabled>Choose Status</option>
@@ -73,17 +68,12 @@
                     </div>
 
                     <div class="row mb-3">
-                        <div class="col-12 col-md-4">
-                            <label for="coor_employee_number" class="form-label required-asterisk">Employee Number <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="coor_employee_number" name="coor_employee_number" required disabled>
-                        </div>
-                        <!-- Coordinator Code -->
-                        <div class="col-12 col-md-4">
-                            <label for="coor_code" class="form-label required-asterisk">Coordinator Code <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="coor_code" name="coor_code" required disabled>
+                        <div class="col-12 col-md-6">
+                            <label for="coor_employee_no" class="form-label required-asterisk">Employee Number <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="coor_employee_no" name="coor_employee_no" required disabled>
                         </div>
                         <!-- Department -->
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-6">
                             <label for="coor_department" class="form-label required-asterisk">Department <span class="text-danger">*</span></label>
                             <select class="form-select" id="coor_department" name="coor_department" required disabled>
                                 <option selected>Choose Department</option>

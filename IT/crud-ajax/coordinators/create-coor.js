@@ -9,32 +9,22 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
     const last_name = document.getElementById('coor_last_name').value;
     const first_name = document.getElementById('coor_first_name').value;
     const middle_name = document.getElementById('coor_middle_name').value;
-    const suffix = document.getElementById('coor_suffix').value;
-    const employee_number = document.getElementById('coor_employee_number').value;
+    const employee_no = document.getElementById('coor_employee_no').value;
     const address = document.getElementById('coor_address').value;
-    const civil_status = document.getElementById('coor_civil_status').value;
     const personal_email = document.getElementById('coor_personal_email').value;
-    const coor_code = document.getElementById('coor_code').value;
     const department_id = document.getElementById('coor_department').value;
     const username = document.getElementById('coor_username').value;
     const password = document.getElementById('coor_password').value;
 
     // Validation for required fields
-    if (!last_name || !first_name || !employee_number || !address || !civil_status ||
-        !personal_email || !coor_code || !department_id || !username || !password) {
+    if (!last_name || !first_name || !employee_no || !address || !personal_email || !department_id || !username || !password) {
         Swal.fire({
             toast: true,
             position: 'top-end',
             icon: 'error',
             title: 'Please fill in all required fields.',
             showConfirmButton: false,
-            timer: 3000,
-            background: '#f8d7da',
-            iconColor: '#721c24',
-            color: '#721c24',
-            customClass: {
-                popup: 'mt-5'
-            }
+            timer: 3000
         });
         return;
     }
@@ -43,12 +33,9 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
         last_name,
         first_name,
         middle_name,
-        suffix,
-        employee_number,
+        employee_no,
         address,
-        civil_status,
         personal_email,
-        coor_code,
         department_id,
         username,
         password
@@ -61,44 +48,41 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
         },
         body: JSON.stringify(data)
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.success) {
-            Swal.fire({
-                toast: true,
-                position: 'top-end',
-                icon: 'success',
-                title: 'Coordinator added successfully!',
-                showConfirmButton: false,
-                timer: 3000,
-                background: '#b9f6ca',
-                iconColor: '#2e7d32',
-                color: '#155724',
-                customClass: {
-                    popup: 'mt-5'
-                }
-            });
-            resetAndLockForms();
-            window.loadCoor();
-        } else {
+    .then(response => response.text()) // Capture raw response as text
+    .then(text => {
+        console.log('Raw response:', text); // Log the raw response
+        try {
+            const data = JSON.parse(text); // Parse it after inspecting
+            if (data.success) {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Coordinator added successfully!',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                resetAndLockForms();
+                window.loadCoor();
+            } else {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: data.message,
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+            }
+        } catch (error) {
+            console.error('Error parsing response:', error);
             Swal.fire({
                 toast: true,
                 position: 'top-end',
                 icon: 'error',
-                title: data.message,
+                title: 'There was an error with the AJAX response.',
                 showConfirmButton: false,
-                timer: 3000,
-                background: '#f8bbd0',
-                iconColor: '#c62828',
-                color: '#721c24',
-                customClass: {
-                    popup: 'mt-5'
-                }
+                timer: 3000
             });
         }
     })
@@ -110,13 +94,7 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
             icon: 'error',
             title: 'There was an error with the AJAX request.',
             showConfirmButton: false,
-            timer: 3000,
-            background: '#f8bbd0',
-            iconColor: '#c62828',
-            color: '#721c24',
-            customClass: {
-                popup: 'mt-5'
-            }
+            timer: 3000
         });
     });
 });

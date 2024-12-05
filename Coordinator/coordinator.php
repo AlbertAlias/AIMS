@@ -7,14 +7,15 @@
         exit();
     }
 
+    // $_SESSION['user_id'] = $user['id'];
+    // $_SESSION['username'] = $user['username'];
+    // $_SESSION['user_type'] = $user['user_type'];
+    // $_SESSION['department'] = $user['department_name']; 
+
     // Prevent caching
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
     header("Pragma: no-cache");
-
-    // Your existing code
-    $developer = 'developer';
-    $isDeveloper = $_SESSION['user_type'] === $developer;
 ?>
 
 
@@ -36,11 +37,8 @@
                 rel="stylesheet">
 
     <link rel="stylesheet" href="../assets/style/itdev/dashboard.css">
-    <link rel="stylesheet" href="../assets/style/itdev/departments.css">
-    <link rel="stylesheet" href="../assets/style/itdev/coordinators.css">
-    <link rel="stylesheet" href="../assets/style/itdev/interns.css">
-    <link rel="stylesheet" href="../assets/style/itdev/admin-profile.css">
-    <link rel="stylesheet" href="../assets/style/itdev/internlist.css">
+    <link rel="stylesheet" href="../assets/style/itdev/profile.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
                 integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -74,12 +72,7 @@
                 <!-- Begin Page Content -->
                 <div id="page-content" style="width: 100%;">
                     <?php include "pages/dashboard.php"; ?>
-                    <?php include "pages/departments.php"; ?>
-                    <?php include "pages/coordinators.php"; ?>
-                    <?php include "pages/interns.php"; ?>
-                    <?php include "pages/sub-admins.php"; ?>
-                    <?php include "pages/admin-profile.php"; ?>
-                    <?php include "pages/internlist.php"; ?>
+                    <?php include "pages/coor-profile.php"; ?>
                 </div>
             </div>
             <!-- End of Main Content -->
@@ -98,50 +91,11 @@
     <!-- <script src="functions/auto-logout/session-timeout.js"></script> -->
 
     <!--START::CRUD AJAX FUNCTIONS-->
-    <script src="crud-ajax/dashboard/retrieve-users-analytics.js"></script>
-    <script src="crud-ajax/dashboard/retrieve-deptCounts.js"></script>
-    <script src="crud-ajax/dashboard/retrieve-coorCounts.js"></script>
-    <script src="crud-ajax/dashboard/retrieve-internCounts.js"></script>
-    <script src="crud-ajax/dashboard/retrieve-adminCounts.js"></script>
-
-    <script src="functions/departments/dept-form-enable.js"></script>
-    <script src="crud-ajax/departments/create-depts.js"></script>
-    <script src="crud-ajax/departments/retrieve-depts.js"></script>
-    <script src="crud-ajax/departments/update-depts.js"></script>
-    <script src="crud-ajax/departments/delete-depts.js"></script>
-
-    <script src="crud-ajax/coordinators/retrieve-coor-deptsName.js"></script>
-    <script src="functions/coordinators/coor-form-enable.js"></script>
-    <script src="crud-ajax/coordinators/retrieve-coor.js"></script>
-    <script src="crud-ajax/coordinators/retrieve-coor-info.js"></script>
-    <script src="crud-ajax/coordinators/create-coor.js"></script>
-    <script src="functions/coordinators/contact-number.js"></script>
-    <script src="crud-ajax/coordinators/update-coor.js"></script>
-    <script src="crud-ajax/coordinators/delete-coor.js"></script>
-    <script src="functions/coordinators/coor_code.js"></script>
-
-    <script src="crud-ajax/interns/retrieve-interns.js"></script>
-    <script src="crud-ajax/interns/retrieve-intern-deptsName.js"></script>
-    <script src="crud-ajax/interns/retrieve-intern-info.js"></script>
-    <script src="crud-ajax/interns/create-upload-interns.js"></script>
-    <script src="functions/interns/drag-drop-files.js"></script>
-    <script src="crud-ajax/interns/update-interns.js"></script>
-
-    <script src="crud-ajax/admins/create-admins.js"></script>
-    <script src="crud-ajax/admins/retrieve-admin-details.js"></script>
-    <script src="crud-ajax/admins/retrieve-admins.js"></script>
-    <script src="functions/admins/admin-form-enable.js"></script>
-    <script src="crud-ajax/admins/update-admins.js"></script>
-
     <script src="crud-ajax/profile/retrieve-profile.js"></script>
     <script src="crud-ajax/profile/create-profile.js"></script>
     <script src="crud-ajax/profile/retrieve-admins-info.js"></script>
     <script src="crud-ajax/profile/update-admins-info.js"></script>
     <script src="functions/profile/profile-details.js"></script>
-
-    <script src="crud-ajax/internlist/retrieve-internlist.js"></script>
-    <script src="crud-ajax/archive/archive.js"></script>
-
     <!--END::CRUD AJAX FUNCTIONS-->
 
 </body>
