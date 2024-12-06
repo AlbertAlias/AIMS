@@ -13,10 +13,10 @@
             <i class="fa-solid fa-scroll"></i>
             <span>Students</span>
         </a>
-        <!-- <a href="#" class="sidebar-link" onclick="showSection(event, 'coordinators')">
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'requirement')">
             <i class="fa-solid fa-user-group"></i>
-            <span>Coordinators</span>
-        </a> -->
+            <span>Requirements</span>
+        </a>
         <!-- <a href="#" class="sidebar-link" onclick="showSection(event, 'interns')">
             <i class="fa-solid fa-graduation-cap"></i>
             <span>Interns</span>
@@ -40,7 +40,7 @@
         }
 
         // Hide all sections
-        document.querySelectorAll('#dashboard, #profile, #student').forEach(section => {
+        document.querySelectorAll('#dashboard, #profile, #student, #requirement').forEach(section => {
             section.style.display = 'none';
         });
 

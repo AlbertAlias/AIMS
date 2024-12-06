@@ -1,0 +1,24 @@
+#departmentInfo {
+    max-height: 410px;
+    padding-right: 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: gray;
+    pointer-events: none;
+}
+
+#searchDepartments {
+    padding-right: 2.5rem;
+    padding-left: 0.5rem;
+}
