@@ -1,6 +1,9 @@
 <?php
 require '../../../dbconn.php';
 
+// Ensure no output before this
+header('Content-Type: application/json');
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['file'])) {
     $file = $_FILES['file'];
 

@@ -69,15 +69,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Send AJAX request to upload the file
         $.ajax({
-            url: 'controller/interns/create-upload-students.php', // PHP file that will process the CSV
+            url: 'controller/students/create-upload-students.php', // PHP file that will process the CSV
             type: 'POST',
             data: formData,
             processData: false,
             contentType: false,
             success: function(response) {
+                console.log('Raw Response:', response); // Log the raw response to see what you're getting
                 let res;
                 try {
-                    res = JSON.parse(response); // Parse the response
+                    res = JSON.parse(response);
+                    console.log('Parsed Response:', res); // Log the parsed response to check it
                     if (res.error) {
                         Swal.fire({
                             toast: true,
@@ -96,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             toast: true,
                             position: 'top-end',
                             icon: 'success',
-                            title: 'Intern lists uploaded successfully',
+                            title: 'Student lists uploaded successfully',
                             showConfirmButton: false,
                             timer: 3000,
                             background: '#b9f6ca',
@@ -104,10 +106,10 @@ document.addEventListener('DOMContentLoaded', function () {
                             color: '#155724',
                             customClass: { popup: 'mt-5' }
                         });
-
-                        window.fetchInterns(); // Reload intern list (assuming this is a function that reloads the data)
+                        loadTableData(); // Refresh the student list after successful upload
                     }
                 } catch (e) {
+                    console.error('Error parsing response:', e.message); // Log parsing error
                     Swal.fire({
                         toast: true,
                         position: 'top-end',

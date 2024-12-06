@@ -106,8 +106,8 @@
     <script src="crud-ajax/departments/create-depts.js"></script>
     <script src="crud-ajax/departments/retrieve-depts.js"></script>
     <script src="crud-ajax/departments/retrieve-deptsInfo.js"></script>
-    <script src="crud-ajax/departments/update-depts.js"></script>
-    <script src="crud-ajax/departments/delete-depts.js"></script>
+    <!-- <script src="crud-ajax/departments/update-depts.js"></script> -->
+    <!-- <script src="crud-ajax/departments/delete-depts.js"></script> -->
 
     <script src="crud-ajax/coordinators/retrieve-coor-deptsName.js"></script>
     <script src="functions/coordinators/coor-form-enable.js"></script>
@@ -115,11 +115,12 @@
     <script src="crud-ajax/coordinators/retrieve-coor-info.js"></script>
     <script src="crud-ajax/coordinators/create-coor.js"></script>
     <script src="functions/coordinators/contact-number.js"></script>
-    <script src="crud-ajax/coordinators/update-coor.js"></script>
+    <!-- <script src="crud-ajax/coordinators/update-coor.js"></script> -->
     <script src="crud-ajax/coordinators/delete-coor.js"></script>
 
-    <script src="crud-ajax/students/retrieve-student-deptsName.js"></script>
-    <script src="crud-ajax/students/retrieve-student-info.js"></script>
+    <script src="crud-ajax/students/retrieve-student-lists.js"></script>
+    <!-- <script src="crud-ajax/students/retrieve-student-deptsName.js"></script> -->
+    <!-- <script src="crud-ajax/students/retrieve-student-info.js"></script> -->
     <script src="crud-ajax/students/create-upload-students.js"></script>
     <script src="crud-ajax/students/update-student.js"></script>
 
@@ -135,7 +136,6 @@
     <!-- <script src="crud-ajax/profile/update-admins-info.js"></script> -->
     <!-- <script src="functions/profile/profile-details.js"></script> -->
 
-    <!-- <script src="crud-ajax/internlist/retrieve-internlist.js"></script> -->
     <script src="crud-ajax/archive/archive.js"></script>
 
     <!--END::CRUD AJAX FUNCTIONS-->
