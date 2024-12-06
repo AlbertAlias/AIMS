@@ -73,7 +73,7 @@
                     <?php include "pages/dashboard.php"; ?>
                     <?php include "pages/depts-dean.php"; ?>
                     <?php include "pages/coordinators.php"; ?>
-                    <?php include "pages/interns.php"; ?>
+                    <?php include "pages/students.php"; ?>
                     <?php include "pages/admin-profile.php"; ?>
                     <?php include "pages/internlist.php"; ?>
                 </div>
@@ -118,12 +118,10 @@
     <script src="crud-ajax/coordinators/update-coor.js"></script>
     <script src="crud-ajax/coordinators/delete-coor.js"></script>
 
-    <!-- <script src="crud-ajax/interns/retrieve-interns.js"></script> -->
-    <!-- <script src="crud-ajax/interns/retrieve-intern-deptsName.js"></script> -->
-    <!-- <script src="crud-ajax/interns/retrieve-intern-info.js"></script> -->
-    <script src="crud-ajax/interns/create-upload-interns.js"></script>
-    <!-- <script src="functions/interns/drag-drop-files.js"></script> -->
-    <script src="crud-ajax/interns/update-interns.js"></script>
+    <script src="crud-ajax/students/retrieve-student-deptsName.js"></script>
+    <script src="crud-ajax/students/retrieve-student-info.js"></script>
+    <script src="crud-ajax/students/create-upload-students.js"></script>
+    <script src="crud-ajax/students/update-student.js"></script>
 
     <!-- <script src="crud-ajax/admins/create-admins.js"></script>
     <script src="crud-ajax/admins/retrieve-admin-details.js"></script>

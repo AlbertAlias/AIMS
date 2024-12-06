@@ -17,9 +17,9 @@
             <i class="fa-solid fa-user-group"></i>
             <span>Coordinators</span>
         </a>
-        <a href="#" class="sidebar-link" onclick="showSection(event, 'interns')">
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'students')">
             <i class="fa-solid fa-graduation-cap"></i>
-            <span>Interns</span>
+            <span>Students</span>
         </a>
     </nav>
 </div>
@@ -40,7 +40,7 @@
         }
 
         // Hide all sections
-        document.querySelectorAll('#dashboard, #departments, #coordinators, #interns, #sub-admins, #profile, #internlist').forEach(section => {
+        document.querySelectorAll('#dashboard, #departments, #coordinators, #students, #sub-admins, #profile, #internlist').forEach(section => {
             section.style.display = 'none';
         });
 

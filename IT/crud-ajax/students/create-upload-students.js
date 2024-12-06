@@ -52,16 +52,11 @@ document.addEventListener('DOMContentLoaded', function () {
         const file = files[0];
         // Check if the file is a .csv file
         if (file && file.name.endsWith('.csv')) {
-            // Display the file name and progress elements
-            document.getElementById('uploadProgress').style.display = 'block';
-            const fileNameElement = document.getElementById('uploadfileName');
-            
-            if (fileNameElement) {
-                fileNameElement.innerText = file.name; // Updated line
-            }
+            // Call the upload function and show loading state on the button
+            uploadButton.disabled = true; // Disable the button
+            uploadButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Uploading...'; // Change button text to show loading
 
-            // Call the upload function and show progress
-            uploadFile(file); // Now this will correctly call the upload function
+            uploadFile(file); // Proceed to upload
         } else {
             alert('Please upload a valid CSV file');
         }
@@ -74,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Send AJAX request to upload the file
         $.ajax({
-            url: 'controller/interns/create-upload-interns.php', // PHP file that will process the CSV
+            url: 'controller/interns/create-upload-students.php', // PHP file that will process the CSV
             type: 'POST',
             data: formData,
             processData: false,
@@ -140,6 +135,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     color: '#721c24',
                     customClass: { popup: 'mt-5' }
                 });
+            },
+            complete: function() {
+                // Once the request is complete (either success or failure), reset the button
+                uploadButton.disabled = false; // Enable the button again
+                uploadButton.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> Upload Files'; // Reset button text
             }
         });
     }
