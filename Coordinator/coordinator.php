@@ -39,6 +39,8 @@
     <link rel="stylesheet" href="../assets/style/itdev/dashboard.css">
     <link rel="stylesheet" href="../assets/style/itdev/profile.css">
     <link rel="stylesheet" href="../assets/style/coor/studentreq/studentreq.css">
+    <link rel="stylesheet" href="../assets/style/coor/requirement/requirement.css">
+
 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
@@ -76,6 +78,8 @@
                     <?php include "pages/dashboard.php"; ?>
                     <?php include "pages/coor-profile.php"; ?>
                     <?php include "pages/studentreq.php"; ?>
+                    <?php include "pages/requirement.php"; ?>
+
 
                 </div>
             </div>
@@ -102,6 +106,10 @@
     <script src="functions/profile/profile-details.js"></script>
 
     <script src="crud_ajax/studentreq.js"></script>
+    <script src="crud_ajax/retrieve-coor.js"></script>
+    <script src="crud_ajax/student.js"></script>
+    <script src="crud_ajax/post_requirement.js"></script>
+
 
 
     <!--END::CRUD AJAX FUNCTIONS-->
