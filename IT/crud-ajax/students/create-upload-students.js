@@ -74,12 +74,11 @@ document.addEventListener('DOMContentLoaded', function () {
             data: formData,
             processData: false,
             contentType: false,
-            success: function(response) {
-                console.log('Raw Response:', response); // Log the raw response to see what you're getting
-                let res;
+            success: function (response) {
+                console.log('Raw Response:', response);
                 try {
-                    res = JSON.parse(response);
-                    console.log('Parsed Response:', res); // Log the parsed response to check it
+                    let res = typeof response === 'object' ? response : JSON.parse(response); // Ensure response is parsed
+                    console.log('Parsed Response:', res);
                     if (res.error) {
                         Swal.fire({
                             toast: true,
@@ -106,15 +105,15 @@ document.addEventListener('DOMContentLoaded', function () {
                             color: '#155724',
                             customClass: { popup: 'mt-5' }
                         });
-                        loadTableData(); // Refresh the student list after successful upload
+                        loadTableData();
                     }
                 } catch (e) {
-                    console.error('Error parsing response:', e.message); // Log parsing error
+                    console.error('Error parsing response:', e.message);
                     Swal.fire({
                         toast: true,
                         position: 'top-end',
                         icon: 'error',
-                        title: 'Error parsing response: ' + e.message,
+                        title: 'Invalid response format: ' + e.message,
                         showConfirmButton: false,
                         timer: 3000,
                         background: '#f8bbd0',
