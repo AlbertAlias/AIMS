@@ -2,7 +2,7 @@
     <div class="row g-4">
         <!-- Left square container -->
         <div class="col-md-4 col-lg-4">
-            <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 120px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+            <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 299px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Upload Intern Lists</h5>
 
                 <!-- Rectangle container with dashed green border -->

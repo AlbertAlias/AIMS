@@ -95,23 +95,24 @@
     <!-- <script src="crud-ajax/dashboard/retrieve-users.js"></script> -->
 
     <!--START::CRUD AJAX FUNCTIONS-->
-    <!-- <script src="crud-ajax/dashboard/retrieve-users-analytics.js"></script>
+    <script src="crud-ajax/dashboard/retrieve-users-analytics.js"></script>
+    <script src="crud-ajax/dashboard/retrieve-studentDepts-analytics.js"></script>
+    <script src="crud-ajax/dashboard/retrieve-deanCounts.js"></script>
     <script src="crud-ajax/dashboard/retrieve-deptCounts.js"></script>
     <script src="crud-ajax/dashboard/retrieve-coorCounts.js"></script>
-    <script src="crud-ajax/dashboard/retrieve-internCounts.js"></script>
-    <script src="crud-ajax/dashboard/retrieve-adminCounts.js"></script> -->
+    <script src="crud-ajax/dashboard/retrieve-studentCounts.js"></script>
 
     <script src="functions/departments/dept-form-enable.js"></script>
     <script src="crud-ajax/departments/create-depts.js"></script>
-    <!-- <script src="crud-ajax/departments/retrieve-depts.js"></script> -->
+    <script src="crud-ajax/departments/retrieve-depts.js"></script>
     <script src="crud-ajax/departments/retrieve-deptsInfo.js"></script>
     <script src="crud-ajax/departments/update-depts.js"></script>
     <script src="crud-ajax/departments/delete-depts.js"></script>
 
     <script src="crud-ajax/coordinators/retrieve-coor-deptsName.js"></script>
     <script src="functions/coordinators/coor-form-enable.js"></script>
-    <!-- <script src="crud-ajax/coordinators/retrieve-coor.js"></script> -->
-    <!-- <script src="crud-ajax/coordinators/retrieve-coor-info.js"></script> -->
+    <script src="crud-ajax/coordinators/retrieve-coor.js"></script>
+    <script src="crud-ajax/coordinators/retrieve-coor-info.js"></script>
     <script src="crud-ajax/coordinators/create-coor.js"></script>
     <script src="functions/coordinators/contact-number.js"></script>
     <script src="crud-ajax/coordinators/update-coor.js"></script>

@@ -13,16 +13,23 @@
 
     $coorId = $_GET['id'];
 
-    // Query to retrieve full user details for the coordinator
-    $sql = "SELECT u.id, u.last_name, u.first_name, u.middle_name, u.suffix, u.address, u.civil_status, u.personal_email,
-                u.username, u.department_id, u.employee_number, c.coor_code
+    // Updated query to remove coor_code
+    $sql = "SELECT 
+                u.id, 
+                u.last_name, 
+                u.first_name, 
+                u.middle_name, 
+                u.gender, 
+                u.address, 
+                u.personal_email, 
+                u.username, 
+                u.department_id, 
+                u.employee_no
             FROM users u
             JOIN coordinators c ON u.id = c.user_id
             WHERE u.id = ? AND u.user_type = 'coordinator'";
 
     $stmt = $conn->prepare($sql);
-
-    error_log(print_r($_GET, true));
 
     if (!$stmt) {
         $response = ['error' => 'Query preparation failed: ' . $conn->error];
@@ -42,7 +49,6 @@
             $response = ['error' => 'No coordinator found or query failed'];
         } else {
             $response = $result->fetch_assoc(); // Fetch the coordinator's user details
-            error_log(print_r($response, true)); // Log the response to see if department_id is included
         }
     }
 

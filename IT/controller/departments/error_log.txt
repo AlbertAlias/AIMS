@@ -53,3 +53,8 @@ Stack trace:
 #0 C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php(47): mysqli_stmt->execute()
 #1 {main}
   thrown in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php on line 47
+[06-Dec-2024 04:58:14 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry 'hmcoor' for key 'username' in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php:47
+Stack trace:
+#0 C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php(47): mysqli_stmt->execute()
+#1 {main}
+  thrown in C:\xampp\htdocs\AIMS\IT\controller\departments\create-depts.php on line 47

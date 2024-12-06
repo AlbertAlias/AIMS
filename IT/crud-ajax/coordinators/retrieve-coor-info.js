@@ -32,14 +32,12 @@ $(document).ready(function () {
                 $('#coor_last_name').val(response.last_name).prop('disabled', false);
                 $('#coor_first_name').val(response.first_name).prop('disabled', false);
                 $('#coor_middle_name').val(response.middle_name).prop('disabled', false);
-                $('#coor_suffix').val(response.suffix).prop('disabled', false);
                 $('#coor_address').val(response.address).prop('disabled', false);
                 $('#coor_personal_email').val(response.personal_email).prop('disabled', false);
-                $('#coor_employee_number').val(response.employee_number).prop('disabled', false);
+                $('#coor_employee_no').val(response.employee_no).prop('disabled', false);
                 $('#coor_department').val(response.department_id).prop('disabled', false);
                 $('#coor_username').val(response.username).prop('disabled', false);
                 $('#coor_password').val('').prop('disabled', false);
-                $('#coor_code').val(response.coor_code).prop('disabled', true);
                 $('#coorUpdateBtn').prop('disabled', false);
             },
             error: function (xhr, status, error) {

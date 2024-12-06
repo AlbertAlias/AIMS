@@ -2,8 +2,8 @@ $(document).ready(function() {
     let chart; // Global variable to store the chart instance
 
     function renderChart(data) {
-        const categories = ['IT', 'Registrar', 'Dean', 'Coordinator'];
-        const series = categories.map(category => data[category.toLowerCase()] || 0);
+        const categories = Object.keys(data); // Get department names as categories
+        const series = categories.map(category => data[category] || 0); // Get student counts
 
         // Calculate the maximum value for y-axis
         const maxCount = Math.max(...series);
@@ -21,13 +21,13 @@ $(document).ready(function() {
                 }
             },
             series: [{
-                name: 'User Count',
+                name: 'Student Count',
                 data: series
             }],
             xaxis: {
                 categories: categories,
                 title: {
-                    text: 'User Roles'
+                    text: 'Student per Departments'
                 }
             },
             yaxis: {
@@ -47,14 +47,7 @@ $(document).ready(function() {
             plotOptions: {
                 bar: {
                     horizontal: false,
-                    endingShape: 'rounded',
-                    colors: {
-                        ranges: [
-                            { from: 0, to: 1, color: '#00E396' },
-                            { from: 1, to: 2, color: '#00E396' },
-                            { from: 2, to: 3, color: '#3357FF' }
-                        ]
-                    }
+                    endingShape: 'rounded'
                 }
             },
             stroke: {
@@ -69,20 +62,20 @@ $(document).ready(function() {
             chart.destroy();
         }
 
-        chart = new ApexCharts(document.querySelector("#users-chart"), options);
+        chart = new ApexCharts(document.querySelector("#students-chart"), options);
         chart.render();
     }
 
     $.ajax({
-        url: 'controller/dashboards/retrieve-users-analytics.php',
+        url: 'controller/dashboards/retrieve-studentDepts-analytics.php', // Make sure this URL is correct
         method: 'GET',
         dataType: 'json',
         success: function (data) {
-            console.log("Users Data received:", data); // Added log to inspect the data
+            console.log("Departments Data received:", data); // Added log to inspect the data
             renderChart(data);
         },
         error: function (err) {
-            console.error('Error fetching user counts:', err);
+            console.error('Error fetching student department counts:', err);
         }
     });
 
@@ -91,5 +84,5 @@ $(document).ready(function() {
         if (chart && typeof chart.resize === 'function') {
             chart.resize();
         }
-    });    
+    });
 });

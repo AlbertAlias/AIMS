@@ -9,16 +9,16 @@
     if (isset($_GET['dept_id'])) {
         $dept_id = intval($_GET['dept_id']);
 
+        // Adjusted SQL query to filter by user_type 'dean'
         $sql = "SELECT 
                     dept_dean.id AS id, 
                     dept_dean.department_name, 
                     users.last_name, 
                     users.first_name, 
-                    users.username,
-                    users.password -- Uncomment if you want to fetch hashed passwords
-                FROM dept_dean
+                    users.username
+                FROM department_dean dept_dean
                 INNER JOIN users ON dept_dean.user_id = users.id
-                WHERE dept_dean.id = ?";
+                WHERE dept_dean.id = ? AND users.user_type = 'dean'"; // Filter by dean user_type
 
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $dept_id);

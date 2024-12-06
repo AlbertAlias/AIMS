@@ -3,12 +3,12 @@
 
     header('Content-Type: application/json');
 
-    // Query to count coordinators
+    // Correct query to count students
     $sql = "
-        SELECT COUNT(*) AS count
-        FROM coordinators c
-        INNER JOIN users u ON c.user_id = u.id
-        WHERE u.user_type = 'coordinator'
+        SELECT COUNT(*) AS count 
+        FROM students s
+        INNER JOIN users u ON s.user_id = u.id
+        WHERE u.user_type = 'student'
     ";
 
     $result = $conn->query($sql);
@@ -17,7 +17,7 @@
         $row = $result->fetch_assoc();
         echo json_encode(['count' => $row['count']]);
     } else {
-        // Include error for debugging
+        // Provide error details for debugging
         echo json_encode(['count' => 0, 'error' => $conn->error]);
     }
 

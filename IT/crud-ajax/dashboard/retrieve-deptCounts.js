@@ -7,14 +7,14 @@ $(document).ready(function() {
             success: function(data) {
                 console.log("AJAX Success:", data);
                 if (data.count !== undefined) {
-                    $('#num-depts').text(data.count);
+                    $('#num-departments').text(data.count);
                 } else {
-                    $('#num-depts').text('0');
+                    $('#num-departments').text('0');
                 }
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error("AJAX Error:", textStatus, errorThrown);
-                $('#num-depts').text('0');
+                $('#num-departments').text('0');
             }
         });
     }

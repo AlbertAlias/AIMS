@@ -5,11 +5,11 @@
     header('Content-Type: application/json');
     include '../../../dbconn.php';
 
-    // Adjust SQL query according to the actual table schema
-        $sql = "SELECT dept_dean.id AS id, dept_dean.department_name AS name, 
+    // Adjusted SQL query based on the provided schema
+    $sql = "SELECT department_dean.id AS id, department_dean.department_name AS name, 
             CONCAT(users.first_name, ' ', users.last_name) AS head
-            FROM dept_dean
-            INNER JOIN users ON dept_dean.user_id = users.id
+            FROM department_dean
+            INNER JOIN users ON department_dean.user_id = users.id
         ";
 
     $result = $conn->query($sql);
