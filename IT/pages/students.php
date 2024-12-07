@@ -69,16 +69,16 @@
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Account Information</h5>
                 <form id="internsForm">
                     <div class="row mb-3">
+                        <!-- First Name -->
+                        <div class="col-md-3">
+                            <label for="intern_first_name" class="form-label required-asterisk">First Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="intern_first_name" name="intern_first_name" required disabled>
+                        </div>
                         <!-- Last Name -->
                         <div class="col-md-3">
                             <input type="hidden" id="internID" name="id">
                             <label for="intern_last_name" class="form-label required-asterisk">Last Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="intern_last_name" name="intern_last_name" required disabled>
-                        </div>
-                        <!-- First Name -->
-                        <div class="col-md-3">
-                            <label for="intern_first_name" class="form-label required-asterisk">First Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="intern_first_name" name="intern_first_name" required disabled>
                         </div>
                         <!-- Gender -->
                         <div class="col-md-3">
@@ -128,7 +128,8 @@
             </div>
         </div>
     </div>
-    
+
+
     <div class="card shadow-sm mt-4">
         <!-- Header -->
         <div class="card-header bg-light text-dark">
@@ -177,13 +178,11 @@
                             </th>
                             <th>First Name</th>
                             <th>Last Name</th>
-                            <th>Department</th>
-                            <th>Employee No</th>
-                            <th>Student ID</th>
                             <th>Gender</th>
+                            <th>Student ID</th>
+                            <th>Department</th>
                             <th>Personal Email</th>
                             <th>Username</th>
-                            <th>User Type</th>
                         </tr>
                     </thead>
                     <tbody id="tdata">
@@ -196,7 +195,7 @@
         <!-- Footer -->
         <div class="card-footer bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <span id="tableInfo">Showing 1 to 10 of 50 entries</span>
+                <span id="tableInfo"></span>
                 <!-- Pagination -->
                 <nav aria-label="Page navigation">
                     <ul id="pagination" class="pagination mb-0">
@@ -207,3 +206,4 @@
         </div>
     </div>
 </div>
+

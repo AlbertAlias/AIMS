@@ -92,7 +92,6 @@
     <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
     <script src="../assets/js/sidebar.js"></script>
     <!-- <script src="functions/auto-logout/session-timeout.js"></script> -->
-    <!-- <script src="crud-ajax/dashboard/retrieve-users.js"></script> -->
 
     <!--START::CRUD AJAX FUNCTIONS-->
     <script src="crud-ajax/dashboard/retrieve-users-analytics.js"></script>
@@ -136,7 +135,7 @@
     <!-- <script src="crud-ajax/profile/update-admins-info.js"></script> -->
     <!-- <script src="functions/profile/profile-details.js"></script> -->
 
-    <script src="crud-ajax/archive/archive.js"></script>
+    <!-- <script src="crud-ajax/archive/archive.js"></script> -->
 
     <!--END::CRUD AJAX FUNCTIONS-->
 
