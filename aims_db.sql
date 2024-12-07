@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 05, 2024 at 11:03 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Dec 07, 2024 at 05:54 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,7 +37,15 @@ CREATE TABLE `coordinators` (
 --
 
 INSERT INTO `coordinators` (`id`, `user_id`) VALUES
-(1, 7);
+(5, 140),
+(6, 141),
+(7, 142),
+(8, 143),
+(9, 144),
+(10, 145),
+(11, 146),
+(12, 147),
+(13, 148);
 
 -- --------------------------------------------------------
 
@@ -56,7 +64,15 @@ CREATE TABLE `department_dean` (
 --
 
 INSERT INTO `department_dean` (`id`, `department_name`, `user_id`) VALUES
-(2, 'Information Technology', 3);
+(6, 'BSIT', 122),
+(7, 'BSCPE', 123),
+(11, 'BSCRIM', 127),
+(13, 'BSTM', 134),
+(14, 'BSA', 135),
+(15, 'BSE', 136),
+(16, 'BSBA', 137),
+(17, 'BSCS', 138),
+(18, 'BSHM', 139);
 
 -- --------------------------------------------------------
 
@@ -86,41 +102,76 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `user_id`, `studentID`) VALUES
-(1, 8, '1-190302'),
-(2, 9, '1-200043'),
-(3, 10, '1-190058'),
-(4, 11, '1-200083'),
-(5, 12, '1-200146'),
-(6, 13, '1-200027'),
-(7, 14, '1-210016'),
-(8, 15, '1-200086'),
-(9, 16, '1-190077'),
-(10, 17, '1-200011'),
-(11, 18, '1-200155'),
-(12, 19, '1-200149'),
-(13, 20, '1-170033'),
-(14, 21, '1-200065'),
-(15, 22, '1-200203'),
-(16, 23, '1-200200'),
-(17, 24, '1-200186'),
-(18, 25, '1-200125'),
-(19, 26, '1-200138'),
-(20, 27, '1-200145'),
-(21, 28, '1-200004'),
-(22, 29, '1-200096'),
-(23, 30, '1-160042'),
-(24, 31, '1-200049'),
-(25, 32, '1-200094'),
-(26, 33, '1-190303'),
-(27, 34, '1-200044'),
-(28, 35, '1-190343'),
-(29, 36, '2-210005'),
-(30, 37, '1-190245'),
-(31, 38, '1-190094'),
-(32, 39, '1-190174'),
-(33, 40, '1-190078'),
-(34, 41, '1-200111'),
-(35, 42, '1-190155');
+(129, 208, '1-123567'),
+(130, 209, '1-123568'),
+(131, 210, '1-123569'),
+(132, 211, '1-123570'),
+(133, 212, '1-123571'),
+(134, 213, '1-123572'),
+(135, 214, '1-123573'),
+(136, 215, '1-123574'),
+(137, 216, '1-123575'),
+(138, 217, '1-123576'),
+(139, 218, '1-123577'),
+(140, 219, '1-123578'),
+(141, 220, '1-123579'),
+(142, 221, '1-123580'),
+(143, 222, '1-123581'),
+(144, 223, '1-123582'),
+(145, 224, '1-123583'),
+(146, 225, '1-123584'),
+(147, 226, '1-123585'),
+(148, 227, '1-123586'),
+(149, 228, '1-123587'),
+(150, 229, '1-123588'),
+(151, 230, '1-123589'),
+(152, 231, '1-123590'),
+(153, 232, '1-123591'),
+(154, 233, '1-123592'),
+(155, 234, '1-123593'),
+(156, 235, '1-123594'),
+(157, 236, '1-123595');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_requirements`
+--
+
+CREATE TABLE `student_requirements` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `student_requirements`
+--
+
+INSERT INTO `student_requirements` (`id`, `title`, `description`, `created_at`) VALUES
+(6, 'Resume', 'Due to Tomorow', '2024-12-07 03:44:22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student_submissions`
+--
+
+CREATE TABLE `student_submissions` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `requirement_id` int(11) NOT NULL,
+  `submitted_documents` text NOT NULL,
+  `submitted_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `student_submissions`
+--
+
+INSERT INTO `student_submissions` (`id`, `student_id`, `requirement_id`, `submitted_documents`, `submitted_at`) VALUES
+(2, 1, 6, 'C:\\fakepath\\EDTD_(FINAL)GROUP 9_ CAPSTONE CHAPTER 1 to 5 (1).pdf', '2024-12-07 04:05:21');
 
 -- --------------------------------------------------------
 
@@ -161,43 +212,53 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `employee_no`, `profile_picture`, `last_name`, `first_name`, `middle_name`, `gender`, `address`, `personal_email`, `username`, `password`, `user_type`, `department_id`) VALUES
 (1, '', NULL, 'alias', 'albert', NULL, NULL, '', '', 'it', '$2y$10$dwY/qMJfYueBEagEJlzJ6.vHWqInONX862GfhVXURI8s.nvGDxmd2', 'it', NULL),
-(3, '', NULL, 'Balauag', 'George', NULL, NULL, '', '', 'dean', '$2y$10$K1hJjx3wclASVh9czFssjerVT3BowjYCNbnYSOCGDIQ/XxsKgQ7LO', 'dean', NULL),
-(7, '12345', NULL, 'Custodio', 'Bryan', 'bry', NULL, 'bry', 'bry@gmail.com', 'coor', '$2y$10$hrfjrjZD2MX.O31uyaxEi.8Me/HdimhdKML6R7IED1YRcuGIRud3a', 'coordinator', 2),
-(8, '', NULL, 'Abella', 'Adriane Paul', NULL, 'Male', '', '', '1190302', '$2y$10$8ccoGvCFTwdgI/toXZfy0OJGpr/9RiSlPjIr/rk.4f2.Ic5xTGB3q', 'student', 2),
-(9, '', NULL, 'Abellano', 'Dynarose', NULL, 'Female', '', '', '1200043', '$2y$10$J5MOg120r9FoalJQIlmfBegivnnN2Z19zyj/4h8vHW.QTopCulYcC', 'student', 2),
-(10, '', NULL, 'Alaurin', 'Karl Dominic', NULL, 'Male', '', '', '1190058', '$2y$10$EtebV7DUcqo5MRmZypmSluo.bVC1LanC2L6nSsXM4zX47PbTOaSQe', 'student', 2),
-(11, '', NULL, 'Apquiz', 'John Lorenz', NULL, 'Male', '', '', '1200083', '$2y$10$3F8SzPvJS/S5o/q0Dke9Ze75avS2EazgKSLI215kf1MfdNEeSHHpW', 'student', 2),
-(12, '', NULL, 'Arambulo', 'Joshua', NULL, 'Male', '', '', '1200146', '$2y$10$HWvbSv1Aent.sIYRH.VMyuy.6fnZbvjBitiRFeVD7FjE.VzAXEU5q', 'student', 2),
-(13, '', NULL, 'Balquin', 'Gerald', NULL, 'Male', '', '', '1200027', '$2y$10$urhXco2KY1s/lknBmgU5a.mrfEovGKk5J3/CbskvS0Th6OlGPyILi', 'student', 2),
-(14, '', NULL, 'Carteciano', 'Mj Bryan', NULL, 'Male', '', '', '1210016', '$2y$10$GYiu4cOR9UaQ8RdrmaNFdunrGEDfSmP.cTIsD.uYt55XEA.ckn.8C', 'student', 2),
-(15, '', NULL, 'Cledera', 'Dulce Maria', NULL, 'Female', '', '', '1200086', '$2y$10$lO6MO3YDyttnLbhUdkU83eBBBk/i3t6g/aQsnlWPA5qgkiqJEdhQ2', 'student', 2),
-(16, '', NULL, 'Coronel', 'John Lenard', NULL, 'Male', '', '', '1190077', '$2y$10$BUjO92na6VFpEK6VsYLxku9CCiku5dvlKizh2ZwmDMaUeUhu8G06u', 'student', 2),
-(17, '', NULL, 'Corsame', 'John Genesis', NULL, 'Male', '', '', '1200011', '$2y$10$zj/SKmuY2TQPKHZXtqtQAenuHBq/ULNSYDk33Oqd.GCsCexxqs5O.', 'student', 2),
-(18, '', NULL, 'Curilan', 'Ruth', NULL, 'Female', '', '', '1200155', '$2y$10$i2bcr2hSAyKJOLgvYP8haeGAw2lImWIxz4TJbd2OZD6EQOQXo1nw.', 'student', 2),
-(19, '', NULL, 'Dacoroon', 'Jade Maureen', NULL, 'Female', '', '', '1200149', '$2y$10$vq09S9b/Vc/OqYaTnqHbEO.5puEL9ngPUrcaP87S/n5W6bMUngDKm', 'student', 2),
-(20, '', NULL, 'Dela Cueva', 'Jose Gabriel', NULL, 'Male', '', '', '1170033', '$2y$10$7Od1GGr0gooOlF7Qepy0Nu3r9KJsxMWCHufjpGUo/LwehM464YsMy', 'student', 2),
-(21, '', NULL, 'Dichoso', 'Jerold', NULL, 'Male', '', '', '1200065', '$2y$10$.llNhS5N3kUlntwdXI2UkuaScp9Zd2mPE5vZ/J2E.o53mKM21u..e', 'student', 2),
-(22, '', NULL, 'Ebro', 'Anne Geline', NULL, 'Female', '', '', '1200203', '$2y$10$f6SlM6gCzOeFF4Q.b8j5OOYR7VrKyKbY9KbKUNlHnn3egiUrh2ZoS', 'student', 2),
-(23, '', NULL, 'Fernandez', 'Rean', NULL, 'Male', '', '', '1200200', '$2y$10$bhou93AHhyCk0X7S/eQ/UeDh0DqNJ1375Oc6JtseBbYx0PeRciKI.', 'student', 2),
-(24, '', NULL, 'Francisco', 'Vince Andrie', NULL, 'Male', '', '', '1200186', '$2y$10$/GbWmYITJo8bgmkKbScSjOxZMxrzrVyKzi6E8JaMzm1VHsvbqFnx.', 'student', 2),
-(25, '', NULL, 'Jaspio', 'Jhomell', NULL, 'Male', '', '', '1200125', '$2y$10$XI4aU2Y9zovMU2LqakBvX.9cyPjiLG8/ngzP1J2KQTN5xwmhFzO0S', 'student', 2),
-(26, '', NULL, 'Labangco', 'Angelyn', NULL, 'Female', '', '', '1200138', '$2y$10$Ce76iTC5NYosiM3uxKHh2OYuCtsE6nvmo34T1Cxzk8AHNo19vJ8aC', 'student', 2),
-(27, '', NULL, 'Labangco', 'Michaela', NULL, 'Female', '', '', '1200145', '$2y$10$r2Cgyb7Q870LCrKeTO66m.qWe/OAkZiLzS9UNVXwI5z1xXG6LSIUC', 'student', 2),
-(28, '', NULL, 'Labao', 'Queen Real', NULL, 'Female', '', '', '1200004', '$2y$10$o9L1TR6Vse.6Dt7xWocB.eIZ8APPYrjqz1yjCRXlh2RAEsLEHg/bG', 'student', 2),
-(29, '', NULL, 'Laserna', 'Rency Gerard', NULL, 'Male', '', '', '1200096', '$2y$10$1KE1oMQb9t.7L5dme1Qxk.bNeUzUV4w8fWZj.qlXD5hFbvvTBnF7q', 'student', 2),
-(30, '', NULL, 'Lucas', 'Pablo III', NULL, 'Male', '', '', '1160042', '$2y$10$l0wGyherJnMZvw9vIsn5h.AGvPEKfIY/WOOJamfHlNOummEMLjGiy', 'student', 2),
-(31, '', NULL, 'Marasigan', 'Jomheldz Prince', NULL, 'Male', '', '', '1200049', '$2y$10$IHj.CiMnz.AqaqXSkRW9Vu8yFT/TPqSE4WBLlJjUTbiDjlZMekJVG', 'student', 2),
-(32, '', NULL, 'Mercado', 'Kyle Brian', NULL, 'Male', '', '', '1200094', '$2y$10$Fdia5T7kWrGA/FL/11XFaukqWEwnMg3/QTXrI5uDKl.Ykah2v5hXW', 'student', 2),
-(33, '', NULL, 'Menoza', 'John Oscar', NULL, 'Male', '', '', '1190303', '$2y$10$yAc6OpukA9CO3adDJ979EuOtVk69VtojdLAKySNPKQUue/kjs5glW', 'student', 2),
-(34, '', NULL, 'Morallos', 'Shara Mae', NULL, 'Female', '', '', '1200044', '$2y$10$4etwNaq6G2bW1oBD2GHn4./TAk8C3RFavSt27t1KjfInbS/EDPCqe', 'student', 2),
-(35, '', NULL, 'Moreno', 'King Cedric', NULL, 'Male', '', '', '1190343', '$2y$10$xe/CS1KQg2LaObNkoGBQ5.WneSY2hyez9fLsJxchybWHNKfpUZfyO', 'student', 2),
-(36, '', NULL, 'Patal', 'Marvin', NULL, 'Male', '', '', '2210005', '$2y$10$xdxtuPk7WNLzmCxUDKzqbet1xZAlSds7msdb6dBuVr73wkA/72FYW', 'student', 2),
-(37, '', NULL, 'Punongbayan', 'Nhiel Bryan', NULL, 'Male', '', '', '1190245', '$2y$10$xJCR0wQdp/6oz/FzSBuAc.iCGizyhSHP2mSQEgbLD5IsIi2ELKwFe', 'student', 2),
-(38, '', NULL, 'Reporte', 'Vic', NULL, 'Male', '', '', '1190094', '$2y$10$CWmFg5dNJWopKHPmfAJZZuOntzfjtPvPsNWKhJRrmLKmuuJi2o4ym', 'student', 2),
-(39, '', NULL, 'Sales', 'Aleahbel', NULL, 'Female', '', '', '1190174', '$2y$10$jFNKlpozXS6fLCfzBHWoguNn6iRp0UYCF70ph9f7gS6qPL0qfsT6G', 'student', 2),
-(40, '', NULL, 'Sayat', 'Kyla Mitch', NULL, 'Female', '', '', '1190078', '$2y$10$8M0Q10UPir8ebQBhmPr8cOa5H8u51qaeVeJYDF/QKui.eKXCx8NZG', 'student', 2),
-(41, '', NULL, 'Villamor', 'John Rey', NULL, 'Male', '', '', '1200111', '$2y$10$KQCq18z81GyAzewPiueiSuTBY3SoAIcgLYiUK2tstA/3PJHKx7B9u', 'student', 2),
-(42, '', NULL, 'Yuzon', 'Jigendille', NULL, 'Male', '', '', '1190155', '$2y$10$HOQovGm7wn7rzHW0HOxTFePgTvq7jWEr5UUXHPKS4WDZWzW.OlwM.', 'student', 2);
+(122, '', NULL, 'Tuazon', 'Rozaida', NULL, NULL, '', '', 'itdean', '$2y$10$yHOBGzJKsU4JJsHoSvx.qOfyEc5F8qGIfXu4v0P3sHU9jzOxGWrpS', 'dean', NULL),
+(123, '', NULL, 'Catherene', 'Oliva', NULL, NULL, '', '', 'cpedean', '$2y$10$msdRdBAhiSC1wCOj2.BFHOZ/Vim3zgcaa/yVoAH/bNaogDrsCrb/.', 'dean', NULL),
+(127, '', NULL, 'Guevarra', 'Gerald', NULL, NULL, '', '', 'crimdean', '$2y$10$fqujNlNBYcxCqnbD47/3.OEMbUKOZBrKwTN0hQpuV9Zrrz4gg60Oe', 'dean', NULL),
+(134, '', NULL, 'Maann', 'Guevarra', NULL, NULL, '', '', 'tmdean', '$2y$10$LZl7h4ikZxBb0gPo7xvLF.T/7iv3YYXw3PO1yBlAQQtRp4LgkOWIq', 'dean', NULL),
+(135, '', NULL, 'Tacker', 'Lenlen', NULL, NULL, '', '', 'adean', '$2y$10$ZLI1sTpZjMy8mQp4t1FVxujSQVX0/BAqrSOibGHbrs6fB05ttwfGO', 'dean', NULL),
+(136, '', NULL, 'Balauag', 'Goerge', NULL, NULL, '', '', 'edean', '$2y$10$LjL7raD/Bhxdqun9aFLzAuXa5cewWDnr0LWoTiVN5AAn8hn8Kxu0C', 'dean', NULL),
+(137, '', NULL, 'Esteban', 'Lolit', NULL, NULL, '', '', 'badean', '$2y$10$BnrprM54eiaNXG9BBrEtte067HLrHe1pMmXYdISzuJ/wlThF5atam', 'dean', NULL),
+(138, '', NULL, 'Marco', 'Guevara', NULL, NULL, '', '', 'csdean', '$2y$10$Bq/SX5in0d2Yikghw/EHW.LGhAZRJJIPx.N.hVZqXi5bVX5ElM5Ki', 'dean', NULL),
+(139, '', NULL, 'Dinio', 'dindo', NULL, NULL, '', '', 'hmdean', '$2y$10$rDu/.7duZHlY4tUHARAUH.SH55IS66u4qeJiE.yLOT0EBDJAJJIiy', 'dean', NULL),
+(140, '1234', NULL, 'Custodio', 'Bryan', 'G', NULL, 'pulong', 'bryan@gmail.com', 'acoor', '$2y$10$hmP/jDMdKWGKJWrb8V98SuarSuyibPYbtw132wOZr8ZzRdQoQCkSu', 'coordinator', 14),
+(141, '1234', NULL, 'Alias', 'Albert', 'P', NULL, 'butong', 'Albert@gmail.com', 'bacoor', '$2y$10$FooplXSf2TsKvssuuR2VNeAJ/lcE8Kv0Fy/k4d9xcTYtOPE.0Ul2u', 'coordinator', 16),
+(142, '2133', NULL, 'Balauag', 'George', 'na', NULL, 'sv69', 'Balauag@gmail.com', 'cpecoor', '$2y$10$apvkGgrHxm5NITS83prl1O1jGVeypvWj4Ve6QmbOgsSu.0BWrqZKC', 'coordinator', 7),
+(143, '1234', NULL, 'Arroyo', 'Justin', 'M', NULL, 'Macabling', 'Arroyo@gmail.com', 'crimcoor', '$2y$10$/m.tPxiXqt3tURYVWVHXC.Ke2X/7IfTa0bsWSYdA4Ic9O4H952TX.', 'coordinator', 11),
+(144, '1234', NULL, 'Tibayan', 'Aaron', 'B', NULL, 'Butonggs', 'Tibayan@gmail.com', 'cscoor', '$2y$10$bbdJ05zZXKDDpoW7yW7qrOGzwhk/.DLgoV5i75GX8WjIVcqmwGS3G', 'coordinator', 17),
+(145, '1234', NULL, 'Lumor', 'Catrina', 'A', NULL, 'Butongs', 'Lumor@gmail.com', 'ecoor', '$2y$10$Xyo74Rp8hmWVdWFdug/s.uNyxS1s537XoIrceR2sazxf16DOwqa02', 'coordinator', 15),
+(146, '12342', NULL, 'nicer', 'archie', 'b', NULL, 'Cabuyao', 'Nicer@gmail.com', 'hmcoor', '$2y$10$FWjgkWjJAi6Mbx0zRkuBSO6oh3tpEXbC5cmAK4fToqHdddMb0SeQe', 'coordinator', 18),
+(147, '6996', NULL, 'Alias', 'Lovely', 'Galang', NULL, 'Butongggs', 'Alias@gmail.com', 'itcoor', '$2y$10$hSdy5fbu9tauirx7ETbGI.aJw9HGLer6cssjXTQ1TkGg.lwA4n9pG', 'coordinator', 6),
+(148, '2312', NULL, 'Talibsao', 'Gaytee', 'B', NULL, 'Aplaya', 'Talibsao@gmail.com', 'tmcoor', '$2y$10$JIreaofSalULZt2lU5aw1Ocz0AbR76qRstay62mPkm4RHqD43pOqG', 'coordinator', 13),
+(208, '', NULL, 'Mary', 'Elizabeth', NULL, 'Male', '', '', '112233', '$2y$10$mTpGOIzLBg5WF.Etj9X8ae2enoqwR7ZAuMiktYaFjFbAV2N4AdA3K', 'student', 11),
+(209, '', NULL, 'Doe', 'John', NULL, 'Female', '', '', '112234', '$2y$10$pvBdZN1Ns9neKbKrKHpxpuM9aea9eg/feooqECEzQQgVnsCEXE7qK', 'student', 11),
+(210, '', NULL, 'Kennedy', 'Jhon', NULL, 'Male', '', '', '112235', '$2y$10$4LWaxApZCeTz56x2t6.22eUz3XvrrktaXK2FndIREAWD3tZY374/m', 'student', 11),
+(211, '', NULL, 'Rid ', 'Joseph', NULL, 'Male', '', '', '112236', '$2y$10$4cFhAGAbXcJ78XmV1So3RevZ/qGNwqHw/IxhHINfdlUaF35dcpiIu', 'student', 6),
+(212, '', NULL, 'Geo', 'Lester', NULL, 'Male', '', '', '112237', '$2y$10$g5Lu8r.gE8oDEBrFS/2ki.RzpRDB98jXI72kPhghyVIe0lYLI8V7K', 'student', 6),
+(213, '', NULL, 'will', 'ford', NULL, 'Male', '', '', '112238', '$2y$10$B2fKLppEV7v70NOeqnja8uF09uDoDIXqW2hzlDAtnYQOz34d5d4zK', 'student', 6),
+(214, '', NULL, 'gil', 'albert', NULL, 'Male', '', '', '112239', '$2y$10$4Yyo6vkQZXDMZ28LtR/5I.bdbQaBqbFe1XjavlGLq.ZLdaBJ7GU86', 'student', 7),
+(215, '', NULL, 'max', 'collins', NULL, 'Female', '', '', '112240', '$2y$10$csFjXMmybRlkOkvlpdDny.3gtfWHqS2ClAT0hnBflaU9YsRDTi0Vq', 'student', 7),
+(216, '', NULL, 'mil', 'Clyde', NULL, 'Male', '', '', '112241', '$2y$10$lAUzGqHKPI8XfBFtD9zZwuH79DV6N3jeZknQ7eonV8evUHzjT/Sxe', 'student', 7),
+(217, '', NULL, 'men', 'ture', NULL, 'Male', '', '', '112242', '$2y$10$T/YHAO0YcBzVje7Nu1qkHuP6xeMm6wW5BS4VE8PN3vHQkzoMx/ljq', 'student', 17),
+(218, '', NULL, 'bry', 'Col', NULL, 'Female', '', '', '112243', '$2y$10$ciolt.3cpXUpEshhDmWVru0kC6NTFYg7lFdgtdO8wShU0vzkSGEsi', 'student', 17),
+(219, '', NULL, 'cren', 'Cin', NULL, 'Female', '', '', '112244', '$2y$10$0T.XbCM5SN4M43jkttkplOb0rRvmwmZXtlxxR2E8uRdLpHMjByn7q', 'student', 17),
+(220, '', NULL, 'Cron', 'Cen', NULL, 'Male', '', '', '112245', '$2y$10$zpmqUtKKUvB7.JgsgCTEguIx/zQNc.cYBgpv4xuA2OpL5B4Lf8ftS', 'student', 13),
+(221, '', NULL, 'gen', 'Der', NULL, 'Male', '', '', '112246', '$2y$10$8qeXtXh8chMW2OO3fVOQ4.yF80Xqw7wYseLp1VqQOa4GSUK3Fr8bq', 'student', 13),
+(222, '', NULL, 'git', 'Get', NULL, 'Female', '', '', '112247', '$2y$10$xacMgUFTbewmfmRjrQaxseWmwDabxi8WH2VeLfDzU7Ofcuc4js7x6', 'student', 13),
+(223, '', NULL, 'Gat', 'Got', NULL, 'Male', '', '', '112248', '$2y$10$hYejH8VK5gEWnR58BbbimeiRC0N2T2l./tj3bpc.5/K4PopUO44Y.', 'student', 18),
+(224, '', NULL, 'tik', 'Tak', NULL, 'Male', '', '', '112249', '$2y$10$FEqgexClWavOOSjJnlYIqu1RrOam.jdktYxHVfiQv1.LT7OCXM6WG', 'student', 18),
+(225, '', NULL, 'Tuk', 'Tok', NULL, 'Male', '', '', '112250', '$2y$10$gsTj8PQeVviX0MEhTjeXeOhIWVSh89dpMJLH6JKpnFaw8QgAZ3rJu', 'student', 18),
+(226, '', NULL, 'Tek', 'Lik', NULL, 'Female', '', '', '112251', '$2y$10$T6UmARkghhpAnceZ8PFg2eBD/hdpyLunhrYqimCgukeFE31YRoYba', 'student', 16),
+(227, '', NULL, 'Lak', 'Lek', NULL, 'Female', '', '', '112252', '$2y$10$Lxhtq/XcpuGN3I8g9P2YpeimtjZQnlN.jsEosEc33nkqqp4QoGFM2', 'student', 16),
+(228, '', NULL, 'Luk', 'Lok', NULL, 'Female', '', '', '112253', '$2y$10$N5VQWMN6F3cHYgzJmfbH3e.CVl8D3QsJWXKTn4qLI7LLW.LM9Tg7C', 'student', 16),
+(229, '', NULL, 'Man', 'Men', NULL, 'Male', '', '', '112254', '$2y$10$dj3mJnF8wfttpo6ErTZk1ujLvZzZiPDkZc.oDrhxxfUb5hbgPOnMi', 'student', 14),
+(230, '', NULL, 'Min', 'Mon', NULL, 'Male', '', '', '112255', '$2y$10$19dGCuc.hfKkPpHpqw9b8OiK5JDaQEVUAFAWScOjWA6YjgR5jxpLq', 'student', 14),
+(231, '', NULL, 'Mun', 'Nam', NULL, 'Male', '', '', '112256', '$2y$10$c1tGIm8gl0.bLLNMKOEFCeQxAYVrm2tE81RkleGcRK9Z9PTIeFuZy', 'student', 14),
+(232, '', NULL, 'Nem', 'Nim', NULL, 'Male', '', '', '112257', '$2y$10$hz170fKJuqVjL6fVwl4PRugTytvGN77jc94pjqc1Tk9m161lL6k.a', 'student', 14),
+(233, '', NULL, 'Nom', 'Num', NULL, 'Male', '', '', '112258', '$2y$10$amNHaxH5jQygF/2uYKxP8Ot.mCGwLCQ.JvP5WHb1ktWFG/uURbbBq', 'student', 15),
+(234, '', NULL, 'Kan', 'Ken', NULL, 'Female', '', '', '112259', '$2y$10$SRlFflYtRQVvjI/CWB95YOzyNpLMFbjJRVWtKVchG4vb74Y4cX1bq', 'student', 15),
+(235, '', NULL, 'Kin', 'Kon', NULL, 'Male', '', '', '112260', '$2y$10$/ZSDDcdmHa1R06uW4R6qO.ZeBsn1H9.xjjxVZrREyExh6.SOPOpty', 'student', 15),
+(236, '', NULL, 'Kun', 'Far', NULL, 'Male', '', '', '112261', '$2y$10$cS6PR8fb6oQBWUSWihfd4uluGCtPKCSpoUIIR.SEzZvTvl/J/d1e6', 'student', 15);
 
 --
 -- Indexes for dumped tables
@@ -234,6 +295,19 @@ ALTER TABLE `students`
   ADD UNIQUE KEY `user_id` (`user_id`);
 
 --
+-- Indexes for table `student_requirements`
+--
+ALTER TABLE `student_requirements`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `student_submissions`
+--
+ALTER TABLE `student_submissions`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `requirement_id` (`requirement_id`);
+
+--
 -- Indexes for table `supervisors`
 --
 ALTER TABLE `supervisors`
@@ -255,13 +329,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `coordinators`
 --
 ALTER TABLE `coordinators`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `department_dean`
 --
 ALTER TABLE `department_dean`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `registrar`
@@ -273,7 +347,19 @@ ALTER TABLE `registrar`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=158;
+
+--
+-- AUTO_INCREMENT for table `student_requirements`
+--
+ALTER TABLE `student_requirements`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `student_submissions`
+--
+ALTER TABLE `student_submissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `supervisors`
@@ -285,7 +371,7 @@ ALTER TABLE `supervisors`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
 
 --
 -- Constraints for dumped tables
@@ -314,6 +400,12 @@ ALTER TABLE `registrar`
 --
 ALTER TABLE `students`
   ADD CONSTRAINT `students_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `student_submissions`
+--
+ALTER TABLE `student_submissions`
+  ADD CONSTRAINT `student_submissions_ibfk_1` FOREIGN KEY (`requirement_id`) REFERENCES `student_requirements` (`id`);
 
 --
 -- Constraints for table `supervisors`
