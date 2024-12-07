@@ -9,7 +9,7 @@
     $sql = "SELECT u.id, u.last_name, u.first_name, dd.department_name
             FROM users u
             JOIN coordinators c ON u.id = c.user_id
-            LEFT JOIN department_dean dd ON u.department_id = dd.id
+            LEFT JOIN departments dd ON u.department_id = dd.id
             WHERE u.user_type = 'coordinator'";
 
     $result = $conn->query($sql);

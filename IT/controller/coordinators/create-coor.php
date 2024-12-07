@@ -28,7 +28,7 @@
         }
 
         // Validate department ID
-        $deptCheckStmt = $conn->prepare("SELECT id FROM department_dean WHERE id = ?");
+        $deptCheckStmt = $conn->prepare("SELECT id FROM departments WHERE id = ?");
         if (!$deptCheckStmt) {
             echo json_encode(['success' => false, 'message' => 'Error preparing department query: ' . $conn->error]);
             exit;

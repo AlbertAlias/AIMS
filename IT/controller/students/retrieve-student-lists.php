@@ -17,7 +17,7 @@
                 u.personal_email, u.username
                 FROM users u
                 JOIN students s ON u.id = s.user_id
-                LEFT JOIN department_dean d ON u.department_id = d.id
+                LEFT JOIN departments d ON u.department_id = d.id
                 WHERE CONCAT_WS(' ', u.first_name, u.last_name, d.department_name, s.studentID, u.personal_email) LIKE ? 
                 LIMIT ?, ?";
 
@@ -52,7 +52,7 @@
         $totalSql = "SELECT COUNT(*) AS total 
                      FROM users u 
                      JOIN students s ON u.id = s.user_id
-                     LEFT JOIN department_dean d ON u.department_id = d.id
+                     LEFT JOIN departments d ON u.department_id = d.id
                      WHERE CONCAT_WS(' ', u.first_name, u.last_name, d.department_name, s.studentID, u.personal_email) LIKE ?";
 
         $totalStmt = $conn->prepare($totalSql);

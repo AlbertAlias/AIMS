@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="../assets/style/itdev/dashboard.css">
     <link rel="stylesheet" href="../assets/style/itdev/departments.css">
     <link rel="stylesheet" href="../assets/style/itdev/coordinators.css">
-    <link rel="stylesheet" href="../assets/style/itdev/interns.css">
+    <link rel="stylesheet" href="../assets/style/itdev/student.css">
     <link rel="stylesheet" href="../assets/style/itdev/profile.css">
     <link rel="stylesheet" href="../assets/style/itdev/internlist.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
@@ -71,7 +71,7 @@
                 <!-- Begin Page Content -->
                 <div id="page-content" style="width: 100%;">
                     <?php include "pages/dashboard.php"; ?>
-                    <?php include "pages/depts-dean.php"; ?>
+                    <?php include "pages/departments.php"; ?>
                     <?php include "pages/coordinators.php"; ?>
                     <?php include "pages/students.php"; ?>
                     <?php include "pages/admin-profile.php"; ?>
@@ -94,18 +94,21 @@
     <!-- <script src="functions/auto-logout/session-timeout.js"></script> -->
 
     <!--START::CRUD AJAX FUNCTIONS-->
-    <script src="crud-ajax/dashboard/retrieve-users-analytics.js"></script>
+    <!-- <script src="crud-ajax/dashboard/retrieve-users-analytics.js"></script>
     <script src="crud-ajax/dashboard/retrieve-studentDepts-analytics.js"></script>
     <script src="crud-ajax/dashboard/retrieve-deanCounts.js"></script>
     <script src="crud-ajax/dashboard/retrieve-deptCounts.js"></script>
     <script src="crud-ajax/dashboard/retrieve-coorCounts.js"></script>
-    <script src="crud-ajax/dashboard/retrieve-studentCounts.js"></script>
+    <script src="crud-ajax/dashboard/retrieve-studentCounts.js"></script> -->
 
     <script src="functions/departments/dept-form-enable.js"></script>
     <script src="crud-ajax/departments/create-depts.js"></script>
-    <script src="crud-ajax/departments/retrieve-depts.js"></script>
-    <script src="crud-ajax/departments/retrieve-deptsInfo.js"></script>
-    <!-- <script src="crud-ajax/departments/update-depts.js"></script> -->
+    <script src="crud-ajax/departments/retrieve-deptsName.js"></script>
+    <script src="crud-ajax/departments/create-dept-deans.js"></script>
+    <script src="crud-ajax/departments/retrieve-dept-dean.js"></script>
+    <script src="crud-ajax/departments/retrieve-dept-deanInfo.js"></script>
+    <script src="crud-ajax/departments/update-depts.js"></script>
+    <script src="crud-ajax/departments/update-dept-deanInfo.js"></script>
     <!-- <script src="crud-ajax/departments/delete-depts.js"></script> -->
 
     <script src="crud-ajax/coordinators/retrieve-coor-deptsName.js"></script>

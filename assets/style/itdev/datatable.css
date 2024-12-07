@@ -69,7 +69,8 @@
     color: #007bff; /* Link color */
     border: 1px solid #dee2e6; /* Border color */
     transition: background-color .15s ease, color .15s ease; /* Smooth transition */
-    padding: 0.5rem 0.75rem; /* Padding for better click area */
+    padding: 0.75rem 1rem; /* Slightly larger padding for easier click */
+    font-weight: bold; /* Make the page numbers stand out more */
 }
 
 .pagination .page-link:hover {
@@ -93,9 +94,9 @@
 .table-responsive {
     overflow-x: auto; /* Allow horizontal scrolling on small screens */
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adds subtle shadow for depth */
 }
 
-/* Ensure card container does not overflow */
 .card {
     overflow: hidden; /* Hide overflow */
 }
@@ -110,4 +111,12 @@
 
 .card-header .d-flex {
     gap: 10px; /* Space between the edit and delete buttons */
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .table td, .table th {
+        padding: 0.5rem;
+        font-size: 0.85rem;
+    }
 }

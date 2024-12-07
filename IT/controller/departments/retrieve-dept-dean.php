@@ -6,11 +6,11 @@
     include '../../../dbconn.php';
 
     // Adjusted SQL query based on the provided schema
-    $sql = "SELECT department_dean.id AS id, department_dean.department_name AS name, 
-            CONCAT(users.first_name, ' ', users.last_name) AS head
-            FROM department_dean
-            INNER JOIN users ON department_dean.user_id = users.id
-        ";
+    $sql = "SELECT departments.id AS id, departments.department_name AS name, 
+                CONCAT(users.first_name, ' ', users.last_name) AS head
+            FROM departments
+            INNER JOIN dean ON departments.dean_id = dean.id
+            INNER JOIN users ON dean.user_id = users.id";
 
     $result = $conn->query($sql);
 

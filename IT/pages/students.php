@@ -139,7 +139,7 @@
                     <!-- Page Length Selector -->
                     <div class="d-flex align-items-center me-3 mb-2 mb-sm-0">
                         <label for="pageLengthSelect" class="form-label mb-0 me-2">Show</label>
-                        <select id="pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
+                        <select id="pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Select number of entries per page">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
@@ -159,8 +159,8 @@
 
                 <!-- Right section (Action buttons) -->
                 <div class="d-flex">
-                    <button class="btn btn-primary btn-sm me-2">Edit</button>
-                    <button class="btn btn-danger btn-sm">Delete</button>
+                    <button class="btn btn-primary btn-sm me-2" aria-label="Edit selected users">Edit</button>
+                    <button class="btn btn-danger btn-sm" aria-label="Delete selected users">Delete</button>
                 </div>
             </div>
         </div>
@@ -174,7 +174,7 @@
                         <tr>
                             <th>
                                 <!-- Select All Checkbox -->
-                                <input type="checkbox" id="selectAllCheckbox">
+                                <input type="checkbox" id="selectAllCheckbox" aria-label="Select all users">
                             </th>
                             <th>First Name</th>
                             <th>Last Name</th>

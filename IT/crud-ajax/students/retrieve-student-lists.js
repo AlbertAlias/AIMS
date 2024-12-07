@@ -3,7 +3,6 @@ let pageLength = 10;
 
 // Fetch and display table data
 function loadTableData() {
-    console.log('Fetching table data...');
     $.ajax({
         url: 'controller/students/retrieve-student-lists.php',
         type: 'GET',

@@ -42,7 +42,7 @@ try {
                 $password = password_hash($data[6], PASSWORD_BCRYPT);
 
                 // Get department_id
-                $deptQuery = "SELECT id FROM department_dean WHERE department_name = ?";
+                $deptQuery = "SELECT id FROM departments WHERE department_name = ?";
                 $deptStmt = $conn->prepare($deptQuery);
                 $deptStmt->bind_param('s', $departmentName);
                 $deptStmt->execute();
