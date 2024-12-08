@@ -46,12 +46,11 @@ try {
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             $html .= '<tr>';
-            $html .= '<td><input type="checkbox" class="userCheckbox" data-id="' . htmlspecialchars($row['id']) . '"></td>';
-            $html .= '<td>' . htmlspecialchars($row['first_name']) . '</td>';
-            $html .= '<td>' . htmlspecialchars($row['last_name']) . '</td>';
-            $html .= '<td>' . htmlspecialchars($row['department_name']) . '</td>';
-            $html .= '<td>' . htmlspecialchars($row['username']) . '</td>';
-            // Display a fixed 6 * for the password field
+            $html .= '<td><input type="checkbox" class="userCheckbox" data-id="' . htmlspecialchars($row['department_id'] ?? '') . '"></td>';
+            $html .= '<td>' . htmlspecialchars($row['first_name'] ?? 'Unknown') . '</td>';
+            $html .= '<td>' . htmlspecialchars($row['last_name'] ?? 'Unknown') . '</td>';
+            $html .= '<td>' . htmlspecialchars($row['department_name'] ?? 'N/A') . '</td>';  // 'N/A' if null
+            $html .= '<td>' . htmlspecialchars($row['username'] ?? 'N/A') . '</td>';  // 'N/A' if null
             $html .= '<td>******</td>';
             $html .= '</tr>';
         }

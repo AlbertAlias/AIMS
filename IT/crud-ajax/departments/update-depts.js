@@ -1,90 +1,46 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const departmentForm = document.getElementById('editDepartmentForm'); // Update to the form in the modal
-    const editDeptSubmitBtn = document.getElementById('editDeptSubmitBtn'); // The submit button for the modal
+$(document).ready(function() {
+    // Handle the update button click
+    $('#editDeptUpdateBtn').on('click', function() {
+        const deptId = $(this).data('dept-id');  // Get the department ID
+        const updatedDeptName = $('#edit_department_name').val();  // Get the new department name
 
-    if (!departmentForm || !editDeptSubmitBtn) {
-        console.error('Form or button not found.');
-        return;
-    }
-
-    // Handle the submit button click for editing department
-    editDeptSubmitBtn.addEventListener('click', function (event) {
-        event.preventDefault();
-        console.log('Submit button clicked');
-
-        const formData = new FormData(departmentForm);
-
-        // Log form data for debugging
-        for (const [key, value] of formData.entries()) {
-            console.log(`${key}: ${value}`);
+        // Check if the department name is valid
+        if (updatedDeptName.trim() === '') {
+            alert('Department name cannot be empty.');
+            return;
         }
 
-        fetch('controller/departments/update-depts.php', {
-            method: 'POST',
-            body: formData,
-        })
-        .then(response => response.text()) // Debug raw response
-        .then(data => {
-            console.log('Raw response:', data); // Log raw response
-            try {
-                const jsonData = JSON.parse(data); // Parse JSON
-                if (jsonData.success) {
-                    console.log('Department updated successfully');
+        // Send the AJAX request to update the department
+        $.ajax({
+            url: 'controller/departments/update-depts.php',
+            type: 'POST',
+            data: {
+                dept_id: deptId,
+                department_name: updatedDeptName
+            },
+            success: function(response) {
+                console.log(response); // Log the response for debugging
 
-                    // Reset and lock the form fields
-                    departmentForm.reset();
-                    Array.from(departmentForm.elements).forEach(element => {
-                        element.disabled = true; // Lock input fields
-                    });
-
-                    // Close the modal after success
-                    $('#editDeptModal').modal('hide');
-
-                    // Call fetchDepartments() to refresh the department list (adjust according to your logic)
-                    fetchDeptsDean();
-
-                    // Success message
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-right',
-                        icon: 'success',
-                        title: 'Department updated successfully',
-                        showConfirmButton: false,
-                        timer: 3000,
-                    });
-                } else {
-                    console.error('Error updating department:', jsonData.message);
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-right',
-                        icon: 'error',
-                        title: `Error: ${jsonData.message}`,
-                        showConfirmButton: false,
-                        timer: 3000,
-                    });
+                // Parse the response if it's a string (sometimes response can be a string, not a JSON object)
+                if (typeof response === "string") {
+                    response = JSON.parse(response);
                 }
-            } catch (err) {
-                console.error('JSON parsing error:', err);
-                Swal.fire({
-                    toast: true,
-                    position: 'top-right',
-                    icon: 'error',
-                    title: 'Invalid server response',
-                    showConfirmButton: false,
-                    timer: 3000,
-                });
+
+                // Check if the response status is 'success'
+                if (response.status === 'success') {
+                    // Only show success message if the update was successful
+                    alert('Department successfully updated.');
+                    $('#editDeptModal').modal('hide');  // Close the modal
+                } else {
+                    // If status is 'error', show the error message
+                    alert('Failed to update department: ' + (response.message || 'An unknown error occurred.'));
+                }
+            },
+            error: function(xhr, status, error) {
+                // Log the error details for debugging
+                console.error("AJAX request failed. Status: " + status + ", Error: " + error);
+                alert('An error occurred while updating the department.');
             }
-        })
-        .catch(error => {
-            console.error('Network or fetch error:', error);
-            Swal.fire({
-                toast: true,
-                position: 'top-right',
-                icon: 'error',
-                title: 'An unexpected error occurred',
-                showConfirmButton: false,
-                timer: 3000,
-            });
         });
     });
 });

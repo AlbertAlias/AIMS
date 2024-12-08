@@ -1,41 +1,40 @@
 function fetchDepartments() {
     const departmentSelect = document.getElementById('dean_department');
-    
-    // Show a loading message or spinner
+
+    // Provide initial loading message
     departmentSelect.innerHTML = '<option selected>Loading...</option>';
-    
-    // Send AJAX request to fetch departments with no dean assigned
+
+    // Fetch department data
     fetch('controller/departments/retrieve-deptsName.php')
         .then(response => response.json())
         .then(data => {
-            // Clear existing options
+            // Clear existing options and reset to default message
             departmentSelect.innerHTML = '<option selected>Choose Department</option>';
 
             if (data.length === 0) {
-                departmentSelect.disabled = true;
-                return; // No departments to display, exit the function
+                // No departments available
+                const noOptions = document.createElement('option');
+                noOptions.textContent = 'No departments available';
+                noOptions.value = '';
+                departmentSelect.appendChild(noOptions);
+                return;
             }
 
-            // Populate the select dropdown with department options
+            // Populate dropdown with departments
             data.forEach(department => {
                 const option = document.createElement('option');
                 option.value = department.id;
                 option.textContent = department.department_name;
                 departmentSelect.appendChild(option);
             });
-
-            // Enable the select dropdown after populating it
-            departmentSelect.disabled = false;
         })
         .catch(error => {
             console.error('Error fetching departments:', error);
-            // Handle error, maybe display a message to the user
+
+            // Add an error option
             departmentSelect.innerHTML = '<option selected>Error loading departments</option>';
-            departmentSelect.disabled = true;
         });
 }
 
-// Call the function to populate departments on page load
-document.addEventListener("DOMContentLoaded", function () {
-    fetchDepartments();  // Now this works because fetchDepartments is defined globally
-});
+// Call function to populate departments on DOMContentLoaded
+document.addEventListener('DOMContentLoaded', fetchDepartments);

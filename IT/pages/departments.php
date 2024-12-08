@@ -34,9 +34,7 @@
                     <button class="btn btn-success btn-sm me-2" aria-label="Assign Dean" data-bs-toggle="modal" data-bs-target="#assignDeanModal">
                         Assign Dean
                     </button>
-                    <button class="btn btn-primary btn-sm me-2" aria-label="Edit Dept" data-bs-toggle="modal" data-bs-target="#editDeptModal" style="display: none;">
-                        Edit Department
-                    </button>
+                    
                     <button class="btn btn-primary btn-sm me-2" aria-label="Edit Dean" data-bs-toggle="modal" data-bs-target="#editDeanModal" style="display: none;"> 
                         Edit Dean
                     </button>
@@ -104,10 +102,16 @@
                     </div>
 
                     <!-- Submit Button -->
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" id="deptSubmitBtn" class="btn btn-success">
-                            <i class="fa-solid fa-check-to-slot"></i> Submit
-                        </button>
+                    <div class="row ">
+                        <div class="col-12 text-end">
+                            <button type="submit" id="deptSubmitBtn" class="btn btn-success">
+                                <i class="fa-solid fa-check-to-slot"></i> Submit
+                            </button>
+
+                            <button class="btn btn-primary me-2" id="editDeptBtn" aria-label="Edit Dept" data-bs-toggle="modal" data-bs-target="#editDeptModal">
+                                Edit Department
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -177,15 +181,23 @@
             </div>
             <div class="modal-body">
                 <form id="editDepartmentForm">
-                    <!-- Department Name Input -->
+                    <!-- Dropdown for selecting a department -->
+                    <div class="mb-3">
+                        <label for="department_select" class="form-label">Select Department <span class="text-danger">*</span></label>
+                        <select class="form-select" id="department_select" name="department_select" required>
+                            <option value="" disabled selected>Select a department</option>
+                        </select>
+                    </div>
+
+                    <!-- Department Name Input (editable field) -->
                     <div class="mb-3">
                         <label for="edit_department_name" class="form-label">Department Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="edit_department_name" name="department_name" required placeholder="Enter department name">
+                        <input type="text" class="form-control" id="edit_department_name" name="edit_department_name" required placeholder="Enter department name">
                     </div>
 
                     <!-- Update Button -->
                     <div class="d-flex justify-content-end">
-                        <button type="button" id="editDeptUpdateBtn" class="btn btn-primary">
+                        <button type="button" id="editDeptUpdateBtn" class="btn btn-primary" disabled>
                             <i class="fa-solid fa-pen-to-square"></i> Update
                         </button>
                     </div>

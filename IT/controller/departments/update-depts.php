@@ -1,39 +1,33 @@
 <?php
-include '../../../dbconn.php';
+require_once '../../../dbconn.php';
 
-header('Content-Type: application/json'); // Ensure JSON response
+if (isset($_POST['dept_id']) && isset($_POST['department_name'])) {
+    $deptId = $_POST['dept_id'];
+    $departmentName = $_POST['department_name'];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['id'] ?? '';
-    $department_name = $_POST['department_name'] ?? '';
+    // Prepare update query
+    $query = "UPDATE departments SET department_name = ? WHERE id = ?";
 
-    // Validate required fields
-    if (empty($id) || empty($department_name)) {
-        echo json_encode(['success' => false, 'message' => 'Missing required fields.']);
-        exit;
+    if ($stmt = $conn->prepare($query)) {
+        $stmt->bind_param("si", $departmentName, $deptId);
+
+        if ($stmt->execute()) {
+            // Return success response when the query is executed successfully
+            echo json_encode(array('status' => 'success', 'message' => 'Department successfully updated.'));
+        } else {
+            // Return error response if query execution fails
+            echo json_encode(array('status' => 'error', 'message' => 'Failed to execute query.'));
+        }
+
+        $stmt->close();
+    } else {
+        // Return error if preparing the query fails
+        echo json_encode(array('status' => 'error', 'message' => 'Failed to prepare query.'));
     }
-
-    // Start database transaction
-    $conn->begin_transaction();
-
-    try {
-        // Update department name in departments table
-        $updateDeptQuery = "UPDATE departments SET department_name = ? WHERE id = ?";
-        $deptStmt = $conn->prepare($updateDeptQuery);
-        $deptStmt->bind_param('si', $department_name, $id);
-        $deptStmt->execute();
-
-        // Commit transaction
-        $conn->commit();
-        echo json_encode(['success' => true]);
-    } catch (Exception $e) {
-        // Rollback on error
-        $conn->rollback();
-        echo json_encode(['success' => false, 'message' => $e->getMessage()]);
-    } finally {
-        // Close statements and connection
-        $deptStmt->close();
-        $conn->close();
-    }
+} else {
+    // Return error if required data is missing
+    echo json_encode(array('status' => 'error', 'message' => 'Missing required data.'));
 }
+
+$conn->close();
 ?>
