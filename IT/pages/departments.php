@@ -34,7 +34,6 @@
                     <button class="btn btn-success btn-sm me-2" aria-label="Assign Dean" data-bs-toggle="modal" data-bs-target="#assignDeanModal">
                         Assign Dean
                     </button>
-                    
                     <button class="btn btn-primary btn-sm me-2" aria-label="Edit Dean" data-bs-toggle="modal" data-bs-target="#editDeanModal" style="display: none;"> 
                         Edit Dean
                     </button>
@@ -107,7 +106,6 @@
                             <button type="submit" id="deptSubmitBtn" class="btn btn-success">
                                 <i class="fa-solid fa-check-to-slot"></i> Submit
                             </button>
-
                             <button class="btn btn-primary me-2" id="editDeptBtn" aria-label="Edit Dept" data-bs-toggle="modal" data-bs-target="#editDeptModal">
                                 Edit Department
                             </button>
@@ -128,22 +126,41 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="assignDeanForm" action="your-server-endpoint" method="POST">
+                <form id="assignDeanForm">
+                    <!-- Form content -->
                     <div class="row mb-3">
                         <div class="col-12 col-md-6">
                             <label for="last_name" class="form-label">Last name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" required>
+                            <input type="text" class="form-control" id="add_last_name" name="last_name" required>
                         </div>
                         <div class="col-12 col-md-6">
                             <label for="first_name" class="form-label">First name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="first_name" name="first_name" required>
+                            <input type="text" class="form-control" id="add_first_name" name="first_name" required>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-12 col-md-12">
-                            <label for="dean_department" class="form-label">Department <span class="text-danger">*</span></label>
-                            <select class="form-select" id="dean_department" name="dean_department" required>
-                                <option selected>Choose Department</option>
+                            <label for="department1" class="form-label">Department 1<span class="text-danger">*</span></label>
+                            <select class="form-select" id="add_department1" name="department1" required>
+                                <option selected>Choose Department 1</option>
+                                <!-- Options will be dynamically populated here -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-12">
+                            <label for="department2" class="form-label">Department 2<span class="text-danger"></span></label>
+                            <select class="form-select" id="add_department2" name="department2">
+                                <option selected>Choose Department 2</option>
+                                <!-- Options will be dynamically populated here -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-12">
+                            <label for="department3" class="form-label">Department 3<span class="text-danger"></span></label>
+                            <select class="form-select" id="add_department3" name="department3">
+                                <option selected>Choose Department 3</option>
                                 <!-- Options will be dynamically populated here -->
                             </select>
                         </div>
@@ -151,11 +168,11 @@
                     <div class="row mb-3">
                         <div class="col-12 col-md-6">
                             <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="username" name="username" required>
+                            <input type="text" class="form-control" id="add_username" name="username" required>
                         </div>
                         <div class="col-12 col-md-6">
                             <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="password" name="password" required>
+                            <input type="text" class="form-control" id="add_password" name="password" required>
                         </div>
                     </div>
                     <div class="row">
@@ -171,7 +188,7 @@
     </div>
 </div>
 
-<!-- Modal Structure for Editing Department -->
+<!-- Modal Structure for Editing Department --> 
 <div class="modal fade" id="editDeptModal" tabindex="-1" aria-labelledby="editDeptModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
@@ -221,11 +238,11 @@
                     <div class="row mb-3">
                         <div class="col-12 col-md-6">
                             <label for="last_name" class="form-label">Last name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" required>
+                            <input type="text" class="form-control" id="update_last_name" name="last_name" required>
                         </div>
                         <div class="col-12 col-md-6">
                             <label for="first_name" class="form-label">First name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="first_name" name="first_name" required>
+                            <input type="text" class="form-control" id="update_first_name" name="first_name" required>
                         </div>
                     </div>
 
@@ -233,7 +250,7 @@
                     <div class="row mb-3">
                         <div class="col-12 col-md-12">
                             <label for="dean_department" class="form-label">Department <span class="text-danger">*</span></label>
-                            <select class="form-select" id="dean_department" name="dean_department" required>
+                            <select class="form-select" id="update_dean_department" name="dean_department" required>
                                 <option selected>Choose Department</option>
                                 <!-- Department options will be dynamically populated -->
                             </select>
@@ -244,19 +261,19 @@
                     <div class="row mb-3">
                         <div class="col-12 col-md-6">
                             <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="username" name="username" required>
+                            <input type="text" class="form-control" id="update_username" name="username" required>
                         </div>
                         <div class="col-12 col-md-6">
                             <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="password" name="password" required>
+                            <input type="text" class="form-control" id="update_password" name="password" required>
                         </div>
                     </div>
 
                     <!-- Submit Button -->
                     <div class="row">
                         <div class="d-flex justify-content-end">
-                            <button type="submit" id="deanUpdateBtn" class="btn btn-success">
-                                <i class="fa-solid fa-check-to-slot"></i> Submit
+                            <button type="button" id="deanUpdateBtn" class="btn btn-primary">
+                                <i class="fa-solid fa-check-to-slot"></i> Update
                             </button>
                         </div>
                     </div>

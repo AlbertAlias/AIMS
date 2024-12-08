@@ -9,15 +9,13 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
     const last_name = document.getElementById('coor_last_name').value;
     const first_name = document.getElementById('coor_first_name').value;
     const middle_name = document.getElementById('coor_middle_name').value;
-    const employee_no = document.getElementById('coor_employee_no').value;
-    const address = document.getElementById('coor_address').value;
     const personal_email = document.getElementById('coor_personal_email').value;
     const department_id = document.getElementById('coor_department').value;
     const username = document.getElementById('coor_username').value;
     const password = document.getElementById('coor_password').value;
 
     // Validation for required fields
-    if (!last_name || !first_name || !employee_no || !address || !personal_email || !department_id || !username || !password) {
+    if (!last_name || !first_name || !personal_email || !department_id || !username || !password) {
         Swal.fire({
             toast: true,
             position: 'top-end',
@@ -33,8 +31,6 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
         last_name,
         first_name,
         middle_name,
-        employee_no,
-        address,
         personal_email,
         department_id,
         username,
@@ -63,7 +59,6 @@ document.getElementById('coorSubmitBtn').addEventListener('click', function (eve
                     timer: 3000
                 });
                 resetAndLockForms();
-                // window.loadCoor();
             } else {
                 Swal.fire({
                     toast: true,

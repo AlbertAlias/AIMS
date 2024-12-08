@@ -1,5 +1,5 @@
-$(document).ready(function() {
-    $('#loginForm').on('submit', function(e) {
+$(document).ready(function () {
+    $('#loginForm').on('submit', function (e) {
         e.preventDefault(); // Prevent form submission
 
         // Get form data
@@ -15,9 +15,11 @@ $(document).ready(function() {
                 password: password
             },
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
+                console.log(response); // Log the entire response object for debugging
+
                 if (response.status === 'success') {
-                    var user_type = response.user_type.toLowerCase(); // Ensure case consistency
+                    var user_type = response.user_type; // Use exact casing from response
                     var department = response.department;
 
                     Swal.fire({
@@ -33,7 +35,7 @@ $(document).ready(function() {
                         customClass: {
                             popup: 'mt-5'
                         }
-                    }).then(function() {
+                    }).then(function () {
                         // Clear form fields after successful login
                         $('#username').val('');
                         $('#password').val('');
@@ -45,7 +47,7 @@ $(document).ready(function() {
                     handleLoginErrors(response);
                 }
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error(xhr.responseText);
                 Swal.fire({
                     position: 'top-end',
@@ -79,24 +81,26 @@ $(document).ready(function() {
     function handleRedirect(user_type, department) {
         var baseUrl = '';
 
-        if (user_type === 'it') {
-            baseUrl = '../IT/it.php';
-        } else if (user_type === 'dean') {
-            // Redirection for Deans based on department
-            baseUrl = '../Dean/' + department.toUpperCase() + '/dean.php';
-        } else if (user_type === 'coordinator') {
-            baseUrl = '../Coordinator/coordinator.php';
-        } else if (user_type === 'supervisor') {
-            baseUrl = '../Supervisor/supervisor.php';
-        } else if (user_type === 'student') {
-            baseUrl = '../Student/student.php';
-        } else if (user_type === 'registrar') {
-            baseUrl = '../Registrar/registrar.php';
+        // Check the user type and redirect accordingly
+        if (user_type === 'IT') { 
+            baseUrl = '../IT/it.php'; // Adjusted for folder structure
+        } else if (user_type === 'Dean') {
+            baseUrl = '../../Dean/dean.php';
+        } else if (user_type === 'Coordinator') {
+            baseUrl = '../../Coordinator/coordinator.php';
+        } else if (user_type === 'Supervisor') {
+            baseUrl = '../../Supervisor/supervisor.php';
+        } else if (user_type === 'Student') {
+            baseUrl = '../../Student/student.php';
+        } else if (user_type === 'Registrar') {
+            baseUrl = '../../Registrar/registrar.php';
         } else {
-            alert('Unknown user type');
+            alert('Unknown user type: ' + user_type); 
             return;
         }
 
+        // Redirect to the appropriate page
+        console.log('Redirecting to:', baseUrl);
         window.location.href = baseUrl;
     }
 });

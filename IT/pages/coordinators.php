@@ -41,36 +41,27 @@
                     </div>
 
                     <div class="row mb-3">
-                        <!-- Address -->
-                        <div class="col-12 col-md-4">
-                            <label for="coor_address" class="form-label required-asterisk">Address <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="coor_address" name="coor_address" required disabled>
-                        </div>
                         <!-- Email -->
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-6">
                             <label for="coor_personal_email" class="form-label required-asterisk">Email <span class="text-danger">*</span></label>
                             <input type="email" class="form-control" id="coor_personal_email" name="coor_personal_email" required disabled>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <label for="coor_employee_no" class="form-label required-asterisk">Employee Number <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="coor_employee_no" name="coor_employee_no" required disabled>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
                         <!-- Department -->
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-6">
                             <label for="coor_department" class="form-label required-asterisk">Department <span class="text-danger">*</span></label>
                             <select class="form-select" id="coor_department" name="coor_department" required disabled>
                                 <option selected>Choose Department</option>
                                 <!-- Options will be dynamically populated here -->
                             </select>
                         </div>
-                        <div class="col-12 col-md-4 mb-3">
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-6 mb-3">
                             <label for="coor_username" class="form-label required-asterisk">Username <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="coor_username" name="coor_username" required disabled>
                         </div>
-                        <div class="col-12 col-md-4 mb-3">
+                        <div class="col-12 col-md-6 mb-3">
                             <label for="coor_password" class="form-label required-asterisk">Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control" id="coor_password" name="coor_password" required disabled>
                         </div>

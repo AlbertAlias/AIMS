@@ -10,7 +10,7 @@
         }
 
         // Insert the department name into the database
-        $stmt = $conn->prepare("INSERT INTO departments (department_name) VALUES (?)");
+        $stmt = $conn->prepare("INSERT INTO department (department_name) VALUES (?)");
         $stmt->bind_param("s", $department_name);
 
         if ($stmt->execute()) {

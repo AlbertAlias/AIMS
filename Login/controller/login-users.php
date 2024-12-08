@@ -1,58 +1,87 @@
 <?php
+// Prevent caching
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header("Content-Type: application/json");
+
+// Include database connection
+include '../../dbconn.php';
+
 // Start session for user authentication
 session_start();
 
-// Include database connection
-include_once('../../dbconn.php');
+// Check if the request method is POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $username = isset($_POST['username']) ? $conn->real_escape_string($_POST['username']) : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : ''; // Plain password
 
-// Get the input values (username and password)
-$username = $_POST['username'];
-$password = $_POST['password'];
-
-// Check if both fields are provided
-if (empty($username) || empty($password)) {
-    echo json_encode(['status' => 'error', 'message' => 'Username and password are required.']);
-    exit();
-}
-
-// SQL Query to fetch user details based on the provided
-$query = "SELECT u.*, d.department_name FROM users u 
-          LEFT JOIN departments d ON u.department_id = d.id
-          WHERE u.username = ? LIMIT 1";
-
-$stmt = $conn->prepare($query);
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$result = $stmt->get_result();
-
-// Check if the user exists
-if ($result->num_rows > 0) {
-    $user = $result->fetch_assoc();
-
-    // Verify the password using bcrypt (password_verify)
-    if (password_verify($password, $user['password'])) {
-
-        // Set session or token for authenticated user
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['user_type'] = $user['user_type'];
-        $_SESSION['department'] = $user['department_name'];
-
-        // Send success response with user type and department
-        echo json_encode([
-            'status' => 'success',
-            'user_type' => $user['user_type'],
-            'department' => $user['department_name']
-        ]);
-    } else {
-        // Invalid password
-        echo json_encode(['status' => 'error', 'message' => 'Invalid password.']);
+    // Validate inputs
+    if (empty($username) || empty($password)) {
+        echo json_encode(['status' => 'error', 'message' => 'Please fill in all fields.']);
+        exit();
     }
-} else {
-    // User not found
-    echo json_encode(['status' => 'error', 'message' => 'Email not found.']);
-}
 
-$stmt->close();
-$conn->close();
+    // SQL query to fetch user details based on the username
+    $sql = "
+        SELECT 
+            user_id,
+            last_name,
+            first_name,
+            middle_name,
+            username,
+            password, -- Plain text password temporarily
+            user_type,
+            department_id,
+            company,
+            email
+        FROM 
+            users
+        WHERE 
+            username = ?
+    ";
+
+    // Prepare the statement to prevent SQL injection
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('s', $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Check if the user exists
+    if ($result->num_rows === 1) {
+        $user = $result->fetch_assoc();
+
+        // Temporarily compare the password as plain text
+        if ($password === $user['password']) { 
+            // Set session variables
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['user_type'] = $user['user_type'];
+            $_SESSION['username'] = $user['username'];
+
+            // Return success with user details
+            echo json_encode([
+                'status' => 'success',
+                'user_id' => $user['user_id'],
+                'last_name' => $user['last_name'],
+                'first_name' => $user['first_name'],
+                'user_type' => $user['user_type'], // Preserve original case
+                'department' => $user['department_id'], // For further routing
+                'company' => $user['company'],
+                'email' => $user['email']
+            ]);
+        } else {
+            // Password does not match
+            echo json_encode(['status' => 'error', 'message' => 'Invalid username or password.']);
+        }
+    } else {
+        // Username not found
+        echo json_encode(['status' => 'error', 'message' => 'Invalid username or password.']);
+    }
+
+    // Close the statement and connection
+    $stmt->close();
+    $conn->close();
+} else {
+    echo json_encode(['status' => 'error', 'message' => 'Invalid request method.']);
+}
 ?>
