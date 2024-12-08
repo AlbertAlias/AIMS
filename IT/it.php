@@ -101,14 +101,14 @@
     <script src="crud-ajax/dashboard/retrieve-coorCounts.js"></script>
     <script src="crud-ajax/dashboard/retrieve-studentCounts.js"></script> -->
 
-    <script src="functions/departments/dept-form-enable.js"></script>
-    <script src="crud-ajax/departments/create-depts.js"></script>
-    <script src="crud-ajax/departments/retrieve-deptsName.js"></script>
-    <script src="crud-ajax/departments/create-dept-deans.js"></script>
-    <script src="crud-ajax/departments/retrieve-dept-dean.js"></script>
+    <!-- <script src="functions/departments/dept-form-enable.js"></script> -->
     <script src="crud-ajax/departments/retrieve-dept-deanInfo.js"></script>
+    <script src="crud-ajax/departments/retrieve-deptsName.js"></script>
+    <script src="crud-ajax/departments/create-depts.js"></script>
+    <script src="crud-ajax/departments/create-deans.js"></script>
+    <script src="functions/departments/show-modalBtn.js"></script>
     <script src="crud-ajax/departments/update-depts.js"></script>
-    <script src="crud-ajax/departments/update-dept-deanInfo.js"></script>
+    <!-- <script src="crud-ajax/departments/update-dept-deanInfo.js"></script> -->
     <!-- <script src="crud-ajax/departments/delete-depts.js"></script> -->
 
     <script src="crud-ajax/coordinators/retrieve-coor-deptsName.js"></script>

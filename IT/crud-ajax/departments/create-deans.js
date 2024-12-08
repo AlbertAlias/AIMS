@@ -1,6 +1,6 @@
 $(document).ready(function() {
     // Handle form submission
-    $('#deanForm').on('submit', function(event) {
+    $('#assignDeanForm').on('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
 
         // Get form data
@@ -18,7 +18,7 @@ $(document).ready(function() {
 
         // If validation passes, send AJAX request to PHP to insert data into the database
         $.ajax({
-            url: 'controller/departments/create-dept-dean.php',
+            url: 'controller/departments/create-dean.php',
             type: 'POST',
             data: {
                 last_name: lastName,
@@ -31,14 +31,10 @@ $(document).ready(function() {
                 const data = JSON.parse(response);
                 if (data.success) {
                     alert('Department Dean created successfully');
-                    // Optionally clear the form
-                    $('#deanForm')[0].reset();
-
-                    // Enable the submit button if it was disabled
-                    $('#deanSubmitBtn').prop('disabled', false);
-
-                    // Refresh the department list
-                    fetchDepartments();
+                    // Close the modal
+                    $('#assignDeanModal').modal('hide');
+                    // Optionally, you can clear the form fields if needed
+                    $('#assignDeanForm')[0].reset();
                 } else {
                     alert('Error: ' + data.error);
                 }

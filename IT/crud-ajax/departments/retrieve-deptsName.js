@@ -1,14 +1,20 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Function to fetch departments and populate the dropdown
-    window.fetchDepartments = function fetchDepartments() {
-        // Send AJAX request to fetch departments
-        fetch('controller/departments/retrieve-deptsName.php')
+function fetchDepartments() {
+    const departmentSelect = document.getElementById('dean_department');
+    
+    // Show a loading message or spinner
+    departmentSelect.innerHTML = '<option selected>Loading...</option>';
+    
+    // Send AJAX request to fetch departments with no dean assigned
+    fetch('controller/departments/retrieve-deptsName.php')
         .then(response => response.json())
         .then(data => {
-            const departmentSelect = document.getElementById('dean_department');
-            
             // Clear existing options
             departmentSelect.innerHTML = '<option selected>Choose Department</option>';
+
+            if (data.length === 0) {
+                departmentSelect.disabled = true;
+                return; // No departments to display, exit the function
+            }
 
             // Populate the select dropdown with department options
             data.forEach(department => {
@@ -23,6 +29,13 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => {
             console.error('Error fetching departments:', error);
+            // Handle error, maybe display a message to the user
+            departmentSelect.innerHTML = '<option selected>Error loading departments</option>';
+            departmentSelect.disabled = true;
         });
-    }
+}
+
+// Call the function to populate departments on page load
+document.addEventListener("DOMContentLoaded", function () {
+    fetchDepartments();  // Now this works because fetchDepartments is defined globally
 });

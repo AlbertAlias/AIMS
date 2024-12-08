@@ -12,5 +12,6 @@
         }
     }
 
+    // Return the departments as a JSON response
     echo json_encode($departments);
 ?>

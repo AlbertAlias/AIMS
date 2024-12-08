@@ -1,87 +1,107 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const departmentForm = document.getElementById('departmentForm');
-    const deanForm = document.getElementById('deanForm');
-    const deptSubmitBtn = document.querySelector('#departmentForm button[type="submit"]');
-    const deanSubmitBtn = document.querySelector('#deanForm button[type="submit"]');
-    const deptCancelBtn = document.getElementById('deptCancelBtn');
-    const deanCancelBtn = document.getElementById('deanCancelBtn');
-    const deptUpdateBtn = document.getElementById('deptUpdateBtn');
-    const deanUpdateBtn = document.getElementById('deanUpdateBtn');
+// Wait for the DOM to be fully loaded
+document.addEventListener("DOMContentLoaded", function () {
+    // Get the button elements
+    const addDepartmentsBtn = document.getElementById("addDepartmentsBtn");
+    const deptSubmitBtn = document.getElementById("deptSubmitBtn");
+    const deanSubmitBtn = document.getElementById("deanSubmitBtn");
 
-    // Initially disable submit buttons and hide cancel buttons
-    deptSubmitBtn.disabled = true;
-    deanSubmitBtn.disabled = true;
+    // Get the form elements
+    const deptForm = document.getElementById("departmentForm");
+    const deanForm = document.getElementById("deanForm");
 
-    // Enable department form and dean form for adding data
-    function enableFormForAdd() {
-        if (departmentForm) {
-            departmentForm.reset(); // Reset department form values
-            departmentForm.querySelectorAll('input, button').forEach(el => {
-                el.disabled = false; // Unlock inputs and buttons
-            });
-            deptSubmitBtn.disabled = false;
-            deptSubmitBtn.style.display = 'inline-block'; // Show submit button
-            deptCancelBtn.classList.remove('d-none');
-            deptCancelBtn.style.display = 'inline-block'; // Show cancel button
-            deptUpdateBtn.style.display = 'none'; // Hide update button
-        }
+    // Add event listener to the "Add Departments" button
+    addDepartmentsBtn.addEventListener("click", function () {
+        // Enable the submit buttons for both department and dean
+        deptSubmitBtn.disabled = false;
+        deanSubmitBtn.disabled = false;
 
-        if (deanForm) {
-            deanForm.reset(); // Reset dean form values
-            deanForm.querySelectorAll('input, select, button').forEach(el => {
-                el.disabled = false; // Unlock inputs, selects, and buttons
-            });
-            deanSubmitBtn.disabled = false;
-            deanSubmitBtn.style.display = 'inline-block'; // Show submit button
-            deanCancelBtn.classList.remove('d-none');
-            deanCancelBtn.style.display = 'inline-block'; // Show cancel button
-            deanUpdateBtn.style.display = 'none'; // Hide update button
-        }
-    }
+        // Optionally, show the departments container if it's hidden
+        document.getElementById("departments").style.display = "block";
 
-    // Reset and lock department form when cancel is clicked
-    function resetAndLockDeptForm() {
-        departmentForm.reset();
-        departmentForm.querySelectorAll('input').forEach(el => {
-            el.disabled = true; // Lock inputs
-        });
-        deptSubmitBtn.disabled = true; // Disable submit button
-        deptSubmitBtn.style.display = 'inline-block'; // Show submit button
-        deptCancelBtn.style.display = 'none'; // Hide cancel button
-        deptUpdateBtn.style.display = 'none'; // Hide update button
-    }
-
-    // Reset and lock dean form when cancel is clicked
-    function resetAndLockDeanForm() {
+        // Reset the department form
+        deptForm.reset();
+        
+        // Reset the dean form
         deanForm.reset();
-        deanForm.querySelectorAll('input, select').forEach(el => {
-            el.disabled = true; // Lock inputs and selects
-        });
-        deanSubmitBtn.disabled = true; // Disable submit button
-        deanSubmitBtn.style.display = 'inline-block'; // Show submit button
-        deanCancelBtn.style.display = 'none'; // Hide cancel button
-        deanUpdateBtn.style.display = 'none'; // Hide update button
-    }
 
-    // Event listener for the "Add Departments" button
-    const addDepartmentsBtn = document.getElementById('addDepartmentsBtn');
-    if (addDepartmentsBtn) {
-        addDepartmentsBtn.addEventListener('click', function () {
-            enableFormForAdd(); // Unlock and reset both forms for adding data
-        });
-    }
-
-    // Add event listener for department cancel button
-    if (deptCancelBtn) {
-        deptCancelBtn.addEventListener('click', function () {
-            resetAndLockDeptForm(); // Reset and lock the department form
-        });
-    }
-
-    // Add event listener for dean cancel button
-    if (deanCancelBtn) {
-        deanCancelBtn.addEventListener('click', function () {
-            resetAndLockDeanForm(); // Reset and lock the dean form
-        });
-    }
+        // Optionally, reset the department select to the default option (if needed)
+        const deptSelect = document.getElementById("dean_department");
+        deptSelect.value = deptSelect.querySelector('option').value; // Resets to "Choose Department"
+    });
 });
+
+
+{/* <div class="row g-4">
+        <!-- Left square container (smaller width) -->
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="bg-light rounded-3 p-4 d-flex flex-column position-relative" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Departments</h5>
+                <div class="mb-3 position-relative">
+                    <input type="text" class="form-control" id="searchDepartments" placeholder="Search Department...">
+                    <i class="fa-solid fa-magnifying-glass position-absolute search-icon"></i>
+                </div>
+                <div id="departmentInfo" class="text-gray-800">
+                    <!-- Department information will be displayed here -->
+                </div>
+                <button id="addDepartmentsBtn" class="btn btn-success mt-3">Add Departments</button>
+            </div>
+        </div>
+
+        <!-- Middle Container (larger width) -->
+        <div class="col-12 col-md-6 col-lg-8">
+            <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 150px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Add Department</h5>
+                <form id="departmentForm">
+                    <input type="hidden" id="departmentId" name="id">
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-12">
+                            <label for="department_name" class="form-label">Department name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="department_name" name="department_name" required>
+                        </div>
+                    </div>
+                    <button type="submit" id="deptSubmitBtn" class="btn btn-success me-2" disabled><i class="fa-solid fa-check-to-slot"></i> Submit</button>
+                    <button type="button" id="deptUpdateBtn" class="btn btn-primary" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> Update</button>
+                    <button type="button" id="deptDeleteBtn" class="btn btn-danger" style="display: none;"><i class="fa-solid fa-trash"></i> Delete</button>
+                    <button type="button" id="deptCancelBtn" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
+                </form>
+
+                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3 mt-3">Add Department Dean</h5>
+                <p class="text-gray-800 fs-5 mb-3">Department Dean Information</p>
+                <form id="deanForm">
+                    <input type="hidden" id="deanId" name="id">
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-4">
+                            <label for="last_name" class="form-label">Dean Last name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" required>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <label for="first_name" class="form-label">Dean First name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="first_name" name="first_name" required>
+                        </div>
+                        <!-- Department -->
+                        <div class="col-12 col-md-4">
+                            <label for="dean_department" class="form-label required-asterisk">Department <span class="text-danger">*</span></label>
+                            <select class="form-select" id="dean_department" name="dean_department" required>
+                                <option selected>Choose Department</option>
+                                <!-- Options will be dynamically populated here -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-6">
+                            <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="password" name="password" required>
+                        </div>
+                    </div>
+                    <button type="submit" id="deanSubmitBtn" class="btn btn-success me-2" disabled><i class="fa-solid fa-check-to-slot"></i> Submit</button>
+                    <button type="button" id="deanUpdateBtn" class="btn btn-primary" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> Update</button>
+                    <button type="button" id="deanDeleteBtn" class="btn btn-danger" style="display: none;"><i class="fa-solid fa-trash"></i> Delete</button>
+                    <button type="button" id="deanCancelBtn" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div> */}

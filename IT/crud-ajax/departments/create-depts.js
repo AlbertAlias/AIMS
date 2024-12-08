@@ -1,36 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const departmentForm = document.getElementById('departmentForm');
+    const departmentForm = document.getElementById('addDepartmentForm');  // Corrected form ID
     const deptSubmitBtn = document.getElementById('deptSubmitBtn');
     const departmentNameInput = document.getElementById('department_name');
-    const cancelBtn = document.getElementById('deptCancelBtn'); // Added cancel button reference
-    const coorDepartmentSelect = document.getElementById('dean_department'); // Reference to select
 
-    // Function to fetch departments and populate the dropdown
-    function fetchDepartments() {
-        fetch('controller/departments/retrieve-depts.php')
-            .then(response => response.json())
-            .then(data => {
-                const departmentSelect = document.getElementById('dean_department');
-                
-                // Clear existing options
-                departmentSelect.innerHTML = '<option selected>Choose Department</option>';
-
-                // Populate the select dropdown with department options
-                data.forEach(department => {
-                    const option = document.createElement('option');
-                    option.value = department.id;
-                    option.textContent = department.department_name;
-                    departmentSelect.appendChild(option);
-                });
-
-                // Enable the select dropdown after populating it
-                departmentSelect.disabled = false;
-            })
-            .catch(error => {
-                console.error('Error fetching departments:', error);
-            });
-    }
-
+    // Submit event for adding a department
     departmentForm.addEventListener('submit', function (e) {
         e.preventDefault(); // Prevent the default form submission
 
@@ -55,10 +28,12 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data.status === 'success') {
                 alert(data.message);
 
-                // Reset and lock department form
+                // Reset the form after success
                 departmentForm.reset();
-                // Call fetchDepartments to update the select options
-                fetchDepartments();
+
+                // Close the modal after successful submission
+                const myModal = bootstrap.Modal.getInstance(document.getElementById('addDepartmentModal'));
+                myModal.hide();  // Close the modal
             } else {
                 alert(data.message);
             }

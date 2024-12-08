@@ -1,62 +1,76 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const departmentInfo = document.getElementById('departmentInfo');
+let deptCurrentPage = 1;
+let deptPageLength = 10;
 
-    if (departmentInfo) {
-        departmentInfo.addEventListener('click', function (event) {
-            const button = event.target.closest('.coordinator-btn');
-            if (button) {
-                const deptId = button.dataset.id;
+// Fetch and display table data
+function loadTableData() {
+    $.ajax({
+        url: 'controller/departments/retrieve-dept-deanInfo.php',
+        type: 'GET',
+        dataType: 'json',  // Automatically parses JSON response
+        data: {
+            page: deptCurrentPage,
+            length: deptPageLength,
+            search: $('#depts-searchInput').val()
+        },
+        success: function(response) {
+            console.log('Server Response:', response); // Debugging line
 
-                // Enable forms and unlock input fields
-                if (typeof enableFormForAdd === 'function') {
-                    enableFormForAdd(); // Call the globally available function from dept-form-enable.js
-                } else {
-                    console.error('enableFormForAdd is not defined.');
-                }
-
-                // Fetch dean details using the department ID
-                fetch(`controller/departments/retrieve-dept-deanInfo.php?dept_id=${deptId}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            // Populate the form fields with the department and dean's information
-                            const { department_name, last_name, first_name, username } = data.dean;
-                            const departments = data.departments; // All departments for dropdown
-
-                            document.getElementById('department_name').value = department_name;
-                            document.getElementById('last_name').value = last_name;
-                            document.getElementById('first_name').value = first_name;
-                            document.getElementById('username').value = username; 
-                            document.getElementById('departmentId').value = deptId;
-
-                            // Update the department select field
-                            const deptSelect = document.getElementById('dean_department');
-                            if (deptSelect) {
-                                deptSelect.disabled = false; // Enable the dropdown
-                                deptSelect.innerHTML = ''; // Clear existing options
-
-                                // Populate all departments
-                                departments.forEach(dept => {
-                                    const option = document.createElement('option');
-                                    option.value = dept.department_id;
-                                    option.textContent = dept.department_name;
-
-                                    // Mark as selected if it matches the dean's department
-                                    if (dept.department_id == deptId) {
-                                        option.selected = true;
-                                    }
-
-                                    deptSelect.appendChild(option);
-                                });
-                            }
-                        } else {
-                            alert('Error retrieving dean information: ' + data.message);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching dean details:', error);
-                    });
+            // Check if the response contains an error
+            if (response.error) {
+                console.error('Error:', response.error);
+                alert('An error occurred while fetching the data.');
+                return;
             }
-        });
-    }
+
+            // Clear table body first
+            $('#deptsTable tbody').html('');
+
+            // Check if data is available
+            if (response.total > 0) {
+                // Populate the table if data is available
+                $('#deptsTable tbody').html(response.html);
+
+                // Display table info
+                $('#depts-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
+
+                // Populate pagination if data is available
+                $('#depts-pagination').html(response.pagination);
+            } else {
+                // Show no data available message if no data is found
+                $('#depts-tableInfo').text('Showing 0 to 0 of 0 entries');
+
+                // Add "No data available" to tbody if no data is found
+                $('#deptsTable tbody').html('<tr><td colspan="5" class="text-center">No data available</td></tr>');
+
+                // Clear pagination if no data
+                $('#depts-pagination').html('');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX error:', status, error);
+            console.error('Response Text:', xhr.responseText); // Log the actual response from the server
+            alert('An error occurred while fetching the data.');
+        }
+    });
+}
+
+// Handle page length change
+$('#depts-pageLengthSelect').on('change', function() {
+    deptPageLength = parseInt($(this).val());
+    loadTableData();
 });
+
+// Handle search input
+$('#depts-searchInput').on('input', function() {
+    loadTableData();
+});
+
+// Handle pagination click
+$(document).on('click', '.page-link', function(e) {
+    e.preventDefault();
+    deptCurrentPage = $(this).data('page');
+    loadTableData();
+});
+
+// Initial data load
+loadTableData();

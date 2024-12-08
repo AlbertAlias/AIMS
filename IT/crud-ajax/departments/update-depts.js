@@ -1,18 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const departmentForm = document.getElementById('departmentForm');
-    const updateBtn = document.getElementById('deptUpdateBtn');
-    const deptSubmitBtn = document.getElementById('deptSubmitBtn');
-    const deptCancelBtn = document.getElementById('deptCancelBtn');
+    const departmentForm = document.getElementById('editDepartmentForm'); // Update to the form in the modal
+    const editDeptSubmitBtn = document.getElementById('editDeptSubmitBtn'); // The submit button for the modal
 
-    if (!departmentForm || !updateBtn || !deptSubmitBtn || !deptCancelBtn) {
-        console.error('Form or buttons not found.');
+    if (!departmentForm || !editDeptSubmitBtn) {
+        console.error('Form or button not found.');
         return;
     }
 
-    // Handle the Update button click
-    updateBtn.addEventListener('click', function (event) {
+    // Handle the submit button click for editing department
+    editDeptSubmitBtn.addEventListener('click', function (event) {
         event.preventDefault();
-        console.log('Update button clicked');
+        console.log('Submit button clicked');
 
         const formData = new FormData(departmentForm);
 
@@ -32,20 +30,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 const jsonData = JSON.parse(data); // Parse JSON
                 if (jsonData.success) {
                     console.log('Department updated successfully');
-                    
+
                     // Reset and lock the form fields
                     departmentForm.reset();
                     Array.from(departmentForm.elements).forEach(element => {
                         element.disabled = true; // Lock input fields
                     });
 
-                    // Hide the update and cancel buttons
-                    updateBtn.style.display = 'none';
-                    deptCancelBtn.style.display = 'none';
+                    // Close the modal after success
+                    $('#editDeptModal').modal('hide');
 
-                    // Show the submit button but disabled
-                    deptSubmitBtn.style.display = 'inline-block';
-                    deptSubmitBtn.disabled = true;
+                    // Call fetchDepartments() to refresh the department list (adjust according to your logic)
+                    fetchDeptsDean();
 
                     // Success message
                     Swal.fire({

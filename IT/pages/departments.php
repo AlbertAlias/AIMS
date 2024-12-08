@@ -1,55 +1,144 @@
 <div class="container-fluid bg-light p-0 m-0" id="departments" style="display: none;">
-    <div class="row g-4">
-        <!-- Left square container (smaller width) -->
-        <div class="col-12 col-md-6 col-lg-4">
-            <div class="bg-light rounded-3 p-4 d-flex flex-column position-relative" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Departments</h5>
-                <div class="mb-3 position-relative">
-                    <input type="text" class="form-control" id="searchDepartments" placeholder="Search Department...">
-                    <i class="fa-solid fa-magnifying-glass position-absolute search-icon"></i>
-                </div>
-                <div id="departmentInfo" class="text-gray-800">
-                    <!-- Department information will be displayed here -->
-                </div>
-                <button id="addDepartmentsBtn" class="btn btn-success mt-3">Add Departments</button>
-            </div>
-        </div>
-
-        <!-- Middle Container (larger width) -->
-        <div class="col-12 col-md-6 col-lg-8">
-            <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 150px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Add Department</h5>
-                <form id="departmentForm">
-                    <input type="hidden" id="departmentId" name="id">
-                    <div class="row mb-3">
-                        <div class="col-12 col-md-12">
-                            <label for="department_name" class="form-label">Department name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="department_name" name="department_name" required disabled>
+    <div class="card shadow-sm">
+        <!-- Header -->
+        <div class="card-header bg-light text-dark">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <!-- Left section (Page Length and Search) -->
+                <div class="d-flex align-items-center">
+                    <!-- Page Length Selector -->
+                    <div class="d-flex align-items-center me-3 mb-2 mb-sm-0">
+                        <label for="depts-pageLengthSelect" class="form-label mb-0 me-2">Show</label>
+                        <select id="depts-pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Select number of entries per page">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <!-- Search Input -->
+                    <div class="ms-3 flex-shrink-1">
+                        <div class="input-group">
+                            <input type="text" id="depts-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
+                            <button class="btn btn-outline-secondary btn-sm" type="button">
+                                <i class="fas fa-search"></i>
+                            </button>
                         </div>
                     </div>
-                    <button type="submit" id="deptSubmitBtn" class="btn btn-success me-2" disabled><i class="fa-solid fa-check-to-slot"></i> Submit</button>
-                    <button type="button" id="deptUpdateBtn" class="btn btn-primary" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> Update</button>
-                    <button type="button" id="deptDeleteBtn" class="btn btn-danger" style="display: none;"><i class="fa-solid fa-trash"></i> Delete</button>
-                    <button type="button" id="deptCancelBtn" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
-                </form>
+                </div>
 
-                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3 mt-3">Add Department Dean</h5>
-                <p class="text-gray-800 fs-5 mb-3">Department Dean Information</p>
-                <form id="deanForm">
-                    <input type="hidden" id="deanId" name="id">
+                <!-- Right section (Action buttons) -->
+                <div class="d-flex">
+                    <button class="btn btn-success btn-sm me-2" aria-label="Add Department" data-bs-toggle="modal" data-bs-target="#addDepartmentModal">
+                        Add Department
+                    </button>
+                    <button class="btn btn-success btn-sm me-2" aria-label="Assign Dean" data-bs-toggle="modal" data-bs-target="#assignDeanModal">
+                        Assign Dean
+                    </button>
+                    <button class="btn btn-primary btn-sm me-2" aria-label="Edit Dept" data-bs-toggle="modal" data-bs-target="#editDeptModal" style="display: none;">
+                        Edit Department
+                    </button>
+                    <button class="btn btn-primary btn-sm me-2" aria-label="Edit Dean" data-bs-toggle="modal" data-bs-target="#editDeanModal" style="display: none;"> 
+                        Edit Dean
+                    </button>
+                    <!-- <button class="btn btn-primary btn-sm me-2" aria-label="Edit selected users">Edit</button> -->
+                    <!-- <button class="btn btn-danger btn-sm" aria-label="Delete selected users">Delete</button> -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Body -->
+        <div class="card-body bg-white">
+            <!-- Table Placeholder -->
+            <div class="table-responsive">
+                <table id="deptsTable" class="table table-hover text-center" style="width: 100%;">
+                    <thead class="table-light">
+                        <tr>
+                            <th>
+                                <!-- Select All Checkbox -->
+                                <input type="checkbox" id="selectAllCheckbox" aria-label="Select all users">
+                            </th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Department</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dept-tdata">
+                        <!-- Data will be loaded here via AJAX -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="card-footer bg-light text-dark">
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <span id="depts-tableInfo"></span>
+                <!-- Pagination -->
+                <nav aria-label="Page navigation">
+                    <ul id="depts-pagination" class="pagination mb-0">
+                        <!-- Pagination buttons will be generated here via AJAX -->
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<!-- Modal Structure -->
+<div class="modal fade" id="addDepartmentModal" tabindex="-1" aria-labelledby="addDepartmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addDepartmentModalLabel">Add Department</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="addDepartmentForm">
+                    <!-- Department Name Input -->
+                    <div class="mb-3">
+                        <label for="department_name" class="form-label">Department Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="department_name" name="department_name" required aria-describedby="departmentHelp" placeholder="Enter department name">
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" id="deptSubmitBtn" class="btn btn-success">
+                            <i class="fa-solid fa-check-to-slot"></i> Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Assigning Dean -->
+<div class="modal fade" id="assignDeanModal" tabindex="-1" aria-labelledby="assignDeanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="assignDeanModalLabel">Assign Dean</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="assignDeanForm" action="your-server-endpoint" method="POST">
                     <div class="row mb-3">
-                        <div class="col-12 col-md-4">
-                            <label for="last_name" class="form-label">Dean Last name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="last_name" name="last_name" required disabled>
+                        <div class="col-12 col-md-6">
+                            <label for="last_name" class="form-label">Last name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" required>
                         </div>
-                        <div class="col-12 col-md-4">
-                            <label for="first_name" class="form-label">Dean First name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="first_name" name="first_name" required disabled>
+                        <div class="col-12 col-md-6">
+                            <label for="first_name" class="form-label">First name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="first_name" name="first_name" required>
                         </div>
-                        <!-- Department -->
-                        <div class="col-12 col-md-4">
-                            <label for="dean_department" class="form-label required-asterisk">Department <span class="text-danger">*</span></label>
-                            <select class="form-select" id="dean_department" name="dean_department" required disabled>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-12">
+                            <label for="dean_department" class="form-label">Department <span class="text-danger">*</span></label>
+                            <select class="form-select" id="dean_department" name="dean_department" required>
                                 <option selected>Choose Department</option>
                                 <!-- Options will be dynamically populated here -->
                             </select>
@@ -58,17 +147,107 @@
                     <div class="row mb-3">
                         <div class="col-12 col-md-6">
                             <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="username" name="username" required disabled>
+                            <input type="text" class="form-control" id="username" name="username" required>
                         </div>
                         <div class="col-12 col-md-6">
                             <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="password" name="password" required disabled>
+                            <input type="text" class="form-control" id="password" name="password" required>
                         </div>
                     </div>
-                    <button type="submit" id="deanSubmitBtn" class="btn btn-success me-2" disabled><i class="fa-solid fa-check-to-slot"></i> Submit</button>
-                    <button type="button" id="deanUpdateBtn" class="btn btn-primary" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> Update</button>
-                    <button type="button" id="deanDeleteBtn" class="btn btn-danger" style="display: none;"><i class="fa-solid fa-trash"></i> Delete</button>
-                    <button type="button" id="deanCancelBtn" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
+                    <div class="row">
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" id="deanSubmitBtn" class="btn btn-success">
+                                <i class="fa-solid fa-check-to-slot"></i> Submit
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Structure for Editing Department -->
+<div class="modal fade" id="editDeptModal" tabindex="-1" aria-labelledby="editDeptModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editDeptModalLabel">Edit Department</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editDepartmentForm">
+                    <!-- Department Name Input -->
+                    <div class="mb-3">
+                        <label for="edit_department_name" class="form-label">Department Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="edit_department_name" name="department_name" required placeholder="Enter department name">
+                    </div>
+
+                    <!-- Update Button -->
+                    <div class="d-flex justify-content-end">
+                        <button type="button" id="editDeptUpdateBtn" class="btn btn-primary">
+                            <i class="fa-solid fa-pen-to-square"></i> Update
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Editing Dean -->
+<div class="modal fade" id="editDeanModal" tabindex="-1" aria-labelledby="editDeanModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editDeanModalLabel">Edit Dean</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editDeanForm">
+                    <!-- Last Name and First Name -->
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-6">
+                            <label for="last_name" class="form-label">Last name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" required>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="first_name" class="form-label">First name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="first_name" name="first_name" required>
+                        </div>
+                    </div>
+
+                    <!-- Department Selection -->
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-12">
+                            <label for="dean_department" class="form-label">Department <span class="text-danger">*</span></label>
+                            <select class="form-select" id="dean_department" name="dean_department" required>
+                                <option selected>Choose Department</option>
+                                <!-- Department options will be dynamically populated -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Username and Password -->
+                    <div class="row mb-3">
+                        <div class="col-12 col-md-6">
+                            <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="password" name="password" required>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="row">
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" id="deanUpdateBtn" class="btn btn-success">
+                                <i class="fa-solid fa-check-to-slot"></i> Submit
+                            </button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
