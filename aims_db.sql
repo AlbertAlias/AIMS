@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2024 at 03:49 PM
+-- Generation Time: Dec 08, 2024 at 03:15 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -32,14 +32,6 @@ CREATE TABLE `coordinators` (
   `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `coordinators`
---
-
-INSERT INTO `coordinators` (`id`, `user_id`) VALUES
-(1, 5),
-(2, 7);
-
 -- --------------------------------------------------------
 
 --
@@ -50,16 +42,6 @@ CREATE TABLE `dean` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `dean`
---
-
-INSERT INTO `dean` (`id`, `user_id`) VALUES
-(1, 2),
-(2, 3),
-(3, 4),
-(4, 6);
 
 -- --------------------------------------------------------
 
@@ -72,18 +54,6 @@ CREATE TABLE `departments` (
   `department_name` varchar(100) DEFAULT NULL,
   `dean_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `departments`
---
-
-INSERT INTO `departments` (`id`, `department_name`, `dean_id`) VALUES
-(1, 'NEWJABOL', 1),
-(2, 'PARAK', 2),
-(3, 'PAKAN', 3),
-(4, 'Information Technology', 4),
-(5, 'bago', NULL),
-(6, 'isa pa', NULL);
 
 -- --------------------------------------------------------
 
@@ -107,20 +77,6 @@ CREATE TABLE `students` (
   `user_id` int(11) DEFAULT NULL,
   `studentID` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `students`
---
-
-INSERT INTO `students` (`id`, `user_id`, `studentID`) VALUES
-(1, 8, '1-190302'),
-(2, 9, '1-200043'),
-(3, 10, '1-190058'),
-(4, 11, '1-200083'),
-(5, 12, '1-200146'),
-(6, 13, '1-200027'),
-(7, 14, '1-210016'),
-(8, 15, '1-200086');
 
 -- --------------------------------------------------------
 
@@ -153,7 +109,10 @@ CREATE TABLE `student_submissions` (
   `student_id` int(11) NOT NULL,
   `requirement_id` int(11) NOT NULL,
   `submitted_documents` text NOT NULL,
-  `submitted_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `submitted_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `file_name` varchar(255) NOT NULL,
+  `file_type` varchar(50) NOT NULL,
+  `file_content` longblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -194,21 +153,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `employee_no`, `profile_picture`, `last_name`, `first_name`, `middle_name`, `gender`, `address`, `personal_email`, `username`, `password`, `user_type`, `department_id`) VALUES
-(1, '', NULL, 'albert', 'bryan', NULL, NULL, '', '', 'it', '$2y$10$dwY/qMJfYueBEagEJlzJ6.vHWqInONX862GfhVXURI8s.nvGDxmd2', 'it', NULL),
-(2, '', NULL, 'JABOL', 'JABOL', NULL, NULL, '', '', 'JABOL', '$2y$10$E1tdm/AkwMxcEdZUnf5fVexkBVFjQorG0zOaW5Tra5SuLbAw/flAW', 'dean', 1),
-(3, '', NULL, 'GEORGE', 'GEORGEQ', NULL, NULL, '', '', 'GEORGE', '$2y$10$qvsT2n/AS9CrO9pH4Aw5q.srbRJ6Hb8iOmPV59yECCeTLqZ0uW3yq', 'dean', 2),
-(4, '', NULL, 'TOT', 'TOT', NULL, NULL, '', '', 'TOT', '$2y$10$DP2SlrY8dQFEaQ1PmpwlLeesW3z7J4AqcR.x/W2VPBPnofABbjyf2', 'dean', 3),
-(5, '12345', NULL, 'tot', 'tot', 'tot', NULL, 'tot', 'tot@gmail.com', 'toto', '$2y$10$48fRBnHTFrTgr/JXiBQP/e63P0nd1LHnuXglBAkDGMe1xUujTL9zS', 'coordinator', 3),
-(6, '', NULL, 'Tuazon', 'Rozaida', NULL, NULL, '', '', 'dean', '$2y$10$6VDKzzIV887cW3MhThiZPOjlmBcvQjiC8NJmtIUXim7JxslLn5G/i', 'dean', 4),
-(7, '12345', NULL, 'coor', 'coor', 'coor', NULL, 'coor', 'coor@gmail.com', 'coor', '$2y$10$T1jJxZPYfqemobsMc4KsyewbckI40OFc8.Cafc051T5xf3ctv56La', 'coordinator', 4),
-(8, '', NULL, 'Abella', 'Adriane Paul', NULL, 'Male', '', '', '1190302', '$2y$10$gRPlIRlMrqHB77g63tGqeeN5FFowDr0HZvAHGgyxaF4CMhWUlYEuq', 'student', 4),
-(9, '', NULL, 'Abellano', 'Dynarose', NULL, 'Female', '', '', '1200043', '$2y$10$wqnBcLGNqdKwQVFjwLKW7OE3vwbWBQnYHwwO/FT9IZojCUJf5.BEm', 'student', 4),
-(10, '', NULL, 'Alaurin', 'Karl Dominic', NULL, 'Male', '', '', '1190058', '$2y$10$2HAuz.5c1wD0OP6xdXfGDOWJYhrMEch.hfQiz8PHM.Xlz9A1Mkgei', 'student', 4),
-(11, '', NULL, 'Apquiz', 'John Lorenz', NULL, 'Male', '', '', '1200083', '$2y$10$eDLUbynzdKRh6NIXHu5qj.wHDUSQxvbITIMa4Qwl686gUj6xyUJwC', 'student', 4),
-(12, '', NULL, 'Arambulo', 'Joshua', NULL, 'Male', '', '', '1200146', '$2y$10$hyPqpJgGW29SDk16GaHodekKxoYNuE1w7BFQ.1fAL8qQDpJb4/HW6', 'student', 4),
-(13, '', NULL, 'Balquin', 'Gerald', NULL, 'Male', '', '', '1200027', '$2y$10$yUeHVdTcWvRkcf4g3tWooun.hGqABJF.3StDc6QtroLpmWcPLGI3i', 'student', 4),
-(14, '', NULL, 'Carteciano', 'Mj Bryan', NULL, 'Male', '', '', '1210016', '$2y$10$9Fr662QVbUe.FZQYl47H4unj3Vq2gf501JnmTrigVEaAFDCnP8AUm', 'student', 4),
-(15, '', NULL, 'Cledera', 'Dulce Maria', NULL, 'Female', '', '', '1200086', '$2y$10$G0iGYbj535Ln6h961Bmbzen/EYJpJanmYvhWKnFCAvoRd0IlIWxHq', 'student', 4);
+(1, '', NULL, 'albert', 'bryan', NULL, NULL, '', '', 'it', '$2y$10$dwY/qMJfYueBEagEJlzJ6.vHWqInONX862GfhVXURI8s.nvGDxmd2', 'it', NULL);
 
 --
 -- Indexes for dumped tables
@@ -294,13 +239,13 @@ ALTER TABLE `coordinators`
 -- AUTO_INCREMENT for table `dean`
 --
 ALTER TABLE `dean`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `departments`
 --
 ALTER TABLE `departments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `registrar`
@@ -336,7 +281,7 @@ ALTER TABLE `supervisors`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
