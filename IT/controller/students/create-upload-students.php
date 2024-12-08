@@ -26,11 +26,8 @@ try {
             // Skip header row
             fgetcsv($handle);
 
-            $usersInsertQuery = "INSERT INTO users (last_name, first_name, gender, username, password, user_type, department_id) VALUES (?, ?, ?, ?, ?, 'student', ?)";
-            $studentsInsertQuery = "INSERT INTO students (user_id, studentID) VALUES (?, ?)";
-
-            $usersStmt = $conn->prepare($usersInsertQuery);
-            $studentsStmt = $conn->prepare($studentsInsertQuery);
+            $userInsertQuery = "INSERT INTO users (last_name, first_name, username, password, user_type, gender, department_id, student_id, academic_year) VALUES (?, ?, ?, ?, 'Student', ?, ?, ?, ?)";
+            $userStmt = $conn->prepare($userInsertQuery);
 
             while (($data = fgetcsv($handle)) !== false) {
                 $lastName = $data[0];
@@ -38,15 +35,17 @@ try {
                 $gender = $data[2];
                 $studentID = $data[3];
                 $departmentName = $data[4];
-                $username = $data[5];
-                $password = password_hash($data[6], PASSWORD_BCRYPT);
+                $academicYear = $data[5];
+                $username = $data[6];
+                $password = password_hash($data[7], PASSWORD_BCRYPT);
 
                 // Get department_id
-                $deptQuery = "SELECT id FROM departments WHERE department_name = ?";
+                $deptQuery = "SELECT department_id FROM department WHERE department_name = ?";
                 $deptStmt = $conn->prepare($deptQuery);
                 $deptStmt->bind_param('s', $departmentName);
                 $deptStmt->execute();
                 $deptStmt->bind_result($department_id);
+
                 if (!$deptStmt->fetch()) {
                     $response['error'] = "Department not found: $departmentName";
                     $deptStmt->close();
@@ -56,12 +55,9 @@ try {
                 }
                 $deptStmt->close();
 
-                $usersStmt->bind_param('sssssi', $lastName, $firstName, $gender, $username, $password, $department_id);
-                if ($usersStmt->execute()) {
-                    $userId = $usersStmt->insert_id;
-                    $studentsStmt->bind_param('is', $userId, $studentID);
-                    $studentsStmt->execute();
-                } else {
+                // Insert user data
+                $userStmt->bind_param('ssssssis', $lastName, $firstName, $username, $password, $gender, $department_id, $studentID, $academicYear);
+                if (!$userStmt->execute()) {
                     $response['error'] = 'Error inserting data into users table.';
                     ob_clean(); // Clear any output
                     echo json_encode($response);

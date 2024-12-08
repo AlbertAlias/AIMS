@@ -124,7 +124,7 @@
     <!-- <script src="crud-ajax/students/retrieve-student-lists.js"></script> -->
     <!-- <script src="crud-ajax/students/retrieve-student-deptsName.js"></script> -->
     <!-- <script src="crud-ajax/students/retrieve-student-info.js"></script> -->
-    <!-- <script src="crud-ajax/students/create-upload-students.js"></script> -->
+    <script src="crud-ajax/students/create-upload-students.js"></script>
     <!-- <script src="crud-ajax/students/update-student.js"></script> -->
 
     <!-- <script src="crud-ajax/admins/create-admins.js"></script>

@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             color: '#155724',
                             customClass: { popup: 'mt-5' }
                         });
-                        loadTableData();
+                        // loadTableData();
                     }
                 } catch (e) {
                     console.error('Error parsing response:', e.message);

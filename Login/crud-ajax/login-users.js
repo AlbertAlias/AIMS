@@ -87,11 +87,11 @@ $(document).ready(function () {
         } else if (user_type === 'Dean') {
             baseUrl = '../../Dean/dean.php';
         } else if (user_type === 'Coordinator') {
-            baseUrl = '../../Coordinator/coordinator.php';
+            baseUrl = '../Coordinator/coordinator.php';
         } else if (user_type === 'Supervisor') {
             baseUrl = '../../Supervisor/supervisor.php';
         } else if (user_type === 'Student') {
-            baseUrl = '../../Student/student.php';
+            baseUrl = '../Student/student.php';
         } else if (user_type === 'Registrar') {
             baseUrl = '../../Registrar/registrar.php';
         } else {
