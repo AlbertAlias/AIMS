@@ -4,7 +4,7 @@
     ini_set('display_errors', 1);
 
     // SQL query to select department IDs and names from the departments table
-    $sql = "SELECT id, department_name FROM department_dean";
+    $sql = "SELECT id, department_name FROM departments";
     $result = $conn->query($sql);
 
     // Check if any departments are found

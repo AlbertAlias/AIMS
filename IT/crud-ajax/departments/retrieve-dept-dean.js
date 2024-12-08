@@ -1,10 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
     const departmentInfo = document.getElementById('departmentInfo');
     const searchInput = document.getElementById('searchDepartments');
+    const deptSubmitBtn = document.querySelector('#departmentForm button[type="submit"]');
+    const deanSubmitBtn = document.querySelector('#deanForm button[type="submit"]');
+    const deptUpdateBtn = document.getElementById('deptUpdateBtn');
+    const deanUpdateBtn = document.getElementById('deanUpdateBtn');
 
     function fetchDepartments() {
         if (departmentInfo) {
-            fetch('controller/departments/retrieve-depts.php')
+            fetch('controller/departments/retrieve-dept-dean.php')
                 .then(response => response.text())
                 .then(text => {
                     try {
@@ -42,11 +46,43 @@ document.addEventListener('DOMContentLoaded', function() {
                 ${dept.name}<br>${dept.head}
             </button>`
         ).join('');
-        
+
         // If no departments found, display a message
         if (departments.length === 0) {
             updateDepartmentList([], 'No departments found.');
         }
+
+        // Add event listener to each department button to unlock forms
+        const deptButtons = document.querySelectorAll('.coordinator-btn');
+        deptButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const deptId = button.getAttribute('data-id');
+                const deptHead = button.getAttribute('data-head');
+
+                // Unlock department form and dean form inputs and selects
+                unlockForm(deptId, deptHead);
+            });
+        });
+    }
+
+    function unlockForm(deptId, deptHead) {
+        // Unlock department form inputs
+        const departmentForm = document.getElementById('departmentForm');
+        departmentForm.querySelectorAll('input, select').forEach(el => {
+            el.disabled = false;
+        });
+        deptSubmitBtn.style.display = 'none'; // Hide submit button
+        deptUpdateBtn.style.display = 'inline-block'; // Show update button
+        document.getElementById('deptCancelBtn').style.display = 'inline-block'; // Show cancel button
+    
+        // Unlock dean form inputs
+        const deanForm = document.getElementById('deanForm');
+        deanForm.querySelectorAll('input, select').forEach(el => {
+            el.disabled = false;
+        });
+        deanSubmitBtn.style.display = 'none'; // Hide submit button
+        deanUpdateBtn.style.display = 'inline-block'; // Show update button
+        document.getElementById('deanCancelBtn').style.display = 'inline-block'; // Show cancel button
     }
 
     // Search functionality

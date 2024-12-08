@@ -1,83 +1,71 @@
 document.addEventListener('DOMContentLoaded', function () {
     const departmentForm = document.getElementById('departmentForm');
-    const submitBtn = document.querySelector('#departmentForm button[type="submit"]');
+    const deptSubmitBtn = document.getElementById('deptSubmitBtn');
+    const departmentNameInput = document.getElementById('department_name');
+    const cancelBtn = document.getElementById('deptCancelBtn'); // Added cancel button reference
+    const coorDepartmentSelect = document.getElementById('dean_department'); // Reference to select
 
-    if (submitBtn) {
-        submitBtn.addEventListener('click', function (event) {
-            event.preventDefault();
-            const formData = new FormData(departmentForm);
-
-            submitBtn.disabled = true;
-
-            fetch('controller/departments/create-depts.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
+    // Function to fetch departments and populate the dropdown
+    function fetchDepartments() {
+        fetch('controller/departments/retrieve-depts.php')
+            .then(response => response.json())
             .then(data => {
-                submitBtn.disabled = false;
+                const departmentSelect = document.getElementById('dean_department');
+                
+                // Clear existing options
+                departmentSelect.innerHTML = '<option selected>Choose Department</option>';
 
-                if (data.success) {
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Department Dean created successfully',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        background: '#b9f6ca',
-                        iconColor: '#2e7d32',
-                        color: '#155724',
-                        customClass: {
-                            popup: 'mt-5'
-                        }
-                    });
+                // Populate the select dropdown with department options
+                data.forEach(department => {
+                    const option = document.createElement('option');
+                    option.value = department.id;
+                    option.textContent = department.department_name;
+                    departmentSelect.appendChild(option);
+                });
 
-                    if (typeof window.refreshDepartmentList === 'function') {
-                        window.refreshDepartmentList();
-                    }
-
-                    resetAndLockForm();
-                } else {
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'error',
-                        title: data.message,
-                        showConfirmButton: false,
-                        timer: 3000,
-                        background: '#f8bbd0',
-                        iconColor: '#c62828',
-                        color: '#721c24',
-                        customClass: {
-                            popup: 'mt-5'
-                        }
-                    });
-                }
+                // Enable the select dropdown after populating it
+                departmentSelect.disabled = false;
             })
             .catch(error => {
-                submitBtn.disabled = false;
-                console.error('Fetch error:', error);
-                Swal.fire({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'error',
-                    title: 'An unexpected error occurred: ' + error.message,
-                    showConfirmButton: false,
-                    timer: 3000,
-                    background: '#f8bbd0',
-                    iconColor: '#c62828',
-                    color: '#721c24',
-                    customClass: {
-                        popup: 'mt-5'
-                    }
-                });
+                console.error('Error fetching departments:', error);
             });
-        });
     }
+
+    departmentForm.addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        // Get department name
+        const departmentName = departmentNameInput.value.trim();
+
+        if (departmentName === '') {
+            alert('Please enter a department name.');
+            return;
+        }
+
+        // AJAX request to add the department
+        fetch('controller/departments/create-depts.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `department_name=${encodeURIComponent(departmentName)}`,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert(data.message);
+
+                // Reset and lock department form
+                departmentForm.reset();
+                // Call fetchDepartments to update the select options
+                fetchDepartments();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while adding the department.');
+        });
+    });
 });
