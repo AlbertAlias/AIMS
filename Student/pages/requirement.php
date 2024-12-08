@@ -23,7 +23,6 @@
         </div>
         <div id="requirementsContainer" class="text-muted">
           <!-- Requirements will be dynamically populated here -->
-          <p>No requirements posted yet.</p>
         </div>
       </div>
     </div>

@@ -103,8 +103,9 @@
     <script src="crud-ajax/profile/update-admins-info.js"></script>
     <script src="functions/profile/profile-details.js"></script>
 
-    <script src="crud_ajax/post-req.js"></script>
-    <script src="crud_ajax/requirement.jss"></script>
+    <script src="crud_ajax/fetch_requirements.js"></script>
+    <script src="crud_ajax/submit_requirements.js"></script>
+    <script src="crud_ajax/view_file.js"></script>
 
 
 

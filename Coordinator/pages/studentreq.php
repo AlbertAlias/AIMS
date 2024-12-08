@@ -54,36 +54,36 @@
                         </div>
                     </div>
 
-<!-- Post Weekly Report Modal -->
-<div class="modal fade" id="postWeeklyReportModal" tabindex="-1" aria-labelledby="postWeeklyReportModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="postWeeklyReportModalLabel">Post Weekly Report</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="postWeeklyReportForm">
-                    <div class="mb-3">
-                        <label for="reportTitle" class="form-label">Title</label>
-                        <input type="text" class="form-control" id="reportTitle" placeholder="Enter weekly report title" required>
+                    <!-- Post Weekly Report Modal -->
+                    <div class="modal fade" id="postWeeklyReportModal" tabindex="-1" aria-labelledby="postWeeklyReportModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="postWeeklyReportModalLabel">Post Weekly Report</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="postWeeklyReportForm">
+                                        <div class="mb-3">
+                                            <label for="reportTitle" class="form-label">Title</label>
+                                            <input type="text" class="form-control" id="reportTitle" placeholder="Enter weekly report title" required>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" form="postWeeklyReportForm" class="btn btn-primary">Post Report</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" form="postWeeklyReportForm" class="btn btn-primary">Post Report</button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Right section (Action buttons) -->
-<div class="d-flex">
-    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#postWeeklyReportModal">Post Weekly Report</button>
-    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#postRequirementsModal">Post Requirements</button>
-    <button class="btn btn-warning">Archive</button>
-</div>
+                    <!-- Right section (Action buttons) -->
+                    <div class="d-flex">
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#postWeeklyReportModal">Post Weekly Report</button>
+                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#postRequirementsModal">Post Requirements</button>
+                        <button class="btn btn-warning">Archive</button>
+                    </div>
 
             </div>
         </div>

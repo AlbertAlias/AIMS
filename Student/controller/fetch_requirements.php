@@ -1,15 +1,26 @@
 <?php
-include '../../dbconn.php';
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 header('Content-Type: application/json');
+include '../../dbconn.php';
 
-$stmt = $conn->prepare("SELECT * FROM student_requirements ORDER BY created_at DESC");
-$stmt->execute();
-$result = $stmt->get_result();
-$requirements = [];
+// Handle GET request to fetch requirements
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $query = "SELECT id, title, description, created_at FROM student_requirements ORDER BY created_at DESC";
+    $result = $conn->query($query);
 
-while ($row = $result->fetch_assoc()) {
-    $requirements[] = $row;
+    if ($result) {
+        $requirements = [];
+        while ($row = $result->fetch_assoc()) {
+            $requirements[] = $row;
+        }
+        echo json_encode(["success" => true, "data" => $requirements]);
+    } else {
+        echo json_encode(["success" => false, "error" => "Error fetching requirements"]);
+    }
+} else {
+    echo json_encode(["success" => false, "error" => "Invalid request method"]);
 }
-
-echo json_encode($requirements);
 ?>
