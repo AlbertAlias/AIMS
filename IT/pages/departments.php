@@ -143,7 +143,7 @@
                             <label for="department1" class="form-label">Department 1<span class="text-danger">*</span></label>
                             <select class="form-select" id="add_department1" name="department1" required>
                                 <option selected>Choose Department 1</option>
-                                <!-- Options will be dynamically populated here -->
+                                <!-- Populate department options dynamically -->
                             </select>
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                             <label for="department2" class="form-label">Department 2<span class="text-danger"></span></label>
                             <select class="form-select" id="add_department2" name="department2">
                                 <option selected>Choose Department 2</option>
-                                <!-- Options will be dynamically populated here -->
+                                <!-- Populate department options dynamically -->
                             </select>
                         </div>
                     </div>
@@ -161,7 +161,7 @@
                             <label for="department3" class="form-label">Department 3<span class="text-danger"></span></label>
                             <select class="form-select" id="add_department3" name="department3">
                                 <option selected>Choose Department 3</option>
-                                <!-- Options will be dynamically populated here -->
+                                <!-- Populate department options dynamically -->
                             </select>
                         </div>
                     </div>
@@ -172,14 +172,12 @@
                         </div>
                         <div class="col-12 col-md-6">
                             <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="add_password" name="password" required>
+                            <input type="password" class="form-control" id="add_password" name="password" required>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="d-flex justify-content-end">
-                            <button type="submit" id="deanSubmitBtn" class="btn btn-success">
-                                <i class="fa-solid fa-check-to-slot"></i> Submit
-                            </button>
+                    <div class="row text-end">
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-success">Add Dean</button>
                         </div>
                     </div>
                 </form>

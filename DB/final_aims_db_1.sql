@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2024 at 01:53 AM
+-- Generation Time: Dec 08, 2024 at 10:13 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -37,7 +37,7 @@ CREATE TABLE `coordinator` (
 --
 
 INSERT INTO `coordinator` (`coordinator_id`, `user_id`) VALUES
-(1, 5);
+(1, 4);
 
 -- --------------------------------------------------------
 
@@ -55,29 +55,42 @@ CREATE TABLE `coordinator_evaluation` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `dean`
+--
+
+CREATE TABLE `dean` (
+  `user_id` int(11) NOT NULL,
+  `department_1` int(11) DEFAULT NULL,
+  `department_2` int(11) DEFAULT NULL,
+  `department_3` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `dean`
+--
+
+INSERT INTO `dean` (`user_id`, `department_1`, `department_2`, `department_3`) VALUES
+(2, 1, 2, 3);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `department`
 --
 
 CREATE TABLE `department` (
   `department_id` int(11) NOT NULL,
-  `department_name` varchar(100) DEFAULT NULL,
-  `dean_id` int(11) DEFAULT NULL
+  `department_name` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `department`
 --
 
-INSERT INTO `department` (`department_id`, `department_name`, `dean_id`) VALUES
-(1, 'BSA', NULL),
-(2, 'BSBA', NULL),
-(3, 'BSCPE', 4),
-(4, 'BSCS', 4),
-(5, 'BSCRIM', NULL),
-(6, 'BSED', NULL),
-(7, 'BSHM', NULL),
-(8, 'BSIT', 4),
-(9, 'BSTM', 3);
+INSERT INTO `department` (`department_id`, `department_name`) VALUES
+(2, 'BSCPE'),
+(3, 'BSCS'),
+(1, 'BSIT');
 
 -- --------------------------------------------------------
 
@@ -101,7 +114,7 @@ CREATE TABLE `requirements` (
   `coordinator_id` int(11) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `status` enum('approved','rejected','pending') DEFAULT NULL,
+  `status` enum('approved','reject','pending') DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -115,7 +128,7 @@ CREATE TABLE `submit_requirements` (
   `submit_id` int(11) NOT NULL,
   `student_id` int(11) DEFAULT NULL,
   `document_name` varchar(255) DEFAULT NULL,
-  `status` enum('approved','rejected','pending') DEFAULT NULL
+  `status` enum('approved','reject','pending') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -132,10 +145,8 @@ CREATE TABLE `users` (
   `username` varchar(100) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
   `user_type` enum('IT','Dean','Coordinator','Student','Supervisor','Registrar') DEFAULT NULL,
-  `emergency_number` varchar(11) DEFAULT NULL,
-  `address` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `gender` enum('Male','Female') DEFAULT NULL,
+  `gender` enum('Male','Female','Other') DEFAULT NULL,
   `department_id` int(11) DEFAULT NULL,
   `company` varchar(100) DEFAULT NULL,
   `company_address` varchar(255) DEFAULT NULL,
@@ -147,19 +158,18 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `last_name`, `first_name`, `middle_name`, `username`, `password`, `user_type`, `emergency_number`, `address`, `email`, `gender`, `department_id`, `company`, `company_address`, `student_id`, `academic_year`) VALUES
-(1, 'albert', 'bryan', 'george', 'itdev', '$2y$10$1/X0mF3r533RLAeuYG3pRuzk.4DhfKdjuTTCVj7uG/j2wotgnGARC', 'IT', NULL, NULL, NULL, 'Male', NULL, NULL, NULL, NULL, NULL),
-(3, 'Arroyo', 'Justin', NULL, 'bstmdean', '$2y$10$o.kyhPfCQCCQe4HkEnrL1u8/K6yNFTH8sr26JkdpajhzAR62NlIje', 'Dean', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 'Balauag', 'George', NULL, 'ceitedean', '$2y$10$E5CbWgg28LdDDBrbel9bn.MSPzdtjqOIALmiaSFi/JWU/DQGKMvr6', 'Dean', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(5, 'BSIT', 'BSIT', 'BSIT', 'bsitcoor', '$2y$10$qI919QY4uqENgDs0Pe2kRuZxIoTsgRHKdwEyRh2O22bGoonsQ7TWq', 'Coordinator', NULL, NULL, 'BSIT@gmail.com', NULL, 8, NULL, NULL, NULL, NULL),
-(6, 'Abella', 'Adriane Paul', NULL, '1190302', '$2y$10$fksNQCrc42oIKbzMG0YwrO8mmIdFL4pAFH6N2291wzSO8pUo9dSBu', 'Student', NULL, NULL, NULL, 'Male', 8, NULL, NULL, '1', 2022),
-(7, 'Abellano', 'Dynarose', NULL, '1200043', '$2y$10$sNbu8OxikpmerzFZ1a3FGuNWczZ8Moj4Snm0aALwfOIT6t0CYUYK.', 'Student', NULL, NULL, NULL, 'Female', 8, NULL, NULL, '1', 2022),
-(8, 'Alaurin', 'Karl Dominic', NULL, '1190058', '$2y$10$Y.Fggfq.tOwLO8yuActJK.ROdjmy3P1dnkpspXAJTi4BxGOb2Qllu', 'Student', NULL, NULL, NULL, 'Male', 8, NULL, NULL, '1', 2022),
-(9, 'Apquiz', 'John Lorenz', NULL, '1200083', '$2y$10$hbgsSSEm7cs.FD847deqRuaC9oM.0Vc31e9nctdOeSSImoRacCnEa', 'Student', NULL, NULL, NULL, 'Male', 8, NULL, NULL, '1', 2022),
-(10, 'Arambulo', 'Joshua', NULL, '1200146', '$2y$10$a/lpLbyRDd5lJBvfxBmfcuIJ0fXc3VmpTRl4hnJ/U6bMxwycowIFy', 'Student', NULL, NULL, NULL, 'Male', 8, NULL, NULL, '1', 2022),
-(11, 'Balquin', 'Gerald', NULL, '1200027', '$2y$10$RiBWQJTKhoONtqtQIdzxmeJ0vzTFoXN.DIKKsqDXi1OyKvY9SAVdu', 'Student', NULL, NULL, NULL, 'Male', 8, NULL, NULL, '1', 2022),
-(12, 'Carteciano', 'Mj Bryan', NULL, '1210016', '$2y$10$2Rs9Ppru2BQeykbGSltEMupcJh5fQLNwRV1pm4rtCHrUpPxUoZWQW', 'Student', NULL, NULL, NULL, 'Male', 8, NULL, NULL, '1', 2022),
-(13, 'Cledera', 'Dulce Maria', NULL, '1200086', '$2y$10$2WYSOwvn8CEJ/dEVbtCOFed6ahXerLcz26kVZ0dEGwFO6NUFkZPj.', 'Student', NULL, NULL, NULL, 'Female', 8, NULL, NULL, '1', 2022);
+INSERT INTO `users` (`user_id`, `last_name`, `first_name`, `middle_name`, `username`, `password`, `user_type`, `email`, `gender`, `department_id`, `company`, `company_address`, `student_id`, `academic_year`) VALUES
+(1, 'albert', 'bryan', 'george', 'itdev', '$2y$10$1/X0mF3r533RLAeuYG3pRuzk.4DhfKdjuTTCVj7uG/j2wotgnGARC', 'IT', NULL, 'Male', NULL, NULL, NULL, NULL, NULL),
+(2, 'Tuazon', 'Rozaida', NULL, 'ceitedean', '$2y$10$RoSPEG.mDBuNUlLpIMv6MuqVFoygnwQmGj6x9rkkI/ynPTVz5KW5i', 'Dean', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 'bsit', 'bsit', 'bsit', 'bsitcoor', '$2y$10$8yc0rx.TVepztkxkj4dqHOX/sgaRp4L8Ec48Su9GCKxpAh6TSuxgS', 'Coordinator', 'bsit', NULL, 1, NULL, NULL, NULL, NULL),
+(6, 'Abella', 'Adriane Paul', NULL, '1190302', '$2y$10$dt0NOd1p3pla6AWheMKQ5.VrXoSWfoOoVq73BiluEf0uXBG4kCJEe', 'Student', NULL, 'Male', 1, NULL, NULL, '1', 2022),
+(7, 'Abellano', 'Dynarose', NULL, '1200043', '$2y$10$Eupp1slOxuDwEWlBj75pvuQq0BSs1mxE98622ToDsGaftEKzFWq3G', 'Student', NULL, 'Female', 1, NULL, NULL, '1', 2022),
+(8, 'Alaurin', 'Karl Dominic', NULL, '1190058', '$2y$10$ZZ5VEaHp4.flM6U8uZmhTuJDP93sRUCWi3Xf514FzNXrH6EqC0.NK', 'Student', NULL, 'Male', 1, NULL, NULL, '1', 2022),
+(9, 'Apquiz', 'John Lorenz', NULL, '1200083', '$2y$10$e211hh.2iCDC66Jrm7WM/OIekXA/mWuPu77mBRSmXu0yuFgarkXGe', 'Student', NULL, 'Male', 1, NULL, NULL, '1', 2022),
+(10, 'Arambulo', 'Joshua', NULL, '1200146', '$2y$10$LfDf5TME..aCeF2AqH05reGR7bxLrJg20LgaUsW922nsHBzsbLD/m', 'Student', NULL, 'Male', 1, NULL, NULL, '1', 2022),
+(11, 'Balquin', 'Gerald', NULL, '1200027', '$2y$10$EBwzchAxHl9e4d.n1fVs.eLLhvCTejcYlhUOc2FlhRsJXX8j.8wLa', 'Student', NULL, 'Male', 1, NULL, NULL, '1', 2022),
+(12, 'Carteciano', 'Mj Bryan', NULL, '1210016', '$2y$10$aUU.UCF2iTM4uJw4CAFScOzgu77fathms5hOKIW093UsJwVvsht/W', 'Student', NULL, 'Male', 1, NULL, NULL, '1', 2022),
+(13, 'Cledera', 'Dulce Maria', NULL, '1200086', '$2y$10$nlg2ABhngTKeOl9aRJWikO/86s5KnSXJPHgzX9n1zIOl6vFQmD5..', 'Student', NULL, 'Female', 1, NULL, NULL, '1', 2022);
 
 -- --------------------------------------------------------
 
@@ -172,7 +182,7 @@ CREATE TABLE `weekly_reports` (
   `coordinator_id` int(11) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `status` enum('approved','rejected','pending') DEFAULT NULL,
+  `status` enum('approved','reject','pending') DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -185,43 +195,51 @@ CREATE TABLE `weekly_reports` (
 --
 ALTER TABLE `coordinator`
   ADD PRIMARY KEY (`coordinator_id`),
-  ADD KEY `FK_coordinator_user` (`user_id`);
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `coordinator_evaluation`
 --
 ALTER TABLE `coordinator_evaluation`
   ADD PRIMARY KEY (`evaluation_id`),
-  ADD KEY `FK_coordinator_evaluation_student` (`student_id`),
-  ADD KEY `FK_coordinator_evaluation_supervisor` (`supervisor_id`);
+  ADD KEY `student_id` (`student_id`),
+  ADD KEY `supervisor_id` (`supervisor_id`);
+
+--
+-- Indexes for table `dean`
+--
+ALTER TABLE `dean`
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `department_1` (`department_1`),
+  ADD KEY `department_2` (`department_2`),
+  ADD KEY `department_3` (`department_3`);
 
 --
 -- Indexes for table `department`
 --
 ALTER TABLE `department`
   ADD PRIMARY KEY (`department_id`),
-  ADD UNIQUE KEY `department_name` (`department_name`),
-  ADD KEY `FK_department_dean` (`dean_id`);
+  ADD UNIQUE KEY `department_name` (`department_name`);
 
 --
 -- Indexes for table `ojt_hours`
 --
 ALTER TABLE `ojt_hours`
-  ADD KEY `FK_ojt_hours_coordinator` (`coordinator_id`);
+  ADD KEY `coordinator_id` (`coordinator_id`);
 
 --
 -- Indexes for table `requirements`
 --
 ALTER TABLE `requirements`
   ADD PRIMARY KEY (`requirement_id`),
-  ADD KEY `FK_requirements_coordinator` (`coordinator_id`);
+  ADD KEY `coordinator_id` (`coordinator_id`);
 
 --
 -- Indexes for table `submit_requirements`
 --
 ALTER TABLE `submit_requirements`
   ADD PRIMARY KEY (`submit_id`),
-  ADD KEY `FK_submit_requirements_student` (`student_id`);
+  ADD KEY `student_id` (`student_id`);
 
 --
 -- Indexes for table `users`
@@ -229,14 +247,14 @@ ALTER TABLE `submit_requirements`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `username` (`username`),
-  ADD KEY `FK_users_department` (`department_id`);
+  ADD KEY `department_id` (`department_id`);
 
 --
 -- Indexes for table `weekly_reports`
 --
 ALTER TABLE `weekly_reports`
   ADD PRIMARY KEY (`report_id`),
-  ADD KEY `FK_weekly_reports_coordinator` (`coordinator_id`);
+  ADD KEY `coordinator_id` (`coordinator_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -246,7 +264,7 @@ ALTER TABLE `weekly_reports`
 -- AUTO_INCREMENT for table `coordinator`
 --
 ALTER TABLE `coordinator`
-  MODIFY `coordinator_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `coordinator_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `coordinator_evaluation`
@@ -258,7 +276,7 @@ ALTER TABLE `coordinator_evaluation`
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `requirements`
@@ -292,50 +310,53 @@ ALTER TABLE `weekly_reports`
 -- Constraints for table `coordinator`
 --
 ALTER TABLE `coordinator`
-  ADD CONSTRAINT `FK_coordinator_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `coordinator_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `coordinator_evaluation`
 --
 ALTER TABLE `coordinator_evaluation`
-  ADD CONSTRAINT `FK_coordinator_evaluation_student` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `FK_coordinator_evaluation_supervisor` FOREIGN KEY (`supervisor_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `coordinator_evaluation_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `coordinator_evaluation_ibfk_2` FOREIGN KEY (`supervisor_id`) REFERENCES `users` (`user_id`);
 
 --
--- Constraints for table `department`
+-- Constraints for table `dean`
 --
-ALTER TABLE `department`
-  ADD CONSTRAINT `FK_department_dean` FOREIGN KEY (`dean_id`) REFERENCES `users` (`user_id`);
+ALTER TABLE `dean`
+  ADD CONSTRAINT `dean_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `dean_ibfk_2` FOREIGN KEY (`department_1`) REFERENCES `department` (`department_id`),
+  ADD CONSTRAINT `dean_ibfk_3` FOREIGN KEY (`department_2`) REFERENCES `department` (`department_id`),
+  ADD CONSTRAINT `dean_ibfk_4` FOREIGN KEY (`department_3`) REFERENCES `department` (`department_id`);
 
 --
 -- Constraints for table `ojt_hours`
 --
 ALTER TABLE `ojt_hours`
-  ADD CONSTRAINT `FK_ojt_hours_coordinator` FOREIGN KEY (`coordinator_id`) REFERENCES `coordinator` (`coordinator_id`);
+  ADD CONSTRAINT `ojt_hours_ibfk_1` FOREIGN KEY (`coordinator_id`) REFERENCES `coordinator` (`coordinator_id`);
 
 --
 -- Constraints for table `requirements`
 --
 ALTER TABLE `requirements`
-  ADD CONSTRAINT `FK_requirements_coordinator` FOREIGN KEY (`coordinator_id`) REFERENCES `coordinator` (`coordinator_id`);
+  ADD CONSTRAINT `requirements_ibfk_1` FOREIGN KEY (`coordinator_id`) REFERENCES `coordinator` (`coordinator_id`);
 
 --
 -- Constraints for table `submit_requirements`
 --
 ALTER TABLE `submit_requirements`
-  ADD CONSTRAINT `FK_submit_requirements_student` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`);
+  ADD CONSTRAINT `submit_requirements_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
-  ADD CONSTRAINT `FK_users_department` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`);
+  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`);
 
 --
 -- Constraints for table `weekly_reports`
 --
 ALTER TABLE `weekly_reports`
-  ADD CONSTRAINT `FK_weekly_reports_coordinator` FOREIGN KEY (`coordinator_id`) REFERENCES `coordinator` (`coordinator_id`);
+  ADD CONSTRAINT `weekly_reports_ibfk_1` FOREIGN KEY (`coordinator_id`) REFERENCES `coordinator` (`coordinator_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

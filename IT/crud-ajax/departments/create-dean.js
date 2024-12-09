@@ -1,45 +1,38 @@
-$(document).ready(function(){
-    // Handle form submission
-    $('#assignDeanForm').submit(function(e){
-        e.preventDefault();  // Prevent default form submission
+$(document).ready(function() {
+    $('#assignDeanForm').on('submit', function(e) {
+        e.preventDefault(); // Prevent form submission
 
-        var last_name = $('#add_last_name').val();
-        var first_name = $('#add_first_name').val();
-        var department1 = $('#add_department1').val();
-        var department2 = $('#add_department2').val();
-        var department3 = $('#add_department3').val();
-        var username = $('#add_username').val();
-        var password = $('#add_password').val();
-
-        // Data to send in AJAX request
+        // Gather form data
         var formData = {
-            last_name: last_name,
-            first_name: first_name,
-            department1: department1,
-            department2: department2,
-            department3: department3,
-            username: username,
-            password: password
+            'last_name': $('#add_last_name').val(),
+            'first_name': $('#add_first_name').val(),
+            'department1': $('#add_department1').val(),
+            'department2': $('#add_department2').val(),
+            'department3': $('#add_department3').val(),
+            'username': $('#add_username').val(),
+            'password': $('#add_password').val()
         };
 
-        // AJAX request to submit form data
         $.ajax({
-            url: 'controller/departments/create-dean.php', // PHP script to process the data
+            url: 'controller/departments/create-dean.php', // PHP script to handle the insertion
             type: 'POST',
             data: formData,
-            dataType: 'json', // Ensure the response is parsed as JSON
             success: function(response) {
-                // Handle the response
-                if (response.success) {
-                    alert(response.message); // Success message
-                    $('#assignDeanModal').modal('hide');
+                var data = JSON.parse(response);
+                if (data.success) {
+                    alert("Dean assigned successfully!");
+
+                    // Close the modal after success
+                    $('#assignDeanModal').modal('hide'); // Replace 'yourModalId' with the actual modal ID
+
+                    // Optionally, reset the form or reload data
                     $('#assignDeanForm')[0].reset();
                 } else {
-                    alert(response.message); // Error message
+                    alert("Error: " + data.message);
                 }
             },
             error: function(xhr, status, error) {
-                alert('An error occurred. Please try again.');
+                alert("There was an error in the request: " + error);
             }
         });
     });
