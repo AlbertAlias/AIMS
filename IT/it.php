@@ -101,22 +101,21 @@
     <script src="crud-ajax/dashboard/retrieve-coorCounts.js"></script>
     <script src="crud-ajax/dashboard/retrieve-studentCounts.js"></script> -->
 
-    <!-- <script src="crud-ajax/departments/retrieve-dean-info.js"></script> -->
-    <script src="crud-ajax/departments/retrieve-department.js"></script>
+    <script src="crud-ajax/departments/retrieve-depts.js"></script>
+    <script src="crud-ajax/departments/retrieve-deans.js"></script>
+    <!-- <script src="crud-ajax/departments/retrieve-depts-info.js"></script> -->
     <script src="crud-ajax/departments/create-depts.js"></script>
     <script src="crud-ajax/departments/create-dean.js"></script>
-    <!-- <script src="crud-ajax/departments/retrieve-depts.js"></script> -->
-    <script src="functions/departments/show-modalBtn.js"></script>
+    <!-- <script src="crud-ajax/departments/retrieve-deptsName.js"></script> -->
+    <!-- <script src="crud-ajax/departments/retrieve-dean-info.js"></script> -->
     <!-- <script src="crud-ajax/departments/update-depts.js"></script> -->
     <!-- <script src="crud-ajax/departments/update-dean-info.js"></script> -->
     <!-- <script src="crud-ajax/departments/delete-depts.js"></script> -->
 
-    <!-- <script src="crud-ajax/coordinators/retrieve-coor-deptsName.js"></script> -->
-    <script src="functions/coordinators/coor-form-enable.js"></script>
+    <script src="crud-ajax/coordinators/create-coor.js"></script>
+    <script src="crud-ajax/coordinators/retrieve-depts.js"></script>
     <!-- <script src="crud-ajax/coordinators/retrieve-coor.js"></script> -->
     <!-- <script src="crud-ajax/coordinators/retrieve-coor-info.js"></script> -->
-    <script src="crud-ajax/coordinators/retrieve-coor-department.js"></script>
-    <script src="crud-ajax/coordinators/create-coor.js"></script>
     <!-- <script src="functions/coordinators/contact-number.js"></script> -->
     <!-- <script src="crud-ajax/coordinators/update-coor.js"></script> -->
     <!-- <script src="crud-ajax/coordinators/delete-coor.js"></script> -->

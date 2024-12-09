@@ -1,46 +1,44 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const departmentForm = document.getElementById('addDepartmentForm');  // Corrected form ID
-    const deptSubmitBtn = document.getElementById('deptSubmitBtn');
-    const departmentNameInput = document.getElementById('department_name');
+$(document).ready(function () {
+    $("#addDepartmentForm").on("submit", function (e) {
+        e.preventDefault(); // Prevent default form submission
 
-    // Submit event for adding a department
-    departmentForm.addEventListener('submit', function (e) {
-        e.preventDefault(); // Prevent the default form submission
+        const departmentName = $("#department_name").val(); // Get input value
 
-        // Get department name
-        const departmentName = departmentNameInput.value.trim();
-
-        if (departmentName === '') {
-            alert('Please enter a department name.');
-            return;
-        }
-
-        // AJAX request to add the department
-        fetch('controller/departments/create-depts.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+        // Perform AJAX request
+        $.ajax({
+            url: "controller/departments/create-depts.php", // PHP script to handle insertion
+            type: "POST",
+            data: {
+                department_name: departmentName
             },
-            body: `department_name=${encodeURIComponent(departmentName)}`,
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                alert(data.message);
+            dataType: "json",
+            success: function (response) {
+                if (response.success) {
+                    // SweetAlert success notification
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Department added successfully!',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#b9f6ca',
+                        iconColor: '#2e7d32',
+                        color: '#155724',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
 
-                // Reset the form after success
-                departmentForm.reset();
-
-                // Close the modal after successful submission
-                const myModal = bootstrap.Modal.getInstance(document.getElementById('addDepartmentModal'));
-                myModal.hide();  // Close the modal
-            } else {
-                alert(data.message);
+                    $("#department_name").val(""); // Clear the input field
+                    setTimeout(populateDepartments, 1000);
+                } else {
+                    alert("Error: " + response.error);
+                }
+            },
+            error: function () {
+                alert("An error occurred. Please try again.");
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while adding the department.');
         });
     });
 });

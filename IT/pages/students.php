@@ -1,7 +1,7 @@
 <div class="container-fluid bg-light p-0 m-0" id="students" style="display: none;">
     <div class="row g-4">
         <!-- Left square container -->
-        <div class="col-md-4 col-lg-4">
+        <div class="col-md-4 col-lg-3">
             <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Upload Student Lists</h5>
 
@@ -46,82 +46,85 @@
         </div>
 
         <!-- Middle square container -->
-        <!-- <div class="col-md-4 col-lg-3">
+        <div class="col-md-4 col-lg-3">
             <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Interns</h5>
+                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Students</h5>
                 <div class="mb-3 position-relative">
-                    <input type="text" class="form-control" id="searchInterns" placeholder="Search Intern...">
+                    <input type="text" class="form-control" id="searchsStudents" placeholder="Search student...">
                     <i class="fa-solid fa-magnifying-glass position-absolute search-icon"></i>
                 </div>
-                <div id="internsInfo" class="text-gray-800"> -->
-                    <!-- Intern information will be displayed here -->
-                <!-- </div> -->
-                <!-- See Intern Lists button -->
+                <div id="studentsInfo" class="text-gray-800">
+                    <!-- Student information will be displayed here -->
+                </div>
+                <!-- See Student Lists button -->
                 <!-- <a type="button" id="uploadButton" class="btn btn-success mt-3 text-light" href="#" onclick="showSection(event, 'internlist');">
                     <i class="fa-solid fa-eye"></i> Intern Lists
-                </a>
+                </a> -->
             </div>
-        </div> -->
+        </div>
 
         <!-- Right rectangle container -->
-        <div class="col-md-4 col-lg-8">
+        <div class="col-md-4 col-lg-6">
             <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Account Information</h5>
-                <form id="internsForm">
+                <form id="studentsForm">
                     <div class="row mb-3">
                         <!-- First Name -->
-                        <div class="col-md-3">
-                            <label for="intern_first_name" class="form-label required-asterisk">First Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="intern_first_name" name="intern_first_name" required disabled>
+                        <div class="col-md-4">
+                            <label for="student_first_name" class="form-label required-asterisk">First Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="student_first_name" name="student_first_name" required>
                         </div>
                         <!-- Last Name -->
-                        <div class="col-md-3">
-                            <input type="hidden" id="internID" name="id">
-                            <label for="intern_last_name" class="form-label required-asterisk">Last Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="intern_last_name" name="intern_last_name" required disabled>
+                        <div class="col-md-4">
+                            <input type="hidden" id="studentID" name="id">
+                            <label for="student_last_name" class="form-label required-asterisk">Last Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="student_last_name" name="student_last_name" required>
                         </div>
                         <!-- Gender -->
-                        <div class="col-md-3">
-                            <label for="intern_gender" class="form-label required-asterisk">Gender <span class="text-danger">*</span></label>
-                            <select class="form-select" id="intern_gender" name="intern_gender" required disabled>
-                                <option selected disabled>Choose Gender</option>
+                        <div class="col-md-4">
+                            <label for="student_gender" class="form-label required-asterisk">Gender <span class="text-danger">*</span></label>
+                            <select class="form-select" id="student_gender" name="student_gender" required>
+                                <option selected>Choose Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
                         </div>
-                        <!-- Student ID -->
-                        <div class="col-md-3">
-                            <label for="studentID" class="form-label">Student ID <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="studentID" name="studentID" required disabled>
-                        </div>
                     </div>
                     <div class="row mb-3">
+                        <!-- Student ID -->
+                        <div class="col-md-4">
+                            <label for="studentID" class="form-label">Student ID <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="studentID" name="studentID" required>
+                        </div>
                         <!-- Department -->
-                        <div class="col-md-3">
-                            <label for="intern_department" class="form-label required-asterisk">Department <span class="text-danger">*</span></label>
-                            <select class="form-select" id="intern_department" name="intern_department" required disabled>
+                        <div class="col-md-8">
+                            <label for="student_department" class="form-label required-asterisk">Department <span class="text-danger">*</span></label>
+                            <select class="form-select" id="student_department" name="student_department" required>
                                 <option selected>Choose Department</option>
                                 <!-- Options will be dynamically populated here -->
                             </select>
                         </div>
+                    </div>
+                    <div class="row mb-3">
                         <!-- Student Email -->
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <label for="student_email" class="form-label required-asterisk">Student email<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="student_email" name="student_email" required disabled>
+                            <input type="text" class="form-control" id="student_email" name="student_email" required>
                         </div>
-                        <div class="col-md-3">
-                            <label for="intern_username" class="form-label required-asterisk">Username <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="intern_username" name="intern_username" required disabled>
+                        <div class="col-md-4">
+                            <label for="student_username" class="form-label required-asterisk">Username <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="student_username" name="student_username" required>
                         </div>
-                        <div class="col-md-3">
-                            <label for="intern_password" class="form-label required-asterisk">Password <span class="text-danger">*</span></label>
-                            <input type="password" class="form-control" id="intern_password" name="intern_password" required disabled>
+                        <div class="col-md-4">
+                            <label for="student_password" class="form-label required-asterisk">Password <span class="text-danger">*</span></label>
+                            <input type="password" class="form-control" id="student_password" name="student_password" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 text-end">
-                            <button type="button" id="internCancelBtn" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
-                            <button type="button" id="internUpdateBtn" class="btn btn-primary" disabled><i class="fa-solid fa-pen-to-square"></i> Update</button>
+                            <button type="button" id="studentCancelBtn" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
+                            <button type="button" id="studentUpdateBtn" class="btn btn-primary" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> Update</button>
+                            <button type="submit" id="studentSubmittn" class="btn btn-success"><i class="fa-solid fa-check-to-slot"></i> Submit</button>
                         </div>
                     </div>
                 </form>
@@ -130,80 +133,6 @@
     </div>
 
 
-    <div class="card shadow-sm mt-4">
-        <!-- Header -->
-        <div class="card-header bg-light text-dark">
-            <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <!-- Left section (Page Length and Search) -->
-                <div class="d-flex align-items-center">
-                    <!-- Page Length Selector -->
-                    <div class="d-flex align-items-center me-3 mb-2 mb-sm-0">
-                        <label for="pageLengthSelect" class="form-label mb-0 me-2">Show</label>
-                        <select id="pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Select number of entries per page">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
-                    </div>
-                    <!-- Search Input -->
-                    <div class="ms-3 flex-shrink-1">
-                        <div class="input-group">
-                            <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
-                            <button class="btn btn-outline-secondary btn-sm" type="button">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right section (Action buttons) -->
-                <div class="d-flex">
-                    <button class="btn btn-primary btn-sm me-2" aria-label="Edit selected users">Edit</button>
-                    <button class="btn btn-danger btn-sm" aria-label="Delete selected users">Delete</button>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Body -->
-        <div class="card-body bg-white">
-            <!-- Table Placeholder -->
-            <div class="table-responsive">
-                <table id="usersTable" class="table table-hover text-center" style="width: 100%;">
-                    <thead class="table-light">
-                        <tr>
-                            <th>
-                                <!-- Select All Checkbox -->
-                                <input type="checkbox" id="selectAllCheckbox" aria-label="Select all users">
-                            </th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Gender</th>
-                            <th>Student ID</th>
-                            <th>Department</th>
-                            <th>Personal Email</th>
-                            <th>Username</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tdata">
-                        <!-- Data will be loaded here via AJAX -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        
-        <!-- Footer -->
-        <div class="card-footer bg-light text-dark">
-            <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <span id="tableInfo"></span>
-                <!-- Pagination -->
-                <nav aria-label="Page navigation">
-                    <ul id="pagination" class="pagination mb-0">
-                        <!-- Pagination buttons will be generated here via AJAX -->
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </div>
+    
 </div>
 

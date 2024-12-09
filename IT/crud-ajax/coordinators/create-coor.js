@@ -1,95 +1,53 @@
-document.getElementById('coorSubmitBtn').addEventListener('click', function (event) {
-    event.preventDefault();
+$(document).ready(function() {
+    // Handle the form submission via AJAX
+    $('#coordinatorForm').on('submit', function(e) {
+        e.preventDefault(); // Prevent the form from submitting the traditional way
+        
+        // Prepare the data from the form
+        var formData = {
+            last_name: $('#coor_last_name').val(),
+            first_name: $('#coor_first_name').val(),
+            middle_name: $('#coor_middle_name').val(),
+            personal_email: $('#coor_personal_email').val(),
+            department_id: $('#coor_department').val(),
+            username: $('#coor_username').val(),
+            password: $('#coor_password').val(),
+        };
 
-    const coorSubmitBtn = document.getElementById('coorSubmitBtn');
-
-    // Prevent double submission
-    if (coorSubmitBtn.disabled) return;
-
-    const last_name = document.getElementById('coor_last_name').value;
-    const first_name = document.getElementById('coor_first_name').value;
-    const middle_name = document.getElementById('coor_middle_name').value;
-    const personal_email = document.getElementById('coor_personal_email').value;
-    const department_id = document.getElementById('coor_department').value;
-    const username = document.getElementById('coor_username').value;
-    const password = document.getElementById('coor_password').value;
-
-    // Validation for required fields
-    if (!last_name || !first_name || !personal_email || !department_id || !username || !password) {
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: 'error',
-            title: 'Please fill in all required fields.',
-            showConfirmButton: false,
-            timer: 3000
-        });
-        return;
-    }
-
-    const data = {
-        last_name,
-        first_name,
-        middle_name,
-        personal_email,
-        department_id,
-        username,
-        password
-    };
-
-    fetch('controller/coordinators/create-coor.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.text()) // Capture raw response as text
-    .then(text => {
-        console.log('Raw response:', text); // Log the raw response
-        try {
-            const data = JSON.parse(text); // Parse it after inspecting
-            if (data.success) {
-                Swal.fire({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Coordinator added successfully!',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-                resetAndLockForms();
-            } else {
-                Swal.fire({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'error',
-                    title: data.message,
-                    showConfirmButton: false,
-                    timer: 3000
-                });
+        // Perform the AJAX request
+        $.ajax({
+            url: 'controller/coordinators/create-coor.php', // PHP script to handle the data
+            type: 'POST',
+            dataType: 'json', // Expecting JSON response
+            contentType: 'application/json', // Send data as JSON
+            data: JSON.stringify(formData), // Convert the form data to a JSON string
+            success: function(response) {
+                if (response.success) {
+                    // Success response handling
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-right',
+                        icon: 'success',
+                        title: 'Coordinator added successfully!',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#b9f6ca',
+                        iconColor: '#2e7d32',
+                        color: '#155724',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
+                    $('#coordinatorForm')[0].reset(); // Reset the form after success
+                } else {
+                    // Error response handling
+                    alert(response.message); // Show error message
+                }
+            },
+            error: function() {
+                // Handle AJAX error
+                alert('An error occurred while submitting the form.');
             }
-        } catch (error) {
-            console.error('Error parsing response:', error);
-            Swal.fire({
-                toast: true,
-                position: 'top-end',
-                icon: 'error',
-                title: 'There was an error with the AJAX response.',
-                showConfirmButton: false,
-                timer: 3000
-            });
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
-            icon: 'error',
-            title: 'There was an error with the AJAX request.',
-            showConfirmButton: false,
-            timer: 3000
         });
     });
 });

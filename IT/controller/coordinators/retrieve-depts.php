@@ -1,5 +1,5 @@
 <?php
-require_once "../../../dbconn.php"; // Include the database connection file
+require_once "../../../dbconn.php";
 
 // Fetch all departments
 $query = "SELECT department_id, department_name FROM department ORDER BY department_name ASC";

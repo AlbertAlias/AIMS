@@ -1,5 +1,5 @@
-$(document).ready(function() {
-    $('#assignDeanForm').on('submit', function(e) {
+$(document).ready(function () {
+    $('#assignDeanForm').on('submit', function (e) {
         e.preventDefault(); // Prevent form submission
 
         // Gather form data
@@ -17,22 +17,34 @@ $(document).ready(function() {
             url: 'controller/departments/create-dean.php', // PHP script to handle the insertion
             type: 'POST',
             data: formData,
-            success: function(response) {
+            success: function (response) {
                 var data = JSON.parse(response);
                 if (data.success) {
-                    alert("Dean assigned successfully!");
+                    // SweetAlert success notification
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Dean is assigned successfully!',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#b9f6ca',
+                        iconColor: '#2e7d32',
+                        color: '#155724',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
 
-                    // Close the modal after success
-                    $('#assignDeanModal').modal('hide'); // Replace 'yourModalId' with the actual modal ID
-
-                    // Optionally, reset the form or reload data
+                    // Reset form fields
                     $('#assignDeanForm')[0].reset();
+                    loadDean();
                 } else {
-                    alert("Error: " + data.message);
+                    alert("Error: " + data.message); // Handle failure
                 }
             },
-            error: function(xhr, status, error) {
-                alert("There was an error in the request: " + error);
+            error: function (xhr, status, error) {
+                alert("There was an error in the request: " + error); // Handle request error
             }
         });
     });

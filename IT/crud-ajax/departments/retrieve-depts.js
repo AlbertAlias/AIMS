@@ -1,42 +1,38 @@
-$(document).ready(function() {
-    // On opening the Edit Department modal, fetch departments
-    $('#editDeptModal').on('show.bs.modal', function () {
+$(document).ready(function () {
+    function populateDepartments() {
         $.ajax({
-            url: 'controller/departments/retrieve-depts.php',  // The PHP file that retrieves departments
-            type: 'GET',
-            dataType: 'json',  // Expecting JSON data
-            success: function(response) {
-                if (response.status == 'success') {
-                    const departmentSelect = $('#department_select');
-                    departmentSelect.empty(); // Clear existing options
-                    departmentSelect.append('<option value="" disabled selected>Select a department</option>');
+            url: "controller/departments/retrieve-depts.php", // PHP script to fetch departments
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+                if (response.success) {
+                    const departments = response.data;
                     
-                    // Append each department as an option in the dropdown
-                    response.departments.forEach(function(department) {
-                        departmentSelect.append('<option value="' + department.id + '">' + department.department_name + '</option>');
+                    // Clear and populate options for each department select
+                    const selectElements = ["#add_department1", "#add_department2", "#add_department3"];
+                    selectElements.forEach((selector) => {
+                        const select = $(selector);
+                        select.empty(); // Clear existing options
+                        select.append('<option selected>Choose Department</option>'); // Default option
+                        departments.forEach((dept) => {
+                            select.append(`<option value="${dept.id}">${dept.name}</option>`);
+                        });
                     });
                 } else {
-                    alert('Failed to load departments.');
+                    console.error("Error fetching departments:", response.error);
                 }
             },
-            error: function() {
-                alert('An error occurred while fetching departments.');
+            error: function () {
+                console.error("An error occurred while fetching departments.");
             }
         });
-    });
+    }
 
-    // When a department is selected, enable editing and store department ID
-    $('#department_select').on('change', function() {
-        const selectedDeptId = $(this).val();
-        const selectedDeptName = $("#department_select option:selected").text();
+    // Call the function to populate departments when the page loads
+    populateDepartments();
 
-        // Populate the input with the department name
-        $('#edit_department_name').val(selectedDeptName);
-
-        // Enable the update button
-        $('#editDeptUpdateBtn').prop('disabled', false);
-
-        // Store the department ID in the button as data
-        $('#editDeptUpdateBtn').data('dept-id', selectedDeptId);
+    // Optional: Re-populate departments after adding a new department
+    $("#addDepartmentForm").on("submit", function () {
+        setTimeout(populateDepartments, 1000); // Delay to ensure the new department is added
     });
 });
