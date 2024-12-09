@@ -79,6 +79,7 @@
                     <?php include "pages/coor-profile.php"; ?>
                     <?php include "pages/studentreq.php"; ?>
                     <?php include "pages/requirement.php"; ?>
+                    <?php include "pages/weeklyreport.php"; ?>
 
 
                 </div>
@@ -110,6 +111,8 @@
     <script src="crud_ajax/student.js"></script>
     <script src="crud_ajax/post_requirement.js"></script>
 
+    <script src="crud_ajax/review_sub.js"></script>
+    <script src="crud_ajax/viewrequirements.js"></script>
 
 
     <!--END::CRUD AJAX FUNCTIONS-->

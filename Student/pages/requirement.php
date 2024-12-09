@@ -17,15 +17,13 @@
     <!-- Right rectangle container (larger width) -->
     <div class="col-12 col-md-6">
       <div class="bg-white rounded shadow-sm p-4 d-flex flex-column" style="min-height: 220px;">
-        <h5 class="text-dark fw-bold border-bottom pb-2 mb-3">Coordinator's Posted Requirements</h5>
-        <div class="mb-3 position-relative">
-          <!-- Add any additional content here -->
+          <h5 class="text-dark fw-bold border-bottom pb-2 mb-3">Coordinator's Posted Requirements</h5>
+          <div id="requirementsContainer" class="text-muted">
+            <!-- Requirements will be dynamically populated here -->
         </div>
-        <div id="requirementsContainer" class="text-muted">
-          <!-- Requirements will be dynamically populated here -->
-        </div>
-      </div>
     </div>
+</div>
+
   </div>
 </div>
 

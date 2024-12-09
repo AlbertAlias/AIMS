@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-  
   const postRequirementsForm = document.getElementById("postRequirementsForm");
-  
+
   if (postRequirementsForm) {
     postRequirementsForm.addEventListener("submit", async function (e) {
       e.preventDefault();
@@ -12,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!requirementTitle || !requirementDescription) {
         Swal.fire({
           icon: "error",
-          title: "Oops!",
-          text: "Both fields are required.",
+          title: "Incomplete",
+          text: "Please fill out all fields.",
         });
         return;
       }
@@ -32,25 +31,26 @@ document.addEventListener("DOMContentLoaded", function () {
         if (result.success) {
           Swal.fire({
             icon: "success",
-            title: "Success",
+            title: "Posted",
             text: result.message,
           });
+
           postRequirementsForm.reset();
-          const postRequirementsModal = new bootstrap.Modal(document.getElementById("postRequirementsModal"));
-          postRequirementsModal.hide();
+          const postModal = new bootstrap.Modal(document.getElementById("postRequirementsModal"));
+          postModal.hide();
         } else {
           Swal.fire({
             icon: "error",
-            title: "Error",
+            title: "Failed",
             text: result.error,
           });
         }
       } catch (error) {
-        console.error("Error submitting the form: ", error);
+        console.error("Unexpected JS error: ", error);
         Swal.fire({
           icon: "error",
           title: "Unexpected Error",
-          text: "An unexpected error occurred. Please try again.",
+          text: "Please try again later.",
         });
       }
     });
