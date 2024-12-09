@@ -9,18 +9,18 @@
             <i class="fa-solid fa-qrcode"></i>
             <span>Dashboard</span>
         </a>
-        <a href="#" class="sidebar-link" onclick="showSection(event, 'student')">
-            <i class="fa-solid fa-scroll"></i>
-            <span>Students</span>
-        </a>
-        <a href="#" class="sidebar-link" onclick="showSection(event, 'requirement')">
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'studentlist')">
             <i class="fa-solid fa-user-group"></i>
-            <span>Requirements</span>
+            <span>Interns list</span>
         </a>
-        <a href="#" class="sidebar-link" onclick="showSection(event, 'weeklyreport')">
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'coorlist')">
+            <i class="fa-solid fa-user-group"></i>
+            <span>Coordinator list</span>
+        </a>
+        <!-- <a href="#" class="sidebar-link" onclick="showSection(event, 'interns')">
             <i class="fa-solid fa-graduation-cap"></i>
-            <span>view</span>
-        </a>
+            <span>Interns</span>
+        </a> -->
     </nav>
 </div>
 
@@ -40,7 +40,7 @@
         }
 
         // Hide all sections
-        document.querySelectorAll('#dashboard, #profile, #student, #requirement, #weeklyreport').forEach(section => {
+        document.querySelectorAll('#dashboard, #profile, #studentlist, #coorlist').forEach(section => {
             section.style.display = 'none';
         });
 

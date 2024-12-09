@@ -1,70 +1,83 @@
 <?php
 header('Content-Type: application/json');
-
 include '../../dbconn.php';
 
 try {
-    // Assume coordinator is logged in and their user ID is stored in a session
     session_start();
-    $coordinatorUserId = $_SESSION['user_id']; // Replace with actual session variable
+    if (!isset($_SESSION['user_id'])) {
+        throw new Exception('Unauthorized access. Please log in.');
+    }
 
-    // Fetch the department_id for the logged-in coordinator
-    $deptQuery = "SELECT department_id FROM users WHERE id = ?";
+    $coordinatorUserId = $_SESSION['user_id'];
+
+    // Fetch the department ID for the logged-in coordinator
+    $deptQuery = "SELECT department_id FROM users WHERE user_id = ?";
     $deptStmt = $conn->prepare($deptQuery);
+    if (!$deptStmt) {
+        throw new Exception('Failed to prepare department query.');
+    }
     $deptStmt->bind_param('i', $coordinatorUserId);
     $deptStmt->execute();
     $deptResult = $deptStmt->get_result()->fetch_assoc();
-
+    
     if (!$deptResult) {
-        throw new Exception('Invalid coordinator account.');
+        throw new Exception('Coordinator account does not have a linked department.');
     }
     $departmentId = $deptResult['department_id'];
 
-    // Get parameters
-    $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-    $length = isset($_GET['length']) ? intval($_GET['length']) : 10;
-    $search = isset($_GET['search']) ? $_GET['search'] : '';
+    // Get pagination and search parameters
+    $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
+    $length = isset($_GET['length']) ? max(1, intval($_GET['length'])) : 10;
+    $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
     // Calculate pagination
     $start = ($page - 1) * $length;
 
-    // Query to get filtered and paginated data for students in the coordinator's department
-    $sql = "SELECT id, employee_no, last_name, first_name, middle_name, gender, personal_email, username, user_type, department_id 
-            FROM users 
-            WHERE user_type = 'student' 
-              AND department_id = ? 
-              AND CONCAT_WS(' ', first_name, last_name, employee_no, personal_email, username) LIKE ? 
-            LIMIT ?, ?";
-    $stmt = $conn->prepare($sql);
+    // Query to get filtered and paginated students
+    $studentQuery = "
+        SELECT user_id, first_name, last_name, department_id 
+        FROM users 
+        WHERE user_type = 'Student' 
+          AND department_id = ? 
+          AND CONCAT_WS(' ', first_name, last_name, username, email) LIKE ? 
+        LIMIT ?, ?";
+    $stmt = $conn->prepare($studentQuery);
+    if (!$stmt) {
+        throw new Exception('Failed to prepare student query.');
+    }
     $searchTerm = "%$search%";
     $stmt->bind_param('isii', $departmentId, $searchTerm, $start, $length);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Generate table rows with checkboxes
+    // Generate HTML table rows with checkboxes
     $html = '';
     while ($row = $result->fetch_assoc()) {
         $html .= '<tr>';
-        $html .= '<td><input type="checkbox" class="userCheckbox" data-id="' . $row['id'] . '"></td>';
+        $html .= '<td><input type="checkbox" class="userCheckbox" data-id="' . htmlspecialchars($row['user_id']) . '"></td>';
         $html .= '<td>' . htmlspecialchars($row['first_name']) . '</td>';
         $html .= '<td>' . htmlspecialchars($row['last_name']) . '</td>';
         $html .= '<td>' . htmlspecialchars($row['department_id']) . '</td>';
         $html .= '</tr>';
     }
 
-    // Query to get total count for pagination
-    $totalSql = "SELECT COUNT(*) AS total 
-                 FROM users 
-                 WHERE user_type = 'student' 
-                   AND department_id = ? 
-                   AND CONCAT_WS(' ', first_name, last_name, employee_no, personal_email, username) LIKE ?";
-    $totalStmt = $conn->prepare($totalSql);
-    $totalStmt->bind_param('is', $departmentId, $searchTerm);
-    $totalStmt->execute();
-    $totalResult = $totalStmt->get_result()->fetch_assoc();
-    $totalRecords = $totalResult['total'];
+    // Query to get total student count for pagination
+    $countQuery = "
+        SELECT COUNT(*) AS total 
+        FROM users 
+        WHERE user_type = 'Student' 
+          AND department_id = ? 
+          AND CONCAT_WS(' ', first_name, last_name, username, email) LIKE ?";
+    $countStmt = $conn->prepare($countQuery);
+    if (!$countStmt) {
+        throw new Exception('Failed to prepare count query.');
+    }
+    $countStmt->bind_param('is', $departmentId, $searchTerm);
+    $countStmt->execute();
+    $countResult = $countStmt->get_result()->fetch_assoc();
+    $totalRecords = $countResult['total'];
 
-    // Pagination logic
+    // Generate pagination
     $totalPages = ceil($totalRecords / $length);
     $pagination = '';
     for ($i = 1; $i <= $totalPages; $i++) {
@@ -73,7 +86,7 @@ try {
         </li>';
     }
 
-    // Send JSON response
+    // Return JSON response
     echo json_encode([
         'html' => $html,
         'pagination' => $pagination,

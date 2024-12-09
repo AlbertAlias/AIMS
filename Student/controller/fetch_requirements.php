@@ -6,21 +6,35 @@ error_reporting(E_ALL);
 header('Content-Type: application/json');
 include '../../dbconn.php';
 
-// Handle GET request to fetch requirements
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $query = "SELECT id, title, description, created_at FROM student_requirements ORDER BY created_at DESC";
-    $result = $conn->query($query);
+session_start();
 
-    if ($result) {
-        $requirements = [];
-        while ($row = $result->fetch_assoc()) {
-            $requirements[] = $row;
-        }
-        echo json_encode(["success" => true, "data" => $requirements]);
-    } else {
-        echo json_encode(["success" => false, "error" => "Error fetching requirements"]);
+// Check if student is logged in
+if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'Student') {
+    echo json_encode(["success" => false, "error" => "Unauthorized access"]);
+    exit();
+}
+
+// Get the student's department_id
+$student_id = $_SESSION['user_id'];
+
+try {
+    $stmt = $conn->prepare("
+        SELECT r.title, r.description, r.created_at 
+        FROM requirements r
+        JOIN users u ON r.coordinator_id = u.user_id
+        WHERE u.department_id = (SELECT department_id FROM users WHERE user_id = ?)
+    ");
+    $stmt->bind_param("i", $student_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $requirements = [];
+    while ($row = $result->fetch_assoc()) {
+        $requirements[] = $row;
     }
-} else {
-    echo json_encode(["success" => false, "error" => "Invalid request method"]);
+
+    echo json_encode(["success" => true, "requirements" => $requirements]);
+} catch (Exception $e) {
+    echo json_encode(["success" => false, "error" => $e->getMessage()]);
 }
 ?>

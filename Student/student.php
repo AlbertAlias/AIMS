@@ -105,7 +105,6 @@
 
     <script src="crud_ajax/fetch_requirements.js"></script>
     <script src="crud_ajax/submit_requirements.js"></script>
-    <script src="crud_ajax/view_file.js"></script>
 
 
 

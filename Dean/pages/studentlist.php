@@ -1,4 +1,4 @@
-<div class="container-fluid p-0 m-0" id="student" style="display: none;">
+<div class="container-fluid p-0 m-0" id="studentlist" style="display: none;">
     <div class="card shadow-sm mt-4">
         <!-- Header -->
         <div class="card-header bg-light text-dark">
@@ -25,40 +25,6 @@
                         </div>
                     </div>
                 </div>
-
-                 <!-- Post Requirements Modal -->
-                 <div class="modal" id="postRequirementsModal" tabindex="-1">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <form id="postRequirementsForm">
-                            <div class="modal-header">
-                            <h5 class="modal-title">Post a Requirement</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="requirementTitle" class="form-label">Requirement Title</label>
-                                <input type="text" class="form-control" id="requirementTitle" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="requirementDescription" class="form-label">Requirement Description</label>
-                                <textarea class="form-control" id="requirementDescription" rows="3" required></textarea>
-                            </div>
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Post Requirement</button>
-                            </div>
-                        </form>
-                        </div>
-                    </div>
-                    </div>
-
-                    <!-- Right section (Action buttons) -->
-                    <div class="d-flex">
-                        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#postRequirementsModal">Post Requirements</button>
-                    </div>
-
             </div>
         </div>
         
@@ -69,16 +35,21 @@
                 <table id="usersTable" class="table table-hover text-center" style="width: 100%;">
                     <thead class="table-light">
                         <tr>
-                            <th>
-                                <!-- Select All Checkbox -->
+                            <!-- <th>
+                                Select All Checkbox
                                 <input type="checkbox" id="selectAllCheckbox">
-                            </th>
+                            </th> -->
                             <th>First Name</th>
                             <th>Last Name</th>
+                            <th>Gender</th>
                             <th>Department</th>
                             <th>Student ID</th>
-                            <th>Gender</th>
+                            <th>Company Name</th>
+                            <th>Emergency Number</th>
                             <th>Personal Email</th>
+                            <th>Address</th>
+                            <th>A\Y</th>
+
                         </tr>
                     </thead>
                     <tbody id="tdata">
