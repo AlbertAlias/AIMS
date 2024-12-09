@@ -75,6 +75,7 @@
                 <div id="page-content" style="width: 100%;">
                     <?php include "pages/dashboard.php"; ?>
                     <?php include "pages/studentlist.php"; ?>
+                    <?php include "pages/coorlist.php"; ?>
                    
 
 
@@ -104,6 +105,7 @@
     <script src="functions/profile/profile-details.js"></script>
 
     <script src="crud_ajax/studentlist.js"></script>
+    <script src="crud_ajax/coorlist.js"></script>
     
 
 
