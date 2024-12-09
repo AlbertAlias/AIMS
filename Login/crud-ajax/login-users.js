@@ -85,7 +85,7 @@ $(document).ready(function () {
         if (user_type === 'IT') { 
             baseUrl = '../IT/it.php'; // Adjusted for folder structure
         } else if (user_type === 'Dean') {
-            baseUrl = '../../Dean/dean.php';
+            baseUrl = '../Dean/dean.php';
         } else if (user_type === 'Coordinator') {
             baseUrl = '../Coordinator/coordinator.php';
         } else if (user_type === 'Supervisor') {
