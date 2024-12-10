@@ -2,8 +2,9 @@ $(document).ready(function () {
     $('#assignDeanForm').on('submit', function (e) {
         e.preventDefault(); // Prevent form submission
 
-        // Gather form data
+        // Gather form data, including the hidden deanID
         var formData = {
+            'deanID': $('#deanID').val(),  // Add deanID from the hidden field
             'last_name': $('#add_last_name').val(),
             'first_name': $('#add_first_name').val(),
             'department1': $('#add_department1').val(),
@@ -13,37 +14,36 @@ $(document).ready(function () {
             'password': $('#add_password').val()
         };
 
+        // Debug log to check department values
+        console.log('Department 1:', formData.department1);
+        console.log('Department 2:', formData.department2);
+        console.log('Department 3:', formData.department3);
+
+        // Validate that all department values are not the default
+        if (formData.department1 === "Choose Department 1" || formData.department2 === "Choose Department 2" || formData.department3 === "Choose Department 3") {
+            alert("Please select valid departments.");
+            return; // Prevent submission if departments are not selected
+        }
+
         $.ajax({
-            url: 'controller/departments/create-dean.php', // PHP script to handle the insertion
+            url: 'controller/departments/create-dean.php',
             type: 'POST',
             data: formData,
             success: function (response) {
-                var data = JSON.parse(response);
-                if (data.success) {
-                    // SweetAlert success notification
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Dean is assigned successfully!',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        background: '#b9f6ca',
-                        iconColor: '#2e7d32',
-                        color: '#155724',
-                        customClass: {
-                            popup: 'mt-5'
-                        }
-                    });
-
-                    // Reset form fields
-                    $('#assignDeanForm')[0].reset();
-                    loadDean();
-                } else {
-                    alert("Error: " + data.message); // Handle failure
+                console.log(response); // Log the response to see if it's valid JSON
+                try {
+                    var data = JSON.parse(response); // Attempt to parse the response as JSON
+                    if (data.success) {
+                        // Success handling
+                    } else {
+                        alert("Error: " + data.message); // Handle failure
+                    }
+                } catch (e) {
+                    alert("Error: Invalid response format.");
                 }
             },
             error: function (xhr, status, error) {
+                console.error("Error:", xhr.responseText); // Log the error response
                 alert("There was an error in the request: " + error); // Handle request error
             }
         });

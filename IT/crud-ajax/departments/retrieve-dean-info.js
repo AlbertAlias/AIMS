@@ -1,59 +1,66 @@
-$(document).ready(function () {
-    // When a button is clicked (each dean button)
-    $('.coor-btn').click(function () {
-        var deanName = $(this).data('id');  // Get the dean's full name from the button
-        
-        if (deanName) {
-            var deanNameParts = deanName.split(' ');  // Split into first and last name
-            
-            // AJAX request to fetch dean data
-            $.ajax({
-                url: 'controller/departments/retrieve-dean-info.php',  // PHP file to handle the data fetching
-                type: 'GET',
-                data: { first_name: deanNameParts[0], last_name: deanNameParts[1] },
-                success: function(response) {
-                    var data = JSON.parse(response);
-                    
-                    if (data.error) {
-                        console.log(data.error);
-                        return;
-                    }
+$(document).on('click', '.coor-btn', function () {
+    const deanId = $(this).data('id');
+    console.log("Dean ID sent to server:", deanId); // Debug
 
-                    // Populate the form fields with the fetched data
-                    $('#add_first_name').val(data.first_name);
-                    $('#add_last_name').val(data.last_name);
-                    $('#add_username').val(data.username);
-                    
-                    // Handle department dropdowns
-                    var departments = data.departments;
-                    // Clear existing options
-                    $('#add_department1, #add_department2, #add_department3').empty().append('<option selected>Choose Department</option>');
-                    
-                    // Populate the first department dropdown
-                    if (departments.length > 0) {
-                        $('#add_department1').val(departments[0]);
-                    }
+    $.ajax({
+        url: 'controller/departments/retrieve-dean-info.php',
+        type: 'POST',
+        data: { dean_id: deanId },
+        dataType: 'json',
+        success: function (response) {
+            console.log("AJAX Response:", response); // Debug
 
-                    // Populate the second department dropdown if it exists
-                    if (departments.length > 1) {
-                        $('#add_department2').prop('disabled', false).val(departments[1]);
-                    } else {
-                        $('#add_department2').prop('disabled', true);
-                    }
+            if (response.success) {
+                // Populate user details
+                $('#add_last_name').val(response.dean.last_name);
+                $('#add_first_name').val(response.dean.first_name);
+                $('#add_username').val(response.dean.username);
 
-                    // Populate the third department dropdown if it exists
-                    if (departments.length > 2) {
-                        $('#add_department3').prop('disabled', false).val(departments[2]);
-                    } else {
-                        $('#add_department3').prop('disabled', true);
+                // Clear and populate department dropdowns
+                $('#add_department1').empty().append('<option selected>Choose Department 1</option>').prop('disabled', true);
+                $('#add_department2').empty().append('<option selected>Choose Department 2</option>').prop('disabled', true);
+                $('#add_department3').empty().append('<option selected>Choose Department 3</option>').prop('disabled', true);
+
+                let deptIndex = 0;
+                response.departments.forEach((dept, index) => {
+                    // Populate dropdowns with department names
+                    if (index === 0) {
+                        $('#add_department1').append(`<option value="${dept.department_id}" selected>${dept.department_name}</option>`);
+                    } else if (index === 1) {
+                        $('#add_department2').append(`<option value="${dept.department_id}" selected>${dept.department_name}</option>`);
+                    } else if (index === 2) {
+                        $('#add_department3').append(`<option value="${dept.department_id}" selected>${dept.department_name}</option>`);
                     }
-                },
-                error: function(xhr, status, error) {
-                    console.log('Error: ' + error);
-                }
-            });
-        } else {
-            console.log("No dean name provided.");
+                });
+
+                // Hide dean submit and show update/cancel buttons
+                $('#deanSubmitBtn').hide();
+                $('#deanUpdateBtn').show();
+                $('#deanCancelBtn').show();
+
+                // populateDepartments();
+            } else {
+                alert(response.error || 'Unable to fetch dean details.');
+            }
+        },
+        error: function () {
+            alert('An error occurred while fetching dean details.');
         }
     });
+});
+
+// Logic for dean cancel button
+$(document).on('click', '#deanCancelBtn', function () {
+    // Hide update/cancel buttons and show submit button for dean
+    $('#deanUpdateBtn').hide();
+    $('#deanCancelBtn').hide();
+    $('#deanSubmitBtn').show();
+
+    // Optionally, reset dean inputs if you want to clear changes
+    $('#add_last_name').val('');
+    $('#add_first_name').val('');
+    $('#add_department1').empty().append('<option selected>Choose Department 1</option>').prop('disabled', false);
+    $('#add_department2').empty().append('<option selected>Choose Department 2</option>').prop('disabled', false);
+    $('#add_department3').empty().append('<option selected>Choose Department 3</option>').prop('disabled', false);
+    $('#add_username').val('');
 });

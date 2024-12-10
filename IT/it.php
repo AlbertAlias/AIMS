@@ -75,7 +75,7 @@
                     <?php include "pages/coordinators.php"; ?>
                     <?php include "pages/students.php"; ?>
                     <?php include "pages/admin-profile.php"; ?>
-                    <?php include "pages/internlist.php"; ?>
+                    <?php include "pages/supervisors.php"; ?>
                 </div>
             </div>
             <!-- End of Main Content -->
@@ -103,13 +103,10 @@
 
     <script src="crud-ajax/departments/retrieve-depts.js"></script>
     <script src="crud-ajax/departments/retrieve-deans.js"></script>
-    <!-- <script src="crud-ajax/departments/retrieve-depts-info.js"></script> -->
+    <script src="crud-ajax/departments/retrieve-dean-info.js"></script>
     <script src="crud-ajax/departments/create-depts.js"></script>
     <script src="crud-ajax/departments/create-dean.js"></script>
-    <!-- <script src="crud-ajax/departments/retrieve-deptsName.js"></script> -->
-    <!-- <script src="crud-ajax/departments/retrieve-dean-info.js"></script> -->
-    <!-- <script src="crud-ajax/departments/update-depts.js"></script> -->
-    <!-- <script src="crud-ajax/departments/update-dean-info.js"></script> -->
+    <script src="crud-ajax/departments/update-dean-info.js"></script>
     <!-- <script src="crud-ajax/departments/delete-depts.js"></script> -->
 
     <script src="crud-ajax/coordinators/create-coor.js"></script>
@@ -139,6 +136,8 @@
     <!-- <script src="functions/profile/profile-details.js"></script> -->
 
     <!-- <script src="crud-ajax/archive/archive.js"></script> -->
+
+    <script src="crud-ajax/supervisors/create-visors.js"></script>
 
     <!--END::CRUD AJAX FUNCTIONS-->
 

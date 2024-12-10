@@ -56,6 +56,7 @@ $(document).ready(function() {
                 </button>
             `;
             deanInfo.append(deanButton);
+            console.log("Generated button:", deanButton);
         });
     }
 

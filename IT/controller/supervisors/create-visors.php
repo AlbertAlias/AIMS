@@ -1,0 +1,44 @@
+<?php
+// Include database connection
+require_once '../../../dbconn.php';
+
+// Capture form data from AJAX request
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $last_name = $conn->real_escape_string(trim($_POST['visor_last_name']));
+    $first_name = $conn->real_escape_string(trim($_POST['visor_first_name']));
+    $middle_name = $conn->real_escape_string(trim($_POST['visor_middle_name']));
+    $gender = $conn->real_escape_string(trim($_POST['visor_gender']));
+    $email = $conn->real_escape_string(trim($_POST['visor_personal_email']));
+    $company = $conn->real_escape_string(trim($_POST['visor_company_name']));
+    $company_address = $conn->real_escape_string(trim($_POST['visor_company_address']));
+    $username = $conn->real_escape_string(trim($_POST['visor_username']));
+    $password = password_hash(trim($_POST['visor_password']), PASSWORD_BCRYPT); // Secure password hashing
+
+    // Validate required fields
+    if (empty($last_name) || empty($first_name) || empty($gender) || empty($email) || empty($company) || empty($username) || empty($password)) {
+        echo json_encode(['success' => false, 'message' => 'Please fill in all required fields.']);
+        exit;
+    }
+
+    // Check if username already exists
+    $checkQuery = "SELECT user_id FROM users WHERE username = '$username'";
+    $checkResult = $conn->query($checkQuery);
+
+    if ($checkResult->num_rows > 0) {
+        echo json_encode(['success' => false, 'message' => 'Username already exists. Please choose another.']);
+        exit;
+    }
+
+    // Insert supervisor into the database
+    $query = "INSERT INTO users (last_name, first_name, middle_name, gender, email, company, company_address, username, password, user_type)
+              VALUES ('$last_name', '$first_name', '$middle_name', '$gender', '$email', '$company', '$company_address', '$username', '$password', 'Supervisor')";
+
+    if ($conn->query($query) === TRUE) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Error: ' . $conn->error]);
+    }
+}
+
+$conn->close();
+?>
