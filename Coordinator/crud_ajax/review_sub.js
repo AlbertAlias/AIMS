@@ -1,13 +1,20 @@
-document.addEventListener('DOMContentLoaded', async () => {
-    const submissionTable = document.querySelector("#submissionTable tbody");
+$(document).ready(function () {
+    const $submissionTable = $("#submissionTable tbody");
 
-    const fetchSubmissions = async () => {
-        const response = await fetch('controller/fetch_submissions.php');
-        const data = await response.json();
-        
-        if (data.success) {
-            renderSubmissions(data.submissions);
-        }
+    const fetchSubmissions = () => {
+        $.ajax({
+            url: 'controller/fetch_submissions.php',
+            method: 'GET',
+            dataType: 'json',
+            success: (data) => {
+                if (data.success) {
+                    renderSubmissions(data.submissions);
+                }
+            },
+            error: (xhr, status, error) => {
+                console.error("Error fetching submissions:", error);
+            }
+        });
     };
 
     const renderSubmissions = (submissions) => {
@@ -23,24 +30,33 @@ document.addEventListener('DOMContentLoaded', async () => {
                 </td>
             </tr>
         `).join('');
-        submissionTable.innerHTML = rows;
+        $submissionTable.html(rows);
     };
 
-    window.reviewSubmission = async (submissionId, action) => {
+    window.reviewSubmission = (submissionId, action) => {
         const message = action === 'disapprove' ? prompt("Provide feedback for disapproval:") : '';
-        const response = await fetch("controller/review_submission.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: `submission_id=${submissionId}&action=${action}&message=${message}`
+        
+        $.ajax({
+            url: 'controller/review_submission.php',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                submission_id: submissionId,
+                action: action,
+                message: message
+            },
+            success: (result) => {
+                if (result.success) {
+                    alert("Action executed successfully");
+                    fetchSubmissions();
+                } else {
+                    alert("Error: " + result.error);
+                }
+            },
+            error: (xhr, status, error) => {
+                console.error("Error processing review:", error);
+            }
         });
-
-        const result = await response.json();
-        if (result.success) {
-            alert("Action executed successfully");
-            fetchSubmissions();
-        } else {
-            alert("Error: " + result.error);
-        }
     };
 
     fetchSubmissions();

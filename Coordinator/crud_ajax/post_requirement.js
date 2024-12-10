@@ -1,12 +1,12 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const postRequirementsForm = document.getElementById("postRequirementsForm");
+$(document).ready(function () {
+  const postRequirementsForm = $("#postRequirementsForm");
 
-  if (postRequirementsForm) {
-    postRequirementsForm.addEventListener("submit", async function (e) {
+  if (postRequirementsForm.length) {
+    postRequirementsForm.on("submit", function (e) {
       e.preventDefault();
 
-      const requirementTitle = document.getElementById("requirementTitle").value.trim();
-      const requirementDescription = document.getElementById("requirementDescription").value.trim();
+      const requirementTitle = $("#requirementTitle").val().trim();
+      const requirementDescription = $("#requirementDescription").val().trim();
 
       if (!requirementTitle || !requirementDescription) {
         Swal.fire({
@@ -17,42 +17,42 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
-      try {
-        const response = await fetch("controller/post_requirement.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: `requirementTitle=${encodeURIComponent(requirementTitle)}&requirementDescription=${encodeURIComponent(requirementDescription)}`,
-        });
+      $.ajax({
+        url: "controller/post_requirement.php",
+        type: "POST",
+        data: {
+          requirementTitle: requirementTitle,
+          requirementDescription: requirementDescription,
+        },
+        dataType: "json",
+        success: function (result) {
+          if (result.success) {
+            Swal.fire({
+              icon: "success",
+              title: "Posted",
+              text: result.message,
+            });
 
-        const result = await response.json();
-
-        if (result.success) {
-          Swal.fire({
-            icon: "success",
-            title: "Posted",
-            text: result.message,
-          });
-
-          postRequirementsForm.reset();
-          const postModal = new bootstrap.Modal(document.getElementById("postRequirementsModal"));
-          postModal.hide();
-        } else {
+            postRequirementsForm[0].reset();
+            const postModal = new bootstrap.Modal($("#postRequirementsModal")[0]);
+            postModal.hide();
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Failed",
+              text: result.error,
+            });
+          }
+        },
+        error: function (xhr, status, error) {
+          console.error("Unexpected JS error: ", error);
           Swal.fire({
             icon: "error",
-            title: "Failed",
-            text: result.error,
+            title: "Unexpected Error",
+            text: "Please try again later.",
           });
         }
-      } catch (error) {
-        console.error("Unexpected JS error: ", error);
-        Swal.fire({
-          icon: "error",
-          title: "Unexpected Error",
-          text: "Please try again later.",
-        });
-      }
+      });
     });
   }
 });

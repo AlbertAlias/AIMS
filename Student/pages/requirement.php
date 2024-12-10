@@ -1,4 +1,4 @@
-<div class="container-fluid bg-light p-4" id="requirement">
+<div class="container-fluid bg-light" id="requirement">
   <div class="row g-4">
     <!-- Left container for general info -->
     <div class="col-12 col-md-6">

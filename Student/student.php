@@ -6,12 +6,6 @@
         header('Location: ../index.php');
         exit();
     }
-
-    // $_SESSION['user_id'] = $user['id'];
-    // $_SESSION['username'] = $user['username'];
-    // $_SESSION['user_type'] = $user['user_type'];
-    // $_SESSION['department'] = $user['department_name']; 
-
     // Prevent caching
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
@@ -76,9 +70,6 @@
                     <?php include "pages/dashboard.php"; ?>
                     <?php include "pages/requirement.php"; ?>
                     <?php include "pages/weeklyreport.php"; ?>
-
-
-
                 </div>
             </div>
             <!-- End of Main Content -->
@@ -97,20 +88,15 @@
     <!-- <script src="functions/auto-logout/session-timeout.js"></script> -->
 
     <!--START::CRUD AJAX FUNCTIONS-->
-    <script src="crud-ajax/profile/retrieve-profile.js"></script>
-    <script src="crud-ajax/profile/create-profile.js"></script>
-    <script src="crud-ajax/profile/retrieve-admins-info.js"></script>
-    <script src="crud-ajax/profile/update-admins-info.js"></script>
-    <script src="functions/profile/profile-details.js"></script>
+    <!-- <script src="crud-ajax/profile/retrieve-profile.js"></script> -->
+    <!-- <script src="crud-ajax/profile/create-profile.js"></script> -->
+    <!-- <script src="crud-ajax/profile/retrieve-admins-info.js"></script> -->
+    <!-- <script src="crud-ajax/profile/update-admins-info.js"></script> -->
+    <!-- <script src="functions/profile/profile-details.js"></script> -->
 
-    <script src="crud_ajax/fetch_requirements.js"></script>
-    <script src="crud_ajax/submit_requirements.js"></script>
-
-
-
+    <script src="crud_ajax/requirement/retrieve-requirements.js"></script>
+    <script src="crud-ajax/requirement/create-submit-requirements.js"></script>
 
     <!--END::CRUD AJAX FUNCTIONS-->
-    
-
 </body>
 </html>

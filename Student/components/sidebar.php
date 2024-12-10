@@ -10,11 +10,11 @@
             <span>Dashboard</span>
         </a>
         <a href="#" class="sidebar-link" onclick="showSection(event, 'requirement')">
-            <i class="fa-solid fa-scroll"></i>
+            <i class="fa-solid fa-file-lines"></i>
             <span>Requirements</span>
         </a>
         <a href="#" class="sidebar-link" onclick="showSection(event, 'weeklyreport')">
-            <i class="fa-solid fa-scroll"></i>
+            <i class="fa-solid fa-file-pen"></i>
             <span>Reports</span>
         </a>
         <!-- <a href="#" class="sidebar-link" onclick="showSection(event, 'coordinators')">

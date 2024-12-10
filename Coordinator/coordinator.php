@@ -7,11 +7,6 @@
         exit();
     }
 
-    // $_SESSION['user_id'] = $user['id'];
-    // $_SESSION['username'] = $user['username'];
-    // $_SESSION['user_type'] = $user['user_type'];
-    // $_SESSION['department'] = $user['department_name']; 
-
     // Prevent caching
     header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
     header("Cache-Control: post-check=0, pre-check=0", false);
@@ -76,12 +71,10 @@
                 <!-- Begin Page Content -->
                 <div id="page-content" style="width: 100%;">
                     <?php include "pages/dashboard.php"; ?>
-                    <?php include "pages/coor-profile.php"; ?>
-                    <?php include "pages/studentreq.php"; ?>
+                    <?php include "pages/students.php"; ?>
                     <?php include "pages/requirement.php"; ?>
                     <?php include "pages/weeklyreport.php"; ?>
-
-
+                    <?php include "pages/coor-profile.php"; ?>
                 </div>
             </div>
             <!-- End of Main Content -->
@@ -106,7 +99,7 @@
     <script src="crud-ajax/profile/update-admins-info.js"></script>
     <script src="functions/profile/profile-details.js"></script>
 
-    <script src="crud_ajax/studentreq.js"></script>
+    <script src="crud_ajax/student-lists-table.js"></script>
     <script src="crud_ajax/retrieve-coor.js"></script>
     <script src="crud_ajax/student.js"></script>
     <script src="crud_ajax/post_requirement.js"></script>
