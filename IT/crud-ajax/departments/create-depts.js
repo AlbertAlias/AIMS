@@ -3,15 +3,13 @@ $(document).ready(function () {
         e.preventDefault(); // Prevent default form submission
 
         const departmentName = $("#department_name").val(); // Get input value
-        const deptID = $("#deptID").val(); // Get department ID if it's for updating
 
         // Perform AJAX request
         $.ajax({
-            url: "controller/departments/create-depts.php", // PHP script to handle insertion or update
+            url: "controller/departments/create-depts.php", // PHP script to handle insertion
             type: "POST",
             data: {
-                department_name: departmentName,
-                id: deptID // Include the deptID if it's an update
+                department_name: departmentName
             },
             dataType: "json",
             success: function (response) {
@@ -21,7 +19,7 @@ $(document).ready(function () {
                         toast: true,
                         position: 'top-end',
                         icon: 'success',
-                        title: deptID ? 'Department updated successfully!' : 'Department added successfully!',
+                        title: 'Department added successfully!',
                         showConfirmButton: false,
                         timer: 3000,
                         background: '#b9f6ca',
@@ -33,8 +31,7 @@ $(document).ready(function () {
                     });
 
                     $("#department_name").val(""); // Clear the input field
-                    $("#deptID").val(""); // Reset deptID field after success
-                    setTimeout(populateDepartments, 1000); // Refresh department list
+                    // setTimeout(populateDepartments, 1000);
                 } else {
                     alert("Error: " + response.error);
                 }

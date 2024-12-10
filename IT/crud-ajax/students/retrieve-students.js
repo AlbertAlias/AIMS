@@ -1,56 +1,54 @@
 $(document).ready(function () {
-    window.loadCoor = function () {
+    window.loadStudents = function () {
         $.ajax({
-            url: 'controller/coordinators/retrieve-coor.php', // PHP script to fetch coordinators
+            url: 'controller/students/retrieve-students.php',
             method: 'GET',
             dataType: 'json',
             success: function (response) {
                 if (response.success) {
-                    // Store the fetched coordinators for filtering
-                    window.coordinators = response.coordinators;
-                    updateCoordinatorList(window.coordinators);
+                    window.students = response.students;
+                    updateStudentsList(window.students);
                 } else {
-                    console.error('Failed to load coordinator:', response.message);
+                    console.error('Failed to load students:', response.message);
                 }
             },
             error: function (xhr, status, error) {
-                console.error('Failed to load coordinator:', error);
+                console.error('Failed to load students:', error);
                 console.error('Response Text:', xhr.responseText); // Debug response
             },
         });
     };
 
-    // Function to update the coordinator list
-    function updateCoordinatorList(coordinators, message = null) {
-        let coordinatorInfo = $('#coordinatorInfo');
-        coordinatorInfo.empty();
+    function updateStudentsList(students, message = null) {
+        let studentsInfo = $('#studentsInfo');
+        studentsInfo.empty();
 
         // If a message is provided, display it
         if (message) {
-            coordinatorInfo.append(`<div class="text-danger">${message}</div>`);
+            studentsInfo.append(`<div class="text-danger">${message}</div>`);
             return;
         }
 
-        // Limit the number of coordinators displayed to 10
-        const limitedCoordinators = coordinators.slice(0, 10);
+        // Limit the number of students displayed to 10
+        const limitedStudents = students.slice(0, 6);
 
-        // If no coordinators found, display a message
-        if (limitedCoordinators.length === 0) {
-            updateCoordinatorList([], 'No coordinators found');
+        // If no students found, display a message
+        if (limitedStudents.length === 0) {
+            updateStudentsList([], 'No students found');
             return;
         }
 
-        limitedCoordinators.forEach(function (coordinator) {
-            let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 coor-btn" data-id="${coordinator.id}">
-                        ${coordinator.last_name}, ${coordinator.first_name}<br>${coordinator.department_name}
+        limitedStudents.forEach(function (student) {
+            let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 coor-btn" data-id="${student.id}">
+                        ${student.last_name}, ${student.first_name}<br>${student.department_name}
                         </button>`;
-            coordinatorInfo.append(btn);
+            studentsInfo.append(btn);
         });
     }
 
-    // When a coordinator button is clicked, fetch and populate their details
+    // When a student button is clicked, fetch and populate their details
     $(document).on('click', '.coor-btn', function () {
-        var userId = $(this).data('id'); // Get the ID of the selected coordinator
+        var userId = $(this).data('id'); // Get the ID of the selected students
 
         $.ajax({
             url: 'controller/coordinators/retrieve-coor-info.php',
@@ -59,18 +57,17 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (response) {
                 if (response.success) {
-                    // Populate the form fields with the coordinator's details
-                    $('#coorID').val(userId);
-                    $('#coor_last_name').val(response.last_name);
-                    $('#coor_first_name').val(response.first_name);
-                    $('#coor_middle_name').val(response.middle_name);
-                    $('#coor_personal_email').val(response.email);
-                    $('#coor_username').val(response.username);
+                    $('#studentID').val(userId);
+                    $('#student_last_name').val(response.last_name);
+                    $('#student_first_name').val(response.first_name);
+                    $('#student_middle_name').val(response.middle_name);
+                    $('#student_personal_email').val(response.email);
+                    $('#student_username').val(response.username);
 
                     // Select the correct department in the dropdown
                     function setDepartment() {
-                        if ($('#coor_department option').length > 0) {
-                            $('#coor_department').val(response.department_id);
+                        if ($('#student_department option').length > 0) {
+                            $('#student_department').val(response.department_id);
                         } else {
                             setTimeout(setDepartment, 100); // Retry until dropdown is ready
                         }
@@ -78,11 +75,9 @@ $(document).ready(function () {
                     setDepartment();
 
                     // Show the Update and Cancel buttons, and hide the Submit button
-                    $('#coorSubmitBtn').hide();
-                    $('#coorUpdateBtn').show();
-                    $('#coorCancelBtn').show();
-                } else {
-                    // console.error('Failed to retrieve coordinator details:', response.message);
+                    $('#studentSubmitBtn').hide();
+                    $('#studentUpdateBtn').show();
+                    $('#studentCancelBtn').show();
                 }
             },
             error: function (xhr, status, error) {
@@ -91,15 +86,15 @@ $(document).ready(function () {
         });
     });
 
-    $('#coorUpdateBtn').click(function () {
+    $('#studentUpdateBtn').click(function () {
         const userData = {
-            user_id: $('#coorID').val(),
-            last_name: $('#coor_last_name').val(),
-            first_name: $('#coor_first_name').val(),
-            middle_name: $('#coor_middle_name').val(),
-            email: $('#coor_personal_email').val(),
-            username: $('#coor_username').val(),
-            department_id: $('#coor_department').val(),
+            user_id: $('#studentsID').val(),
+            last_name: $('#students_last_name').val(),
+            first_name: $('#students_first_name').val(),
+            middle_name: $('#students_middle_name').val(),
+            email: $('#students_personal_email').val(),
+            username: $('#students_username').val(),
+            department_id: $('#students_department').val(),
         };
 
         // Validate required fields
@@ -121,7 +116,7 @@ $(document).ready(function () {
             return;
         }
 
-        // Send AJAX request to update coordinator details
+        // Send AJAX request to update student details
         $.ajax({
             url: 'controller/coordinators/update-coor.php', // PHP script to handle updates
             method: 'POST',
@@ -133,7 +128,7 @@ $(document).ready(function () {
                         toast: true,
                         position: 'top-end',
                         icon: 'success',
-                        title: 'Coordinator information updated successfully!',
+                        title: 'Student information updated successfully!',
                         showConfirmButton: false,
                         timer: 3000,
                         background: '#b9f6ca',
@@ -144,11 +139,11 @@ $(document).ready(function () {
                         }
                     });
 
-                    loadCoor(); // Reload the coordinator list
-                    $('#coordinatorForm')[0].reset(); // Reset the form
-                    $('#coorSubmitBtn').show(); // Show Submit button
-                    $('#coorUpdateBtn').hide(); // Hide Update button
-                    $('#coorCancelBtn').hide(); // Hide Cancel button
+                    loadStudents(); // Reload the student list
+                    $('#studentsForm')[0].reset(); // Reset the form
+                    $('#studentSubmitBtn').show(); // Show Submit button
+                    $('#studentUpdateBtn').hide(); // Hide Update button
+                    $('#studentCancelBtn').hide(); // Hide Cancel button
                 } else {
                     Swal.fire({
                         toast: true,
@@ -167,7 +162,7 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status, error) {
-                console.error('Error updating coordinator:', error);
+                console.error('Error updating student:', error);
                 console.error('Response Text:', xhr.responseText); // Debugging info
 
                 Swal.fire({
@@ -189,15 +184,15 @@ $(document).ready(function () {
     });
 
     // Cancel the update and reset the form
-    $('#coorCancelBtn').click(function () {
+    $('#studentCancelBtn').click(function () {
         // Reset the form fields
-        $('#coordinatorForm')[0].reset();
+        $('#studentForm')[0].reset();
 
         // Hide the Update and Cancel buttons, and show the Submit button
-        $('#coorSubmitBtn').show();
-        $('#coorUpdateBtn').hide();
-        $('#coorCancelBtn').hide();
+        $('#studentSubmitBtn').show();
+        $('#studentUpdateBtn').hide();
+        $('#studentCancelBtn').hide();
     });
 
-    loadCoor(); // Initially load the coordinator list
+    loadStudents(); // Initially load the student list
 });

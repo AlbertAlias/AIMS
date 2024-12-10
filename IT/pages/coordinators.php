@@ -11,7 +11,7 @@
                 <div id="coordinatorInfo" class="text-gray-800">
                     <!-- Coordinator information will be displayed here -->
                 </div>
-                <button id="addCoordinatorsBtn" data-id="1" class="btn btn-success mt-3">Add Coordinator</button>
+                <button id="addCoordinatorsBtn" data-id="1" class="btn btn-success mt-3">See table lists</button>
             </div>
         </div>
 
@@ -55,26 +55,20 @@
                             </select>
                         </div>
                     </div>
-
                     <div class="row mb-3">
-                        <div class="col-12 col-md-6 mb-3">
+                        <div class="col-12 col-md-6">
                             <label for="coor_username" class="form-label required-asterisk">Username <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="coor_username" name="coor_username" required>
                         </div>
-                        <div class="col-12 col-md-6 mb-3">
+                        <div class="col-12 col-md-6">
                             <label for="coor_password" class="form-label required-asterisk">Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control" id="coor_password" name="coor_password" required>
                         </div>
                     </div>
-                   
-                    <div class="row">
-                        <div class="col-12 text-end">
-                            <button type="button" id="coorCancelBtn" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
-                            <button type="button" id="coorDeleteBtn" class="btn btn-danger" style="display: none;"><i class="fa-solid fa-trash"></i> Delete</button>
-                            <button type="button" id="coorUpdateBtn" class="btn btn-primary" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> Update</button>
-                            <button type="submit" id="coorSubmitBtn" class="btn btn-success"><i class="fa-solid fa-check-to-slot"></i> Submit</button>
-                        </div>
-                    </div>
+                    <button type="submit" id="coorSubmitBtn" class="btn btn-success"><i class="fa-solid fa-check-to-slot"></i> Submit</button>
+                    <button type="button" id="coorUpdateBtn" class="btn btn-primary" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> Update</button>
+                    <button type="button" id="coorCancelBtn" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
+                    <button type="button" id="coorDeleteBtn" class="btn btn-danger" style="display: none;"><i class="fa-solid fa-trash"></i> Delete</button>
                 </form>
             </div>
         </div>

@@ -1,59 +1,42 @@
 <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-    header('Content-Type: application/json');
-    require_once '../../../dbconn.php';
+    include('../../../dbconn.php');
 
-    if (!isset($_GET['id'])) {
-        $response = ['error' => 'No ID provided'];
-        echo json_encode($response);
-        exit();
-    }
+    // Get the coordinator ID from the AJAX request
+    $user_id = $_GET['user_id'];
 
-    $coorId = $_GET['id'];
-
-    // Updated query to remove coor_code
-    $sql = "SELECT 
-                u.id, 
-                u.last_name, 
-                u.first_name, 
-                u.middle_name, 
-                u.gender, 
-                u.address, 
-                u.personal_email, 
-                u.username, 
-                u.department_id, 
-                u.employee_no
-            FROM users u
-            JOIN coordinators c ON u.id = c.user_id
-            WHERE u.id = ? AND u.user_type = 'coordinator'";
+    // SQL query to fetch coordinator details, including department_id
+    $sql = "SELECT u.last_name, u.first_name, u.middle_name, u.email, d.department_id, d.department_name, u.username
+        FROM users u
+        JOIN department d ON u.department_id = d.department_id
+        WHERE u.user_id = ? AND u.user_type = 'Coordinator'";
 
     $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id); // Bind the user ID parameter
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if (!$stmt) {
-        $response = ['error' => 'Query preparation failed: ' . $conn->error];
-        echo json_encode($response);
-        exit();
-    }
+    $response = array();
 
-    $stmt->bind_param('i', $coorId);
-
-    if (!$stmt->execute()) {
-        error_log("Execute error: " . $stmt->error);
-        $response = ['error' => 'Query execution failed'];
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $response = array(
+            'last_name' => $row['last_name'],
+            'first_name' => $row['first_name'],
+            'middle_name' => $row['middle_name'],
+            'email' => $row['email'],
+            'department_id' => $row['department_id'], // Include department_id
+            'department_name' => $row['department_name'],
+            'username' => $row['username']
+        );
+        $response['success'] = true;
     } else {
-        $result = $stmt->get_result();
-        
-        if ($result->num_rows == 0) {
-            $response = ['error' => 'No coordinator found or query failed'];
-        } else {
-            $response = $result->fetch_assoc(); // Fetch the coordinator's user details
-        }
+        $response['success'] = false;
+        $response['message'] = 'Coordinator not found';
     }
-
-    echo json_encode($response);
 
     $stmt->close();
     $conn->close();
+
+    // Return the response as JSON
+    echo json_encode($response);
 ?>

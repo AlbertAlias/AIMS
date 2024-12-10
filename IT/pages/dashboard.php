@@ -49,7 +49,7 @@
             <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <div>
                     <div class="card-title fs-6">Supervisors</div>
-                    <div id="num-supervisors" class="h2">0</div>
+                    <div id="num-supervisors" class="h2"></div>
                 </div>
                 <div>
                     <i class="fa-solid fa-user-tie fa-2x"></i>
@@ -60,7 +60,7 @@
             <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <div>
                     <div class="card-title fs-6">Registrar</div>
-                    <div id="num-registrar" class="h2">0</div>
+                    <div id="num-registrar" class="h2"></div>
                 </div>
                 <div>
                     <i class="fa-solid fa-user-gear fa-2x"></i>

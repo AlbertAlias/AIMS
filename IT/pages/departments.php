@@ -11,7 +11,7 @@
                 <div id="deanInfo" class="text-gray-800">
                     <!-- Department information will be displayed here -->
                 </div>
-                <!-- <button id="addDepartmentsBtn" class="btn btn-success mt-3">Add Departments</button> -->
+                <button id="addDepartmentsBtn" class="btn btn-success mt-3">See table lists</button>
             </div>
         </div>
 
@@ -19,9 +19,9 @@
             <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 150px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Add Department</h5>
                 <form id="addDepartmentForm">
-                    <input type="hidden" id="deptID" name="id">
-                    <div class="row mb-2">
+                    <div class="row mb-3">
                         <div class="col-12 col-md-12">
+                            <input type="hidden" id="deptID" name="id">
                             <label for="department_name" class="form-label">Department Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="department_name" name="department_name" required aria-describedby="departmentHelp">
                         </div>
@@ -33,10 +33,10 @@
                 </form>
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3 mt-3">Assign Dean</h5>
                 <form id="assignDeanForm">
-                    <input type="hidden" id="deanID" name="deanID">
                     <!-- Form content -->
                     <div class="row mb-3">
                         <div class="col-12 col-md-4">
+                            <input type="hidden" id="deanID" name="deanID">
                             <label for="last_name" class="form-label">Last name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="add_last_name" name="last_name" required>
                         </div>

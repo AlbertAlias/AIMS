@@ -1,28 +1,42 @@
 <?php
-include '../../../dbconn.php';
+    include('../../../dbconn.php');
 
-if (isset($_GET['id'])) {
-    $internId = $_GET['id'];
+    // Get the coordinator ID from the AJAX request
+    $user_id = $_GET['user_id'];
 
-    $sql = "SELECT u.id, u.last_name, u.first_name, u.gender, u.username, i.intern_id, i.studentID, u.department_id
+    // SQL query to fetch coordinator details, including department_id
+    $sql = "SELECT u.last_name, u.first_name, u.middle_name, u.email, d.department_id, d.department_name, u.username
         FROM users u
-        JOIN interns i ON u.id = i.user_id
-        WHERE i.id = ?";
+        JOIN department d ON u.department_id = d.department_id
+        WHERE u.user_id = ? AND u.user_type = 'Student'";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $internId);
+    $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
 
+    $response = array();
+
     if ($result->num_rows > 0) {
-        $intern = $result->fetch_assoc();
-        echo json_encode($intern);
+        $row = $result->fetch_assoc();
+        $response = array(
+            'last_name' => $row['last_name'],
+            'first_name' => $row['first_name'],
+            'middle_name' => $row['middle_name'],
+            'email' => $row['email'],
+            'department_id' => $row['department_id'],
+            'department_name' => $row['department_name'],
+            'username' => $row['username']
+        );
+        $response['success'] = true;
     } else {
-        echo json_encode(['error' => 'Intern not found']);
+        $response['success'] = false;
+        $response['message'] = 'Coordinator not found';
     }
 
     $stmt->close();
     $conn->close();
-} else {
-    echo json_encode(['error' => 'No intern ID provided']);
-}
+
+    // Return the response as JSON
+    echo json_encode($response);
+?>

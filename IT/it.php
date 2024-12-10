@@ -103,24 +103,20 @@
 
     <script src="crud-ajax/departments/retrieve-depts.js"></script>
     <script src="crud-ajax/departments/retrieve-deans.js"></script>
-    <script src="crud-ajax/departments/retrieve-dean-info.js"></script>
     <script src="crud-ajax/departments/create-depts.js"></script>
     <script src="crud-ajax/departments/create-dean.js"></script>
-    <script src="crud-ajax/departments/update-dean-info.js"></script>
     <!-- <script src="crud-ajax/departments/delete-depts.js"></script> -->
 
     <script src="crud-ajax/coordinators/create-coor.js"></script>
     <script src="crud-ajax/coordinators/retrieve-depts.js"></script>
-    <!-- <script src="crud-ajax/coordinators/retrieve-coor.js"></script> -->
-    <!-- <script src="crud-ajax/coordinators/retrieve-coor-info.js"></script> -->
-    <!-- <script src="functions/coordinators/contact-number.js"></script> -->
-    <!-- <script src="crud-ajax/coordinators/update-coor.js"></script> -->
+    <script src="crud-ajax/coordinators/retrieve-coor.js"></script>
     <!-- <script src="crud-ajax/coordinators/delete-coor.js"></script> -->
 
+    <script src="crud-ajax/students/create-upload-students.js"></script>
+    <script src="crud-ajax/students/retrieve-students.js"></script>
     <!-- <script src="crud-ajax/students/retrieve-student-lists.js"></script> -->
     <!-- <script src="crud-ajax/students/retrieve-student-deptsName.js"></script> -->
     <!-- <script src="crud-ajax/students/retrieve-student-info.js"></script> -->
-    <script src="crud-ajax/students/create-upload-students.js"></script>
     <!-- <script src="crud-ajax/students/update-student.js"></script> -->
 
     <!-- <script src="crud-ajax/admins/create-admins.js"></script>

@@ -45,21 +45,18 @@
             </div>
         </div>
 
-        <!-- Middle square container -->
-        <div class="col-md-4 col-lg-3">
-            <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Students</h5>
+        <!-- Left square container (smaller width) -->
+        <div class="col-12 col-md-6 col-lg-3">
+            <div class="bg-light rounded-3 p-4 d-flex flex-column position-relative" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Departments</h5>
                 <div class="mb-3 position-relative">
-                    <input type="text" class="form-control" id="searchsStudents" placeholder="Search student...">
+                    <input type="text" class="form-control" id="searchDepartments" placeholder="Search Department...">
                     <i class="fa-solid fa-magnifying-glass position-absolute search-icon"></i>
                 </div>
                 <div id="studentsInfo" class="text-gray-800">
-                    <!-- Student information will be displayed here -->
+                    <!-- Department information will be displayed here -->
                 </div>
-                <!-- See Student Lists button -->
-                <!-- <a type="button" id="uploadButton" class="btn btn-success mt-3 text-light" href="#" onclick="showSection(event, 'internlist');">
-                    <i class="fa-solid fa-eye"></i> Intern Lists
-                </a> -->
+                <button id="addDepartmentsBtn" class="btn btn-success mt-3">See table lists</button>
             </div>
         </div>
 
@@ -120,13 +117,9 @@
                             <input type="password" class="form-control" id="student_password" name="student_password" required>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 text-end">
-                            <button type="button" id="studentCancelBtn" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
-                            <button type="button" id="studentUpdateBtn" class="btn btn-primary" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> Update</button>
-                            <button type="submit" id="studentSubmittn" class="btn btn-success"><i class="fa-solid fa-check-to-slot"></i> Submit</button>
-                        </div>
-                    </div>
+                    <button type="button" id="studentCancelBtn" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
+                    <button type="button" id="studentUpdateBtn" class="btn btn-primary" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> Update</button>
+                    <button type="submit" id="studentSubmittn" class="btn btn-success"><i class="fa-solid fa-check-to-slot"></i> Submit</button>
                 </form>
             </div>
         </div>

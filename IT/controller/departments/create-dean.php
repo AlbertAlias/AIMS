@@ -1,62 +1,50 @@
 <?php
-header('Content-Type: application/json'); // Ensure response is treated as JSON
-error_reporting(E_ALL);  // Report all errors
-ini_set('display_errors', 1);  // Display errors
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+    header('Content-Type: application/json');
+    
+    include('../../../dbconn.php'); // Database connection
 
-include('../../../dbconn.php'); // Database connection
+    // Ensure required fields are set
+    if (isset($_POST['last_name'], $_POST['first_name'], $_POST['username'], $_POST['password'], $_POST['department1'])) {
+        // Gather POST data
+        $last_name = $conn->real_escape_string($_POST['last_name']);
+        $first_name = $conn->real_escape_string($_POST['first_name']);
+        $username = $conn->real_escape_string($_POST['username']);
+        $password = password_hash($conn->real_escape_string($_POST['password']), PASSWORD_BCRYPT); // Hash the password
+        $department1 = $_POST['department1'];
+        $department2 = isset($_POST['department2']) ? $_POST['department2'] : null;
+        $department3 = isset($_POST['department3']) ? $_POST['department3'] : null;
 
-// Retrieve form data, including deanID
-$dean_id = $_POST['deanID']; // Retrieve deanID
-$last_name = $_POST['last_name'];
-$first_name = $_POST['first_name'];
-$department1 = $_POST['department1'];
-$department2 = $_POST['department2'];
-$department3 = $_POST['department3'];
-$username = $_POST['username'];
-$password = $_POST['password'];
+        // Insert into users table (dean)
+        $sql = "INSERT INTO users (last_name, first_name, username, password, user_type) 
+                VALUES ('$last_name', '$first_name', '$username', '$password', 'Dean')";
 
-// Encrypt the password
-$hashed_password = password_hash($password, PASSWORD_BCRYPT);
+        if ($conn->query($sql) === TRUE) {
+            $dean_id = $conn->insert_id; // Get the newly inserted dean's user_id
 
-// Check if deanID is provided for update or new insertion
-if (empty($dean_id)) {
-    // Step 1: Insert the user (Dean) into the users table
-    $sql = "INSERT INTO users (last_name, first_name, user_type, username, password) VALUES (?, ?, 'Dean', ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssss", $last_name, $first_name, $username, $hashed_password);
+            // Insert into dean_department table for each department selected
+            $departments = [$department1, $department2, $department3];
+            foreach ($departments as $department_id) {
+                if ($department_id) {
+                    $insertDeptSql = "INSERT INTO dean_department (dean_id, department_id) VALUES ('$dean_id', '$department_id')";
+                    if (!$conn->query($insertDeptSql)) {
+                        echo json_encode(['success' => false, 'error' => 'Failed to assign department: ' . $conn->error]);
+                        exit();
+                    }
+                }
+            }
 
-    if ($stmt->execute()) {
-        $dean_id = $stmt->insert_id; // Get the ID of the newly inserted dean
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Failed to assign dean']);
-        exit();
-    }
-}
+            // Success response
+            echo json_encode(['success' => true]);
 
-// Step 2: Insert or update in dean_department to assign the dean to multiple departments
-$departments = [$department1, $department2, $department3];
-foreach ($departments as $department_id) {
-    if (!empty($department_id)) {
-        // Check if the dean is already assigned to the department
-        $check_sql = "SELECT * FROM dean_department WHERE dean_id = ? AND department_id = ?";
-        $check_stmt = $conn->prepare($check_sql);
-        $check_stmt->bind_param("ii", $dean_id, $department_id);
-        $check_stmt->execute();
-        $result = $check_stmt->get_result();
-
-        if ($result->num_rows == 0) {
-            // Insert into dean_department if not already assigned
-            $insert_dean_department_sql = "INSERT INTO dean_department (dean_id, department_id) VALUES (?, ?)";
-            $insert_dean_department_stmt = $conn->prepare($insert_dean_department_sql);
-            $insert_dean_department_stmt->bind_param("ii", $dean_id, $department_id);
-            $insert_dean_department_stmt->execute();
+        } else {
+            // Failure response
+            echo json_encode(['success' => false, 'error' => 'Error inserting dean into users']);
         }
+    } else {
+        echo json_encode(['success' => false, 'error' => 'Missing required fields']);
     }
-}
 
-// Return success response
-echo json_encode(['success' => true]);
-
-$stmt->close();
-$conn->close();
+    $conn->close();
 ?>

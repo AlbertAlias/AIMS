@@ -1,76 +1,67 @@
 <?php
-include '../../../dbconn.php';
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['dean_id'])) {
-    $dean_id = intval($_POST['dean_id']);
-    error_log("Dean ID received in PHP: " . $dean_id); // Debug
+    include('../../../dbconn.php');
 
-    $response = [];
+    // Get dean_id from the request
+    $dean_id = isset($_GET['dean_id']) ? intval($_GET['dean_id']) : 0;
 
-    // Retrieve dean details
-    $deanQuery = "SELECT u.user_id, u.last_name, u.first_name, u.username
-                  FROM users u
-                  WHERE u.user_id = ? AND u.user_type = 'Dean'";
-
-    $stmt = $conn->prepare($deanQuery);
-    if (!$stmt) {
-        error_log("Failed to prepare dean query: " . $conn->error); // Debug
-        echo json_encode(['success' => false, 'error' => 'Server error.']);
+    // Validate dean_id
+    if ($dean_id <= 0) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Invalid dean ID.'
+        ]);
         exit;
     }
 
-    $stmt->bind_param('i', $dean_id);
-    $stmt->execute();
-    $deanResult = $stmt->get_result();
+    // Query to get dean's details (first name, last name, username, and associated departments)
+    $query = "
+        SELECT u.user_id, u.first_name, u.last_name, u.username,
+            GROUP_CONCAT(d.department_name ORDER BY d.department_name SEPARATOR ', ') AS departments
+        FROM users u
+        LEFT JOIN dean_department dd ON u.user_id = dd.dean_id
+        LEFT JOIN department d ON dd.department_id = d.department_id
+        WHERE u.user_id = ? AND u.user_type = 'Dean'
+        GROUP BY u.user_id
+    ";
 
-    if ($deanResult->num_rows > 0) {
-        $dean = $deanResult->fetch_assoc();
-        $response['dean'] = [
-            'last_name' => $dean['last_name'],
-            'first_name' => $dean['first_name'],
-            'username' => $dean['username']
-        ];
-
-        // Retrieve associated departments
-        $deptQuery = "SELECT d.department_id, d.department_name
-                      FROM dean_department dd
-                      INNER JOIN department d ON dd.department_id = d.department_id
-                      WHERE dd.dean_id = ?";
-
-        $deptStmt = $conn->prepare($deptQuery);
-        if (!$deptStmt) {
-            error_log("Failed to prepare department query: " . $conn->error); // Debug
-            echo json_encode(['success' => false, 'error' => 'Server error.']);
-            exit;
-        }
-
-        $deptStmt->bind_param('i', $dean_id);
-        $deptStmt->execute();
-        $deptResult = $deptStmt->get_result();
-
-        if ($deptResult->num_rows > 0) {
-            $departments = [];
-            while ($row = $deptResult->fetch_assoc()) {
-                $departments[] = $row;
-            }
-            $response['departments'] = $departments;
-            $response['success'] = true;
-        } else {
-            error_log("No departments found for dean ID: " . $dean_id); // Debug
-            $response['success'] = false;
-            $response['error'] = 'No departments assigned to this dean.';
-        }
-    } else {
-        error_log("Dean not found for ID: " . $dean_id); // Debug
-        $response['success'] = false;
-        $response['error'] = 'Dean not found.';
+    // Prepare statement to avoid SQL injection
+    $stmt = $conn->prepare($query);
+    if ($stmt === false) {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Failed to prepare the query.'
+        ]);
+        exit;
     }
 
-    echo json_encode($response);
+    // Bind the dean_id parameter
+    $stmt->bind_param('i', $dean_id);
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Check if any result is found
+    if ($result->num_rows > 0) {
+        $dean = $result->fetch_assoc();
+        echo json_encode([
+            'success' => true,
+            'dean' => [
+                'first_name' => $dean['first_name'],
+                'last_name' => $dean['last_name'],
+                'username' => $dean['username'],
+                'departments' => $dean['departments']  // Comma-separated departments
+            ]
+        ]);
+    } else {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Dean not found or no departments assigned.'
+        ]);
+    }
+
     $stmt->close();
     $conn->close();
-} else {
-    error_log("Invalid request: " . print_r($_POST, true)); // Debug
-    echo json_encode(['success' => false, 'error' => 'Invalid request.']);
-}
 ?>

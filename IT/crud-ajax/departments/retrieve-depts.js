@@ -7,15 +7,16 @@ $(document).ready(function () {
             success: function (response) {
                 if (response.success) {
                     const departments = response.data;
-                    
-                    // Clear and populate options for each department select
+
+                    // Populate departments for all three select elements
                     const selectElements = ["#add_department1", "#add_department2", "#add_department3"];
                     selectElements.forEach((selector) => {
                         const select = $(selector);
-                        select.empty(); // Clear existing options
-                        select.append('<option selected>Choose Department</option>'); // Default option
                         departments.forEach((dept) => {
-                            select.append(`<option value="${dept.id}">${dept.name}</option>`);
+                            // Only add departments that are not already assigned to the dean
+                            if (!select.find(`option[value="${dept.id}"]`).length) {
+                                select.append(`<option value="${dept.id}">${dept.name}</option>`);
+                            }
                         });
                     });
                 } else {

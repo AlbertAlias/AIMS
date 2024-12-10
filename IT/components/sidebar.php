@@ -11,19 +11,19 @@
         </a>
         <a href="#" class="sidebar-link" onclick="showSection(event, 'departments')">
             <i class="fa-solid fa-scroll"></i>
-            <span>Departments</span>
+            <span>Department</span>
         </a>
         <a href="#" class="sidebar-link" onclick="showSection(event, 'coordinators')">
             <i class="fa-solid fa-user-group"></i>
-            <span>Coordinators</span>
+            <span>Coordinator</span>
         </a>
         <a href="#" class="sidebar-link" onclick="showSection(event, 'students')">
             <i class="fa-solid fa-graduation-cap"></i>
-            <span>Students</span>
+            <span>Student</span>
         </a>
         <a href="#" class="sidebar-link" onclick="showSection(event, 'supervisors')">
             <i class="fa-solid fa-user-tie"></i>
-            <span>Supervisors</span>
+            <span>Supervisor</span>
         </a>
     </nav>
 </div>
