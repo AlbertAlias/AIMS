@@ -1,0 +1,33 @@
+/* Task Card Styling */
+.task-header .task-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.task-card:hover {
+    transform: translateY(-5px); /* Card hover animation */
+}
+
+.card-title {
+    font-weight: 600;
+    color: #1e88e5;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #757575;
+}
+
+/* Responsive Design - Mobile First */
+@media (max-width: 768px) {
+    .task-card {
+        padding: 15px;
+    }
+    .card-title {
+        font-size: 1.25rem;
+    }
+    .card-text {
+        font-size: 0.875rem;
+    }
+}

@@ -1,26 +1,41 @@
-#requirement .rounded {
-  border: 1px solid #dee2e6;
-  transition: box-shadow 0.2s ease-in-out;
+.file-preview {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
 }
 
-#requirement .rounded:hover {
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+.file-icon {
+  font-size: 24px;
+  margin-right: 10px;
 }
 
-.modal-header {
-  border-bottom: none;
+.file-details {
+  flex-grow: 1;
 }
 
-.modal-content {
-  border-radius: 10px;
+.file-name {
+  margin: 0;
+  font-weight: bold;
 }
 
-.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
+.file-date {
+  margin: 0;
+  color: #777;
+  /* color: #c7312c; */
+  font-size: 12px;
 }
 
-.btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #004085;
+.file-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px; /* Adjust as necessary */
+}
+
+.position-relative {
+  position: relative;
 }
