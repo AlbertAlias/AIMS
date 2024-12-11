@@ -69,11 +69,9 @@ document.getElementById('fileContainer').addEventListener('click', function (eve
     const fileCard = event.target.closest('.d-flex'); // Get the clicked file card
     if (fileCard && !event.target.closest('.btn')) { // Ensure the click wasn't on the close button
         const fileName = fileCard.querySelector('.file-name').textContent.trim();
-
         // Set the PDF viewer source (correct the URL to point to the public folder)
         const pdfViewer = document.getElementById('pdfViewer');
         pdfViewer.src = `controller/requirement/uploads/${fileName}#toolbar=0`; // Updated path
-
         // Show the modal
         const modal = document.getElementById('pdfModal');
         modal.style.display = 'flex';
@@ -84,7 +82,6 @@ document.getElementById('fileContainer').addEventListener('click', function (eve
 document.getElementById('closeModal').addEventListener('click', function () {
     const modal = document.getElementById('pdfModal');
     modal.style.display = 'none';
-
     // Clear the PDF viewer source
     document.getElementById('pdfViewer').src = '';
 });
@@ -94,7 +91,6 @@ window.addEventListener('click', function (event) {
     const modal = document.getElementById('pdfModal');
     if (event.target === modal) {
         modal.style.display = 'none';
-
         // Clear the PDF viewer source
         document.getElementById('pdfViewer').src = '';
     }

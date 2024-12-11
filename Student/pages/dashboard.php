@@ -1,13 +1,13 @@
 <div class="container-fluid p-0 m-0" id="dashboard" style="display: none;">
     <div class="row">
         <!-- Left Container -->
-        <div class="col-lg-8">
+        <div class="col-md-8">
             <!-- Full-width Container -->
             <div class="col-12 col-md-12 col-lg-12 mb-3">
                 <div class="card p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                     <!-- OJT Hours at the top center -->
                     <div class="text-center mb-2">
-                        <div class="card-title fs-4 text-success">OJT Hours</div>
+                        <div class="card-title fs-5 text-success fw-bold">OJT Hours</div>
                     </div>
 
                     <!-- Left and Right Section with Hours Needed and Hours Remaining -->
@@ -71,21 +71,19 @@
         </div>
 
         <!-- Right Container for Requirements (Dynamic Content) -->
-        <div class="col-lg-4">
-            <div class="card task-header mb-3" style="background-color: #198754; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; border-radius: 12px; transition: transform 0.3s ease;">
+        <div class="col-md-4">
+            <div class="card task-title bg-success mb-4" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; transition: transform 0.3s ease;">
                 <div class="d-flex justify-content-center align-items-center">
-                        <div class="card-title fs-5 text-light fw-bold mt-1">Task</div>
+                    <div>
+                        <div class="card-title fs-5 text-white fw-bold mt-1">Task</div>
+                    </div>
                 </div>
             </div>
             <div id="requirementsContainer">
                 <!-- Dynamic requirement items will be appended here -->
             </div>
         </div>
-
-        
     </div>
-    
-
 </div>
 
 <!-- <div class="row"> -->
@@ -133,5 +131,3 @@
         </div>
         </div>
     </div> -->
-
-</div>
