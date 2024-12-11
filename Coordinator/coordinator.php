@@ -93,21 +93,19 @@
     <!-- <script src="functions/auto-logout/session-timeout.js"></script> -->
 
     <!--START::CRUD AJAX FUNCTIONS-->
-    <script src="crud-ajax/profile/retrieve-profile.js"></script>
-    <script src="crud-ajax/profile/create-profile.js"></script>
-    <script src="crud-ajax/profile/retrieve-admins-info.js"></script>
-    <script src="crud-ajax/profile/update-admins-info.js"></script>
-    <script src="functions/profile/profile-details.js"></script>
+    <!-- <script src="crud-ajax/profile/retrieve-profile.js"></script> -->
+    <!-- <script src="crud-ajax/profile/create-profile.js"></script> -->
+    <!-- <script src="crud-ajax/profile/retrieve-admins-info.js"></script> -->
+    <!-- <script src="crud-ajax/profile/update-admins-info.js"></script> -->
+    <!-- <script src="functions/profile/profile-details.js"></script> -->
 
-    <script src="crud_ajax/student-lists-table.js"></script>
-    <script src="crud_ajax/retrieve-coor.js"></script>
-    <script src="crud_ajax/student.js"></script>
-    <script src="crud_ajax/post_requirement.js"></script>
+    <script src="crud-ajax/student-lists-table.js"></script>
+    <script src="crud-ajax/retrieve-coor.js"></script>
+    <script src="crud-ajax/post_requirement.js"></script>
 
-    <script src="crud_ajax/review_sub.js"></script>
-    <script src="crud_ajax/viewrequirements.js"></script>
+    <script src="crud-ajax/review_sub.js"></script>
 
-
+    <script src="crud-ajax/requirement/retrieve-student-file.js"></script>
     <!--END::CRUD AJAX FUNCTIONS-->
     
 

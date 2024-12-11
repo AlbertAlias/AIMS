@@ -10,12 +10,13 @@
 }
 
 .card-title {
+    font-size: 1.1rem;
     font-weight: 600;
     color: #1e88e5;
 }
 
 .card-text {
-    font-size: 1rem;
+    font-size: 0.9rem;
     color: #757575;
 }
 

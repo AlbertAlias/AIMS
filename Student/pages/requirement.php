@@ -29,7 +29,7 @@
 
         <!-- Right side container with card -->
         <div class="col-md-4">
-            <div class="card shadow-sm">
+            <div class="card shadow-sm mb-3">
                 <div class="card-body mx-2">
                     <h5 class="card-title mt-2 mb-3">Your requirement</h5>
                     <!-- Container to display uploaded files -->
@@ -44,6 +44,17 @@
                     <button class="btn btn-success w-100 mb-2" disabled>Turn in</button>
                 </div>
             </div>
-        </div>
+
+            <!-- Hidden task card container -->
+            <div id="taskCardContainer" style="display: none;"></div>
+
+        </div>        
+    </div>
+</div>
+
+<div id="pdfModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <iframe id="pdfViewer" src="" frameborder="0"></iframe>
     </div>
 </div>

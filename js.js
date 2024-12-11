@@ -177,3 +177,99 @@
     //         </div>
     //     </div>
     // </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="col-md-4">
+            <div class="col-12 col-md-12 col-lg-12 mb-3">
+                <div class="card p-3 mb-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="card-title fs-5 text-primary">Pass the MOA until the first week of internship</div>
+                            <div class="card-text fs-6">Please accomplish this as soon as possible</div>
+                        </div>
+
+                        <div class="card p-2 text-center bg-danger" style="color: white; cursor: pointer; border: none; border-radius: 5px;">
+                            <div class="card-text fs-6">Pending</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-12 mb-3">
+                <div class="card p-3 mb-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="card-title fs-5 text-primary">Pass the Medical Certificate</div>
+                            <div class="card-text fs-6">Deadline: Dec 09, 2024</div>
+                        </div>
+
+                        <div class="card p-2 text-center bg-warning" style="color: white; cursor: pointer; border: none; border-radius: 5px;">
+                            <div class="card-text fs-6">Submitted</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-12 mb-3">
+                <div class="card p-3 mb-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="card-title fs-5 text-primary">Pass the Birth Certificate or PSA</div>
+                            <div class="card-text fs-6">Deadline: Dec 09, 2024</div>
+                        </div>
+
+                        <div class="card p-2 text-center bg-success" style="color: white; cursor: pointer; border: none; border-radius: 5px;">
+                            <div class="card-text fs-6">Completed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-12 col-lg-12 mb-3">
+                <div class="card p-3 mb-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <div class="card-title fs-5 text-primary">Pass the Resume</div>
+                            <div class="card-text fs-6">Deadline: Nov 27, 2024</div>
+                        </div>
+
+                        <div class="card p-2 text-center bg-success" style="color: white; cursor: pointer; border: none; border-radius: 5px;">
+                            <div class="card-text fs-6">Completed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+{/* <div class="card task-card px-3 py-2 mb-4" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; transition: transform 0.3s ease;">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div>
+                                        <div class="card-title text-primary fw-bold mb-1 mt-2">${req.title}</div>
+                                        <div class="card-text mb-2 text-muted">${req.description}</div>
+                                    </div>
+                                    <div class="text-end">
+                                        <div class="badge bg-warning text-white py-2 px-3 mt-3" style="font-size: 0.875rem; border-radius: 20px;">Pending</div>
+                                    </div>
+                                </div>
+                            </div> */}

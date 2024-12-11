@@ -26,45 +26,16 @@ document.getElementById('fileInput').addEventListener('change', function() {
         const fileIcon = document.createElement('div');
         fileIcon.innerHTML = '<i class="fa-solid fa-file-pdf icon mx-3"></i>';
         fileIcon.style.fontSize = '1.5rem';
-        fileIcon.querySelector('i').style.color = '#c7312c'; // Set custom color (red) for the PDF icon
+        fileIcon.querySelector('i').style.color = '#d32923'; // Set custom color (red) for the PDF icon
         
         // File Details with name overflow styling
         const fileDetails = document.createElement('div');
         fileDetails.style.flex = '1';
-        fileDetails.innerHTML = ` 
+        fileDetails.innerHTML = `        
             <p class="file-name mb-0" title="${file.name}" style="color: #6c757d;"><strong>${file.name}</strong></p> <!-- Light gray text color -->
             <p class="text-muted small mb-0">${(file.size / 1024).toFixed(2)} KB</p>
         `;
         
-        // Add event listener to make file name clickable and open in full-screen view
-        const fileNameElement = fileDetails.querySelector('.file-name');
-        fileNameElement.addEventListener('click', function() {
-            // Create an object URL for the uploaded file to open it
-            const fileURL = URL.createObjectURL(file);
-
-            // Create a full-screen view for the PDF directly
-            const pdfFullScreen = document.createElement('object');
-            pdfFullScreen.data = fileURL;
-            pdfFullScreen.type = 'application/pdf';
-            pdfFullScreen.style.position = 'fixed';
-            pdfFullScreen.style.top = '0';
-            pdfFullScreen.style.left = '0';
-            pdfFullScreen.style.width = '100vw';  // Full width of the viewport
-            pdfFullScreen.style.height = '100vh'; // Full height of the viewport
-            pdfFullScreen.style.zIndex = '1050';  // Ensure it's on top
-            pdfFullScreen.style.backgroundColor = 'rgba(0, 0, 0, 0.6)'; // Dark background effect
-
-            // Append the PDF to the body to make it visible
-            document.body.appendChild(pdfFullScreen);
-
-            // Add event listener to close the PDF when clicking outside of it
-            pdfFullScreen.addEventListener('click', function(event) {
-                if (event.target === pdfFullScreen) { // Close only if clicked outside the PDF
-                    pdfFullScreen.remove();
-                }
-            });
-        });
-
         // Close Button (X mark)
         const closeButton = document.createElement('button');
         closeButton.className = 'btn btn-sm position-absolute top-5 end-0 p-3'; // Positioned at the top-right of the file card
@@ -73,7 +44,8 @@ document.getElementById('fileInput').addEventListener('change', function() {
         closeButton.style.cursor = 'pointer';
         
         // Add event listener to remove the file card when the close button is clicked
-        closeButton.addEventListener('click', function() {
+        closeButton.addEventListener('click', function(event) {
+            event.stopPropagation();  // Prevent triggering the modal open behavior
             fileCard.remove(); // Remove the file card from the container
             document.getElementById('fileInput').value = ''; // Reset the file input field if the file is removed
             submitButton.disabled = true; // Disable the "Turn in" button if no file is selected
@@ -92,18 +64,57 @@ document.getElementById('fileInput').addEventListener('change', function() {
     }
 });
 
+// Add event listener to preview file in a modal
+document.getElementById('fileContainer').addEventListener('click', function (event) {
+    const fileCard = event.target.closest('.d-flex'); // Get the clicked file card
+    if (fileCard && !event.target.closest('.btn')) { // Ensure the click wasn't on the close button
+        const fileName = fileCard.querySelector('.file-name').textContent.trim();
+
+        // Set the PDF viewer source (correct the URL to point to the public folder)
+        const pdfViewer = document.getElementById('pdfViewer');
+        pdfViewer.src = `controller/requirement/uploads/${fileName}#toolbar=0`; // Updated path
+
+        // Show the modal
+        const modal = document.getElementById('pdfModal');
+        modal.style.display = 'flex';
+    }
+});
+
+// Close the modal when the close button is clicked
+document.getElementById('closeModal').addEventListener('click', function () {
+    const modal = document.getElementById('pdfModal');
+    modal.style.display = 'none';
+
+    // Clear the PDF viewer source
+    document.getElementById('pdfViewer').src = '';
+});
+
+// Close the modal when clicking outside of the modal content
+window.addEventListener('click', function (event) {
+    const modal = document.getElementById('pdfModal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+
+        // Clear the PDF viewer source
+        document.getElementById('pdfViewer').src = '';
+    }
+});
 
 // Handle "Turn in" button click to upload the file
 document.querySelector('.btn.btn-success').addEventListener('click', function() {
-    // Get the file from the file preview (instead of the file input)
     const fileCard = document.querySelector('#fileContainer .d-flex');
+    const fileInput = document.getElementById('fileInput');
+    const submitButton = document.querySelector('.btn.btn-success');
+    const taskCardContainer = document.getElementById('taskCardContainer');
+
     if (!fileCard) {
         alert('No file uploaded! Please upload a file before submitting.');
         return;
     }
 
+    // Uploading the file as usual
     const fileName = fileCard.querySelector('.file-name').textContent; // Get the file name from the preview
-    const file = document.getElementById('fileInput').files[0]; // Get the file from the file input
+    const file = fileInput.files[0]; // Get the file from the file input
 
     if (!file) {
         alert('No file selected! Please upload a file before submitting.');
@@ -117,27 +128,24 @@ document.querySelector('.btn.btn-success').addEventListener('click', function() 
     formData.append('student_id', studentId);
     formData.append('document_name', fileName);
 
-    // Send the file to the server via AJAX
     fetch('controller/requirement/create-upload-file.php', {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
+    .then(response => response.json())  // Ensure response is parsed as JSON
     .then(data => {
         if (data.success) {
             alert('File uploaded successfully!');
-            
-            // Remove the file card (reset the file preview)
+            // Reset file preview and form after upload
             const fileContainer = document.getElementById('fileContainer');
             fileContainer.innerHTML = ''; // Remove all file cards
-            
-            // Reset the file input
-            document.getElementById('fileInput').value = '';
-            
-            // Disable the "Turn in" button
-            document.querySelector('.btn.btn-success').disabled = true;
+            fileInput.value = ''; // Reset file input field
+            submitButton.disabled = true; // Disable the "Turn in" button
+    
+            // Show the task card container below the "Turn in" button
+            taskCardContainer.style.display = 'block'; // Make the task card container visible
         } else {
-            alert('Error uploading file!');
+            alert('Error uploading file: ' + data.message);  // Display the error message if exists
         }
     })
     .catch(error => {

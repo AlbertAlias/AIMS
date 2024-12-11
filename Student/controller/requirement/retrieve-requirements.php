@@ -1,40 +1,50 @@
 <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+    session_start();  // Start the session to access session variables
 
-    header('Content-Type: application/json');
-    include '../../../dbconn.php';
+    // Ensure the user is logged in and is a coordinator
+    if (isset($_SESSION['user_id']) && $_SESSION['user_type'] == 'Coordinator') {
+        // Get the coordinator ID from the session
+        $coordinatorId = $_SESSION['user_id'];
 
-    session_start();
+        // Include database connection
+        include('../../../dbconn.php');
 
-    // Check if student is logged in
-    if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'Student') {
-        echo json_encode(["success" => false, "error" => "Unauthorized access"]);
-        exit();
-    }
-
-    // Get the student's department_id
-    $student_id = $_SESSION['user_id'];
-
-    try {
-        $stmt = $conn->prepare("
-            SELECT r.title, r.description, r.created_at 
+        // Prepare SQL query to fetch pending requirements
+        $sql = "
+            SELECT r.requirement_id, r.title, r.description 
             FROM requirements r
-            JOIN users u ON r.coordinator_id = u.user_id
-            WHERE u.department_id = (SELECT department_id FROM users WHERE user_id = ?)
-        ");
-        $stmt->bind_param("i", $student_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+            LEFT JOIN submit_requirements sr ON r.requirement_id = sr.requirement_id
+            WHERE r.coordinator_id = ? 
+            AND (sr.submit_id IS NULL OR sr.status != 'approved') 
+            AND r.status = 'pending';
+        ";
 
-        $requirements = [];
-        while ($row = $result->fetch_assoc()) {
-            $requirements[] = $row;
+        // Prepare and execute the query
+        if ($stmt = $conn->prepare($sql)) {
+            $stmt->bind_param("i", $coordinatorId);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            // Check if we have results
+            if ($result->num_rows > 0) {
+                $requirements = [];
+                while ($row = $result->fetch_assoc()) {
+                    $requirements[] = $row;
+                }
+                // Return the results as a JSON response
+                echo json_encode(['requirements' => $requirements]);
+            } else {
+                echo json_encode(['requirements' => []]);  // Send an empty array if no data found
+            }
+
+            $stmt->close();
+        } else {
+            echo json_encode(['error' => 'Failed to prepare SQL query']);
         }
 
-        echo json_encode(["success" => true, "requirements" => $requirements]);
-    } catch (Exception $e) {
-        echo json_encode(["success" => false, "error" => $e->getMessage()]);
+        $conn->close();
+    } else {
+        // If not logged in or not a coordinator, return an error
+        echo json_encode(['error' => 'Not logged in or not a coordinator']);
     }
 ?>
