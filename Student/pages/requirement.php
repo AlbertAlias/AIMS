@@ -6,24 +6,15 @@
                 <!-- Example File Preview -->
                 <div class="file-preview">
                     <div class="file-icon">
-                        <i class="bi bi-file-earmark-pdf text-danger"></i>
+                        <i class="fa-solid fa-file-pdf"></i>
                     </div>
                     <div class="file-details">
-                        <p class="file-name">alias_cv.pdf</p>
-                        <p class="file-date">You opened • Dec 6, 2024</p>
+                        <p class="file-name"></p>
+                        <p class="file-date"></p>
                     </div>
                 </div>
 
-                <div class="file-preview">
-                    <div class="file-icon">
-                        <i class="bi bi-file-earmark-text"></i>
-                    </div>
-                    <div class="file-details">
-                        <p class="file-name">Untitled Diagram.drawio</p>
-                        <p class="file-date">You opened • Dec 6, 2024</p>
-                    </div>
-                </div>
-                <!-- Repeat for other files -->
+                
             </div>
         </div>
 
@@ -47,7 +38,6 @@
 
             <!-- Hidden task card container -->
             <div id="taskCardContainer" style="display: none;"></div>
-
         </div>        
     </div>
 </div>

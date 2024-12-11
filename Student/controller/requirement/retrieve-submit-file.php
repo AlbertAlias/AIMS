@@ -1,4 +1,5 @@
 <?php
+    header('Content-Type: application/json');
     session_start();
     include '../../../dbconn.php';  // Include the database connection
 
@@ -11,25 +12,24 @@
     $student_id = $_SESSION['user_id'];  // Assuming the student's ID is stored in the session
 
     // Query to get the file submission for the logged-in student
-    $sql = "SELECT sr.submit_id, sr.document_name, sr.status
-            FROM submit_requirements sr
-            WHERE sr.student_id = ?";
+    $sql = "SELECT sr.submit_id, sr.document_name, sr.status, sr.submission_date
+        FROM submit_requirements sr
+        WHERE sr.student_id = ?";
 
-    // Prepare the query
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $student_id);  // Bind student_id to the query
+    $stmt->bind_param("i", $student_id);
     $stmt->execute();
 
-    // Fetch the result
     $result = $stmt->get_result();
 
-    // Check if the student has submitted a file
     if ($result->num_rows > 0) {
         $file = $result->fetch_assoc();
         echo json_encode([
             'document_name' => $file['document_name'],
-            'status' => $file['status']
+            'status' => $file['status'],
+            'submission_date' => $file['submission_date']
         ]);
+        exit;
     } else {
         echo json_encode(['error' => 'No file submitted']);
     }
