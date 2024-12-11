@@ -1,37 +1,29 @@
-$(document).ready(function() {
-    // AJAX request to fetch the requirements
-    $.ajax({
-        url: 'controller/requirement/retrieve-requirements.php',
-        type: 'GET',
-        success: function(response) {
-            console.log('Response from server:', response);  // Log the entire response for debugging
+document.addEventListener("DOMContentLoaded", async function () {
+    const requirementsContainer = document.getElementById("requirementsContainer");
 
-            // Check if there was an error in the response
-            if (response.error) {
-                alert(response.error);
+    try {
+        const response = await fetch("controller/requirement/retrieve-requirements.php");
+        const result = await response.json();
+
+        if (result.success) {
+            const requirements = result.requirements;
+
+            if (requirements.length > 0) {
+                requirementsContainer.innerHTML = requirements.map(req => `
+                    <div class="requirement-item mb-3">
+                        <h6 class="fw-bold">${req.title}</h6>
+                        <p>${req.description}</p>
+                        <small class="text-muted">Posted on: ${new Date(req.created_at).toLocaleDateString()}</small>
+                    </div>
+                `).join("");
             } else {
-                // Clear the requirements container before appending new items
-                $('#requirementsContainer').empty();
-
-                // Ensure response.requirements is an array before calling forEach
-                if (Array.isArray(response.requirements)) {
-                    response.requirements.forEach(function(requirement) {
-                        let requirementItem = `
-                            <div class="requirement-item">
-                                <h5>${requirement.title}</h5>
-                                <p>${requirement.description}</p>
-                            </div>
-                        `;
-                        $('#requirementsContainer').append(requirementItem);
-                    });
-                } else {
-                    alert("Invalid response format, 'requirements' is not an array.");
-                }
+                requirementsContainer.innerHTML = "<p class='text-muted'>No requirements posted by your coordinator.</p>";
             }
-        },
-        error: function(xhr, status, error) {
-            console.error("AJAX Error: " + error);
-            alert("An error occurred while retrieving the requirements.");
+        } else {
+            requirementsContainer.innerHTML = `<p class='text-danger'>Error: ${result.error}</p>`;
         }
-    });
+    } catch (error) {
+        console.error("Error fetching requirements:", error);
+        requirementsContainer.innerHTML = "<p class='text-danger'>Failed to load requirements. Please try again later.</p>";
+    }
 });
