@@ -79,9 +79,7 @@
                     </div>
                 </div>
             </div>
-            <div id="requirementsContainer">
-                <!-- Dynamic requirement items will be appended here -->
-            </div>
+            <div id="requirementsContainer"></div>
         </div>
     </div>
 </div>

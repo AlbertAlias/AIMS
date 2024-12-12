@@ -11,26 +11,23 @@
     // Get the student ID from the session
     $student_id = $_SESSION['user_id'];  // Assuming the student's ID is stored in the session
 
-    // Query to get all file submissions for the logged-in student
-    $sql = "SELECT sr.submit_id, sr.document_name, sr.status, sr.submission_date
-        FROM submit_requirements sr
-        WHERE sr.student_id = ?";
+    // Query to check if the student has already posted a requirement
+    $sql = "SELECT requirement_id FROM submit_requirements WHERE student_id = ?";
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $student_id);
     $stmt->execute();
 
     $result = $stmt->get_result();
-
-    $files = [];
-    while ($file = $result->fetch_assoc()) {
-        $files[] = $file;
+    $postedRequirements = [];
+    while ($row = $result->fetch_assoc()) {
+        $postedRequirements[] = $row['requirement_id'];
     }
 
-    if (!empty($files)) {
-        echo json_encode($files);
+    if (!empty($postedRequirements)) {
+        echo json_encode(['posted' => true, 'requirements' => $postedRequirements]);
     } else {
-        echo json_encode(['error' => 'No files submitted']);
+        echo json_encode(['posted' => false]);
     }
 
     $stmt->close();

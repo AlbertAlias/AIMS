@@ -96,7 +96,6 @@ window.addEventListener('click', function (event) {
     }
 });
 
-// Handle "Turn in" button click to upload the file
 document.querySelector('.btn.btn-success').addEventListener('click', function() {
     const fileCard = document.querySelector('#fileContainer .d-flex');
     const fileInput = document.getElementById('fileInput');
@@ -104,7 +103,20 @@ document.querySelector('.btn.btn-success').addEventListener('click', function() 
     const taskCardContainer = document.getElementById('taskCardContainer');
 
     if (!fileCard) {
-        alert('No file uploaded! Please upload a file before submitting.');
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'No file uploaded! Please upload a file before submitting.',
+            showConfirmButton: false,
+            timer: 3000,
+            background: '#f8d7da',
+            iconColor: '#721c24',
+            color: '#721c24',
+            customClass: {
+                popup: 'mt-5'
+            }
+        });
         return;
     }
 
@@ -113,15 +125,30 @@ document.querySelector('.btn.btn-success').addEventListener('click', function() 
     const file = fileInput.files[0]; // Get the file from the file input
 
     if (!file) {
-        alert('No file selected! Please upload a file before submitting.');
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'No file selected! Please upload a file before submitting.',
+            showConfirmButton: false,
+            timer: 3000,
+            background: '#f8d7da',
+            iconColor: '#721c24',
+            color: '#721c24',
+            customClass: {
+                popup: 'mt-5'
+            }
+        });
         return;
     }
 
     const studentId = 1; // Replace this with the dynamic student ID as needed
+    const requirementId = 1; // Replace this with the dynamic requirement ID as needed
 
     const formData = new FormData();
     formData.append('file', file);
     formData.append('student_id', studentId);
+    formData.append('requirement_id', requirementId); // Add this line
     formData.append('document_name', fileName);
 
     fetch('controller/requirement/create-upload-file.php', {
@@ -131,7 +158,20 @@ document.querySelector('.btn.btn-success').addEventListener('click', function() 
     .then(response => response.json())  // Ensure response is parsed as JSON
     .then(data => {
         if (data.success) {
-            alert('File uploaded successfully!');
+            Swal.fire({
+                toast: true,
+                position: 'top-right',
+                icon: 'success',
+                title: 'File uploaded successfully!',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#b9f6ca',
+                iconColor: '#2e7d32',
+                color: '#155724',
+                customClass: {
+                    popup: 'mt-5'
+                }
+            });
             // Reset file preview and form after upload
             const fileContainer = document.getElementById('fileContainer');
             fileContainer.innerHTML = ''; // Remove all file cards
@@ -140,12 +180,41 @@ document.querySelector('.btn.btn-success').addEventListener('click', function() 
     
             // Show the task card container below the "Turn in" button
             taskCardContainer.style.display = 'block'; // Make the task card container visible
+
+            // Dynamically retrieve the uploaded file
+            window.loadStudentFiles(); // Call the function to load the student's files
         } else {
-            alert('Error uploading file: ' + data.message);  // Display the error message if exists
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: 'Error uploading file: ' + data.message,
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#f8d7da',
+                iconColor: '#721c24',
+                color: '#721c24',
+                customClass: {
+                    popup: 'mt-5'
+                }
+            });
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Error uploading file!');
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: 'There was an error with the AJAX request.',
+            showConfirmButton: false,
+            timer: 3000,
+            background: '#f8bbd0',
+            iconColor: '#c62828',
+            color: '#721c24',
+            customClass: {
+                popup: 'mt-5'
+            }
+        });
     });
 });
