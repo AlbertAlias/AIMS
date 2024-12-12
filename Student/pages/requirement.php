@@ -16,7 +16,7 @@
                         <input type="file" id="fileInput" style="display: none;" accept=".pdf">
                     </label>
                     
-                    <button class="btn btn-success w-100 mb-2" disabled>Turn in</button>
+                    <button id="turnInButton" class="btn btn-success w-100 mb-2" disabled>Turn in</button>
                 </div>
             </div>
             <div id="taskCardContainer" style="display: none;"></div>

@@ -96,6 +96,7 @@ window.addEventListener('click', function (event) {
     }
 });
 
+
 document.querySelector('.btn.btn-success').addEventListener('click', function() {
     const fileCard = document.querySelector('#fileContainer .d-flex');
     const fileInput = document.getElementById('fileInput');
@@ -142,13 +143,13 @@ document.querySelector('.btn.btn-success').addEventListener('click', function() 
         return;
     }
 
-    const studentId = 1; // Replace this with the dynamic student ID as needed
-    const requirementId = 1; // Replace this with the dynamic requirement ID as needed
+    const studentId = 1;
+    const requirementId = 1;
 
     const formData = new FormData();
     formData.append('file', file);
     formData.append('student_id', studentId);
-    formData.append('requirement_id', requirementId); // Add this line
+    formData.append('requirement_id', requirementId);
     formData.append('document_name', fileName);
 
     fetch('controller/requirement/create-upload-file.php', {
