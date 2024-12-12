@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2024 at 11:32 AM
+-- Generation Time: Dec 11, 2024 at 01:52 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -124,8 +124,7 @@ CREATE TABLE `requirements` (
 --
 
 INSERT INTO `requirements` (`requirement_id`, `coordinator_id`, `title`, `description`, `status`, `created_at`) VALUES
-(18, 3, 'Application Letter', 'Di na to makikita kapag submitted na', 'pending', '2024-12-12 09:08:52'),
-(19, 3, 'Resume Letter', 'Di to mawawala kapag di pa na submit', 'pending', '2024-12-12 09:09:14');
+(1, 3, 'bsit requirements', 'need ipasa', 'pending', '2024-12-11 11:03:43');
 
 -- --------------------------------------------------------
 
@@ -137,17 +136,15 @@ CREATE TABLE `submit_requirements` (
   `submit_id` int(11) NOT NULL,
   `student_id` int(11) DEFAULT NULL,
   `document_name` varchar(255) DEFAULT NULL,
-  `status` enum('approved','rejected','pending') DEFAULT NULL,
-  `submission_date` datetime DEFAULT current_timestamp(),
-  `requirement_id` int(11) DEFAULT NULL
+  `status` enum('approved','rejected','pending') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `submit_requirements`
 --
 
-INSERT INTO `submit_requirements` (`submit_id`, `student_id`, `document_name`, `status`, `submission_date`, `requirement_id`) VALUES
-(52, 4, 'Application Letter.pdf', 'pending', '2024-12-12 18:28:05', NULL);
+INSERT INTO `submit_requirements` (`submit_id`, `student_id`, `document_name`, `status`) VALUES
+(6, 4, 'Application Letter.pdf', 'approved');
 
 -- --------------------------------------------------------
 
@@ -183,7 +180,7 @@ INSERT INTO `users` (`user_id`, `last_name`, `first_name`, `middle_name`, `usern
 (2, 'DEAN', 'CEITE', NULL, 'ceitedean', '$2y$10$POlAJNjZLlLDDcQCEbCywesmhPze32aL4RSxPWtA5Dx.IspqgEjUO', 'Dean', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (3, 'COOR', 'BSIT', '', 'bsitcoor', '$2y$10$eLmRYH/Y/4eJiFTYCYFWTuToi3TdlRSLHUyA/bEaG3Yh0KxQ6omN2', 'Coordinator', NULL, NULL, 'bsit@gmail.com', NULL, 1, NULL, NULL, NULL, NULL),
 (4, 'Abella', 'Adriane Paul', NULL, '1190302', '$2y$10$hAq3AW4Qv6MDR9oFDIdNUOBxHFKkCkiZ90KNfH96PU4iGOdFIYeqC', 'Student', NULL, NULL, NULL, 'Male', 1, NULL, NULL, '1190302', 2022),
-(5, 'Abellano', 'Dynarose', NULL, '1200043', '$2y$10$3PfUofkZktBG2zg9D8IJH.hl9yhpJUfhEmyChvMDjIiMGG70y1EF6', 'Student', NULL, NULL, NULL, 'Female', 2, NULL, NULL, '1200043', 2022);
+(5, 'Abellano', 'Dynarose', NULL, '1200043', '$2y$10$3PfUofkZktBG2zg9D8IJH.hl9yhpJUfhEmyChvMDjIiMGG70y1EF6', 'Student', NULL, NULL, NULL, 'Female', 3, NULL, NULL, '1200043', 2022);
 
 -- --------------------------------------------------------
 
@@ -249,8 +246,7 @@ ALTER TABLE `requirements`
 -- Indexes for table `submit_requirements`
 --
 ALTER TABLE `submit_requirements`
-  ADD PRIMARY KEY (`submit_id`),
-  ADD KEY `requirement_id` (`requirement_id`);
+  ADD PRIMARY KEY (`submit_id`);
 
 --
 -- Indexes for table `users`
@@ -293,13 +289,13 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `requirements`
 --
 ALTER TABLE `requirements`
-  MODIFY `requirement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `requirement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `submit_requirements`
 --
 ALTER TABLE `submit_requirements`
-  MODIFY `submit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `submit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -342,13 +338,6 @@ ALTER TABLE `dean_department`
 --
 ALTER TABLE `ojt_hours`
   ADD CONSTRAINT `FK_ojt_hours_coordinator` FOREIGN KEY (`coordinator_id`) REFERENCES `coordinator` (`coordinator_id`);
-
---
--- Constraints for table `submit_requirements`
---
-ALTER TABLE `submit_requirements`
-  ADD CONSTRAINT `fk_requirement_id` FOREIGN KEY (`requirement_id`) REFERENCES `requirements` (`requirement_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `submit_requirements_ibfk_1` FOREIGN KEY (`requirement_id`) REFERENCES `requirements` (`requirement_id`);
 
 --
 -- Constraints for table `users`
