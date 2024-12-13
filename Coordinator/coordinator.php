@@ -75,6 +75,7 @@
                     <?php include "pages/requirement.php"; ?>
                     <?php include "pages/weeklyreport.php"; ?>
                     <?php include "pages/coor-profile.php"; ?>
+                    <?php include "pages/studend-file.php"; ?>
                 </div>
             </div>
             <!-- End of Main Content -->
@@ -103,9 +104,13 @@
     <script src="crud-ajax/retrieve-coor.js"></script>
     <script src="crud-ajax/post_requirement.js"></script>
 
-    <script src="crud-ajax/review_sub.js"></script>
+    <script src="crud-ajax/requirement/retrieve-stud-submitted-file.js"></script>
 
     <script src="crud-ajax/requirement/retrieve-student-file.js"></script>
+
+    <script src="function/requirement/folder-toggle.js"></script>
+
+    <script src="crud-ajax/requirement/student-req.js"></script>
     <!--END::CRUD AJAX FUNCTIONS-->
     
 
