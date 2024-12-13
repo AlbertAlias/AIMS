@@ -8,6 +8,8 @@
             <div class="card shadow-sm mb-3">
                 <div class="card-body">
                     <h5 class="card-title mt-2 mb-3">Your requirement</h5>
+                    <input type="hidden" class="requirement-id" value="${req.requirement_id}">
+                    <input type="hidden" class="student-id" value="${user.student_id}">
 
                     <div id="fileContainer" class="mb-3"></div>
                     

@@ -1,15 +1,8 @@
 $(document).ready(function () {
     const requirementsContainer = $("#requirementsContainer");
     const postedRequirementsContainer = $("#postedRequirementsContainer");
-
-    // Function to check if the user has already posted a requirement
-    function checkUserPostedRequirement() {
-        return $.ajax({
-            url: "controller/requirement/check-student-posted.php", // PHP script to check if the user has posted a requirement
-            method: "GET",
-            dataType: "json"
-        });
-    }
+    const requirementTitleElement = $(".card-title.mt-2.mb-3");
+    const hiddenRequirementIdInput = $(".requirement-id");
 
     // Function to load the coordinator's requirements
     function loadCoordinatorRequirements() {
@@ -20,6 +13,15 @@ $(document).ready(function () {
             success: function (result) {
                 if (result.success) {
                     const requirements = result.requirements;
+
+                    // Add studentId as hidden input field
+                    const studentId = result.studentId;
+                    const hiddenStudentIdInput = $('<input>', {
+                        type: 'hidden',
+                        class: 'student-id',
+                        value: studentId
+                    });
+                    $('body').append(hiddenStudentIdInput); // Append it to the body or any other container
 
                     if (requirements.length > 0) {
                         // HTML for requirementsContainer (only title)
@@ -32,7 +34,7 @@ $(document).ready(function () {
                                 <div class="card task-card task-card-hover px-3 py-2 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px, rgba(0, 0, 0, 0.05) 0px 1px 3px; transition: transform 0.3s ease;">
                                     <div class="d-flex justify-content-between align-items-center" style="height: 100%;">
                                         <div class="d-flex flex-column justify-content-center">
-                                            <div class="card-title fs-5 text-primary fw-bold mt-2">${req.title}</div>
+                                            <div class="card-title fs-5 text-primary mt-2">${req.title}</div>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             ${statusBadge}
@@ -42,30 +44,42 @@ $(document).ready(function () {
                             `;
                         }).join("");
 
-                        // HTML for postedRequirementsContainer (full details)
+                        // HTML for postedRequirementsContainer (full details with hidden requirement_id)
                         const postedRequirementsHtml = requirements.map(req => {
                             // Format the created_at date to show only the month and date
                             const createdAt = new Date(req.created_at);
                             const formattedDate = createdAt.toLocaleString('default', { month: 'short', day: 'numeric' });
                         
                             return `
-                                <div class="card task-card px-3 py-2 mb-4" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                                <div 
+                                    class="card task-card px-3 py-2 mb-4 posted-requirement" data-title="${req.title}" data-requirement-id="${req.requirement_id}" 
+                                    style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; cursor: pointer;">
                                     <div class="d-flex align-items-center" style="height: 100%;">
                                         <i class="fa-solid fa-clipboard-list me-3" style="font-size: 2rem;"></i>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <div class="card-title fs-6 text-primary mb-2 pt-2">
-                                                ${req.first_name} ${req.last_name} posted a new requirement: ${req.title}
-                                            </div>
-                                            <div class="card-text fs-7 mb-2 text-muted">Posted ${formattedDate}</div>
+                                        <div class="d-flex flex-column justify-content-center mt-2">
+                                            <h5 class="card-title mb-1">${req.first_name} ${req.last_name} posted a new requirement: ${req.title}</h5>
+                                            <div class="card-text fs-7 mb-2 text-muted">${formattedDate}</div>
                                         </div>
                                     </div>
                                 </div>
                             `;
                         }).join("");
-                        
+
                         // Append the generated HTML to the respective containers
                         requirementsContainer.html(requirementsHtml);
                         postedRequirementsContainer.html(postedRequirementsHtml);
+
+                        // Add click event listener to update the title and hidden requirement ID
+                        $(".posted-requirement").on("click", function () {
+                            const title = $(this).data("title");
+                            const requirementId = $(this).data("requirement-id");
+
+                            // Update the card title
+                            requirementTitleElement.text(title);
+
+                            // Update the hidden requirement ID input
+                            hiddenRequirementIdInput.val(requirementId);
+                        });
                     } else {
                         requirementsContainer.html("<p class='text-muted'>No requirements posted by your coordinator.</p>");
                         postedRequirementsContainer.html("<p class='text-muted'>No requirements posted by your coordinator.</p>");
@@ -83,19 +97,6 @@ $(document).ready(function () {
         });
     }
 
-    // Check if the user has already posted a requirement
-    checkUserPostedRequirement().done(function (response) {
-        if (response.posted) {
-            // Hide the coordinator's requirements if the user has already posted a requirement
-            requirementsContainer.html("<p class='text-muted'>You have already posted a requirement.</p>");
-            postedRequirementsContainer.html("<p class='text-muted'>You have already posted a requirement.</p>");
-        } else {
-            // Load the coordinator's requirements if the user has not posted a requirement
-            loadCoordinatorRequirements();
-        }
-    }).fail(function (xhr, status, error) {
-        console.error("Error checking user posted requirement:", error);
-        requirementsContainer.html("<p class='text-danger'>Failed to check user posted requirement. Please try again later.</p>");
-        postedRequirementsContainer.html("<p class='text-danger'>Failed to check user posted requirement. Please try again later.</p>");
-    });
+    // Load the coordinator's requirements
+    loadCoordinatorRequirements();
 });

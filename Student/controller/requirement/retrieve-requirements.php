@@ -37,7 +37,8 @@
             $requirements[] = $row;
         }
 
-        echo json_encode(["success" => true, "requirements" => $requirements]);
+        // Add student ID to the response
+        echo json_encode(["success" => true, "requirements" => $requirements, "studentId" => $student_id]);
     } catch (Exception $e) {
         echo json_encode(["success" => false, "error" => $e->getMessage()]);
     }
