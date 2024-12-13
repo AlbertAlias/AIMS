@@ -67,18 +67,14 @@
             <!-- Table Placeholder -->
             <div class="table-responsive">
                 <table id="usersTable" class="table table-hover text-center" style="width: 100%;">
-                    <thead class="table-light">
+                <thead class="table-light">
                         <tr>
-                            <th>
-                                <!-- Select All Checkbox -->
-                                <input type="checkbox" id="selectAllCheckbox">
-                            </th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Department</th>
-                            <th>Student ID</th>
-                            <th>Gender</th>
-                            <th>Personal Email</th>
+                        <th>First Name</th>
+            <th>Last Name</th>
+            <th>Student ID</th>
+            <th>Department</th>
+            <th>Company</th>
+            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="tdata">
@@ -102,4 +98,22 @@
         </div>
     </div>
 
+    <div class="modal fade" id="actionModal" tabindex="-1" aria-labelledby="actionModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="actionModalLabel">Student Action</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Modal content goes here -->
+                    <p id="modalStudentId"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

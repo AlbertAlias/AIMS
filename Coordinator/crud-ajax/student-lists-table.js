@@ -55,6 +55,12 @@ $('#selectAllCheckbox').on('change', function() {
     });
 });
 
+$(document).on('click', '.open-modal-btn', function() {
+    const studentId = $(this).data('id'); // Get student ID from data attribute
+    $('#modalStudentId').text(`Selected Student ID: ${studentId}`);
+});
+
+
 // Handle individual row checkbox
 $(document).on('change', '#usersTable tbody input[type="checkbox"]', function() {
     const totalCheckboxes = $('#usersTable tbody input[type="checkbox"]').length;

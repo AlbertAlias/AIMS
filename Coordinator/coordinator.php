@@ -37,6 +37,10 @@
     <link rel="stylesheet" href="../assets/style/coor/requirement/requirement.css">
 
 
+    <link rel="stylesheet" href="../assets/style/coor/weekly/weekly.css">
+
+
+
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
                 integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -73,7 +77,6 @@
                     <?php include "pages/dashboard.php"; ?>
                     <?php include "pages/students.php"; ?>
                     <?php include "pages/requirement.php"; ?>
-                    <?php include "pages/weeklyreport.php"; ?>
                     <?php include "pages/coor-profile.php"; ?>
                     <?php include "pages/studend-file.php"; ?>
                 </div>
@@ -113,6 +116,8 @@
     <script src="crud-ajax/requirement/student-req.js"></script>
     <!--END::CRUD AJAX FUNCTIONS-->
     
+
+    <script src="crud-ajax/testing.js"></script>
 
 </body>
 </html>
