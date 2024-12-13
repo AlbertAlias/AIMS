@@ -17,6 +17,10 @@
             <i class="fa-solid fa-file-pen"></i>
             <span>Reports</span>
         </a>
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'requirements-folder')">
+            <i class="fa-regular fa-folder-open"></i>
+            <span>Folder</span>
+        </a>
         <!-- <a href="#" class="sidebar-link" onclick="showSection(event, 'coordinators')">
             <i class="fa-solid fa-user-group"></i>
             <span>Coordinators</span>
@@ -44,7 +48,7 @@
         }
 
         // Hide all sections
-        document.querySelectorAll('#dashboard, #profile, #requirement, #weeklyreport').forEach(section => {
+        document.querySelectorAll('#dashboard, #profile, #requirement, #weeklyreport, #requirements-folder').forEach(section => {
             section.style.display = 'none';
         });
 

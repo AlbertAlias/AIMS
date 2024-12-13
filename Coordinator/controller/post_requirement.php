@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Prepare and execute database query
     try {
         $stmt = $conn->prepare(
-            "INSERT INTO requirements (coordinator_id, title, description, status) VALUES (?, ?, ?, 'pending')"
+            "INSERT INTO requirements (coordinator_id, title, description) VALUES (?, ?, ?)"
         );
         $stmt->bind_param("iss", $createdBy, $title, $description);
 

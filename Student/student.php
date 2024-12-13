@@ -73,6 +73,7 @@
                     <?php include "pages/dashboard.php"; ?>
                     <?php include "pages/requirement.php"; ?>
                     <?php include "pages/weeklyreport.php"; ?>
+                    <?php include "pages/requirements-folder.php"; ?>
                 </div>
             </div>
             <!-- End of Main Content -->
