@@ -19,7 +19,7 @@ try {
     $deptStmt->bind_param('i', $coordinatorUserId);
     $deptStmt->execute();
     $deptResult = $deptStmt->get_result()->fetch_assoc();
-    
+
     if (!$deptResult) {
         throw new Exception('Coordinator account does not have a linked department.');
     }
@@ -33,13 +33,19 @@ try {
     // Calculate pagination
     $start = ($page - 1) * $length;
 
-    // Query to get filtered and paginated students
+    // Query to get filtered and paginated students with department name
     $studentQuery = "
-        SELECT user_id, first_name, last_name, department_id 
-        FROM users 
-        WHERE user_type = 'Student' 
-          AND department_id = ? 
-          AND CONCAT_WS(' ', first_name, last_name, username, email) LIKE ? 
+        SELECT 
+            u.first_name, 
+            u.last_name, 
+            u.student_id, 
+            d.department_name, 
+            u.company 
+        FROM users u
+        LEFT JOIN department d ON u.department_id = d.department_id
+        WHERE u.user_type = 'Student' 
+          AND u.department_id = ? 
+          AND CONCAT_WS(' ', u.first_name, u.last_name, u.username, u.email) LIKE ? 
         LIMIT ?, ?";
     $stmt = $conn->prepare($studentQuery);
     if (!$stmt) {
@@ -50,24 +56,34 @@ try {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Generate HTML table rows with checkboxes
+    // Generate HTML table rows
     $html = '';
     while ($row = $result->fetch_assoc()) {
         $html .= '<tr>';
-        $html .= '<td><input type="checkbox" class="userCheckbox" data-id="' . htmlspecialchars($row['user_id']) . '"></td>';
         $html .= '<td>' . htmlspecialchars($row['first_name']) . '</td>';
         $html .= '<td>' . htmlspecialchars($row['last_name']) . '</td>';
-        $html .= '<td>' . htmlspecialchars($row['department_id']) . '</td>';
+        $html .= '<td>' . htmlspecialchars($row['student_id']) . '</td>';
+        $html .= '<td>' . htmlspecialchars($row['department_name']) . '</td>';
+        $html .= '<td>' . htmlspecialchars($row['company']) . '</td>';
+        $html .= '<td>
+            <button class="btn btn-primary btn-sm open-modal-btn" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#actionModal" 
+                    data-id="' . htmlspecialchars($row['student_id']) . '">
+                Action
+            </button>
+        </td>';
         $html .= '</tr>';
     }
 
     // Query to get total student count for pagination
     $countQuery = "
         SELECT COUNT(*) AS total 
-        FROM users 
-        WHERE user_type = 'Student' 
-          AND department_id = ? 
-          AND CONCAT_WS(' ', first_name, last_name, username, email) LIKE ?";
+        FROM users u
+        LEFT JOIN department d ON u.department_id = d.department_id
+        WHERE u.user_type = 'Student' 
+          AND u.department_id = ? 
+          AND CONCAT_WS(' ', u.first_name, u.last_name, u.username, u.email) LIKE ?";
     $countStmt = $conn->prepare($countQuery);
     if (!$countStmt) {
         throw new Exception('Failed to prepare count query.');
@@ -97,5 +113,4 @@ try {
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage()]);
 }
-$conn->close();
 ?>

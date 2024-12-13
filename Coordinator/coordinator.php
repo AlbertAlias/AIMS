@@ -78,7 +78,6 @@
                     <?php include "pages/students.php"; ?>
                     <?php include "pages/requirement.php"; ?>
                     <?php include "pages/coor-profile.php"; ?>
-                    <?php include "pages/studend-file.php"; ?>
                 </div>
             </div>
             <!-- End of Main Content -->

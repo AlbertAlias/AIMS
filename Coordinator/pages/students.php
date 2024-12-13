@@ -70,11 +70,11 @@
                 <thead class="table-light">
                         <tr>
                         <th>First Name</th>
-            <th>Last Name</th>
-            <th>Student ID</th>
-            <th>Department</th>
-            <th>Company</th>
-            <th>Action</th>
+                        <th>Last Name</th>
+                        <th>Student ID</th>
+                        <th>Department</th>
+                        <th>Company</th>
+                        <th>Action</th>
                         </tr>
                     </thead>
                     <tbody id="tdata">
