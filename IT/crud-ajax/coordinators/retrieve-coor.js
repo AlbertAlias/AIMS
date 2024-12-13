@@ -51,7 +51,7 @@ $(document).ready(function () {
     // When a coordinator button is clicked, fetch and populate their details
     $(document).on('click', '.coor-btn', function () {
         var userId = $(this).data('id'); // Get the ID of the selected coordinator
-
+    
         $.ajax({
             url: 'controller/coordinators/retrieve-coor-info.php',
             method: 'GET',
@@ -66,23 +66,14 @@ $(document).ready(function () {
                     $('#coor_middle_name').val(response.middle_name);
                     $('#coor_personal_email').val(response.email);
                     $('#coor_username').val(response.username);
-
-                    // Select the correct department in the dropdown
-                    function setDepartment() {
-                        if ($('#coor_department option').length > 0) {
-                            $('#coor_department').val(response.department_id);
-                        } else {
-                            setTimeout(setDepartment, 100); // Retry until dropdown is ready
-                        }
-                    }
-                    setDepartment();
-
+    
+                    // Set the coordinator's department
+                    setDepartment(response.department_id, response.department_name);
+    
                     // Show the Update and Cancel buttons, and hide the Submit button
                     $('#coorSubmitBtn').hide();
                     $('#coorUpdateBtn').show();
                     $('#coorCancelBtn').show();
-                } else {
-                    // console.error('Failed to retrieve coordinator details:', response.message);
                 }
             },
             error: function (xhr, status, error) {
@@ -90,6 +81,26 @@ $(document).ready(function () {
             },
         });
     });
+    
+    
+    // Function to set the coordinator's department (populate and pre-select it)
+    function setDepartment(departmentId, departmentName) {
+        var $select = $('#coor_department');
+        
+        // First clear all options in the select dropdown, except for the 'Choose Department' option
+        $select.empty();
+    
+        // Add the "Choose Department" option
+        $select.append('<option selected disabled>Choose Department</option>');
+    
+        // Add the department of the coordinator (this will remain as selected)
+        $select.append('<option value="' + departmentId + '" selected>' + departmentName + '</option>');
+    
+        // Call loadDepartments to add the available departments that do not belong to the coordinator
+        loadDepartments(departmentId); // Pass the coordinator's department ID to prevent it from being added again
+    }
+    
+    
 
     $('#coorUpdateBtn').click(function () {
         const userData = {
@@ -192,12 +203,21 @@ $(document).ready(function () {
     $('#coorCancelBtn').click(function () {
         // Reset the form fields
         $('#coordinatorForm')[0].reset();
-
+    
+        // Reset the department dropdown to its default state
+        var $select = $('#coor_department');
+        $select.empty();  // Clear the current options
+        $select.append('<option selected disabled>Choose Department</option>'); // Add the default "Choose Department" option
+    
+        // Call loadDepartments() to repopulate the department dropdown
+        loadDepartments(); // Reload available departments
+    
         // Hide the Update and Cancel buttons, and show the Submit button
         $('#coorSubmitBtn').show();
         $('#coorUpdateBtn').hide();
         $('#coorCancelBtn').hide();
     });
+    
 
     loadCoor(); // Initially load the coordinator list
 });

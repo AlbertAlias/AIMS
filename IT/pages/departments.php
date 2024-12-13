@@ -33,7 +33,6 @@
                 </form>
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3 mt-3">Assign Dean</h5>
                 <form id="assignDeanForm">
-                    <!-- Form content -->
                     <div class="row mb-3">
                         <div class="col-12 col-md-4">
                             <input type="hidden" id="deanID" name="deanID">
@@ -48,7 +47,6 @@
                             <label for="department1" class="form-label">Department 1<span class="text-danger">*</span></label>
                             <select class="form-select" id="add_department1" name="department1" required>
                                 <option selected>Choose Department 1</option>
-                                <!-- Populate department options dynamically -->
                             </select>
                         </div>
                     </div>
@@ -57,14 +55,12 @@
                             <label for="department2" class="form-label">Department 2<span class="text-danger"></span></label>
                             <select class="form-select" id="add_department2" name="department2">
                                 <option selected>Choose Department 2</option>
-                                <!-- Populate department options dynamically -->
                             </select>
                         </div>
                         <div class="col-12 col-md-6">
                             <label for="department3" class="form-label">Department 3<span class="text-danger"></span></label>
                             <select class="form-select" id="add_department3" name="department3">
                                 <option selected>Choose Department 3</option>
-                                <!-- Populate department options dynamically -->
                             </select>
                         </div>
                     </div>

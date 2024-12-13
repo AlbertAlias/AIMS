@@ -1,22 +1,38 @@
 <?php
-require_once "../../../dbconn.php";
+    require_once "../../../dbconn.php";
 
-// Fetch all departments
-$query = "SELECT department_id, department_name FROM department ORDER BY department_name ASC";
-$result = $conn->query($query);
+    // Check if we should exclude a specific department
+    $exclude_department_id = isset($_GET['exclude_department_id']) ? (int)$_GET['exclude_department_id'] : null;
 
-if ($result && $result->num_rows > 0) {
-    $departments = [];
-    while ($row = $result->fetch_assoc()) {
-        $departments[] = [
-            "id" => $row['department_id'],
-            "name" => $row['department_name']
-        ];
+    // Fetch departments that don't have a coordinator
+    $query = "
+        SELECT department_id, department_name
+        FROM department
+        WHERE department_id NOT IN (
+            SELECT DISTINCT department_id FROM users WHERE user_type = 'Coordinator'
+        )";
+    
+    // Exclude a department if needed
+    if ($exclude_department_id) {
+        $query .= " AND department_id != $exclude_department_id";
     }
-    echo json_encode(['success' => true, 'data' => $departments]);
-} else {
-    echo json_encode(['success' => false, 'error' => 'No departments found.']);
-}
 
-$conn->close();
+    $query .= " ORDER BY department_name ASC";
+
+    $result = $conn->query($query);
+
+    if ($result && $result->num_rows > 0) {
+        $departments = [];
+        while ($row = $result->fetch_assoc()) {
+            $departments[] = [
+                "id" => $row['department_id'],
+                "name" => $row['department_name']
+            ];
+        }
+        echo json_encode(['success' => true, 'data' => $departments]);
+    } else {
+        echo json_encode(['success' => false, 'error' => 'No departments found or all departments have coordinators.']);
+    }
+
+    $conn->close();
 ?>

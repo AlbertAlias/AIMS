@@ -1,0 +1,65 @@
+Form data received: {"deanID":"","last_name":"Bala","first_name":"uag","username":"adean","password":"adean","department1":"5","department2":"Choose Department 2","department3":"Choose Department 3"}
+SQL to insert into users: INSERT INTO users (last_name, first_name, username, password, user_type) 
+                VALUES ('Bala', 'uag', 'adean', '$2y$10$vH4xJ/4qrZzWtCZK95.5vOvPweBa4cTWkQOVcCw2TNu6XPAUNEWuG', 'Dean')
+Dean inserted successfully, dean_id: 17
+SQL to insert into dean_department: INSERT INTO dean_department (dean_id, department_id) VALUES ('17', '5')
+SQL to insert into dean_department: INSERT INTO dean_department (dean_id, department_id) VALUES ('17', 'Choose Department 2')
+Form data received: {"deanID":"","last_name":"Bala","first_name":"uag","username":"adean","password":"adean","department1":"5","department2":"Choose Department 2","department3":"Choose Department 3"}
+SQL to insert into users: INSERT INTO users (last_name, first_name, username, password, user_type) 
+                VALUES ('Bala', 'uag', 'adean', '$2y$10$npl0JAXWawC7/fAn5.NsCOLUIgCW0nGoLMVJzxDdKZGCfPllU0IUS', 'Dean')
+Form data received: {"last_name":"Arroyo","first_name":"Dyastin","username":"bstmdean","password":"bstmdean","department1":"4","department2":"Choose Department 2","department3":"Choose Department 3"}
+SQL to insert into users: INSERT INTO users (last_name, first_name, username, password, user_type) 
+                VALUES ('Arroyo', 'Dyastin', 'bstmdean', '$2y$10$R8B.Ob/Njbybq3E/XA5rIOfrUu5TlKkJ.qZoEq76WYj9wgIKe4U/u', 'Dean')
+Dean inserted successfully, dean_id: 19
+SQL to insert into dean_department: INSERT INTO dean_department (dean_id, department_id) VALUES ('19', '4')
+SQL to insert into dean_department: INSERT INTO dean_department (dean_id, department_id) VALUES ('19', 'Choose Department 2')
+Form data received: {"last_name":"Arroyo","first_name":"Dyastin","username":"tmdean","password":"tmdean","department1":"4","department2":"Choose Department 2","department3":"Choose Department 3"}
+SQL to insert into users: INSERT INTO users (last_name, first_name, username, password, user_type) 
+                VALUES ('Arroyo', 'Dyastin', 'tmdean', '$2y$10$nx19tXjlB3VbugqQIxfFCOC60ohi1seBYgVBU1RcmpyCoysYN/RYG', 'Dean')
+Dean inserted successfully, dean_id: 20
+SQL to insert into dean_department: INSERT INTO dean_department (dean_id, department_id) VALUES ('20', '4')
+SQL to insert into dean_department: INSERT INTO dean_department (dean_id, department_id) VALUES ('20', 'Choose Department 2')
+POST data received: {"last_name":"Arroyo","first_name":"Dyastin","username":"tmdean","password":"tmdean","department1":"4","department2":"","department3":""}
+POST data received: {"last_name":"Arroyo","first_name":"Dyastin","username":"tmdean","password":"tmdean","department1":"4","department2":"","department3":""}
+POST data received: {"last_name":"Balauag","first_name":"George","username":"adean","password":"adean","department1":"5","department2":"","department3":""}
+POST data received: {"last_name":"Lao","first_name":"Soffia Pearl","username":"tmdean","password":"tmdean","department1":"6","department2":"","department3":""}
+Error: Duplicate entry 'tmdean' for key 'username'
+POST data received: {"last_name":"Lao","first_name":"Soffia Pearl","username":"tmdean","password":"tmdean","department1":"6","department2":"","department3":""}
+Error: Duplicate entry 'tmdean' for key 'username'
+POST data received: {"last_name":"Lao","first_name":"Soffia Pearl","username":"tmdean","password":"tmdean","department1":"6","department2":"","department3":""}
+Error: Duplicate entry 'tmdean' for key 'username'
+POST data received: {"last_name":"Lao","first_name":"Soffia Pearl","username":"tmdean","password":"tmdean","department1":"6","department2":"","department3":""}
+Error: Duplicate entry 'tmdean' for key 'username'
+POST data received: {"last_name":"Lao","first_name":"Soffia Pearl","username":"tmdean","password":"tmdean","department1":"6","department2":"","department3":""}
+Error: Duplicate entry 'tmdean' for key 'username'
+POST data received: {"last_name":"Lao","first_name":"Soffia Pearl","username":"tmdean","password":"tmdean","department1":"6","department2":"","department3":""}
+Error: Duplicate entry 'tmdean' for key 'username'
+POST data received: {"last_name":"Lao","first_name":"Soffia Pearl","username":"tmdean","password":"tmdean","department1":"6","department2":"","department3":""}
+Error: Duplicate entry 'tmdean' for key 'username'
+POST data received: {"last_name":"Lao","first_name":"Soffia Pearl","username":"tmdean","password":"tmdean","department1":"6","department2":"","department3":""}
+Error: Unknown column 'id' in 'field list'
+POST data received: {"last_name":"Lao","first_name":"Soffia Pearl","username":"tmdean","password":"tmdean","department1":"6","department2":"","department3":""}
+Error: Unknown column 'id' in 'field list'
+POST data received: {"last_name":"Lao","first_name":"Soffia Pearl","username":"tmdean","password":"tmdean","department1":"6","department2":"","department3":""}
+Error: Username already exists
+POST data received: {"last_name":"Lao","first_name":"Soffia Pearl","username":"tmdean","password":"tmdean","department1":"6","department2":"","department3":""}
+Error: Username already exists
+POST data received: {"last_name":"Lao","first_name":"Soffia Pearl","username":"bsdean","password":"badean","department1":"6","department2":"","department3":""}
+POST data received: {"last_name":"dadas","first_name":"asdasd","username":"tmdean","password":"tmdean","department1":"7","department2":"","department3":""}
+Error: Username already exists
+POST data received: {"last_name":"dada","first_name":"dasdas","username":"tmdean","password":"tmdean","department1":"7","department2":"","department3":""}
+Error: Username already exists
+POST data received: {"last_name":"dada","first_name":"dasdas","username":"tmdean","password":"tmdean","department1":"7","department2":"","department3":""}
+Error: Username already exists
+POST data received: {"last_name":"dada","first_name":"dasdas","username":"tmdean","password":"tmdean","department1":"7","department2":"","department3":""}
+Error: Username already exists
+POST data received: {"last_name":"dada","first_name":"dasdas","username":"tmdean","password":"tmdean","department1":"7","department2":"","department3":""}
+Error: Username already exists
+POST data received: {"last_name":"dada","first_name":"dasdas","username":"tmdean","password":"tmdean","department1":"7","department2":"","department3":""}
+Error: Username already exists
+POST data received: {"last_name":"dada","first_name":"dasdas","username":"tmdean","password":"tmdean","department1":"7","department2":"","department3":""}
+Error: Username already exists
+POST data received: {"last_name":"asdasd","first_name":"asdas","username":"tmdean","password":"tmdean","department1":"7","department2":"","department3":""}
+Error: Username already exists
+POST data received: {"last_name":"fasfas","first_name":"fsafas","username":"tmdean","password":"tmdean","department1":"7","department2":"Choose Department 2","department3":"Choose Department 3"}
+Error: Username already exists
