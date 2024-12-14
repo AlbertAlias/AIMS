@@ -5,11 +5,10 @@ $(document).ready(function () {
         var lastName = $('#editLastNameInput').val();
         var firstName = $('#editFirstNameInput').val();
         var middleName = $('#editMiddleNameInput').val();
-        var suffix = $('#editSuffixInput').val();
         var location = $('#editLocationInput').val();
-        var civilStatus = $('#editCivilStatusInput').val();
-        var personalEmail = $('#editEmailInput').val();
-        var userName = $('#editUsernameInput').val();
+        var gender = $('#editGenderInput').val();
+        var email = $('#editEmailInput').val();
+        var username = $('#editUsernameInput').val();
 
         if (!lastName || !firstName) {
             Swal.fire({
@@ -38,11 +37,10 @@ $(document).ready(function () {
                 last_name: lastName,
                 first_name: firstName,
                 middle_name: middleName,
-                suffix: suffix,
                 address: location,
-                civil_status: civilStatus,
-                personal_email: personalEmail,
-                username: userName
+                gender: gender,
+                email: email,
+                username: username
             },
             success: function (response) {
                 var res = JSON.parse(response);
@@ -64,7 +62,6 @@ $(document).ready(function () {
                     // Close all modals
                     $('.modal').modal('hide');
                     refreshUserInfo();
-                    loadAdmins();
                 } else {
                     Swal.fire({
                         toast: true,
@@ -204,8 +201,8 @@ function refreshUserInfo() {
             if (userInfo.status === 'success') {
                 $('#users-name').text(userInfo.full_name);
                 $('#users-location').text(userInfo.address);
-                $('#users-civil-status').text(userInfo.civil_status);
-                $('#users-email').text(userInfo.personal_email);
+                $('#users-gender').text(userInfo.gender);
+                $('#users-email').text(userInfo.email);
                 $('#users-username').text(userInfo.username);
             } else {
                 Swal.fire({

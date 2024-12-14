@@ -7,8 +7,8 @@
 
         if ($user_id > 0) {
             // Prepare and execute the SQL query to retrieve the profile picture
-            $stmt = $conn->prepare("SELECT profile_picture FROM users WHERE id = ?");
-            $stmt->bind_param("i", $user_id);
+            $stmt = $conn->prepare("SELECT profile_picture FROM users WHERE user_id = ?");
+            $stmt->bind_param("i", $user_id); // Bind the user_id parameter
             $stmt->execute();
             $stmt->bind_result($profile_picture);
             $stmt->fetch();

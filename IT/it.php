@@ -74,7 +74,7 @@
                     <?php include "pages/departments.php"; ?>
                     <?php include "pages/coordinators.php"; ?>
                     <?php include "pages/students.php"; ?>
-                    <?php include "pages/admin-profile.php"; ?>
+                    <?php include "pages/profile.php"; ?>
                     <?php include "pages/supervisors.php"; ?>
                 </div>
             </div>
@@ -115,10 +115,10 @@
     <script src="crud-ajax/students/create-upload-students.js"></script>
     <script src="crud-ajax/students/retrieve-students.js"></script>
 
-    <!-- <script src="crud-ajax/profile/retrieve-profile.js"></script> -->
-    <!-- <script src="crud-ajax/profile/create-profile.js"></script> -->
-    <!-- <script src="crud-ajax/profile/retrieve-admins-info.js"></script> -->
-    <!-- <script src="crud-ajax/profile/update-admins-info.js"></script> -->
+    <script src="crud-ajax/profile/retrieve-profile.js"></script>
+    <script src="crud-ajax/profile/create-profile.js"></script>
+    <script src="crud-ajax/profile/retrieve-admins-info.js"></script>
+    <script src="crud-ajax/profile/update-admins-info.js"></script>
     <script src="functions/profile/profile-details.js"></script>
 
     <!-- <script src="crud-ajax/archive/archive.js"></script> -->

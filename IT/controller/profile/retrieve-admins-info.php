@@ -4,7 +4,7 @@
 
     // Ensure the user is logged in
     if (!isset($_SESSION['username'])) {
-        echo json_encode(['status' => 'error', 'message' => 'User not logged in']);
+        echo json_encode(['status' => 'error', 'message' => 'User not logged in or session expired']);
         exit();
     }
 
@@ -36,18 +36,21 @@
         exit();
     }
 
-    $stmt = $conn->prepare("SELECT last_name, first_name, middle_name, suffix, address, civil_status, personal_email, username FROM users WHERE username = ?");
+    // Query user details based on the schema
+    $stmt = $conn->prepare("SELECT last_name, first_name, middle_name, address, gender, email, username 
+                                FROM users 
+                                WHERE username = ?");
     $stmt->bind_param('s', $user_username);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($last_name, $first_name, $middle_name, $suffix, $address, $civil_status, $personal_email, $username);
+        $stmt->bind_result($last_name, $first_name, $middle_name, $address, $gender, $email, $username);
         $stmt->fetch();
 
+        // Concatenate full name
         $full_name = $last_name . ', ' . $first_name;
         if ($middle_name) $full_name .= ' ' . $middle_name;
-        if ($suffix) $full_name .= ' ' . $suffix;
 
         echo json_encode([
             'status' => 'success',
@@ -55,10 +58,9 @@
             'last_name' => $last_name,
             'first_name' => $first_name,
             'middle_name' => $middle_name,
-            'suffix' => $suffix,
             'address' => $address,
-            'civil_status' => $civil_status,
-            'personal_email' => $personal_email,
+            'gender' => $gender,
+            'email' => $email,
             'username' => $username
         ]);
     } else {

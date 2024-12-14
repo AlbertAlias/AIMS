@@ -22,8 +22,8 @@
             if (in_array(strtolower($file_type), $allowed_types)) {
                 // Move the uploaded file to the specified directory
                 if (move_uploaded_file($file_tmp, $file_path)) {
-                    // Store only the file name in the database
-                    $stmt = $conn->prepare("UPDATE users SET profile_picture = ? WHERE id = ?");
+                    // Store only the file name in the database (Make sure you're using user_id column)
+                    $stmt = $conn->prepare("UPDATE users SET profile_picture = ? WHERE user_id = ?");
                     $stmt->bind_param("si", $unique_file_name, $user_id); // Save only the file name
 
                     if ($stmt->execute()) {
