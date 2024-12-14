@@ -30,10 +30,9 @@ try {
     $length = isset($_GET['length']) ? max(1, intval($_GET['length'])) : 10;
     $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
-    // Calculate pagination
     $start = ($page - 1) * $length;
 
-    // Query to get filtered and paginated students with department name
+    // Query to fetch paginated data with department name
     $studentQuery = "
         SELECT 
             u.first_name, 
@@ -56,7 +55,7 @@ try {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Generate HTML table rows
+    // Generate HTML rows
     $html = '';
     while ($row = $result->fetch_assoc()) {
         $html .= '<tr>';
@@ -76,7 +75,7 @@ try {
         $html .= '</tr>';
     }
 
-    // Query to get total student count for pagination
+    // Query to get total students for pagination
     $countQuery = "
         SELECT COUNT(*) AS total 
         FROM users u
@@ -93,13 +92,23 @@ try {
     $countResult = $countStmt->get_result()->fetch_assoc();
     $totalRecords = $countResult['total'];
 
-    // Generate pagination
-    $totalPages = ceil($totalRecords / $length);
-    $pagination = '';
-    for ($i = 1; $i <= $totalPages; $i++) {
-        $pagination .= '<li class="page-item ' . ($i === $page ? 'active' : '') . '">
-            <a class="page-link" href="#" data-page="' . $i . '">' . $i . '</a>
-        </li>';
+    // Handle edge case when no records are found
+    if ($totalRecords <= 0) {
+        $pagination = '';
+    } else {
+        $totalPages = ceil($totalRecords / $length);
+
+        // Show only a maximum range of 5 pages around the current page
+        $pagination = '';
+        $pageRange = 2; // How many pages to show left and right of the current page
+        $startPage = max(1, $page - $pageRange);
+        $endPage = min($totalPages, $page + $pageRange);
+
+        for ($i = $startPage; $i <= $endPage; $i++) {
+            $pagination .= '<li class="page-item ' . ($i === $page ? 'active' : '') . '">
+                <a class="page-link" href="#" data-page="' . $i . '">' . $i . '</a>
+            </li>';
+        }
     }
 
     // Return JSON response

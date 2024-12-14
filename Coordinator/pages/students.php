@@ -63,10 +63,10 @@
         </div>
         
         <!-- Body -->
-        <div class="card-body bg-white">
+        <div class="card-body bg-white p-0">
             <!-- Table Placeholder -->
             <div class="table-responsive">
-                <table id="usersTable" class="table table-hover text-center" style="width: 100%;">
+                <table id="usersTable" class="table table-hover text-center m-0" style="width: 100%;">
                 <thead class="table-light">
                         <tr>
                         <th>First Name</th>
@@ -97,8 +97,10 @@
             </div>
         </div>
     </div>
+</div>
 
-    <div class="modal fade" id="actionModal" tabindex="-1" aria-labelledby="actionModalLabel" aria-hidden="true">
+
+<div class="modal fade" id="actionModal" tabindex="-1" aria-labelledby="actionModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -116,4 +118,3 @@
             </div>
         </div>
     </div>
-</div>
