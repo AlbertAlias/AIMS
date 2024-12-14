@@ -46,11 +46,11 @@
                                 </button>
                             </div>
                             <div class="mb-3 d-flex justify-content-between align-items-center">
-                                <label class="form-label" for="civil-status">
-                                    <i class="fa-solid fa-heart fa-lg" style="color: #198754;"></i>
-                                    <span id="users-civil-status"></span>
+                                <label class="form-label" for="gender">
+                                    <i class="fa-solid fa-venus-mars" style="color: #198754;"></i>
+                                    <span id="users-gender"></span>
                                 </label>
-                                <button type="button" id="civilEditBtn" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#editCivilStatusModal">
+                                <button type="button" id="genderEditBtn" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#editGenderModal">
                                     <i class="fa-solid fa-pen"></i> Edit
                                 </button>
                             </div>
@@ -120,11 +120,6 @@
                     <input type="text" class="form-control" id="editMiddleNameInput" placeholder="Middle name">
                 </div>
 
-                <!-- Suffix -->
-                <div class="mb-3">
-                    <input type="text" class="form-control" id="editSuffixInput" placeholder="Suffix (e.g., Jr., Sr.)">
-                </div>
-
                 <div class="d-flex justify-content-end mt-3">
                     <button type="button" class="btn btn-sm btn-primary">Update</button>
                 </div>
@@ -151,20 +146,19 @@
     </div>
 </div>
 
-<!-- Modal for Civil Status -->
-<div class="modal fade" id="editCivilStatusModal" tabindex="-1" aria-labelledby="editCivilStatusModalLabel" aria-hidden="true">
+<!-- Modal for Gender -->
+<div class="modal fade" id="editGenderModal" tabindex="-1" aria-labelledby="editGenderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editCivilStatusModalLabel">Edit Civil Status</h5>
+                <h5 class="modal-title" id="editGenderModalLabel">Edit Gender Status</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Dropdown for Civil Status -->
-                <select class="form-select" id="editCivilStatusInput">
-                    <option value="Single">Single</option>
-                    <option value="Married">Married</option>
-                    <option value="Divorced">Divorced</option>
+                <!-- Dropdown for Gender -->
+                <select class="form-select" id="editGenderInput">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
                 </select>
                 <div class="d-flex justify-content-end mt-3">
                     <button type="button" class="btn btn-sm btn-primary">Update</button>

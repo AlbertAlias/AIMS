@@ -21,14 +21,6 @@
             <i class="fa-regular fa-folder-open"></i>
             <span>Folder</span>
         </a>
-        <!-- <a href="#" class="sidebar-link" onclick="showSection(event, 'coordinators')">
-            <i class="fa-solid fa-user-group"></i>
-            <span>Coordinators</span>
-        </a> -->
-        <!-- <a href="#" class="sidebar-link" onclick="showSection(event, 'interns')">
-            <i class="fa-solid fa-graduation-cap"></i>
-            <span>Interns</span>
-        </a> -->
     </nav>
 </div>
 
@@ -48,7 +40,7 @@
         }
 
         // Hide all sections
-        document.querySelectorAll('#dashboard, #profile, #requirement, #weeklyreport, #requirements-folder').forEach(section => {
+        document.querySelectorAll('#dashboard, #requirement, #weeklyreport, #requirements-folder, #profile').forEach(section => {
             section.style.display = 'none';
         });
 

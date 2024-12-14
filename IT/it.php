@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="../assets/style/itdev/departments.css">
     <link rel="stylesheet" href="../assets/style/itdev/coordinators.css">
     <link rel="stylesheet" href="../assets/style/itdev/student.css">
-    <link rel="stylesheet" href="../assets/style/itdev/profile.css">
+    <link rel="stylesheet" href="../assets/style/core-css/profile.css">
     <link rel="stylesheet" href="../assets/style/itdev/internlist.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
                 integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -115,10 +115,10 @@
     <script src="crud-ajax/students/create-upload-students.js"></script>
     <script src="crud-ajax/students/retrieve-students.js"></script>
 
-    <script src="crud-ajax/profile/retrieve-profile.js"></script>
-    <script src="crud-ajax/profile/create-profile.js"></script>
-    <script src="crud-ajax/profile/retrieve-admins-info.js"></script>
-    <script src="crud-ajax/profile/update-admins-info.js"></script>
+    <script src="crud-ajax/profile/retrieve-users-profile.js"></script>
+    <script src="crud-ajax/profile/create-users-profile.js"></script>
+    <script src="crud-ajax/profile/retrieve-users-info.js"></script>
+    <script src="crud-ajax/profile/update-users-info.js"></script>
     <script src="functions/profile/profile-details.js"></script>
 
     <!-- <script src="crud-ajax/archive/archive.js"></script> -->
@@ -126,6 +126,5 @@
     <script src="crud-ajax/supervisors/create-visors.js"></script>
 
     <!--END::CRUD AJAX FUNCTIONS-->
-
 </body>
 </html>

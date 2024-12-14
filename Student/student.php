@@ -27,11 +27,12 @@
     <link rel="stylesheet" href="../assets/style/core-css/main.css">
     <link rel="stylesheet" href="../assets/style/core-css/sidebar.css">
     <link rel="stylesheet" href="../assets/style/core-css/header.css">
+    <link rel="stylesheet" href="../assets/style/core-css/profile.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
                 rel="stylesheet">
 
     <link rel="stylesheet" href="../assets/style/itdev/dashboard.css">
-    <link rel="stylesheet" href="../assets/style/itdev/profile.css">
+
 
     <link rel="stylesheet" href="../assets/style/student/dashboard.css">
     <link rel="stylesheet" href="../assets/style/student/requirement.css">
@@ -74,6 +75,7 @@
                     <?php include "pages/requirement.php"; ?>
                     <?php include "pages/weeklyreport.php"; ?>
                     <?php include "pages/requirements-folder.php"; ?>
+                    <?php include "pages/profile.php"; ?>
                 </div>
             </div>
             <!-- End of Main Content -->
@@ -93,12 +95,12 @@
     <!-- <script src="functions/auto-logout/session-timeout.js"></script> -->
 
     <!--START::CRUD AJAX FUNCTIONS-->
-    <!-- <script src="crud-ajax/profile/retrieve-profile.js"></script> -->
-    <!-- <script src="crud-ajax/profile/create-profile.js"></script> -->
-    <!-- <script src="crud-ajax/profile/retrieve-admins-info.js"></script> -->
-    <!-- <script src="crud-ajax/profile/update-admins-info.js"></script> -->
-    <!-- <script src="functions/profile/profile-details.js"></script> -->
-
+    <script src="crud-ajax/profile/retrieve-users-profile.js"></script>
+    <script src="crud-ajax/profile/create-users-profile.js"></script>
+    <script src="crud-ajax/profile/retrieve-users-info.js"></script>
+    <script src="crud-ajax/profile/update-users-info.js"></script>
+    <script src="function/profile/profile-details.js"></script>
+    
     <script src="crud-ajax/requirement/retrieve-requirements.js"></script>
     <script src="crud-ajax/requirement/create-submit-file.js"></script>
     <script src="crud-ajax/requirement/retrieve-submit-file.js"></script>

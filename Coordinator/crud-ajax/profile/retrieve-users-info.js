@@ -1,7 +1,7 @@
 $(document).ready(function () {
     // Fetch user info when the page loads
     $.ajax({
-        url: 'controller/profile/retrieve-admins-info.php',
+        url: 'controller/profile/retrieve-users-info.php',
         type: 'POST',
         data: { username: '<?php echo $_SESSION["username"]; ?>' },
         success: function (response) {
@@ -36,7 +36,7 @@ $(document).ready(function () {
         var oldPassword = $(this).val(); // Get the value entered in the old password input
 
         $.ajax({
-            url: 'controller/profile/retrieve-admins-info.php',
+            url: 'controller/profile/retrieve-users-info.php',
             type: 'POST',
             data: { oldPassword: oldPassword }, // Send old password for verification
             success: function (response) {

@@ -31,7 +31,7 @@ $(document).ready(function () {
 
         // Send AJAX request to update information
         $.ajax({
-            url: 'controller/profile/update-admins-info.php',
+            url: 'controller/profile/update-users-info.php',
             type: 'POST',
             data: {
                 last_name: lastName,
@@ -194,7 +194,7 @@ $(document).ready(function () {
 // Refresh user info
 function refreshUserInfo() {
     $.ajax({
-        url: 'controller/profile/retrieve-admins-info.php',
+        url: 'controller/profile/retrieve-users-info.php',
         type: 'POST',
         success: function (response) {
             var userInfo = JSON.parse(response);
