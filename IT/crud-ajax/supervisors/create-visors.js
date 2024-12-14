@@ -22,6 +22,7 @@ $(document).ready(function () {
             data: formData,
             dataType: "json",
             success: function (response) {
+                console.log(response); // Log the entire response
                 if (response.success) {
                     alert("Supervisor added successfully!");
                     $("#visorForm")[0].reset(); // Reset the form

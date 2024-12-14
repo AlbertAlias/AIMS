@@ -35,7 +35,6 @@
     <link rel="stylesheet" href="../assets/style/core-css/profile.css">
     <link rel="stylesheet" href="../assets/style/coor/studentreq/studentreq.css">
     <link rel="stylesheet" href="../assets/style/coor/requirement/requirement.css">
-    <link rel="stylesheet" href="../assets/style/coor/weekly/weekly.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
                 integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -98,20 +97,22 @@
     <script src="function/profile/profile-details.js"></script>
 
     <script src="crud-ajax/student-lists-table.js"></script>
-    <script src="crud-ajax/retrieve-coor.js"></script>
     <script src="crud-ajax/post_requirement.js"></script>
 
     <script src="crud-ajax/requirement/retrieve-stud-submitted-file.js"></script>
 
     <script src="crud-ajax/requirement/retrieve-student-file.js"></script>
 
-    <script src="function/requirement/folder-toggle.js"></script>
-
-    <script src="crud-ajax/requirement/student-req.js"></script>
-    <!--END::CRUD AJAX FUNCTIONS-->
+    <!-- <script src="crud-ajax/retrieve-coor.js"></script> -->
     
+    <!-- <script src="crud-ajax/requirement/student-req.js"></script> -->
 
-    <script src="crud-ajax/testing.js"></script>
+    <!-- AL -->
+    <script src="crud-ajax/requirement/retrieve-stud-lists.js"></script>
+    <script src="crud-ajax/requirement/retrieve-companies.js"></script>
+    <script src="crud-ajax/requirement/retrieve-supervisors.js"></script>
+    <script src="crud-ajax/requirement/create-assign-supervisors.js"></script>
 
+    <!--END::CRUD AJAX FUNCTIONS-->
 </body>
 </html>

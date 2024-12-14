@@ -2,6 +2,9 @@
 // Include database connection
 require_once '../../../dbconn.php';
 
+// Set response header
+header('Content-Type: application/json');
+
 // Capture form data from AJAX request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $last_name = $conn->real_escape_string(trim($_POST['visor_last_name']));
@@ -30,14 +33,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Insert supervisor into the database
-    $query = "INSERT INTO users (last_name, first_name, middle_name, gender, email, company, company_address, username, password, user_type)
-              VALUES ('$last_name', '$first_name', '$middle_name', '$gender', '$email', '$company', '$company_address', '$username', '$password', 'Supervisor')";
+    $query = "INSERT INTO users (last_name, first_name, middle_name, gender, email, company, company_address, username, password, user_type) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 'Supervisor')";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("sssssssss", $last_name, $first_name, $middle_name, $gender, $email, $company, $company_address, $username, $password);
 
-    if ($conn->query($query) === TRUE) {
+    if ($stmt->execute()) {
         echo json_encode(['success' => true]);
     } else {
-        echo json_encode(['success' => false, 'message' => 'Error: ' . $conn->error]);
+        echo json_encode(['success' => false, 'message' => 'Error: ' . $stmt->error]);
     }
+
+    $stmt->close();
 }
 
 $conn->close();

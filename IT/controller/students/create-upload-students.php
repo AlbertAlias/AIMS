@@ -26,9 +26,11 @@ try {
             // Skip header row
             fgetcsv($handle);
 
-            $userInsertQuery = "INSERT INTO users (last_name, first_name, username, password, user_type, gender, department_id, student_id, academic_year) VALUES (?, ?, ?, ?, 'Student', ?, ?, ?, ?)";
+            $userInsertQuery = "INSERT INTO users (last_name, first_name, username, password, user_type, gender, department_id, student_id, academic_year) 
+                    VALUES (?, ?, ?, ?, 'Student', ?, ?, ?, ?)";
             $userStmt = $conn->prepare($userInsertQuery);
-
+            $userStmt->bind_param('ssssssis', $lastName, $firstName, $username, $password, $gender, $department_id, $studentID, $academicYear);
+            
             while (($data = fgetcsv($handle)) !== false) {
                 $lastName = $data[0];
                 $firstName = $data[1];
@@ -38,14 +40,14 @@ try {
                 $academicYear = $data[5];
                 $username = $data[6];
                 $password = password_hash($data[7], PASSWORD_BCRYPT);
-
+            
                 // Get department_id
                 $deptQuery = "SELECT department_id FROM department WHERE department_name = ?";
                 $deptStmt = $conn->prepare($deptQuery);
                 $deptStmt->bind_param('s', $departmentName);
                 $deptStmt->execute();
                 $deptStmt->bind_result($department_id);
-
+            
                 if (!$deptStmt->fetch()) {
                     $response['error'] = "Department not found: $departmentName";
                     $deptStmt->close();
@@ -54,16 +56,12 @@ try {
                     exit();
                 }
                 $deptStmt->close();
-
-                // Insert user data
-                $userStmt->bind_param('ssssssis', $lastName, $firstName, $username, $password, $gender, $department_id, $studentID, $academicYear);
-                if (!$userStmt->execute()) {
-                    $response['error'] = 'Error inserting data into users table.';
-                    ob_clean(); // Clear any output
-                    echo json_encode($response);
-                    exit();
-                }
+            
+                // Insert student data
+                $userStmt->execute();  // Execute the prepared statement
             }
+            
+            $userStmt->close();
 
             fclose($handle);
             $response['success'] = 'File uploaded successfully';
