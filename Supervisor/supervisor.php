@@ -72,7 +72,6 @@
                 <div id="page-content" style="width: 100%;">
                     <?php include "pages/dashboard.php"; ?>
                     <?php include "pages/student_list.php"; ?>
-                    <?php include "pages/evaluation.php"; ?>
 
 
                 </div>
@@ -94,8 +93,6 @@
     <!-- <script src="functions/auto-logout/session-timeout.js"></script> -->
     <script src="crud-ajax/student_list.js"></script>
 
-    <script src="crud-ajax/evaluation.js"></script>
-
     <!--START::CRUD AJAX FUNCTIONS-->
     <!-- <script src="crud-ajax/profile/retrieve-profile.js"></script> -->
     <!-- <script src="crud-ajax/profile/create-profile.js"></script> -->
@@ -105,4 +102,4 @@
 
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>
-</html>
+</html

@@ -134,64 +134,102 @@
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    const tableBody = document.getElementById('studentTableBody');
-    const searchInput = document.getElementById('searchInput');
-    const searchButton = document.getElementById('searchButton');
-    const paginationContainer = document.getElementById('pagination');
-    
-    let currentPage = 1;
-    const rowsPerPage = 10;
+  const tableBody = document.getElementById('studentTableBody');
+  const searchInput = document.getElementById('searchInput');
+  const searchButton = document.getElementById('searchButton');
+  const paginationContainer = document.getElementById('pagination');
+  const evaluationModal = new bootstrap.Modal(document.getElementById('evaluationModal'));
+  const evaluationForm = document.getElementById('evaluationForm');
+  const studentIdInput = document.getElementById('studentId');
 
-    /**
-     * Function to fetch students via AJAX
-     */
-    function fetchStudents(page = 1, searchTerm = '') {
+  let currentPage = 1;
+  const rowsPerPage = 10;
+
+  /**
+   * Function to fetch students via AJAX
+   */
+  function fetchStudents(page = 1, searchTerm = '') {
       fetch(`controller/student_list.php?page=${page}&length=${rowsPerPage}&search=${encodeURIComponent(searchTerm)}`)
-        .then(response => response.json())
-        .then(data => {
-          if (data.error) {
-            alert(data.error);
-            return;
-          }
-          renderTable(data.html);
-          renderPagination(data.pagination);
-          currentPage = page;
-        })
-        .catch(error => {
-          console.error('Error fetching students:', error);
-        });
-    }
+          .then(response => response.json())
+          .then(data => {
+              if (data.error) {
+                  alert(data.error);
+                  return;
+              }
+              renderTable(data.html);
+              renderPagination(data.pagination);
+              currentPage = page;
+          })
+          .catch(error => {
+              console.error('Error fetching students:', error);
+          });
+  }
 
-    /**
-     * Render student table rows
-     */
-    function renderTable(html) {
+  /**
+   * Render student table rows
+   */
+  function renderTable(html) {
       tableBody.innerHTML = html;
-    }
 
-    /**
-     * Render pagination buttons
-     */
-    function renderPagination(paginationHTML) {
+      // Attach event listeners to Evaluate buttons
+      const evaluateButtons = document.querySelectorAll('.evaluateButton');
+      evaluateButtons.forEach(button => {
+          button.addEventListener('click', function() {
+              const studentId = this.getAttribute('data-id');
+              studentIdInput.value = studentId;
+              evaluationModal.show();
+          });
+      });
+  }
+
+  /**
+   * Render pagination buttons
+   */
+  function renderPagination(paginationHTML) {
       paginationContainer.innerHTML = paginationHTML;
 
       // Attach event listeners to the pagination buttons
       const pageLinks = document.querySelectorAll('.page-link');
       pageLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          const page = parseInt(this.getAttribute('data-page'));
-          fetchStudents(page, searchInput.value.trim());
-        });
+          link.addEventListener('click', function() {
+              const page = parseInt(this.getAttribute('data-page'));
+              fetchStudents(page, searchInput.value.trim());
+          });
       });
-    }
+  }
 
-    /**
-     * Event listener for the search button
-     */
-    searchButton.addEventListener('click', function() {
+  /**
+   * Event listener for the search button
+   */
+  searchButton.addEventListener('click', function() {
       fetchStudents(1, searchInput.value.trim());
-    });
+  });
 
-    // Initial fetch when the page loads
-    fetchStudents();
+  // Submit Evaluation Form
+  evaluationForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const formData = new FormData(evaluationForm);
+
+      fetch('controller/student_evaluate.php', {
+          method: 'POST',
+          body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              alert('Evaluation submitted successfully!');
+              evaluationModal.hide();
+              fetchStudents(currentPage, searchInput.value.trim());
+          } else {
+              alert(data.error || 'Failed to submit evaluation.');
+          }
+      })
+      .catch(error => {
+          console.error('Error submitting evaluation:', error);
+      });
+  });
+
+  // Initial fetch when the page loads
+  fetchStudents();
 });
