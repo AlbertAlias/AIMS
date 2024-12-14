@@ -48,56 +48,86 @@ $(document).ready(function () {
 
     // When a student button is clicked, fetch and populate their details
     $(document).on('click', '.coor-btn', function () {
-        var userId = $(this).data('id'); // Get the ID of the selected students
-
+        var userId = $(this).data('id'); // Get the ID of the selected student
+        console.log("Clicked user ID:", userId);
+    
         $.ajax({
-            url: 'controller/coordinators/retrieve-coor-info.php',
+            url: 'controller/students/retrieve-students-info.php',
             method: 'GET',
             data: { user_id: userId },
             dataType: 'json',
             success: function (response) {
+                console.log("Response:", response); // Debug the response
+    
                 if (response.success) {
-                    $('#studentID').val(userId);
+                    // Populate the form with the retrieved data
+                    $('#student_id').val(userId);
                     $('#student_last_name').val(response.last_name);
                     $('#student_first_name').val(response.first_name);
-                    $('#student_middle_name').val(response.middle_name);
-                    $('#student_personal_email').val(response.email);
+                    $('#student_gender').val(response.gender);
+                    $('#studentID').val(response.studentID);
+                    $('#student_email').val(response.email);
                     $('#student_username').val(response.username);
-
-                    // Select the correct department in the dropdown
-                    function setDepartment() {
-                        if ($('#student_department option').length > 0) {
-                            $('#student_department').val(response.department_id);
-                        } else {
-                            setTimeout(setDepartment, 100); // Retry until dropdown is ready
-                        }
-                    }
-                    setDepartment();
-
-                    // Show the Update and Cancel buttons, and hide the Submit button
+    
+                    // Fetch department options
+                    $.ajax({
+                        url: 'controller/students/retrieve-depts.php',
+                        method: 'GET',
+                        dataType: 'json',
+                        success: function (departmentResponse) {
+                            if (departmentResponse.success) {
+                                var departmentDropdown = $('#student_department');
+                                departmentDropdown.empty(); // Clear existing options
+                                departmentDropdown.append('<option selected>Choose Department</option>');
+    
+                                // Populate dropdown with department_id and department_name
+                                departmentResponse.departments.forEach(function (department) {
+                                    departmentDropdown.append(
+                                        $('<option>', {
+                                            value: department.department_id, // Use department_id as value
+                                            text: department.department_name,
+                                        })
+                                    );
+                                });
+    
+                                // Set the selected department_id
+                                $('#student_department').val(response.department_id);
+                            } else {
+                                console.error('Failed to fetch departments:', departmentResponse.message);
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error fetching departments:', error);
+                        },
+                    });
+    
+                    // Show buttons
                     $('#studentSubmitBtn').hide();
                     $('#studentUpdateBtn').show();
                     $('#studentCancelBtn').show();
+                } else {
+                    console.error('Failed to fetch student details:', response.message);
                 }
             },
             error: function (xhr, status, error) {
                 console.error('Error:', error);
+                console.error('Response Text:', xhr.responseText);
             },
         });
     });
 
     $('#studentUpdateBtn').click(function () {
+        console.log("Update button clicked!");
+    
         const userData = {
-            user_id: $('#studentsID').val(),
-            last_name: $('#students_last_name').val(),
-            first_name: $('#students_first_name').val(),
-            middle_name: $('#students_middle_name').val(),
-            email: $('#students_personal_email').val(),
-            username: $('#students_username').val(),
-            department_id: $('#students_department').val(),
+            user_id: $('#student_id').val(),
+            last_name: $('#student_last_name').val(),
+            first_name: $('#student_first_name').val(),
+            email: $('#student_email').val(),
+            username: $('#student_username').val(),
+            department_id: $('#student_department').val(),
         };
-
-        // Validate required fields
+    
         if (!userData.last_name || !userData.first_name || !userData.email || !userData.username || !userData.department_id) {
             Swal.fire({
                 toast: true,
@@ -115,10 +145,9 @@ $(document).ready(function () {
             });
             return;
         }
-
-        // Send AJAX request to update student details
+    
         $.ajax({
-            url: 'controller/coordinators/update-coor.php', // PHP script to handle updates
+            url: 'controller/students/update-students.php',
             method: 'POST',
             data: userData,
             dataType: 'json',
@@ -138,12 +167,12 @@ $(document).ready(function () {
                             popup: 'mt-5'
                         }
                     });
-
-                    loadStudents(); // Reload the student list
-                    $('#studentsForm')[0].reset(); // Reset the form
-                    $('#studentSubmitBtn').show(); // Show Submit button
-                    $('#studentUpdateBtn').hide(); // Hide Update button
-                    $('#studentCancelBtn').hide(); // Hide Cancel button
+    
+                    loadStudents();
+                    $('#studentsForm')[0].reset();
+                    $('#studentSubmitBtn').show();  // Show Submit button
+                    $('#studentUpdateBtn').hide();  // Hide Update button
+                    $('#studentCancelBtn').hide();  // Hide Cancel button
                 } else {
                     Swal.fire({
                         toast: true,
@@ -163,8 +192,8 @@ $(document).ready(function () {
             },
             error: function (xhr, status, error) {
                 console.error('Error updating student:', error);
-                console.error('Response Text:', xhr.responseText); // Debugging info
-
+                console.error('Response Text:', xhr.responseText);
+    
                 Swal.fire({
                     toast: true,
                     position: 'top-end',
@@ -186,8 +215,11 @@ $(document).ready(function () {
     // Cancel the update and reset the form
     $('#studentCancelBtn').click(function () {
         // Reset the form fields
-        $('#studentForm')[0].reset();
-
+        $('#studentsForm')[0].reset();
+    
+        // Reset the "Choose Department" option explicitly
+        $('#student_department').val('Choose Department');
+    
         // Hide the Update and Cancel buttons, and show the Submit button
         $('#studentSubmitBtn').show();
         $('#studentUpdateBtn').hide();

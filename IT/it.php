@@ -114,16 +114,6 @@
 
     <script src="crud-ajax/students/create-upload-students.js"></script>
     <script src="crud-ajax/students/retrieve-students.js"></script>
-    <!-- <script src="crud-ajax/students/retrieve-student-lists.js"></script> -->
-    <!-- <script src="crud-ajax/students/retrieve-student-deptsName.js"></script> -->
-    <!-- <script src="crud-ajax/students/retrieve-student-info.js"></script> -->
-    <!-- <script src="crud-ajax/students/update-student.js"></script> -->
-
-    <!-- <script src="crud-ajax/admins/create-admins.js"></script>
-    <script src="crud-ajax/admins/retrieve-admin-details.js"></script>
-    <script src="crud-ajax/admins/retrieve-admins.js"></script>
-    <script src="functions/admins/admin-form-enable.js"></script>
-    <script src="crud-ajax/admins/update-admins.js"></script> -->
 
     <!-- <script src="crud-ajax/profile/retrieve-profile.js"></script> -->
     <!-- <script src="crud-ajax/profile/create-profile.js"></script> -->

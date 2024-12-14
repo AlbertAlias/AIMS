@@ -68,12 +68,12 @@
                     <div class="row mb-3">
                         <!-- First Name -->
                         <div class="col-md-4">
+                            <input type="hidden" id="student_id" name="id">
                             <label for="student_first_name" class="form-label required-asterisk">First Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="student_first_name" name="student_first_name" required>
                         </div>
                         <!-- Last Name -->
                         <div class="col-md-4">
-                            <input type="hidden" id="studentID" name="id">
                             <label for="student_last_name" class="form-label required-asterisk">Last Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="student_last_name" name="student_last_name" required>
                         </div>
@@ -97,29 +97,30 @@
                         <div class="col-md-8">
                             <label for="student_department" class="form-label required-asterisk">Department <span class="text-danger">*</span></label>
                             <select class="form-select" id="student_department" name="student_department" required>
-                                <option selected>Choose Department</option>
-                                <!-- Options will be dynamically populated here -->
+                                <!-- Options populated dynamically -->
                             </select>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <!-- Student Email -->
                         <div class="col-md-4">
-                            <label for="student_email" class="form-label required-asterisk">Student email<span class="text-danger">*</span></label>
+                            <label for="student_email" class="form-label required-asterisk">Student Email <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="student_email" name="student_email" required>
                         </div>
+                        <!-- Username -->
                         <div class="col-md-4">
                             <label for="student_username" class="form-label required-asterisk">Username <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="student_username" name="student_username" required>
                         </div>
+                        <!-- Password -->
                         <div class="col-md-4">
                             <label for="student_password" class="form-label required-asterisk">Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control" id="student_password" name="student_password" required>
                         </div>
                     </div>
-                    <button type="button" id="studentCancelBtn" class="btn btn-secondary" style="display: none;"><i class="fa-solid fa-rotate-left"></i> Cancel</button>
-                    <button type="button" id="studentUpdateBtn" class="btn btn-primary" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> Update</button>
-                    <button type="submit" id="studentSubmittn" class="btn btn-success"><i class="fa-solid fa-check-to-slot"></i> Submit</button>
+                    <button type="button" id="studentUpdateBtn" class="btn btn-primary" style="display: none;">Update</button>
+                    <button type="button" id="studentCancelBtn" class="btn btn-secondary" style="display: none;">Cancel</button>
+                    <button type="submit" id="studentSubmitBtn" class="btn btn-success">Submit</button>
                 </form>
             </div>
         </div>
