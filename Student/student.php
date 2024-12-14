@@ -35,7 +35,7 @@
 
 
     <link rel="stylesheet" href="../assets/style/student/dashboard.css">
-    <link rel="stylesheet" href="../assets/style/student/requirement.css">
+    <!-- <link rel="stylesheet" href="../assets/style/student/requirement.css"> -->
 
 
 
@@ -100,7 +100,7 @@
     <script src="crud-ajax/profile/retrieve-users-info.js"></script>
     <script src="crud-ajax/profile/update-users-info.js"></script>
     <script src="function/profile/profile-details.js"></script>
-    
+
     <script src="crud-ajax/requirement/retrieve-requirements.js"></script>
     <script src="crud-ajax/requirement/create-submit-file.js"></script>
     <script src="crud-ajax/requirement/retrieve-submit-file.js"></script>
