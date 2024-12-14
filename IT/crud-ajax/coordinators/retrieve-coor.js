@@ -99,8 +99,6 @@ $(document).ready(function () {
         // Call loadDepartments to add the available departments that do not belong to the coordinator
         loadDepartments(departmentId); // Pass the coordinator's department ID to prevent it from being added again
     }
-    
-    
 
     $('#coorUpdateBtn').click(function () {
         const userData = {
@@ -112,7 +110,7 @@ $(document).ready(function () {
             username: $('#coor_username').val(),
             department_id: $('#coor_department').val(),
         };
-
+    
         // Validate required fields
         if (!userData.last_name || !userData.first_name || !userData.email || !userData.username || !userData.department_id) {
             Swal.fire({
@@ -131,7 +129,7 @@ $(document).ready(function () {
             });
             return;
         }
-
+    
         // Send AJAX request to update coordinator details
         $.ajax({
             url: 'controller/coordinators/update-coor.php', // PHP script to handle updates
@@ -154,12 +152,17 @@ $(document).ready(function () {
                             popup: 'mt-5'
                         }
                     });
-
+    
                     loadCoor(); // Reload the coordinator list
                     $('#coordinatorForm')[0].reset(); // Reset the form
-                    $('#coorSubmitBtn').show(); // Show Submit button
-                    $('#coorUpdateBtn').hide(); // Hide Update button
-                    $('#coorCancelBtn').hide(); // Hide Cancel button
+    
+                    // Reset the select to the default option
+                    $('#coor_department').prop('selectedIndex', 0); // This resets to "Choose Department"
+    
+                    // Show Submit button and hide Update/Cancel buttons
+                    $('#coorSubmitBtn').show();
+                    $('#coorUpdateBtn').hide();
+                    $('#coorCancelBtn').hide();
                 } else {
                     Swal.fire({
                         toast: true,
@@ -180,7 +183,7 @@ $(document).ready(function () {
             error: function (xhr, status, error) {
                 console.error('Error updating coordinator:', error);
                 console.error('Response Text:', xhr.responseText); // Debugging info
-
+    
                 Swal.fire({
                     toast: true,
                     position: 'top-end',
