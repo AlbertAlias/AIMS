@@ -36,6 +36,9 @@
     <link rel="stylesheet" href="../assets/style/student/dashboard.css">
     <link rel="stylesheet" href="../assets/style/supervisor/supervisor.css">
 
+    <link rel="stylesheet" href="../assets/style/supervisor/modalform.css">
+
+
 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
@@ -92,6 +95,9 @@
     <script src="../assets/js/sidebar.js"></script>
     <!-- <script src="functions/auto-logout/session-timeout.js"></script> -->
     <script src="crud-ajax/student_list.js"></script>
+
+    <script src="crud-ajax/evaluate.js"></script>
+
 
     <!--START::CRUD AJAX FUNCTIONS-->
     <!-- <script src="crud-ajax/profile/retrieve-profile.js"></script> -->
