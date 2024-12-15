@@ -93,6 +93,9 @@
     <!-- <script src="functions/auto-logout/session-timeout.js"></script> -->
     <script src="crud-ajax/student_list.js"></script>
 
+    <script src="crud-ajax/evaluate.js"></script>
+
+
     <!--START::CRUD AJAX FUNCTIONS-->
     <!-- <script src="crud-ajax/profile/retrieve-profile.js"></script> -->
     <!-- <script src="crud-ajax/profile/create-profile.js"></script> -->
