@@ -55,18 +55,10 @@ try {
         $html .= '<td>' . $supervisorCompany . '</td>';
         $html .= '<td>' . $supervisorCompanyAddress . '</td>';
         $html .= '<td>
-            <button class="btn btn-success btn-sm open-modal-btn" 
-                    data-bs-toggle="modal" 
-                    data-bs-target="#assignSupervisorModal"
-                    data-user-id="' . $row['userID'] . '">
-                Assign
+            <button class="btn btn-success btn-sm open-modal-btn" data-bs-toggle="modal" data-bs-target="#assignSupervisorModal"
+                    data-user-id="' . $row['userID'] . '">Assign
             </button>
-            <button class="btn btn-info btn-sm open-modal-btn" 
-                    data-bs-toggle="modal" 
-                    data-bs-target="#viewRequirementsModal"
-                    data-user-id="' . $row['userID'] . '">
-                Requirements
-            </button>
+            <button class="btn btn-info btn-sm open-modal-btn" data-bs-toggle="modal" data-bs-target="#viewRequirementsModal" data-user-id="' . $row['userID'] . '">Requirements</button>
         </td>';
         $html .= '</tr>';
     }
@@ -106,7 +98,7 @@ try {
 
     // Main pagination buttons
     for ($i = $startPage; $i <= $endPage; $i++) {
-        $pagination .= '<li class="page-item' . ($i == $page ? ' active' : '') . '">';
+        $pagination .= '<li class="page-item ' . ($i == $page ? ' active' : '') . '">';
         $pagination .= '<a class="page-link" href="#" data-page="' . $i . '">' . $i . '</a>';
         $pagination .= '</li>';
     }

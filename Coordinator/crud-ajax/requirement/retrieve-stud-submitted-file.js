@@ -101,20 +101,29 @@ $(document).ready(function () {
             const formattedDate = submissionDate.toLocaleString('default', { month: 'short', day: 'numeric' });
 
             return `
-                <div 
-                    class="card task-card px-3 py-2 mb-4 submission-card position-relative" 
-                    data-submission-id="${sub.submit_id}" style="cursor: pointer;">
-                    <div class="d-flex align-items-center">
-                        <i class="fa-solid fa-file-alt me-3" style="font-size: 2rem;"></i>
-                        <div class="d-flex flex-column justify-content-center">
-                            <h5 class="card-title fs-6 mb-1">${sub.last_name}, ${sub.first_name}</h5>
-                            <h6 class="card-title fs-6 mb-1">${sub.document_name}</h6>
-                            <small class="text-muted">Submitted on: ${formattedDate}</small>
-                        </div>
+            <div class="card task-card px-3 py-2 mb-4 submission-card position-relative" data-submission-id="${submission.submit_id}" style="cursor: pointer;">
+                <div class="d-flex align-items-center">
+                    <!-- PDF Icon on the left, made larger -->
+                    <i class="fa-solid fa-file-pdf me-3" style="font-size: 3rem;"></i>
+            
+                    <!-- Document Name on the right -->
+                    <div class="d-flex flex-column">
+                        <h5 class="card-title fs-6 mb-1">${submission.document_name}</h5>
+                        <small class="text-muted">Submitted on: ${submission.submission_date}</small>
                     </div>
-                    <button class="btn btn-success btn-sm position-absolute top-0 end-0 m-2 btn-approve" data-id="${sub.submit_id}">Approve</button>
-                    <button class="btn btn-danger btn-sm position-absolute bottom-0 end-0 m-2 btn-reject" data-id="${sub.submit_id}">Reject</button>
                 </div>
+            
+                <!-- Status and Buttons -->
+                <div class="d-flex justify-content-between mt-2">
+                    <p class="card-text mb-1">
+                        <strong>Status: ${submission.status}</strong>
+                    </p>
+                    <div>
+                        <button class="btn btn-success btn-sm btn-approve" data-id="${submission.submit_id}">Approve</button>
+                        <button class="btn btn-danger btn-sm btn-reject" data-id="${submission.submit_id}">Reject</button>
+                    </div>
+                </div>
+            </div>
             `;
         }).join('');
 

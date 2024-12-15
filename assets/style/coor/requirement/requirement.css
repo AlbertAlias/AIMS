@@ -22,3 +22,85 @@
     padding-right: 2.5rem;
     padding-left: 0.5rem;
 }
+
+
+
+
+
+.custom-modal-size {
+    max-width: 70% !important;
+    height: 60vh !important;
+}
+
+.custom-modal-size .modal-content {
+    height: 100%;
+}
+
+
+.modal-body h5 {
+    font-weight: bold;
+    color: #333;
+}
+
+.nav-tabs {
+    border-bottom: 5px solid #383838;
+}
+
+.nav-tabs .nav-item {
+    flex: 1; /* Ensures each tab takes up equal width */
+}
+
+.nav-tabs .nav-link {
+    text-align: center;
+    font-weight: bold;
+    color: #555;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    background-color: #f9f9f9; /* Light background for inactive tabs */
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff #007bff transparent;
+}
+
+.tab-content {
+    padding-top: 1rem;
+}
+
+.nav-tabs .nav-link.active.pending-tab {
+    background-color: #ffc107; /* Bootstrap Warning (Yellow/Orange) */
+    color: white;
+    border-color: #ffc107 #ffc107 transparent;
+}
+
+.nav-tabs .nav-link.active.approved-tab {
+    background-color: #28a745; /* Bootstrap Success (Green) */
+    color: white;
+    border-color: #28a745 #28a745 transparent;
+}
+
+.nav-tabs .nav-link.active.rejected-tab {
+    background-color: #dc3545; /* Bootstrap Danger (Red) */
+    color: white;
+    border-color: #dc3545 #dc3545 transparent;
+}
+
+/* Styling for Inactive Tabs (default state) */
+.nav-tabs .nav-link {
+    color: #555;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    background-color: #f9f9f9;
+}
+
+.nav-tabs .nav-link:hover {
+    background-color: #198754;
+    color: #333;
+}
+
+/* Optional: Make the tab content padding consistent */
+.tab-content {
+    padding-top: 1rem;
+}
