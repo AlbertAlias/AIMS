@@ -100,7 +100,7 @@ try {
     if ($startPage > 1) {
         $pagination .= '<li class="page-item"><a class="page-link" href="#" data-page="1">1</a></li>';
         if ($startPage > 2) {
-            $pagination .= '<li class="page-item disabled"><span class="page-link">...</span></li>';
+            $pagination .= '<li class="page-item disabled"><span class="page-link"><i class="fa-solid fa-chevron-left"></i></span></li>';
         }
     }
 
@@ -114,7 +114,7 @@ try {
     // Last page button
     if ($endPage < $totalPages) {
         if ($endPage < $totalPages - 1) {
-            $pagination .= '<li class="page-item disabled"><span class="page-link">...</span></li>';
+            $pagination .= '<li class="page-item disabled"><span class="page-link"><i class="fa-solid fa-chevron-right"></i></span></li>';
         }
         $pagination .= '<li class="page-item"><a class="page-link" href="#" data-page="' . $totalPages . '">' . $totalPages . '</a></li>';
     }

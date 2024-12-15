@@ -9,10 +9,6 @@
             <i class="fa-solid fa-qrcode"></i>
             <span>Dashboard</span>
         </a>
-        <a href="#" class="sidebar-link" onclick="showSection(event, 'student')">
-            <i class="fa-solid fa-scroll"></i>
-            <span>Students</span>
-        </a>
         <a href="#" class="sidebar-link" onclick="showSection(event, 'requirements')">
             <i class="fa-solid fa-user-group"></i>
             <span>Requirements</span>
@@ -40,7 +36,7 @@
         }
 
         // Hide all sections
-        document.querySelectorAll('#dashboard, #student, #requirements, #weeklyreport, #profile').forEach(section => {
+        document.querySelectorAll('#dashboard, #requirements, #weeklyreport, #profile').forEach(section => {
             section.style.display = 'none';
         });
 
