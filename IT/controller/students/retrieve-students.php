@@ -9,27 +9,18 @@
 
     $result = $conn->query($sql);
 
-    $response = array();
-
-    // Check if the query returns any results
+    $response = ['success' => true, 'students' => []]; // Default: no students, but success is true
     if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $student = array(
+        while ($row = $result->fetch_assoc()) {
+            $student = [
                 'id' => $row['user_id'],
                 'last_name' => $row['last_name'],
                 'first_name' => $row['first_name'],
                 'department_name' => $row['department_name']
-            );
+            ];
             $response['students'][] = $student;
         }
-        $response['success'] = true;
-    } else {
-        $response['success'] = false;
-        $response['message'] = 'No students found';
     }
-
     $conn->close();
-
-    // Return the response as JSON
     echo json_encode($response);
 ?>

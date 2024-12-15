@@ -4,22 +4,24 @@ window.loadDepartments = function (excludeDeptId) {
         type: 'GET',
         dataType: 'json',
         success: function (response) {
-            if (response.success) {
-                var $select = $('#coor_department');
-                
-                // Loop through the departments and append them as options, excluding the coordinator's department
+            var $select = $('#coor_department');
+            $select.empty(); // Clear existing options
+
+            // Add "Choose Department" as the default option
+            $select.append('<option selected disabled>Choose Department</option>');
+
+            // Append available departments if any exist
+            if (response.success && response.data.length > 0) {
                 $.each(response.data, function (index, department) {
-                    // Only add the department if it's not the coordinator's department
                     if (department.id !== excludeDeptId) {
-                        $select.append('<option value="' + department.id + '">' + department.name + '</option>');
+                        $select.append(`<option value="${department.id}">${department.name}</option>`);
                     }
                 });
-            } else {
-                alert('Error fetching departments: ' + response.error);
             }
+            // If no departments exist, just leave the dropdown empty beyond the default option
         },
         error: function () {
-            alert('An error occurred while fetching the departments.');
+            console.error('An error occurred while fetching the departments.');
         },
     });
 };

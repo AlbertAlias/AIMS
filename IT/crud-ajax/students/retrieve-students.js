@@ -1,20 +1,22 @@
 $(document).ready(function () {
     window.loadStudents = function () {
+        let studentsInfo = $('#studentsInfo');
+        studentsInfo.html('<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>');
         $.ajax({
             url: 'controller/students/retrieve-students.php',
             method: 'GET',
             dataType: 'json',
             success: function (response) {
-                if (response.success) {
+                if (response.success && response.students && response.students.length > 0) {
                     window.students = response.students;
                     updateStudentsList(window.students);
                 } else {
-                    console.error('Failed to load students:', response.message);
+                    updateStudentsList([], 'No students available yet.'); // Empty state message
                 }
             },
             error: function (xhr, status, error) {
                 console.error('Failed to load students:', error);
-                console.error('Response Text:', xhr.responseText); // Debug response
+                studentsInfo.html('<div class="text-danger">Failed to load students. Please try again later.</div>');
             },
         });
     };
@@ -22,23 +24,15 @@ $(document).ready(function () {
     function updateStudentsList(students, message = null) {
         let studentsInfo = $('#studentsInfo');
         studentsInfo.empty();
-
+    
         // If a message is provided, display it
         if (message) {
-            studentsInfo.append(`<div class="text-danger">${message}</div>`);
+            studentsInfo.html(`<div class="alert alert-info">${message}</div>`);
             return;
         }
-
-        // Limit the number of students displayed to 10
-        const limitedStudents = students.slice(0, 6);
-
-        // If no students found, display a message
-        if (limitedStudents.length === 0) {
-            updateStudentsList([], 'No students found');
-            return;
-        }
-
-        limitedStudents.forEach(function (student) {
+    
+        // If students are available, display them
+        students.forEach(function (student) {
             let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 coor-btn" data-id="${student.id}">
                         ${student.last_name}, ${student.first_name}<br>${student.department_name}
                         </button>`;
@@ -74,26 +68,22 @@ $(document).ready(function () {
                         url: 'controller/students/retrieve-depts.php',
                         method: 'GET',
                         dataType: 'json',
-                        success: function (departmentResponse) {
-                            if (departmentResponse.success) {
-                                var departmentDropdown = $('#student_department');
-                                departmentDropdown.empty(); // Clear existing options
+                        success: function (response) {
+                            var departmentDropdown = $('#student_department');
+                            departmentDropdown.empty();
+                        
+                            if (response.success && response.departments.length > 0) {
                                 departmentDropdown.append('<option selected>Choose Department</option>');
-    
-                                // Populate dropdown with department_id and department_name
-                                departmentResponse.departments.forEach(function (department) {
+                                response.departments.forEach(function (department) {
                                     departmentDropdown.append(
                                         $('<option>', {
-                                            value: department.department_id, // Use department_id as value
+                                            value: department.department_id,
                                             text: department.department_name,
                                         })
                                     );
                                 });
-    
-                                // Set the selected department_id
-                                $('#student_department').val(response.department_id);
                             } else {
-                                console.error('Failed to fetch departments:', departmentResponse.message);
+                                departmentDropdown.append('<option selected disabled>No departments available</option>');
                             }
                         },
                         error: function (xhr, status, error) {

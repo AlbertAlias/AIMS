@@ -10,7 +10,9 @@ $(document).ready(function () {
                     window.coordinators = response.coordinators;
                     updateCoordinatorList(window.coordinators);
                 } else {
-                    console.error('Failed to load coordinator:', response.message);
+                    // Gracefully handle empty data
+                    console.warn('No coordinators found. Displaying empty list.');
+                    updateCoordinatorList([], response.message);
                 }
             },
             error: function (xhr, status, error) {
