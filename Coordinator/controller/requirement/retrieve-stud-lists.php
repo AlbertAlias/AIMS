@@ -15,7 +15,7 @@ try {
     // Query to get filtered and paginated data
     $sql = "SELECT 
         users.user_id AS userID,
-        CONCAT(users.first_name, ' ', users.last_name) AS name,
+        CONCAT(users.last_name,' ', users.first_name) AS name,
         department.department_name AS department,
         users.student_id AS studentID,
         users.email AS email
