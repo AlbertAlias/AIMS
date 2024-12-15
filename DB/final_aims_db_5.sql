@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2024 at 03:34 AM
+-- Generation Time: Dec 14, 2024 at 06:55 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -137,20 +137,6 @@ INSERT INTO `requirements` (`requirement_id`, `coordinator_id`, `title`, `descri
 -- --------------------------------------------------------
 
 --
--- Table structure for table `student_supervisor`
---
-
-CREATE TABLE `student_supervisor` (
-  `id` int(11) NOT NULL,
-  `student_id` int(11) NOT NULL,
-  `supervisor_id` int(11) NOT NULL,
-  `company` varchar(100) NOT NULL,
-  `assigned_date` datetime DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `submit_requirements`
 --
 
@@ -205,16 +191,13 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `last_name`, `first_name`, `middle_name`, `username`, `password`, `user_type`, `emergency_number`, `address`, `email`, `gender`, `department_id`, `company`, `company_address`, `student_id`, `academic_year`, `profile_picture`) VALUES
 (1, 'Sabao', 'Joemari', '', 'itdev', '$2y$10$1/X0mF3r533RLAeuYG3pRuzk.4DhfKdjuTTCVj7uG/j2wotgnGARC', 'IT', NULL, 'Santa Rosa Laguna', 'itdev@gmail.com', 'Male', NULL, NULL, NULL, NULL, NULL, 'profile_675cf1ced375b9.47616365.jpg'),
 (2, 'DEAN', 'CEITE', NULL, 'ceitedean', '$2y$10$POlAJNjZLlLDDcQCEbCywesmhPze32aL4RSxPWtA5Dx.IspqgEjUO', 'Dean', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 'COOR', 'BSIT', '', 'bsitcoor', '$2y$10$eLmRYH/Y/4eJiFTYCYFWTuToi3TdlRSLHUyA/bEaG3Yh0KxQ6omN2', 'Coordinator', NULL, 'Santa Rosa', 'bsit@gmail.com', '', 1, NULL, NULL, NULL, NULL, NULL),
+(3, 'COOR', 'BSIT', '', 'bsitcoor', '$2y$10$eLmRYH/Y/4eJiFTYCYFWTuToi3TdlRSLHUyA/bEaG3Yh0KxQ6omN2', 'Coordinator', NULL, NULL, 'bsit@gmail.com', NULL, 1, NULL, NULL, NULL, NULL, NULL),
 (4, 'Abella', 'Adriane Paul', NULL, '1190302', '$2y$10$hAq3AW4Qv6MDR9oFDIdNUOBxHFKkCkiZ90KNfH96PU4iGOdFIYeqC', 'Student', NULL, NULL, '1-190302@asiatech.edu.ph', 'Male', 1, NULL, NULL, '1190302', 2022, NULL),
-(5, 'Abellano', 'Dynarose', NULL, '1200043', '$2y$10$3PfUofkZktBG2zg9D8IJH.hl9yhpJUfhEmyChvMDjIiMGG70y1EF6', 'Student', NULL, NULL, '1-200043@asiatech.edu.ph', 'Female', 2, NULL, NULL, '1200043', 2022, NULL),
+(5, 'Abellano', 'Dynarose', NULL, '1200043', '$2y$10$3PfUofkZktBG2zg9D8IJH.hl9yhpJUfhEmyChvMDjIiMGG70y1EF6', 'Student', NULL, NULL, '1200043@asiatech.edu.ph', 'Female', 1, NULL, NULL, '1200043', 2022, NULL),
 (22, 'Arroyo', 'Dyastin', NULL, 'tmdean', '$2y$10$UxP7myNub2Yq98M33Z1c8OwJ9a7.EpQaY.pGlukdmC6x5tv4vnOTO', 'Dean', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (23, 'Balauag', 'George', NULL, 'adean', '$2y$10$F0XvwILC4mxXj3f.4hrcXuGSVUoTNcDWT/xviTJqNWcx6MlBDtWf6', 'Dean', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (31, 'Lao', 'Soffia Pearl', NULL, 'bsdean', '$2y$10$Pocg1Hpy5W2bRhYgHt9RGuW33shfpGzsK9BM.0Kxi6GTc5q9yLioS', 'Dean', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(32, 'Payos', 'John Paul', '', 'cpecoor', '$2y$10$1iE8ZO35Uky.bffFqz9aVufEHsxez1WxJPknVZqlJktH/We0jEObW', 'Coordinator', NULL, NULL, 'cpe@gmail.com', NULL, 3, NULL, NULL, NULL, NULL, NULL),
-(33, 'Alias', 'Alvy', '', 'alvy', '$2y$10$6wuMiCep1DiGBxhZJio5D.LAre53wGMXRRZlD1GVMBomHPgWmsxMO', 'Supervisor', NULL, NULL, 'accenture@gmail.com', 'Male', NULL, 'Accenture', 'BGC', NULL, NULL, NULL),
-(34, 'Alias', 'Leonardrexan', '', 'drex', '$2y$10$/.E.nGJNvzGqNjsttme.HeuwyCgpGTW47apPvInILoCwJSWZy6L8W', 'Supervisor', NULL, NULL, 'fujitsu@gmail.com', 'Male', NULL, 'Fujitsu Die Tech Philippines Corporation', 'Gate 3 Sta.Rosa Laguna Techno Park', NULL, NULL, NULL),
-(35, 'Alias', 'Akisha Nianna', '', 'kisha', '$2y$10$rNzJrPRFHclultZziw6QeOaEjkOxCX1AJAJECpHHMLfj2Ub1RcLMu', 'Supervisor', NULL, NULL, 'densoten@gmail.com', 'Female', NULL, 'Denso Ten Philippines Corporation', 'Gate 1 Sta. Rosa Laguna Techno Park', NULL, NULL, NULL);
+(32, 'Payos', 'John Paul', '', 'cpecoor', '$2y$10$1iE8ZO35Uky.bffFqz9aVufEHsxez1WxJPknVZqlJktH/We0jEObW', 'Coordinator', NULL, NULL, 'cpe@gmail.com', NULL, 3, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -277,14 +260,6 @@ ALTER TABLE `requirements`
   ADD PRIMARY KEY (`requirement_id`);
 
 --
--- Indexes for table `student_supervisor`
---
-ALTER TABLE `student_supervisor`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `student_id` (`student_id`),
-  ADD KEY `supervisor_id` (`supervisor_id`);
-
---
 -- Indexes for table `submit_requirements`
 --
 ALTER TABLE `submit_requirements`
@@ -332,13 +307,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `requirements`
 --
 ALTER TABLE `requirements`
-  MODIFY `requirement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
-
---
--- AUTO_INCREMENT for table `student_supervisor`
---
-ALTER TABLE `student_supervisor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `requirement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `submit_requirements`
@@ -350,7 +319,7 @@ ALTER TABLE `submit_requirements`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `weekly_reports`
@@ -387,13 +356,6 @@ ALTER TABLE `dean_department`
 --
 ALTER TABLE `ojt_hours`
   ADD CONSTRAINT `FK_ojt_hours_coordinator` FOREIGN KEY (`coordinator_id`) REFERENCES `coordinator` (`coordinator_id`);
-
---
--- Constraints for table `student_supervisor`
---
-ALTER TABLE `student_supervisor`
-  ADD CONSTRAINT `student_supervisor_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `student_supervisor_ibfk_2` FOREIGN KEY (`supervisor_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `submit_requirements`
