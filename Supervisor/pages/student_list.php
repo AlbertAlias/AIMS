@@ -96,7 +96,7 @@
 </div> -->
 
 <div class="modal fade" id="evaluateModal" tabindex="-1" role="dialog" aria-labelledby="evaluateModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="evaluateModalLabel">Evaluate Student</h5>
@@ -106,102 +106,179 @@
       </div>
       <div class="modal-body">
         <form id="evaluationForm">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>CRITERIA</th>
-                <th>O (5)</th>
-                <th>VS (4)</th>
-                <th>S (3)</th>
-                <th>NI (2)</th>
-                <th>U (1)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td colspan="6"><strong>A. QUALITY OF WORK</strong></td>
-              </tr>
-              <tr>
-                <td>Accuracy of completed work according to the operational standards</td>
-                <td><input type="radio" name="quality1" value="5"></td>
-                <td><input type="radio" name="quality1" value="4"></td>
-                <td><input type="radio" name="quality1" value="3"></td>
-                <td><input type="radio" name="quality1" value="2"></td>
-                <td><input type="radio" name="quality1" value="1"></td>
-              </tr>
-              <tr>
-                <td>Thoroughness and attention to detail in performing the assigned tasks</td>
-                <td><input type="radio" name="quality2" value="5"></td>
-                <td><input type="radio" name="quality2" value="4"></td>
-                <td><input type="radio" name="quality2" value="3"></td>
-                <td><input type="radio" name="quality2" value="2"></td>
-                <td><input type="radio" name="quality2" value="1"></td>
-              </tr>
-              <tr>
-                <td>Neatness and presentation of work</td>
-                <td><input type="radio" name="quality3" value="5"></td>
-                <td><input type="radio" name="quality3" value="4"></td>
-                <td><input type="radio" name="quality3" value="3"></td>
-                <td><input type="radio" name="quality3" value="2"></td>
-                <td><input type="radio" name="quality3" value="1"></td>
-              </tr>
-              <tr>
-                <td colspan="6"><strong>B. PRODUCTIVITY</strong></td>
-              </tr>
-              <tr>
-                <td>Effective use of time</td>
-                <td><input type="radio" name="quality4" value="5"></td>
-                <td><input type="radio" name="quality4" value="4"></td>
-                <td><input type="radio" name="quality4" value="3"></td>
-                <td><input type="radio" name="quality4" value="2"></td>
-                <td><input type="radio" name="quality4" value="1"></td>
-              </tr>
-              <tr>
-                <td>Tasks accomplished</td>
-                <td><input type="radio" name="quality5" value="5"></td>
-                <td><input type="radio" name="quality5" value="4"></td>
-                <td><input type="radio" name="quality5" value="3"></td>
-                <td><input type="radio" name="quality5" value="2"></td>
-                <td><input type="radio" name="quality5" value="1"></td>
-              </tr>
-              <tr>
-                <td>Prompt completion of work assignments</td>
-                <td><input type="radio" name="quality6" value="5"></td>
-                <td><input type="radio" name="quality6" value="4"></td>
-                <td><input type="radio" name="quality6" value="3"></td>
-                <td><input type="radio" name="quality6" value="2"></td>
-                <td><input type="radio" name="quality6" value="1"></td>
-              </tr>
-              <tr>
-                <td>Useful or effective application of knowledge and skills</td>
-                <td><input type="radio" name="quality7" value="5"></td>
-                <td><input type="radio" name="quality7" value="4"></td>
-                <td><input type="radio" name="quality7" value="3"></td>
-                <td><input type="radio" name="quality7" value="2"></td>
-                <td><input type="radio" name="quality7" value="1"></td>
-              </tr>
-              <tr>
-                <td colspan="6"><strong>C. WORK HABITS, TALENTS & SKILLS</strong></td>
-              </tr>
-              <tr>
-                <td>Appropriate attire</td>
-                <td><input type="radio" name="quality8" value="5"></td>
-                <td><input type="radio" name="quality8" value="4"></td>
-                <td><input type="radio" name="quality8" value="3"></td>
-                <td><input type="radio" name="quality8" value="2"></td>
-                <td><input type="radio" name="quality8" value="1"></td>
-              </tr>
-              <tr>
-                <td>Adherence to policies and procedures</td>
-                <td><input type="radio" name="quality9" value="5"></td>
-                <td><input type="radio" name="quality9" value="4"></td>
-                <td><input type="radio" name="quality9" value="3"></td>
-                <td><input type="radio" name="quality9" value="2"></td>
-                <td><input type="radio" name="quality9" value="1"></td>
-              </tr>
-              <!-- Add more criteria as needed -->
-            </tbody>
-          </table>
+          <input type="hidden" id="student_id">
+
+          <!-- List of 15 evaluation criteria -->
+          <div class="form-group">
+            <label>1. Accuracy of completed work according to the operational standards</label>
+            <select class="form-control" name="ratings[1]" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>2. Thoroughness and attention to detail in performing the assigned tasks</label>
+            <select class="form-control" name="ratings[2]" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>3. Neatness and presentation of work</label>
+            <select class="form-control" name="ratings[3]" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>4. Effective use of time</label>
+            <select class="form-control" name="ratings[4]" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>5. Tasks accomplished</label>
+            <select class="form-control" name="ratings[5]" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>6. Prompt completion of work assignments</label>
+            <select class="form-control" name="ratings[6]" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>7. Useful or effective application of knowledge and skills</label>
+            <select class="form-control" name="ratings[7]" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>8. Appropriate attire</label>
+            <select class="form-control" name="ratings[8]" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>9. Adherence to policies and procedures</label>
+            <select class="form-control" name="ratings[9]" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>10. Attendance and punctuality</label>
+            <select class="form-control" name="ratings[10]" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>11. Ability to communicate effectively to guest, supervisor, and colleagues</label>
+            <select class="form-control" name="ratings[11]" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>12. Ability to think independently</label>
+            <select class="form-control" name="ratings[12]" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>13. Ability to remain calm and in control when presented with stressful situations</label>
+            <select class="form-control" name="ratings[13]" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>14. Accepts suggestions, directions, and constructive criticism</label>
+            <select class="form-control" name="ratings[14]" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>15. Cooperative team player</label>
+            <select class="form-control" name="ratings[15]" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="comments">Comments</label>
+            <textarea class="form-control" id="comments" placeholder="Enter comments here..."></textarea>
+          </div>
+          
         </form>
       </div>
       <div class="modal-footer">
