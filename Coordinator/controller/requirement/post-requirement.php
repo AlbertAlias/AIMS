@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 header('Content-Type: application/json');
-include '../../dbconn.php';
+include '../../../dbconn.php';
 
 // Start session
 session_start();

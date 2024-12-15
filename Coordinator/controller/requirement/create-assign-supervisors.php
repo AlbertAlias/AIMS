@@ -4,49 +4,62 @@ include '../../../dbconn.php';
 // Set content type to application/json
 header('Content-Type: application/json');
 
-// Log the incoming POST data to verify
-error_log("Company: " . $_POST['company']);
-error_log("Supervisor ID: " . $_POST['supervisor_id']);
-error_log("Student ID: " . $_POST['student_id']);
-
 try {
-    // Get the POST data (company, supervisor ID, and student ID)
-    $company = isset($_POST['company']) ? $_POST['company'] : '';
-    $supervisorId = isset($_POST['supervisor_id']) ? $_POST['supervisor_id'] : '';
-    $studentId = isset($_POST['student_id']) ? $_POST['student_id'] : '';
+    // Get the POST data
+    $company = isset($_POST['company']) ? trim($_POST['company']) : '';
+    $supervisorId = isset($_POST['supervisor_id']) ? (int) $_POST['supervisor_id'] : 0;
+    $studentId = isset($_POST['student_id']) ? (int) $_POST['student_id'] : 0;
 
     // Validate the inputs
-    if (empty($company) || empty($supervisorId) || empty($studentId)) {
+    if (empty($company) || $supervisorId <= 0 || $studentId <= 0) {
         echo json_encode(['success' => false, 'error' => 'Invalid input data.']);
         exit();
     }
 
-    // Prepare the SQL query to insert into the student_supervisor table
-    $sql = "INSERT INTO student_supervisor (student_id, supervisor_id, company) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
+    // Start a transaction
+    $conn->begin_transaction();
 
-    // Check for errors in preparing the statement
-    if (!$stmt) {
+    // Delete any existing supervisor assignment for the student
+    $deleteSql = "DELETE FROM student_supervisor WHERE student_id = ?";
+    $deleteStmt = $conn->prepare($deleteSql);
+    $deleteStmt->bind_param('i', $studentId);
+
+    if (!$deleteStmt->execute()) {
+        $conn->rollback();
+        echo json_encode(['success' => false, 'error' => 'Failed to clear existing assignments: ' . $deleteStmt->error]);
+        exit();
+    }
+
+    // Prepare the SQL query to insert the new supervisor assignment
+    $insertSql = "INSERT INTO student_supervisor (student_id, supervisor_id, company) VALUES (?, ?, ?)";
+    $insertStmt = $conn->prepare($insertSql);
+
+    if (!$insertStmt) {
+        $conn->rollback();
         echo json_encode(['success' => false, 'error' => 'SQL preparation error: ' . $conn->error]);
         exit();
     }
 
-    // Bind parameters
-    $stmt->bind_param('iis', $studentId, $supervisorId, $company); 
+    // Bind parameters and execute
+    $insertStmt->bind_param('iis', $studentId, $supervisorId, $company);
 
-    // Execute the query
-    if ($stmt->execute()) {
-        // If the insertion is successful
-        echo json_encode(['success' => true, 'message' => 'Supervisor assigned successfully!']);
-    } else {
-        // If there's an issue with SQL execution, display more info
-        echo json_encode(['success' => false, 'error' => 'Failed to assign supervisor. SQL Error: ' . $stmt->error]);
+    if (!$insertStmt->execute()) {
+        $conn->rollback();
+        echo json_encode(['success' => false, 'error' => 'Failed to assign supervisor. SQL Error: ' . $insertStmt->error]);
+        exit();
     }
 
-    // Close the statement and connection
-    $stmt->close();
+    // Commit the transaction
+    $conn->commit();
+
+    echo json_encode(['success' => true, 'message' => 'Supervisor assigned successfully!']);
+
+    // Close the statements and connection
+    $deleteStmt->close();
+    $insertStmt->close();
     $conn->close();
 } catch (Exception $e) {
+    $conn->rollback();
     echo json_encode(['success' => false, 'error' => $e->getMessage()]);
 }
 ?>

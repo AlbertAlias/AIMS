@@ -26,6 +26,7 @@
                     </div>
                 </div>
                 
+                <!-- Right section (Action buttons) -->
                 <div class="d-flex">
                     <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#postRequirementsModal">Post Requirements</button>
                 </div>
@@ -105,16 +106,33 @@
     </div>
 </div>
 
-<!-- Post Requirements Modal -->
-<div class="modal" id="postRequirementsModal" tabindex="-1">
+
+<div class="modal fade" id="viewRequirementsModal" tabindex="-1" aria-labelledby="actionModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="postRequirementsForm">
-                <div class="modal-header">
-                    <h5 class="modal-title">Post a Requirement</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
+            <div class="modal-header">
+                <h5 class="modal-title" id="actionModalLabel">Student Requirements</h5>
+            </div>
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <!-- <button type="button" class="btn btn-success" id="assignSupervisorBtn">Submit</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="postRequirementsModal" tabindex="-1" aria-labelledby="actionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Post a Requirement</h5>
+            </div>
+            <div class="modal-body">
+                <form id="postRequirementsForm">
                     <div class="mb-3">
                         <label for="requirementTitle" class="form-label">Requirement Title</label>
                         <input type="text" class="form-control" id="requirementTitle" required>
@@ -123,12 +141,12 @@
                         <label for="requirementDescription" class="form-label">Requirement Description</label>
                         <textarea class="form-control" id="requirementDescription" rows="3" required></textarea>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Post Requirement</button>
-                </div>
-            </form>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="postRequirementBtn">Post</button>
+            </div>
         </div>
     </div>
 </div>

@@ -112,6 +112,7 @@
     <script src="crud-ajax/requirement/retrieve-companies.js"></script>
     <script src="crud-ajax/requirement/retrieve-supervisors.js"></script>
     <script src="crud-ajax/requirement/create-assign-supervisors.js"></script>
+    <script src="crud-ajax/requirement/post-requirement.js"></script>
 
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>
