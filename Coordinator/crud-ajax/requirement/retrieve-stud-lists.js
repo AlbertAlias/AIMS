@@ -7,7 +7,7 @@ function loadTableData() {
     $.ajax({
         url: 'controller/requirement/retrieve-stud-lists.php',
         type: 'GET',
-        dataType: 'json',  // Automatically parses JSON response
+        dataType: 'json', // Automatically parses JSON response
         data: {
             page: studentPage,
             length: studentPageLength,
@@ -32,19 +32,21 @@ function loadTableData() {
 // Handle page length change
 $('#stud-lists-pageLengthSelect').on('change', function() {
     studentPageLength = parseInt($(this).val());
+    studentPage = 1; // Reset to first page
     loadTableData();
 });
 
 // Handle search input
 $('#stud-lists-searchInput').on('input', function() {
+    studentPage = 1; // Reset to first page
     loadTableData();
 });
 
-// Handle pagination click
-$(document).on('click', '.page-link', function(e) {
+// Handle pagination click using delegated event
+$('#stud-lists-pagination').on('click', '.page-link', function(e) {
     e.preventDefault();
-    studentPage = $(this).data('page');
-    loadTableData();
+    studentPage = $(this).data('page'); // Get the page number
+    loadTableData(); // Fetch new data for the selected page
 });
 
 // Initial data load

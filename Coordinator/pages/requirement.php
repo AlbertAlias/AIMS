@@ -1,5 +1,5 @@
 <div class="container-fluid p-0 m-0" id="requirements" style="display: none;">
-    <div class="card shadow-sm mt-4">
+    <div class="card shadow-sm">
         <!-- Header -->
         <div class="card-header bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
