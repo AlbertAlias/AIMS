@@ -6,7 +6,6 @@
                 <!-- Page Length Selector -->
                 <div class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
-                        <label for="pageLengthSelect" class="form-label mb-0 me-2">Show</label>
                         <select id="stud-lists-pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
                             <option value="10">10</option>
                             <option value="25">25</option>
@@ -42,10 +41,10 @@
                         <tr>
                             <th>Name</th>
                             <th>Department</th>
-                            <th>Student ID</th>
                             <th>Email</th>
-                            <!-- <th>Company</th> -->
-                            <!-- <th>Supervisor</th> -->
+                            <th>Supervisor</th>
+                            <th>Company</th>
+                            <th>Company Address</th>
                             <th>Actions</th>
                         </tr>
                     </thead>

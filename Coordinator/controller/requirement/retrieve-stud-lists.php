@@ -15,15 +15,21 @@ try {
     // Query to get filtered and paginated data
     $sql = "SELECT 
         users.user_id AS userID,
-        CONCAT(users.last_name,' ', users.first_name) AS name,
+        CONCAT(users.last_name, ' ', users.first_name) AS name,
         department.department_name AS department,
-        users.student_id AS studentID,
-        users.email AS email
+        users.email AS email,
+        supervisor.last_name AS supervisor_last_name,
+        supervisor.first_name AS supervisor_first_name,
+        supervisor.company AS supervisor_company,
+        supervisor.company_address AS supervisor_company_address
     FROM users
     LEFT JOIN department ON users.department_id = department.department_id
+    LEFT JOIN student_supervisor ON users.user_id = student_supervisor.student_id
+    LEFT JOIN users AS supervisor ON student_supervisor.supervisor_id = supervisor.user_id
     WHERE users.user_type = 'Student'
-      AND CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.student_id, users.email) LIKE ?
+      AND CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email) LIKE ?
     LIMIT ?, ?";
+
     $stmt = $conn->prepare($sql);
     $searchTerm = "%$search%";
     $stmt->bind_param('sii', $searchTerm, $start, $length);
@@ -36,14 +42,18 @@ try {
         // Check if any value is empty and replace with "N/A" or "--"
         $name = htmlspecialchars($row['name']) ?: '--';
         $department = htmlspecialchars($row['department']) ?: '--';
-        $studentID = htmlspecialchars($row['studentID']) ?: '--';
         $email = htmlspecialchars($row['email']) ?: '--';
+        $supervisorName = htmlspecialchars($row['supervisor_first_name'] . ' ' . $row['supervisor_last_name']) ?: '--';
+        $supervisorCompany = htmlspecialchars($row['supervisor_company']) ?: '--';
+        $supervisorCompanyAddress = htmlspecialchars($row['supervisor_company_address']) ?: '--';
 
         $html .= '<tr>';
         $html .= '<td>' . $name . '</td>';
         $html .= '<td>' . $department . '</td>';
-        $html .= '<td>' . $studentID . '</td>';
         $html .= '<td>' . $email . '</td>';
+        $html .= '<td>' . $supervisorName . '</td>';
+        $html .= '<td>' . $supervisorCompany . '</td>';
+        $html .= '<td>' . $supervisorCompanyAddress . '</td>';
         $html .= '<td>
             <button class="btn btn-success btn-sm open-modal-btn" 
                     data-bs-toggle="modal" 
@@ -65,8 +75,10 @@ try {
     $totalSql = "SELECT COUNT(*) AS total
          FROM users
          LEFT JOIN department ON users.department_id = department.department_id
+         LEFT JOIN student_supervisor ON users.user_id = student_supervisor.student_id
+         LEFT JOIN users AS supervisor ON student_supervisor.supervisor_id = supervisor.user_id
          WHERE users.user_type = 'Student'
-           AND CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.student_id, users.email) LIKE ?";
+           AND CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email) LIKE ?";
     $totalStmt = $conn->prepare($totalSql);
     $totalStmt->bind_param('s', $searchTerm);
     $totalStmt->execute();
@@ -76,7 +88,7 @@ try {
     // Generate pagination links with a limited display
     $totalPages = ceil($total / $length);
     $pagination = '';
-    $maxVisiblePages = 5; // Number of pages to show at a time
+    $maxVisiblePages = 3; // Number of pages to show at a time
     $startPage = max(1, $page - floor($maxVisiblePages / 2));
     $endPage = min($totalPages, $startPage + $maxVisiblePages - 1);
 

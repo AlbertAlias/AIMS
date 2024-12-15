@@ -25,6 +25,7 @@ function loadTableData() {
         },
         error: function(xhr, status, error) {
             console.error('AJAX error:', status, error);
+            console.log('Response Text:', xhr.responseText);  // Log the actual response body
         }
     });
 }
