@@ -17,6 +17,10 @@
             <i class="fa-solid fa-graduation-cap"></i>
             <span>view</span>
         </a>
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'posting')">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>Post</span>
+        </a>
     </nav>
 </div>
 
@@ -36,7 +40,7 @@
         }
 
         // Hide all sections
-        document.querySelectorAll('#dashboard, #requirements, #weeklyreport, #profile').forEach(section => {
+        document.querySelectorAll('#dashboard, #requirements, #weeklyreport, #posting, #profile').forEach(section => {
             section.style.display = 'none';
         });
 

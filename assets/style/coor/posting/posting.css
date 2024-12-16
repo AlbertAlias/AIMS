@@ -1,0 +1,51 @@
+.post-container {
+    background-color: #35353522;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: rgba(83, 107, 126, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.post-header {
+    margin-bottom: 10px;
+}
+
+.post-header input {
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.post-body textarea {
+    width: 100%;
+    border: none;
+    resize: none;
+    outline: none;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+.post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.deadline-container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.deadline-container .deadline-input {
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #ffffff;
+    width: 130px;
+}
