@@ -94,8 +94,8 @@
     <script src="crud-ajax/profile/update-users-info.js"></script>
     <script src="functions/profile/profile-details.js"></script>
 
-    <script src="crud_ajax/studentlist.js"></script>
-    <script src="crud_ajax/coorlist.js"></script>
+    <script src="crud-ajax/studentlist.js"></script>
+    <!-- <script src="crud_ajax/coorlist.js"></script> -->
     
 
     <!--END::CRUD AJAX FUNCTIONS-->

@@ -44,8 +44,8 @@
                             <th>Gender</th>
                             <th>Department</th>
                             <th>Student ID</th>
-                            <th>Company Name</th>
-                            <th>Emergency Number</th>
+                            <!-- <th>Company Name</th> -->
+                            <!-- <th>Emergency Number</th> -->
                             <th>Personal Email</th>
                             <th>Address</th>
                             <th>A\Y</th>
