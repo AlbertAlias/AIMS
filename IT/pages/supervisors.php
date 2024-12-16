@@ -66,11 +66,11 @@
                             <label for="visor_company_address" class="form-label">Company Address <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="visor_company_address" name="visor_company_address" required>
                         </div>
-                        <div class="col-12 col-md-4 mb-3">
+                        <div class="col-12 col-md-4">
                             <label for="visor_username" class="form-label required-asterisk">Username <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="visor_username" name="visor_username" required>
                         </div>
-                        <div class="col-12 col-md-4 mb-3">
+                        <div class="col-12 col-md-4">
                             <label for="visor_password" class="form-label required-asterisk">Password <span class="text-danger">*</span></label>
                             <input type="password" class="form-control" id="visor_password" name="visor_password" required>
                         </div>

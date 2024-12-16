@@ -75,6 +75,7 @@
                     <?php include "pages/coordinators.php"; ?>
                     <?php include "pages/students.php"; ?>
                     <?php include "pages/supervisors.php"; ?>
+                    <?php include "pages/registrar.php"; ?>
                     <?php include "pages/profile.php"; ?>
                 </div>
             </div>
@@ -125,6 +126,10 @@
 
     <script src="crud-ajax/supervisors/retrieve-visors.js"></script>
     <script src="crud-ajax/supervisors/create-visors.js"></script>
+
+    <script src="crud-ajax/registrar/retrieve-registrar.js"></script>
+    <script src="crud-ajax/registrar/create-registrar.js"></script>
+
 
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>
