@@ -123,7 +123,6 @@ $(document).ready(function () {
             data: userData,
             dataType: 'json',
             success: function (response) {
-                console.log(response);
                 if (response.success) {
                     Swal.fire({
                         toast: true,

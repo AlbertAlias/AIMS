@@ -25,6 +25,10 @@
             <i class="fa-solid fa-user-tie"></i>
             <span>Supervisor</span>
         </a>
+        <a href="#" class="sidebar-link" onclick="showSection(event, 'registrar')">
+            <i class="fa-solid fa-user-gear"></i>
+            <span>Registrar</span>
+        </a>
     </nav>
 </div>
 
@@ -44,7 +48,7 @@
         }
 
         // Hide all sections
-        document.querySelectorAll('#dashboard, #departments, #coordinators, #students, #sub-admins, #profile, #supervisors').forEach(section => {
+        document.querySelectorAll('#dashboard, #departments, #coordinators, #students, #sub-admins, #supervisors, #registrar, #profile').forEach(section => {
             section.style.display = 'none';
         });
 

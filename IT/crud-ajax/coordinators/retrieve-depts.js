@@ -26,7 +26,7 @@ window.loadDepartments = function (excludeDeptId) {
     });
 };
 
-// Call the loadDepartments function when the page is ready
+// Initial call to load departments when the page is ready
 $(document).ready(function () {
-    loadDepartments(); // This will load departments without a coordinator
+    loadDepartments(); // Load departments on page load
 });

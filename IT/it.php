@@ -74,8 +74,8 @@
                     <?php include "pages/departments.php"; ?>
                     <?php include "pages/coordinators.php"; ?>
                     <?php include "pages/students.php"; ?>
-                    <?php include "pages/profile.php"; ?>
                     <?php include "pages/supervisors.php"; ?>
+                    <?php include "pages/profile.php"; ?>
                 </div>
             </div>
             <!-- End of Main Content -->

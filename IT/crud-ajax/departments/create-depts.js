@@ -31,7 +31,8 @@ $(document).ready(function () {
                     });
 
                     $("#department_name").val(""); // Clear the input field
-                    populateDepartments(); // Now the function is accessible globally
+                    populateDepartments();
+                    loadDepartments();
                 } else {
                     alert("Error: " + response.error);
                 }
