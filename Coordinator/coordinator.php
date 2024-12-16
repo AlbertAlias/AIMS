@@ -101,9 +101,10 @@
     <script src="crud-ajax/requirement/retrieve-companies.js"></script>
     <script src="crud-ajax/requirement/retrieve-supervisors.js"></script>
     <script src="crud-ajax/requirement/create-assign-supervisors.js"></script>
-    <script src="crud-ajax/requirement/post-requirement.js"></script>
     <script src="crud-ajax/requirement/retrieve-student-requirements.js"></script>
 
+    <script src="crud-ajax/requirement/post-requirement.js"></script>
+    <script src="crud-ajax/requirement/retrieve-posted-requirements.js"></script>
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>
 </html>

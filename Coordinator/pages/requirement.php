@@ -13,21 +13,15 @@
                             <option value="100">100</option>
                         </select>
                     </div>
-                    
-                    <!-- Search Input -->
-                    <div class="flex-shrink-1">
-                        <div class="input-group">
-                            <input type="text" id="stud-lists-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
-                            <button class="btn btn-outline-secondary btn-sm" type="button">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
                 </div>
-                
-                <!-- Right section (Action buttons) -->
-                <div class="d-flex">
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#postRequirementsModal">Post Requirements</button>
+                <!-- Search Input -->
+                <div class="flex-shrink-1">
+                    <div class="input-group">
+                        <input type="text" id="stud-lists-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
+                        <button class="btn btn-outline-secondary btn-sm" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -161,33 +155,6 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal fade" id="postRequirementsModal" tabindex="-1" aria-labelledby="actionModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Post a Requirement</h5>
-            </div>
-            <div class="modal-body">
-                <form id="postRequirementsForm">
-                    <div class="mb-3">
-                        <label for="requirementTitle" class="form-label">Requirement Title</label>
-                        <input type="text" class="form-control" id="requirementTitle" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="requirementDescription" class="form-label">Requirement Description</label>
-                        <textarea class="form-control" id="requirementDescription" rows="3" required></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary" id="postRequirementBtn">Post</button>
             </div>
         </div>
     </div>
