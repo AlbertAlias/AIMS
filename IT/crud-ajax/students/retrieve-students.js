@@ -1,7 +1,5 @@
 $(document).ready(function () {
     window.loadStudents = function () {
-        let studentsInfo = $('#studentsInfo');
-        studentsInfo.html('<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>');
         $.ajax({
             url: 'controller/students/retrieve-students.php',
             method: 'GET',
@@ -45,16 +43,18 @@ $(document).ready(function () {
         var userId = $(this).data('id'); // Get the ID of the selected student
         console.log("Clicked user ID:", userId);
     
+        // Hide the submit button and show the update and cancel buttons
+        $('#studentSubmitBtn').hide();  // Hide submit button
+        $('#studentUpdateBtn').show();  // Show update button
+        $('#studentCancelBtn').show();  // Show cancel button
+    
         $.ajax({
             url: 'controller/students/retrieve-students-info.php',
             method: 'GET',
             data: { user_id: userId },
             dataType: 'json',
             success: function (response) {
-                console.log("Response:", response); // Debug the response
-    
                 if (response.success) {
-                    // Populate the form with the retrieved data
                     $('#student_id').val(userId);
                     $('#student_last_name').val(response.last_name);
                     $('#student_first_name').val(response.first_name);
@@ -68,13 +68,13 @@ $(document).ready(function () {
                         url: 'controller/students/retrieve-depts.php',
                         method: 'GET',
                         dataType: 'json',
-                        success: function (response) {
+                        success: function (deptResponse) {
                             var departmentDropdown = $('#student_department');
                             departmentDropdown.empty();
-                        
-                            if (response.success && response.departments.length > 0) {
+    
+                            if (deptResponse.success && deptResponse.departments.length > 0) {
                                 departmentDropdown.append('<option selected>Choose Department</option>');
-                                response.departments.forEach(function (department) {
+                                deptResponse.departments.forEach(function (department) {
                                     departmentDropdown.append(
                                         $('<option>', {
                                             value: department.department_id,
@@ -82,6 +82,10 @@ $(document).ready(function () {
                                         })
                                     );
                                 });
+    
+                                // Set the selected department
+                                console.log('Setting department:', response.department_id);
+                                departmentDropdown.val(String(response.department_id));
                             } else {
                                 departmentDropdown.append('<option selected disabled>No departments available</option>');
                             }
@@ -90,18 +94,12 @@ $(document).ready(function () {
                             console.error('Error fetching departments:', error);
                         },
                     });
-    
-                    // Show buttons
-                    $('#studentSubmitBtn').hide();
-                    $('#studentUpdateBtn').show();
-                    $('#studentCancelBtn').show();
                 } else {
                     console.error('Failed to fetch student details:', response.message);
                 }
             },
             error: function (xhr, status, error) {
                 console.error('Error:', error);
-                console.error('Response Text:', xhr.responseText);
             },
         });
     });

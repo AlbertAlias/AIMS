@@ -54,7 +54,7 @@
                     <i class="fa-solid fa-magnifying-glass position-absolute search-icon"></i>
                 </div>
                 <div id="studentsInfo" class="text-gray-800">
-                    <!-- Department information will be displayed here -->
+                    <!-- Student information will be displayed here -->
                 </div>
                 <button id="addDepartmentsBtn" class="btn btn-success mt-3">See table lists</button>
             </div>
@@ -97,6 +97,7 @@
                         <div class="col-md-8">
                             <label for="student_department" class="form-label required-asterisk">Department <span class="text-danger">*</span></label>
                             <select class="form-select" id="student_department" name="student_department" required>
+                                <option selected>Choose Department</option>
                                 <!-- Options populated dynamically -->
                             </select>
                         </div>
@@ -125,8 +126,5 @@
             </div>
         </div>
     </div>
-
-
-    
 </div>
 

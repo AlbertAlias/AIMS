@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function uploadFile(file) {
         var formData = new FormData();
         formData.append('file', file);
-
+    
         // Send AJAX request to upload the file
         $.ajax({
             url: 'controller/students/create-upload-students.php', // PHP file that will process the CSV
@@ -105,7 +105,9 @@ document.addEventListener('DOMContentLoaded', function () {
                             color: '#155724',
                             customClass: { popup: 'mt-5' }
                         });
-                        // loadTableData();
+    
+                        // Call loadStudents after a successful upload
+                        window.loadStudents(); // Trigger the function from retrieve-students.js to load students dynamically
                     }
                 } catch (e) {
                     console.error('Error parsing response:', e.message);

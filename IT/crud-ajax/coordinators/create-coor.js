@@ -39,6 +39,12 @@ $(document).ready(function() {
                         }
                     });
                     $('#coordinatorForm')[0].reset(); // Reset the form after success
+                    
+                    // Reload the coordinators list dynamically
+                    loadCoor(); // This will call the function from retrieve-coor.js to update the list
+
+                    // Reload the departments list
+                    loadDepartments(); // Call this to refresh the departments dropdown
                 } else {
                     // Error response handling
                     alert(response.message); // Show error message

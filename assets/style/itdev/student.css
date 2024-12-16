@@ -1,29 +1,24 @@
-#internsInfo {
-    max-height: 410px;
-    padding-right: 8px;
-    overflow-y: auto;
-    overflow-x: hidden;
+#studentsInfo {
+    max-height: 410px; /* Adjust the height as per your requirement */
+    padding-right: 8px; /* Ensure it doesn't overlap with scroll */
+    overflow-y: auto; /* Add vertical scrolling */
+    overflow-x: hidden; /* Hide horizontal scroll */
 }
 
 .position-relative {
-    position: relative; /* Make the container position relative */
+    position: relative; /* Make sure any child elements are properly positioned */
 }
 
 .search-icon {
-    position: absolute; /* Position the icon absolutely */
-    right: 10px; /* Adjust as needed to position it within the input */
+    position: absolute; /* Position the search icon */
+    right: 10px; /* Adjust to your liking */
     top: 50%; /* Center it vertically */
-    transform: translateY(-50%); /* Adjust for perfect centering */
-    color: gray; /* Optional: Change the color of the icon */
-    pointer-events: none; /* Prevent clicks on the icon */
+    transform: translateY(-50%); /* For perfect centering */
+    color: gray; /* Icon color */
+    pointer-events: none; /* Allow clicks through the icon */
 }
 
-#searchInterns {
-    padding-right: 2.5rem; /* Space for the icon */
-    padding-left: 0.5rem; /* Adjust this value to reduce space on the left */
-}
-
-#progressBar {
-    background-color: #489f48;
-    /* background-color: #0d6dfd67; */
+#searchDepartments {
+    padding-right: 2.5rem; /* Add space for the search icon */
+    padding-left: 0.5rem; /* Adjust the padding to fit your design */
 }

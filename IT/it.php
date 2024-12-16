@@ -123,6 +123,7 @@
 
     <!-- <script src="crud-ajax/archive/archive.js"></script> -->
 
+    <script src="crud-ajax/supervisors/retrieve-visors.js"></script>
     <script src="crud-ajax/supervisors/create-visors.js"></script>
 
     <!--END::CRUD AJAX FUNCTIONS-->

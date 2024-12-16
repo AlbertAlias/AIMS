@@ -33,7 +33,7 @@ $(document).ready(function () {
                     if (typeof response === "string") {
                         response = JSON.parse(response); // Parse string into JSON
                     }
-            
+
                     if (response.success) {
                         Swal.fire({
                             toast: true,
@@ -50,6 +50,9 @@ $(document).ready(function () {
                             }
                         });
                         $("#assignDeanForm")[0].reset(); // Reset the form
+
+                        // Dynamically load the updated dean list
+                        loadDeans();  // This is the function from retrieve-deans.js
                     } else {
                         // Error handling for existing username
                         if (response.error === 'Username already exists') {
