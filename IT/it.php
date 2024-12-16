@@ -76,6 +76,7 @@
                     <?php include "pages/students.php"; ?>
                     <?php include "pages/supervisors.php"; ?>
                     <?php include "pages/registrar.php"; ?>
+                    <?php include "pages/masterlists.php"; ?>
                     <?php include "pages/profile.php"; ?>
                 </div>
             </div>
@@ -130,7 +131,7 @@
     <script src="crud-ajax/registrar/retrieve-registrar.js"></script>
     <script src="crud-ajax/registrar/create-registrar.js"></script>
 
-
+    <script src="crud-ajax/masterlists/retrieve-master-lists.js"></script>
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>
 </html>
