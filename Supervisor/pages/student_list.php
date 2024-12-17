@@ -97,7 +97,7 @@
 
 <!-- Evaluation Modal -->
 <div class="modal fade" id="evaluationModal" tabindex="-1" aria-labelledby="evaluationModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable custom-modal-width">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header bg-light">
