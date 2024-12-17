@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2024 at 10:47 AM
+-- Generation Time: Dec 17, 2024 at 09:06 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -151,8 +151,19 @@ CREATE TABLE `requirements` (
   `coordinator_id` int(11) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `deadline` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `requirements`
+--
+
+INSERT INTO `requirements` (`requirement_id`, `coordinator_id`, `title`, `description`, `created_at`, `deadline`) VALUES
+(63, 484, 'App', 'Letter', '2024-12-17 06:42:57', '2024-12-18'),
+(64, 484, 'Res', 'Letter', '2024-12-17 06:43:04', '2024-12-18'),
+(65, 484, 'MO', 'A', '2024-12-17 06:43:12', '2024-12-18'),
+(66, 484, 'Birth', 'Cert', '2024-12-17 06:43:20', '2024-12-18');
 
 -- --------------------------------------------------------
 
@@ -180,8 +191,16 @@ CREATE TABLE `submit_requirements` (
   `document_name` varchar(255) DEFAULT NULL,
   `status` enum('approved','rejected','pending') DEFAULT NULL,
   `submission_date` datetime DEFAULT current_timestamp(),
-  `requirement_id` int(11) DEFAULT NULL
+  `requirement_id` int(11) DEFAULT NULL,
+  `file_path` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `submit_requirements`
+--
+
+INSERT INTO `submit_requirements` (`submit_id`, `student_id`, `document_name`, `status`, `submission_date`, `requirement_id`, `file_path`) VALUES
+(108, 1217, 'Application Letter.pdf', 'pending', '2024-12-17 15:05:04', 63, 'uploads/Application Letter.pdf');
 
 -- --------------------------------------------------------
 
@@ -583,7 +602,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `requirements`
 --
 ALTER TABLE `requirements`
-  MODIFY `requirement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `requirement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `student_supervisor`
@@ -595,7 +614,7 @@ ALTER TABLE `student_supervisor`
 -- AUTO_INCREMENT for table `submit_requirements`
 --
 ALTER TABLE `submit_requirements`
-  MODIFY `submit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `submit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT for table `users`

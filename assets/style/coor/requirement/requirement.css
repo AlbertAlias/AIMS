@@ -27,20 +27,7 @@
 
 
 
-.custom-modal-size {
-    max-width: 70% !important;
-    height: 60vh !important;
-}
 
-.custom-modal-size .modal-content {
-    height: 100%;
-}
-
-
-.modal-body h5 {
-    font-weight: bold;
-    color: #333;
-}
 
 .nav-tabs {
     border-bottom: 5px solid #383838;

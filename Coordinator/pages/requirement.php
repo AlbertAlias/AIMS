@@ -99,7 +99,7 @@
     </div>
 </div>
 
-
+<!-- 
 <div class="modal fade" id="viewRequirementsModal" tabindex="-1" aria-labelledby="actionModalLabel" aria-hidden="true">
     <div class="modal-dialog custom-modal-size modal-dialog-centered">
         <div class="modal-content">
@@ -107,7 +107,6 @@
                 <h5 class="text-center">Student Requirements</h5>
             </div>
             <div class="modal-body">
-                <!-- Full-Width Tab Navigation -->
                 <ul class="nav nav-tabs nav-justified" id="requirementsTabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active pending-tab" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending" type="button" role="tab" aria-controls="pending" aria-selected="true">
@@ -128,26 +127,19 @@
                     </li>
                 </ul>
 
-                <!-- Tab Content -->
                 <div class="tab-content mt-3" id="requirementsTabsContent">
-                    <!-- Pending Tab -->
                     <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
                         <div class="requirements-list" id="pendingRequirements">
-                            <!-- This is where the pending requirements will be inserted dynamically -->
                         </div>
                     </div>
 
-                    <!-- Rejected Tab -->
                     <div class="tab-pane fade" id="rejected" role="tabpanel" aria-labelledby="rejected-tab">
                         <div class="requirements-list" id="rejectedRequirements">
-                            <!-- This is where the pending requirements will be inserted dynamically -->
                         </div>
                     </div>
 
-                    <!-- Approved Tab -->
                     <div class="tab-pane fade" id="approved" role="tabpanel" aria-labelledby="approved-tab">
                         <div class="requirements-list" id="approvedRequirements">
-                            <!-- This is where the pending requirements will be inserted dynamically -->
                         </div>
                     </div>
                 </div>
@@ -159,3 +151,4 @@
         </div>
     </div>
 </div>
+ -->

@@ -12,11 +12,11 @@
         <a href="#" class="sidebar-link" onclick="showSection(event, 'requirements')">
             <i class="fa-solid fa-user-group"></i>
             <span>Requirements</span>
-        </a>
+        <!-- </a>
         <a href="#" class="sidebar-link" onclick="showSection(event, 'weeklyreport')">
             <i class="fa-solid fa-graduation-cap"></i>
             <span>view</span>
-        </a>
+        </a> -->
         <a href="#" class="sidebar-link" onclick="showSection(event, 'posting')">
             <i class="fa-solid fa-file-lines"></i>
             <span>Post</span>

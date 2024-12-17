@@ -23,13 +23,139 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row mt-3">
+                <div class="col-lg-12">
+                    <div class="counts-container d-flex justify-content-around">
+                        <button class="btn count-btn text-start" id="pendingCount" data-bs-toggle="modal" data-bs-target="#pendingModal">Pending: 0</button>
+                    </div>
+                </div>
+                <div class="col-lg-12 mt-3 mb-3">
+                    <div class="counts-container d-flex justify-content-around">
+                        <button class="btn count-btn text-start" id="rejectedCount" data-bs-toggle="modal" data-bs-target="#rejectedModal">Rejected: 0</button>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="counts-container d-flex justify-content-around">
+                        <button class="btn count-btn text-start" id="completedCount" data-bs-toggle="modal" data-bs-target="#completedModal">Completed: 0</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="col-12 col-md-8 col-lg-8">
-        <!-- Dynamically populated requirement posts will appear here -->
+        <div class="col-12 col-md-8 col-lg-8" id="posted-req">
+            <!-- Dynamically populated requirement posts will appear here -->
         </div>
     </div>
+</div>
 
+<!-- Pending Modal -->
+<div class="modal fade" id="pendingModal" tabindex="-1" aria-labelledby="pendingModalLabel" aria-hidden="true">
+    <div class="modal-dialog custom-modal-size modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-between align-items-center w-100">
+                <h5 class="text-center mb-0">Pending Requirements</h5>
+                <div class="input-group flex-shrink-1" style="max-width: 250px;">
+                    <!-- Select Dropdown -->
+                    <select class="form-select form-select-sm" aria-label="Select filter" id="pendingSelectOption">
+                        <option selected>Filter</option>
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                    </select>
+                    <!-- Search Input -->
+                    <input type="text" id="pendingSearchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
+                    <button class="btn btn-outline-secondary btn-sm" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- Pending requirements content here -->
+                <div id="pendingContent">
+                    <!-- This is where the pending requirements will be inserted dynamically -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Rejected Modal -->
+<div class="modal fade" id="rejectedModal" tabindex="-1" aria-labelledby="rejectedModalLabel" aria-hidden="true">
+    <div class="modal-dialog custom-modal-size modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-between align-items-center w-100">
+                <h5 class="text-center mb-0">Rejected Requirements</h5>
+                <div class="input-group flex-shrink-1" style="max-width: 250px;">
+                    <!-- Select Dropdown -->
+                    <select class="form-select form-select-sm" aria-label="Select filter" id="rejectedSelectOption">
+                        <option selected>Filter</option>
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                    </select>
+                    <!-- Search Input -->
+                    <input type="text" id="master-lists-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
+                    <button class="btn btn-outline-secondary btn-sm" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- Rejected requirements content here -->
+                <div id="rejectedContent">
+                    <!-- This is where the rejected requirements will be inserted dynamically -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
 
+<!-- Completed Modal -->
+<div class="modal fade" id="completedModal" tabindex="-1" aria-labelledby="completedModalLabel" aria-hidden="true">
+    <div class="modal-dialog custom-modal-size modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-between align-items-center w-100">
+                <h5 class="text-center mb-0">Completed Requirements</h5>
+                <div class="input-group flex-shrink-1" style="max-width: 250px;">
+                    <!-- Select Dropdown -->
+                    <select class="form-select form-select-sm" aria-label="Select filter" id="completedSelectOption">
+                        <option selected>Filter</option>
+                        <option value="option1">Option 1</option>
+                        <option value="option2">Option 2</option>
+                        <option value="option3">Option 3</option>
+                    </select>
+                    <!-- Search Input -->
+                    <input type="text" id="master-lists-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
+                    <button class="btn btn-outline-secondary btn-sm" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!-- Completed requirements content here -->
+                <div id="completedContent">
+                    <!-- This is where the completed requirements will be inserted dynamically -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for PDF viewing -->
+<div id="pdfModal" class="pdf-modal" style="display: none;">
+    <div class="pdf-modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <!-- PDF viewer embedded in the modal -->
+        <embed id="pdfViewer" width="100%" height="100%" type="application/pdf">
+    </div>
 </div>

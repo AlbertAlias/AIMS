@@ -85,6 +85,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
                 integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
     <script src="../assets/js/sidebar.js"></script>
@@ -101,10 +102,10 @@
     <script src="crud-ajax/requirement/retrieve-companies.js"></script>
     <script src="crud-ajax/requirement/retrieve-supervisors.js"></script>
     <script src="crud-ajax/requirement/create-assign-supervisors.js"></script>
-    <script src="crud-ajax/requirement/retrieve-student-requirements.js"></script>
 
     <script src="crud-ajax/requirement/post-requirement.js"></script>
     <script src="crud-ajax/requirement/retrieve-posted-requirements.js"></script>
+    <script src="crud-ajax/requirement/retrieve-student-requirements.js"></script>
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>
 </html>

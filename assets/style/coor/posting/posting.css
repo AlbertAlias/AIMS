@@ -107,7 +107,7 @@
 /* Styles for the dropdown menu */ 
 
 .requirement-post .dropdown-menu { 
-    min-width: 100px; padding: 0.5rem 0; 
+    min-width: 110px; padding: 0.2rem 0; 
 } 
 
 .requirement-post .dropdown-item { 
@@ -196,4 +196,100 @@
 
 .toggle-input:checked + .toggle-label .close-icon {
     opacity: 1;
+}
+
+/* Styles for count buttons */
+.count-btn {
+    width: 100%;
+    height: 80px;
+    font-size: 1.1em;
+    padding: 12px 25px;
+    border-radius: 8px;
+    box-shadow: rgba(83, 107, 126, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.count-btn:hover {
+    background-color: #e2e6ea;
+}
+
+/* Specific styles for each button */
+#pendingCount {
+    background-color: #ffc107dd;
+    /* background-color: #ffc107; */
+}
+
+#rejectedCount {
+    background-color: #ff2a00cf;
+}
+
+#completedCount {
+    background-color: #28a745;
+}
+
+
+
+.custom-modal-size {
+    max-width: 70% !important;
+    height: 60vh !important;
+}
+
+.custom-modal-size .modal-content {
+    height: 100%;
+}
+
+.custom-modal-size .modal-body {
+    overflow-y: auto;
+}
+
+
+.modal-body h5 {
+    font-weight: bold;
+    color: #333;
+}
+  
+.pdf-modal {
+    display: none; /* Initially hidden */
+    position: fixed; /* Fixed to cover the whole screen */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    background-color: rgba(0, 0, 0, 0.9); /* Black background with transparency */
+    z-index: 9999; /* Ensure the modal is on top of all content */
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+/* Modal Content */
+.pdf-modal-content {
+    position: relative;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background: transparent; /* Transparent background */
+    overflow: hidden; /* Prevent overflow */
+    padding: 0;
+}
+
+/* PDF Viewer inside the modal */
+.pdf-modal-content embed {
+    width: 100%;
+    height: 100%;
+    border: none; /* Remove border */
+}
+
+/* Close button */
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff; /* White close button */
+    cursor: pointer;
+    z-index: 1001; /* Above modal content */
+}
+
+.close:hover {
+    color: #ff4d4d; /* Slight color change on hover */
 }

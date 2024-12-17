@@ -1,87 +1,111 @@
 $(document).ready(function () {
-    $('#viewRequirementsModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var userId = button.data('user-id');
-        loadStudentRequirements(userId);
+    // Event listener for clicks on the card (instead of "View File" button)
+    document.addEventListener('click', function (event) {
+        const card = event.target.closest('.submission-card');
+        if (card) {
+            const filePath = card.querySelector('.btn-view-file').getAttribute('data-file-path');
+            openPDFModal(filePath);
+        }
     });
 
-    function loadStudentRequirements(userId) {
+    // Function to open the PDF modal
+    function openPDFModal(filePath) {
+        const pdfViewer = document.getElementById('pdfViewer');
+        const modal = document.getElementById('pdfModal');
+        
+        // Reassign the src to ensure the PDF reloads
+        pdfViewer.src = ''; // Clear first to force reload
+        setTimeout(() => {
+            pdfViewer.src = `${filePath}#toolbar=0`;
+        }, 50); // Small delay to allow the browser to reset the src
+        
+        modal.style.display = 'flex'; // Show the modal
+    }
+
+    // Close the modal when the close button is clicked
+    document.getElementById('closeModal').addEventListener('click', function () {
+        const modal = document.getElementById('pdfModal');
+        const pdfViewer = document.getElementById('pdfViewer');
+        modal.style.display = 'none';
+        pdfViewer.src = ''; // Clear the PDF source when modal is closed
+    });
+
+    // Close the modal when clicking outside the modal content
+    window.addEventListener('click', function (event) {
+        const modal = document.getElementById('pdfModal');
+        if (event.target === modal) {
+            modal.style.display = 'none';
+            document.getElementById('pdfViewer').src = '';
+        }
+    });
+    
+    $('#pendingModal').on('show.bs.modal', function () {
+        loadPendingRequirements();
+    });
+
+    // Function to load pending student requirements
+    function loadPendingRequirements() {
         $.ajax({
             url: 'controller/requirement/retrieve-student-requirements.php',
             method: 'POST',
-            data: { user_id: userId },
             success: function (response) {
                 try {
                     if (typeof response === 'string') {
                         response = JSON.parse(response);
                     }
     
-                    // Clear all sections
-                    $('#pendingRequirements, #approvedRequirements, #rejectedRequirements').empty();
+                    $('#pendingContent').empty();
     
-                    if (response && response.status === 'success') {
+                    if (response.status === 'success') {
                         const data = response.data;
     
                         if (data.length === 0) {
-                            // If no submissions, display the message in all tabs
-                            $('#pendingRequirements').html('<p class="text-center text-muted">Student hasn\'t submitted anything yet</p>');
-                            $('#approvedRequirements').html('<p class="text-center text-muted">Student hasn\'t submitted anything yet</p>');
-                            $('#rejectedRequirements').html('<p class="text-center text-muted">Student hasn\'t submitted anything yet</p>');
+                            $('#pendingContent').html('<p class="text-center text-muted">No pending requirements found.</p>');
                             return;
                         }
     
                         data.forEach(function (submission) {
-                            const submissionDate = new Date(submission.submission_date);
-                            const formattedDate = submissionDate.toLocaleString('en-US', {
+                            const submissionDate = new Date(submission.submission_date).toLocaleString('en-US', {
                                 month: 'short',
                                 day: 'numeric',
                             });
-    
+                        
                             const cardHtml = `
-                                <div class="card task-card px-3 py-2 mb-4 submission-card position-relative" 
-                                    data-submission-id="${submission.submit_id}">
+                                <div class="card task-card px-3 py-2 mb-3 submission-card position-relative" data-submission-id="${submission.submit_id}" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
                                     <div class="d-flex align-items-center">
-                                        <i class="fa-solid fa-file-alt me-3" style="font-size: 4rem;"></i>
+                                    <i class="fa-solid fa-file-pdf me-2" style="font-size: 4rem; color: #d32923;"></i>
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="card-title fs-6 mb-1">${submission.document_name}</h6>
-                                            <small class="text-muted">Submitted ${formattedDate}</small>
-                                            <p class="card-text mb-1"><strong>Status: ${submission.status}</strong></p>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                            <p class="card-title mb-1" style= color: #333;">${submission.student_name} has</p>
+                                            <p class="card-text mb-1 mx-1">${submission.status}</p>
+                                            <h6 class="card-title fs-6 mb-1" style="color: #555;">${submission.document_name}</h6>
+                                            </div>
+                                            <small class="text-muted">Submitted ${submissionDate}</small>
                                         </div>
                                     </div>
-                                    ${
-                                        submission.status === 'pending'
-                                            ? `
-                                                <button class="btn btn-success btn-sm position-absolute top-0 end-0 m-2 btn-approve" 
-                                                    data-id="${submission.submit_id}">Approve</button>
-                                                <button class="btn btn-danger btn-sm px-3 position-absolute bottom-0 end-0 m-2 btn-reject" 
-                                                    data-id="${submission.submit_id}">Reject</button>
-                                            `
-                                            : ''
-                                    }
-                                </div>`;
-    
-                            if (submission.status === 'pending') {
-                                $('#pendingRequirements').append(cardHtml);
-                            } else if (submission.status === 'approved') {
-                                $('#approvedRequirements').append(cardHtml);
-                            } else if (submission.status === 'rejected') {
-                                $('#rejectedRequirements').append(cardHtml);
-                            }
+                                    <button class="btn btn-success btn-sm position-absolute top-0 end-0 m-2 btn-approve" data-id="${submission.submit_id}" style="border-radius: 5px;">Approve</button>
+                                    <button class="btn btn-danger btn-sm px-3 position-absolute bottom-0 end-0 m-2 btn-reject" data-id="${submission.submit_id}" style="border-radius: 5px;">Reject</button>
+                                    <button class="btn btn-primary btn-sm position-absolute bottom-0 start-0 m-2 btn-view-file" data-file-path="${submission.file_path}" style="border-radius: 5px; display: none;">View File</button>
+                                </div>
+                                `;
+                            $('#pendingContent').append(cardHtml);
                         });
     
-                        attachActionButtons();
                     } else {
-                        console.error('Error: Missing status or malformed response', response);
+                        console.error('Error: Invalid response', response);
+                        $('#pendingContent').html('<p class="text-center text-danger">Error fetching pending requirements.</p>');
                     }
                 } catch (e) {
-                    console.error('Error processing response:', e);
+                    console.error('Error parsing response:', e);
                 }
             },
             error: function (xhr, status, error) {
                 console.error('AJAX error:', status, error);
-            },
+                $('#pendingContent').html('<p class="text-center text-danger">Failed to load pending requirements.</p>');
+            }
         });
     }
+    
 
     function attachActionButtons() {
         $('.btn-approve').off('click').on('click', function () {
