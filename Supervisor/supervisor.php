@@ -32,10 +32,9 @@
 
     <link rel="stylesheet" href="../assets/style/itdev/dashboard.css">
     <link rel="stylesheet" href="../assets/style/itdev/profile.css">
-
     <link rel="stylesheet" href="../assets/style/student/dashboard.css">
-    <link rel="stylesheet" href="../assets/style/supervisor/supervisor.css">
 
+    <!-- <link rel="stylesheet" href="../assets/style/supervisor/supervisor.css"> -->
     <link rel="stylesheet" href="../assets/style/supervisor/modalform.css">
 
 
@@ -94,8 +93,8 @@
     <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script>
     <script src="../assets/js/sidebar.js"></script>
     <!-- <script src="functions/auto-logout/session-timeout.js"></script> -->
-    <script src="crud-ajax/student_list.js"></script>
 
+    <script src="crud-ajax/student_list.js"></script>
     <script src="crud-ajax/evaluate.js"></script>
 
 

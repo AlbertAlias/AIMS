@@ -88,7 +88,7 @@
 
 function evaluateStudent(userId) {
     $('#student_id').val(userId);
-    $('#evaluateModal').modal('show');
+    $('#evaluationModal').modal('show');
 }
 
 function submitEvaluation() {
@@ -117,7 +117,7 @@ function submitEvaluation() {
         },
         success: function(response) {
             alert('Evaluation submitted successfully. Total Grade: ' + totalGrade);
-            $('#evaluateModal').modal('hide');
+            $('#evaluationModal').modal('hide');
             $('#evaluationForm')[0].reset();
         },
         error: function(error) {
