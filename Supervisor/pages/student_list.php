@@ -164,7 +164,7 @@
                                 <td><input type="radio" name="ratings[quality2]" value="1"></td>
                             </tr>
                             <tr>
-                                <td>Thoroughness and attention to detail in performing the assigned tasks</td>
+                                <td>Neatness and presentation of work</td>
                                 <td><input type="radio" name="ratings[quality3]" value="5"></td>
                                 <td><input type="radio" name="ratings[quality3]" value="4"></td>
                                 <td><input type="radio" name="ratings[quality3]" value="3"></td>
@@ -172,7 +172,10 @@
                                 <td><input type="radio" name="ratings[quality3]" value="1"></td>
                             </tr>
                             <tr>
-                                <td>Thoroughness and attention to detail in performing the assigned tasks</td>
+                                <td colspan="6"><strong>B. PRODUCTIVITY</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Effective use of time</td>
                                 <td><input type="radio" name="ratings[quality4]" value="5"></td>
                                 <td><input type="radio" name="ratings[quality4]" value="4"></td>
                                 <td><input type="radio" name="ratings[quality4]" value="3"></td>
@@ -180,7 +183,7 @@
                                 <td><input type="radio" name="ratings[quality4]" value="1"></td>
                             </tr>
                             <tr>
-                                <td>Thoroughness and attention to detail in performing the assigned tasks</td>
+                                <td>Tasks accomplished</td>
                                 <td><input type="radio" name="ratings[quality5]" value="5"></td>
                                 <td><input type="radio" name="ratings[quality5]" value="4"></td>
                                 <td><input type="radio" name="ratings[quality5]" value="3"></td>
@@ -188,12 +191,114 @@
                                 <td><input type="radio" name="ratings[quality5]" value="1"></td>
                             </tr>
                             <tr>
-                                <td>Thoroughness and attention to detail in performing the assigned tasks</td>
+                                <td>Prompt completion of work assignments</td>
                                 <td><input type="radio" name="ratings[quality6]" value="5"></td>
                                 <td><input type="radio" name="ratings[quality6]" value="4"></td>
                                 <td><input type="radio" name="ratings[quality6]" value="3"></td>
                                 <td><input type="radio" name="ratings[quality6]" value="2"></td>
                                 <td><input type="radio" name="ratings[quality6]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Useful or effective application of knowledge and skills</td>
+                                <td><input type="radio" name="ratings[quality7]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality7]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality7]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality7]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality7]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="6"><strong>C. WORK HABITS, TALENTS & SKILLS</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Appropriate attire</td>
+                                <td><input type="radio" name="ratings[quality8]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality8]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality8]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality8]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality8]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Adherence to policies and procedures</td>
+                                <td><input type="radio" name="ratings[quality9]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality9]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality9]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality9]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality9]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Attendance and punctuality</td>
+                                <td><input type="radio" name="ratings[quality10]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality10]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality10]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality10]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality10]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Ability to communicate effectively to guest, supervisor and colleagues</td>
+                                <td><input type="radio" name="ratings[quality11]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality11]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality11]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality11]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality11]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Ability to think independently</td>
+                                <td><input type="radio" name="ratings[quality12]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality12]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality12]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality12]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality12]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Ability to remain calm and in control when presented with stressful situations</td>
+                                <td><input type="radio" name="ratings[quality13]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality13]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality13]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality13]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality13]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Demonstrates an interest and willingness to learn the task required to maintain operational standards</td>
+                                <td><input type="radio" name="ratings[quality14]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality14]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality14]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality14]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality14]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="6"><strong>D. INTERPERSONAL WORK RELATIONSHIP</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Demonstrates positive relationship with the establishments’ workers</td>
+                                <td><input type="radio" name="ratings[quality15]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality15]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality15]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality15]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality15]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Relates effectively with visitors in a friendly and courteous manner</td>
+                                <td><input type="radio" name="ratings[quality16]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality16]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality16]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality16]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality16]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Accepts suggestions, directions and constructive criticism from employees and supervisors</td>
+                                <td><input type="radio" name="ratings[quality17]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality17]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality17]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality17]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality17]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Cooperative team player</td>
+                                <td><input type="radio" name="ratings[quality18]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality18]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality18]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality18]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality18]" value="1"></td>
                             </tr>
                             <!-- Continue for additional criteria -->
                         </tbody>
