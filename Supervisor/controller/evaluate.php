@@ -71,27 +71,105 @@
 
 
 
+// include '../../dbconn.php';
+
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     try {
+//         $student_id = $_POST['student_id'];
+//         $ratings = json_decode($_POST['ratings'], true);
+//         $totalGrade = $_POST['totalGrade'];
+//         $comments = $_POST['comments'];
+
+//         $stmt = $conn->prepare("
+//             INSERT INTO evaluations (student_id, ratings, total_grade, comments, evaluation_date)
+//             VALUES (?, ?, ?, ?, NOW())
+//         ");
+//         $ratings_string = json_encode($ratings); // Store ratings in JSON format
+
+//         $stmt->bind_param('ssss', $student_id, $ratings_string, $totalGrade, $comments);
+
+//         if ($stmt->execute()) {
+//             echo json_encode(['success' => true]);
+//         } else {
+//             throw new Exception("Database error.");
+//         }
+//     } catch (Exception $e) {
+//         http_response_code(500);
+//         echo json_encode(['error' => $e->getMessage()]);
+//     }
+// }
+
+
+// include '../../dbconn.php';
+
+// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+//     try {
+//         $student_id = $_POST['student_id'];
+//         $ratings = json_decode($_POST['ratings'], true);
+//         $totalGrade = $_POST['totalGrade'];
+//         $comments = $_POST['comments'];
+
+//         $stmt = $conn->prepare("
+//             INSERT INTO evaluations (student_id, ratings, total_grade, comments, evaluation_date)
+//             VALUES (?, ?, ?, ?, NOW())
+//         ");
+//         $ratings_json = json_encode($ratings);
+
+//         $stmt->bind_param('ssis', $student_id, $ratings_json, $totalGrade, $comments);
+
+//         if ($stmt->execute()) {
+//             echo json_encode(['success' => true]);
+//         } else {
+//             throw new Exception("Failed to save evaluation.");
+//         }
+//     } catch (Exception $e) {
+//         http_response_code(500);
+//         echo json_encode(['error' => $e->getMessage()]);
+//     }
+// }
+
+
+
+
+
+
 include '../../dbconn.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
+        // Capture POST data
         $student_id = $_POST['student_id'];
         $ratings = json_decode($_POST['ratings'], true);
-        $totalGrade = $_POST['totalGrade'];
         $comments = $_POST['comments'];
 
+        // Validate and process ratings
+        if (!is_array($ratings) || empty($ratings)) {
+            throw new Exception("Invalid ratings provided.");
+        }
+
+        // Calculate total points (sum of all ratings)
+        $ratingPoints = array_sum($ratings);
+
+        // Apply the formula to compute total_grade
+        $totalGrade = ($ratingPoints / 90) * 70;
+
+        // Prepare database query
         $stmt = $conn->prepare("
             INSERT INTO evaluations (student_id, ratings, total_grade, comments, evaluation_date)
             VALUES (?, ?, ?, ?, NOW())
         ");
-        $ratings_string = json_encode($ratings); // Store ratings in JSON format
+        
+        // Convert the ratings array to JSON
+        $ratings_json = json_encode($ratings);
 
-        $stmt->bind_param('ssss', $student_id, $ratings_string, $totalGrade, $comments);
+        // Bind parameters to the query
+        $stmt->bind_param('ssds', $student_id, $ratings_json, $totalGrade, $comments);
 
+        // Execute the query
         if ($stmt->execute()) {
             echo json_encode(['success' => true]);
         } else {
-            throw new Exception("Database error.");
+            throw new Exception("Failed to save evaluation.");
         }
     } catch (Exception $e) {
         http_response_code(500);

@@ -101,77 +101,113 @@
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header bg-light">
-                <!-- <h5 class="modal-title" id="evaluationModalLabel">Performance Evaluation Form</h5> -->
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             
             <!-- Modal Body -->
-            <div class="modal-body">
-                <header class="text-center">
-                    <h1>ASIATECH COLLEGE OF STA. ROSA</h1>
-                    <h2>COLLEGE OF ENGINEERING AND INFORMATION TECHNOLOGY EDUCATION</h2>
-                    <h3>PERFORMANCE EVALUATION FORM</h3>
-                    <p>(Practicum Training)</p>
-                </header>
-                <div id="main">
-                    <p>Name of Student: ___________________________________    Course: ________________________________</p>
+            <form id="evaluationForm">
+                <input type="hidden" id="student_id" name="student_id">
+                <div class="modal-body">
+                    <header class="text-center">
+                        <h1>ASIATECH COLLEGE OF STA. ROSA</h1>
+                        <h2>COLLEGE OF ENGINEERING AND INFORMATION TECHNOLOGY EDUCATION</h2>
+                        <h3>PERFORMANCE EVALUATION FORM</h3>
+                        <p>(Practicum Training)</p>
+                    </header>
+                    <div id="main">
+                        <p>Name of Student: ___________________________________    Course: ________________________________</p>
+                    </div>
+                    <div id="main1">
+                        <p>Date Covered: From_________________ to _____________    Department: ______________________________</p>
+                    </div>
+                    <div id="instructions">
+                        <p>To the Rater:</p>
+                        <p>This form has been developed to monitor the performance of each practicum trainee not only for grading purposes but also to provide a basis for identifying his/her strengths & weaknesses:</p>
+                        <p>Kindly rate the trainee in each of the traits indicated below by encircling the appropriate number that corresponds to your OBJECTIVE EVALUATION of his/her performance in your department using the scale provided.</p>
+                        <p>
+                            5 – Outstanding (O)<br>
+                            4 – Very Satisfactory (VS)<br>
+                            3 – Satisfactory (S)<br>
+                            2 – Needs Improvement (NI)<br>
+                            1 – Unacceptable (U)
+                        </p>
+                    </div>
+                    <table class="table table-bordered table-striped text-center">
+                        <thead>
+                            <tr>
+                                <th>CRITERIA</th>
+                                <th>O (5)</th>
+                                <th>VS (4)</th>
+                                <th>S (3)</th>
+                                <th>NI (2)</th>
+                                <th>U (1)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="6"><strong>A. QUALITY OF WORK</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Accuracy of completed work according to the operational standards</td>
+                                <td><input type="radio" name="ratings[quality1]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality1]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality1]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality1]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality1]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Thoroughness and attention to detail in performing the assigned tasks</td>
+                                <td><input type="radio" name="ratings[quality2]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality2]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality2]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality2]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality2]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Thoroughness and attention to detail in performing the assigned tasks</td>
+                                <td><input type="radio" name="ratings[quality3]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality3]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality3]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality3]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality3]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Thoroughness and attention to detail in performing the assigned tasks</td>
+                                <td><input type="radio" name="ratings[quality4]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality4]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality4]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality4]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality4]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Thoroughness and attention to detail in performing the assigned tasks</td>
+                                <td><input type="radio" name="ratings[quality5]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality5]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality5]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality5]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality5]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Thoroughness and attention to detail in performing the assigned tasks</td>
+                                <td><input type="radio" name="ratings[quality6]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality6]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality6]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality6]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality6]" value="1"></td>
+                            </tr>
+                            <!-- Continue for additional criteria -->
+                        </tbody>
+                    </table>
+                    <div class="comments mt-3">
+                        <label for="comments"><strong>Additional Comments:</strong></label>
+                        <textarea id="comments" name="comments" rows="4" class="form-control"></textarea>
+                    </div>
                 </div>
-                <div id="main1">
-                    <p>Date Covered: From_________________ to _____________    Department: ______________________________</p>
+                <!-- Modal Footer -->
+                <div class="modal-footer bg-light">
+                    <button type="submit" class="btn btn-primary">Submit Evaluation</button>
                 </div>
-                <div id="instructions">
-                    <p>To the Rater:</p>
-                    <p>This form has been developed to monitor the performance of each practicum trainee not only for grading purposes but also to provide a basis for identifying his/her strengths & weaknesses:</p>
-                    <p>Kindly rate the trainee in each of the traits indicated below by encircling the appropriate number that corresponds to your OBJECTIVE EVALUATION of his/her performance in your department using the scale provided.</p>
-                    <p>
-                        5 – Outstanding (O)<br>
-                        4 – Very Satisfactory (VS)<br>
-                        3 – Satisfactory (S)<br>
-                        2 – Needs Improvement (NI)<br>
-                        1 – Unacceptable (U)
-                    </p>
-                </div>
-                <table class="table table-bordered table-striped text-center">
-                    <thead>
-                        <tr>
-                            <th>CRITERIA</th>
-                            <th>O (5)</th>
-                            <th>VS (4)</th>
-                            <th>S (3)</th>
-                            <th>NI (2)</th>
-                            <th>U (1)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="6"><strong>A. QUALITY OF WORK</strong></td>
-                        </tr>
-                        <tr>
-                            <td>Accuracy of completed work according to the operational standards</td>
-                            <td><input type="radio" name="quality1" value="5"></td>
-                            <td><input type="radio" name="quality1" value="4"></td>
-                            <td><input type="radio" name="quality1" value="3"></td>
-                            <td><input type="radio" name="quality1" value="2"></td>
-                            <td><input type="radio" name="quality1" value="1"></td>
-                        </tr>
-                        <tr>
-                            <td>Thoroughness and attention to detail in performing the assigned tasks</td>
-                            <td><input type="radio" name="quality2" value="5"></td>
-                            <td><input type="radio" name="quality2" value="4"></td>
-                            <td><input type="radio" name="quality2" value="3"></td>
-                            <td><input type="radio" name="quality2" value="2"></td>
-                            <td><input type="radio" name="quality2" value="1"></td>
-                        </tr>
-                        <!-- Continue the rest of your rows similarly -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <!-- Modal Footer -->
-            <div class="modal-footer bg-light">
-                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                <button type="submit" class="btn btn-primary">Submit Evaluation</button>
-            </div>
+            </form>
         </div>
     </div>
 </div>

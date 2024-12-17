@@ -86,26 +86,77 @@
 
 
 
+// function evaluateStudent(userId) {
+//     $('#student_id').val(userId);
+//     $('#evaluationModal').modal('show');
+// }
+
+// function submitEvaluation() {
+//     const studentId = $('#student_id').val();
+//     const ratings = [];
+//     const formRatings = $('[name^="ratings"]');
+//     let totalGrade = 0;
+
+//     formRatings.each(function() {
+//         const score = parseInt($(this).val(), 10);
+//         ratings.push(score);
+//         totalGrade += score; // Compute the sum of all ratings
+//     });
+
+//     const comments = $('#comments').val();
+
+//     // Send the data to server via AJAX
+//     $.ajax({
+//         url: 'controller/evaluate.php',
+//         type: 'POST',
+//         data: {
+//             student_id: studentId,
+//             ratings: JSON.stringify(ratings),
+//             totalGrade: totalGrade,
+//             comments: comments,
+//         },
+//         success: function(response) {
+//             alert('Evaluation submitted successfully. Total Grade: ' + totalGrade);
+//             $('#evaluationModal').modal('hide');
+//             $('#evaluationForm')[0].reset();
+//         },
+//         error: function(error) {
+//             alert('Error occurred. Please try again.');
+//         }
+//     });
+// }
+
+
+
 function evaluateStudent(userId) {
     $('#student_id').val(userId);
     $('#evaluationModal').modal('show');
 }
 
-function submitEvaluation() {
-    const studentId = $('#student_id').val();
-    const ratings = [];
-    const formRatings = $('[name^="ratings"]');
-    let totalGrade = 0;
+$('#evaluationForm').submit(function (e) {
+    e.preventDefault();
 
-    formRatings.each(function() {
-        const score = parseInt($(this).val(), 10);
-        ratings.push(score);
-        totalGrade += score; // Compute the sum of all ratings
-    });
+    const studentId = $('#student_id').val();
+    const ratings = {};
+    const totalGrade = $('[name^="ratings"]:checked')
+        .toArray()
+        .reduce((sum, input) => {
+            ratings[$(input).attr('name')] = $(input).val();
+            return sum + parseInt($(input).val());
+        }, 0);
 
     const comments = $('#comments').val();
 
-    // Send the data to server via AJAX
+    if (Object.keys(ratings).length === 0) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Please complete all ratings before submitting!',
+        });
+        return;
+    }
+
+    // Send data to server via AJAX
     $.ajax({
         url: 'controller/evaluate.php',
         type: 'POST',
@@ -115,13 +166,21 @@ function submitEvaluation() {
             totalGrade: totalGrade,
             comments: comments,
         },
-        success: function(response) {
-            alert('Evaluation submitted successfully. Total Grade: ' + totalGrade);
+        success: function (response) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Evaluation Submitted!',
+                text: `Total Grade: ${totalGrade}`,
+            });
             $('#evaluationModal').modal('hide');
             $('#evaluationForm')[0].reset();
         },
-        error: function(error) {
-            alert('Error occurred. Please try again.');
-        }
+        error: function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'An error occurred while submitting the evaluation. Please try again.',
+            });
+        },
     });
-}
+});
