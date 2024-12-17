@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2024 at 09:06 AM
+-- Generation Time: Dec 17, 2024 at 01:57 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -122,9 +122,9 @@ INSERT INTO `department` (`department_id`, `department_name`) VALUES
 
 CREATE TABLE `evaluations` (
   `id` int(11) NOT NULL,
-  `student_id` varchar(20) NOT NULL,
-  `ratings` text NOT NULL,
-  `total_grade` int(11) NOT NULL,
+  `student_id` varchar(50) NOT NULL,
+  `ratings` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `total_grade` decimal(5,2) NOT NULL,
   `comments` text DEFAULT NULL,
   `evaluation_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -192,15 +192,17 @@ CREATE TABLE `submit_requirements` (
   `status` enum('approved','rejected','pending') DEFAULT NULL,
   `submission_date` datetime DEFAULT current_timestamp(),
   `requirement_id` int(11) DEFAULT NULL,
-  `file_path` varchar(255) DEFAULT NULL
+  `file_path` varchar(255) DEFAULT NULL,
+  `remarks` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `submit_requirements`
 --
 
-INSERT INTO `submit_requirements` (`submit_id`, `student_id`, `document_name`, `status`, `submission_date`, `requirement_id`, `file_path`) VALUES
-(108, 1217, 'Application Letter.pdf', 'pending', '2024-12-17 15:05:04', 63, 'uploads/Application Letter.pdf');
+INSERT INTO `submit_requirements` (`submit_id`, `student_id`, `document_name`, `status`, `submission_date`, `requirement_id`, `file_path`, `remarks`) VALUES
+(111, 1217, 'Birth Certificate.pdf', 'approved', '2024-12-17 19:15:34', 64, 'uploads/Birth Certificate.pdf', NULL),
+(112, 1217, 'Birth Certificate.pdf', 'rejected', '2024-12-17 19:59:16', 65, 'uploads/Birth Certificate.pdf', 'ulitin mo ulit to');
 
 -- --------------------------------------------------------
 
@@ -484,7 +486,8 @@ INSERT INTO `users` (`user_id`, `last_name`, `first_name`, `middle_name`, `usern
 (1427, 'Gungon', 'Jastine James', NULL, '112463', '$2y$10$zDxSKjGSdqnEA5rqsgtwP.pIYIbug.hJFMno3HWi/c2K2ZRD0Ywnm', 'Student', NULL, NULL, NULL, 'Male', 34, NULL, NULL, '1190532', '2022-2253', NULL),
 (1428, 'Gutierrez', 'Kent Adrian', NULL, '112464', '$2y$10$EQxfz/qo0uk1qXZNbFkAyuBELbBpsVKLy.LVN9aY6OIpjfEaPyuRK', 'Student', NULL, NULL, NULL, 'Male', 34, NULL, NULL, '1190533', '2022-2254', NULL),
 (1429, 'Hermano', 'Kurt Justin', NULL, '112465', '$2y$10$yLYFngdzccJHs4GFm1Ccbe4LEe0lm2BFnf.kGHa45DTHc/1WpUHwK', 'Student', NULL, NULL, NULL, 'Male', 34, NULL, NULL, '1190534', '2022-2255', NULL),
-(1430, 'Herrera', 'Gabriel', NULL, '112466', '$2y$10$li1jct4qVd2ibB21G3gWdevAQdU5H5o3KiASSb2Mg4ZWqxo3wLELO', 'Student', NULL, NULL, NULL, 'Male', 34, NULL, NULL, '1190535', '2022-2256', NULL);
+(1430, 'Herrera', 'Gabriel', NULL, '112466', '$2y$10$li1jct4qVd2ibB21G3gWdevAQdU5H5o3KiASSb2Mg4ZWqxo3wLELO', 'Student', NULL, NULL, NULL, 'Male', 34, NULL, NULL, '1190535', '2022-2256', NULL),
+(1431, 'Custodio', 'Bryan', 'Guevarra', 'supervisor', '$2y$10$.Pk22qplQJvrU155rWuHDOScJ.vmdhzOvPfKe8NZ0XNjNxrJjdDt.', 'Supervisor', NULL, NULL, 'bryancustodio320@gmail.com', '', NULL, 'fujitsu', 'santa rosa', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -533,6 +536,12 @@ ALTER TABLE `dean_department`
 ALTER TABLE `department`
   ADD PRIMARY KEY (`department_id`),
   ADD UNIQUE KEY `department_name` (`department_name`);
+
+--
+-- Indexes for table `evaluations`
+--
+ALTER TABLE `evaluations`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `ojt_hours`
@@ -614,13 +623,13 @@ ALTER TABLE `student_supervisor`
 -- AUTO_INCREMENT for table `submit_requirements`
 --
 ALTER TABLE `submit_requirements`
-  MODIFY `submit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `submit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1431;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1432;
 
 --
 -- AUTO_INCREMENT for table `weekly_reports`

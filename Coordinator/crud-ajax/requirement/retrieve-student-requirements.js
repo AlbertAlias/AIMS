@@ -1,11 +1,169 @@
 $(document).ready(function () {
-    // Event listener for clicks on the card (instead of "View File" button)
-    document.addEventListener('click', function (event) {
-        const card = event.target.closest('.submission-card');
-        if (card) {
-            const filePath = card.querySelector('.btn-view-file').getAttribute('data-file-path');
+    // Event listener for clicks on the card to trigger the "View File" button
+    $(document).on('click', '.submission-card', function (event) {
+        // Check if the target is not an "Approve" or "Reject" button
+        if (!$(event.target).closest('.btn-approve').length && !$(event.target).closest('.btn-reject').length) {
+            const filePath = $(this).find('.btn-view-file').data('file-path');
             openPDFModal(filePath);
         }
+    });
+
+    $(document).on('click', '.btn-approve', function (event) {
+        event.stopPropagation();  // Prevent the click from bubbling up to the card
+        const submissionId = $(this).data('id');
+        const submissionCard = $(this).closest('.submission-card'); // Get the card where this button was clicked
+        
+        // Extract data from the card using the correct selectors
+        const submissionData = {
+            submit_id: submissionId,
+            student_name: submissionCard.find('.student-name').text().trim(), // Get student name
+            document_name: submissionCard.find('.document-name').text().trim(), // Get document name
+            submission_date: submissionCard.find('.submission-date').text().replace('Submitted ', '').trim() // Get submission date
+        };
+        
+        console.log(submissionData); // Check the extracted data
+    
+        // Send AJAX request to update the status in the database
+        $.ajax({
+            url: 'controller/requirement/update-requirement-status.php',
+            method: 'POST',
+            data: {
+                submit_id: submissionId,
+                status: 'approved'
+            },
+            success: function (response) {
+                try {
+                    if (typeof response === 'string') {
+                        response = JSON.parse(response);
+                    }
+    
+                    if (response.status === 'success') {
+                        // On success, remove the item from the pending list
+                        submissionCard.remove();
+    
+                        // Store the approved submission data in localStorage
+                        let approvedSubmissions = JSON.parse(localStorage.getItem('approvedSubmissions')) || [];
+                        approvedSubmissions.push(submissionData);
+                        localStorage.setItem('approvedSubmissions', JSON.stringify(approvedSubmissions));
+
+                        // Append the approved requirement to the completed content
+                        const approvedRequirement = `
+                            <div class="card task-card px-3 py-2 mb-3 submission-card position-relative" data-submission-id="${submissionId}" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                                <div class="d-flex align-items-center">
+                                    <i class="fa-solid fa-file-pdf me-2" style="font-size: 4rem; color: #d32923;"></i>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="card-title fs-6 mb-1" style="color: #555;">${submissionData.document_name}</h6>
+                                            <p class="card-title mb-1" style="color: #333;">of ${submissionData.student_name} has been</p>
+                                            <p class="card-text mb-1 mx-1">approved</p>
+                                        </div>
+                                        <small class="text-muted">Submitted ${submissionData.submission_date}</small>
+                                    </div>
+                                </div>
+                                <button class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2 btn-delete-file" data-id="${submissionId}" style="border-radius: 5px;">Delete File</button>
+                            </div>
+                        `;
+                        $('#completedContent').append(approvedRequirement); // Append to completed content
+                    } else {
+                        console.error('Error: Failed to approve the submission');
+                    }
+                } catch (e) {
+                    console.error('Error parsing response:', e);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX error:', status, error);
+            }
+        });
+    });
+
+    // Event listener for "Reject" button click
+    $(document).on('click', '.btn-reject', function (event) {
+        event.stopPropagation();
+        const submissionId = $(this).data('id');
+        const submissionCard = $(this).closest('.submission-card');
+    
+        // Show modal for remarks input
+        $('#remarksModal').modal('show');
+    
+        // Clear previous remarks
+        $('#remarksTextarea').val('');
+    
+        // Handle submit button click inside the modal
+        $('#submitRemarksBtn').off('click').on('click', function () {
+            const remarks = $('#remarksTextarea').val().trim();
+    
+            if (remarks === '') {
+                alert('Please provide remarks before rejecting.');
+                return;
+            }
+    
+            // Send AJAX request to reject with remarks
+            $.ajax({
+                url: 'controller/requirement/update-requirement-status.php',
+                method: 'POST',
+                data: {
+                    submit_id: submissionId,
+                    status: 'rejected',
+                    remarks: remarks
+                },
+                success: function (response) {
+                    try {
+                        response = JSON.parse(response);
+                        if (response.status === 'success') {
+                            submissionCard.remove();
+                            $('#remarksModal').modal('hide');
+                            console.log('Submission rejected successfully.');
+                        } else {
+                            alert(response.message || 'Error rejecting submission.');
+                        }
+                    } catch (e) {
+                        console.error('Error parsing response:', e);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('AJAX error:', status, error);
+                }
+            });
+        });
+    });
+
+    // Event listener for "Delete File" button click
+    $(document).on('click', '.btn-delete-file', function (event) {
+        const submissionId = $(this).data('id');
+        const submissionCard = $(this).closest('.submission-card');
+
+        // Send AJAX request to delete the file from the database
+        $.ajax({
+            url: 'controller/requirement/delete-student-requirements.php',
+            method: 'POST',
+            data: { submit_id: submissionId },
+            success: function (response) {
+                try {
+                    if (typeof response === 'string') {
+                        response = JSON.parse(response);
+                    }
+        
+                    if (response.status === 'success') {
+                        // Remove the file from both the frontend and localStorage
+                        submissionCard.remove();
+                        
+                        let approvedSubmissions = JSON.parse(localStorage.getItem('approvedSubmissions')) || [];
+                        approvedSubmissions = approvedSubmissions.filter(submission => submission.submit_id !== submissionId);
+                        localStorage.setItem('approvedSubmissions', JSON.stringify(approvedSubmissions));
+        
+                        console.log('File deleted and removed from view.');
+                    } else {
+                        console.error('Error: Failed to delete the file');
+                    }
+                } catch (e) {
+                    console.error('Error parsing response:', e);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX error:', status, error);
+            }
+        });
     });
 
     // Function to open the PDF modal
@@ -38,7 +196,7 @@ $(document).ready(function () {
             document.getElementById('pdfViewer').src = '';
         }
     });
-    
+
     $('#pendingModal').on('show.bs.modal', function () {
         loadPendingRequirements();
     });
@@ -70,24 +228,25 @@ $(document).ready(function () {
                                 day: 'numeric',
                             });
                         
+                            // Ensure proper classes are in place for jQuery to target
                             const cardHtml = `
-                                <div class="card task-card px-3 py-2 mb-3 submission-card position-relative" data-submission-id="${submission.submit_id}" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                <div class="card task-card px-3 py-2 mb-3 submission-card position-relative" data-submission-id="${submission.submit_id}" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                                     <div class="d-flex align-items-center">
-                                    <i class="fa-solid fa-file-pdf me-2" style="font-size: 4rem; color: #d32923;"></i>
+                                        <i class="fa-solid fa-file-pdf me-2" style="font-size: 4rem; color: #d32923;"></i>
                                         <div class="d-flex flex-column justify-content-center">
                                             <div class="d-flex justify-content-between align-items-center">
-                                            <p class="card-title mb-1" style= color: #333;">${submission.student_name} has</p>
-                                            <p class="card-text mb-1 mx-1">${submission.status}</p>
-                                            <h6 class="card-title fs-6 mb-1" style="color: #555;">${submission.document_name}</h6>
+                                                <p class="card-title mb-1 student-name" style="color: #333;">${submission.student_name} has</p>
+                                                <p class="card-text mb-1 mx-1">${submission.status}</p>
+                                                <h6 class="card-title fs-6 mb-1 document-name" style="color: #555;">${submission.document_name}</h6>
                                             </div>
-                                            <small class="text-muted">Submitted ${submissionDate}</small>
+                                            <small class="text-muted submission-date">Submitted ${submissionDate}</small>
                                         </div>
                                     </div>
                                     <button class="btn btn-success btn-sm position-absolute top-0 end-0 m-2 btn-approve" data-id="${submission.submit_id}" style="border-radius: 5px;">Approve</button>
                                     <button class="btn btn-danger btn-sm px-3 position-absolute bottom-0 end-0 m-2 btn-reject" data-id="${submission.submit_id}" style="border-radius: 5px;">Reject</button>
                                     <button class="btn btn-primary btn-sm position-absolute bottom-0 start-0 m-2 btn-view-file" data-file-path="${submission.file_path}" style="border-radius: 5px; display: none;">View File</button>
                                 </div>
-                                `;
+                            `;
                             $('#pendingContent').append(cardHtml);
                         });
     
@@ -105,52 +264,50 @@ $(document).ready(function () {
             }
         });
     }
-    
 
-    function attachActionButtons() {
-        $('.btn-approve').off('click').on('click', function () {
-            const submitId = $(this).data('id');
-            updateStatus(submitId, 'approved');
-        });
-
-        $('.btn-reject').off('click').on('click', function () {
-            const submitId = $(this).data('id');
-            updateStatus(submitId, 'rejected');
-        });
-    }
-
-    function updateStatus(submitId, status) {
+    // Load approved submissions from localStorage on page load
+    function loadApprovedSubmissions() {
         $.ajax({
-            url: 'controller/requirement/update-stud-file-status.php',
-            method: 'POST',
-            data: { submissionId: submitId, status: status },
+            url: 'controller/requirement/retrieve-approved-requirements.php',
+            method: 'GET',
             success: function (response) {
-                console.log('Server Response:', response);
-    
-                if (response.success) {
-                    // Find the card for the submission
-                    const card = $(`.submission-card[data-submission-id="${submitId}"]`);
-    
-                    // Remove the buttons (optional, since no action needed after approval/rejection)
-                    card.find('.btn-approve, .btn-reject').remove();
-    
-                    // Move the card to the correct container
-                    if (status === 'approved') {
-                        $('#approvedRequirements').append(card);
-                    } else if (status === 'rejected') {
-                        $('#rejectedRequirements').append(card);
+                try {
+                    if (typeof response === 'string') {
+                        response = JSON.parse(response);
                     }
     
-                    // Optional: Show a success message
-                    console.log(`Submission ${submitId} moved to ${status} section.`);
-                } else {
-                    console.error('Failed to update status:', response.error);
+                    $('#completedContent').empty();
+    
+                    if (response.status === 'success') {
+                        const data = response.data;
+                        data.forEach(function (submission) {
+                            const submissionHtml = `
+                                <div class="card task-card px-3 py-2 mb-3 submission-card position-relative" data-submission-id="${submission.submit_id}">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fa-solid fa-file-pdf me-2" style="font-size: 4rem; color: #d32923;"></i>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="card-title fs-6 mb-1">${submission.document_name}</h6>
+                                            <small class="text-muted">Submitted ${submission.submission_date}</small>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-danger btn-sm position-absolute top-0 end-0 m-2 btn-delete-file" data-id="${submission.submit_id}">Delete File</button>
+                                    <!-- Add View File button and make it visible -->
+                                    <button class="btn btn-primary btn-sm position-absolute bottom-0 start-0 m-2 btn-view-file" data-file-path="${submission.file_path}" style="border-radius: 5px; display: none;">View File</button>
+                                </div>
+                            `;
+                            $('#completedContent').append(submissionHtml);
+                        });
+                    }
+                } catch (e) {
+                    console.error('Error parsing response:', e);
                 }
             },
             error: function (xhr, status, error) {
-                console.error('AJAX Error:', status, error);
-                console.error('Response Text:', xhr.responseText);
-            },
+                console.error('AJAX error:', status, error);
+            }
         });
     }
+
+    // Load the approved submissions when the page loads
+    loadApprovedSubmissions();
 });

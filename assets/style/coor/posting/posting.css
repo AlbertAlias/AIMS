@@ -226,8 +226,6 @@
     background-color: #28a745;
 }
 
-
-
 .custom-modal-size {
     max-width: 70% !important;
     height: 60vh !important;
@@ -240,7 +238,6 @@
 .custom-modal-size .modal-body {
     overflow-y: auto;
 }
-
 
 .modal-body h5 {
     font-weight: bold;
@@ -292,4 +289,9 @@
 
 .close:hover {
     color: #ff4d4d; /* Slight color change on hover */
+}
+
+.card.task-card:hover {
+    cursor: pointer;
+    background-color: #f4f4f4;
 }
