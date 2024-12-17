@@ -37,7 +37,7 @@
                             <th>Name</th>
                             <th>Lastname</th>
                             <th>Department</th>
-                            <th>Student ID</th>
+                            <!-- <th>Student ID</th> -->
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -95,193 +95,224 @@
   </div>
 </div> -->
 
-<div class="modal fade" id="evaluateModal" tabindex="-1" role="dialog" aria-labelledby="evaluateModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="evaluateModalLabel">Evaluate Student</h5>
-      </div>
-      <div class="modal-body">
-        <form id="evaluationForm">
-          <input type="hidden" id="student_id">
-
-          <!-- List of 15 evaluation criteria -->
-          <div class="form-group">
-            <label>1. Accuracy of completed work according to the operational standards</label>
-            <select class="form-control" name="ratings[1]" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>2. Thoroughness and attention to detail in performing the assigned tasks</label>
-            <select class="form-control" name="ratings[2]" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>3. Neatness and presentation of work</label>
-            <select class="form-control" name="ratings[3]" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>4. Effective use of time</label>
-            <select class="form-control" name="ratings[4]" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>5. Tasks accomplished</label>
-            <select class="form-control" name="ratings[5]" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>6. Prompt completion of work assignments</label>
-            <select class="form-control" name="ratings[6]" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>7. Useful or effective application of knowledge and skills</label>
-            <select class="form-control" name="ratings[7]" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>8. Appropriate attire</label>
-            <select class="form-control" name="ratings[8]" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>9. Adherence to policies and procedures</label>
-            <select class="form-control" name="ratings[9]" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>10. Attendance and punctuality</label>
-            <select class="form-control" name="ratings[10]" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>11. Ability to communicate effectively to guest, supervisor, and colleagues</label>
-            <select class="form-control" name="ratings[11]" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>12. Ability to think independently</label>
-            <select class="form-control" name="ratings[12]" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>13. Ability to remain calm and in control when presented with stressful situations</label>
-            <select class="form-control" name="ratings[13]" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>14. Accepts suggestions, directions, and constructive criticism</label>
-            <select class="form-control" name="ratings[14]" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label>15. Cooperative team player</label>
-            <select class="form-control" name="ratings[15]" required>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="comments">Comments</label>
-            <textarea class="form-control" id="comments" placeholder="Enter comments here..."></textarea>
-          </div>
-          
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="submitEvaluation()">Submit</button>
-      </div>
+<!-- Evaluation Modal -->
+<div class="modal fade" id="evaluationModal" tabindex="-1" aria-labelledby="evaluationModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header bg-light">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            
+            <!-- Modal Body -->
+            <form id="evaluationForm">
+                <input type="hidden" id="student_id" name="student_id">
+                <div class="modal-body">
+                    <header class="text-center">
+                        <h1>ASIATECH COLLEGE OF STA. ROSA</h1>
+                        <h2>COLLEGE OF ENGINEERING AND INFORMATION TECHNOLOGY EDUCATION</h2>
+                        <h3>PERFORMANCE EVALUATION FORM</h3>
+                        <p>(Practicum Training)</p>
+                    </header>
+                    <div id="main">
+                        <p>Name of Student: ___________________________________    Course: ________________________________</p>
+                    </div>
+                    <div id="main1">
+                        <p>Date Covered: From_________________ to _____________    Department: ______________________________</p>
+                    </div>
+                    <div id="instructions">
+                        <p>To the Rater:</p>
+                        <p>This form has been developed to monitor the performance of each practicum trainee not only for grading purposes but also to provide a basis for identifying his/her strengths & weaknesses:</p>
+                        <p>Kindly rate the trainee in each of the traits indicated below by encircling the appropriate number that corresponds to your OBJECTIVE EVALUATION of his/her performance in your department using the scale provided.</p>
+                        <p>
+                            5 – Outstanding (O)<br>
+                            4 – Very Satisfactory (VS)<br>
+                            3 – Satisfactory (S)<br>
+                            2 – Needs Improvement (NI)<br>
+                            1 – Unacceptable (U)
+                        </p>
+                    </div>
+                    <table class="table table-bordered table-striped text-center">
+                        <thead>
+                            <tr>
+                                <th>CRITERIA</th>
+                                <th>O (5)</th>
+                                <th>VS (4)</th>
+                                <th>S (3)</th>
+                                <th>NI (2)</th>
+                                <th>U (1)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="6"><strong>A. QUALITY OF WORK</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Accuracy of completed work according to the operational standards</td>
+                                <td><input type="radio" name="ratings[quality1]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality1]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality1]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality1]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality1]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Thoroughness and attention to detail in performing the assigned tasks</td>
+                                <td><input type="radio" name="ratings[quality2]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality2]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality2]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality2]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality2]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Neatness and presentation of work</td>
+                                <td><input type="radio" name="ratings[quality3]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality3]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality3]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality3]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality3]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="6"><strong>B. PRODUCTIVITY</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Effective use of time</td>
+                                <td><input type="radio" name="ratings[quality4]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality4]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality4]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality4]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality4]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Tasks accomplished</td>
+                                <td><input type="radio" name="ratings[quality5]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality5]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality5]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality5]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality5]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Prompt completion of work assignments</td>
+                                <td><input type="radio" name="ratings[quality6]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality6]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality6]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality6]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality6]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Useful or effective application of knowledge and skills</td>
+                                <td><input type="radio" name="ratings[quality7]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality7]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality7]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality7]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality7]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="6"><strong>C. WORK HABITS, TALENTS & SKILLS</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Appropriate attire</td>
+                                <td><input type="radio" name="ratings[quality8]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality8]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality8]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality8]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality8]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Adherence to policies and procedures</td>
+                                <td><input type="radio" name="ratings[quality9]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality9]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality9]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality9]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality9]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Attendance and punctuality</td>
+                                <td><input type="radio" name="ratings[quality10]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality10]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality10]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality10]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality10]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Ability to communicate effectively to guest, supervisor and colleagues</td>
+                                <td><input type="radio" name="ratings[quality11]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality11]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality11]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality11]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality11]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Ability to think independently</td>
+                                <td><input type="radio" name="ratings[quality12]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality12]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality12]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality12]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality12]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Ability to remain calm and in control when presented with stressful situations</td>
+                                <td><input type="radio" name="ratings[quality13]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality13]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality13]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality13]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality13]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Demonstrates an interest and willingness to learn the task required to maintain operational standards</td>
+                                <td><input type="radio" name="ratings[quality14]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality14]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality14]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality14]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality14]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="6"><strong>D. INTERPERSONAL WORK RELATIONSHIP</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Demonstrates positive relationship with the establishments’ workers</td>
+                                <td><input type="radio" name="ratings[quality15]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality15]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality15]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality15]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality15]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Relates effectively with visitors in a friendly and courteous manner</td>
+                                <td><input type="radio" name="ratings[quality16]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality16]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality16]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality16]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality16]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Accepts suggestions, directions and constructive criticism from employees and supervisors</td>
+                                <td><input type="radio" name="ratings[quality17]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality17]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality17]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality17]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality17]" value="1"></td>
+                            </tr>
+                            <tr>
+                                <td>Cooperative team player</td>
+                                <td><input type="radio" name="ratings[quality18]" value="5"></td>
+                                <td><input type="radio" name="ratings[quality18]" value="4"></td>
+                                <td><input type="radio" name="ratings[quality18]" value="3"></td>
+                                <td><input type="radio" name="ratings[quality18]" value="2"></td>
+                                <td><input type="radio" name="ratings[quality18]" value="1"></td>
+                            </tr>
+                            <!-- Continue for additional criteria -->
+                        </tbody>
+                    </table>
+                    <div class="comments mt-3">
+                        <label for="comments"><strong>Additional Comments:</strong></label>
+                        <textarea id="comments" name="comments" rows="4" class="form-control"></textarea>
+                    </div>
+                </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer bg-light">
+                    <button type="submit" class="btn btn-primary">Submit Evaluation</button>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
 </div>

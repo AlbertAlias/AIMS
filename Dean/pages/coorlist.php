@@ -7,8 +7,8 @@
                 <div class="d-flex align-items-center">
                     <!-- Page Length Selector -->
                     <div class="d-flex align-items-center me-3 mb-2 mb-sm-0">
-                        <label for="pageLengthSelect" class="form-label mb-0 me-2">Show</label>
-                        <select id="pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
+                        <label for="coorPageLengthSelect" class="form-label mb-0 me-2">Show</label>
+                        <select id="coorPageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
@@ -18,7 +18,7 @@
                     <!-- Search Input -->
                     <div class="ms-3 flex-shrink-1">
                         <div class="input-group">
-                            <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
+                            <input type="text" id="coorSearchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
                             <button class="btn btn-outline-secondary btn-sm" type="button">
                                 <i class="fas fa-search"></i>
                             </button>
@@ -28,32 +28,31 @@
             </div>
         </div>
         
-        <table id="usersTables" class="table table-hover text-center" style="width: 100%;">
-    <thead class="table-light">
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Department</th>
-            <th>Total Students in Department</th>
-        </tr>
-    </thead>
-    <tbody id="coordata">
-        <!-- Data will be dynamically loaded here -->
-    </tbody>
-</table>
+        <table id="coorUsersTable" class="table table-hover text-center" style="width: 100%;">
+            <thead class="table-light">
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Department</th>
+                    <th>Total Students in Department</th>
+                </tr>
+            </thead>
+            <tbody id="coorTableData">
+                <!-- Data will be dynamically loaded here -->
+            </tbody>
+        </table>
         
         <!-- Footer -->
         <div class="card-footer bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <span id="tableInfo">Showing 1 to 10 of 50 entries</span>
+                <span id="coorTableInfo">Showing 1 to 10 of 50 entries</span>
                 <!-- Pagination -->
                 <nav aria-label="Page navigation">
-                    <ul id="pagination" class="pagination mb-0">
+                    <ul id="coorPagination" class="pagination mb-0">
                         <!-- Pagination buttons will be generated here via AJAX -->
                     </ul>
                 </nav>
             </div>
         </div>
     </div>
-
 </div>

@@ -95,7 +95,7 @@
     <script src="functions/profile/profile-details.js"></script>
 
     <script src="crud-ajax/studentlist.js"></script>
-    <!-- <script src="crud_ajax/coorlist.js"></script> -->
+    <script src="crud-ajax/coorlist.js"></script>
     
 
     <!--END::CRUD AJAX FUNCTIONS-->
