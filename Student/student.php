@@ -85,7 +85,7 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- <script src="https://kit.fontawesome.com/29c04b1733.js" crossorigin="anonymous"></script> -->
+    <script src="https://kit.fontawesome.com/6384c39e42.js" crossorigin="anonymous"></script>
     <script src="../assets/js/sidebar.js"></script>
     <!-- <script src="functions/auto-logout/session-timeout.js"></script> -->
 
