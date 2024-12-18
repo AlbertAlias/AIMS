@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2024 at 01:57 PM
+-- Generation Time: Dec 18, 2024 at 05:02 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -129,6 +129,13 @@ CREATE TABLE `evaluations` (
   `evaluation_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `evaluations`
+--
+
+INSERT INTO `evaluations` (`id`, `student_id`, `ratings`, `total_grade`, `comments`, `evaluation_date`) VALUES
+(1, '1197', '{\"ratings[quality1]\":\"5\",\"ratings[quality2]\":\"5\",\"ratings[quality3]\":\"5\",\"ratings[quality4]\":\"5\",\"ratings[quality5]\":\"5\",\"ratings[quality6]\":\"5\",\"ratings[quality7]\":\"5\",\"ratings[quality8]\":\"5\",\"ratings[quality9]\":\"5\",\"ratings[quality10]\":\"5\",\"ratings[quality11]\":\"5\",\"ratings[quality12]\":\"5\",\"ratings[quality13]\":\"5\",\"ratings[quality14]\":\"5\",\"ratings[quality15]\":\"5\",\"ratings[quality16]\":\"5\",\"ratings[quality17]\":\"5\",\"ratings[quality18]\":\"5\"}', 70.00, 'tanga ka bert', '2024-12-17 13:12:11');
+
 -- --------------------------------------------------------
 
 --
@@ -152,18 +159,18 @@ CREATE TABLE `requirements` (
   `title` varchar(255) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `deadline` date NOT NULL
+  `deadline` date NOT NULL,
+  `status` enum('open','closed') NOT NULL DEFAULT 'open'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `requirements`
 --
 
-INSERT INTO `requirements` (`requirement_id`, `coordinator_id`, `title`, `description`, `created_at`, `deadline`) VALUES
-(63, 484, 'App', 'Letter', '2024-12-17 06:42:57', '2024-12-18'),
-(64, 484, 'Res', 'Letter', '2024-12-17 06:43:04', '2024-12-18'),
-(65, 484, 'MO', 'A', '2024-12-17 06:43:12', '2024-12-18'),
-(66, 484, 'Birth', 'Cert', '2024-12-17 06:43:20', '2024-12-18');
+INSERT INTO `requirements` (`requirement_id`, `coordinator_id`, `title`, `description`, `created_at`, `deadline`, `status`) VALUES
+(67, 484, 'Application Letter', 'Pokemon Horizon Episode 30', '2024-12-17 13:05:11', '2024-12-18', 'open'),
+(68, 484, 'Resume Letter', 'Pokemon Horizon Rayquaza', '2024-12-17 13:05:38', '2001-12-15', 'open'),
+(77, 484, 'Memorandum of Agreement', 'pikachu', '2024-12-18 03:29:59', '2024-12-22', 'open');
 
 -- --------------------------------------------------------
 
@@ -178,6 +185,15 @@ CREATE TABLE `student_supervisor` (
   `company` varchar(100) NOT NULL,
   `assigned_date` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `student_supervisor`
+--
+
+INSERT INTO `student_supervisor` (`id`, `student_id`, `supervisor_id`, `company`, `assigned_date`) VALUES
+(24, 1197, 1195, 'Fujitsu Die Tech Philippines Corporation', '2024-12-17 21:11:07'),
+(25, 1206, 1195, 'Fujitsu Die Tech Philippines Corporation', '2024-12-17 21:11:34'),
+(26, 1207, 1195, 'Fujitsu Die Tech Philippines Corporation', '2024-12-17 21:11:42');
 
 -- --------------------------------------------------------
 
@@ -201,8 +217,10 @@ CREATE TABLE `submit_requirements` (
 --
 
 INSERT INTO `submit_requirements` (`submit_id`, `student_id`, `document_name`, `status`, `submission_date`, `requirement_id`, `file_path`, `remarks`) VALUES
-(111, 1217, 'Birth Certificate.pdf', 'approved', '2024-12-17 19:15:34', 64, 'uploads/Birth Certificate.pdf', NULL),
-(112, 1217, 'Birth Certificate.pdf', 'rejected', '2024-12-17 19:59:16', 65, 'uploads/Birth Certificate.pdf', 'ulitin mo ulit to');
+(125, 1217, 'Application Letter.pdf', 'rejected', '2024-12-18 10:49:27', 67, 'uploads/Application Letter.pdf', 'adad'),
+(126, 1217, 'Resume Letter.pdf', 'rejected', '2024-12-18 10:49:33', 68, 'uploads/Resume Letter.pdf', 'bawal'),
+(127, 1217, 'Buenaobra Certified True Copy of Registration Form 1st Semester1st Term, AY 2023-2024.pdf', 'rejected', '2024-12-18 11:33:13', 68, 'uploads/Buenaobra Certified True Copy of Registration Form 1st Semester1st Term, AY 2023-2024.pdf', 'dsd'),
+(128, 1217, 'Buenaobra Certified True Copy of Registration Form 1st Semester1st Term, AY 2023-2024.pdf', 'rejected', '2024-12-18 11:33:24', 77, 'uploads/Buenaobra Certified True Copy of Registration Form 1st Semester1st Term, AY 2023-2024.pdf', 'dsds');
 
 -- --------------------------------------------------------
 
@@ -541,7 +559,7 @@ ALTER TABLE `department`
 -- Indexes for table `evaluations`
 --
 ALTER TABLE `evaluations`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- Indexes for table `ojt_hours`
@@ -608,22 +626,28 @@ ALTER TABLE `department`
   MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
+-- AUTO_INCREMENT for table `evaluations`
+--
+ALTER TABLE `evaluations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `requirements`
 --
 ALTER TABLE `requirements`
-  MODIFY `requirement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `requirement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- AUTO_INCREMENT for table `student_supervisor`
 --
 ALTER TABLE `student_supervisor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `submit_requirements`
 --
 ALTER TABLE `submit_requirements`
-  MODIFY `submit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `submit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT for table `users`

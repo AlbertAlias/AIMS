@@ -1,4 +1,4 @@
-<div class="container-fluid p-0 m-0" id="posting" style="display: none;">
+<div class="container-fluid p-0 m-0" id="requirements" style="display: none;">
     <div class="row">
         <div class="col-12 col-md-4 col-lg-4 mb-3">
             <div class="post-container">
@@ -19,7 +19,8 @@
                     <div>
                         <!-- Post Button -->
                         <button class="btn btn-success" id="postRequirementBtn">Post</button>
-                        <button class="btn btn-secondary">Cancel</button>
+                        <button class="btn btn-primary" id="updatePostRequirementBtn" style="display: none;">Update</button>
+                        <button class="btn btn-secondary" id="cancelEditRequirementsBtn">Cancel</button>
                     </div>
                 </div>
             </div>
@@ -43,7 +44,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-8 col-lg-8" id="posted-req">
+        <div class="col-12 col-md-8 col-lg-8" id="posted-requirements">
             <!-- Dynamically populated requirement posts will appear here -->
         </div>
     </div>
@@ -55,13 +56,10 @@
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between align-items-center w-100">
                 <h5 class="text-center mb-0">Pending Requirements</h5>
-                <div class="input-group flex-shrink-1" style="max-width: 250px;">
+                <div class="input-group flex-shrink-1" style="max-width: 350px;">
                     <!-- Select Dropdown -->
                     <select class="form-select form-select-sm" aria-label="Select filter" id="pendingSelectOption">
-                        <option selected>Filter</option>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
+                        <option selected></option>
                     </select>
                     <!-- Search Input -->
                     <input type="text" id="pendingSearchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
@@ -89,13 +87,10 @@
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between align-items-center w-100">
                 <h5 class="text-center mb-0">Rejected Requirements</h5>
-                <div class="input-group flex-shrink-1" style="max-width: 250px;">
+                <div class="input-group flex-shrink-1" style="max-width: 350px;">
                     <!-- Select Dropdown -->
                     <select class="form-select form-select-sm" aria-label="Select filter" id="rejectedSelectOption">
                         <option selected>Filter</option>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
                     </select>
                     <!-- Search Input -->
                     <input type="text" id="master-lists-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
@@ -123,13 +118,10 @@
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between align-items-center w-100">
                 <h5 class="text-center mb-0">Completed Requirements</h5>
-                <div class="input-group flex-shrink-1" style="max-width: 250px;">
+                <div class="input-group flex-shrink-1" style="max-width: 350px;">
                     <!-- Select Dropdown -->
                     <select class="form-select form-select-sm" aria-label="Select filter" id="completedSelectOption">
                         <option selected>Filter</option>
-                        <option value="option1">Option 1</option>
-                        <option value="option2">Option 2</option>
-                        <option value="option3">Option 3</option>
                     </select>
                     <!-- Search Input -->
                     <input type="text" id="master-lists-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">

@@ -1,4 +1,4 @@
-<div class="container-fluid p-0 m-0" id="requirements" style="display: none;">
+<div class="container-fluid p-0 m-0" id="students" style="display: none;">
     <div class="card shadow-sm">
         <!-- Header -->
         <div class="card-header bg-light text-dark">

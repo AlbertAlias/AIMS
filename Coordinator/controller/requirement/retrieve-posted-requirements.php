@@ -7,15 +7,17 @@
     include '../../../dbconn.php';
 
     // Fetch the requirements from the database
-    $sql = "SELECT title, description, deadline FROM requirements ORDER BY created_at DESC";
+    $sql = "SELECT requirement_id, title, description, deadline, status FROM requirements ORDER BY created_at DESC";
     $result = $conn->query($sql);
 
     $requirements = [];
     while ($row = $result->fetch_assoc()) {
         $requirements[] = [
+            'requirement_id' => $row['requirement_id'],
             'title' => $row['title'],
             'description' => $row['description'],
-            'deadline' => $row['deadline']
+            'deadline' => $row['deadline'],
+            'status' => $row['status']
         ];
     }
 

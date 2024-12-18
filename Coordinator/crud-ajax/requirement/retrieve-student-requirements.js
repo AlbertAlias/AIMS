@@ -197,15 +197,83 @@ $(document).ready(function () {
         }
     });
 
+    function loadRequirementTitles() {
+        $.ajax({
+            url: 'controller/requirement/retrieve-requirements-title.php', // New PHP file to fetch titles
+            method: 'GET',
+            success: function (response) {
+                try {
+                    if (typeof response === 'string') {
+                        response = JSON.parse(response);
+                    }
+
+                    if (response.status === 'success') {
+                        // Get the titles from the response
+                        const titles = response.titles;
+
+                        // Clear existing options
+                        $('#pendingSelectOption').empty();
+                        $('#rejectedSelectOption').empty();
+                        $('#completedSelectOption').empty();
+
+                        // Add default "Filter" option
+                        const defaultOption = '<option selected>All</option>';
+                        $('#pendingSelectOption').append(defaultOption);
+                        $('#rejectedSelectOption').append(defaultOption);
+                        $('#completedSelectOption').append(defaultOption);
+
+                        // Populate select options with titles
+                        titles.forEach(function (title) {
+                            const optionHtml = `<option value="${title}">${title}</option>`;
+                            $('#pendingSelectOption').append(optionHtml);
+                            $('#rejectedSelectOption').append(optionHtml);
+                            $('#completedSelectOption').append(optionHtml);
+                        });
+                    } else {
+                        console.error('Error fetching titles:', response.message);
+                    }
+                } catch (e) {
+                    console.error('Error parsing response:', e);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX error:', status, error);
+            }
+        });
+    }
+
+    // Load requirement titles when the modal is opened
     $('#pendingModal').on('show.bs.modal', function () {
-        loadPendingRequirements();
+        loadRequirementTitles(); // Populate select options on modal open
+        loadPendingRequirements(); // Existing function to load pending requirements
+    });
+
+    $('#rejectedModal').on('show.bs.modal', function () {
+        loadRequirementTitles(); // Populate select options on modal open
+    });
+
+    $('#completedModal').on('show.bs.modal', function () {
+        loadRequirementTitles(); // Populate select options on modal open
+    });
+
+    $('#pendingSelectOption').change(function () {
+        const selectedTitle = $(this).val(); // Get the selected title
+    
+        if (selectedTitle === 'Filter' || selectedTitle === '') {
+            // If "Filter" is selected, load all pending requirements
+            loadPendingRequirements();
+        } else {
+            // If a specific title is selected, load requirements for that title
+            loadPendingRequirements(selectedTitle);
+        }
     });
 
     // Function to load pending student requirements
-    function loadPendingRequirements() {
+    function loadPendingRequirements(titleFilter = '') {
         $.ajax({
             url: 'controller/requirement/retrieve-student-requirements.php',
             method: 'POST',
+            data: { title: titleFilter }, // Pass the selected title as data (empty if no filter)
             success: function (response) {
                 try {
                     if (typeof response === 'string') {
@@ -227,8 +295,7 @@ $(document).ready(function () {
                                 month: 'short',
                                 day: 'numeric',
                             });
-                        
-                            // Ensure proper classes are in place for jQuery to target
+    
                             const cardHtml = `
                                 <div class="card task-card px-3 py-2 mb-3 submission-card position-relative" data-submission-id="${submission.submit_id}" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                                     <div class="d-flex align-items-center">

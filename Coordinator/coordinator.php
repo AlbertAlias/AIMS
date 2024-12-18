@@ -70,8 +70,8 @@
                 <!-- Begin Page Content -->
                 <div id="page-content" style="width: 100%;">
                     <?php include "pages/dashboard.php"; ?>
-                    <?php include "pages/requirement.php"; ?>
-                    <?php include "pages/posting.php"; ?>
+                    <?php include "pages/students-lists.php"; ?>
+                    <?php include "pages/requirements.php"; ?>
                     <?php include "pages/profile.php"; ?>
                 </div>
             </div>
