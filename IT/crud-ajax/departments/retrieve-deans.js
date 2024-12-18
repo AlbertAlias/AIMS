@@ -110,6 +110,7 @@ $(document).ready(function() {
         $('#add_last_name').val('');
         $('#add_first_name').val('');
         $('#add_username').val('');
+        $('#add_password').val('');
         $('#add_department1').val('Choose Department 1');
         $('#add_department2').val('Choose Department 2');
         $('#add_department3').val('Choose Department 3');
@@ -124,6 +125,7 @@ $(document).ready(function() {
         const lastName = $('#add_last_name').val();
         const firstName = $('#add_first_name').val();
         const username = $('#add_username').val();
+        const password = $('#add_password').val();
         const dept1 = $('#add_department1').val();
         const dept2 = $('#add_department2').val();
         const dept3 = $('#add_department3').val();
@@ -157,6 +159,7 @@ $(document).ready(function() {
                 last_name: lastName,
                 first_name: firstName,
                 username: username,
+                password: password,
                 department1: dept1,
                 department2: dept2,
                 department3: dept3

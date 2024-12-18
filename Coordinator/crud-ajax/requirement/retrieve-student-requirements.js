@@ -402,6 +402,9 @@ $(document).ready(function () {
                                     <small class="text-muted submission-date">Submitted ${submissionDate}</small>
                                 </div>
                             </div>
+                            <button class="btn btn-success btn-sm position-absolute top-0 end-0 m-2 btn-approve" data-id="${submission.submit_id}">Approve</button>
+                            <button class="btn btn-danger btn-sm px-3 position-absolute bottom-0 end-0 m-2 btn-reject" data-id="${submission.submit_id}">Reject</button>
+                            <button class="btn btn-primary btn-sm position-absolute bottom-0 start-0 m-2 btn-view-file" data-file-path="${submission.file_path}" style="display: none;">View File</button>
                         </div>
                     `;
                     $(container).append(cardHtml);
