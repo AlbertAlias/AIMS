@@ -99,6 +99,8 @@
     <script src="crud-ajax/requirement/retrieve-requirements.js"></script>
     <script src="crud-ajax/requirement/create-submit-file.js"></script>
     <script src="crud-ajax/requirement/retrieve-submit-file.js"></script>
+    <script src="crud-ajax/weeklyreport/weeklyreport.js"></script>
+
 
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>
