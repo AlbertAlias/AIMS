@@ -8,41 +8,44 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'Coordinator') {
 }
 
 $coordinatorId = $_SESSION['user_id'];
-$titleFilter = isset($_POST['title']) ? $_POST['title'] : ''; // Get the title filter from the POST request
 
-// SQL query to retrieve student requirements along with file paths
+// Get title and status filters from POST request
+$titleFilter = isset($_POST['title']) ? $_POST['title'] : ''; 
+$statusFilter = isset($_POST['status']) ? $_POST['status'] : 'pending'; 
+
+// Initialize the SQL query and parameters based on the filters
 if (empty($titleFilter)) {
-    // Modify the query to return all requirements if no title filter is provided
+    // No title filter provided, query based on status only
     $sql = "SELECT sr.submit_id, sr.document_name, sr.status, sr.submission_date, sr.student_id, sr.file_path,
                 u.first_name, u.last_name
             FROM submit_requirements sr
             INNER JOIN requirements r ON sr.requirement_id = r.requirement_id
             INNER JOIN users u ON sr.student_id = u.user_id
-            WHERE r.coordinator_id = ? AND sr.status = 'pending'";
+            WHERE r.coordinator_id = ? AND sr.status = ?";
 } else {
-    // Filter by title if it's provided
+    // If title filter is provided, include it in the query
     $sql = "SELECT sr.submit_id, sr.document_name, sr.status, sr.submission_date, sr.student_id, sr.file_path,
                 u.first_name, u.last_name
             FROM submit_requirements sr
             INNER JOIN requirements r ON sr.requirement_id = r.requirement_id
             INNER JOIN users u ON sr.student_id = u.user_id
-            WHERE r.coordinator_id = ? AND sr.status = 'pending' AND r.title = ?";
+            WHERE r.coordinator_id = ? AND sr.status = ? AND r.title = ?";
 }
 
-// Prepare and execute the statement
+// Prepare and execute the query
 if ($stmt = $conn->prepare($sql)) {
+    // Bind the parameters based on whether a title filter is provided
     if (!empty($titleFilter)) {
-        // Bind the coordinatorId and titleFilter when title is provided
-        $stmt->bind_param("is", $coordinatorId, $titleFilter);
+        $stmt->bind_param("iss", $coordinatorId, $statusFilter, $titleFilter);
     } else {
-        // Only bind the coordinatorId if no title filter
-        $stmt->bind_param("i", $coordinatorId);
+        $stmt->bind_param("is", $coordinatorId, $statusFilter);
     }
 
     $stmt->execute();
     $result = $stmt->get_result();
 
     $requirements = [];
+    // Fetch the results and prepare them for the response
     while ($row = $result->fetch_assoc()) {
         $requirements[] = [
             'submit_id' => $row['submit_id'],
@@ -55,14 +58,13 @@ if ($stmt = $conn->prepare($sql)) {
         ];
     }
 
-    if (count($requirements) > 0) {
-        echo json_encode(['status' => 'success', 'data' => $requirements]);
-    } else {
-        echo json_encode(['status' => 'success', 'data' => []]); // No data found
-    }
+    // Return the requirements data as JSON
+    echo json_encode(['status' => 'success', 'data' => $requirements]);
 
     $stmt->close();
 } else {
+    // Handle failure to prepare the query
     echo json_encode(['status' => 'error', 'message' => 'Failed to prepare database query']);
 }
+
 ?>
