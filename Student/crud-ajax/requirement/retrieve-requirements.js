@@ -181,7 +181,7 @@ $(document).ready(function () {
                                 <div class="card task-card task-card-hover px-3 py-2 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px, rgba(0, 0, 0, 0.05) 0px 1px 3px; transition: transform 0.3s ease;">
                                     <div class="d-flex justify-content-between align-items-center" style="height: 100%;">
                                         <div class="d-flex flex-column justify-content-center">
-                                            <div class="card-title fs-5 text-primary mt-2">${req.title}</div>
+                                            <div class="card-title fs-5 text-success mt-2">${req.title}</div>
                                         </div>
                                         <div class="d-flex align-items-center">
                                             ${statusBadge}
