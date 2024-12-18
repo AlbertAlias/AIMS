@@ -26,10 +26,40 @@
         </div>
     </div>
 </div>
-
-<div id="pdfModal" class="modal" style="display: none;">
+<!-- Albert -->
+<!-- <div id="pdfModal" class="modal" style="display: none;">
     <div class="modal-content">
         <span id="closeModal" class="close">&times;</span>
         <iframe id="pdfViewer" src="" frameborder="0"></iframe>
+    </div>
+</div> -->
+
+<!-- Bryan -->
+
+<!-- Modal for preview -->
+<div id="pdfModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); align-items: center; justify-content: center;">
+    <div style="width: 80%; height: 80%; background: #fff; padding: 10px; position: relative;">
+        <button id="closeModal" style="position: absolute; top: 10px; right: 10px; background: #f44336; color: white; border: none; padding: 5px 10px; cursor: pointer;">Close</button>
+        <iframe id="pdfViewer" style="width: 100%; height: 100%; border: none;"></iframe>
+    </div>
+</div>
+
+<!-- Bryan -->
+<!-- Modal for PDF Viewer -->
+<!-- <div id="pdfModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); justify-content: center; align-items: center;">
+    <div style="position: relative; background: #fff; padding: 20px; border-radius: 8px; max-width: 80%; height: 80%;">
+        <button id="closeModal" style="position: absolute; top: 10px; right: 10px; font-size: 1.2rem; background: none; border: none; cursor: pointer;">✖</button>
+        <iframe id="pdfViewer" style="width: 100%; height: 100%;" frameborder="0"></iframe>
+    </div>
+</div> -->
+
+<!-- Bryan -->
+
+
+<!-- Modal for previewing the PDF -->
+<div id="pdfModal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+    <div class="modal-content" style="width: 80%; height: 80%; background-color: #fff; position: relative; padding: 10px; border-radius: 8px;">
+        <iframe id="pdfViewer" style="width: 100%; height: 90%;" frameborder="0"></iframe>
+        <button id="closeModal" style="position: absolute; top: 10px; right: 10px; font-size: 1.2rem; background-color: transparent; border: none; cursor: pointer;">✖</button>
     </div>
 </div>

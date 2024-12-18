@@ -31,10 +31,209 @@ window.addEventListener('click', function (event) {
 });
 
 
+// document.getElementById('fileInput').addEventListener('change', function () {
+//     const fileContainer = document.getElementById('fileContainer');
+//     const file = this.files[0]; // Get the selected file
+//     const submitButton = document.getElementById('turnInButton'); // "Turn in" button
+
+//     if (file) {
+//         // Check if the file is a PDF
+//         if (file.type !== 'application/pdf') {
+//             alert('Only PDF files are allowed!');
+//             this.value = ''; // Clear the file input
+//             return;
+//         }
+
+//         // Ensure only one file is added
+//         if (fileContainer.children.length > 0) {
+//             alert('You can only upload one file.');
+//             this.value = ''; // Clear the file input
+//             return;
+//         }
+
+//         // Create a new container for the file
+//         const fileCard = document.createElement('div');
+//         fileCard.className = 'd-flex align-items-center border p-1 rounded mb-2 position-relative';
+        
+//         // File Icon
+//         const fileIcon = document.createElement('div');
+//         fileIcon.innerHTML = '<i class="fa-solid fa-file-pdf icon mx-3"></i>';
+//         fileIcon.style.fontSize = '1.5rem';
+//         fileIcon.querySelector('i').style.color = '#d32923';
+        
+//         // File Details with name overflow styling
+//         const fileDetails = document.createElement('div');
+//         fileDetails.style.flex = '1';
+//         fileDetails.innerHTML = `        
+//             <p class="file-name mb-0" title="${file.name}" style="color: #6c757d;"><strong>${file.name}</strong></p>
+//             <p class="text-muted small mb-0">${(file.size / 1024).toFixed(2)} KB</p>
+//         `;
+        
+//         // Close Button
+//         const closeButton = document.createElement('button');
+//         closeButton.className = 'btn btn-sm position-absolute top-5 end-0 p-3';
+//         closeButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+//         closeButton.style.fontSize = '1.3rem';
+//         closeButton.style.cursor = 'pointer';
+        
+//         // Add event listener to remove the file card
+//         closeButton.addEventListener('click', function (event) {
+//             event.stopPropagation();
+//             fileCard.remove();
+//             document.getElementById('fileInput').value = '';
+//             submitButton.disabled = true;
+//         });
+
+//         // Append icon, details, and close button to the file card
+//         fileCard.appendChild(fileIcon);
+//         fileCard.appendChild(fileDetails);
+//         fileCard.appendChild(closeButton);
+        
+//         // Append the file card to the container
+//         fileContainer.insertBefore(fileCard, fileContainer.firstChild);
+
+//         // Enable the "Turn in" button after a file is uploaded
+//         submitButton.disabled = false;
+//     }
+// });
+
+
+// Bryan Custodio to 
+// document.getElementById('fileInput').addEventListener('change', function () {
+//     const fileContainer = document.getElementById('fileContainer');
+//     const file = this.files[0]; // Get the selected file
+//     const submitButton = document.getElementById('turnInButton'); // "Turn in" button
+
+//     if (file) {
+//         // Check if the file is a PDF
+//         if (file.type !== 'application/pdf') {
+//             alert('Only PDF files are allowed!');
+//             this.value = ''; // Clear the file input
+//             return;
+//         }
+
+//         // Ensure only one file is added
+//         if (fileContainer.children.length > 0) {
+//             alert('You can only upload one file.');
+//             this.value = ''; // Clear the file input
+//             return;
+//         }
+
+//         // Create a new container for the file
+//         const fileCard = document.createElement('div');
+//         fileCard.className = 'd-flex align-items-center border p-1 rounded mb-2 position-relative';
+
+//         // File Icon
+//         const fileIcon = document.createElement('div');
+//         fileIcon.innerHTML = '<i class="fa-solid fa-file-pdf icon mx-3"></i>';
+//         fileIcon.style.fontSize = '1.5rem';
+//         fileIcon.querySelector('i').style.color = '#d32923';
+
+//         // File Details with name overflow styling
+//         const fileDetails = document.createElement('div');
+//         fileDetails.style.flex = '1';
+//         fileDetails.innerHTML = `        
+//             <p class="file-name mb-0" title="${file.name}" style="color: #6c757d;"><strong>${file.name}</strong></p>
+//             <p class="text-muted small mb-0">${(file.size / 1024).toFixed(2)} KB</p>
+//         `;
+
+//         // View Button
+//         const viewButton = document.createElement('button');
+//         viewButton.className = 'btn btn-sm btn-info ms-2';
+//         viewButton.innerHTML = 'View';
+//         viewButton.style.cursor = 'pointer';
+//         viewButton.addEventListener('click', function () {
+//             const pdfViewer = document.getElementById('pdfViewer');
+//             const fileURL = URL.createObjectURL(file); // Create a blob URL for the file
+//             pdfViewer.src = `${fileURL}#toolbar=0`; // Update the viewer's source
+//             const modal = document.getElementById('pdfModal');
+//             modal.style.display = 'flex'; // Show the modal
+//         });
+
+//         // Close Button
+//         const closeButton = document.createElement('button');
+//         closeButton.className = 'btn btn-sm position-absolute top-5 end-0 p-3';
+//         closeButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+//         closeButton.style.fontSize = '1.3rem';
+//         closeButton.style.cursor = 'pointer';
+//         closeButton.addEventListener('click', function (event) {
+//             event.stopPropagation();
+//             fileCard.remove();
+//             document.getElementById('fileInput').value = '';
+//             submitButton.disabled = true;
+//         });
+
+//         // Append icon, details, view button, and close button to the file card
+//         fileCard.appendChild(fileIcon);
+//         fileCard.appendChild(fileDetails);
+//         fileCard.appendChild(viewButton);
+//         fileCard.appendChild(closeButton);
+
+//         // Append the file card to the container
+//         fileContainer.insertBefore(fileCard, fileContainer.firstChild);
+
+//         // Enable the "Turn in" button after a file is uploaded
+//         submitButton.disabled = false;
+//     }
+// });
+
+
+// Bryan Custodio
+// document.getElementById('fileInput').addEventListener('change', function () {
+//     const fileContainer = document.getElementById('fileContainer');
+//     const file = this.files[0]; // Get the selected file
+//     const submitButton = document.getElementById('turnInButton'); // "Turn in" button
+
+//     // Clear the container before adding a new file
+//     fileContainer.innerHTML = '';
+
+//     if (file) {
+//         // Validate PDF file
+//         if (file.type !== 'application/pdf') {
+//             alert('Only PDF files are allowed!');
+//             this.value = ''; // Clear the file input
+//             return;
+//         }
+
+//         // Create a clickable file card
+//         const fileCard = document.createElement('div');
+//         fileCard.className = 'file-card d-flex align-items-center border p-2 rounded mb-2';
+//         fileCard.style.cursor = 'pointer';
+//         fileCard.title = 'Click to view the file'; // Tooltip
+
+//         // Add file details
+//         fileCard.innerHTML = `
+//             <div style="flex: 1; overflow: hidden;">
+//                 <strong>${file.name}</strong>
+//                 <p class="text-muted small mb-0">${(file.size / 1024).toFixed(2)} KB</p>
+//             </div>
+//         `;
+
+//         // Add click event to preview file
+//         fileCard.addEventListener('click', function () {
+//             const pdfViewer = document.getElementById('pdfViewer');
+//             const fileURL = URL.createObjectURL(file); // Create a blob URL
+//             pdfViewer.src = `${fileURL}#toolbar=0`; // Set iframe source
+//             const modal = document.getElementById('pdfModal');
+//             modal.style.display = 'flex'; // Show modal
+//         });
+
+//         // Add the file card to the container
+//         fileContainer.appendChild(fileCard);
+
+//         // Enable "Turn In" button
+//         submitButton.disabled = false;
+//     }
+// });
+
+// Bryan Custodio
 document.getElementById('fileInput').addEventListener('change', function () {
     const fileContainer = document.getElementById('fileContainer');
     const file = this.files[0]; // Get the selected file
     const submitButton = document.getElementById('turnInButton'); // "Turn in" button
+
+    // Clear existing content in the fileContainer
+    fileContainer.innerHTML = '';
 
     if (file) {
         // Check if the file is a PDF
@@ -44,23 +243,18 @@ document.getElementById('fileInput').addEventListener('change', function () {
             return;
         }
 
-        // Ensure only one file is added
-        if (fileContainer.children.length > 0) {
-            alert('You can only upload one file.');
-            this.value = ''; // Clear the file input
-            return;
-        }
-
         // Create a new container for the file
         const fileCard = document.createElement('div');
         fileCard.className = 'd-flex align-items-center border p-1 rounded mb-2 position-relative';
-        
+        fileCard.style.cursor = 'pointer'; // Make it clickable
+        fileCard.title = 'Click to view the file'; // Tooltip for user feedback
+
         // File Icon
         const fileIcon = document.createElement('div');
         fileIcon.innerHTML = '<i class="fa-solid fa-file-pdf icon mx-3"></i>';
         fileIcon.style.fontSize = '1.5rem';
         fileIcon.querySelector('i').style.color = '#d32923';
-        
+
         // File Details with name overflow styling
         const fileDetails = document.createElement('div');
         fileDetails.style.flex = '1';
@@ -68,17 +262,15 @@ document.getElementById('fileInput').addEventListener('change', function () {
             <p class="file-name mb-0" title="${file.name}" style="color: #6c757d;"><strong>${file.name}</strong></p>
             <p class="text-muted small mb-0">${(file.size / 1024).toFixed(2)} KB</p>
         `;
-        
+
         // Close Button
         const closeButton = document.createElement('button');
         closeButton.className = 'btn btn-sm position-absolute top-5 end-0 p-3';
         closeButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
         closeButton.style.fontSize = '1.3rem';
         closeButton.style.cursor = 'pointer';
-        
-        // Add event listener to remove the file card
         closeButton.addEventListener('click', function (event) {
-            event.stopPropagation();
+            event.stopPropagation(); // Prevent triggering the view event
             fileCard.remove();
             document.getElementById('fileInput').value = '';
             submitButton.disabled = true;
@@ -88,14 +280,42 @@ document.getElementById('fileInput').addEventListener('change', function () {
         fileCard.appendChild(fileIcon);
         fileCard.appendChild(fileDetails);
         fileCard.appendChild(closeButton);
-        
+
+        // Add click event to open the modal and preview the file
+        fileContainer.addEventListener('click', function () {
+            const pdfViewer = document.getElementById('pdfViewer');
+            const fileURL = URL.createObjectURL(file); // Create a blob URL for the file
+            pdfViewer.src = `${fileURL}#toolbar=0`; // Update the viewer's source
+            const modal = document.getElementById('pdfModal');
+            modal.style.display = 'flex'; // Show the modal
+        });
+
         // Append the file card to the container
-        fileContainer.insertBefore(fileCard, fileContainer.firstChild);
+        fileContainer.appendChild(fileCard);
 
         // Enable the "Turn in" button after a file is uploaded
         submitButton.disabled = false;
     }
 });
+
+// Close Modal
+document.getElementById('closeModal').addEventListener('click', function () {
+    const modal = document.getElementById('pdfModal');
+    modal.style.display = 'none';
+    const pdfViewer = document.getElementById('pdfViewer');
+    pdfViewer.src = ''; // Clear the iframe source
+});
+
+
+
+// Close Modal
+document.getElementById('closeModal').addEventListener('click', function () {
+    const modal = document.getElementById('pdfModal');
+    modal.style.display = 'none';
+    const pdfViewer = document.getElementById('pdfViewer');
+    pdfViewer.src = ''; // Clear the iframe source
+});
+
 
 document.getElementById('turnInButton').addEventListener('click', function () {
     const fileCard = document.querySelector('#fileContainer .d-flex');
