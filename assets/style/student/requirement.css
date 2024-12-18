@@ -1,23 +1,23 @@
 /* Task Card Styling */
-.task-header .task-card {
+/* .task-header .task-card {
   background-color: #ffffff;
   border-radius: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+} */
 
-.card-title {
+/* .card-title {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 200;
   color: #1e88e5;
-}
+} */
 
-.card-text {
+/* .card-text {
   font-size: 0.9rem;
   color: #757575;
-}
+} */
 
 /* Responsive Design - Mobile First */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .task-card {
       padding: 15px;
   }
@@ -27,7 +27,7 @@
   .card-text {
       font-size: 0.875rem;
   }
-}
+} */
 
 
 
