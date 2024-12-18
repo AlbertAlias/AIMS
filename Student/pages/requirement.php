@@ -57,9 +57,9 @@
 
 
 <!-- Modal for previewing the PDF -->
-<div id="pdfModal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
+<!-- <div id="pdfModal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); align-items: center; justify-content: center;">
     <div class="modal-content" style="width: 80%; height: 80%; background-color: #fff; position: relative; padding: 10px; border-radius: 8px;">
         <iframe id="pdfViewer" style="width: 100%; height: 90%;" frameborder="0"></iframe>
         <button id="closeModal" style="position: absolute; top: 10px; right: 10px; font-size: 1.2rem; background-color: transparent; border: none; cursor: pointer;">✖</button>
     </div>
-</div>
+</div> -->
