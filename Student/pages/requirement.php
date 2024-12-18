@@ -39,7 +39,8 @@
 <!-- Modal for preview -->
 <div id="pdfModal" class="modal" style="display: none;">
     <div class="modal-content">
-        <button id="closeModal" style="position: absolute; top: 10px; right: 10px; font-size: 1.2rem; background: none; border: none; cursor: pointer;">✖</button>
+    <span id="closeModal" class="close">&times;</span>
+        <!-- <button id="closeModal" style="position: absolute; top: 10px; right: 10px; font-size: 1.2rem; background: none; border: none; cursor: pointer;">✖</button> -->
         <iframe id="pdfViewer" src="" frameborder="0"></iframe>
     </div>
 </div>
