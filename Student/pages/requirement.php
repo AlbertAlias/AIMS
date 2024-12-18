@@ -37,10 +37,10 @@
 <!-- Bryan -->
 
 <!-- Modal for preview -->
-<div id="pdfModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); align-items: center; justify-content: center;">
-    <div style="width: 80%; height: 80%; background: #fff; padding: 10px; position: relative;">
-        <button id="closeModal" style="position: absolute; top: 10px; right: 10px; background: #f44336; color: white; border: none; padding: 5px 10px; cursor: pointer;">Close</button>
-        <iframe id="pdfViewer" style="width: 100%; height: 100%; border: none;"></iframe>
+<div id="pdfModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <button id="closeModal" style="position: absolute; top: 10px; right: 10px; font-size: 1.2rem; background: none; border: none; cursor: pointer;">✖</button>
+        <iframe id="pdfViewer" src="" frameborder="0"></iframe>
     </div>
 </div>
 
