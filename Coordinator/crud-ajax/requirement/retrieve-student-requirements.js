@@ -292,12 +292,40 @@ $(document).ready(function () {
         }
     });
 
-    // Function to load pending student requirements
+    // Add event listener for search inputs
+    $('#pendingSearchInput').on('input', function () {
+        const searchTerm = $(this).val().toLowerCase();
+        filterRequirements('#pendingContent', searchTerm);
+    });
+
+    $('#rejectedSearchInput').on('input', function () {
+        const searchTerm = $(this).val().toLowerCase();
+        filterRequirements('#rejectedContent', searchTerm);
+    });
+
+    $('#completeSearchInput').on('input', function () {
+        const searchTerm = $(this).val().toLowerCase();
+        filterRequirements('#completedContent', searchTerm);
+    });
+
+    // Function to filter requirements based on search term
+    function filterRequirements(container, searchTerm) {
+        $(container).find('.submission-card').each(function () {
+            const studentName = $(this).find('.student-name').text().toLowerCase();
+            if (studentName.includes(searchTerm)) {
+                $(this).show(); // Show the item if it matches
+            } else {
+                $(this).hide(); // Hide the item if it doesn't match
+            }
+        });
+    }
+
+    // Existing functions to load requirements for different statuses
     function loadPendingRequirements(titleFilter = '') {
         $.ajax({
             url: 'controller/requirement/retrieve-student-requirements.php',
             method: 'POST',
-            data: { title: titleFilter, status: 'pending' }, // Filter by status 'pending'
+            data: { title: titleFilter, status: 'pending' },
             success: function (response) {
                 renderRequirements(response, '#pendingContent');
             },
@@ -308,12 +336,11 @@ $(document).ready(function () {
         });
     }
 
-    // Function to load rejected student requirements
     function loadRejectedRequirements(titleFilter = '') {
         $.ajax({
             url: 'controller/requirement/retrieve-student-requirements.php',
             method: 'POST',
-            data: { title: titleFilter, status: 'rejected' }, // Filter by status 'rejected'
+            data: { title: titleFilter, status: 'rejected' },
             success: function (response) {
                 renderRequirements(response, '#rejectedContent');
             },
@@ -324,12 +351,11 @@ $(document).ready(function () {
         });
     }
 
-    // Function to load completed student requirements
     function loadCompletedRequirements(titleFilter = '') {
         $.ajax({
             url: 'controller/requirement/retrieve-student-requirements.php',
             method: 'POST',
-            data: { title: titleFilter, status: 'approved' }, // Filter by status 'approved'
+            data: { title: titleFilter, status: 'approved' },
             success: function (response) {
                 renderRequirements(response, '#completedContent');
             },
@@ -376,14 +402,10 @@ $(document).ready(function () {
                                     <small class="text-muted submission-date">Submitted ${submissionDate}</small>
                                 </div>
                             </div>
-                            <button class="btn btn-success btn-sm position-absolute top-0 end-0 m-2 btn-approve" data-id="${submission.submit_id}">Approve</button>
-                            <button class="btn btn-danger btn-sm px-3 position-absolute bottom-0 end-0 m-2 btn-reject" data-id="${submission.submit_id}">Reject</button>
-                            <button class="btn btn-primary btn-sm position-absolute bottom-0 start-0 m-2 btn-view-file" data-file-path="${submission.file_path}" style="display: none;">View File</button>
                         </div>
                     `;
                     $(container).append(cardHtml);
                 });
-
             } else {
                 console.error('Error: Invalid response', response);
                 $(container).html('<p class="text-center text-danger">Error fetching requirements.</p>');

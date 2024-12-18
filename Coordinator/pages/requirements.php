@@ -93,7 +93,7 @@
                         <option selected>Filter</option>
                     </select>
                     <!-- Search Input -->
-                    <input type="text" id="master-lists-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
+                    <input type="text" id="rejectedSearchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
                     <button class="btn btn-outline-secondary btn-sm" type="button">
                         <i class="fas fa-search"></i>
                     </button>
@@ -124,7 +124,7 @@
                         <option selected>Filter</option>
                     </select>
                     <!-- Search Input -->
-                    <input type="text" id="master-lists-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
+                    <input type="text" id="completedSearchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
                     <button class="btn btn-outline-secondary btn-sm" type="button">
                         <i class="fas fa-search"></i>
                     </button>
