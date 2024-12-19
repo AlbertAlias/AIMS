@@ -123,5 +123,10 @@ $(document).ready(function () {
     }
 
     // Load the coordinator's requirements
-    loadCoordinatorRequirements();
+    window.loadCoordinatorRequirements = loadCoordinatorRequirements;
+
+    // Call the function on document ready
+    $(document).ready(function () {
+        loadCoordinatorRequirements();
+    });
 });

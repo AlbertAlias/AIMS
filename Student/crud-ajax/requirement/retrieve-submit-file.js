@@ -1,24 +1,24 @@
 $(document).ready(function () {
-    // Function to load the student's file submissions
-    window.loadStudentFiles = function() {
+    // Load student files
+    window.loadStudentFiles = function () {
         $.ajax({
-            url: 'controller/requirement/retrieve-submit-file.php', // The PHP script to fetch the files
+            url: 'controller/requirement/retrieve-submit-file.php',
             method: 'GET',
             dataType: 'json',
             success: function (response) {
                 if (response.error) {
                     console.log(response.error);
                 } else {
-                    $('#taskCardContainer').empty(); // Clear the container before appending new files
-                    $('.approved-file-container').empty(); // Clear the approved file container
+                    $('#taskCardContainer').empty();
+                    $('.approved-file-container').empty();
 
                     response.forEach(function (file) {
                         const fileName = file.document_name;
                         const fileStatus = file.status;
                         const submissionDate = file.submission_date;
+                        const submitId = file.submit_id;
 
                         if (fileStatus.toLowerCase() === "approved") {
-                            // Dynamically create and append the file preview HTML for approved files
                             const filePreviewHtml = `
                                 <div class="file-preview">
                                     <div class="file-icon">
@@ -37,24 +37,43 @@ $(document).ready(function () {
                             `;
                             $('.approved-file-container').append(filePreviewHtml);
                         } else {
-                            // Show the taskCardContainer for non-approved files
                             $('#taskCardContainer').show();
 
                             const fileCardHtml = `
-                                <div class="card task-card px-3 py-3 mt-1 mb-3" 
-                                    style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; transition: transform 0.3s ease;">
-                                    <div class="d-flex justify-content-between align-items-center" style="height: 100%;">
-                                        <div class="d-flex align-items-center">
-                                            <div class="card-title fs-6 text-success fw-bold mt-2">${fileName}</div>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            <div class="badge bg-warning text-white py-2 px-3" style="font-size: 0.875rem; border-radius: 15px;">${fileStatus}</div>
-                                        </div>
+                            <div class="card task-card px-3 py-3 mt-1 mb-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; transition: transform 0.3s ease;"
+                                data-file-name="${fileName}">
+                                <div class="d-flex justify-content-between align-items-center" style="height: 100%;">
+                                    <div class="d-flex align-items-center">
+                                        <div class="card-title fs-6 text-success fw-bold mt-2">${fileName}</div>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <div class="badge bg-warning text-white py-2 px-3" style="font-size: 0.875rem; border-radius: 15px;">${fileStatus}</div>
+                                        <i class="fa-solid fa-xmark delete-icon" data-id="${submitId}" style="margin-top: 2px; margin-left: 10px; color: #dc3545; cursor: pointer; font-size: 1.25rem; transition: transform 0.2s ease, color 0.2s ease;"
+                                        onmouseover="this.style.color='#b02a37'; this.style.transform='scale(1.2)';"
+                                        onmouseout="this.style.color='#dc3545'; this.style.transform='scale(1)';"></i>
                                     </div>
                                 </div>
+                            </div>
                             `;
                             $('#taskCardContainer').append(fileCardHtml);
                         }
+                    });
+
+                    // Add click event for delete icons
+                    $('.delete-icon').on('click', function (event) {
+                        event.stopPropagation(); // Prevent the parent .task-card click event
+                        const submitId = $(this).data('id');
+                        deleteStudentFile(submitId);
+                    });
+
+                    // Add click event for task cards to view PDF
+                    $('.task-card').on('click', function () {
+                        const fileName = $(this).data('file-name');
+                        const pdfViewer = document.getElementById('pdfViewer');
+                        pdfViewer.src = `controller/requirement/uploads/${fileName}#toolbar=0`;
+
+                        const modal = document.getElementById('pdfModal');
+                        modal.style.display = 'flex';
                     });
                 }
             },
@@ -62,8 +81,74 @@ $(document).ready(function () {
                 console.log('Error fetching files');
             }
         });
-    }
+    };
 
-    // Load the student's files when the page is ready
+    function deleteStudentFile(submitId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'Do you really want to delete this file?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel',
+            reverseButtons: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: 'controller/requirement/delete-submit-file.php',
+                    method: 'POST',
+                    data: { submit_id: submitId },
+                    success: function (response) {
+                        if (response.success) {
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-right',
+                                icon: 'success',
+                                title: 'File deleted successfully!',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                background: '#b9f6ca',
+                                iconColor: '#2e7d32',
+                                color: '#155724',
+                                customClass: {
+                                    popup: 'mt-5'
+                                }
+                            });
+                            // Dynamically remove the task card
+                            $(`.delete-icon[data-id="${submitId}"]`)
+                            .closest('.task-card')
+                            .fadeOut(300, function () {
+                                $(this).remove();
+                            });
+
+                            loadCoordinatorRequirements();
+                        } else {
+                            Swal.fire('Error', 'Error deleting file: ' + response.error, 'error');
+                        }
+                    },
+                    error: function () {
+                        Swal.fire('Error', 'An error occurred while trying to delete the file.', 'error');
+                    }
+                });
+            }
+        });
+    }
+    
+
+    // Close modal logic
+    $('#closeModal').on('click', function () {
+        const modal = document.getElementById('pdfModal');
+        modal.style.display = 'none';
+        document.getElementById('pdfViewer').src = '';
+    });
+
+    $(window).on('click', function (event) {
+        const modal = document.getElementById('pdfModal');
+        if (event.target === modal) {
+            modal.style.display = 'none';
+            document.getElementById('pdfViewer').src = '';
+        }
+    });
+
     loadStudentFiles();
 });

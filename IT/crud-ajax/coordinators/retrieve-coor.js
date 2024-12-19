@@ -110,6 +110,7 @@ $(document).ready(function () {
             middle_name: $('#coor_middle_name').val(),
             email: $('#coor_personal_email').val(),
             username: $('#coor_username').val(),
+            password: $('#coor_password').val(),
             department_id: $('#coor_department').val(),
         };
     

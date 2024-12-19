@@ -8,6 +8,7 @@
     $middle_name = $_POST['middle_name'];
     $email = $_POST['email'];
     $username = $_POST['username'];
+    $password = $_POST['password'];
     $department_id = $_POST['department_id'];
 
     $response = array();
@@ -16,20 +17,24 @@
         $response['success'] = false;
         $response['message'] = 'All required fields must be filled.';
     } else {
-        // Update query
+        // Hash the password using bcrypt
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+        // Update query with hashed password
         $sql = "UPDATE users SET 
                     last_name = ?, 
                     first_name = ?, 
                     middle_name = ?, 
                     email = ?, 
                     username = ?, 
+                    password = ?, 
                     department_id = ? 
                 WHERE user_id = ?";
 
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
-            $stmt->bind_param("ssssssi", $last_name, $first_name, $middle_name, $email, $username, $department_id, $user_id);
+            $stmt->bind_param("sssssssi", $last_name, $first_name, $middle_name, $email, $username, $hashed_password, $department_id, $user_id);
 
             if ($stmt->execute()) {
                 $response['success'] = true;

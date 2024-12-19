@@ -114,6 +114,7 @@ $(document).ready(function () {
             email: $('#student_email').val(),
             username: $('#student_username').val(),
             department_id: $('#student_department').val(),
+            password: $('#student_password').val(),  // Include password field
         };
     
         if (!userData.last_name || !userData.first_name || !userData.email || !userData.username || !userData.department_id) {
