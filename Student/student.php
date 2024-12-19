@@ -100,13 +100,9 @@
 
     <script src="crud-ajax/requirement/retrieve-requirements.js"></script>
     <script src="crud-ajax/requirement/retrieve-submit-file.js"></script>
-<<<<<<< Updated upstream
     <script src="crud-ajax/weeklyreport/weeklyreport.js"></script>
     <script src="crud-ajax/weeklyreport/retrieve_weeklyreport.js"></script>
-
-=======
     <script src="crud-ajax/requirement/create-submit-file.js"></script>
->>>>>>> Stashed changes
 
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>
