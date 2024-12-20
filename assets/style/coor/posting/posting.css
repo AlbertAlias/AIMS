@@ -92,22 +92,46 @@
     padding: 5px 10px; font-size: 0.9em; 
 } 
 
-/* Styles for the dropdown button */ 
-.requirement-post .dropdown .fa-ellipsis-vertical { 
-    cursor: pointer; 
-    font-size: 1.2em; 
-    color: #6c757d; 
-    transition: color 0.2s ease-in-out; 
-} 
+/* Hide the default dropdown icon */
+.post-dropdown::after {
+    display: none !important;
+}
 
-.requirement-post .dropdown .fa-ellipsis-vertical:hover { 
-    color: #198754; 
+/* Remove padding and background from the button */
+.post-dropdown {
+    padding: 0;
+    border: none;
+    background: none;
+    border-radius: 50%; /* Make the button round */
+    width: 40px; /* Set the button width */
+    height: 40px; /* Set the button height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Add background color on hover and change icon color */
+.requirement-post .post-dropdown:hover {
+    background-color: #e9ecef; /* Change this color as needed */
+}
+
+.requirement-post .post-dropdown:hover .dropdown-icon {
+    fill: #198754; 
+}
+
+/* Styles for your SVG icon */
+.requirement-post .dropdown .dropdown-icon { 
+    cursor: pointer; 
+    width: 5px; /* 1.2em * 16px = 19.2px */
+    height: auto; 
+    fill: #6c757d; 
+    transition: fill 0.2s ease-in-out; 
 } 
 
 /* Styles for the dropdown menu */ 
-
 .requirement-post .dropdown-menu { 
-    min-width: 110px; padding: 0.2rem 0; 
+    min-width: 110px; 
+    padding: 0.2rem 0; 
 } 
 
 .requirement-post .dropdown-item { 
@@ -123,6 +147,13 @@
     background-color: #f8f9fa; 
     color: #198754; 
 }
+
+.requirement-post .dropdown-item .dropdown-icon { 
+    width: 16px; /* 1em * 16px = 16px */ 
+    height: auto; 
+    fill: currentColor; 
+}
+
 
 /* Styles for the toggle switch */
 .toggle-switch {
@@ -174,19 +205,20 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 1em;
+    width: 17px; /* Adjust the size of the SVG icons as needed */
+    height: 17px;
     transition: opacity 0.2s ease-in-out;
 }
 
 .open-icon {
     left: 5px;
-    color: #198754;
+    fill: #198754;
     opacity: 1;
 }
 
 .close-icon {
-    right: 7px;
-    color: #dc3545;
+    right: 5px;
+    fill: #dc3545;
     opacity: 0;
 }
 

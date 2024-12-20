@@ -14,5 +14,11 @@
 }
 
 .card i {
-    color: #198754; /* Set the icon color */
+    color: #198754;
+}
+
+.card svg {
+    width: 2rem; /* Adjust the width as needed */
+    height: 2rem; /* Adjust the height as needed */
+    fill: #198754; /* This will set the color of the SVG to match the .card i color */
 }

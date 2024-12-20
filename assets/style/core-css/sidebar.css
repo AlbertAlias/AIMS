@@ -64,6 +64,21 @@
     margin-right: 10px;
 }
 
+/* Additional styles for SVG */
+.sidebar-link svg {
+    width: 35px; /* Set the width of the SVG */
+    height: 1.4rem; /* Set the height of the SVG */
+    fill: currentColor; /* Ensure the SVG inherits the color from the parent */
+    text-align: center; /* Align the SVG in the center */
+    margin-right: 10px; /* Add margin to the right of the SVG */
+}
+
+#sidebar-toggle svg {
+    width: 25px;
+    height: 25px;
+    fill: #198754;
+}
+
 .sidebar-footer {
     font-size: 1rem;
     color: #777;

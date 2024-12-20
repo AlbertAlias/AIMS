@@ -1,0 +1,30 @@
+.search-icon { 
+    width: 16px;
+    height: 16px;
+    fill: #198754;
+    position: absolute; 
+    right: 10px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    pointer-events: none; 
+}
+
+.btn svg {
+    width: 20px;
+    height: 20px;
+    padding-bottom: 3px;
+    fill: currentColor;
+}
+
+button.btn.btn-outline-secondary.btn-sm .table-icon {
+    width: 18px;
+    height: 18px;
+    fill: #198754;
+}
+
+.page-link .table-icon {
+    width: 20px;
+    height: 20px;
+    padding-bottom: 3px;
+    fill: #198754;
+}

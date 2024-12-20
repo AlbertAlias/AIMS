@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="../assets/style/core-css/main.css">
     <link rel="stylesheet" href="../assets/style/core-css/sidebar.css">
     <link rel="stylesheet" href="../assets/style/core-css/header.css">
+    <link rel="stylesheet" href="../assets/style/dean/deancore.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
                 rel="stylesheet">
 
@@ -83,7 +84,7 @@
                 integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://kit.fontawesome.com/6384c39e42.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/6384c39e42.js" crossorigin="anonymous"></script> -->
     <script src="../assets/js/sidebar.js"></script>
     <!-- <script src="functions/auto-logout/session-timeout.js"></script> -->
 

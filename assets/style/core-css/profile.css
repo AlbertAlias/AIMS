@@ -15,7 +15,9 @@
 }
 
 #default-profile-icon {
-    font-size: 130px; /* Reduce icon size */
+    width: 130px; /* Size adjustment for SVG */
+    height: 130px; /* Size adjustment for SVG */
+    fill: gray; /* Color for SVG icon */
     transform: translateY(20px); /* Adjust downward if needed */
 }
 
@@ -30,8 +32,9 @@
     position: absolute;
     top: 73%; /* Position below the profile picture container */
     right: 25px; /* Align it to the right edge */
-    font-size: 20px;
-    color: white;
+    width: 30px; /* Width for SVG icon */
+    height: 30px; /* Height for SVG icon */
+    fill: white; /* Color for SVG icon */
     background-color: rgb(143, 143, 143);
     border-radius: 50%;
     padding: 6px;
@@ -61,6 +64,27 @@
     align-items: center;
     justify-content: center;
 }
+
+.icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    fill: #198754; /* This will make the icon inherit the color from its parent */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-icon {
+    width: 18px;
+    height: 18px;
+    margin-bottom: 3px;
+    fill: currentColor; /* This will make the icon inherit the color from its parent */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 #oldPasswordFeedback {
     top: 5px;

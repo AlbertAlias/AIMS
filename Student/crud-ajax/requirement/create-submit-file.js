@@ -11,17 +11,26 @@ document.addEventListener('DOMContentLoaded', function () {
     fileContainer.addEventListener('click', function (event) {
         const fileCard = event.target.closest('.d-flex'); // Get the clicked file card
         if (fileCard && !event.target.closest('.btn')) { // Ensure the click wasn't on the close button
-            const fileName = fileCard.querySelector('.file-name').textContent.trim();
-            // Set the PDF viewer source (correct the URL to point to the public folder)
-            pdfViewer.src = `controller/requirement/uploads/${fileName}#toolbar=0`; // Updated path
-            // Show the modal
-            modal.style.display = 'flex';
+            const fileIndex = fileCard.getAttribute('data-file-index'); // Get file index from data attribute
+            const file = fileInput.files[fileIndex]; // Get the file from the input based on the index
+    
+            if (file) {
+                // Create a temporary Blob URL for the file
+                const fileURL = URL.createObjectURL(file);
+    
+                // Set the PDF viewer's source
+                pdfViewer.src = `${fileURL}#toolbar=0`;
+    
+                // Show the modal
+                modal.style.display = 'flex';
+            }
         }
     });
 
     // Close the modal when the close button is clicked
     closeModal.addEventListener('click', function () {
         modal.style.display = 'none';
+        URL.revokeObjectURL(pdfViewer.src); // Free up memory
         pdfViewer.src = ''; // Clear the iframe source
     });
 
@@ -29,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('click', function (event) {
         if (event.target === modal) {
             modal.style.display = 'none';
+            URL.revokeObjectURL(pdfViewer.src); // Free up memory
             pdfViewer.src = ''; // Clear the iframe source
         }
     });
@@ -37,29 +47,31 @@ document.addEventListener('DOMContentLoaded', function () {
     fileInput.addEventListener('change', function () {
         // Clear existing content in the fileContainer
         fileContainer.innerHTML = '';
-
-        const file = this.files[0]; // Get the selected file
-
-        // Check if the file is a PDF
-        if (file && file.type !== 'application/pdf') {
-            alert('Only PDF files are allowed!');
-            this.value = ''; // Clear the file input
-            return;
-        }
-
-        if (file) {
+    
+        const files = this.files; // Get the selected files
+    
+        // Iterate over the selected files
+        Array.from(files).forEach((file, index) => {
+            // Check if the file is a PDF
+            if (file.type !== 'application/pdf') {
+                alert('Only PDF files are allowed!');
+                this.value = ''; // Clear the file input
+                return;
+            }
+    
             // Create a new container for the file
             const fileCard = document.createElement('div');
             fileCard.className = 'd-flex align-items-center border p-1 rounded mb-2 position-relative';
             fileCard.style.cursor = 'pointer'; // Make it clickable
             fileCard.title = 'Click to view the file'; // Tooltip for user feedback
-
+            fileCard.setAttribute('data-file-index', index); // Store the file index for later reference
+    
             // File Icon
             const fileIcon = document.createElement('div');
             fileIcon.innerHTML = '<i class="fa-solid fa-file-pdf icon mx-3"></i>';
             fileIcon.style.fontSize = '1.5rem';
             fileIcon.querySelector('i').style.color = '#d32923';
-
+    
             // File Details with name overflow styling
             const fileDetails = document.createElement('div');
             fileDetails.style.flex = '1';
@@ -67,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <p class="file-name mb-0" title="${file.name}" style="color: #6c757d;"><strong>${file.name}</strong></p>
                 <p class="text-muted small mb-0">${(file.size / 1024).toFixed(2)} KB</p>
             `;
-
+    
             // Close Button
             const closeButton = document.createElement('button');
             closeButton.className = 'btn btn-sm position-absolute top-5 end-0 p-3';
@@ -80,25 +92,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 fileInput.value = '';
                 submitButton.disabled = true;
             });
-
+    
             // Append icon, details, and close button to the file card
             fileCard.appendChild(fileIcon);
             fileCard.appendChild(fileDetails);
             fileCard.appendChild(closeButton);
-
-            // Add click event to open the modal and preview the file
-            fileCard.addEventListener('click', function () {
-                const fileURL = URL.createObjectURL(file); // Create a blob URL for the file
-                pdfViewer.src = `${fileURL}#toolbar=0`; // Update the viewer's source
-                modal.style.display = 'flex'; // Show the modal
-            });
-
+    
             // Append the file card to the container
             fileContainer.appendChild(fileCard);
-
+    
             // Enable the "Turn in" button after a file is uploaded
             submitButton.disabled = false;
-        }
+        });
     });
 
     // Handle the "Turn in" button click

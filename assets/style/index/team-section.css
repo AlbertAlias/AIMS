@@ -113,5 +113,12 @@
 }
 
 .social-icons .gmail:hover {
-    background-color: rgb(219, 42, 26)
+    background-color: rgb(219, 42, 26);
+}
+
+/* Additional styles for SVG */
+.social-icons .icon svg {
+    width: 60%;
+    height: 60%;
+    fill: currentColor;
 }

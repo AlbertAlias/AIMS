@@ -33,7 +33,7 @@
 
     <link rel="stylesheet" href="../assets/style/student/dashboard.css">
     <link rel="stylesheet" href="../assets/style/student/requirement.css">
-    <link rel="stylesheet" href="../assets/style/student/viewmodal.css">
+    <!-- <link rel="stylesheet" href="../assets/style/student/viewmodal.css"> -->
 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
@@ -87,7 +87,7 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://kit.fontawesome.com/6384c39e42.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/6384c39e42.js" crossorigin="anonymous"></script> -->
     <script src="../assets/js/sidebar.js"></script>
     <!-- <script src="functions/auto-logout/session-timeout.js"></script> -->
 
@@ -100,7 +100,7 @@
 
     <script src="crud-ajax/requirement/retrieve-requirements.js"></script>
     <script src="crud-ajax/requirement/retrieve-submit-file.js"></script>
-    <script src="crud-ajax/weeklyreport/weeklyreport.js"></script>
+    <!-- <script src="crud-ajax/weeklyreport/weeklyreport.js"></script> -->
     <script src="crud-ajax/weeklyreport/retrieve_weeklyreport.js"></script>
     <script src="crud-ajax/requirement/create-submit-file.js"></script>
 

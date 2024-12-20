@@ -9,15 +9,6 @@
     position: relative; /* Make sure any child elements are properly positioned */
 }
 
-.search-icon {
-    position: absolute; /* Position the search icon */
-    right: 10px; /* Adjust to your liking */
-    top: 50%; /* Center it vertically */
-    transform: translateY(-50%); /* For perfect centering */
-    color: gray; /* Icon color */
-    pointer-events: none; /* Allow clicks through the icon */
-}
-
 #searchDepartments {
     padding-right: 2.5rem; /* Add space for the search icon */
     padding-left: 0.5rem; /* Adjust the padding to fit your design */
