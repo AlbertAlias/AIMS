@@ -3,12 +3,10 @@
 
     header('Content-Type: application/json');
 
-    // Correct query to count students
     $sql = "
-        SELECT COUNT(*) AS count 
-        FROM students s
-        INNER JOIN users u ON s.user_id = u.id
-        WHERE u.user_type = 'student'
+        SELECT COUNT(*) AS count
+        FROM users
+        WHERE user_type = 'Student'
     ";
 
     $result = $conn->query($sql);

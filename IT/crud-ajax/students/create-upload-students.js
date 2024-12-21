@@ -107,7 +107,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         });
     
                         // Call loadStudents after a successful upload
-                        window.loadStudents(); // Trigger the function from retrieve-students.js to load students dynamically
+                        window.loadStudents();
+                        var event = new CustomEvent('updateChart');
+                        window.dispatchEvent(event);
                     }
                 } catch (e) {
                     console.error('Error parsing response:', e.message);

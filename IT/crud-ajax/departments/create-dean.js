@@ -51,8 +51,8 @@ $(document).ready(function () {
                         });
                         $("#assignDeanForm")[0].reset(); // Reset the form
 
-                        // Dynamically load the updated dean list
-                        loadDeans();  // This is the function from retrieve-deans.js
+                        loadDeans();
+                        fetchUserAnalytics();
                     } else {
                         // Error handling for existing username
                         if (response.error === 'Username already exists') {

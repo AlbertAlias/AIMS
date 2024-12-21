@@ -1,20 +1,6 @@
 <div class="container-fluid p-0 m-0" id="dashboard" style="display: none;">
     <div class="row">
-        <div class="col-12 col-md-6 col-lg-4 mb-3">
-            <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                <div>
-                    <div class="card-title fs-6">Departments</div>
-                    <div id="num-depts" class="h2"></div>
-                </div>
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                        <path d="M0 80l0 48c0 17.7 14.3 32 32 32l16 0 48 0 0-80c0-26.5-21.5-48-48-48S0 53.5 0 80zM112 32c10 13.4 16 30 16 48l0 304c0 35.3 28.7 64 64 64s64-28.7 64-64l0-5.3c0-32.4 26.3-58.7 58.7-58.7L480 320l0-192c0-53-43-96-96-96L112 32zM464 480c61.9 0 112-50.1 112-112c0-8.8-7.2-16-16-16l-245.3 0c-14.7 0-26.7 11.9-26.7 26.7l0 5.3c0 53-43 96-96 96l176 0 96 0z"/>
-                    </svg>
-                </div>
-            </div>
-        </div>
-        <!-- Repeat the above col for more containers -->
-        <div class="col-12 col-md-6 col-lg-4 mb-3">
+        <div class="col-12 col-md-6 col-lg-6 mb-3">
             <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <div>
                     <div class="card-title fs-6">Coordinators</div>
@@ -27,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-3">
+        <div class="col-12 col-md-6 col-lg-6 mb-3">
             <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <div>
                     <div class="card-title fs-6">Students</div>
@@ -43,10 +29,18 @@
     </div>
 
     <div class="row">
-        <div class="col-12 col-md-6 col-lg-4 mb-3">
-            <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                <div class="card-chart" style="padding: 0; display: flex; justify-content: center; align-items: center;">
-                    <div id="users-chart" style="width: 100%; height: 100%; min-height: 300px;"></div>
+        <div class="col-12 col-md-6 col-lg-6 mb-3">
+            <div class="container m-0 p-0 rounded" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <div class="card-chart m-0 pb-0 pt-3 px-2">
+                    <div id="requirements-chart"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-6 mb-3">
+            <div class="container m-0 p-0 rounded" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <div class="card-chart m-0 pb-0 pt-3 px-2">
+                    
                 </div>
             </div>
         </div>

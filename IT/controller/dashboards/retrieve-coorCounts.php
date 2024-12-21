@@ -3,12 +3,11 @@
 
     header('Content-Type: application/json');
 
-    // Query to count coordinators
+    // Query to count coordinators directly from the users table
     $sql = "
         SELECT COUNT(*) AS count
-        FROM coordinators c
-        INNER JOIN users u ON c.user_id = u.id
-        WHERE u.user_type = 'coordinator'
+        FROM users
+        WHERE user_type = 'Coordinator'
     ";
 
     $result = $conn->query($sql);
@@ -17,7 +16,7 @@
         $row = $result->fetch_assoc();
         echo json_encode(['count' => $row['count']]);
     } else {
-        // Include error for debugging
+        // Include error details for debugging (optional, remove in production)
         echo json_encode(['count' => 0, 'error' => $conn->error]);
     }
 

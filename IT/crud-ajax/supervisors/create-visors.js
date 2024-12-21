@@ -25,7 +25,8 @@ $(document).ready(function () {
                 console.log(response); // Log the entire response
                 if (response.success) {
                     alert("Supervisor added successfully!");
-                    $("#visorForm")[0].reset(); // Reset the form
+                    $("#visorForm")[0].reset();
+                    fetchUserAnalytics();
                 } else {
                     alert("Error: " + response.message);
                 }

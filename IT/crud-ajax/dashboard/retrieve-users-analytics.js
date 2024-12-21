@@ -1,95 +1,198 @@
-$(document).ready(function() {
-    let chart; // Global variable to store the chart instance
+$(document).ready(function () {
+    let chart = null; // Keep a reference to the chart instance
 
-    function renderChart(data) {
-        const categories = ['IT', 'Registrar', 'Dean', 'Coordinator'];
-        const series = categories.map(category => data[category.toLowerCase()] || 0);
+    // Function to validate incoming data
+    function validateData(data) {
+        return (
+            data &&
+            (parseInt(data.Dean) > 0 || parseInt(data.Coordinator) > 0 || parseInt(data.Supervisor) > 0)
+        );
+    }
 
-        // Calculate the maximum value for y-axis
-        const maxCount = Math.max(...series);
+    // Function to fetch the user analytics data
+    function fetchUserAnalytics() {
+        // Add a timestamp to prevent caching
+        $.ajax({
+            url: 'controller/dashboards/retrieve-users-analytics.php',
+            method: 'GET',
+            data: { timestamp: new Date().getTime() }, // Prevent cache
+            success: function (response) {
+                console.log("Raw response from PHP:", response);
 
-        var options = {
-            chart: {
-                type: 'bar',
-                height: '100%',
-                events: {
-                    resized: function() {
-                        if (chart instanceof ApexCharts) {
-                            chart.resize();
-                        }
+                try {
+                    const data = JSON.parse(response);
+                    console.log("Parsed data:", data);
+
+                    if (!data.error && validateData(data)) {
+                        renderChart(data);
+                    } else if (!validateData(data)) {
+                        showError('No Data Available');
+                        clearChart(); // Clear any existing chart if no data is available
+                    } else {
+                        showError(`Error fetching data: ${data.error || 'Invalid data received'}`);
                     }
+                } catch (e) {
+                    console.error('Error parsing JSON:', e);
+                    showError('Invalid JSON response.');
                 }
             },
-            series: [{
-                name: 'User Count',
-                data: series
-            }],
-            xaxis: {
-                categories: categories,
-                title: {
-                    text: 'User Roles'
+            error: function (xhr, status, error) {
+                console.error('AJAX error:', error);
+                showError(`There was an error processing your request. Status: ${status}`);
+            }
+        });
+    }
+
+    // Function to render the chart with the parsed data
+    function renderChart(data) {
+        const deanCount = parseInt(data['Dean']) || 0;
+        const coordinatorCount = parseInt(data['Coordinator']) || 0;
+        const supervisorCount = parseInt(data['Supervisor']) || 0;
+
+        const chartOptions = {
+            title: {
+                text: 'Users Count',
+                align: 'center',
+                style: {
+                    fontSize: '18px',
+                    fontWeight: '600',
+                    color: '#333',
+                    fontFamily: 'Arial, sans-serif'
                 }
-            },
-            yaxis: {
-                title: {
-                    text: 'Count'
-                },
-                max: maxCount + 1 // Optional: set a little extra space above the highest value
-            },
-            dataLabels: {
-                enabled: true
             },
             tooltip: {
                 enabled: true,
-                shared: true,
-                intersect: false
+                theme: 'dark',
+                style: {
+                    fontSize: '14px',
+                    fontFamily: 'Arial, sans-serif'
+                },
+                y: {
+                    formatter: (val) => `${val} users`,
+                },
+                x: {
+                    formatter: (val) => `Role: ${val}`,
+                }
             },
-            plotOptions: {
-                bar: {
-                    horizontal: false,
-                    endingShape: 'rounded',
-                    colors: {
-                        ranges: [
-                            { from: 0, to: 1, color: '#00E396' },
-                            { from: 1, to: 2, color: '#00E396' },
-                            { from: 2, to: 3, color: '#3357FF' }
-                        ]
+            legend: {
+                position: 'right',
+                fontSize: '15px',
+                labels: {
+                    colors: '#333'
+                },
+                markers: {
+                    width: 12,
+                    height: 12,
+                    radius: 50
+                }
+            },
+            series: [deanCount, coordinatorCount, supervisorCount],
+            chart: {
+                type: 'pie',
+                width: '100%',
+                height: '100%',
+                animations: {
+                    enabled: true,
+                    easing: 'easeinout',
+                    speed: 1000,
+                    animateGradually: {
+                        enabled: true,
+                        delay: 150
                     }
                 }
             },
-            stroke: {
-                show: true,
-                width: 2,
-                colors: ['transparent']
-            }
+            labels: ['Dean', 'Coordinator', 'Supervisor'],
+            colors: ['#FF5733', '#33FF57', '#3357FF'],
+            plotOptions: {
+                pie: {
+                    expandOnClick: false,
+                    donut: {
+                        size: '50%'
+                    },
+                    customScale: 0.85,
+                    hover: {
+                        expand: true
+                    }
+                }
+            },
+            responsive: getResponsiveOptions()
         };
 
-        // Destroy the previous chart instance if it exists
+        console.log("Chart data:", chartOptions);
+
+        // Destroy the existing chart if it exists
         if (chart) {
             chart.destroy();
         }
 
-        chart = new ApexCharts(document.querySelector("#users-chart"), options);
+        // Create a new chart instance
+        chart = new ApexCharts(document.querySelector("#users-chart"), chartOptions);
         chart.render();
     }
 
-    $.ajax({
-        url: 'controller/dashboards/retrieve-users-analytics.php',
-        method: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            console.log("Users Data received:", data); // Added log to inspect the data
-            renderChart(data);
-        },
-        error: function (err) {
-            console.error('Error fetching user counts:', err);
-        }
-    });
+    // Function to return responsive chart options
+    function getResponsiveOptions() {
+        return [
+            {
+                breakpoint: 768, // Adjust for tablets and smaller devices
+                options: {
+                    chart: {
+                        width: '100%',
+                        height: '300px'  // Adjust the height to fit better on smaller screens
+                    },
+                    title: {
+                        fontSize: '14px'
+                    },
+                    legend: {
+                        position: 'top',
+                        fontSize: '10px'
+                    }
+                }
+            },
+            {
+                breakpoint: 480, // Adjust for small devices like phones
+                options: {
+                    chart: {
+                        width: '100%',
+                        height: '250px'  // Further reduce height for small screens
+                    },
+                    title: {
+                        fontSize: '12px'
+                    },
+                    legend: {
+                        position: 'top',
+                        fontSize: '10px'
+                    }
+                }
+            }
+        ];
+    }
 
-    // Resize chart on window resize
-    $(window).on('resize', function () {
-        if (chart && typeof chart.resize === 'function') {
-            chart.resize();
+    // Function to show error messages (using a toast or alert)
+    function showError(message) {
+        toastr.error(message); // Show a non-blocking toast notification
+    }
+
+    // Function to clear the chart if no data is available
+    function clearChart() {
+        if (chart) {
+            chart.destroy();
         }
-    });    
+        $("#users-chart").html('<div class="text-center text-muted mt-3">No Data Available</div>');
+    }
+
+    // Expose the fetchUserAnalytics function globally for external triggers
+    window.fetchUserAnalytics = debounce(fetchUserAnalytics, 500); // Debounce function added
+
+    // Call the function to fetch data on page load
+    fetchUserAnalytics();
 });
+
+// Debounce function to prevent multiple simultaneous calls
+function debounce(func, delay) {
+    let timeout;
+    return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
+    };
+}

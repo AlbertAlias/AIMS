@@ -3,11 +3,11 @@
 
     header('Content-Type: application/json');
 
-    // Query to count deans
-    $sql = "SELECT COUNT(*) AS count
-        FROM department_dean dd
-        INNER JOIN users u ON dd.user_id = u.id
-        WHERE u.user_type = 'dean'
+    // Query to count deans directly from the users table
+    $sql = "
+        SELECT COUNT(*) AS count
+        FROM users
+        WHERE user_type = 'Dean'
     ";
 
     $result = $conn->query($sql);
@@ -16,7 +16,8 @@
         $row = $result->fetch_assoc();
         echo json_encode(['count' => $row['count']]);
     } else {
-        echo json_encode(['count' => 0, 'error' => $conn->error]); // Include error for debugging
+        // Include error details for debugging (remove in production)
+        echo json_encode(['count' => 0, 'error' => $conn->error]);
     }
 
     $conn->close();

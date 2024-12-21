@@ -1,31 +1,19 @@
 <?php
-    include '../../../dbconn.php';
-    header('Content-Type: application/json');
+    include('../../../dbconn.php');
 
-    // Correct SQL query to count users by user_type
-    $query = "SELECT user_type, COUNT(*) as count 
-        FROM users 
-        WHERE user_type IN ('it', 'registrar', 'dean', 'coordinator') 
-        GROUP BY user_type
-    ";
-
+    // Query to count the number of users for each user type
+    $query = "SELECT user_type, COUNT(user_id) AS total FROM users GROUP BY user_type";
     $result = $conn->query($query);
 
-    $data = [];
-    if ($result && $result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            $data[$row['user_type']] = (int)$row['count'];
+    if ($result->num_rows > 0) {
+        $userData = [];
+        while($row = $result->fetch_assoc()) {
+            $userData[$row['user_type']] = $row['total'];
         }
+        echo json_encode($userData); // Return the data as JSON
     } else {
-        // If no data, initialize all counts as 0
-        $data = [
-            'it' => 0,
-            'registrar' => 0,
-            'dean' => 0,
-            'coordinator' => 0
-        ];
+        echo json_encode(['error' => 'No data found']);
     }
 
     $conn->close();
-    echo json_encode($data);
 ?>
