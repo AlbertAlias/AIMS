@@ -57,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['user_type'] = $user['user_type'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['department_id'] = $user['department_id'];
 
             // Return success with user details
             echo json_encode([
