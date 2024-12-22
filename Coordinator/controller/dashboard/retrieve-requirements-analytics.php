@@ -10,33 +10,46 @@
 
     // Validate session variables
     if (!isset($_SESSION['user_id']) || !isset($_SESSION['department_id'])) {
-        // Log and respond with an error message
         error_log("Unauthorized access: Missing session variables");
         echo json_encode(['error' => 'Unauthorized access']);
-        exit; // Stop further execution
+        exit;
     }
 
     $coordinator_id = $_SESSION['user_id'];
     $department_id = $_SESSION['department_id'];
-    $requirement_id = $_POST['requirement_id'] ?? 'all'; // Default to 'all' if not provided
+    $requirement_id = $_POST['requirement_id'] ?? 'all';
 
     try {
         if ($requirement_id === 'all') {
-            // Query for all requirements for the coordinator and department
-            $query = "SELECT sr.status, COUNT(*) AS count 
-                    FROM submit_requirements sr
-                    JOIN requirements r ON sr.requirement_id = r.requirement_id
-                    JOIN users u ON sr.student_id = u.user_id
-                    WHERE r.coordinator_id = ? AND u.department_id = ?
-                    GROUP BY sr.status";
+            $query = "SELECT status_table.status, 
+                            COUNT(sr.status) AS count 
+                    FROM (SELECT 'approved' AS status 
+                            UNION ALL SELECT 'rejected' 
+                            UNION ALL SELECT 'pending') AS status_table
+                    LEFT JOIN submit_requirements sr 
+                            ON sr.status = status_table.status 
+                    JOIN requirements r 
+                            ON sr.requirement_id = r.requirement_id
+                    JOIN users u 
+                            ON sr.student_id = u.user_id
+                    WHERE r.coordinator_id = ? 
+                        AND u.department_id = ?
+                    GROUP BY status_table.status";
             $stmt = $conn->prepare($query);
             $stmt->bind_param('ii', $coordinator_id, $department_id);
         } else {
-            // Query for specific requirement
-            $query = "SELECT sr.status, COUNT(*) AS count 
-                    FROM submit_requirements sr
-                    JOIN users u ON sr.student_id = u.user_id
-                    WHERE sr.requirement_id = ? AND u.department_id = ?";
+            $query = "SELECT status_table.status, 
+                            COUNT(sr.status) AS count 
+                    FROM (SELECT 'approved' AS status 
+                            UNION ALL SELECT 'rejected' 
+                            UNION ALL SELECT 'pending') AS status_table
+                    LEFT JOIN submit_requirements sr 
+                            ON sr.status = status_table.status 
+                            AND sr.requirement_id = ? 
+                    JOIN users u 
+                            ON sr.student_id = u.user_id
+                    WHERE u.department_id = ?
+                    GROUP BY status_table.status";
             $stmt = $conn->prepare($query);
             $stmt->bind_param('ii', $requirement_id, $department_id);
         }
@@ -50,9 +63,13 @@
             $chartData['series'][] = (int)$row['count'];
         }
 
-        echo json_encode($chartData); // Return the result as JSON
+        if (empty($chartData['labels'])) {
+            echo json_encode(['noData' => true]); // Indicate no data is available
+        } else {
+            echo json_encode($chartData);
+        }
     } catch (Exception $e) {
         error_log("Error fetching data: " . $e->getMessage());
-        echo json_encode(['error' => $e->getMessage()]); // Return the error
+        echo json_encode(['error' => $e->getMessage()]);
     }
 ?>

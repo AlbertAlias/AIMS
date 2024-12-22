@@ -10,8 +10,8 @@ $(document).ready(function () {
 
                     if (Array.isArray(data)) {
                         const dropdown = $('#requirement-dropdown');
-                        dropdown.empty(); // Clear existing options
-                        dropdown.append('<option value="all">All Requirements</option>'); // Default option
+                        dropdown.empty();
+                        dropdown.append('<option value="all">All Requirements</option>');
 
                         data.forEach(requirement => {
                             dropdown.append(`<option value="${requirement.requirement_id}">${requirement.title}</option>`);
@@ -38,56 +38,53 @@ $(document).ready(function () {
                 try {
                     console.log("Raw response:", response);
                     const data = typeof response === 'string' ? JSON.parse(response) : response;
-    
+
+                    if (data.noData) {
+                        $("#requirements-chart").html('<p style="text-align:center; font-size:16px; color:gray;">No data available</p>');
+                        return;
+                    }
+
                     if (data.error) {
-                        console.error("No data for chart:", data.error);
+                        console.error("Error fetching chart data:", data.error);
                         alert("Unauthorized access or error fetching chart data.");
                         return;
                     }
-    
-                    if (data.series && data.labels) {
-                        // Format series to be an array of arrays for multiple series
-                        const seriesData = [{
-                            name: 'Requirement Status',
-                            data: data.series
-                        }];
-    
-                        // Ensure labels are in the correct format
-                        const chartData = {
-                            series: seriesData,
-                            labels: data.labels,
-                            chart: {
-                                type: 'bar',
-                                height: 380
-                            },
-                            plotOptions: {
-                                bar: {
-                                    distributed: true,
-                                    horizontal: true
-                                }
-                            },
-                            colors: ['#FF4560', '#00E396', '#FEB019'],
-                            title: {
-                                text: `Requirement Status Counts`,
-                                align: 'center',
-                                style: {
-                                    fontSize: '18px',
-                                    fontWeight: '600'
-                                }
-                            },
-                            tooltip: {
-                                theme: 'dark'
-                            }
-                        };
-    
-                        const chartElement = document.querySelector("#requirements-chart");
-                        if (chartElement) {
-                            chartElement.innerHTML = ""; // Clear existing chart
-                            const chart = new ApexCharts(chartElement, chartData);
-                            chart.render();
+
+                    const labels = ['Pending', 'Rejected', 'Approved'];
+                    const series = [0, 0, 0];
+
+                    data.labels.forEach((label, index) => {
+                        const labelIndex = labels.findIndex(l => l.toLowerCase() === label.toLowerCase());
+                        if (labelIndex !== -1) {
+                            series[labelIndex] = data.series[index];
                         }
-                    } else {
-                        console.error("No data for chart:", "Empty dataset or missing series/labels");
+                    });
+
+                    const chartData = {
+                        series: [{ name: 'Requirement Status', data: series }],
+                        labels,
+                        chart: { type: 'bar', height: 380 },
+                        plotOptions: {
+                            bar: {
+                                distributed: true,
+                                horizontal: false // Set to false for a column chart
+                            }
+                        },
+                        colors: ['#FEB019', '#FF4560', '#00E396'],
+                        title: {
+                            text: 'Requirement Status',
+                            align: 'center',
+                            style: { fontSize: '18px', fontWeight: '600' }
+                        },
+                        xaxis: { categories: labels }, // Map labels to the x-axis
+                        tooltip: { theme: 'dark' }
+                    };
+
+                    const chartElement = document.querySelector("#requirements-chart");
+                    if (chartElement) {
+                        chartElement.innerHTML = "";
+                        const chart = new ApexCharts(chartElement, chartData);
+                        chart.render();
                     }
                 } catch (e) {
                     console.error("Error parsing chart data JSON:", e.message);
@@ -99,11 +96,9 @@ $(document).ready(function () {
         });
     }
 
-    // Populate dropdown and initialize chart
     fetchRequirements();
     fetchChartData();
 
-    // Update chart when dropdown selection changes
     $('#requirement-dropdown').change(function () {
         const selectedRequirement = $(this).val();
         fetchChartData(selectedRequirement);
