@@ -10,7 +10,7 @@
     $last_name = isset($_POST['last_name']) ? $_POST['last_name'] : '';
     $first_name = isset($_POST['first_name']) ? $_POST['first_name'] : '';
     $username = isset($_POST['username']) ? $_POST['username'] : '';
-    $password = isset($_POST['password']) ? $_POST['password'] : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';  // Password may be empty
     $department1 = isset($_POST['department1']) ? $_POST['department1'] : '';
     $department2 = isset($_POST['department2']) ? $_POST['department2'] : '';
     $department3 = isset($_POST['department3']) ? $_POST['department3'] : '';
@@ -24,26 +24,29 @@
         exit;
     }
 
-    // Hash the password with bcrypt
+    // If password is provided, hash it; if not, do not update the password field
     if (!empty($password)) {
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+        // Update query with password
+        $updateUserQuery = "
+            UPDATE users 
+            SET last_name = ?, first_name = ?, username = ?, password = ?
+            WHERE user_id = ? AND user_type = 'Dean'
+        ";
+        $stmt = $conn->prepare($updateUserQuery);
+        $stmt->bind_param('ssssi', $last_name, $first_name, $username, $passwordHash, $dean_id);
     } else {
-        echo json_encode([
-            'success' => false,
-            'message' => 'Password cannot be empty.'
-        ]);
-        exit;
+        // Update query without password (if password is empty)
+        $updateUserQuery = "
+            UPDATE users 
+            SET last_name = ?, first_name = ?, username = ?
+            WHERE user_id = ? AND user_type = 'Dean'
+        ";
+        $stmt = $conn->prepare($updateUserQuery);
+        $stmt->bind_param('sssi', $last_name, $first_name, $username, $dean_id);
     }
 
-    // Update the dean's details in the users table
-    $updateUserQuery = "
-        UPDATE users 
-        SET last_name = ?, first_name = ?, username = ?, password = ?
-        WHERE user_id = ? AND user_type = 'Dean'
-    ";
-
-    // Prepare statement
-    $stmt = $conn->prepare($updateUserQuery);
+    // Prepare and execute the update query
     if ($stmt === false) {
         echo json_encode([
             'success' => false,
@@ -52,8 +55,6 @@
         exit;
     }
 
-    // Bind the parameters and execute
-    $stmt->bind_param('ssssi', $last_name, $first_name, $username, $passwordHash, $dean_id);
     if (!$stmt->execute()) {
         echo json_encode([
             'success' => false,
@@ -75,7 +76,6 @@
         exit;
     }
 
-    // Bind and execute the delete statement
     $stmt->bind_param('i', $dean_id);
     if (!$stmt->execute()) {
         echo json_encode([
