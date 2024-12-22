@@ -1,27 +1,27 @@
-let currentPage = 1;
-let pageLength = 10;
+let studentCurrentPage = 1;
+let studentPageLength = 10;
 
 // Fetch and display table data
 function loadTableData() {
     console.log('Fetching table data...');
     $.ajax({
-        url: 'controller/studentlist.php',
+        url: 'controller/retrieve-student-lists.php',
         type: 'GET',
         dataType: 'json',  // Automatically parses JSON response
         data: {
-            page: currentPage,
-            length: pageLength,
-            search: $('#searchInput').val()
+            page: studentCurrentPage,
+            length: studentPageLength,
+            search: $('#student-searchInput').val()
         },
         success: function(response) {
             console.log('Response Data:', response); // Debugging line
             if (response.html) {
-                $('#usersTable tbody').html(response.html);
+                $('#studentsTable tbody').html(response.html);
             }
             if (response.pagination) {
-                $('#pagination').html(response.pagination);
+                $('#student-pagination').html(response.pagination);
             }
-            $('#tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
+            $('#student-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
         },
         error: function(xhr, status, error) {
             console.error('AJAX error:', status, error);
@@ -30,35 +30,35 @@ function loadTableData() {
 }
 
 // Handle page length change
-$('#pageLengthSelect').on('change', function() {
-    pageLength = parseInt($(this).val());
+$('#student-pageLengthSelect').on('change', function() {
+    studentPageLength = parseInt($(this).val());
     loadTableData();
 });
 
 // Handle search input
-$('#searchInput').on('input', function() {
+$('#student-searchInput').on('input', function() {
     loadTableData();
 });
 
 // Handle pagination click
 $(document).on('click', '.page-link', function(e) {
     e.preventDefault();
-    currentPage = $(this).data('page');
+    studentCurrentPage = $(this).data('page');
     loadTableData();
 });
 
 // Handle "Select All" checkbox
 $('#selectAllCheckbox').on('change', function() {
     const isChecked = $(this).prop('checked');
-    $('#usersTable tbody input[type="checkbox"]').each(function() {
+    $('#studentsTable tbody input[type="checkbox"]').each(function() {
         $(this).prop('checked', isChecked);
     });
 });
 
 // Handle individual row checkbox
-$(document).on('change', '#usersTable tbody input[type="checkbox"]', function() {
-    const totalCheckboxes = $('#usersTable tbody input[type="checkbox"]').length;
-    const checkedCheckboxes = $('#usersTable tbody input[type="checkbox"]:checked').length;
+$(document).on('change', '#studentsTable tbody input[type="checkbox"]', function() {
+    const totalCheckboxes = $('#studentsTable tbody input[type="checkbox"]').length;
+    const checkedCheckboxes = $('#studentsTable tbody input[type="checkbox"]:checked').length;
     $('#selectAllCheckbox').prop('checked', totalCheckboxes === checkedCheckboxes);
 });
 
@@ -96,7 +96,7 @@ $('.btn-danger').on('click', function() {
 // Helper function to get selected user IDs
 function getSelectedUserIds() {
     const selectedIds = [];
-    $('#usersTable tbody input[type="checkbox"]:checked').each(function() {
+    $('#studentsTable tbody input[type="checkbox"]:checked').each(function() {
         selectedIds.push($(this).data('id')); // Get the id from data-id
     });
     return selectedIds;

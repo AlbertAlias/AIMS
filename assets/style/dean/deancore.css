@@ -14,3 +14,10 @@ button.btn.btn-outline-secondary.btn-sm .table-icon {
     padding-bottom: 3px;
     fill: #198754;
 }
+
+.page-link .table-icon {
+    width: 15px;
+    height: 15px;
+    padding-bottom: 3px;
+    fill: #198754;
+}

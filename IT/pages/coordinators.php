@@ -13,7 +13,7 @@
                 <div id="coordinatorInfo" class="text-gray-800">
                     <!-- Coordinator information will be displayed here -->
                 </div>
-                <button id="addCoordinatorsBtn" data-id="1" class="btn btn-success mt-3">See table lists</button>
+                <div class="container rounded bg-success p-2 mt-3 text-center text-white">Coordinator Lists</div>
             </div>
         </div>
 

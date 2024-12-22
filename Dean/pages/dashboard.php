@@ -1,20 +1,6 @@
 <div class="container-fluid p-0 m-0" id="dashboard" style="display: none;">
-    <div class="row">
-        <div class="col-12 col-md-6 col-lg-4 mb-3">
-            <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                <div>
-                    <div class="card-title fs-6">Departments</div>
-                    <div id="num-depts" class="h2"></div>
-                </div>
-                <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                        <path d="M256 288A144 144 0 1 0 256 0a144 144 0 1 0 0 288zm-94.7 32C72.2 320 0 392.2 0 481.3c0 17 13.8 30.7 30.7 30.7l450.6 0c17 0 30.7-13.8 30.7-30.7C512 392.2 439.8 320 350.7 320l-189.4 0z"/>
-                    </svg>
-                </div>
-            </div>
-        </div>
-        <!-- Repeat the above col for more containers -->
-        <div class="col-12 col-md-6 col-lg-4 mb-3">
+    <!-- <div class="row">
+        <div class="col-12 col-md-6 col-lg-6 mb-3">
             <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <div>
                     <div class="card-title fs-6">Coordinators</div>
@@ -27,7 +13,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4 mb-3">
+        <div class="col-12 col-md-6 col-lg-6 mb-3">
             <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <div>
                     <div class="card-title fs-6">Students</div>
@@ -40,15 +26,22 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="row">
-        <div class="col-12 col-md-6 col-lg-4 mb-3">
-            <div class="card d-flex flex-row justify-content-between align-items-center p-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                <div class="card-chart" style="padding: 0; display: flex; justify-content: center; align-items: center;">
-                    <div id="users-chart" style="width: 100%; height: 100%; min-height: 300px;"></div>
+        <div class="col-12 col-md-6 col-lg-6 mb-3">
+            <div class="container m-0 p-0 rounded" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <div class="card-chart m-0 pb-0 pt-3 px-2">
+                    <div id="handles-chart"></div>
                 </div>
             </div>
         </div>
+        <!-- <div class="col-12 col-md-6 col-lg-6 mb-3">
+            <div class="container m-0 p-0 rounded" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <div class="card-chart m-0 pb-0 pt-3 px-2">
+                    <div id="students-chart"></div>
+                </div>
+            </div>
+        </div> -->
     </div>
 </div>

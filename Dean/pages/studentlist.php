@@ -6,35 +6,35 @@
                 <!-- Left section (Page Length and Search) -->
                 <div class="d-flex align-items-center">
                     <!-- Page Length Selector -->
-                    <div class="d-flex align-items-center me-3 mb-2 mb-sm-0">
-                        <label for="pageLengthSelect" class="form-label mb-0 me-2">Show</label>
-                        <select id="pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
+                    <div class="d-flex align-items-center">
+                        <label for="student-pageLengthSelect" class="form-label mb-0 me-2">Show</label>
+                        <select id="student-pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
                             <option value="100">100</option>
                         </select>
                     </div>
-                    <!-- Search Input -->
-                    <div class="ms-3 flex-shrink-1">
-                        <div class="input-group">
-                            <input type="text" id="searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
-                            <button class="btn btn-outline-secondary btn-sm" type="button">
-                                <svg class="table-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                    <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
-                                </svg>
-                            </button>
-                        </div>
+                </div>
+                <!-- Search Input -->
+                <div class="flex-shrink-1">
+                    <div class="input-group">
+                        <input type="text" id="student-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
+                        <button class="btn btn-outline-secondary btn-sm" type="button">
+                            <svg class="table-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
         
         <!-- Body -->
-        <div class="card-body bg-white">
+        <div class="card-body bg-white p-0">
             <!-- Table Placeholder -->
             <div class="table-responsive">
-                <table id="usersTable" class="table table-hover text-center" style="width: 100%;">
+                <table id="studentsTable" class="table table-hover text-center m-0" style="width: 100%;">
                     <thead class="table-light">
                         <tr>
                             <!-- <th>
@@ -46,8 +46,6 @@
                             <th>Gender</th>
                             <th>Department</th>
                             <th>Student ID</th>
-                            <!-- <th>Company Name</th> -->
-                            <!-- <th>Emergency Number</th> -->
                             <th>Personal Email</th>
                             <th>Address</th>
                             <th>A\Y</th>
@@ -64,15 +62,14 @@
         <!-- Footer -->
         <div class="card-footer bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <span id="tableInfo">Showing 1 to 10 of 50 entries</span>
+                <span id="student-tableInfo">Showing 1 to 10 of 50 entries</span>
                 <!-- Pagination -->
                 <nav aria-label="Page navigation">
-                    <ul id="pagination" class="pagination mb-0">
+                    <ul id="student-pagination" class="pagination mb-0">
                         <!-- Pagination buttons will be generated here via AJAX -->
                     </ul>
                 </nav>
             </div>
         </div>
     </div>
-
 </div>

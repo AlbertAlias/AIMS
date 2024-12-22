@@ -125,6 +125,8 @@
     <script src="crud-ajax/profile/retrieve-users-info.js"></script>
     <script src="crud-ajax/profile/update-users-info.js"></script>
     <script src="functions/profile/profile-details.js"></script>
+
+    <script src="functions/sidebar/show-masterlists.js"></script>
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>
 </html>

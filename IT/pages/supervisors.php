@@ -13,7 +13,7 @@
                 <div id="supervisorInfo" class="text-gray-800">
                     <!-- Supervisor information will be displayed here -->
                 </div>
-                <button id="addDepartmentsBtn" class="btn btn-success mt-3">See table lists</button>
+                <div class="container rounded bg-success p-2 mt-3 text-center text-white">Supervisor Lists</div>
             </div>
         </div>
 

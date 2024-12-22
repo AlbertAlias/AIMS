@@ -1,0 +1,5 @@
+#handles-chart {
+    width: 100%;
+    height: 400px;  /* Increased height */
+    min-height: 400px; /* Ensure a minimum height */
+}

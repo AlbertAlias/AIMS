@@ -2,7 +2,7 @@
     <div class="row g-4">
         <!-- Left square container (smaller width) -->
         <div class="col-12 col-md-6 col-lg-4">
-            <div class="bg-light rounded-3 p-4 d-flex flex-column position-relative" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+            <div class="bg-light rounded-3 p-4 d-flex flex-column position-relative" style="min-height: 50px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Departments</h5>
                 <div class="mb-3 position-relative">
                     <input type="text" class="form-control" id="searchDepartments" placeholder="Search Department...">
@@ -13,7 +13,7 @@
                 <div id="deanInfo" class="text-gray-800">
                     <!-- Department information will be displayed here -->
                 </div>
-                <button id="addDepartmentsBtn" class="btn btn-success mt-3">See table lists</button>
+                <div class="container rounded bg-success p-2 mt-3 text-center text-white">Dean Lists</div>
             </div>
         </div>
 
