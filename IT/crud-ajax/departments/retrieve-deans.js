@@ -1,4 +1,18 @@
 $(document).ready(function() {
+    $('#searchDepartments').on('input', function() {
+        const searchQuery = $(this).val().toLowerCase();  // Get the search query and convert to lowercase
+        if (window.deans) {
+            // Filter the deans array based on the search query (now checks first name, last name, and departments)
+            const filteredDeans = window.deans.filter(dean => {
+                // Check if the department names, first name, or last name contain the search query (case insensitive)
+                return dean.first_name.toLowerCase().includes(searchQuery) ||
+                       dean.last_name.toLowerCase().includes(searchQuery) ||
+                       dean.departments.toLowerCase().includes(searchQuery);
+            });
+            updateDeanList(filteredDeans); // Update the list with filtered results
+        }
+    });
+    
     window.loadDeans = function() {
         $.ajax({
             url: 'controller/departments/retrieve-deans.php',

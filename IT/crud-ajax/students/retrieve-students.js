@@ -1,8 +1,11 @@
 $(document).ready(function () {
-    window.loadStudents = function () {
+    window.students = [];
+
+    window.loadStudents = function (searchTerm = '') {
         $.ajax({
             url: 'controller/students/retrieve-students.php',
             method: 'GET',
+            data: { searchTerm: searchTerm },  // Send the search term to the backend
             dataType: 'json',
             success: function (response) {
                 if (response.success && response.students && response.students.length > 0) {
@@ -14,7 +17,7 @@ $(document).ready(function () {
             },
             error: function (xhr, status, error) {
                 console.error('Failed to load students:', error);
-                studentsInfo.html('<div class="text-danger">Failed to load students. Please try again later.</div>');
+                $('#studentsInfo').html('<div class="text-danger">Failed to load students. Please try again later.</div>');
             },
         });
     };
@@ -22,18 +25,23 @@ $(document).ready(function () {
     function updateStudentsList(students, message = null) {
         let studentsInfo = $('#studentsInfo');
         studentsInfo.empty();
-    
+
         // If a message is provided, display it
         if (message) {
             studentsInfo.html(`<div class="alert alert-info">${message}</div>`);
             return;
         }
-    
+
         // If students are available, display them
+        if (students.length === 0) {
+            studentsInfo.html('<div class="alert alert-info">No students found for the selected department.</div>');
+            return;
+        }
+
         students.forEach(function (student) {
             let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 coor-btn" data-id="${student.id}">
-                        ${student.last_name}, ${student.first_name}<br>${student.department_name}
-                        </button>`;
+                       ${student.last_name}, ${student.first_name}<br>${student.department_name}
+                       </button>`;
             studentsInfo.append(btn);
         });
     }
@@ -104,6 +112,11 @@ $(document).ready(function () {
         });
     });
 
+    $('#searchStudents').on('input', function () {
+        const searchTerm = $(this).val().toLowerCase();
+        window.loadStudents(searchTerm); // Pass the search term to load students
+    });
+
     $('#studentUpdateBtn').click(function () {
         console.log("Update button clicked!");
     
@@ -117,7 +130,7 @@ $(document).ready(function () {
             password: $('#student_password').val(),  // Include password field
         };
     
-        if (!userData.last_name || !userData.first_name || !userData.email || !userData.username || !userData.department_id) {
+        if (!userData.last_name || !userData.first_name || !userData.username || !userData.department_id) {
             Swal.fire({
                 toast: true,
                 position: 'top-end',

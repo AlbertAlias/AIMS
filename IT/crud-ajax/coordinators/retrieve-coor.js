@@ -1,8 +1,9 @@
 $(document).ready(function () {
-    window.loadCoor = function () {
+    window.loadCoor = function (searchQuery = '') {
         $.ajax({
             url: 'controller/coordinators/retrieve-coor.php',
             method: 'GET',
+            data: { search: searchQuery },  // Send search query to the backend
             dataType: 'json',
             success: function (response) {
                 if (response.success) {
@@ -14,7 +15,7 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status, error) {
-                console.error('Failed to load coordinator:', error);
+                console.error('Failed to load coordinators:', error);
                 console.error('Response Text:', xhr.responseText); 
             },
         });
@@ -30,7 +31,7 @@ $(document).ready(function () {
             return;
         }
 
-        const limitedCoordinators = coordinators.slice(0, 10);
+        const limitedCoordinators = coordinators.slice(0, 10); // Show a maximum of 10 results
 
         if (limitedCoordinators.length === 0) {
             updateCoordinatorList([], 'No coordinators found');
@@ -44,6 +45,11 @@ $(document).ready(function () {
             coordinatorInfo.append(btn);
         });
     }
+
+    $('#searchCoordinators').on('input', function () {
+        const searchQuery = $(this).val().toLowerCase(); // Get the search query and convert to lowercase
+        window.loadCoor(searchQuery);  // Reload coordinators with the search query
+    });
 
     // When a coordinator button is clicked, fetch and populate their details
     $(document).on('click', '.coor-btn', function () {

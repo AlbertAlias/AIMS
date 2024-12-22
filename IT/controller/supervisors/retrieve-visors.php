@@ -1,10 +1,21 @@
 <?php
     include('../../../dbconn.php');
 
-    // SQL Query to get supervisors' information
+    // Get the search term from the query string (if provided)
+    $searchTerm = isset($_GET['searchTerm']) ? $_GET['searchTerm'] : '';
+
+    // SQL Query to get supervisors' information with optional filtering by search term
     $sql = "SELECT u.user_id, u.last_name, u.first_name, u.company
             FROM users u
             WHERE u.user_type = 'Supervisor'";
+
+    // Apply filter if search term is provided
+    if ($searchTerm) {
+        $searchTerm = $conn->real_escape_string($searchTerm);
+        $sql .= " AND (u.first_name LIKE '%" . $searchTerm . "%' 
+                      OR u.last_name LIKE '%" . $searchTerm . "%' 
+                      OR u.company LIKE '%" . $searchTerm . "%')";
+    }
 
     $result = $conn->query($sql);
 

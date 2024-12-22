@@ -1,8 +1,9 @@
 $(document).ready(function () {
-    window.loadVisor = function () {
+    function loadVisor(searchTerm = '') {
         $.ajax({
             url: 'controller/supervisors/retrieve-visors.php', // PHP script to fetch supervisors
             method: 'GET',
+            data: { searchTerm: searchTerm }, // Send search term to the server
             dataType: 'json',
             success: function (response) {
                 console.log(response);
@@ -21,25 +22,25 @@ $(document).ready(function () {
                 console.error('Response Text:', xhr.responseText); // Debug response
             },
         });
-    };
+    }
 
     // Function to update the Supervisor list
     function updateSupervisorList(supervisors, message = null) {
         let supervisorInfo = $('#supervisorInfo');
         supervisorInfo.empty();
-    
+
         if (message) {
             supervisorInfo.append(`<div class="text-danger">${message}</div>`);
             return;
         }
-    
+
         const limitedSupervisors = supervisors.slice(0, 10);
-    
+
         if (limitedSupervisors.length === 0) {
             updateSupervisorList([], 'No supervisors found');
             return;
         }
-    
+
         limitedSupervisors.forEach(function (supervisor) {
             let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 visor-btn" data-id="${supervisor.id}">
                         ${supervisor.last_name}, ${supervisor.first_name}<br>${supervisor.company}
@@ -47,6 +48,12 @@ $(document).ready(function () {
             supervisorInfo.append(btn);
         });
     }
+
+    // Event listener for input field to trigger search
+    $('#searchSupervisors').on('input', function () {
+        const searchTerm = $(this).val(); // Get the value of the search input
+        loadVisor(searchTerm); // Load supervisors based on the search term
+    });
 
     // When a supervisor button is clicked, fetch and populate their details
     $(document).on('click', '.visor-btn', function () {

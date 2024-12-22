@@ -5,10 +5,11 @@
             <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Upload Student Lists</h5>
 
-                <!-- Rectangle container with dashed green border -->
                 <div id="dropZone" class="d-flex flex-column justify-content-center align-items-center" 
                     style="border: 2px dashed green; min-height: 90px; padding: 20px; border-radius: 10px;">
-                    <i class="fa-solid fa-cloud-arrow-up mt-3" style="font-size: 44px; color: green;"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" style="width: 64px; height: 44px; color: green;">
+                        <path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128l-368 0zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39L296 392c0 13.3 10.7 24 24 24s24-10.7 24-24l0-134.1 39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z" style="fill: green;"/>
+                    </svg>
                     <p class="text-gray-800 mt-2">Drag files to upload</p>
                     <!-- Hidden file input -->
                     <input type="file" id="fileInput" accept=".csv" style="display: none;"/>
@@ -16,32 +17,10 @@
 
                 <!-- Upload button -->
                 <button type="button" id="uploadButton" class="btn btn-success mt-3">
-                    <i class="fa-solid fa-cloud-arrow-up"></i> Upload Files
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                        <path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128l-368 0zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39L296 392c0 13.3 10.7 24 24 24s24-10.7 24-24l0-134.1 39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"/>
+                    </svg> Upload Files
                 </button>
-
-                <!-- Progress Container -->
-                <!-- <div id="uploadProgress" class="mt-4" style="display: none;">
-                    <div class="d-flex align-items-center justify-content-between" style="width: 100%;">
-                        <div class="d-flex align-items-center flex-grow-1">
-                            <i class="fa-solid fa-file-csv" style="font-size: 30px; color: green;"></i>
-                            <div class="ms-2">
-                                <span id="uploadfileName" class="text-gray-800"></span>
-                                <div class="progress mb-1" style="width: 180px; height: 15px;">
-                                    <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" 
-                                        role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                        <span id="progressPercent" class="text-end d-block me-1">0%</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <span id="uploadCompleteIcon" style="display: none;">
-                            <i class="fa-solid fa-check" style="font-size: 15px; color: green;"></i>
-                        </span>
-                        <button id="cancelUploadBtn" style="display: none;">
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
-                    </div>
-                </div> -->
             </div>
         </div>
 
@@ -50,7 +29,7 @@
             <div class="bg-light rounded-3 p-4 d-flex flex-column position-relative" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Departments</h5>
                 <div class="mb-3 position-relative">
-                    <input type="text" class="form-control" id="searchDepartments" placeholder="Search Department...">
+                    <input type="text" class="form-control" id="searchStudents" placeholder="Search Department...">
                     <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
                     </svg>
@@ -107,7 +86,7 @@
                     <div class="row mb-3">
                         <!-- Student Email -->
                         <div class="col-md-4">
-                            <label for="student_email" class="form-label required-asterisk">Student Email <span class="text-danger">*</span></label>
+                            <label for="student_email" class="form-label required-asterisk">Student Email </label>
                             <input type="text" class="form-control" id="student_email" name="student_email" required>
                         </div>
                         <!-- Username -->

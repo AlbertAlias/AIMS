@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $username = $_POST['username'];
     $department_id = (int)$_POST['department_id'];
-    $password = $_POST['password'];  // Get the password field
+    $password = $_POST['password'];
 
     $department_sql = "SELECT department_id FROM department WHERE department_id = ?";
     $stmt = $conn->prepare($department_sql);
