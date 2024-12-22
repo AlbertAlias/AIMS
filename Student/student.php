@@ -33,7 +33,7 @@
 
     <link rel="stylesheet" href="../assets/style/student/dashboard.css">
     <link rel="stylesheet" href="../assets/style/student/requirement.css">
-    <!-- <link rel="stylesheet" href="../assets/style/student/viewmodal.css"> -->
+    <link rel="stylesheet" href="../assets/style/student/viewmodal.css">
 
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
@@ -100,7 +100,7 @@
 
     <script src="crud-ajax/requirement/retrieve-requirements.js"></script>
     <script src="crud-ajax/requirement/retrieve-submit-file.js"></script>
-    <!-- <script src="crud-ajax/weeklyreport/weeklyreport.js"></script> -->
+    <script src="crud-ajax/weeklyreport/weeklyreport.js"></script>
     <script src="crud-ajax/weeklyreport/retrieve_weeklyreport.js"></script>
     <script src="crud-ajax/requirement/create-submit-file.js"></script>
 
