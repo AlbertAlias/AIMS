@@ -1,10 +1,30 @@
 $(document).ready(function () {
-    $("#addDepartmentForm").on("submit", function (e) {
-        e.preventDefault(); // Prevent default form submission
+    // Handle form submission
+    $("#deptSubmitBtn").on("click", function (e) {
+        e.preventDefault(); // Prevent form default submission
 
         const departmentName = $("#department_name").val(); // Get input value
 
-        // Perform AJAX request
+        // Check if the department name is empty
+        if (!departmentName) {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                icon: 'error',
+                title: 'Please fill in the department name!',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#f8d7da',
+                iconColor: '#721c24',
+                color: '#721c24',
+                customClass: {
+                    popup: 'mt-5'
+                }
+            });
+            return; // Prevent form submission if the field is empty
+        }
+
+        // Proceed with AJAX request if all fields are filled
         $.ajax({
             url: "controller/departments/create-depts.php", // PHP script to handle insertion
             type: "POST",
@@ -14,7 +34,6 @@ $(document).ready(function () {
             dataType: "json",
             success: function (response) {
                 if (response.success) {
-                    // SweetAlert success notification
                     Swal.fire({
                         toast: true,
                         position: 'top-end',
@@ -34,11 +53,37 @@ $(document).ready(function () {
                     populateDepartments();
                     loadDepartments();
                 } else {
-                    alert("Error: " + response.error);
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Error: ' + response.error,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#f8d7da',
+                        iconColor: '#721c24',
+                        color: '#721c24',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
                 }
             },
             error: function () {
-                alert("An error occurred. Please try again.");
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'An error occurred. Please try again.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#f8d7da',
+                    iconColor: '#721c24',
+                    color: '#721c24',
+                    customClass: {
+                        popup: 'mt-5'
+                    }
+                });
             }
         });
     });

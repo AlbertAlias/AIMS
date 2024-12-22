@@ -1,9 +1,10 @@
 $(document).ready(function () {
-    $("#assignDeanForm").on("submit", function (event) {
-        event.preventDefault();
+    // Handle form submission
+    $("#deanSubmitBtn").on("click", function (event) {
+        event.preventDefault(); // Prevent form default submission
 
         // Gather form data
-        var formData = {
+        const formData = {
             last_name: $("#add_last_name").val(),
             first_name: $("#add_first_name").val(),
             username: $("#add_username").val(),
@@ -13,87 +14,65 @@ $(document).ready(function () {
             department3: $("#add_department3").val(),
         };
 
-        // Debugging
-        console.log("Form data being sent:", formData);
-
-        // Validate required fields
-        if (!formData.last_name || !formData.first_name || !formData.username || !formData.password || !formData.department1) {
-            alert("Please fill in all required fields.");
-            return;
+        // Check if any required field is empty
+        let emptyField = false;
+        for (const field in formData) {
+            if (formData[field] === "") {
+                emptyField = true;
+                break;
+            }
         }
 
-        // AJAX request
+        // If any required field is empty, show SweetAlert and return
+        if (emptyField) {
+            Swal.fire({
+                toast: true,
+                position: 'top-right',
+                icon: 'error',
+                title: 'Please fill out all required fields!',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#f8d7da',
+                iconColor: '#721c24',
+                color: '#721c24',
+                customClass: {
+                    popup: 'mt-5'
+                }
+            });
+            return; // Prevent form submission if fields are empty
+        }
+
+        // Proceed with AJAX request if all fields are filled
         $.ajax({
-            url: "controller/departments/create-dean.php",
+            url: "controller/departments/create-dean.php", // PHP script to handle request
             type: "POST",
             data: formData,
+            dataType: "json",
             success: function (response) {
-                console.log("Raw response from server:", response);
-                try {
-                    if (typeof response === "string") {
-                        response = JSON.parse(response); // Parse string into JSON
-                    }
-
-                    if (response.success) {
-                        Swal.fire({
-                            toast: true,
-                            position: 'top-right',
-                            icon: 'success',
-                            title: 'Dean added successfully!',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            background: '#b9f6ca',
-                            iconColor: '#2e7d32',
-                            color: '#155724',
-                            customClass: {
-                                popup: 'mt-5'
-                            }
-                        });
-                        $("#assignDeanForm")[0].reset(); // Reset the form
-
-                        loadDeans();
-                        fetchUserAnalytics();
-                    } else {
-                        // Error handling for existing username
-                        if (response.error === 'Username already exists') {
-                            Swal.fire({
-                                toast: true,
-                                position: 'top-right',
-                                icon: 'error',
-                                title: 'Username already exists',
-                                showConfirmButton: false,
-                                timer: 3000,
-                                background: '#f8d7da',
-                                iconColor: '#721c24',
-                                color: '#721c24',
-                                customClass: {
-                                    popup: 'mt-5'
-                                }
-                            });
-                        } else {
-                            Swal.fire({
-                                toast: true,
-                                position: 'top-right',
-                                icon: 'error',
-                                title: response.error,
-                                showConfirmButton: false,
-                                timer: 3000,
-                                background: '#f8d7da',
-                                iconColor: '#721c24',
-                                color: '#721c24',
-                                customClass: {
-                                    popup: 'mt-5'
-                                }
-                            });
+                if (response.success) {
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-right',
+                        icon: 'success',
+                        title: 'Dean added successfully!',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#b9f6ca',
+                        iconColor: '#2e7d32',
+                        color: '#155724',
+                        customClass: {
+                            popup: 'mt-5'
                         }
-                    }
-                } catch (e) {
-                    console.error("Error parsing response:", e, response);
+                    });
+                    $("#assignDeanForm")[0].reset();
+                    loadDeans();
+                    fetchUserAnalytics();
+                } else {
                     Swal.fire({
                         toast: true,
                         position: 'top-right',
                         icon: 'error',
-                        title: 'Unexpected server response. Check console for details.',
+                        title: 'Error: ' + response.error,
                         showConfirmButton: false,
                         timer: 3000,
                         background: '#f8d7da',
@@ -106,12 +85,12 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status, error) {
-                console.error("AJAX error details:", status, error, xhr.responseText);
+                console.error("AJAX Error:", error);
                 Swal.fire({
                     toast: true,
                     position: 'top-right',
                     icon: 'error',
-                    title: 'An error occurred while submitting the form. Please try again.',
+                    title: 'An error occurred. Please try again.',
                     showConfirmButton: false,
                     timer: 3000,
                     background: '#f8d7da',

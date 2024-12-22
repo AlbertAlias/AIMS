@@ -1,29 +1,55 @@
-$(document).ready(function() {
-    // Handle the form submission via AJAX
-    $('#coordinatorForm').on('submit', function(e) {
-        e.preventDefault(); // Prevent the form from submitting the traditional way
-        
-        // Prepare the data from the form
-        var formData = {
-            last_name: $('#coor_last_name').val(),
-            first_name: $('#coor_first_name').val(),
-            middle_name: $('#coor_middle_name').val(),
-            personal_email: $('#coor_personal_email').val(),
-            department_id: $('#coor_department').val(),
-            username: $('#coor_username').val(),
-            password: $('#coor_password').val(),
+$(document).ready(function () {
+    // Handle form submission
+    $("#coorSubmitBtn").on("click", function (event) {
+        event.preventDefault(); // Prevent form default submission
+
+        // Gather form data
+        const formData = {
+            coor_last_name: $("#coor_last_name").val(),
+            coor_first_name: $("#coor_first_name").val(),
+            coor_personal_email: $("#coor_personal_email").val(),
+            coor_department: $("#coor_department").val(),
+            coor_username: $("#coor_username").val(),
+            coor_password: $("#coor_password").val(),
         };
 
-        // Perform the AJAX request
+        // Check if any required field is empty
+        let emptyField = false;
+        for (const field in formData) {
+            if (formData[field] === "") {
+                emptyField = true;
+                break;
+            }
+        }
+
+        // If any required field is empty, show SweetAlert and return
+        if (emptyField) {
+            Swal.fire({
+                toast: true,
+                position: 'top-right',
+                icon: 'error',
+                title: 'Please fill in all required fields.',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#f8d7da',
+                iconColor: '#721c24',
+                color: '#721c24',
+                customClass: {
+                    popup: 'mt-5'
+                }
+            });
+            return; // Prevent form submission if fields are empty
+        }
+
+        // Proceed with AJAX request if all fields are filled
         $.ajax({
-            url: 'controller/coordinators/create-coor.php', // PHP script to handle the data
+            url: 'controller/coordinators/create-coor.php', // PHP script to handle request
             type: 'POST',
-            dataType: 'json', // Expecting JSON response
-            contentType: 'application/json', // Send data as JSON
-            data: JSON.stringify(formData), // Convert the form data to a JSON string
-            success: function(response) {
+            data: formData,
+            dataType: 'json',
+            success: function (response) {
+                console.log(response); // Log the entire response
                 if (response.success) {
-                    // Success response handling
                     Swal.fire({
                         toast: true,
                         position: 'top-right',
@@ -38,20 +64,44 @@ $(document).ready(function() {
                             popup: 'mt-5'
                         }
                     });
-                    $('#coordinatorForm')[0].reset();
-                    
+                    $("#coordinatorForm")[0].reset(); // Reset the form after success
                     loadCoor();
                     loadDepartments();
                     fetchUserAnalytics();
                 } else {
-                    // Error response handling
-                    alert(response.message); // Show error message
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-right',
+                        icon: 'error',
+                        title: 'Error: ' + response.message,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#f8d7da',
+                        iconColor: '#721c24',
+                        color: '#721c24',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
                 }
             },
-            error: function() {
-                // Handle AJAX error
-                alert('An error occurred while submitting the form.');
-            }
+            error: function (xhr, status, error) {
+                console.error("AJAX Error:", error);
+                Swal.fire({
+                    toast: true,
+                    position: 'top-right',
+                    icon: 'error',
+                    title: 'An error occurred. Please try again.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#f8d7da',
+                    iconColor: '#721c24',
+                    color: '#721c24',
+                    customClass: {
+                        popup: 'mt-5'
+                    }
+                });
+            },
         });
     });
 });

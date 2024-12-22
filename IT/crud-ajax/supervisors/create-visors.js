@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // Handle form submission
-    $("#visorForm").on("submit", function (event) {
+    $("#visorSubmitBtn").on("click", function (event) {
         event.preventDefault(); // Prevent form default submission
 
         // Gather form data
@@ -16,6 +16,35 @@ $(document).ready(function () {
             visor_password: $("#visor_password").val(),
         };
 
+        // Check if any required field is empty
+        let emptyField = false;
+        for (const field in formData) {
+            if (formData[field] === "") {
+                emptyField = true;
+                break;
+            }
+        }
+
+        // If any required field is empty, show SweetAlert and return
+        if (emptyField) {
+            Swal.fire({
+                toast: true,
+                position: 'top-right',
+                icon: 'error',
+                title: 'Please fill out all required fields!',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#f8d7da',
+                iconColor: '#721c24',
+                color: '#721c24',
+                customClass: {
+                    popup: 'mt-5'
+                }
+            });
+            return; // Prevent form submission if fields are empty
+        }
+
+        // Proceed with AJAX request if all fields are filled
         $.ajax({
             url: "controller/supervisors/create-visors.php", // PHP script to handle request
             type: "POST",
@@ -24,16 +53,55 @@ $(document).ready(function () {
             success: function (response) {
                 console.log(response); // Log the entire response
                 if (response.success) {
-                    alert("Supervisor added successfully!");
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-right',
+                        icon: 'success',
+                        title: 'Supervisor added successfully!',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#b9f6ca',
+                        iconColor: '#2e7d32',
+                        color: '#155724',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
                     $("#visorForm")[0].reset();
                     fetchUserAnalytics();
                 } else {
-                    alert("Error: " + response.message);
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-right',
+                        icon: 'error',
+                        title: 'Error: ' + response.message,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#f8d7da',
+                        iconColor: '#721c24',
+                        color: '#721c24',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
                 }
             },
             error: function (xhr, status, error) {
                 console.error("AJAX Error:", error);
-                alert("An error occurred. Please try again.");
+                Swal.fire({
+                    toast: true,
+                    position: 'top-right',
+                    icon: 'error',
+                    title: 'An error occurred. Please try again.',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#f8d7da',
+                    iconColor: '#721c24',
+                    color: '#721c24',
+                    customClass: {
+                        popup: 'mt-5'
+                    }
+                });
             },
         });
     });

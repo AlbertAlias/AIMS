@@ -51,9 +51,7 @@ $(document).ready(function () {
         var userId = $(this).data('id'); // Get the ID of the selected student
         console.log("Clicked user ID:", userId);
     
-        // Hide the submit button and show the update and cancel buttons
-        $('#studentSubmitBtn').hide();  // Hide submit button
-        $('#studentUpdateBtn').show();  // Show update button
+        $('#studentUpdateBtn').prop('disabled', false);  // Show update button
         $('#studentCancelBtn').show();  // Show cancel button
     
         $.ajax({
@@ -172,9 +170,9 @@ $(document).ready(function () {
     
                     loadStudents();
                     $('#studentsForm')[0].reset();
-                    $('#studentSubmitBtn').show();  // Show Submit button
-                    $('#studentUpdateBtn').hide();  // Hide Update button
-                    $('#studentCancelBtn').hide();  // Hide Cancel button
+                    $('#studentUpdateBtn').prop('disabled', true);
+                    $('#studentCancelBtn').hide();
+
                 } else {
                     Swal.fire({
                         toast: true,
@@ -223,8 +221,7 @@ $(document).ready(function () {
         $('#student_department').val('Choose Department');
     
         // Hide the Update and Cancel buttons, and show the Submit button
-        $('#studentSubmitBtn').show();
-        $('#studentUpdateBtn').hide();
+        $('#studentUpdateBtn').prop('disabled', true);
         $('#studentCancelBtn').hide();
     });
 
