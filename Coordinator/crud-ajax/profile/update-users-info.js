@@ -1,6 +1,6 @@
 $(document).ready(function () {
     // Update admin information
-    $('.btn.btn-sm.btn-primary').on('click', function () {
+    $('.update-profile-info').on('click', function () {
         // Gather updated values
         var lastName = $('#editLastNameInput').val();
         var firstName = $('#editFirstNameInput').val();

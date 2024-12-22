@@ -153,7 +153,7 @@
                 </div>
 
                 <div class="d-flex justify-content-end mt-3">
-                    <button type="button" class="btn btn-sm btn-primary">Update</button>
+                    <button type="button" class="btn btn-sm btn-primary update-profile-info">Update</button>
                 </div>
             </div>
         </div>
@@ -171,7 +171,7 @@
             <div class="modal-body">
                 <input type="text" class="form-control" id="editLocationInput" placeholder="Enter new location">
                 <div class="d-flex justify-content-end mt-3">
-                    <button type="button" class="btn btn-sm btn-primary">Update</button>
+                    <button type="button" class="btn btn-sm btn-primary update-profile-info">Update</button>
                 </div>
             </div>
         </div>
@@ -193,7 +193,7 @@
                     <option value="Female">Female</option>
                 </select>
                 <div class="d-flex justify-content-end mt-3">
-                    <button type="button" class="btn btn-sm btn-primary">Update</button>
+                    <button type="button" class="btn btn-sm btn-primary update-profile-info">Update</button>
                 </div>
             </div>
         </div>
@@ -211,7 +211,7 @@
             <div class="modal-body">
                 <input type="email" class="form-control" id="editEmailInput" placeholder="Enter new email">
                 <div class="d-flex justify-content-end mt-3">
-                    <button type="button" class="btn btn-sm btn-primary">Update</button>
+                    <button type="button" class="btn btn-sm btn-primary update-profile-info">Update</button>
                 </div>
             </div>
         </div>
@@ -229,7 +229,7 @@
             <div class="modal-body">
                 <input type="text" class="form-control" id="editUsernameInput" placeholder="Enter new username">
                 <div class="d-flex justify-content-end mt-3">
-                    <button type="button" class="btn btn-sm btn-primary">Update</button>
+                    <button type="button" class="btn btn-sm btn-primary update-profile-info">Update</button>
                 </div>
             </div>
         </div>
@@ -262,7 +262,7 @@
                         <span id="passwordFeedback" class="position-absolute text-danger"></span>
                     </div>
                     <div class="text-end">
-                        <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary update-profile-info">Update</button>
                     </div>
                 </form>
             </div>
