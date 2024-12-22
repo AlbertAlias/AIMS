@@ -11,7 +11,7 @@
         WHERE u.user_id = ? AND u.user_type = 'Coordinator'";
 
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $user_id); // Bind the user ID parameter
+    $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $result = $stmt->get_result();
 

@@ -1,24 +1,19 @@
 window.loadDepartments = function (excludeDeptId) {
     $.ajax({
-        url: 'controller/coordinators/retrieve-depts.php', // URL of the PHP file that retrieves department data
+        url: 'controller/coordinators/retrieve-depts.php',
         type: 'GET',
         dataType: 'json',
         success: function (response) {
-            var $select = $('#coor_department');
-            $select.empty(); // Clear existing options
+            const $select = $('#coor_department');
 
-            // Add "Choose Department" as the default option
-            $select.append('<option selected disabled>Choose Department</option>');
-
-            // Append available departments if any exist
+            // Add available departments excluding the specified one
             if (response.success && response.data.length > 0) {
-                $.each(response.data, function (index, department) {
+                response.data.forEach(function (department) {
                     if (department.id !== excludeDeptId) {
                         $select.append(`<option value="${department.id}">${department.name}</option>`);
                     }
                 });
             }
-            // If no departments exist, just leave the dropdown empty beyond the default option
         },
         error: function () {
             console.error('An error occurred while fetching the departments.');
@@ -26,7 +21,6 @@ window.loadDepartments = function (excludeDeptId) {
     });
 };
 
-// Initial call to load departments when the page is ready
 $(document).ready(function () {
     loadDepartments(); // Load departments on page load
 });
