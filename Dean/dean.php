@@ -96,7 +96,8 @@
     <script src="crud-ajax/dashboard/retrieve-handles.js"></script>
 
     <script src="crud-ajax/retrieve-student-lists.js"></script>
-    <script src="crud-ajax/coorlist.js"></script>
+    
+    <script src="crud-ajax/retrieve-coor-lists.js"></script>
     
 
     <!--END::CRUD AJAX FUNCTIONS-->

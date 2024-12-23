@@ -1,6 +1,5 @@
 <?php
     header('Content-Type: application/json');
-
     include '../../dbconn.php';
 
     try {
@@ -31,6 +30,7 @@
             throw new Exception('No departments assigned to the logged-in dean.');
         }
 
+        // Convert department IDs into a comma-separated string for SQL queries
         $departmentIdsStr = implode(',', $departmentIds);
 
         // Handle pagination and search parameters
@@ -40,25 +40,22 @@
 
         $start = ($page - 1) * $length;
 
-        // Query to get filtered and paginated student data
-        $query = "
+        // Query to fetch coordinators managed by the dean
+        $sql = "
             SELECT 
+                u.user_id, 
                 u.first_name, 
                 u.last_name, 
-                u.gender, 
-                d.department_name, 
-                u.student_id, 
-                u.email, 
-                u.address, 
-                u.academic_year
+                u.department_id, 
+                d.department_name
             FROM users u
             INNER JOIN department d ON u.department_id = d.department_id
-            WHERE u.user_type = 'Student'
+            WHERE u.user_type = 'Coordinator'
             AND u.department_id IN ($departmentIdsStr)
             AND CONCAT_WS(' ', u.first_name, u.last_name, u.username, u.email) LIKE ?
             LIMIT ?, ?";
         
-        $stmt = $conn->prepare($query);
+        $stmt = $conn->prepare($sql);
         if (!$stmt) {
             throw new Exception('Failed to prepare query.');
         }
@@ -68,53 +65,51 @@
         $stmt->execute();
         $result = $stmt->get_result();
 
+        // Generate table rows
         $html = '';
         while ($row = $result->fetch_assoc()) {
             $first_name = htmlspecialchars($row['first_name']) ?: '--';
             $last_name = htmlspecialchars($row['last_name']) ?: '--';
-            $gender = htmlspecialchars($row['gender']) ?: '--';
             $department_name = htmlspecialchars($row['department_name']) ?: '--';
-            $student_id = htmlspecialchars($row['student_id']) ?: '--';
-            $email = htmlspecialchars($row['email']) ?: '--';
-            $address = htmlspecialchars($row['address']) ?: '--';
-            $academic_year = htmlspecialchars($row['academic_year']) ?: '--';
+            $department_id = htmlspecialchars($row['department_id']) ?: '--';
 
             $html .= '<tr>';
             $html .= '<td>' . $first_name . '</td>';
             $html .= '<td>' . $last_name . '</td>';
-            $html .= '<td>' . $gender . '</td>';
             $html .= '<td>' . $department_name . '</td>';
-            $html .= '<td>' . $student_id . '</td>';
-            $html .= '<td>' . $email . '</td>';
-            $html .= '<td>' . $address . '</td>';
-            $html .= '<td>' . $academic_year . '</td>';
+            $html .= '<td>' . $department_id . '</td>';
             $html .= '</tr>';
         }
 
-        // Fetch total record count
-        $countQuery = "
+        // Query to get total count for pagination
+        $totalSql = "
             SELECT COUNT(*) AS total
             FROM users u
             INNER JOIN department d ON u.department_id = d.department_id
-            WHERE u.user_type = 'Student'
+            WHERE u.user_type = 'Coordinator'
             AND u.department_id IN ($departmentIdsStr)
             AND CONCAT_WS(' ', u.first_name, u.last_name, u.username, u.email) LIKE ?";
         
-        $countStmt = $conn->prepare($countQuery);
-        if (!$countStmt) {
+        $totalStmt = $conn->prepare($totalSql);
+        if (!$totalStmt) {
             throw new Exception('Failed to prepare total count query.');
         }
 
-        $countStmt->bind_param('s', $searchTerm);
-        $countStmt->execute();
-        $totalRecords = $countStmt->get_result()->fetch_assoc()['total'];
+        $totalStmt->bind_param('s', $searchTerm);
+        $totalStmt->execute();
+        $totalResult = $totalStmt->get_result();
+        $total = $totalResult->fetch_assoc()['total'];
 
-        // Generate pagination links
-        $totalPages = ceil($totalRecords / $length);
+        // Calculate pagination
+        $totalPages = ceil($total / $length);
         $pagination = '';
         $maxVisiblePages = 3;
         $startPage = max(1, $page - floor($maxVisiblePages / 2));
         $endPage = min($totalPages, $startPage + $maxVisiblePages - 1);
+
+        if ($endPage - $startPage + 1 < $maxVisiblePages) {
+            $startPage = max(1, $endPage - $maxVisiblePages + 1);
+        }
 
         if ($startPage > 1) {
             $pagination .= '<li class="page-item"><a class="page-link" href="#" data-page="1">1</a></li>';
@@ -124,7 +119,7 @@
         }
 
         for ($i = $startPage; $i <= $endPage; $i++) {
-            $pagination .= '<li class="page-item ' . ($i == $page ? 'active' : '') . '">';
+            $pagination .= '<li class="page-item ' . ($i == $page ? ' active' : '') . '">';
             $pagination .= '<a class="page-link" href="#" data-page="' . $i . '">' . $i . '</a>';
             $pagination .= '</li>';
         }
@@ -137,21 +132,18 @@
         }
 
         // Return JSON response
-        $response = [
+        echo json_encode([
             'html' => $html,
             'pagination' => $pagination,
             'start' => $start + 1,
-            'end' => min($start + $length, $totalRecords),
-            'total' => $totalRecords
-        ];
-
-        echo json_encode($response);
+            'end' => min($start + $length, $total),
+            'total' => $total
+        ]);
     } catch (Exception $e) {
-        http_response_code(500); // Set HTTP status to 500
         echo json_encode(['error' => $e->getMessage()]);
-    } finally {
-        if (isset($stmt)) $stmt->close();
-        if (isset($countStmt)) $countStmt->close();
-        $conn->close();
     }
+
+    $stmt->close();
+    $totalStmt->close();
+    $conn->close();
 ?>

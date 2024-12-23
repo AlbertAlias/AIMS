@@ -38,7 +38,7 @@ $(document).ready(function () {
                 toolbar: { show: true }, // Show the toolbar
             },
             title: {
-                text: 'Department Handles Overview', // Chart title text
+                text: 'Dean Department Handles', // Chart title text
                 align: 'center', // Align the title at the top
                 style: {
                     fontSize: '20px', // Title font size

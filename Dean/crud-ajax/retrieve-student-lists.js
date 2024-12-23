@@ -7,14 +7,14 @@ function loadTableData() {
     $.ajax({
         url: 'controller/retrieve-student-lists.php',
         type: 'GET',
-        dataType: 'json',  // Automatically parses JSON response
+        dataType: 'json',
         data: {
             page: studentCurrentPage,
             length: studentPageLength,
             search: $('#student-searchInput').val()
         },
         success: function(response) {
-            console.log('Response Data:', response); // Debugging line
+            console.log('Response Data:', response);
             if (response.html) {
                 $('#studentsTable tbody').html(response.html);
             }
@@ -25,9 +25,12 @@ function loadTableData() {
         },
         error: function(xhr, status, error) {
             console.error('AJAX error:', status, error);
+            console.error('Raw Response:', xhr.responseText); // Log raw response for debugging
+            alert('An error occurred while fetching data. Please try again.');
         }
     });
 }
+
 
 // Handle page length change
 $('#student-pageLengthSelect').on('change', function() {
