@@ -2,6 +2,7 @@
     session_start();
     require '../../../dbconn.php';
 
+    // Ensure the user is logged in
     if (!isset($_SESSION['username'])) {
         echo json_encode(['status' => 'error', 'message' => 'User not logged in or session expired']);
         exit();
@@ -9,16 +10,12 @@
 
     $user_username = $_SESSION['username'];
 
-    // Check if oldPassword is being sent
+    // Check if oldPassword is being sent (indicating password verification request)
     if (isset($_POST['oldPassword'])) {
-        $old_password = $_POST['oldPassword'];
+        $old_password = $_POST['oldPassword']; // Get the old password from the form
 
+        // Fetch the hashed password from the database
         $stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
-        if (!$stmt) {
-            echo json_encode(['status' => 'error', 'message' => 'Database error: ' . $conn->error]);
-            exit();
-        }
-
         $stmt->bind_param('s', $user_username);
         $stmt->execute();
         $stmt->store_result();
@@ -27,6 +24,7 @@
             $stmt->bind_result($hashed_password);
             $stmt->fetch();
 
+            // Verify if the entered password matches the hashed password
             if (password_verify($old_password, $hashed_password)) {
                 echo json_encode(['status' => 'success', 'message' => 'Password match']);
             } else {
@@ -38,30 +36,16 @@
         exit();
     }
 
-    // Query user details and company information
-    $stmt = $conn->prepare("
-        SELECT 
-            u.last_name, u.first_name, u.middle_name, u.address, u.gender, u.email, u.username,
-            ss.company, u.company_address, CONCAT(s.first_name, ' ', s.last_name) AS supervisor
-        FROM users u
-        LEFT JOIN student_supervisor ss ON u.user_id = ss.student_id
-        LEFT JOIN users s ON ss.supervisor_id = s.user_id
-        WHERE u.username = ?
-    ");
-    if (!$stmt) {
-        echo json_encode(['status' => 'error', 'message' => 'Database error: ' . $conn->error]);
-        exit();
-    }
-
+    // Query user details based on the schema
+    $stmt = $conn->prepare("SELECT last_name, first_name, middle_name, address, gender, email, username 
+                                FROM users 
+                                WHERE username = ?");
     $stmt->bind_param('s', $user_username);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result(
-            $last_name, $first_name, $middle_name, $address, $gender, $email, $username,
-            $company, $company_address, $supervisor
-        );
+        $stmt->bind_result($last_name, $first_name, $middle_name, $address, $gender, $email, $username);
         $stmt->fetch();
 
         // Concatenate full name
@@ -77,10 +61,7 @@
             'address' => $address,
             'gender' => $gender,
             'email' => $email,
-            'username' => $username,
-            'company' => $company,
-            'company_address' => $company_address,
-            'supervisor' => $supervisor
+            'username' => $username
         ]);
     } else {
         echo json_encode(['status' => 'error', 'message' => 'User not found']);

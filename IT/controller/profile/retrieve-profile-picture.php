@@ -16,7 +16,7 @@
             if ($profile_picture) {
                 echo json_encode(['profile_picture' => $profile_picture]);
             } else {
-                echo json_encode(['error' => 'No profile picture found.']);
+                echo json_encode([]); // Return an empty response if no profile picture
             }
 
             $stmt->close();

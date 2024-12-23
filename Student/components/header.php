@@ -1,5 +1,4 @@
 <nav class="navbar navbar-expand navbar-light bg-white topbar m-0 p-0 px-2 sticky-top" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-    <!-- Add icon button on the left side -->
     <div class="d-flex align-items-center">
         <button id="sidebar-toggle" class="btn btn-link me-3">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -10,8 +9,7 @@
 
     <ul class="navbar-nav ms-auto">
         <li class="nav-item dropdown no-arrow">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="d-flex align-items-center">
                     <div id="profile-container" class="img-profile rounded-circle">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">

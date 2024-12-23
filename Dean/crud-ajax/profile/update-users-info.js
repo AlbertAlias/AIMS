@@ -1,7 +1,6 @@
 $(document).ready(function () {
     // Update admin information
-    $('.btn.btn-sm.btn-primary').on('click', function () {
-        // Gather updated values
+    $('.profileUpdateBtn').on('click', function () {
         var lastName = $('#editLastNameInput').val();
         var firstName = $('#editFirstNameInput').val();
         var middleName = $('#editMiddleNameInput').val();
@@ -29,7 +28,6 @@ $(document).ready(function () {
             return;
         }
 
-        // Send AJAX request to update information
         $.ajax({
             url: 'controller/profile/update-users-info.php',
             type: 'POST',
@@ -59,7 +57,6 @@ $(document).ready(function () {
                             popup: 'mt-5',
                         }
                     });
-                    // Close all modals
                     $('.modal').modal('hide');
                     refreshUserInfo();
                 } else {

@@ -158,7 +158,7 @@ $('#evaluationForm').submit(function (e) {
 
     // Send data to server via AJAX
     $.ajax({
-        url: 'controller/evaluate.php',
+        url: 'controller/create-evaluate.php',
         type: 'POST',
         data: {
             student_id: studentId,

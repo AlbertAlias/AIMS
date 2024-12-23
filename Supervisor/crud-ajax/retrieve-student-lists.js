@@ -5,7 +5,7 @@ let studentPageLength = 10;
 function loadTableData() {
     console.log('Fetching table data...');
     $.ajax({
-        url: 'controller/student_list.php',
+        url: 'controller/retrieve-student-lists.php',
         type: 'GET',
         dataType: 'json', // Automatically parses JSON response
         data: {

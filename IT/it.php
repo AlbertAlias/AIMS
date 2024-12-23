@@ -97,10 +97,10 @@
     <script src="crud-ajax/dashboard/retrieve-coorCounts.js"></script>
     <script src="crud-ajax/dashboard/retrieve-studentCounts.js"></script>
 
-    <script src="crud-ajax/departments/retrieve-depts.js"></script>
     <script src="crud-ajax/departments/retrieve-deans.js"></script>
     <script src="crud-ajax/departments/create-depts.js"></script>
     <script src="crud-ajax/departments/create-dean.js"></script>
+    <script src="crud-ajax/departments/update-depts.js"></script>
     <!-- <script src="crud-ajax/departments/delete-depts.js"></script> -->
 
     <script src="crud-ajax/coordinators/create-coor.js"></script>
@@ -125,8 +125,6 @@
     <script src="crud-ajax/profile/retrieve-users-info.js"></script>
     <script src="crud-ajax/profile/update-users-info.js"></script>
     <script src="functions/profile/profile-details.js"></script>
-
-    <script src="functions/sidebar/show-masterlists.js"></script>
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>
 </html>

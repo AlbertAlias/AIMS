@@ -39,7 +39,7 @@ $(document).ready(function () {
         }
 
         students.forEach(function (student) {
-            let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 coor-btn" data-id="${student.id}">
+            let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 stud-btn" data-id="${student.id}">
                        ${student.last_name}, ${student.first_name}<br>${student.department_name}
                        </button>`;
             studentsInfo.append(btn);
@@ -47,7 +47,7 @@ $(document).ready(function () {
     }
 
     // When a student button is clicked, fetch and populate their details
-    $(document).on('click', '.coor-btn', function () {
+    $(document).on('click', '.stud-btn', function () {
         var userId = $(this).data('id'); // Get the ID of the selected student
         console.log("Clicked user ID:", userId);
     

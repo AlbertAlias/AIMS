@@ -7,9 +7,9 @@ $(document).ready(function() {
 // Function to retrieve and display the profile picture
 function retrieveProfilePicture(userId) {
     $.ajax({
-        url: 'controller/profile/retrieve-profile-picture.php', // PHP file to retrieve the uploaded profile picture
+        url: 'controller/profile/retrieve-profile-picture.php',
         type: 'GET',
-        data: { user_id: userId }, // Send the user ID as data
+        data: { user_id: userId },
         dataType: 'json',
         success: function(response) {
             if (response && response.profile_picture) {
@@ -21,20 +21,20 @@ function retrieveProfilePicture(userId) {
                 $('#profile-picture').attr('src', imagePath).show(); // Show uploaded picture
                 
                 // Profile Picture in header
-                $('#default-header-icon').hide(); // Hide the default header icon
+                $('#profile-container svg').hide(); // Hide the default SVG placeholder in the header
                 $('#profile-container').css({
                     'background-image': 'url(' + imagePath + ')',
                     'background-size': 'cover',
                     'background-position': 'center center'
                 });
             } else {
-                console.warn('No profile picture found, displaying initials instead.');
+                // Hide profile picture and display default styling/icons
                 $('#default-profile-icon').show(); // Show default icon if no picture is found
                 $('#profile-picture').hide(); // Hide profile picture if not available
 
-                // Show default icon in header if no picture
-                $('#default-header-icon').show();
-                $('#profile-container').css('background-image', 'none'); // Remove background if no image
+                // Default header icon and no background
+                $('#profile-container svg').show();
+                $('#profile-container').css('background-image', 'none');
             }
         },
         error: function() {

@@ -91,8 +91,8 @@
 </div> -->
 
 <!-- Modal for preview -->
-<div id="filePreviewModal" class="modal" style="display: none;">
-    <div class="modal-content">
+<div id="filePreviewModal" class="reportsModal" style="display: none;">
+    <div class="reports-modal-content">
         <span id="closeModal" class="close">&times;</span>
         <div id="modalContentContainer"></div>
     </div>

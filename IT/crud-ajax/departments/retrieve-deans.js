@@ -33,16 +33,13 @@ $(document).ready(function() {
                 return `<div class="text-gray-800">${department}</div>`;
             }).join('');
 
-            let deanButton = `
-                <button class="btn btn-outline-secondary d-block mb-2 w-100 coor-btn" data-id="${dean.user_id}">
-                    ${dean.last_name}, ${dean.first_name}<br>
-                    <div class="department-list">${deptList}</div>
-                </button>
-            `;
+            let deanButton = `<button class="btn btn-outline-secondary d-block mb-2 w-100 dean-btn" data-id="${dean.user_id}">
+                                ${dean.last_name}, ${dean.first_name}<br><div class="department-list">${deptList}</div>
+                            </button>`;
             deanInfo.append(deanButton);
         });
 
-        $('.coor-btn').on('click', function() {
+        $('.dean-btn').on('click', function() {
             const deanId = $(this).data('id');
             fetchDeanDetails(deanId);
         });
