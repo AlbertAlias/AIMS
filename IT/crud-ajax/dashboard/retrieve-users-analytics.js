@@ -134,6 +134,24 @@ $(document).ready(function () {
     function getResponsiveOptions() {
         return [
             {
+                breakpoint: 1024, // Adjust for tablets and smaller devices
+                options: {
+                    chart: {
+                        width: '100%',
+                        height: '350px' // Adjust the height to fit better on smaller screens
+                    },
+                    title: {
+                        style: {
+                            fontSize: '16px'
+                        }
+                    },
+                    legend: {
+                        position: 'bottom',
+                        fontSize: '12px'
+                    }
+                }
+            },
+            {
                 breakpoint: 768, // Adjust for tablets and smaller devices
                 options: {
                     chart: {
@@ -141,10 +159,12 @@ $(document).ready(function () {
                         height: '300px'  // Adjust the height to fit better on smaller screens
                     },
                     title: {
-                        fontSize: '14px'
+                        style: {
+                            fontSize: '14px'
+                        }
                     },
                     legend: {
-                        position: 'top',
+                        position: 'bottom',
                         fontSize: '10px'
                     }
                 }
@@ -157,11 +177,13 @@ $(document).ready(function () {
                         height: '250px'  // Further reduce height for small screens
                     },
                     title: {
-                        fontSize: '12px'
+                        style: {
+                            fontSize: '12px'
+                        }
                     },
                     legend: {
-                        position: 'top',
-                        fontSize: '10px'
+                        position: 'bottom',
+                        fontSize: '8px'
                     }
                 }
             }

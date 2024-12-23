@@ -1,5 +1,19 @@
 #handles-chart {
     width: 100%;
-    height: 400px;  /* Increased height */
-    min-height: 400px; /* Ensure a minimum height */
+    height: 400px;
+    min-height: 400px;
+}
+
+@media (max-width: 768px) {
+    #handles-chart {
+        height: 300px;
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    #handles-chart {
+        height: 200px;
+        min-height: 200px;
+    }
 }

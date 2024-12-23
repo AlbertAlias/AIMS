@@ -2,7 +2,7 @@
     <div class="row g-4">
         <!-- Left square container -->
         <div class="col-md-4 col-lg-3">
-            <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+            <div class="bg-light rounded-3 px-4 py-3 d-flex flex-column" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Upload Student Lists</h5>
 
                 <div id="dropZone" class="d-flex flex-column justify-content-center align-items-center" 
@@ -27,8 +27,8 @@
         <!-- Left square container (smaller width) -->
         <div class="col-12 col-md-6 col-lg-3">
             <div class="bg-light rounded-3 p-4 d-flex flex-column position-relative" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Departments</h5>
-                <div class="mb-3 position-relative">
+                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-2">Departments</h5>
+                <div class="mb-2 position-relative">
                     <input type="text" class="form-control" id="searchStudents" placeholder="Search Department...">
                     <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
@@ -37,67 +37,67 @@
                 <div id="studentsInfo" class="text-gray-800">
                     <!-- Student information will be displayed here -->
                 </div>
-                <div class="container rounded bg-success p-2 mt-3 text-center text-white">Student Lists</div>
+                <div class="container rounded bg-success p-2 mt-2 text-center text-white">Student Lists</div>
             </div>
         </div>
 
         <!-- Right rectangle container -->
         <div class="col-md-4 col-lg-6">
-            <div class="bg-light rounded-3 px-4 py-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Account Information</h5>
+            <div class="bg-light rounded-3 px-4 py-3 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-2">Account Information</h5>
                 <form id="studentsForm">
-                    <div class="row mb-3">
+                    <div class="row mb-1">
                         <!-- First Name -->
                         <div class="col-md-4">
                             <input type="hidden" id="student_id" name="id">
                             <label for="student_first_name" class="form-label required-asterisk">First Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="student_first_name" name="student_first_name" required>
+                            <input type="text" class="form-control mb-2" id="student_first_name" name="student_first_name" required>
                         </div>
                         <!-- Last Name -->
                         <div class="col-md-4">
                             <label for="student_last_name" class="form-label required-asterisk">Last Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="student_last_name" name="student_last_name" required>
+                            <input type="text" class="form-control mb-2" id="student_last_name" name="student_last_name" required>
                         </div>
                         <!-- Gender -->
                         <div class="col-md-4">
                             <label for="student_gender" class="form-label required-asterisk">Gender <span class="text-danger">*</span></label>
-                            <select class="form-select" id="student_gender" name="student_gender" required>
+                            <select class="form-select mb-2" id="student_gender" name="student_gender" required>
                                 <option selected>Choose Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
                             </select>
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <div class="row mb-1">
                         <!-- Student ID -->
                         <div class="col-md-4">
                             <label for="studentID" class="form-label">Student ID <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="studentID" name="studentID" required>
+                            <input type="text" class="form-control mb-2" id="studentID" name="studentID" required>
                         </div>
                         <!-- Department -->
                         <div class="col-md-8">
                             <label for="student_department" class="form-label required-asterisk">Department <span class="text-danger">*</span></label>
-                            <select class="form-select" id="student_department" name="student_department" required>
+                            <select class="form-select mb-2" id="student_department" name="student_department" required>
                                 <option selected>Choose Department</option>
                                 <!-- Options populated dynamically -->
                             </select>
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <div class="row mb-1">
                         <!-- Student Email -->
                         <div class="col-md-4">
                             <label for="student_email" class="form-label required-asterisk">Student Email </label>
-                            <input type="text" class="form-control" id="student_email" name="student_email" required>
+                            <input type="text" class="form-control mb-2" id="student_email" name="student_email" required>
                         </div>
                         <!-- Username -->
                         <div class="col-md-4">
                             <label for="student_username" class="form-label required-asterisk">Username <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="student_username" name="student_username" required>
+                            <input type="text" class="form-control mb-2" id="student_username" name="student_username" required>
                         </div>
                         <!-- Password -->
                         <div class="col-md-4">
                             <label for="student_password" class="form-label required-asterisk">Password <span class="text-danger">*</span></label>
-                            <input type="password" class="form-control" id="student_password" name="student_password" required>
+                            <input type="password" class="form-control mb-2" id="student_password" name="student_password" required>
                         </div>
                     </div>
                     <button type="button" id="studentUpdateBtn" class="btn btn-primary" disabled>

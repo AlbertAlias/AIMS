@@ -7,22 +7,35 @@
 
 .dropdown-overlay {
     position: absolute;
-    top: 10px; /* Adjust as needed */
+    top: 10px; /* Default for larger devices */
     left: 5%;
     transform: translateX(-5%);
-    z-index: 10; /* Ensure it appears above the chart */
+    z-index: 10;
     width: auto;
     text-align: center;
 }
 
 #requirement-dropdown {
-    width: 160px; /* Optional: Adjust width */
+    width: 160px;
     margin: 0 auto;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
 }
 
+/* Media query for smaller devices */
+@media (max-width: 768px) {
+    .dropdown-overlay {
+        top: auto; /* Reset top positioning */
+        bottom: 20px; /* Position it below the chart for smaller screens */
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #requirements-chart {
+        height: 450px; /* Increase height to accommodate the dropdown */
+    }
+}
 
 .card i {
     color: #198754;

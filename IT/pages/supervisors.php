@@ -2,9 +2,9 @@
     <div class="row g-3">
         <!-- Supervisor Section -->
         <div class="col-12 col-md-6 col-lg-4">
-            <div class="bg-light rounded-3 p-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                <h5 class="text-gray-800 fw-bold border-bottom pb-2 mb-3">Supervisors</h5>
-                <div class="mb-3 position-relative">
+            <div class="bg-light rounded-3 p-3 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-2">Supervisors</h5>
+                <div class="mb-2 position-relative">
                     <input type="text" class="form-control" id="searchSupervisors" placeholder="Search Supervisor...">
                     <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                         <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
@@ -13,39 +13,39 @@
                 <div id="supervisorInfo" class="text-gray-800">
                     <!-- Supervisor information will be displayed here -->
                 </div>
-                <div class="container rounded bg-success p-2 mt-3 text-center text-white">Supervisor Lists</div>
+                <div class="container rounded bg-success p-2 mt-2 text-center text-white">Supervisor Lists</div>
             </div>
         </div>
 
         <!-- Add Supervisor Section -->
         <div class="col-12 col-md-6 col-lg-8">
-            <div class="bg-light rounded-3 p-4 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                <h5 class="text-gray-800 fw-bold border-bottom pb-2 mb-3">Add Supervisor</h5>
-                <p class="text-gray-800 fs-5 mb-3">Personal Information</p>
+            <div class="bg-light rounded-3 p-3 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-2">Add Supervisor</h5>
+                <p class="text-gray-800 fs-5 mb-2">Personal Information</p>
                 <form id="visorForm">
-                    <div class="row mb-3">
+                    <div class="row mb-1">
                         <!-- Last Name -->
                         <div class="col-12 col-md-4">
                             <input type="hidden" id="visorID" name="id">
                             <label for="visor_last_name" class="form-label required-asterisk">Last Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="visor_last_name" name="visor_last_name" required>
+                            <input type="text" class="form-control mb-2" id="visor_last_name" name="visor_last_name" required>
                         </div>
                         <!-- First Name -->
                         <div class="col-12 col-md-4">
                             <label for="visor_first_name" class="form-label required-asterisk">First Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="visor_first_name" name="visor_first_name" required>
+                            <input type="text" class="form-control mb-2" id="visor_first_name" name="visor_first_name" required>
                         </div>
                         <!-- Middle Name -->
                         <div class="col-12 col-md-4">
                             <label for="visor_middleName" class="form-label">Middle Name</label>
-                            <input type="text" class="form-control" id="visor_middle_name" name="visor_middle_name">
+                            <input type="text" class="form-control mb-2" id="visor_middle_name" name="visor_middle_name">
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <div class="row mb-1">
                         <!-- Gender -->
                         <div class="col-12 col-md-3">
                             <label for="visor_gender" class="form-label required-asterisk">Gender <span class="text-danger">*</span></label>
-                            <select class="form-select" id="visor_gender" name="visor_gender" required>
+                            <select class="form-select mb-2" id="visor_gender" name="visor_gender" required>
                                 <option selected>Choose Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
@@ -54,27 +54,27 @@
                         <!-- Email -->
                         <div class="col-12 col-md-4">
                             <label for="visor_personal_email" class="form-label required-asterisk">Email <span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" id="visor_personal_email" name="visor_personal_email" required>
+                            <input type="email" class="form-control mb-2" id="visor_personal_email" name="visor_personal_email" required>
                         </div>
                         <!-- Company -->
                         <div class="col-12 col-md-5">
                             <label for="visor_company_name" class="form-label required-asterisk">Company Name <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="visor_company_name" name="visor_company_name" required>
+                            <input type="text" class="form-control mb-2" id="visor_company_name" name="visor_company_name" required>
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <div class="row mb-1">
                         <!-- Company Address -->
                         <div class="col-12 col-md-4">
                             <label for="visor_company_address" class="form-label">Company Address <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="visor_company_address" name="visor_company_address" required>
+                            <input type="text" class="form-control mb-2" id="visor_company_address" name="visor_company_address" required>
                         </div>
                         <div class="col-12 col-md-4">
                             <label for="visor_username" class="form-label required-asterisk">Username <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="visor_username" name="visor_username" required>
+                            <input type="text" class="form-control mb-2" id="visor_username" name="visor_username" required>
                         </div>
                         <div class="col-12 col-md-4">
                             <label for="visor_password" class="form-label required-asterisk">Password <span class="text-danger">*</span></label>
-                            <input type="password" class="form-control" id="visor_password" name="visor_password" required>
+                            <input type="password" class="form-control mb-2" id="visor_password" name="visor_password" required>
                         </div>
                     </div>
                     <button type="submit" id="visorSubmitBtn" class="btn btn-success">

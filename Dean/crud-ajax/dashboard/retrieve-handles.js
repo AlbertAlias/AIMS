@@ -1,8 +1,6 @@
 $(document).ready(function () {
-    // Cache the DOM element
     const chartElement = $("#handles-chart");
 
-    // Fetch data with jQuery AJAX
     $.ajax({
         url: 'controller/dashboard/retrieve-handles.php',
         method: 'GET',
@@ -16,7 +14,6 @@ $(document).ready(function () {
         }
     });
 
-    // Function to render the chart
     function renderChart(data) {
         const categories = data.map(item => item.department_name);
         const coordinators = data.map(item => item.coordinators_count);
@@ -29,21 +26,21 @@ $(document).ready(function () {
             ],
             chart: {
                 type: 'bar',
-                height: 400, // Adjust the height of the chart
+                height: 400,
                 animations: {
-                    enabled: true, // Enable animations for better UX
-                    easing: 'easeinout', // Smooth animation easing
-                    speed: 800, // Duration of the animation
+                    enabled: true,
+                    easing: 'easeinout',
+                    speed: 800,
                 },
-                toolbar: { show: true }, // Show the toolbar
+                toolbar: { show: true },
             },
             title: {
-                text: 'Dean Department Handles', // Chart title text
-                align: 'center', // Align the title at the top
+                text: 'Dean Department Handles',
+                align: 'center',
                 style: {
-                    fontSize: '20px', // Title font size
-                    fontWeight: 'bold', // Title font weight
-                    color: '#333', // Title color
+                    fontSize: '20px',
+                    fontWeight: 'bold',
+                    color: '#333',
                 },
             },
             plotOptions: {
@@ -53,11 +50,11 @@ $(document).ready(function () {
                 },
             },
             dataLabels: {
-                enabled: true, // Enable data labels
+                enabled: true,
             },
             xaxis: {
                 categories: categories,
-                title: { text: 'Departments' }, // X-axis title
+                title: { text: 'Departments' },
             },
             fill: {
                 opacity: 1,
@@ -65,24 +62,60 @@ $(document).ready(function () {
             tooltip: {
                 y: {
                     formatter: function (val) {
-                        return `${val} individuals`; // Format tooltips to add context
+                        return `${val} individuals`;
                     },
                 },
             },
             legend: {
-                position: 'bottom', // Place the legend at the bottom
-                horizontalAlign: 'center', // Center align the legend
+                position: 'bottom',
+                horizontalAlign: 'center',
             },
-            responsive: [{
-                breakpoint: 768, // Responsive handling for smaller screens
-                options: {
-                    chart: { height: 300 }, // Adjust chart height for smaller screens
-                    plotOptions: { bar: { columnWidth: '50%' } }, // Adjust bar width for smaller screens
-                }
-            }]
+            responsive: [
+                {
+                    breakpoint: 768,
+                    options: {
+                        chart: {
+                            height: 300,
+                        },
+                        plotOptions: {
+                            bar: {
+                                columnWidth: '50%',
+                            },
+                        },
+                        title: {
+                            style: {
+                                fontSize: '16px',
+                            },
+                        },
+                        legend: {
+                            fontSize: '14px',
+                        },
+                    },
+                },
+                {
+                    breakpoint: 576,
+                    options: {
+                        chart: {
+                            height: 200,
+                        },
+                        plotOptions: {
+                            bar: {
+                                columnWidth: '40%',
+                            },
+                        },
+                        title: {
+                            style: {
+                                fontSize: '14px',
+                            },
+                        },
+                        legend: {
+                            fontSize: '12px',
+                        },
+                    },
+                },
+            ],
         };
 
-        // Initialize and render the chart
         const chart = new ApexCharts(chartElement[0], options);
         chart.render();
     }

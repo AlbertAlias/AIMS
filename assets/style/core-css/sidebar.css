@@ -24,7 +24,7 @@
     font-size: 1rem;
     color: #f8f8f8;
     text-decoration: none;
-    margin-left: 10px;
+    margin-left: 18px;
     margin-top: 10px;
     margin-bottom: 10px;
     display: flex;
@@ -39,8 +39,8 @@
     height: 40px;
     color: #198754;
     border-radius: 7px 0 0 7px;
-    margin-left: 20px;
-    width: calc(100% - 20px);
+    margin-left: 28px;
+    width: calc(100% - 28px);
     position: relative;
     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
@@ -64,13 +64,12 @@
     margin-right: 10px;
 }
 
-/* Additional styles for SVG */
 .sidebar-link svg {
-    width: 35px; /* Set the width of the SVG */
-    height: 1.4rem; /* Set the height of the SVG */
-    fill: currentColor; /* Ensure the SVG inherits the color from the parent */
-    text-align: center; /* Align the SVG in the center */
-    margin-right: 10px; /* Add margin to the right of the SVG */
+    width: 35px;
+    height: 1.4rem;
+    fill: currentColor;
+    text-align: center;
+    margin-right: 10px;
 }
 
 #sidebar-toggle svg {
@@ -101,7 +100,6 @@
     margin-left: 22px;
     width: calc(100% - 20px);
 }
-
 
 .sidebar-container.d-none {
     display: none;

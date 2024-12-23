@@ -1,13 +1,9 @@
-#users-chart {
-    width: 100%;
-    height: 400px;  /* Increased height */
-    min-height: 400px; /* Ensure a minimum height */
-}
-
+/* Maintain original styles for larger devices */
+#users-chart,
 #students-chart {
     width: 100%;
-    height: 400px;  /* Increased height */
-    min-height: 400px; /* Ensure a minimum height */
+    height: 400px;
+    min-height: 400px;
 }
 
 .card i {
@@ -15,7 +11,20 @@
 }
 
 .card svg {
-    width: 2rem; /* Adjust the width as needed */
-    height: 2rem; /* Adjust the height as needed */
-    fill: #198754; /* This will set the color of the SVG to match the .card i color */
+    width: 2rem;
+    height: 2rem;
+    fill: #198754;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .card-chart {
+        padding: 10px;
+    }
+
+    #users-chart,
+    #students-chart {
+        height: 300px;
+        min-height: 300px;
+    }
 }
