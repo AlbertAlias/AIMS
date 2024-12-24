@@ -1,8 +1,10 @@
 <?php
     header('Content-Type: application/json');
+
     include '../../dbconn.php';
 
     try {
+        // Start session to check if user is logged in
         session_start();
         if (!isset($_SESSION['user_id'])) {
             throw new Exception('Unauthorized access. Please log in.');
@@ -33,28 +35,28 @@
         // Convert department IDs into a comma-separated string for SQL queries
         $departmentIdsStr = implode(',', $departmentIds);
 
-        // Handle pagination and search parameters
-        $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
-        $length = isset($_GET['length']) ? max(1, intval($_GET['length'])) : 10;
-        $search = isset($_GET['search']) ? trim($_GET['search']) : '';
+        // Get parameters
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $length = isset($_GET['length']) ? intval($_GET['length']) : 10;
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
 
+        // Calculate pagination
         $start = ($page - 1) * $length;
 
         // Query to fetch coordinators managed by the dean
         $sql = "
-            SELECT 
-                u.user_id, 
-                u.first_name, 
-                u.last_name, 
-                u.department_id, 
-                d.department_name
-            FROM users u
-            INNER JOIN department d ON u.department_id = d.department_id
-            WHERE u.user_type = 'Coordinator'
-            AND u.department_id IN ($departmentIdsStr)
-            AND CONCAT_WS(' ', u.first_name, u.last_name, u.username, u.email) LIKE ?
-            LIMIT ?, ?";
-        
+        SELECT 
+            u.user_id, 
+            u.first_name, 
+            u.last_name, 
+            u.department_id, 
+            d.department_name
+        FROM users u
+        INNER JOIN department d ON u.department_id = d.department_id
+        WHERE u.user_type = 'Coordinator'
+        AND u.department_id IN ($departmentIdsStr)
+        AND CONCAT_WS(' ', u.first_name, u.last_name, u.username, u.email) LIKE ?
+        LIMIT ?, ?";
         $stmt = $conn->prepare($sql);
         if (!$stmt) {
             throw new Exception('Failed to prepare query.');
@@ -83,27 +85,25 @@
 
         // Query to get total count for pagination
         $totalSql = "
-            SELECT COUNT(*) AS total
-            FROM users u
-            INNER JOIN department d ON u.department_id = d.department_id
-            WHERE u.user_type = 'Coordinator'
-            AND u.department_id IN ($departmentIdsStr)
-            AND CONCAT_WS(' ', u.first_name, u.last_name, u.username, u.email) LIKE ?";
-        
+        SELECT COUNT(*) AS total
+        FROM users u
+        INNER JOIN department d ON u.department_id = d.department_id
+        WHERE u.user_type = 'Coordinator'
+        AND u.department_id IN ($departmentIdsStr)
+        AND CONCAT_WS(' ', u.first_name, u.last_name, u.username, u.email) LIKE ?";
         $totalStmt = $conn->prepare($totalSql);
         if (!$totalStmt) {
             throw new Exception('Failed to prepare total count query.');
         }
-
         $totalStmt->bind_param('s', $searchTerm);
         $totalStmt->execute();
         $totalResult = $totalStmt->get_result();
         $total = $totalResult->fetch_assoc()['total'];
 
-        // Calculate pagination
+        // Generate pagination links with a limited display
         $totalPages = ceil($total / $length);
         $pagination = '';
-        $maxVisiblePages = 3;
+        $maxVisiblePages = 3; // Number of pages to show at a time
         $startPage = max(1, $page - floor($maxVisiblePages / 2));
         $endPage = min($totalPages, $startPage + $maxVisiblePages - 1);
 
@@ -111,34 +111,36 @@
             $startPage = max(1, $endPage - $maxVisiblePages + 1);
         }
 
-        if ($startPage > 1) {
-            $pagination .= '<li class="page-item"><a class="page-link" href="#" data-page="1">1</a></li>';
-            if ($startPage > 2) {
-                $pagination .= '<li class="page-item disabled"><span class="page-link">...</span></li>';
-            }
+        // Previous button
+        if ($page > 1) {
+            $pagination .= '<li class="page-item"><a class="page-link" href="#" data-page="' . ($page - 1) . '">Previous</a></li>';
+        } else {
+            $pagination .= '<li class="page-item disabled"><span class="page-link">Previous</span></li>';
         }
 
+        // Main pagination buttons
         for ($i = $startPage; $i <= $endPage; $i++) {
             $pagination .= '<li class="page-item ' . ($i == $page ? ' active' : '') . '">';
             $pagination .= '<a class="page-link" href="#" data-page="' . $i . '">' . $i . '</a>';
             $pagination .= '</li>';
         }
 
-        if ($endPage < $totalPages) {
-            if ($endPage < $totalPages - 1) {
-                $pagination .= '<li class="page-item disabled"><span class="page-link">...</span></li>';
-            }
-            $pagination .= '<li class="page-item"><a class="page-link" href="#" data-page="' . $totalPages . '">' . $totalPages . '</a></li>';
+        // Next button
+        if ($page < $totalPages) {
+            $pagination .= '<li class="page-item"><a class="page-link" href="#" data-page="' . ($page + 1) . '">Next</a></li>';
+        } else {
+            $pagination .= '<li class="page-item disabled"><span class="page-link">Next</span></li>';
         }
 
         // Return JSON response
-        echo json_encode([
+        $response = [
             'html' => $html,
             'pagination' => $pagination,
             'start' => $start + 1,
             'end' => min($start + $length, $total),
             'total' => $total
-        ]);
+        ];
+        echo json_encode($response);
     } catch (Exception $e) {
         echo json_encode(['error' => $e->getMessage()]);
     }

@@ -3,8 +3,10 @@
 
     include '../../dbconn.php';
 
+    session_start();
+
     try {
-        session_start();
+        // Ensure user is logged in
         if (!isset($_SESSION['user_id'])) {
             throw new Exception('Unauthorized access. Please log in.');
         }
@@ -33,14 +35,15 @@
 
         $departmentIdsStr = implode(',', $departmentIds);
 
-        // Handle pagination and search parameters
-        $page = isset($_GET['page']) ? max(1, intval($_GET['page'])) : 1;
-        $length = isset($_GET['length']) ? max(1, intval($_GET['length'])) : 10;
-        $search = isset($_GET['search']) ? trim($_GET['search']) : '';
+        // Get parameters
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+        $length = isset($_GET['length']) ? intval($_GET['length']) : 10;
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
 
+        // Calculate pagination
         $start = ($page - 1) * $length;
 
-        // Query to get filtered and paginated student data
+        // Query to get filtered and paginated data
         $query = "
             SELECT 
                 u.first_name, 
@@ -68,6 +71,7 @@
         $stmt->execute();
         $result = $stmt->get_result();
 
+        // Generate table rows
         $html = '';
         while ($row = $result->fetch_assoc()) {
             $first_name = htmlspecialchars($row['first_name']) ?: '--';
@@ -91,7 +95,7 @@
             $html .= '</tr>';
         }
 
-        // Fetch total record count
+        // Fetch total count for pagination
         $countQuery = "
             SELECT COUNT(*) AS total
             FROM users u
@@ -99,7 +103,7 @@
             WHERE u.user_type = 'Student'
             AND u.department_id IN ($departmentIdsStr)
             AND CONCAT_WS(' ', u.first_name, u.last_name, u.username, u.email) LIKE ?";
-        
+
         $countStmt = $conn->prepare($countQuery);
         if (!$countStmt) {
             throw new Exception('Failed to prepare total count query.');
@@ -107,33 +111,36 @@
 
         $countStmt->bind_param('s', $searchTerm);
         $countStmt->execute();
-        $totalRecords = $countStmt->get_result()->fetch_assoc()['total'];
+        $countResult = $countStmt->get_result();
+        $total = $countResult->fetch_assoc()['total'];
 
         // Generate pagination links
-        $totalPages = ceil($totalRecords / $length);
+        $totalPages = ceil($total / $length);
         $pagination = '';
         $maxVisiblePages = 3;
         $startPage = max(1, $page - floor($maxVisiblePages / 2));
         $endPage = min($totalPages, $startPage + $maxVisiblePages - 1);
 
-        if ($startPage > 1) {
-            $pagination .= '<li class="page-item"><a class="page-link" href="#" data-page="1">1</a></li>';
-            if ($startPage > 2) {
-                $pagination .= '<li class="page-item disabled"><span class="page-link">...</span></li>';
-            }
+        if ($endPage - $startPage + 1 < $maxVisiblePages) {
+            $startPage = max(1, $endPage - $maxVisiblePages + 1);
+        }
+
+        if ($page > 1) {
+            $pagination .= '<li class="page-item"><a class="page-link" href="#" data-page="' . ($page - 1) . '">Previous</a></li>';
+        } else {
+            $pagination .= '<li class="page-item disabled"><span class="page-link">Previous</span></li>';
         }
 
         for ($i = $startPage; $i <= $endPage; $i++) {
-            $pagination .= '<li class="page-item ' . ($i == $page ? 'active' : '') . '">';
+            $pagination .= '<li class="page-item ' . ($i == $page ? ' active' : '') . '">';
             $pagination .= '<a class="page-link" href="#" data-page="' . $i . '">' . $i . '</a>';
             $pagination .= '</li>';
         }
 
-        if ($endPage < $totalPages) {
-            if ($endPage < $totalPages - 1) {
-                $pagination .= '<li class="page-item disabled"><span class="page-link">...</span></li>';
-            }
-            $pagination .= '<li class="page-item"><a class="page-link" href="#" data-page="' . $totalPages . '">' . $totalPages . '</a></li>';
+        if ($page < $totalPages) {
+            $pagination .= '<li class="page-item"><a class="page-link" href="#" data-page="' . ($page + 1) . '">Next</a></li>';
+        } else {
+            $pagination .= '<li class="page-item disabled"><span class="page-link">Next</span></li>';
         }
 
         // Return JSON response
@@ -141,17 +148,16 @@
             'html' => $html,
             'pagination' => $pagination,
             'start' => $start + 1,
-            'end' => min($start + $length, $totalRecords),
-            'total' => $totalRecords
+            'end' => min($start + $length, $total),
+            'total' => $total
         ];
-
         echo json_encode($response);
+
     } catch (Exception $e) {
-        http_response_code(500); // Set HTTP status to 500
         echo json_encode(['error' => $e->getMessage()]);
-    } finally {
-        if (isset($stmt)) $stmt->close();
-        if (isset($countStmt)) $countStmt->close();
-        $conn->close();
     }
+
+    $stmt->close();
+    $countStmt->close();
+    $conn->close();
 ?>

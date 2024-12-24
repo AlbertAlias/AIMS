@@ -3,11 +3,9 @@
         <!-- Header -->
         <div class="card-header bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <!-- Left section (Page Length and Search) -->
+                <!-- Page Length Selector -->
                 <div class="d-flex align-items-center">
-                    <!-- Page Length Selector -->
                     <div class="d-flex align-items-center">
-                        <label for="student-pageLengthSelect" class="form-label mb-0 me-2">Show</label>
                         <select id="student-pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
                             <option value="10">10</option>
                             <option value="25">25</option>
@@ -29,7 +27,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Body -->
         <div class="card-body bg-white p-0">
             <!-- Table Placeholder -->
@@ -37,10 +35,6 @@
                 <table id="studentsTable" class="table table-hover text-center m-0" style="width: 100%;">
                     <thead class="table-light">
                         <tr>
-                            <!-- <th>
-                                Select All Checkbox
-                                <input type="checkbox" id="selectAllCheckbox">
-                            </th> -->
                             <th>First Name</th>
                             <th>Last Name</th>
                             <th>Gender</th>
@@ -49,7 +43,6 @@
                             <th>Personal Email</th>
                             <th>Address</th>
                             <th>A\Y</th>
-
                         </tr>
                     </thead>
                     <tbody id="tdata">
@@ -58,11 +51,11 @@
                 </table>
             </div>
         </div>
-        
+
         <!-- Footer -->
         <div class="card-footer bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <span id="student-tableInfo">Showing 1 to 10 of 50 entries</span>
+                <span id="student-tableInfo">Showing 0 to 0 of 0 entries</span>
                 <!-- Pagination -->
                 <nav aria-label="Page navigation">
                     <ul id="student-pagination" class="pagination mb-0">
@@ -72,4 +65,6 @@
             </div>
         </div>
     </div>
+
 </div>
+

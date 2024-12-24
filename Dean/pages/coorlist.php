@@ -6,7 +6,6 @@
                 <!-- Page Length Selector -->
                 <div class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
-                        <label for="coor-pageLengthSelect" class="form-label mb-0 me-2">Show</label>
                         <select id="coor-pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
                             <option value="10">10</option>
                             <option value="25">25</option>
@@ -52,7 +51,7 @@
         <!-- Footer -->
         <div class="card-footer bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <span id="coor-tableInfo">Showing 0 to 0 of 0 entries</span>
+                <span class="mb-1" id="coor-tableInfo">Showing 0 to 0 of 0 entries</span>
                 <!-- Pagination -->
                 <nav aria-label="Page navigation">
                     <ul id="coor-pagination" class="pagination mb-0">

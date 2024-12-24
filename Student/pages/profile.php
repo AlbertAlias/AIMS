@@ -3,7 +3,7 @@
     <div class="col-md-9 col-12">
         <div class="bg-light rounded-3 px-2" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
             <div class="row">
-                <div class="col-md-4 d-flex flex-column align-items-center py-4" style="border-right: 2px solid #ddd;">
+                <div class="col-md-4 d-flex flex-column align-items-center py-3" style="border-right: 2px solid #ddd;">
                     <div class="profile-wrapper" style="position: relative;">
                         <div id="profile-picture-container">
                             <svg id="default-profile-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -17,7 +17,7 @@
                         <input type="file" id="profile-picture-input" accept="image/png, image/jpeg" style="display: none;">
                     </div>
                     <!-- Sidebar Navigation -->
-                    <div class="mt-3 w-100">
+                    <div class="mt-2 w-100">
                         <div class="list-group">
                             <a href="#profile-info" class="list-group-item list-group-item-action active">Profile</a>
                             <a href="#company-info" class="list-group-item list-group-item-action">Company</a>

@@ -2,7 +2,7 @@ let coorlistsPage = 1;
 let coorlistsPageLength = 10;
 
 // Fetch and display table data
-function loadTableData() {
+function loadcoorTableData() {
     $.ajax({
         url: 'controller/retrieve-coor-lists.php',
         type: 'GET',
@@ -33,19 +33,19 @@ function loadTableData() {
 $('#coor-pageLengthSelect').on('change', function() {
     coorlistsPageLength = parseInt($(this).val());
     coorlistsPage = 1;
-    loadTableData();
+    loadcoorTableData();
 });
 
 $('#coor-searchInput').on('input', function() {
     coorlistsPage = 1;
-    loadTableData();
+    loadcoorTableData();
 });
 
 $('#coor-pagination').on('click', '.page-link', function(e) {
     e.preventDefault();
     coorlistsPage = $(this).data('page');
-    loadTableData();
+    loadcoorTableData();
 });
 
 // Initial load
-loadTableData();
+loadcoorTableData();
