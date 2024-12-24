@@ -43,9 +43,9 @@
 }
 
 .page-item.active .page-link {
-    background-color: #198754;
+    background-color: #198754 !important;
     color: white !important;
-    border-color: #198754;
+    border-color: #198754 !important;
 }
 
 .page-item.disabled .page-link {
@@ -54,19 +54,4 @@
 
 .page-item.disabled {
     pointer-events: none;
-}
-
-
-button.btn.btn-outline-secondary.btn-sm .table-icon {
-    width: 18px;
-    height: 18px;
-    padding-bottom: 3px;
-    fill: #198754;
-}
-
-.page-link .table-icon {
-    width: 15px;
-    height: 15px;
-    padding-bottom: 3px;
-    fill: #198754;
 }

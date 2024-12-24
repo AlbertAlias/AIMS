@@ -54,7 +54,7 @@
         <!-- Footer -->
         <div class="card-footer bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <span id="stud-lists-tableInfo">Showing 1 to 10 of 50 entries</span>
+                <span class="mb-2" id="stud-lists-tableInfo">Showing 1 to 10 of 50 entries</span>
                 <!-- Pagination -->
                 <nav aria-label="Page navigation">
                     <ul id="stud-lists-pagination" class="pagination mb-0">

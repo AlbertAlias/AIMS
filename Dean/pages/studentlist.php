@@ -55,7 +55,7 @@
         <!-- Footer -->
         <div class="card-footer bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <span id="student-tableInfo">Showing 0 to 0 of 0 entries</span>
+                <span class="mb-2" id="student-tableInfo">Showing 0 to 0 of 0 entries</span>
                 <!-- Pagination -->
                 <nav aria-label="Page navigation">
                     <ul id="student-pagination" class="pagination mb-0">
@@ -65,6 +65,4 @@
             </div>
         </div>
     </div>
-
 </div>
-

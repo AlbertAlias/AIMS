@@ -7,17 +7,3 @@
     height: 2rem; /* Adjust the height as needed */
     fill: #198754; /* This will set the color of the SVG to match the .card i color */
 }
-
-button.btn.btn-outline-secondary.btn-sm .table-icon {
-    width: 18px;
-    height: 18px;
-    padding-bottom: 3px;
-    fill: #198754;
-}
-
-.page-link .table-icon {
-    width: 15px;
-    height: 15px;
-    padding-bottom: 3px;
-    fill: #198754;
-}
