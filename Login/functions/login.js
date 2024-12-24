@@ -1,20 +1,15 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const passwordInput = document.getElementById('password');
-    const showPasswordSvg = document.getElementById('showPassword');
-    const hidePasswordSvg = document.getElementById('hidePassword');
+document.getElementById('togglePassword').addEventListener('click', function () {
+    const passwordField = document.getElementById('password');
+    const showPasswordIcon = this.querySelector('.show-password');
+    const hidePasswordIcon = this.querySelector('.hide-password');
 
-    // Initially, hide the 'hide password' SVG and show the 'show password' SVG
-    hidePasswordSvg.style.display = 'none';
-
-    showPasswordSvg.addEventListener('click', () => {
-        passwordInput.type = 'text';
-        showPasswordSvg.style.display = 'none';
-        hidePasswordSvg.style.display = 'block';
-    });
-
-    hidePasswordSvg.addEventListener('click', () => {
-        passwordInput.type = 'password';
-        showPasswordSvg.style.display = 'block';
-        hidePasswordSvg.style.display = 'none';
-    });
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        showPasswordIcon.style.display = 'none';
+        hidePasswordIcon.style.display = 'inline-block';
+    } else {
+        passwordField.type = 'password';
+        showPasswordIcon.style.display = 'inline-block';
+        hidePasswordIcon.style.display = 'none';
+    }
 });

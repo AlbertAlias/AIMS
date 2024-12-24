@@ -52,13 +52,18 @@
     transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.form-control-wrapper input:focus {
+.form-control-wrapper input:focus-visible {
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4); /* Enhanced inner shadow on focus */
     border-color: #28a745; /* Green border on focus */
     background-color: rgba(255, 255, 255, 0.2); /* Slightly more opaque background on focus */
 }
 
-.form-control-wrapper input:focus + label,
+.form-control-wrapper input:hover {
+    border-color: rgba(255, 255, 255, 0.5); /* Slightly lighter border on hover */
+    background-color: rgba(255, 255, 255, 0.15); /* Slightly more opaque background on hover */
+}
+
+.form-control-wrapper input:focus-visible + label,
 .form-control-wrapper input:not(:placeholder-shown) + label {
     top: -1.4rem;
     left: 0.30rem;
@@ -103,17 +108,27 @@
     position: relative;
 }
 
-.password-wrapper svg {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    fill: black; /* Black color for the SVG icons */
+.password-wrapper input[type="password"]::-ms-reveal, 
+.password-wrapper input[type="password"]::-ms-clear {
+    display: none; /* Hide icons in Internet Explorer and Edge */
 }
 
-.password-wrapper .show-password {
-    display: none;
+.toggle-password {
+    background: none;
+    border: none;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    padding: 0;
+}
+
+.toggle-password svg {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 2px;
+    fill: #1b915a;
 }
 
 .btn-success.custom-border {
@@ -136,27 +151,40 @@
     width: auto;
 }
 
-.go-back-link .flipped-icon {
-    font-size: 1.3rem; /* Increase icon size */
-    color: #145c32; /* Darker green */
-    transform: scaleX(-1); /* Flips the icon horizontally */
-    margin-top: 2px;
-}
-
-.go-back-link:hover .flipped-icon {
-    color: #1a7d4d; /* Lighter green than #145c32 */
-}
-
 .go-back-link {
-    color: white; /* Change to light text */
-    border: 1px solid black; /* Add black border */
+    display: flex;
+    align-items: center;
+    color: #0e482d; /* Change to light text */
+    border: 1px solid #0e482d; /* Add black border */
     padding: 5px 10px; /* Add some padding for better clickability */
     border-radius: 5px; /* Slightly round the corners */
     text-decoration: none; /* Remove underline by default */
+    transition: background-color 0.3s, color 0.3s; /* Add hover transition */
 }
 
 .go-back-link:hover {
     background-color: rgba(255, 255, 255, 0.2); /* Light background on hover */
+    color: #156f45; /* Change text color on hover */
     text-decoration: none; /* Ensure no underline on hover */
-    color: black; /* Keep the text color white on hover */
+}
+
+.go-back-icon {
+    fill: currentColor; /* Inherit color from parent */
+}
+
+/* Make SweetAlert responsive */
+@media (max-width: 767px) {
+    .swal-responsive {
+        width: 80% !important; /* Adjust width for small screens */
+        max-width: 300px !important; /* Optional: Set a max width */
+        top: 10% !important; /* Adjust position for small screens */
+        padding: 10px !important; /* Optional: Reduce padding */
+    }
+}
+
+@media (min-width: 768px) {
+    .swal-responsive {
+        width: 400px !important; /* Default size for larger screens */
+        top: 10% !important; /* Keep top position for larger screens */
+    }
 }
