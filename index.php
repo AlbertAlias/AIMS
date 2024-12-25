@@ -87,7 +87,7 @@
                 </div>
                 <div class="card">
                     <div class="card-inner">
-                        <div class="card-front" style="background-image: url('assets/img/index/tn-card.jpg');"></div>
+                        <div class="card-front" style="background-image: url('assets/img/index/tm-card.jpg');"></div>
                         <div class="card-back" style="background-color: maroon;"></div>
                     </div>
                 </div>
@@ -284,9 +284,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-    <!--START::LOGIN FUNCTION-->
-    <script src="crud-ajax/login-users.js"></script>
-    <!--END::LOGIN FUNCTION-->
     <script src="functions/landing-header.js"></script>
     <script src="functions/dept-card.js"></script>
     <script src="functions/comp-card-logo.js"></script>

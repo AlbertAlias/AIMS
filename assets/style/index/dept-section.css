@@ -1,7 +1,7 @@
 .dept-section {
     height: 100vh;
     /* background-color: #e0d5d5be; */
-    background-color: #efe7e7;
+    background-color: #e0e0e0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,7 +20,6 @@
     align-items: center;
     gap: 5px;
     overflow: visible;
-    
     position: relative;
 }
 
