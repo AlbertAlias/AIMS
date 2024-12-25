@@ -1,3 +1,4 @@
+/* Default Styles */
 .home-section {
   height: 100vh;
   background-image: url('../../img/index/esyatek-bg1.png');
@@ -18,6 +19,18 @@
   text-align: center;
 }
 
+.home-content h1 {
+  font-size: 2.3rem; /* Increase font size */
+  color: #125f3b; /* Set text color */
+  margin-bottom: 5px; /* Add space below heading */
+}
+
+.home-content p {
+  font-size: 1.5rem; /* Increase font size */
+  color: #125f3b; /* Set text color */
+  margin-bottom: 5px; /* Add space below paragraph */
+}
+
 .home-logo {
   position: absolute;
   top: 42%;
@@ -27,50 +40,40 @@
   max-width: 75%; /* Adjust the size of the logo */
 }
 
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .home-section {
+    flex-direction: column;
+    align-items: center; /* Align content at the center for mobile */
+    padding-bottom: 0; /* Remove padding-bottom for mobile */
+  }
+
+  .home-content {
+    padding: 10px; /* Add padding for better spacing */
+  }
+
+  .home-content h1 {
+    font-size: 1.5rem; /* Adjust font size for mobile */
+  }
+
+  .home-content p {
+    font-size: 0.8rem; /* Adjust font size for mobile */
+  }
+
+  .home-logo {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    max-width: 100%;
+    max-height: 80vh;
+    width: auto;
+    height: auto;
+    margin-bottom: 20px; /* Add space below the logo */
+  }
+}
 
 * {
   user-select: none;
   -webkit-user-select: none;
 }
-
-/* html {
-  scroll-behavior: smooth;
-} */
-
-/* section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-} */
-
-/* #company {
-  background-color: #adb5bdc3;
-}
-
-#about {
-  background-color: #c6cfd7e6;
-}
-
-#contact {
-  background-color: #ced4da;
-} */
-
-/* .custom-logo {
-  width: 55%;
-} */
-
-/* For medium screens (≥768px) */
-/* @media (max-width: 991.98px) {
-  .custom-logo {
-      width: 90%;
-  }
-} */
-
-/* For small screens (≤575px) */
-/* @media (max-width: 575.98px) {
-  .custom-logo {
-      width: 100%;
-  }
-} */

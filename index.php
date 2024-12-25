@@ -26,9 +26,9 @@
     <!-- HOME SECTION -->
     <section class="home-section" id="home">
         <div class="home-content">
-            <h1 class="display-6 fw-bold">Welcome To AIMS!</h1>
-            <p class="lead">Where you Achieve, Inspire, Motivate, & Succeed</p>
-            <a href="#department" class="btn btn-success btn-sm">Tell Me More</a>
+            <h1>Welcome to AIMS</h1>
+            <p>Where you Achieve, Inspire, Motivate, & Succeed</p>
+            <a href="#department" class="btn btn-sm btn-success">Tell Me More</a>
         </div>
         <img src="assets/img/index/esyatek-bg1-logo.png" alt="Logo" class="home-logo">
     </section>

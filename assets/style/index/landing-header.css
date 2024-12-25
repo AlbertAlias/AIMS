@@ -46,6 +46,10 @@
 
 /* New styles for smaller screens */
 @media (max-width: 991px) { 
+    .navbar {
+        background-color: rgba(255, 255, 255, 1) !important;
+    }
+    
     .navbar-nav .nav-item {
         text-align: center;
         display: flex; /* Add flex display */
