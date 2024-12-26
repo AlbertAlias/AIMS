@@ -23,7 +23,8 @@
 
 .team-member:hover {
     transform: translateY(-10px);
-    border-color: rgba(0, 0, 0, 0.1);
+    /* border-color: #0000001a; */
+    border-color: #198754b5;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 

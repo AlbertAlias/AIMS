@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', function () {
     fileInput.addEventListener('change', function () {
         // Clear existing content in the fileContainer
         fileContainer.innerHTML = '';
-    
+
         const files = this.files; // Get the selected files
-    
+
         // Iterate over the selected files
         Array.from(files).forEach((file, index) => {
             // Check if the file is a PDF
@@ -58,20 +58,44 @@ document.addEventListener('DOMContentLoaded', function () {
                 this.value = ''; // Clear the file input
                 return;
             }
-    
+
             // Create a new container for the file
             const fileCard = document.createElement('div');
             fileCard.className = 'd-flex align-items-center border p-1 rounded mb-2 position-relative';
-            fileCard.style.cursor = 'pointer'; // Make it clickable
-            fileCard.title = 'Click to view the file'; // Tooltip for user feedback
+            fileCard.style.pointerEvents = 'none'; // Make it non-clickable during loading
             fileCard.setAttribute('data-file-index', index); // Store the file index for later reference
-    
-            // File Icon
+
+            // Set height and width for the container (compact version)
+            fileCard.style.height = '60px';
+            fileCard.style.width = '100%';
+
+            // Create the loading indicator and append it to the file card
+            const loadingElement = document.createElement('div');
+            loadingElement.classList.add('loading-indicator');
+            loadingElement.style.height = '3px'; // Thin loading bar
+            loadingElement.style.backgroundColor = '#198754'; // Green color
+
+            // Position and animation styles for the loading indicator
+            loadingElement.style.position = 'absolute';
+            loadingElement.style.bottom = '0'; // Place it at the bottom of the file card
+            loadingElement.style.left = '0';
+            loadingElement.style.width = '0'; // Initially, the bar will be 0 width
+            loadingElement.style.transition = 'width 2s ease-out'; // Smooth transition for width change
+
+            // Append the loading bar to the file card
+            fileCard.appendChild(loadingElement);
+
+            // Append the file card to the container (only the loading bar will be visible initially)
+            fileContainer.appendChild(fileCard);
+
+            // Create the file icon, details, and close button but keep them hidden initially
             const fileIcon = document.createElement('div');
-            fileIcon.innerHTML = '<i class="fa-solid fa-file-pdf icon mx-3"></i>';
-            fileIcon.style.fontSize = '1.5rem';
-            fileIcon.querySelector('i').style.color = '#d32923';
-    
+            fileIcon.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 2.3rem; height: 2.3rem; padding: 1px; margin-left: 3px; margin-right: 3px;">
+                    <path d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 144-208 0c-35.3 0-64 28.7-64 64l0 144-48 0c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128zM176 352l32 0c30.9 0 56 25.1 56 56s-25.1 56-56 56l-16 0 0 32c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-48 0-80c0-8.8 7.2-16 16-16zm32 80c13.3 0 24-10.7 24-24s-10.7-24-24-24l-16 0 0 48 16 0zm96-80l32 0c26.5 0 48 21.5 48 48l0 64c0 26.5-21.5 48-48 48l-32 0c-8.8 0-16-7.2-16-16l0-128c0-8.8 7.2-16 16-16zm32 128c8.8 0 16-7.2 16-16l0-64c0-8.8-7.2-16-16-16l-16 0 0 96 16 0zm80-112c0-8.8 7.2-16 16-16l48 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 32 32 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 48c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-64 0-64z" fill="#d32923"/>
+                </svg>
+            `;
+
             // File Details with name overflow styling
             const fileDetails = document.createElement('div');
             fileDetails.style.flex = '1';
@@ -79,28 +103,62 @@ document.addEventListener('DOMContentLoaded', function () {
                 <p class="file-name mb-0" title="${file.name}" style="color: #6c757d;"><strong>${file.name}</strong></p>
                 <p class="text-muted small mb-0">${(file.size / 1024).toFixed(2)} KB</p>
             `;
-    
+
             // Close Button
             const closeButton = document.createElement('button');
-            closeButton.className = 'btn btn-sm position-absolute top-5 end-0 p-3';
-            closeButton.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+            closeButton.className = 'btn btn-sm position-absolute end-0 p-3';
+            closeButton.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" style="width: 1.3rem; height: 1.3rem; margin-bottom: 3px;">
+                    <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" fill="#6c757d"/>
+                </svg>
+            `;
             closeButton.style.fontSize = '1.3rem';
             closeButton.style.cursor = 'pointer';
+
+            // Close button click handler
             closeButton.addEventListener('click', function (event) {
                 event.stopPropagation(); // Prevent triggering the view event
-                fileCard.remove();
-                fileInput.value = '';
-                submitButton.disabled = true;
+
+                // Disable the close button and make fileCard unclickable
+                closeButton.disabled = true;
+                fileCard.style.pointerEvents = 'none'; // Disable click events on the file container
+
+                // Blur the button to prevent any focus outline
+                closeButton.blur(); 
+
+                // Delay before removing the file container
+                setTimeout(() => {
+                    fileCard.remove(); // Remove the file card after delay
+                    fileInput.value = ''; // Clear the file input
+                    submitButton.disabled = true; // Disable the submit button again
+                }, 2000); // Adjust the delay as needed (2 seconds here)
             });
-    
-            // Append icon, details, and close button to the file card
+
+            // Initially hide the file icon, details, and close button
+            fileIcon.style.display = 'none';
+            fileDetails.style.display = 'none';
+            closeButton.style.display = 'none';
+
+            // Append the icon, details, and close button to the file card
             fileCard.appendChild(fileIcon);
             fileCard.appendChild(fileDetails);
             fileCard.appendChild(closeButton);
-    
-            // Append the file card to the container
-            fileContainer.appendChild(fileCard);
-    
+
+            // Simulate a file upload by gradually expanding the loading bar
+            setTimeout(() => {
+                loadingElement.style.width = '100%'; // Make it move from left to right
+            }, 10);
+
+            // After the loading is complete, show the file icon, details, and close button
+            setTimeout(() => {
+                fileIcon.style.display = 'block'; // Show the file icon
+                fileDetails.style.display = 'block'; // Show file details
+                closeButton.style.display = 'block'; // Show close button
+                loadingElement.remove(); // Remove the loading element after completion
+                fileCard.style.pointerEvents = 'auto'; // Enable clicking again after loading
+                fileCard.style.cursor = 'pointer'; // Make it appear clickable (hand cursor)
+            }, 2500); // Time to match the animation duration (2s + buffer)
+
             // Enable the "Turn in" button after a file is uploaded
             submitButton.disabled = false;
         });

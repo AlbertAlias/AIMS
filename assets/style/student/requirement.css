@@ -22,6 +22,11 @@
   margin-bottom: 15px;
 }
 
+.file-preview.no-click {
+  pointer-events: none;  /* Disable pointer events initially */
+  cursor: default; /* Default cursor */
+}
+
 /* File Icon */
 .file-preview .file-icon {
   display: flex;
@@ -140,4 +145,16 @@
   margin-right: 3px;
   vertical-align: -0.125em;
   fill: currentColor;
+}
+
+/* Remove border and outline from button when disabled */
+button:disabled {
+  border: none !important;
+  outline: none !important;
+}
+
+/* Prevent focus outline when clicked */
+button:focus {
+  outline: none !important;
+  border: none !important;
 }
