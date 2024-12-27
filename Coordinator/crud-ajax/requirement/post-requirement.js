@@ -1,13 +1,12 @@
 $(document).ready(function () {
-    console.log("post-requirement.js loaded");  // This will print to the console
+    console.log("post-requirement.js loaded");
 
     $("#postRequirementBtn").on("click", function (e) {
-        e.preventDefault(); // Prevent default form submission
-        console.log("Post button clicked");  // Check if the click event is triggered
+        e.preventDefault();
 
         const requirementTitle = $("#requirementTitle").val().trim();
         const requirementDescription = $("#requirementDescription").val().trim();
-        const deadline = $(".deadline-input").val(); // Get the deadline input value
+        const deadline = $(".deadline-input").val();
 
         if (!requirementTitle || !deadline) {
             Swal.fire({
@@ -34,12 +33,10 @@ $(document).ready(function () {
             data: {
                 requirementTitle: requirementTitle,
                 requirementDescription: requirementDescription,
-                deadline: deadline, // Include deadline
+                deadline: deadline,
             },
             dataType: "json",
             success: function (result) {
-                console.log(result);  // Log the result to see what is returned from the server
-
                 if (result.success) {
                     Swal.fire({
                         toast: true,
@@ -60,6 +57,11 @@ $(document).ready(function () {
                     $("#requirementTitle").val('');
                     $("#requirementDescription").val('');
                     $(".deadline-input").val('');
+
+                    // Dynamically reload the requirements
+                    if (typeof loadPostedRequirements === "function") {
+                        loadPostedRequirements();
+                    }
                 } else {
                     Swal.fire({
                         toast: true,
@@ -79,7 +81,6 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status, error) {
-                console.error("AJAX error: ", error);
                 Swal.fire({
                     toast: true,
                     position: 'top-right',

@@ -66,7 +66,7 @@ $(document).ready(function () {
         });
     }
 
-    // Helper: Format deadline for display
+    // Helper: Format deadline for display (Month and Day only)
     function formatDeadline(deadline) {
         const date = new Date(deadline);
         return date.toLocaleDateString("en-US", { month: 'short', day: 'numeric' });
@@ -93,7 +93,6 @@ $(document).ready(function () {
         });
     });
     
-
     // Edit functionality
     $(document).on("click", ".edit-requirement", function (e) {
         e.preventDefault();
@@ -101,20 +100,43 @@ $(document).ready(function () {
         const requirementId = requirementPost.data("id");
         const title = requirementPost.find("h6").text().trim();
         const description = requirementPost.find("p").text().trim();
-        const deadline = requirementPost.find(".deadline").text().split(":")[1].trim();
-
+        const deadline = requirementPost.find(".deadline").text().split(":")[1].trim(); // Assuming the deadline is like "Dec 27, 2024"
+    
+        // Set the values in the form for editing
         $("#requirementTitle").val(title);
         $("#requirementDescription").val(description);
+    
+        // Correctly format the date for input[type="date"]
         $("#deadline").val(formatDateForInput(deadline));
-
+    
+        // Show the update button, hide the post button
         $("#postRequirementBtn").hide();
         $("#updatePostRequirementBtn").show().data("id", requirementId);
     });
+    
 
-    // Helper: Format date for input field
-    function formatDateForInput(dateString) {
-        const date = new Date(dateString);
-        return date.toISOString().split("T")[0];
+    function formatDateForInput(deadline) {
+        const dateParts = deadline.split(' ');  // Split the deadline into month and day, e.g., ["Dec", "27"]
+        const month = dateParts[0];  // "Dec"
+        const day = dateParts[1];  // "27"
+        const currentYear = new Date().getFullYear();  // Get the current year, e.g., 2024
+    
+        // Map the month abbreviation to its numeric value
+        const monthMap = {
+            "Jan": "01", "Feb": "02", "Mar": "03", "Apr": "04", "May": "05", "Jun": "06",
+            "Jul": "07", "Aug": "08", "Sep": "09", "Oct": "10", "Nov": "11", "Dec": "12"
+        };
+    
+        // Check if the month abbreviation is valid
+        const monthNumber = monthMap[month];
+        if (!monthNumber) {
+            console.error("Invalid month:", month);
+            return "";  // Return empty if the month is invalid
+        }
+    
+        // Construct the full date in YYYY-MM-DD format
+        const formattedDate = `${currentYear}-${monthNumber}-${day.padStart(2, '0')}`;
+        return formattedDate;
     }
 
     // Update functionality
@@ -195,6 +217,8 @@ $(document).ready(function () {
         $("#updatePostRequirementBtn").hide();
     }
 
+    window.loadPostedRequirements = loadPostedRequirements;
+    
     // Load requirements on page load
     loadPostedRequirements();
 });
