@@ -1,20 +1,19 @@
-let studentPage = 1;
-let studentPageLength = 10;
+let studentlistsPage = 1;
+let studentlistsPageLength = 10;
 
 // Fetch and display table data
 function loadTableData() {
-    console.log('Fetching table data...');
     $.ajax({
-        url: 'controller/student-lists.php',
+        url: 'controller/retrieve-student-lists.php',
         type: 'GET',
-        dataType: 'json', // Automatically parses JSON response
+        dataType: 'json',
         data: {
-            page: studentPage,
-            length: studentPageLength,
+            page: studentlistsPage,
+            length: studentlistsPageLength,
             search: $('#stud-lists-searchInput').val()
         },
         success: function(response) {
-            console.log('Response Data:', response); // Debugging line
+            console.log('Response:', response);
             if (response.html) {
                 $('#stud-lists tbody').html(response.html);
             }
@@ -24,30 +23,29 @@ function loadTableData() {
             $('#stud-lists-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
         },
         error: function(xhr, status, error) {
-            console.error('AJAX error:', status, error);
+            console.error('AJAX Error:', status, error);
+            console.log('Response Text:', xhr.responseText);
         }
     });
 }
 
-// Handle page length change
+// Event listeners
 $('#stud-lists-pageLengthSelect').on('change', function() {
-    studentPageLength = parseInt($(this).val());
-    studentPage = 1; // Reset to first page
+    studentlistsPageLength = parseInt($(this).val());
+    studentlistsPage = 1;
     loadTableData();
 });
 
-// Handle search input
 $('#stud-lists-searchInput').on('input', function() {
-    studentPage = 1; // Reset to first page
+    studentlistsPage = 1;
     loadTableData();
 });
 
-// Handle pagination click using delegated event
 $('#stud-lists-pagination').on('click', '.page-link', function(e) {
     e.preventDefault();
-    studentPage = $(this).data('page'); // Get the page number
-    loadTableData(); // Fetch new data for the selected page
+    studentlistsPage = $(this).data('page');
+    loadTableData();
 });
 
-// Initial data load
+// Initial load
 loadTableData();
