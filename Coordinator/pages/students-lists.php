@@ -13,9 +13,8 @@
                             <option value="100">100</option>
                         </select>
                     </div>
-                </div>
-                <!-- Search Input -->
-                <div class="flex-shrink-1">
+                    <!-- Search Input -->
+                    <div class="flex-shrink-1">
                     <div class="input-group">
                         <input type="text" id="stud-lists-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
                         <button class="btn btn-outline-secondary btn-sm" type="button">
@@ -25,6 +24,10 @@
                         </button>
                     </div>
                 </div>
+                </div>
+                <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#setHoursModal">
+                    Interns Set Hours
+                </button>
             </div>
         </div>
         
@@ -96,6 +99,34 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-success" id="assignSupervisorBtn">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal for setting hours -->
+<div class="modal fade" id="setHoursModal" tabindex="-1" aria-labelledby="setHoursModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="setHoursModalLabel">Set Hours for Interns</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Form to set hours -->
+                <form id="setHoursForm">
+                    <div class="mb-3">
+                        <label for="hoursNeeded" class="form-label">Hours Needed</label>
+                        <input type="number" class="form-control" id="hoursNeeded" name="hoursNeeded" required>
+                    </div>
+                    <input type="hidden" id="coordinatorId" name="coordinatorId" value="1"> <!-- Set the coordinator ID here -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveHoursButton">Save Hours</button>
             </div>
         </div>
     </div>
