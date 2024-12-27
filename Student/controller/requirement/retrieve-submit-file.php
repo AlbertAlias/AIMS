@@ -11,10 +11,11 @@
     // Get the student ID from the session
     $student_id = $_SESSION['user_id'];  // Assuming the student's ID is stored in the session
 
-    // Query to get all file submissions for the logged-in student
+    // Query to get all file submissions for the logged-in student, ordered by submission_date DESC
     $sql = "SELECT sr.submit_id, sr.document_name, sr.status, sr.submission_date
         FROM submit_requirements sr
-        WHERE sr.student_id = ?";
+        WHERE sr.student_id = ?
+        ORDER BY sr.submission_date DESC";
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $student_id);

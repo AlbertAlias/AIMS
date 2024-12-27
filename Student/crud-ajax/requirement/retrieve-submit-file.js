@@ -40,7 +40,7 @@ $(document).ready(function () {
                             $('#taskCardContainer').show();
 
                             const fileCardHtml = `
-                            <div class="card task-card px-3 py-3 mt-1 mb-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; transition: transform 0.3s ease;"
+                            <div class="card task-card px-3 py-3 mt-1 mb-3" style="width: 400px !important; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; transition: transform 0.3s ease;"
                                 data-file-name="${fileName}">
                                 <div class="d-flex justify-content-between align-items-center" style="height: 100%;">
                                     <div class="d-flex align-items-center">
@@ -48,9 +48,11 @@ $(document).ready(function () {
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <div class="badge bg-warning text-white py-2 px-3" style="font-size: 0.875rem; border-radius: 15px;">${fileStatus}</div>
-                                        <i class="fa-solid fa-xmark delete-icon" data-id="${submitId}" style="margin-top: 2px; margin-left: 10px; color: #dc3545; cursor: pointer; font-size: 1.25rem; transition: transform 0.2s ease, color 0.2s ease;"
-                                        onmouseover="this.style.color='#b02a37'; this.style.transform='scale(1.2)';"
-                                        onmouseout="this.style.color='#dc3545'; this.style.transform='scale(1)';"></i>
+                                        <div class="delete-icon-container" data-id="${submitId}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="delete-icon" style="width: 24px; height: 24px;">
+                                                <path fill="#dc3545" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+                                            </svg>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -133,7 +135,6 @@ $(document).ready(function () {
             }
         });
     }
-    
 
     // Close modal logic
     $('#closeModal').on('click', function () {

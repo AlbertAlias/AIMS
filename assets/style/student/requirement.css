@@ -158,3 +158,19 @@ button:focus {
   outline: none !important;
   border: none !important;
 }
+
+.delete-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; /* Adjust size as needed */
+  height: 40px; /* Adjust size as needed */
+  margin-left: 10px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.delete-icon-container:hover {
+  background-color: rgba(200, 200, 200, 0.318);
+}
