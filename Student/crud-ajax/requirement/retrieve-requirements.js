@@ -1,8 +1,9 @@
 $(document).ready(function () {
     const requirementsContainer = $("#requirementsContainer");
     const postedRequirementsContainer = $("#postedRequirementsContainer");
-    const requirementTitleElement = $(".card-title.mt-2.mb-3");
+    const requirementTitleElement = $(".card-title");
     const hiddenRequirementIdInput = $(".requirement-id");
+    let activeRequirement = null;
 
     // Function to load the coordinator's requirements
     function loadCoordinatorRequirements() {
@@ -45,7 +46,6 @@ $(document).ready(function () {
                             `;
                         }).join("");
 
-
                         // HTML for postedRequirementsContainer (full details with hidden requirement_id)
                         const postedRequirementsHtml = requirements.map(req => {
                             // Format the created_at date to show only the month and date
@@ -53,8 +53,8 @@ $(document).ready(function () {
                             const formattedDate = createdAt.toLocaleString('default', { month: 'short', day: 'numeric' });
                         
                             return `
-                            <div class="card task-card mb-3 posted-requirement" data-title="${req.title}" data-requirement-id="${req.requirement_id}" 
-                                style="cursor: pointer; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #198754; transition: background-color 0.3s ease; padding: 8px;">
+                            <div class="card task-card ms-2 mb-3 posted-requirement" data-title="${req.title}" data-requirement-id="${req.requirement_id}" 
+                                style="cursor: pointer; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); width: 98%; border-left: 4px solid #198754; transition: background-color 0.3s ease; padding: 8px;">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <p style="margin: 0; font-weight: 400; color: #333; font-size: 1.2rem;">
                                         ${req.first_name} ${req.last_name} posted a <span style="color: #198754;">${req.title}</span>
@@ -69,7 +69,6 @@ $(document).ready(function () {
                             </div>
                             `;
                         }).join("");
-
 
                         // Append the generated HTML to the respective containers
                         requirementsContainer.html(requirementsHtml);
@@ -93,17 +92,59 @@ $(document).ready(function () {
                         $(".posted-requirement").on("click", function() {
                             const title = $(this).data("title");
                             const requirementId = $(this).data("requirement-id");
-
-                            requirementTitleElement.text(title);
-                            hiddenRequirementIdInput.val(requirementId);
-
-                            const fileInput = $('#fileInput');
-                            fileInput.prop('disabled', false);
-                            fileInput.css('box-shadow', 'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px');
-
-                            $(".posted-requirement").removeClass('active');
-                            $(this).addClass('active');
-                            $(this).css('box-shadow', 'rgba(25, 135, 84, 0.7) 0px 1px 2px 0px, rgba(25, 135, 84, 0.16) 0px 2px 6px 2px');
+                        
+                            // Check if a file is attached to the requirement
+                            const isFileAttached = $('#fileContainer').children().length > 0;
+                        
+                            // If a requirement is already active and there's a file attached, don't allow switching
+                            if (activeRequirement && activeRequirement !== requirementId && isFileAttached) {
+                                alert('You cannot switch to another task while a file is attached.');
+                                return; // Exit without changing the active card
+                            }
+                        
+                            // Proceed to toggle the active state of the card
+                            if ($(this).hasClass('active')) {
+                                // If active, reset everything (unless a file is attached)
+                                if (!isFileAttached) {
+                                    // Reset the file input to be disabled again
+                                    $('#fileInput').prop('disabled', true);
+                                    $('#fileInput').closest('label').css('pointer-events', 'none');
+                        
+                                    requirementTitleElement.text('Upload requirement'); // Reset to default title
+                                    hiddenRequirementIdInput.val('');
+                                    $(this).removeClass('active');
+                                    $(this).css('box-shadow', 'none');
+                                    activeRequirement = null; // Reset active requirement
+                                }
+                            } else {
+                                // If not active, deactivate the previous active card
+                                $(".posted-requirement.active").removeClass('active').css('box-shadow', 'none');
+                                
+                                // Activate the new clicked card
+                                requirementTitleElement.text(title); // Populate with the selected card's title
+                                hiddenRequirementIdInput.val(requirementId);
+                        
+                                const fileInput = $('#fileInput');
+                                fileInput.prop('disabled', false); // Enable file input for this task
+                                fileInput.closest('label').css('pointer-events', 'auto'); // Enable the label button
+                        
+                                $(this).addClass('active');
+                                $(this).css('box-shadow', 'rgba(25, 135, 84, 0.7) 0px 1px 2px 0px, rgba(25, 135, 84, 0.16) 0px 2px 6px 2px');
+                                
+                                activeRequirement = requirementId; // Mark this requirement as active
+                            }
+                        
+                            // Disable other task cards when one is active
+                            if (activeRequirement) {
+                                $(".posted-requirement").each(function() {
+                                    const requirementId = $(this).data("requirement-id");
+                                    if (requirementId !== activeRequirement) {
+                                        $(this).css('pointer-events', 'none').css('opacity', '0.7');
+                                    }
+                                });
+                            } else {
+                                $(".posted-requirement").css('pointer-events', 'auto').css('opacity', '1');
+                            }
                         });
                     } else {
                         requirementsContainer.html("<p class='text-muted'>No requirements posted by your coordinator.</p>");

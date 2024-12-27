@@ -1,14 +1,9 @@
 <div class="container-fluid bg-light" id="requirement" style="display: none;">
     <div class="row">
-        <div class="col-12 col-md-12 col-lg-8">
-            <h4 class="border-bottom border-secondary pb-2 mb-2">Requirements</h4>
-            <div id="postedRequirementsContainer" class="row"></div>
-        </div>
-
-        <div class="col-12 col-md-12 col-lg-4">
-            <div class="card shadow-sm mb-3">
+        <div class="col-12 col-md-12 col-lg-4 m-0 p-0">
+            <div class="card shadow-sm mb-3 me-4">
                 <div class="card-body">
-                    <h5 class="card-title mt-2 mb-3">Upload requirement</h5>
+                    <h5 class="card-title mb-3">Upload requirement</h5>
                     <input type="hidden" class="requirement-id" value="${req.requirement_id}">
                     <input type="hidden" class="student-id" value="${user.student_id}">
 
@@ -25,6 +20,11 @@
                 </div>
             </div>
             <div id="taskCardContainer" style="display: none;"></div>
+        </div>
+
+        <div class="col-12 col-md-12 col-lg-8 m-0 p-0">
+            <h4 class="border-bottom border-secondary pb-2 mb-2">Requirements</h4>
+            <div id="postedRequirementsContainer" class="row"></div>
         </div>
     </div>
 </div>

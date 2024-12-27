@@ -27,6 +27,7 @@
                 ON r.requirement_id = sr.requirement_id AND sr.student_id = ?
             WHERE u.department_id = (SELECT department_id FROM users WHERE user_id = ?)
             AND (sr.status IS NULL OR sr.status = 'rejected')
+            ORDER BY r.created_at DESC
         ");
         $stmt->bind_param("ii", $student_id, $student_id);
         $stmt->execute();
