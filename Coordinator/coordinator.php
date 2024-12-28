@@ -36,8 +36,7 @@
     <link rel="stylesheet" href="../assets/style/coor/dashboard.css">
     <link rel="stylesheet" href="../assets/style/coor/studentlists.css">
     <link rel="stylesheet" href="../assets/style/coor/studentreq.css">
-    <!-- <link rel="stylesheet" href="../assets/style/coor/requirement/requirement.css"> -->
-    <link rel="stylesheet" href="../assets/style/coor/posting.css">
+    <link rel="stylesheet" href="../assets/style/coor/requirement.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
@@ -106,7 +105,10 @@
 
     <script src="crud-ajax/requirement/post-requirement.js"></script>
     <script src="crud-ajax/requirement/retrieve-posted-requirements.js"></script>
-    <script src="crud-ajax/requirement/retrieve-student-requirements.js"></script>
+    <!-- <script src="crud-ajax/requirement/retrieve-student-requirements.js"></script> -->
+    <script src="crud-ajax/requirement/retrieve-pending-requirements.js"></script>
+    <script src="crud-ajax/requirement/retrieve-rejected-requirements.js"></script>
+    <script src="crud-ajax/requirement/retrieve-approved-requirements.js"></script>
 
     <script src="crud-ajax/hours/hours.js"></script>
 

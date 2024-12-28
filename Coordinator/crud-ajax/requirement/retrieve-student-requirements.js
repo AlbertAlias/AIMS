@@ -8,6 +8,119 @@ $(document).ready(function () {
         }
     });
 
+    // Helper function to render requirements on the page
+    function renderRequirements(response, container) {
+        try {
+            if (typeof response === 'string') {
+                response = JSON.parse(response);
+            }
+
+            $(container).empty();
+
+            if (response.status === 'success') {
+                const data = response.data;
+
+                if (data.length === 0) {
+                    $(container).html('<p class="text-center text-muted">No requirements found.</p>');
+                    return;
+                }
+
+                data.forEach(function (submission) {
+                    const submissionDate = new Date(submission.submission_date).toLocaleString('en-US', {
+                        month: 'short',
+                        day: 'numeric',
+                    });
+
+                    const cardHtml = `
+                        <div class="card task-card px-3 py-2 mb-3 submission-card position-relative" data-submission-id="${submission.submit_id}">
+                            <div class="d-flex align-items-center pt-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 2.5rem; height: 2.5rem; margin-right: 5px;">
+                                    <path fill="#d32923" d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 144-208 0c-35.3 0-64 28.7-64 64l0 144-48 0c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128zM176 352l32 0c30.9 0 56 25.1 56 56s-25.1 56-56 56l-16 0 0 32c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-48 0-80c0-8.8 7.2-16 16-16zm32 80c13.3 0 24-10.7 24-24s-10.7-24-24-24l-16 0 0 48 16 0zm96-80l32 0c26.5 0 48 21.5 48 48l0 64c0 26.5-21.5 48-48 48l-32 0c-8.8 0-16-7.2-16-16l0-128c0-8.8 7.2-16 16-16zm32 128c8.8 0 16-7.2 16-16l0-64c0-8.8-7.2-16-16-16l-16 0 0 96 16 0zm80-112c0-8.8 7.2-16 16-16l48 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 32 32 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 48c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-64 0-64z"/>
+                                </svg>
+                                <div class="d-flex flex-column justify-content-center">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="card-title mb-1 student-name">${submission.student_name} has</p>
+                                        <p class="card-text mb-1 mx-1">${submission.status}</p>
+                                        <h6 class="card-title fs-6 mb-1 document-name">${submission.document_name}</h6>
+                                    </div>
+                                    <small class="text-muted submission-date">Submitted ${submissionDate}</small>
+                                </div>
+                            </div>
+                            <button class="btn btn-sm btn-success position-absolute top-0 end-0 m-2 btn-approve" data-id="${submission.submit_id}">Approve</button>
+                            <button class="btn btn-sm btn-danger px-3 position-absolute bottom-0 end-0 m-2 btn-reject" data-id="${submission.submit_id}">Reject</button>
+                            <button class="btn btn-sm btn-primary position-absolute bottom-0 start-0 m-2 btn-view-file" data-file-path="${submission.file_path}" style="display: none;">View File</button>
+                        </div>
+                    `;
+                    $(container).append(cardHtml);
+                });
+            } else {
+                console.error('Error: Invalid response', response);
+                $(container).html('<p class="text-center text-danger">Error fetching requirements.</p>');
+            }
+        } catch (e) {
+            console.error('Error parsing response:', e);
+        }
+    }
+
+    // Load approved submissions on page load
+    function loadApprovedSubmissions() {
+        $.ajax({
+            url: 'controller/requirement/retrieve-approved-requirements.php',
+            method: 'GET',
+            success: function (response) {
+                try {
+                    if (typeof response === 'string') {
+                        response = JSON.parse(response);
+                    }
+
+                    $('#completedContent').empty();
+
+                    if (response.status === 'success') {
+                        const data = response.data;
+
+                        if (data.length === 0) {
+                            $('#completedContent').html('<p class="text-center text-muted">No approved requirements found.</p>');
+                            return;
+                        }
+
+                        data.forEach(function (submission) {
+                            const submissionDate = new Date(submission.submission_date).toLocaleString('en-US', {
+                                month: 'short',
+                                day: 'numeric',
+                            });
+
+                            const cardHtml = `
+                                <div class="card task-card px-3 py-2 mb-3 submission-card position-relative" data-submission-id="${submission.submit_id}">
+                                    <div class="d-flex align-items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 4rem; height: 4rem; margin-right: 5px;">
+                                            <path fill="#d32923" d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 144-208 0c-35.3 0-64 28.7-64 64l0 144-48 0c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128zM176 352l32 0c30.9 0 56 25.1 56 56s-25.1 56-56 56l-16 0 0 32c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-48 0-80c0-8.8 7.2-16 16-16zm32 80c13.3 0 24-10.7 24-24s-10.7-24-24-24l-16 0 0 48 16 0zm96-80l32 0c26.5 0 48 21.5 48 48l0 64c0 26.5-21.5 48-48 48l-32 0c-8.8 0-16-7.2-16-16l0-128c0-8.8 7.2-16 16-16zm32 128c8.8 0 16-7.2 16-16l0-64c0-8.8-7.2-16-16-16l-16 0 0 96 16 0zm80-112c0-8.8 7.2-16 16-16l48 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 32 32 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 48c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-64 0-64z"/>
+                                        </svg>
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <p class="card-title mb-1 student-name">${submission.student_name} has</p>
+                                                <p class="card-text mb-1 mx-1">${submission.status}</p>
+                                                <h6 class="card-title fs-6 mb-1 document-name">${submission.document_name}</h6>
+                                            </div>
+                                            <small class="text-muted submission-date">Submitted ${submissionDate}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                            $('#completedContent').append(cardHtml);
+                        });
+                    } else {
+                        console.error('Error fetching approved submissions:', response.message);
+                    }
+                } catch (e) {
+                    console.error('Error parsing response:', e);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('AJAX error:', status, error);
+            }
+        });
+    }
+
     $(document).on('click', '.btn-approve', function (event) {
         event.stopPropagation();  // Prevent the click from bubbling up to the card
         const submissionId = $(this).data('id');
@@ -133,7 +246,6 @@ $(document).ready(function () {
         });
     });
     
-
     // Event listener for "Delete File" button click
     $(document).on('click', '.btn-delete-file', function (event) {
         const submissionId = $(this).data('id');
@@ -364,119 +476,6 @@ $(document).ready(function () {
             error: function (xhr, status, error) {
                 console.error('AJAX error:', status, error);
                 $('#completedContent').html('<p class="text-center text-danger">Failed to load completed requirements.</p>');
-            }
-        });
-    }
-
-    // Helper function to render requirements on the page
-    function renderRequirements(response, container) {
-        try {
-            if (typeof response === 'string') {
-                response = JSON.parse(response);
-            }
-
-            $(container).empty();
-
-            if (response.status === 'success') {
-                const data = response.data;
-
-                if (data.length === 0) {
-                    $(container).html('<p class="text-center text-muted">No requirements found.</p>');
-                    return;
-                }
-
-                data.forEach(function (submission) {
-                    const submissionDate = new Date(submission.submission_date).toLocaleString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                    });
-
-                    const cardHtml = `
-                        <div class="card task-card px-3 py-2 mb-3 submission-card position-relative" data-submission-id="${submission.submit_id}">
-                            <div class="d-flex align-items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 4rem; height: 4rem; margin-right: 5px;">
-                                    <path fill="#d32923" d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 144-208 0c-35.3 0-64 28.7-64 64l0 144-48 0c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128zM176 352l32 0c30.9 0 56 25.1 56 56s-25.1 56-56 56l-16 0 0 32c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-48 0-80c0-8.8 7.2-16 16-16zm32 80c13.3 0 24-10.7 24-24s-10.7-24-24-24l-16 0 0 48 16 0zm96-80l32 0c26.5 0 48 21.5 48 48l0 64c0 26.5-21.5 48-48 48l-32 0c-8.8 0-16-7.2-16-16l0-128c0-8.8 7.2-16 16-16zm32 128c8.8 0 16-7.2 16-16l0-64c0-8.8-7.2-16-16-16l-16 0 0 96 16 0zm80-112c0-8.8 7.2-16 16-16l48 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 32 32 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 48c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-64 0-64z"/>
-                                </svg>
-                                <div class="d-flex flex-column justify-content-center">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <p class="card-title mb-1 student-name">${submission.student_name} has</p>
-                                        <p class="card-text mb-1 mx-1">${submission.status}</p>
-                                        <h6 class="card-title fs-6 mb-1 document-name">${submission.document_name}</h6>
-                                    </div>
-                                    <small class="text-muted submission-date">Submitted ${submissionDate}</small>
-                                </div>
-                            </div>
-                            <button class="btn btn-success btn-sm position-absolute top-0 end-0 m-2 btn-approve" data-id="${submission.submit_id}">Approve</button>
-                            <button class="btn btn-danger btn-sm px-3 position-absolute bottom-0 end-0 m-2 btn-reject" data-id="${submission.submit_id}">Reject</button>
-                            <button class="btn btn-primary btn-sm position-absolute bottom-0 start-0 m-2 btn-view-file" data-file-path="${submission.file_path}" style="display: none;">View File</button>
-                        </div>
-                    `;
-                    $(container).append(cardHtml);
-                });
-            } else {
-                console.error('Error: Invalid response', response);
-                $(container).html('<p class="text-center text-danger">Error fetching requirements.</p>');
-            }
-        } catch (e) {
-            console.error('Error parsing response:', e);
-        }
-    }
-
-    // Load approved submissions on page load
-    function loadApprovedSubmissions() {
-        $.ajax({
-            url: 'controller/requirement/retrieve-approved-requirements.php',
-            method: 'GET',
-            success: function (response) {
-                try {
-                    if (typeof response === 'string') {
-                        response = JSON.parse(response);
-                    }
-
-                    $('#completedContent').empty();
-
-                    if (response.status === 'success') {
-                        const data = response.data;
-
-                        if (data.length === 0) {
-                            $('#completedContent').html('<p class="text-center text-muted">No approved requirements found.</p>');
-                            return;
-                        }
-
-                        data.forEach(function (submission) {
-                            const submissionDate = new Date(submission.submission_date).toLocaleString('en-US', {
-                                month: 'short',
-                                day: 'numeric',
-                            });
-
-                            const cardHtml = `
-                                <div class="card task-card px-3 py-2 mb-3 submission-card position-relative" data-submission-id="${submission.submit_id}">
-                                    <div class="d-flex align-items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 4rem; height: 4rem; margin-right: 5px;">
-                                            <path fill="#d32923" d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 144-208 0c-35.3 0-64 28.7-64 64l0 144-48 0c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128zM176 352l32 0c30.9 0 56 25.1 56 56s-25.1 56-56 56l-16 0 0 32c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-48 0-80c0-8.8 7.2-16 16-16zm32 80c13.3 0 24-10.7 24-24s-10.7-24-24-24l-16 0 0 48 16 0zm96-80l32 0c26.5 0 48 21.5 48 48l0 64c0 26.5-21.5 48-48 48l-32 0c-8.8 0-16-7.2-16-16l0-128c0-8.8 7.2-16 16-16zm32 128c8.8 0 16-7.2 16-16l0-64c0-8.8-7.2-16-16-16l-16 0 0 96 16 0zm80-112c0-8.8 7.2-16 16-16l48 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 32 32 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 48c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-64 0-64z"/>
-                                        </svg>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <p class="card-title mb-1 student-name">${submission.student_name} has</p>
-                                                <p class="card-text mb-1 mx-1">${submission.status}</p>
-                                                <h6 class="card-title fs-6 mb-1 document-name">${submission.document_name}</h6>
-                                            </div>
-                                            <small class="text-muted submission-date">Submitted ${submissionDate}</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            `;
-                            $('#completedContent').append(cardHtml);
-                        });
-                    } else {
-                        console.error('Error fetching approved submissions:', response.message);
-                    }
-                } catch (e) {
-                    console.error('Error parsing response:', e);
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error('AJAX error:', status, error);
             }
         });
     }

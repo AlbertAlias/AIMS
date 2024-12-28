@@ -18,28 +18,37 @@
                     </div>
                     <div>
                         <!-- Post Button -->
-                        <button class="btn btn-success" id="postRequirementBtn">Post</button>
-                        <button class="btn btn-primary" id="updatePostRequirementBtn" style="display: none;">Update</button>
-                        <button class="btn btn-secondary" id="cancelEditRequirementsBtn">Cancel</button>
+                        <button class="btn btn-md btn-success" id="postRequirementBtn">Post</button>
+                        <button class="btn btn-md btn-primary" id="updatePostRequirementBtn" style="display: none;">Update</button>
+                        <button class="btn btn-md btn-secondary" id="cancelEditRequirementsBtn">Cancel</button>
                     </div>
                 </div>
             </div>
 
             <div class="row mt-3">
                 <div class="col-lg-12">
-                    <div class="counts-container d-flex justify-content-around">
-                        <button class="btn count-btn text-start" id="pendingCount" data-bs-toggle="modal" data-bs-target="#pendingModal">Pending: 0</button>
-                    </div>
+                    <a class="requirements-container" id="pendingContainer" data-bs-toggle="modal" data-bs-target="#pendingModal">
+                        Pending: 0
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon" style="fill: #ffc107dd;">
+                            <path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/>
+                        </svg>
+                    </a>
                 </div>
                 <div class="col-lg-12 mt-3 mb-3">
-                    <div class="counts-container d-flex justify-content-around">
-                        <button class="btn count-btn text-start" id="rejectedCount" data-bs-toggle="modal" data-bs-target="#rejectedModal">Rejected: 0</button>
-                    </div>
+                    <a class="requirements-container" id="rejectedContainer" data-bs-toggle="modal" data-bs-target="#rejectedModal">
+                        Rejected: 0
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon" style="fill: #ff2a00cf;">
+                            <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"/>
+                        </svg>
+                    </a>
                 </div>
                 <div class="col-12">
-                    <div class="counts-container d-flex justify-content-around">
-                        <button class="btn count-btn text-start" id="completedCount" data-bs-toggle="modal" data-bs-target="#completedModal">Completed: 0</button>
-                    </div>
+                    <a class="requirements-container" id="completedContainer" data-bs-toggle="modal" data-bs-target="#completedModal">
+                        Completed: 0
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon" style="fill: #28a745;">
+                            <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>

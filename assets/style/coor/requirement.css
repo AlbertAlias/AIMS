@@ -1,8 +1,93 @@
-/* Existing styles */
+#departmentInfo {
+    max-height: 410px;
+    padding-right: 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: gray;
+    pointer-events: none;
+}
+
+#searchDepartments {
+    padding-right: 2.5rem;
+    padding-left: 0.5rem;
+}
+
+.nav-tabs {
+    border-bottom: 5px solid #383838;
+}
+
+.nav-tabs .nav-item {
+    flex: 1;
+}
+
+.nav-tabs .nav-link {
+    text-align: center;
+    font-weight: bold;
+    color: #555;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    background-color: #f9f9f9;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff #007bff transparent;
+}
+
+.tab-content {
+    padding-top: 1rem;
+}
+
+.nav-tabs .nav-link.active.pending-tab {
+    background-color: #ffc107;
+    color: white;
+    border-color: #ffc107 #ffc107 transparent;
+}
+
+.nav-tabs .nav-link.active.approved-tab {
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745 #28a745 transparent;
+}
+
+.nav-tabs .nav-link.active.rejected-tab {
+    background-color: #dc3545;
+    color: white;
+    border-color: #dc3545 #dc3545 transparent;
+}
+
+.nav-tabs .nav-link {
+    color: #555;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    background-color: #f9f9f9;
+}
+
+.nav-tabs .nav-link:hover {
+    background-color: #198754;
+    color: #333;
+}
+
+.tab-content {
+    padding-top: 1rem;
+}
+
 .post-container {
     /* background-color: #95959522; */
     border-radius: 10px;
-    padding: 20px;
+    padding: 15px;
     border-left: 5px solid #198754;
     box-shadow: rgba(83, 107, 126, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
@@ -33,7 +118,6 @@
     width: 130px;
 }
 
-/* Enhanced styles for the outcome of the post */
 .requirement-post {
     background-color: #ffffff;
     border-radius: 10px;
@@ -63,7 +147,6 @@
     font-style: italic;
 }
 
-/* New styles for post metadata */
 .requirement-post .post-meta {
     display: flex;
     justify-content: space-between;
@@ -81,7 +164,6 @@
     font-style: italic;
 }
 
-/* New styles for post actions */
 .requirement-post .post-actions {
     display: flex;
     justify-content: flex-end;
@@ -92,43 +174,38 @@
     padding: 5px 10px; font-size: 0.9em; 
 } 
 
-/* Hide the default dropdown icon */
 .post-dropdown::after {
     display: none !important;
 }
 
-/* Remove padding and background from the button */
 .post-dropdown {
     padding: 0;
     border: none;
     background: none;
-    border-radius: 50%; /* Make the button round */
-    width: 40px; /* Set the button width */
-    height: 40px; /* Set the button height */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Add background color on hover and change icon color */
 .requirement-post .post-dropdown:hover {
-    background-color: #e9ecef; /* Change this color as needed */
+    background-color: #e9ecef;
 }
 
 .requirement-post .post-dropdown:hover .dropdown-icon {
     fill: #198754; 
 }
 
-/* Styles for your SVG icon */
 .requirement-post .dropdown .dropdown-icon { 
     cursor: pointer; 
-    width: 5px; /* 1.2em * 16px = 19.2px */
+    width: 5px;
     height: auto; 
     fill: #6c757d; 
     transition: fill 0.2s ease-in-out; 
 } 
 
-/* Styles for the dropdown menu */ 
 .requirement-post .dropdown-menu { 
     min-width: 110px; 
     padding: 0.2rem 0; 
@@ -149,13 +226,11 @@
 }
 
 .requirement-post .dropdown-item .dropdown-icon { 
-    width: 16px; /* 1em * 16px = 16px */ 
+    width: 16px;
     height: auto; 
     fill: currentColor; 
 }
 
-
-/* Styles for the toggle switch */
 .toggle-switch {
     position: absolute;
     bottom: 10px;
@@ -205,7 +280,7 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 17px; /* Adjust the size of the SVG icons as needed */
+    width: 17px;
     height: 17px;
     transition: opacity 0.2s ease-in-out;
 }
@@ -230,32 +305,40 @@
     opacity: 1;
 }
 
-/* Styles for count buttons */
-.count-btn {
+.requirements-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 100%;
     height: 80px;
+    border-radius: 10px;
     font-size: 1.1em;
-    padding: 12px 25px;
-    border-radius: 8px;
+    padding: 0 10px;
     box-shadow: rgba(83, 107, 126, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    text-align: left;
+    text-decoration: none;
+    color: inherit;
 }
 
-.count-btn:hover {
-    background-color: #e2e6ea;
+.requirements-container:hover {
+    background-color: #f0f2f4;
 }
 
-/* Specific styles for each button */
-#pendingCount {
-    background-color: #ffc107dd;
-    /* background-color: #ffc107; */
+.requirements-container .icon {
+    width: 24px;
+    height: 24px;
 }
 
-#rejectedCount {
-    background-color: #ff2a00cf;
+#pendingContainer {
+    border-left: 5px solid #ffc107dd;
 }
 
-#completedCount {
-    background-color: #28a745;
+#rejectedContainer {
+    border-left: 5px solid #ff2a00cf;
+}
+
+#completedContainer {
+    border-left: 5px solid #28a745;
 }
 
 .custom-modal-size {
@@ -277,53 +360,54 @@
 }
   
 .pdf-modal {
-    display: none; /* Initially hidden */
-    position: fixed; /* Fixed to cover the whole screen */
+    display: none;
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100vw; /* Full viewport width */
-    height: 100vh; /* Full viewport height */
-    background-color: rgba(0, 0, 0, 0.9); /* Black background with transparency */
-    z-index: 9999; /* Ensure the modal is on top of all content */
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
     justify-content: center;
     align-items: center;
     padding: 0;
 }
 
-/* Modal Content */
 .pdf-modal-content {
     position: relative;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    background: transparent; /* Transparent background */
-    overflow: hidden; /* Prevent overflow */
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
     padding: 0;
 }
 
-/* PDF Viewer inside the modal */
 .pdf-modal-content embed {
     width: 100%;
     height: 100%;
-    border: none; /* Remove border */
+    border: none;
 }
 
-/* Close button */
 .close {
     position: absolute;
     top: 20px;
     right: 30px;
     font-size: 2rem;
     font-weight: bold;
-    color: #fff; /* White close button */
+    color: #fff;
     cursor: pointer;
-    z-index: 1001; /* Above modal content */
+    z-index: 1001;
 }
 
 .close:hover {
-    color: #ff4d4d; /* Slight color change on hover */
+    color: #ff4d4d;
 }
 
 .card.task-card:hover {
     cursor: pointer;
     background-color: #f4f4f4;
+}
+
+.task-card {
+    height: 80px !important;
 }
