@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    // Flag to ensure the button is only triggered once
+    let isFileOpen = false;
+
     // Function to fetch rejected requirements when the modal is shown
     $('#rejectedModal').on('show.bs.modal', function () {
         $.ajax({
@@ -21,15 +24,102 @@ $(document).ready(function () {
                                     </svg>
                                     <div class="d-flex flex-column justify-content-center">
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <p class="card-title mb-1 mx-1 student-name">${submission.student_name}</p>
+                                            <p class="card-title mb-1 me-1 student-name">${submission.student_name}</p>
                                             <h6 class="card-title fs-6 mb-1 document-name">${submission.document_name}</h6>
                                         </div>
                                         <small class="text-muted submission-date">Rejected ${submissionDate}</small>
                                     </div>
                                 </div>
+                                <button class="btn btn-sm btn-success position-absolute top-0 end-0 mt-4 me-2 btn-approve" data-id="${submission.submit_id}">Approve</button>
+                                <button class="btn btn-sm btn-primary position-absolute bottom-0 start-0 m-2 btn-view-file" data-file-path="${submission.file_path}" style="display: none;">View File</button>
                             </div>`;
                     });
                     $('#rejectedContent').html(content);
+
+                    // Handle submission card click for "View File"
+                    $(document).on('click', '.submission-card', function () {
+                        var viewFileButton = $(this).find('.btn-view-file'); // Find the View File button inside the clicked card
+                        if (viewFileButton.length && !isFileOpen) {
+                            // Prevent multiple clicks while file is being opened
+                            isFileOpen = true;
+                            const filePath = viewFileButton.data('file-path');
+                            openPDFModal(filePath); // Open the PDF modal with the file
+
+                            // Reset flag after a short delay
+                            setTimeout(() => {
+                                isFileOpen = false;
+                            }, 500);  // Adjust this delay as necessary
+                        }
+                    });
+
+                    // Handle approve button click
+                    $(document).on('click', '.btn-approve', function (event) {
+                        event.stopPropagation(); // Prevent click event from bubbling up to .submission-card
+                        var submitId = $(this).data('id');
+                    
+                        $.ajax({
+                            url: 'controller/requirement/students-requirements/update-pending-requirements.php', // This can be changed to update-rejected-requirements.php if needed
+                            method: 'POST',
+                            data: {
+                                submit_id: submitId,
+                                status: 'approved'
+                            },
+                            success: function (response) {
+                                console.log("Response from server:", response); // Log raw response
+                                try {
+                                    var parsedResponse = typeof response === 'string' ? JSON.parse(response) : response;
+                                    if (parsedResponse.status === 'success') {
+                                        $(`.submission-card[data-submission-id="${submitId}"]`).remove(); // Remove card from UI
+                                    } else {
+                                        alert(parsedResponse.message || 'Error approving the requirement. Please try again later.');
+                                    }
+                                } catch (e) {
+                                    console.error('Error parsing response:', e);
+                                    alert('Unexpected response format. Please try again later.');
+                                }
+                            },
+                            error: function () {
+                                alert('An error occurred while updating the status.');
+                            }
+                        });
+                    });
+
+                    // Handle View File button click
+                    $(document).on('click', '.btn-view-file', function () {
+                        const filePath = $(this).data('file-path');
+                        openPDFModal(filePath); // Open the PDF modal with the file
+                    });
+
+                    // Open PDF modal function
+                    function openPDFModal(filePath) {
+                        const pdfViewer = document.getElementById('pdfViewer');
+                        const modal = document.getElementById('pdfModal');
+
+                        // Reassign the src to ensure the PDF reloads
+                        pdfViewer.src = ''; // Clear first to force reload
+                        setTimeout(() => {
+                            pdfViewer.src = `${filePath}#toolbar=0`; // Add `#toolbar=0` to hide the toolbar
+                        }, 50); // Small delay to allow the browser to reset the src
+
+                        modal.style.display = 'flex'; // Show the modal
+                    }
+
+                    // Close the modal when the close button is clicked
+                    document.getElementById('closeModal').addEventListener('click', function () {
+                        const modal = document.getElementById('pdfModal');
+                        const pdfViewer = document.getElementById('pdfViewer');
+                        modal.style.display = 'none';
+                        pdfViewer.src = ''; // Clear the PDF source when modal is closed
+                    });
+
+                    // Close the modal when clicking outside the modal content
+                    window.addEventListener('click', function (event) {
+                        const modal = document.getElementById('pdfModal');
+                        if (event.target === modal) {
+                            modal.style.display = 'none';
+                            document.getElementById('pdfViewer').src = '';
+                        }
+                    });
                 } else {
                     $('#rejectedContent').html('<p>No rejected requirements found.</p>');
                 }

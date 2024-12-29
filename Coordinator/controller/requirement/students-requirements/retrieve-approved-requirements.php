@@ -16,7 +16,8 @@
                 CONCAT(u.first_name, ' ', u.last_name) AS student_name,
                 sr.document_name,
                 sr.submission_date,
-                sr.status
+                sr.status,
+                sr.file_path
             FROM 
                 submit_requirements sr
             JOIN 
@@ -35,6 +36,7 @@
         if ($result->num_rows > 0) {
             $submissions = [];
             while ($row = $result->fetch_assoc()) {
+                $row['file_path'] = '/AIMS/Student/controller/requirement/uploads/' . basename($row['file_path']);
                 $submissions[] = $row;
             }
             echo json_encode(['status' => 'success', 'data' => $submissions]);
