@@ -64,7 +64,7 @@
     <div class="modal-dialog custom-modal-size modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between align-items-center w-100">
-                <h5 class="text-center mb-0">Pending Requirements</h5>
+                <h5 class="text-center mb-0 text-warning">Pending Requirements</h5>
                 <div class="input-group flex-shrink-1" style="max-width: 350px;">
                     <!-- Select Dropdown -->
                     <select class="form-select form-select-sm" aria-label="Select filter" id="pendingSelectOption">
@@ -97,7 +97,7 @@
     <div class="modal-dialog custom-modal-size modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between align-items-center w-100">
-                <h5 class="text-center mb-0">Rejected Requirements</h5>
+                <h5 class="text-center mb-0 text-danger">Rejected Requirements</h5>
                 <div class="input-group flex-shrink-1" style="max-width: 350px;">
                     <!-- Select Dropdown -->
                     <select class="form-select form-select-sm" aria-label="Select filter" id="rejectedSelectOption">
@@ -130,7 +130,7 @@
     <div class="modal-dialog custom-modal-size modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between align-items-center w-100">
-                <h5 class="text-center mb-0">Completed Requirements</h5>
+                <h5 class="text-center mb-0 text-success">Completed Requirements</h5>
                 <div class="input-group flex-shrink-1" style="max-width: 350px;">
                     <!-- Select Dropdown -->
                     <select class="form-select form-select-sm" aria-label="Select filter" id="completedSelectOption">
@@ -171,7 +171,6 @@
                 <textarea id="remarksTextarea" class="form-control" rows="5" placeholder="Enter remarks here..."></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" id="submitRemarksBtn" class="btn btn-danger">Reject</button>
             </div>
         </div>

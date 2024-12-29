@@ -23,6 +23,10 @@
     padding-left: 0.5rem;
 }
 
+#remarksModal .modal-content {
+    background-color: #f4f4f4;
+}
+
 .nav-tabs {
     border-bottom: 5px solid #383838;
 }

@@ -27,6 +27,30 @@ $(document).ready(function () {
         });
     }
 
+    function formatSubmissionDate(submissionDate) {
+        const date = new Date(submissionDate);
+        const now = new Date();
+        const isSameYear = date.getFullYear() === now.getFullYear();
+        
+        // Format the date to "Month Date, Year, Hours:Minutes AM/PM"
+        const options = {
+            month: 'short',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true
+        };
+        
+        let formattedDate = date.toLocaleString('en-US', options);
+        
+        // Check if the year is the same or different from the current year
+        if (!isSameYear) {
+            formattedDate = `${formattedDate}, ${date.getFullYear()}`;
+        }
+
+        return formattedDate;
+    }
+
     // Fetch rejected requirements based on selected requirement or search term
     function fetchRejectedRequirements(searchTerm = '', requirementId = '') {
         $.ajax({
@@ -42,8 +66,7 @@ $(document).ready(function () {
                     let submissions = response.data;
                     let content = '';
                     submissions.forEach(function (submission) {
-                        let submissionDate = new Date(submission.submission_date);
-                        submissionDate = submissionDate.toLocaleString(); // Format the date
+                        let submissionDate = formatSubmissionDate(submission.submission_date);
 
                         content += `
                         <div class="card task-card px-3 py-2 mb-3 submission-card position-relative" data-submission-id="${submission.submit_id}">
@@ -57,7 +80,7 @@ $(document).ready(function () {
                                         <h6 class="card-title fs-6 mb-1 mx-1 document-name">${submission.document_name}</h6>
                                         <p class="card-text mb-1">is ${submission.status}</p>
                                     </div>
-                                    <small class="text-muted submission-date">Submitted ${submissionDate}</small>
+                                    <small class="text-muted submission-date">${submissionDate}</small>
                                 </div>
                             </div>
                             <button class="btn btn-sm btn-success position-absolute top-0 end-0 mt-4 m-2 btn-approve" data-id="${submission.submit_id}">Approve</button>
@@ -76,15 +99,13 @@ $(document).ready(function () {
         });
     }
 
-    // Open PDF modal function
+    // Open PDF modal function (without delay)
     function openPDFModal(filePath) {
         const pdfViewer = document.getElementById('pdfViewer');
         const modal = document.getElementById('pdfModal');
-
-        pdfViewer.src = '';
-        setTimeout(() => {
-            pdfViewer.src = `${filePath}#toolbar=0`;
-        }, 50);
+        
+        // Reset and load the new file immediately
+        pdfViewer.src = `${filePath}#toolbar=0`; // Directly setting the src without delay
 
         modal.style.display = 'flex';
     }
@@ -94,7 +115,7 @@ $(document).ready(function () {
         const modal = document.getElementById('pdfModal');
         const pdfViewer = document.getElementById('pdfViewer');
         modal.style.display = 'none';
-        pdfViewer.src = '';
+        pdfViewer.src = ''; // Reset the PDF source
     });
 
     // Close the modal when clicking outside the modal content
@@ -102,7 +123,7 @@ $(document).ready(function () {
         const modal = document.getElementById('pdfModal');
         if (event.target === modal) {
             modal.style.display = 'none';
-            document.getElementById('pdfViewer').src = '';
+            document.getElementById('pdfViewer').src = ''; // Reset the PDF source
         }
     });
 
@@ -126,7 +147,7 @@ $(document).ready(function () {
         fetchRejectedRequirements(searchTerm, selectedRequirement);
     });
 
-    // Handle submission card click for "View File"
+    // Handle submission card click for "View File" 
     $(document).on('click', '.submission-card', function () {
         var viewFileButton = $(this).find('.btn-view-file');
         if (viewFileButton.length && !isFileOpen) {
@@ -135,8 +156,8 @@ $(document).ready(function () {
             openPDFModal(filePath); // Open the PDF modal with the file
 
             setTimeout(() => {
-                isFileOpen = false;
-            }, 200);
+                isFileOpen = false; // Reset the flag after the file has been opened
+            }, 200); // Allow a small time window to avoid issues
         }
     });
 
@@ -158,6 +179,21 @@ $(document).ready(function () {
                     var parsedResponse = typeof response === 'string' ? JSON.parse(response) : response;
                     if (parsedResponse.status === 'success') {
                         $(`.submission-card[data-submission-id="${submitId}"]`).remove();
+
+                        Swal.fire({
+                            toast: true,
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Requirement Approved',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            background: '#b9f6ca',
+                            iconColor: '#2e7d32',
+                            color: '#155724',
+                            customClass: {
+                                popup: 'mt-5'
+                            }
+                        });
                     } else {
                         alert(parsedResponse.message || 'Error approving requirement.');
                     }
