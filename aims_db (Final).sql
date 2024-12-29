@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 27, 2024 at 06:54 AM
+-- Generation Time: Dec 29, 2024 at 07:45 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -139,6 +139,24 @@ INSERT INTO `evaluations` (`id`, `student_id`, `ratings`, `total_grade`, `commen
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ojt_hours`
+--
+
+CREATE TABLE `ojt_hours` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `morning_start` time NOT NULL,
+  `lunch_start` time NOT NULL,
+  `lunch_end` time NOT NULL,
+  `afternoon_end` time NOT NULL,
+  `total_hours` varchar(50) NOT NULL,
+  `file_path` varchar(255) DEFAULT NULL,
+  `submission_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `requirements`
 --
 
@@ -201,7 +219,10 @@ CREATE TABLE `student_supervisor` (
 INSERT INTO `student_supervisor` (`id`, `student_id`, `supervisor_id`, `company`, `assigned_date`) VALUES
 (24, 1197, 1195, 'Fujitsu Die Tech Philippines Corporation', '2024-12-17 21:11:07'),
 (25, 1206, 1195, 'Fujitsu Die Tech Philippines Corporation', '2024-12-17 21:11:34'),
-(26, 1207, 1195, 'Fujitsu Die Tech Philippines Corporation', '2024-12-17 21:11:42');
+(26, 1207, 1195, 'Fujitsu Die Tech Philippines Corporation', '2024-12-17 21:11:42'),
+(27, 1208, 1431, 'fujitsu', '2024-12-27 13:58:28'),
+(28, 1209, 1431, 'fujitsu', '2024-12-27 13:58:36'),
+(29, 1210, 1431, 'fujitsu', '2024-12-27 13:58:42');
 
 -- --------------------------------------------------------
 
@@ -219,16 +240,6 @@ CREATE TABLE `submit_requirements` (
   `file_path` varchar(255) DEFAULT NULL,
   `remarks` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `submit_requirements`
---
-
-INSERT INTO `submit_requirements` (`submit_id`, `student_id`, `document_name`, `status`, `submission_date`, `requirement_id`, `file_path`, `remarks`) VALUES
-(125, 1217, 'Application Letter.pdf', 'rejected', '2024-12-18 10:49:27', 67, 'uploads/Application Letter.pdf', 'adad'),
-(126, 1217, 'Resume Letter.pdf', 'rejected', '2024-12-18 10:49:33', 68, 'uploads/Resume Letter.pdf', 'bawal'),
-(127, 1217, 'Buenaobra Certified True Copy of Registration Form 1st Semester1st Term, AY 2023-2024.pdf', 'rejected', '2024-12-18 11:33:13', 68, 'uploads/Buenaobra Certified True Copy of Registration Form 1st Semester1st Term, AY 2023-2024.pdf', 'dsd'),
-(128, 1217, 'Buenaobra Certified True Copy of Registration Form 1st Semester1st Term, AY 2023-2024.pdf', 'rejected', '2024-12-18 11:33:24', 77, 'uploads/Buenaobra Certified True Copy of Registration Form 1st Semester1st Term, AY 2023-2024.pdf', 'dsds');
 
 -- --------------------------------------------------------
 
@@ -577,6 +588,13 @@ ALTER TABLE `evaluations`
   ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
+-- Indexes for table `ojt_hours`
+--
+ALTER TABLE `ojt_hours`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`);
+
+--
 -- Indexes for table `requirements`
 --
 ALTER TABLE `requirements`
@@ -647,6 +665,12 @@ ALTER TABLE `evaluations`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `ojt_hours`
+--
+ALTER TABLE `ojt_hours`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
 -- AUTO_INCREMENT for table `requirements`
 --
 ALTER TABLE `requirements`
@@ -656,13 +680,13 @@ ALTER TABLE `requirements`
 -- AUTO_INCREMENT for table `student_supervisor`
 --
 ALTER TABLE `student_supervisor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `submit_requirements`
 --
 ALTER TABLE `submit_requirements`
-  MODIFY `submit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `submit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -699,6 +723,12 @@ ALTER TABLE `coordinator_evaluation`
 ALTER TABLE `dean_department`
   ADD CONSTRAINT `FK_dean_department_dean` FOREIGN KEY (`dean_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_dean_department_department` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `ojt_hours`
+--
+ALTER TABLE `ojt_hours`
+  ADD CONSTRAINT `ojt_hours_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `student_hours`

@@ -33,6 +33,7 @@
 
     <link rel="stylesheet" href="../assets/style/student/dashboard.css">
     <link rel="stylesheet" href="../assets/style/student/requirement.css">
+    <link rel="stylesheet" href="../assets/style/student/hours.css">
     <!-- <link rel="stylesheet" href="../assets/style/student/viewmodal.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
@@ -67,6 +68,7 @@
                     <?php include "pages/dashboard.php"; ?>
                     <?php include "pages/requirement.php"; ?>
                     <?php include "pages/weeklyreport.php"; ?>
+                    <?php include "pages/hours.php"; ?>
                     <?php include "pages/requirements-folder.php"; ?>
                     <?php include "pages/profile.php"; ?>
                 </div>
@@ -98,6 +100,13 @@
     <script src="crud-ajax/weeklyreport/weeklyreport.js"></script>
     <script src="crud-ajax/weeklyreport/retrieve_weeklyreport.js"></script>
     <script src="crud-ajax/requirement/create-submit-file.js"></script>
+
+    <script src="crud-ajax/hours/hours.js"></script>
+    <script src="crud-ajax/hours/submit_hours.js"></script>
+    <script src="crud-ajax/hours/retrieve_hours.js"></script>
+
+
+
 
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>

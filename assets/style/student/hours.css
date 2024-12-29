@@ -1,0 +1,46 @@
+/* Ensure the table is responsive on smaller screens */
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    table th, table td {
+        padding: 10px 5px; /* Adjust padding for small screens */
+    }
+
+    table td {
+        font-size: 14px; /* Adjust font size for small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    table th, table td {
+        font-size: 12px; /* Adjust font size for very small screens */
+    }
+
+    table td {
+        padding: 8px 4px; /* Adjust padding for very small screens */
+    }
+
+    table th {
+        font-size: 13px;
+    }
+}
