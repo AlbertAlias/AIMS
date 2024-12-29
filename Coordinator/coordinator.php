@@ -105,7 +105,6 @@
 
     <script src="crud-ajax/requirement/post-requirement.js"></script>
     <script src="crud-ajax/requirement/retrieve-posted-requirements.js"></script>
-    <!-- <script src="crud-ajax/requirement/retrieve-student-requirements.js"></script> -->
     <script src="crud-ajax/requirement/retrieve-pending-requirements.js"></script>
     <script src="crud-ajax/requirement/retrieve-rejected-requirements.js"></script>
     <script src="crud-ajax/requirement/retrieve-approved-requirements.js"></script>

@@ -3,6 +3,9 @@
 
     session_start();
 
+    // Set headers to ensure JSON response
+    header('Content-Type: application/json');
+
     if (isset($_POST['submit_id'], $_POST['status'])) {
         $submit_id = $_POST['submit_id'];
         $status = $_POST['status'];
@@ -15,8 +18,9 @@
             $stmt->execute();
 
             if ($stmt->affected_rows >= 0) { // Updated or already set
-                echo json_encode(['status' => 'success']); // Return success response
+                echo json_encode(['status' => 'success']);
             } else {
+                error_log("Failed to update record: {$stmt->error}");
                 echo json_encode(['status' => 'error', 'message' => 'Failed to update the record.']);
             }
 
