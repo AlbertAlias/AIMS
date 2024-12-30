@@ -14,7 +14,8 @@
                 <div class="post-footer d-flex justify-content-between align-items-center">
                     <div class="deadline-container">
                         <!-- Deadline Input -->
-                        <input type="date" class="form-control deadline-input" id="deadline" placeholder="Set a deadline">
+                        <!-- <input type="date" class="form-control deadline-input" id="deadline" placeholder="Set a deadline"> -->
+                        <input type="text" class="form-control deadline-input" id="deadline" placeholder="Set a deadline" onfocus="(this.type='date')" onblur="(this.type='text')">
                     </div>
                     <div>
                         <!-- Post Button -->
@@ -61,7 +62,7 @@
 
 <!-- Pending Modal -->
 <div class="modal fade" id="pendingModal" tabindex="-1" aria-labelledby="pendingModalLabel" aria-hidden="true">
-    <div class="modal-dialog custom-modal-size modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between align-items-center w-100">
                 <h5 class="text-center mb-0 text-warning">Pending Requirements</h5>
@@ -92,9 +93,10 @@
     </div>
 </div>
 
+
 <!-- Rejected Modal -->
 <div class="modal fade" id="rejectedModal" tabindex="-1" aria-labelledby="rejectedModalLabel" aria-hidden="true">
-    <div class="modal-dialog custom-modal-size modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between align-items-center w-100">
                 <h5 class="text-center mb-0 text-danger">Rejected Requirements</h5>
@@ -127,7 +129,7 @@
 
 <!-- Completed Modal -->
 <div class="modal fade" id="completedModal" tabindex="-1" aria-labelledby="completedModalLabel" aria-hidden="true">
-    <div class="modal-dialog custom-modal-size modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header d-flex justify-content-between align-items-center w-100">
                 <h5 class="text-center mb-0 text-success">Completed Requirements</h5>
@@ -161,7 +163,7 @@
 
 <!-- Remarks Modal -->
 <div class="modal fade" id="remarksModal" tabindex="-1" aria-labelledby="remarksModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="remarksModalLabel">Provide Remarks</h5>

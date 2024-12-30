@@ -174,3 +174,29 @@ button:focus {
 .delete-icon-container:hover {
   background-color: rgba(200, 200, 200, 0.318);
 }
+
+/* Ensures the modal is always centered */
+.modal-dialog-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 576px) {
+  .modal-dialog {
+      max-width: 90%;  /* Modal width is 90% of the screen */
+      margin: 0; /* Remove margin to ensure it's fully centered */
+  }
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+      max-width: 500px;  /* Modal width on medium/large screens */
+  }
+}
+
+.modal-dialog-scrollable {
+  max-height: 80vh;  /* Ensures the modal content is scrollable on large content */
+}
+

@@ -100,7 +100,7 @@ $(document).ready(function () {
         const requirementId = requirementPost.data("id");
         const title = requirementPost.find("h6").text().trim();
         const description = requirementPost.find("p").text().trim();
-        const deadline = requirementPost.find(".deadline").text().split(":")[1].trim(); // Assuming the deadline is like "Dec 27, 2024"
+        const deadline = requirementPost.find(".deadline").text().split(":")[1].trim();
     
         // Set the values in the form for editing
         $("#requirementTitle").val(title);

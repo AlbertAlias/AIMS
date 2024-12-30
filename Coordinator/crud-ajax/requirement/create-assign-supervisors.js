@@ -66,7 +66,7 @@ $('#assignSupervisorBtn').on('click', function () {
 
     // Send the data to the server using AJAX
     $.ajax({
-        url: 'controller/requirement/create-assign-supervisors.php', // PHP script to handle the assignment
+        url: 'controller/requirement/create-assign-supervisors.php',
         type: 'POST',
         data: {
             company: company,
