@@ -111,7 +111,7 @@ $(document).ready(function () {
                                     $('#fileInput').closest('label').css('pointer-events', 'none');
 
                                     // Reset the chosen requirement text
-                                    $('#chosenRequirement').text('Chosen Requirement: '); // Reset text
+                                    $('#chosenRequirement').text(''); // Reset text
                                     hiddenRequirementIdInput.val('');
                                     $(this).removeClass('active');
                                     $(this).css('box-shadow', 'none');
@@ -122,7 +122,7 @@ $(document).ready(function () {
                                 $(".posted-requirement.active").removeClass('active').css('box-shadow', 'none');
                                 
                                 // Activate the new clicked card
-                                $('#chosenRequirement').text('Chosen Requirement: ' + title); // Update chosen requirement text
+                                $('#chosenRequirement').text('Requirement: ' + title); // Update chosen requirement text
                                 hiddenRequirementIdInput.val(requirementId);
 
                                 const fileInput = $('#fileInput');
