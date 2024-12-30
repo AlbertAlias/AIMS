@@ -7,6 +7,7 @@
                     <input type="hidden" class="requirement-id" value="${req.requirement_id}">
                     <input type="hidden" class="student-id" value="${user.student_id}">
 
+                    <p id="chosenRequirement" class="mb-3" style="font-size: 1.1rem; color: #333;"></p>
                     <div id="fileContainer" class="mb-3"></div>
                     
                     <label class="btn btn-white d-flex align-items-center justify-content-center border-secondary mb-3" style="cursor: pointer;">

@@ -92,16 +92,16 @@ $(document).ready(function () {
                         $(".posted-requirement").on("click", function() {
                             const title = $(this).data("title");
                             const requirementId = $(this).data("requirement-id");
-                        
+
                             // Check if a file is attached to the requirement
                             const isFileAttached = $('#fileContainer').children().length > 0;
-                        
+
                             // If a requirement is already active and there's a file attached, don't allow switching
                             if (activeRequirement && activeRequirement !== requirementId && isFileAttached) {
                                 alert('You cannot switch to another task while a file is attached.');
                                 return; // Exit without changing the active card
                             }
-                        
+
                             // Proceed to toggle the active state of the card
                             if ($(this).hasClass('active')) {
                                 // If active, reset everything (unless a file is attached)
@@ -109,8 +109,9 @@ $(document).ready(function () {
                                     // Reset the file input to be disabled again
                                     $('#fileInput').prop('disabled', true);
                                     $('#fileInput').closest('label').css('pointer-events', 'none');
-                        
-                                    requirementTitleElement.text('Upload requirement'); // Reset to default title
+
+                                    // Reset the chosen requirement text
+                                    $('#chosenRequirement').text('Chosen Requirement: '); // Reset text
                                     hiddenRequirementIdInput.val('');
                                     $(this).removeClass('active');
                                     $(this).css('box-shadow', 'none');
@@ -121,19 +122,19 @@ $(document).ready(function () {
                                 $(".posted-requirement.active").removeClass('active').css('box-shadow', 'none');
                                 
                                 // Activate the new clicked card
-                                requirementTitleElement.text(title); // Populate with the selected card's title
+                                $('#chosenRequirement').text('Chosen Requirement: ' + title); // Update chosen requirement text
                                 hiddenRequirementIdInput.val(requirementId);
-                        
+
                                 const fileInput = $('#fileInput');
                                 fileInput.prop('disabled', false); // Enable file input for this task
                                 fileInput.closest('label').css('pointer-events', 'auto'); // Enable the label button
-                        
+
                                 $(this).addClass('active');
                                 $(this).css('box-shadow', 'rgba(25, 135, 84, 0.7) 0px 1px 2px 0px, rgba(25, 135, 84, 0.16) 0px 2px 6px 2px');
                                 
                                 activeRequirement = requirementId; // Mark this requirement as active
                             }
-                        
+
                             // Disable other task cards when one is active
                             if (activeRequirement) {
                                 $(".posted-requirement").each(function() {
