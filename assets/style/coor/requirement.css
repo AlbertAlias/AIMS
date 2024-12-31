@@ -23,71 +23,6 @@
     padding-left: 0.5rem;
 }
 
-#remarksModal .modal-content {
-    background-color: #f4f4f4;
-}
-
-.nav-tabs {
-    border-bottom: 5px solid #383838;
-}
-
-.nav-tabs .nav-item {
-    flex: 1;
-}
-
-.nav-tabs .nav-link {
-    text-align: center;
-    font-weight: bold;
-    color: #555;
-    border: 1px solid #ddd;
-    border-bottom: none;
-    background-color: #f9f9f9;
-}
-
-.nav-tabs .nav-link.active {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff #007bff transparent;
-}
-
-.tab-content {
-    padding-top: 1rem;
-}
-
-.nav-tabs .nav-link.active.pending-tab {
-    background-color: #ffc107;
-    color: white;
-    border-color: #ffc107 #ffc107 transparent;
-}
-
-.nav-tabs .nav-link.active.approved-tab {
-    background-color: #28a745;
-    color: white;
-    border-color: #28a745 #28a745 transparent;
-}
-
-.nav-tabs .nav-link.active.rejected-tab {
-    background-color: #dc3545;
-    color: white;
-    border-color: #dc3545 #dc3545 transparent;
-}
-
-.nav-tabs .nav-link {
-    color: #555;
-    border: 1px solid #ddd;
-    border-bottom: none;
-    background-color: #f9f9f9;
-}
-
-.nav-tabs .nav-link:hover {
-    background-color: #198754;
-    color: #333;
-}
-
-.tab-content {
-    padding-top: 1rem;
-}
-
 .post-container {
     /* background-color: #95959522; */
     border-radius: 10px;
@@ -150,33 +85,6 @@
     color: #6c757d;
     font-style: italic;
 }
-
-.requirement-post .post-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
-    font-size: 0.9em;
-    color: #6c757d;
-}
-
-.requirement-post .post-meta .author {
-    font-weight: bold;
-}
-
-.requirement-post .post-meta .timestamp {
-    font-style: italic;
-}
-
-.requirement-post .post-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
-.requirement-post .post-actions .btn { 
-    padding: 5px 10px; font-size: 0.9em; 
-} 
 
 .post-dropdown::after {
     display: none !important;
@@ -345,18 +253,9 @@
     border-left: 5px solid #28a745;
 }
 
-.custom-modal-size {
-    max-width: 70% !important;
-    height: 60vh !important;
-}
-
-.custom-modal-size .modal-content {
-    height: 100%;
-}
-
-.custom-modal-size .modal-body {
-    overflow-y: auto;
-}
+/* #remarksModal .modal-content {
+    background-color: #f4f4f4;
+} */
 
 .modal-body h5 {
     font-weight: bold;

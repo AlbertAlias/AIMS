@@ -1,9 +1,9 @@
-<div class="container-fluid bg-light" id="requirement" style="display: none;">
+<div class="container-fluid p-0 m-0" id="requirement" style="display: none;">
     <div class="row">
-        <div class="col-12 col-md-12 col-lg-4 m-0 p-0">
-            <div class="card shadow-sm mb-3 me-4">
+        <div class="col-12 col-md-5 col-lg-5 mb-3" >
+            <div class="card shadow-sm" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <div class="card-body">
-                    <h5 class="card-title mb-3">Upload requirement</h5>
+                    <h5 class="card-title">Upload requirement</h5>
                     <input type="hidden" class="requirement-id" value="${req.requirement_id}">
                     <input type="hidden" class="student-id" value="${user.student_id}">
 
@@ -20,12 +20,16 @@
                     <button id="turnInButton" class="btn btn-success w-100 mb-2" disabled>Turn in</button>
                 </div>
             </div>
-            <div id="taskCardContainer" style="display: none;"></div>
+            <div class="row mt-3">
+                <div class="col-lg-12">
+                    <div id="taskCardContainer" style="display: none;"></div>
+                </div>
+            </div>
         </div>
 
-        <div class="col-12 col-md-12 col-lg-8 m-0 p-0">
-            <h4 class="border-bottom border-secondary pb-2 mb-2">Requirements</h4>
-            <div id="postedRequirementsContainer" class="row"></div>
+        <div class="col-12 col-md-7 col-lg-7" id="postedRequirementsContainer">
+        <h5 class="border-bottom border-secondary pb-2 mb-2">Requirements</h5>
+            <!-- Dynamically populated requirement posts will appear here -->
         </div>
     </div>
 </div>

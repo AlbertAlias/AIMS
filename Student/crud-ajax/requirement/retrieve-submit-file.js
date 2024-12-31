@@ -17,6 +17,7 @@ $(document).ready(function () {
                         const submissionDate = file.submission_date;
                         const submitId = file.submit_id;
                         const description = file.description || 'No description available';
+                        const remarks = file.remarks || 'No remarks provided';
 
                         let badgeClass = 'bg-warning';
                         if (fileStatus.toLowerCase() === 'rejected') {
@@ -32,7 +33,7 @@ $(document).ready(function () {
                                     <div class="file-details">
                                         <p class="file-name">${fileName}</p>
                                         <p class="file-date">Approved ${new Date(submissionDate).toLocaleDateString('en-US', {
-                                            month: 'long', day: 'numeric'
+                                            month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true
                                         })}</p>
                                     </div>
                                     <div class="file-options">
@@ -44,13 +45,23 @@ $(document).ready(function () {
                         } else {
                             $('#taskCardContainer').show();
 
+                            // Determine the content for the description based on the status
+                            let additionalInfo = '';
+                            if (fileStatus.toLowerCase() === 'pending') {
+                                additionalInfo = `<p class="file-description text-muted" style="font-size: 0.835rem;">${new Date(submissionDate).toLocaleDateString('en-US', {
+                                    month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true
+                                })}</p>`;
+                            } else if (fileStatus.toLowerCase() === 'rejected') {
+                                additionalInfo = `<p class="file-description text-danger" style="font-size: 0.835rem;">Remarks: ${remarks}</p>`;
+                            }
+
                             const fileCardHtml = `
-                            <div class="card task-card px-3 py-1 mt-1 mb-3" style="width: 400px !important; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; transition: transform 0.3s ease;"
+                            <div class="card task-card px-3 py-1 mt-1 mb-3" style="max-width: 493px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; transition: transform 0.3s ease;"
                                 data-file-name="${fileName}">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex flex-column justify-content-center">
                                         <div class="card-title fs-6 text-success fw-bold mt-3">${fileName}</div>
-                                        <p class="file-description text-muted" style="font-size: 0.835rem;">${description}</p>
+                                        ${additionalInfo}
                                     </div>
                                     <div class="d-flex align-items-center">
                                         <div class="badge ${badgeClass} text-white py-2 px-3" style="font-size: 0.875rem; border-radius: 15px;">${fileStatus}</div>

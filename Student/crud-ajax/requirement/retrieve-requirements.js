@@ -30,16 +30,18 @@ $(document).ready(function () {
                             const statusBadge = req.submission_status === 'not_submitted'
                                 ? `<div class="badge bg-warning text-white py-2 px-3" style="font-size: 0.875rem; border-radius: 15px;">Not Submitted</div>`
                                 : `<div class="badge bg-danger text-white py-2 px-3" style="font-size: 0.875rem; border-radius: 15px;">Rejected</div>`;
-    
-                            return ` 
-                                <div class="card task-card task-card-hover px-3 py-2 mb-4" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px, rgba(0, 0, 0, 0.05) 0px 1px 3px; transition: transform 0.3s ease;">
-                                    <div class="d-flex justify-content-between align-items-center" style="height: 100%;">
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <div class="card-title fs-5 text-success">${req.title}</div>
-                                            <div class="card-text text-muted">${req.description}</div>
-                                        </div>
-                                        <div class="d-flex align-items-center">
-                                            ${statusBadge}
+                        
+                            return `
+                                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                                    <div class="card task-card px-3 py-2 h-100" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px, rgba(0, 0, 0, 0.05) 0px 1px 3px; transition: transform 0.3s ease;">
+                                        <div class="d-flex flex-column justify-content-between h-100">
+                                            <div>
+                                                <div class="card-title fs-5 text-success">${req.title}</div>
+                                                <div class="card-text text-muted">${req.description}</div>
+                                            </div>
+                                            <div class="d-flex justify-content-end align-items-center mt-3">
+                                                ${statusBadge}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -53,20 +55,22 @@ $(document).ready(function () {
                             const formattedDate = createdAt.toLocaleString('default', { month: 'short', day: 'numeric' });
                         
                             return `
-                            <div class="card task-card ms-2 mb-3 posted-requirement" data-title="${req.title}" data-requirement-id="${req.requirement_id}" 
-                                style="cursor: pointer; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); width: 98%; border-left: 4px solid #198754; transition: background-color 0.3s ease; padding: 8px;">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p style="margin: 0; font-weight: 400; color: #333; font-size: 1.2rem;">
-                                        ${req.first_name} ${req.last_name} posted a <span style="color: #198754;">${req.title}</span>
-                                    </p>
+                                <div class="col-12 mb-3">
+                                    <div class="card task-card posted-requirement p-3 h-100" data-title="${req.title}" data-requirement-id="${req.requirement_id}"
+                                        style="cursor: pointer; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); border-left: 4px solid #198754; transition: background-color 0.3s ease;">
+                                        <div class="d-flex flex-column">
+                                            <p class="mb-1" style="font-weight: 500; color: #333; font-size: 1.2rem;">
+                                                ${req.first_name} ${req.last_name} posted a <span style="color: #198754;">${req.title}</span>
+                                            </p>
+                                            <div class="card-text mb-2" style="font-size: 1rem; color: #555;">
+                                                ${req.description}
+                                            </div>
+                                            <div class="card-text fs-6 text-muted">
+                                                ${formattedDate}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-text" style="font-size: 1.1rem; color: #555;">
-                                    ${req.description}
-                                </div>
-                                <div class="card-text fs-6 text-muted"">
-                                    ${formattedDate}
-                                </div>
-                            </div>
                             `;
                         }).join("");
 
