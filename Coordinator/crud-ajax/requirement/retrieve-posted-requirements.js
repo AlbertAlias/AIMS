@@ -80,6 +80,30 @@ $(document).ready(function () {
         }
     }
 
+    function formatDateForInput(deadline) {
+        const dateParts = deadline.split(' ');  // Split the deadline into month and day, e.g., ["Dec", "27"]
+        const month = dateParts[0];  // "Dec"
+        const day = dateParts[1];  // "27"
+        const currentYear = new Date().getFullYear();  // Get the current year, e.g., 2024
+    
+        // Map the month abbreviation to its numeric value
+        const monthMap = {
+            "Jan": "01", "Feb": "02", "Mar": "03", "Apr": "04", "May": "05", "Jun": "06",
+            "Jul": "07", "Aug": "08", "Sep": "09", "Oct": "10", "Nov": "11", "Dec": "12"
+        };
+    
+        // Check if the month abbreviation is valid
+        const monthNumber = monthMap[month];
+        if (!monthNumber) {
+            console.error("Invalid month:", month);
+            return "";  // Return empty if the month is invalid
+        }
+    
+        // Construct the full date in YYYY-MM-DD format
+        const formattedDate = `${currentYear}-${monthNumber}-${day.padStart(2, '0')}`;
+        return formattedDate;
+    }
+
     $(document).on("click", ".toggle-switch", function (e) {
         const checkbox = $(this).find(".toggle-input");
         
@@ -177,31 +201,6 @@ $(document).ready(function () {
         $("#postRequirementBtn").hide();
         $("#updatePostRequirementBtn").show().data("id", requirementId);
     });
-    
-
-    function formatDateForInput(deadline) {
-        const dateParts = deadline.split(' ');  // Split the deadline into month and day, e.g., ["Dec", "27"]
-        const month = dateParts[0];  // "Dec"
-        const day = dateParts[1];  // "27"
-        const currentYear = new Date().getFullYear();  // Get the current year, e.g., 2024
-    
-        // Map the month abbreviation to its numeric value
-        const monthMap = {
-            "Jan": "01", "Feb": "02", "Mar": "03", "Apr": "04", "May": "05", "Jun": "06",
-            "Jul": "07", "Aug": "08", "Sep": "09", "Oct": "10", "Nov": "11", "Dec": "12"
-        };
-    
-        // Check if the month abbreviation is valid
-        const monthNumber = monthMap[month];
-        if (!monthNumber) {
-            console.error("Invalid month:", month);
-            return "";  // Return empty if the month is invalid
-        }
-    
-        // Construct the full date in YYYY-MM-DD format
-        const formattedDate = `${currentYear}-${monthNumber}-${day.padStart(2, '0')}`;
-        return formattedDate;
-    }
 
     // Update functionality
     $("#updatePostRequirementBtn").on("click", function () {
@@ -222,12 +221,56 @@ $(document).ready(function () {
             dataType: "json",
             success: function (response) {
                 if (response.success) {
-                    Swal.fire("Updated!", response.message, "success");
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-right',
+                        icon: 'success',
+                        title: 'Requirement updated successfully!',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#b9f6ca', // Green background for success
+                        iconColor: '#2e7d32', // Green icon
+                        color: '#155724', // Green text
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
                     resetForm();
                     loadPostedRequirements();
                 } else {
-                    Swal.fire("Error!", response.error, "error");
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-right',
+                        icon: 'error',
+                        title: 'Error updating requirement!',
+                        text: response.error,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#ffcccb', // Red background for error
+                        iconColor: '#d32f2f', // Red icon
+                        color: '#721c24', // Red text
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
                 }
+            },
+            error: function () {
+                // General error SweetAlert
+                Swal.fire({
+                    toast: true,
+                    position: 'top-right',
+                    icon: 'error',
+                    title: 'Something went wrong!',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#ffcccb', // Red background
+                    iconColor: '#d32f2f', // Red icon
+                    color: '#721c24', // Red text
+                    customClass: {
+                        popup: 'mt-5'
+                    }
+                });
             }
         });
     });
