@@ -8,20 +8,36 @@ $(document).ready(function () {
                 if (data.success) {
                     const requirementsContainer = $("#posted-requirements");
                     requirementsContainer.empty();
-
+    
                     data.requirements.forEach(function (requirement) {
                         const formattedDeadline = formatDeadline(requirement.deadline);
-
+    
                         // Check if the current date is past the deadline
                         const currentDate = new Date();
                         const deadlineDate = new Date(requirement.deadline);
                         let status = requirement.status;
-
+    
                         // Automatically close the requirement if the deadline has passed
                         if (currentDate > deadlineDate && status === 'open') {
                             status = 'closed'; // Auto-close if deadline is passed
+    
+                            // AJAX to update the status in the database
+                            $.ajax({
+                                url: "controller/requirement/close-open-post-requirements.php",
+                                type: "POST",
+                                data: { requirement_id: requirement.requirement_id, status: 'closed' },
+                                dataType: "json",
+                                success: function (response) {
+                                    if (response.success) {
+                                        console.log(`Requirement ${requirement.requirement_id} status updated to closed.`);
+                                    }
+                                },
+                                error: function () {
+                                    console.error("Failed to update the status in the database.");
+                                }
+                            });
                         }
-
+    
                         const requirementHTML = `
                         <div class="requirement-post mb-3" data-id="${requirement.requirement_id}">
                             <div class="d-flex justify-content-between align-items-center">
@@ -40,12 +56,10 @@ $(document).ready(function () {
                             </div>
                             <p>${requirement.description}</p>
                             <div class="deadline text-muted">Deadline: ${formattedDeadline}</div>
-
+    
                             <!-- SVGs for open/closed lock icons -->
                             <div class="toggle-switch">
-                                <input type="checkbox" 
-                                    id="toggleSwitch${requirement.requirement_id}" 
-                                    class="toggle-input" 
+                                <input type="checkbox" id="toggleSwitch${requirement.requirement_id}" class="toggle-input" 
                                     ${status === 'closed' ? 'checked' : ''} 
                                     ${(status === 'closed' && currentDate > deadlineDate) ? 'disabled' : ''}>
                                 <label for="toggleSwitch${requirement.requirement_id}" class="toggle-label">
@@ -64,6 +78,7 @@ $(document).ready(function () {
             }
         });
     }
+    
 
     // Helper: Format deadline for display
     function formatDeadline(deadline) {
@@ -202,13 +217,12 @@ $(document).ready(function () {
         $("#updatePostRequirementBtn").show().data("id", requirementId);
     });
 
-    // Update functionality
     $("#updatePostRequirementBtn").on("click", function () {
         const requirementId = $(this).data("id");
         const updatedTitle = $("#requirementTitle").val();
         const updatedDescription = $("#requirementDescription").val();
         const updatedDeadline = $("#deadline").val();
-
+    
         $.ajax({
             url: "controller/requirement/update-posted-requirements.php",
             type: "POST",
@@ -228,12 +242,10 @@ $(document).ready(function () {
                         title: 'Requirement updated successfully!',
                         showConfirmButton: false,
                         timer: 3000,
-                        background: '#b9f6ca', // Green background for success
-                        iconColor: '#2e7d32', // Green icon
-                        color: '#155724', // Green text
-                        customClass: {
-                            popup: 'mt-5'
-                        }
+                        background: '#b9f6ca',
+                        iconColor: '#2e7d32',
+                        color: '#155724',
+                        customClass: { popup: 'mt-5' }
                     });
                     resetForm();
                     loadPostedRequirements();
@@ -246,17 +258,14 @@ $(document).ready(function () {
                         text: response.error,
                         showConfirmButton: false,
                         timer: 3000,
-                        background: '#ffcccb', // Red background for error
-                        iconColor: '#d32f2f', // Red icon
-                        color: '#721c24', // Red text
-                        customClass: {
-                            popup: 'mt-5'
-                        }
+                        background: '#ffcccb',
+                        iconColor: '#d32f2f',
+                        color: '#721c24',
+                        customClass: { popup: 'mt-5' }
                     });
                 }
             },
             error: function () {
-                // General error SweetAlert
                 Swal.fire({
                     toast: true,
                     position: 'top-right',
@@ -264,16 +273,15 @@ $(document).ready(function () {
                     title: 'Something went wrong!',
                     showConfirmButton: false,
                     timer: 3000,
-                    background: '#ffcccb', // Red background
-                    iconColor: '#d32f2f', // Red icon
-                    color: '#721c24', // Red text
-                    customClass: {
-                        popup: 'mt-5'
-                    }
+                    background: '#ffcccb',
+                    iconColor: '#d32f2f',
+                    color: '#721c24',
+                    customClass: { popup: 'mt-5' }
                 });
             }
         });
     });
+    
 
     // Delete functionality
     $(document).on("click", ".delete-requirement", function (e) {
