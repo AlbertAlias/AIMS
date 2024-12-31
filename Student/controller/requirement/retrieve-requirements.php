@@ -18,14 +18,15 @@
     $student_id = $_SESSION['user_id'];
 
     try {
-        // Fetch only the requirements the student needs to address (pending or rejected)
+        // Fetch only the requirements the student needs to address (pending or rejected, not closed)
         $stmt = $conn->prepare("
-            SELECT r.requirement_id, r.title, r.description, r.created_at, u.first_name, u.last_name, COALESCE(sr.status, 'not_submitted') AS submission_status
+            SELECT r.requirement_id, r.title, r.description, r.created_at, r.deadline, u.first_name, u.last_name, COALESCE(sr.status, 'not_submitted') AS submission_status
             FROM requirements r
             JOIN users u ON r.coordinator_id = u.user_id
             LEFT JOIN submit_requirements sr 
                 ON r.requirement_id = sr.requirement_id AND sr.student_id = ?
             WHERE u.department_id = (SELECT department_id FROM users WHERE user_id = ?)
+            AND r.status != 'closed'  -- Exclude 'closed' requirements
             AND (sr.status IS NULL OR sr.status = 'rejected')
             ORDER BY r.created_at DESC
         ");
