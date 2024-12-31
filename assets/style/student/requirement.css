@@ -199,3 +199,14 @@ button:focus {
 .modal-dialog-scrollable {
   max-height: 80vh;  /* Ensures the modal content is scrollable on large content */
 }
+
+/* Task card hover effect */
+.task-card {
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+}
+
+.task-card:hover {
+  background-color: #eeeeee; /* Light background color on hover */
+  cursor: pointer; /* Changes cursor to a hand */
+  box-shadow: rgba(60, 64, 67, 0.4) 0px 1px 2px 0px, rgba(60, 64, 67, 0.25) 0px 2px 6px 2px; /* Optional: enhances shadow on hover */
+}

@@ -7,8 +7,8 @@
                     <input type="hidden" class="requirement-id" value="${req.requirement_id}">
                     <input type="hidden" class="student-id" value="${user.student_id}">
 
-                    <p id="chosenRequirement" class="mb-3" style="font-size: 1.1rem; color: #333;"></p>
-                    <div id="fileContainer" class="mb-3"></div>
+                    <p id="chosenRequirement" class="mb-1" style="font-size: 1.1rem; color: #333;"></p>
+                    <div id="fileContainer" class="mb-1"></div>
                     
                     <label class="btn btn-white d-flex align-items-center justify-content-center border-secondary mb-3" style="cursor: pointer;">
                         <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -28,7 +28,7 @@
         </div>
 
         <div class="col-12 col-md-7 col-lg-7" id="postedRequirementsContainer">
-        <h5 class="border-bottom border-secondary pb-2 mb-2">Requirements</h5>
+            <h5 class="border-bottom border-secondary pb-2 mb-2">Requirements</h5>
             <!-- Dynamically populated requirement posts will appear here -->
         </div>
     </div>

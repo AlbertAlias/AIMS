@@ -13,11 +13,11 @@
 
     // Query to get all file submissions for the logged-in student, ordered by submission_date DESC
     $sql = "
-        SELECT sr.submit_id, sr.document_name, sr.status, sr.submission_date, r.description
-        FROM submit_requirements sr
-        LEFT JOIN requirements r ON sr.requirement_id = r.requirement_id
-        WHERE sr.student_id = ?
-        ORDER BY sr.submission_date DESC";
+    SELECT sr.submit_id, sr.document_name, sr.status, sr.submission_date, sr.remarks, r.description
+    FROM submit_requirements sr
+    LEFT JOIN requirements r ON sr.requirement_id = r.requirement_id
+    WHERE sr.student_id = ?
+    ORDER BY sr.submission_date DESC";
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $student_id);

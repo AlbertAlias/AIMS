@@ -52,19 +52,18 @@ $(document).ready(function () {
                                     month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true
                                 })}</p>`;
                             } else if (fileStatus.toLowerCase() === 'rejected') {
-                                additionalInfo = `<p class="file-description text-danger" style="font-size: 0.835rem;">Remarks: ${remarks}</p>`;
+                                additionalInfo = `<p class="file-description text-danger" style="font-size: 0.735rem;">${remarks}</p>`;
                             }
 
                             const fileCardHtml = `
-                            <div class="card task-card px-3 py-1 mt-1 mb-3" style="max-width: 493px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; transition: transform 0.3s ease;"
-                                data-file-name="${fileName}">
+                            <div class="card task-card px-3 py-1 mt-1 mb-3 col-12 col-md-6 col-lg-4 w-100" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; transition: transform 0.3s ease;" data-file-name="${fileName}">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex flex-column justify-content-center">
-                                        <div class="card-title fs-6 text-success fw-bold mt-3">${fileName}</div>
+                                        <div class="card-title text-success fw-bold mt-3" style="font-size: 0.835rem;">${fileName}</div>
                                         ${additionalInfo}
                                     </div>
                                     <div class="d-flex align-items-center">
-                                        <div class="badge ${badgeClass} text-white py-2 px-3" style="font-size: 0.875rem; border-radius: 15px;">${fileStatus}</div>
+                                        <div class="badge ${badgeClass} text-white py-2 px-2" style="font-size: 0.775rem; border-radius: 15px;">${fileStatus}</div>
                                         <div class="delete-icon-container" data-id="${submitId}">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="delete-icon" style="width: 24px; height: 24px;">
                                                 <path fill="#dc3545" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
