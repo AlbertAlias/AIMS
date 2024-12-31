@@ -96,7 +96,6 @@
     <script src="function/profile/profile-details.js"></script>
 
     <script src="crud-ajax/requirement/retrieve-requirements.js"></script>
-    <!-- <script src="crud-ajax/requirement/retrieve-requirements-posted.js"></script> -->
     <script src="crud-ajax/requirement/retrieve-submit-file.js"></script>
     <script src="crud-ajax/weeklyreport/weeklyreport.js"></script>
     <script src="crud-ajax/weeklyreport/retrieve_weeklyreport.js"></script>

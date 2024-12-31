@@ -14,17 +14,40 @@
             exit();
         }
 
-        $sql = "UPDATE requirements SET status = ? WHERE requirement_id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("si", $status, $requirement_id);
+        // Check the current status and deadline
+        $sqlCheck = "SELECT deadline, status FROM requirements WHERE requirement_id = ?";
+        $stmtCheck = $conn->prepare($sqlCheck);
+        $stmtCheck->bind_param("i", $requirement_id);
+        $stmtCheck->execute();
+        $result = $stmtCheck->get_result();
+        $requirement = $result->fetch_assoc();
 
-        if ($stmt->execute()) {
-            echo json_encode(['success' => true, 'message' => 'Status updated successfully']);
+        $currentDate = new DateTime();
+        $deadline = new DateTime($requirement['deadline']);
+        $currentStatus = $requirement['status'];
+
+        // Prevent reopening if the deadline has passed
+        if ($currentDate > $deadline && $status === 'open') {
+            echo json_encode(['success' => false, 'error' => 'Deadline has passed. Requirement cannot be reopened.']);
+            exit();
+        }
+
+        // Update the status
+        $sqlUpdate = "UPDATE requirements SET status = ? WHERE requirement_id = ?";
+        $stmtUpdate = $conn->prepare($sqlUpdate);
+        $stmtUpdate->bind_param("si", $status, $requirement_id);
+
+        if ($stmtUpdate->execute()) {
+            $message = $status === 'closed'
+                ? 'Requirement is now closed'
+                : 'Requirement is now open';
+            echo json_encode(['success' => true, 'message' => $message]);
         } else {
             echo json_encode(['success' => false, 'error' => 'Failed to update status']);
         }
 
-        $stmt->close();
+        $stmtCheck->close();
+        $stmtUpdate->close();
         $conn->close();
     } else {
         echo json_encode(['success' => false, 'error' => 'Invalid request method']);

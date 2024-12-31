@@ -41,18 +41,13 @@ $(document).ready(function () {
                             <p>${requirement.description}</p>
                             <div class="deadline text-muted">Deadline: ${formattedDeadline}</div>
 
-                            <!-- Toggle Switch with SVGs -->
-                            <div class="toggle-switch">
-                                <input type="checkbox" id="toggleSwitch${requirement.requirement_id}" class="toggle-input" ${status === 'closed' ? 'checked' : ''}>
-                                <label for="toggleSwitch${requirement.requirement_id}" class="toggle-label">
-                                    <i class="fa-solid ${status === 'closed' ? 'fa-lock' : 'fa-lock-open'} open-icon"></i>
-                                    <i class="fa-solid ${status === 'closed' ? 'fa-lock' : 'fa-lock-open'} close-icon"></i>
-                                </label>
-                            </div>
-
                             <!-- SVGs for open/closed lock icons -->
                             <div class="toggle-switch">
-                                <input type="checkbox" id="toggleSwitch${requirement.requirement_id}" class="toggle-input" ${status === 'closed' ? 'checked' : ''}>
+                                <input type="checkbox" 
+                                    id="toggleSwitch${requirement.requirement_id}" 
+                                    class="toggle-input" 
+                                    ${status === 'closed' ? 'checked' : ''} 
+                                    ${(status === 'closed' && currentDate > deadlineDate) ? 'disabled' : ''}>
                                 <label for="toggleSwitch${requirement.requirement_id}" class="toggle-label">
                                     <svg class="open-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                         <path d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"/>
@@ -85,11 +80,38 @@ $(document).ready(function () {
         }
     }
 
-    $(document).on("change", ".toggle-input", function () {
+    $(document).on("click", ".toggle-switch", function (e) {
+        const checkbox = $(this).find(".toggle-input");
+        
+        if (checkbox.is(":disabled")) {
+            // Prevent any default behavior
+            e.preventDefault();
+            e.stopPropagation();
+    
+            // Show SweetAlert notification
+            Swal.fire({
+                toast: true,
+                position: 'top-right',
+                icon: 'warning',
+                title: 'Deadline is reached, Edit it instead.',
+                showConfirmButton: false,
+                timer: 3000,
+                background: '#ffcccb',
+                iconColor: '#d32f2f',
+                color: '#721c24',
+                customClass: {
+                    popup: 'mt-5'
+                }
+            });
+        }
+    });
+    
+    $(document).on("change", ".toggle-input:not(:disabled)", function () {
         const requirementId = $(this).closest(".requirement-post").data("id");
         const isChecked = $(this).is(":checked");
         const newStatus = isChecked ? "closed" : "open";
     
+        // Proceed with AJAX for status update
         $.ajax({
             url: "controller/requirement/close-open-post-requirements.php",
             type: "POST",
@@ -97,11 +119,40 @@ $(document).ready(function () {
             dataType: "json",
             success: function (response) {
                 if (response.success) {
-                    Swal.fire("Success!", response.message, "success");
+                    const successMessage = isChecked
+                        ? "Requirement is now closed"
+                        : "Requirement is now open";
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-right',
+                        icon: 'success',
+                        title: successMessage,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: isChecked ? '#ffcccb' : '#b9f6ca', // Red for closed, green for open
+                        iconColor: isChecked ? '#d32f2f' : '#2e7d32', // Adjust icon color accordingly
+                        color: isChecked ? '#721c24' : '#155724', // Adjust text color accordingly
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
                     loadPostedRequirements();
                 } else {
-                    Swal.fire("Error!", response.error, "error");
+                    Swal.fire({
+                        icon: "error",
+                        title: "Error!",
+                        text: response.error,
+                        confirmButtonText: "OK"
+                    });
                 }
+            },
+            error: function () {
+                Swal.fire({
+                    icon: "error",
+                    title: "Error!",
+                    text: "Something went wrong.",
+                    confirmButtonText: "OK"
+                });
             }
         });
     });
