@@ -302,7 +302,7 @@ $(document).ready(function () {
     $(document).on("click", ".delete-requirement", function (e) {
         e.preventDefault();
         const requirementId = $(this).data("id");
-
+    
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to recover this!",
@@ -320,11 +320,26 @@ $(document).ready(function () {
                     dataType: "json",
                     success: function (response) {
                         if (response.success) {
-                            Swal.fire("Deleted!", response.message, "success");
-                            loadPostedRequirements();
+                            // Custom success SweetAlert
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-right',
+                                icon: 'success',
+                                title: 'Requirement deleted successfully!',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                background: '#b9f6ca',
+                                iconColor: '#2e7d2f',
+                                color: '#155724',
+                                customClass: { popup: 'mt-5' }
+                            });
+                            loadPostedRequirements();  // Refresh the posted requirements list
                         } else {
                             Swal.fire("Error!", response.error, "error");
                         }
+                    },
+                    error: function () {
+                        Swal.fire("Error!", "Something went wrong.", "error");
                     }
                 });
             }
