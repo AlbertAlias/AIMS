@@ -60,7 +60,7 @@
 .requirement-post {
     background-color: #ffffff;
     border-radius: 10px;
-    padding: 12px 15px;
+    padding: 8px 10px;
     margin-bottom: 15px;
     box-shadow: rgba(83, 107, 126, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
     border-left: 5px solid #198754;
@@ -68,19 +68,25 @@
 }
 
 .requirement-post h6 {
-    margin-bottom: 5px;
+    margin-bottom: 1px;
     font-weight: bold;
     color: #198754;
     font-size: 1.2em;
 }
 
 .requirement-post p {
-    margin-bottom: 5px;
+    margin-bottom: 1px;
     color: #333333;
     line-height: 1.5;
 }
 
 .requirement-post .deadline {
+    font-size: 0.9em;
+    color: #6c757d;
+    font-style: italic;
+}
+
+.requirement-post .created-at {
     font-size: 0.9em;
     color: #6c757d;
     font-style: italic;

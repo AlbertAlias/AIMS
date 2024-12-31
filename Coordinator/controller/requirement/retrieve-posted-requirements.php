@@ -11,12 +11,11 @@
     $coordinator_id = $_SESSION['user_id']; // The logged-in user's ID
 
     // Fetch only the posts created by the logged-in coordinator
-    $sql = "SELECT r.requirement_id, r.title, r.description, DATE(r.deadline) AS deadline, r.status, u.first_name, u.last_name 
+    $sql = "SELECT r.requirement_id, r.title, r.description, DATE(r.deadline) AS deadline, r.status, r.created_at, u.first_name, u.last_name 
         FROM requirements r
         LEFT JOIN users u ON r.coordinator_id = u.user_id
         WHERE r.coordinator_id = ? 
         ORDER BY r.created_at DESC";
-
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $coordinator_id);
@@ -31,6 +30,7 @@
             'description' => $row['description'],
             'deadline' => $row['deadline'],
             'status' => $row['status'],
+            'created_at' => $row['created_at'], // Add created_at field
             'coordinator_name' => $row['first_name'] . ' ' . $row['last_name'] // Get the full name of the coordinator
         ];
     }

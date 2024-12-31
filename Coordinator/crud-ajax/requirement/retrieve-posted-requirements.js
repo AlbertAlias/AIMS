@@ -11,6 +11,7 @@ $(document).ready(function () {
     
                     data.requirements.forEach(function (requirement) {
                         const formattedDeadline = formatDeadline(requirement.deadline);
+                        const formattedCreatedAt = formatCreatedAt(requirement.created_at);
     
                         // Check if the current date is past the deadline
                         const currentDate = new Date();
@@ -41,7 +42,7 @@ $(document).ready(function () {
                         const requirementHTML = `
                         <div class="requirement-post mb-3" data-id="${requirement.requirement_id}">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h6 class="text-success">${requirement.title}</h6>
+                                <h6>${requirement.title}</h6>
                                 <div class="dropdown">
                                     <button class="post-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512">
@@ -55,7 +56,10 @@ $(document).ready(function () {
                                 </div>
                             </div>
                             <p>${requirement.description}</p>
-                            <div class="deadline text-muted">Deadline: ${formattedDeadline}</div>
+                            <div class="d-flex">
+                                <div class="created-at text-muted">Posted: ${formattedCreatedAt}</div>
+                                <div class="ms-1 deadline text-muted">/ Deadline: ${formattedDeadline}</div>
+                            </div>
     
                             <!-- SVGs for open/closed lock icons -->
                             <div class="toggle-switch">
@@ -79,6 +83,17 @@ $(document).ready(function () {
         });
     }
     
+    function formatCreatedAt(createdAt) {
+        const date = new Date(createdAt);
+        const currentYear = new Date().getFullYear();
+        const formattedDate = date.toLocaleDateString("en-US", { month: 'short', day: 'numeric' });
+    
+        // Display year only if it's not the current year
+        if (date.getFullYear() !== currentYear) {
+            return `${formattedDate}, ${date.getFullYear()}`;
+        }
+        return formattedDate;
+    }
 
     // Helper: Format deadline for display
     function formatDeadline(deadline) {
