@@ -206,7 +206,21 @@ button:focus {
 }
 
 .task-card:hover {
-  background-color: #f5f1f1; /* Light background color on hover */
-  cursor: pointer; /* Changes cursor to a hand */
+  cursor: pointer;
   box-shadow: rgba(60, 64, 67, 0.4) 0px 1px 2px 0px, rgba(60, 64, 67, 0.25) 0px 2px 6px 2px; /* Optional: enhances shadow on hover */
+}
+
+@media (max-width: 576px) {
+  .task-card.posted-requirement {
+    padding: 0.5rem !important; /* Further reduce padding for very small screens */
+    font-size: 0.8rem !important; /* Reduce font size even more */
+  }
+
+  .task-card.posted-requirement .card-text {
+    font-size: 0.75rem !important; /* Adjust text size for small devices */
+  }
+
+  .task-card.posted-requirement p {
+    font-size: 0.9rem !important; /* Reduce paragraph font size */
+  }
 }
