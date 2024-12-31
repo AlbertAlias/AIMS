@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    // Load student files
     window.loadStudentFiles = function () {
         $.ajax({
             url: 'controller/requirement/retrieve-submit-file.php',
@@ -19,9 +18,9 @@ $(document).ready(function () {
                         const submitId = file.submit_id;
                         const description = file.description || 'No description available';
 
-                        let badgeClass = 'bg-warning';  // Default to bg-warning
+                        let badgeClass = 'bg-warning';
                         if (fileStatus.toLowerCase() === 'rejected') {
-                            badgeClass = 'bg-danger';  // Change to bg-danger if the status is "rejected"
+                            badgeClass = 'bg-danger'; 
                         }
 
                         if (fileStatus.toLowerCase() === "approved") {
@@ -68,14 +67,12 @@ $(document).ready(function () {
                         }
                     });
 
-                    // Add click event for delete icons
                     $('.delete-icon').on('click', function (event) {
                         event.stopPropagation(); // Prevent the parent .task-card click event
                         const submitId = $(this).closest('.delete-icon-container').data('id');
                         deleteStudentFile(submitId);
                     });
 
-                    // Add click event for task cards to view PDF
                     $('.task-card').on('click', function () {
                         const fileName = $(this).data('file-name');
                         const pdfViewer = document.getElementById('pdfViewer');
@@ -108,7 +105,7 @@ $(document).ready(function () {
                     method: 'POST',
                     data: { submit_id: submitId },
                     success: function (response) {
-                        console.log('Delete Response:', response);  // Log the response from the server
+                        console.log('Delete Response:', response);
                         if (response.success) {
                             Swal.fire({
                                 toast: true,
@@ -131,12 +128,13 @@ $(document).ready(function () {
                                 });
 
                             loadCoordinatorRequirements();
+                            window.loadStudentFiles();
                         } else {
                             Swal.fire('Error', 'Error deleting file: ' + response.error, 'error');
                         }
                     },
                     error: function (xhr, status, error) {
-                        console.log('Error details:', status, error); // Properly log the error details
+                        console.log('Error details:', status, error);
                         Swal.fire('Error', 'An error occurred while trying to delete the file.', 'error');
                     }
                 });
@@ -144,7 +142,6 @@ $(document).ready(function () {
         });
     }
 
-    // Close modal logic
     $('#closeModal').on('click', function () {
         const modal = document.getElementById('pdfModal');
         modal.style.display = 'none';
