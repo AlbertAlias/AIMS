@@ -1,43 +1,79 @@
 <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+    // ini_set('display_errors', 1);
+    // ini_set('display_startup_errors', 1);
+    // error_reporting(E_ALL);
 
-    header('Content-Type: application/json');
-    include '../../../dbconn.php';
+    // header('Content-Type: application/json');
+    // include '../../../dbconn.php';
 
-    // Assuming the coordinator's user ID is stored in the session
-    session_start();
-    $coordinator_id = $_SESSION['user_id']; // The logged-in user's ID
+    // // Assuming the coordinator's user ID is stored in the session
+    // session_start();
+    // $coordinator_id = $_SESSION['user_id']; // The logged-in user's ID
 
-    // Fetch only the posts created by the logged-in coordinator
-    $sql = "SELECT r.requirement_id, r.title, r.description, DATE(r.deadline) AS deadline, r.status, r.created_at, u.first_name, u.last_name 
-        FROM requirements r
-        LEFT JOIN users u ON r.coordinator_id = u.user_id
-        WHERE r.coordinator_id = ? 
-        ORDER BY r.created_at DESC";
+    // // Fetch only the posts created by the logged-in coordinator
+    // $sql = "SELECT r.requirement_id, r.title, r.description, DATE(r.deadline) AS deadline, r.status, r.created_at, u.first_name, u.last_name 
+    //     FROM requirements r
+    //     LEFT JOIN users u ON r.coordinator_id = u.user_id
+    //     WHERE r.coordinator_id = ? 
+    //     ORDER BY r.created_at DESC";
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $coordinator_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // $stmt = $conn->prepare($sql);
+    // $stmt->bind_param("i", $coordinator_id);
+    // $stmt->execute();
+    // $result = $stmt->get_result();
 
-    $requirements = [];
-    while ($row = $result->fetch_assoc()) {
-        $requirements[] = [
-            'requirement_id' => $row['requirement_id'],
-            'title' => $row['title'],
-            'description' => $row['description'],
-            'deadline' => $row['deadline'],
-            'status' => $row['status'],
-            'created_at' => $row['created_at'], // Add created_at field
-            'coordinator_name' => $row['first_name'] . ' ' . $row['last_name'] // Get the full name of the coordinator
-        ];
-    }
+    // $requirements = [];
+    // while ($row = $result->fetch_assoc()) {
+    //     $requirements[] = [
+    //         'requirement_id' => $row['requirement_id'],
+    //         'title' => $row['title'],
+    //         'description' => $row['description'],
+    //         'deadline' => $row['deadline'],
+    //         'status' => $row['status'],
+    //         'created_at' => $row['created_at'], // Add created_at field
+    //         'coordinator_name' => $row['first_name'] . ' ' . $row['last_name'] // Get the full name of the coordinator
+    //     ];
+    // }
 
-    // Return the requirements as a JSON object
-    echo json_encode([
-        'success' => true,
-        'requirements' => $requirements
-    ]);
+    // // Return the requirements as a JSON object
+    // echo json_encode([
+    //     'success' => true,
+    //     'requirements' => $requirements
+    // ]);
+?>
+
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+header('Content-Type: application/json');
+include '../../../dbconn.php';
+
+// Update statuses of expired requirements
+$current_date = date('Y-m-d');
+$update_expired_query = "UPDATE requirements SET status = 'closed' WHERE deadline < ? AND status = 'open'";
+$stmt_update = $conn->prepare($update_expired_query);
+$stmt_update->bind_param("s", $current_date);
+$stmt_update->execute();
+
+// Retrieve updated requirements
+session_start();
+$coordinator_id = $_SESSION['user_id'];
+
+$sql = "SELECT * FROM requirements WHERE coordinator_id = ? ORDER BY created_at DESC";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $coordinator_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$requirements = [];
+while ($row = $result->fetch_assoc()) {
+    $requirements[] = $row;
+}
+
+echo json_encode([
+    'success' => true,
+    'requirements' => $requirements
+]);
 ?>

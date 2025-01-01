@@ -8,37 +8,15 @@ $(document).ready(function () {
                 if (data.success) {
                     const requirementsContainer = $("#posted-requirements");
                     requirementsContainer.empty();
-    
+
                     data.requirements.forEach(function (requirement) {
                         const formattedDeadline = formatDeadline(requirement.deadline);
                         const formattedCreatedAt = formatCreatedAt(requirement.created_at);
-    
-                        // Check if the current date is past the deadline
+
                         const currentDate = new Date();
                         const deadlineDate = new Date(requirement.deadline);
                         let status = requirement.status;
-    
-                        // Automatically close the requirement if the deadline has passed
-                        if (currentDate > deadlineDate && status === 'open') {
-                            status = 'closed'; // Auto-close if deadline is passed
-    
-                            // AJAX to update the status in the database
-                            $.ajax({
-                                url: "controller/requirement/close-open-post-requirements.php",
-                                type: "POST",
-                                data: { requirement_id: requirement.requirement_id, status: 'closed' },
-                                dataType: "json",
-                                success: function (response) {
-                                    if (response.success) {
-                                        console.log(`Requirement ${requirement.requirement_id} status updated to closed.`);
-                                    }
-                                },
-                                error: function () {
-                                    console.error("Failed to update the status in the database.");
-                                }
-                            });
-                        }
-    
+
                         const requirementHTML = `
                         <div class="requirement-post mb-3" data-id="${requirement.requirement_id}">
                             <div class="d-flex justify-content-between align-items-center">
@@ -60,18 +38,16 @@ $(document).ready(function () {
                                 <div class="created-at text-muted">Posted: ${formattedCreatedAt}</div>
                                 <div class="ms-1 deadline text-muted">/ Deadline: ${formattedDeadline}</div>
                             </div>
-    
-                            <!-- SVGs for open/closed lock icons -->
                             <div class="toggle-switch">
                                 <input type="checkbox" id="toggleSwitch${requirement.requirement_id}" class="toggle-input" 
                                     ${status === 'closed' ? 'checked' : ''} 
-                                    ${(status === 'closed' && currentDate > deadlineDate) ? 'disabled' : ''}>
+                                    ${(status === 'closed') ? 'disabled' : ''}>
                                 <label for="toggleSwitch${requirement.requirement_id}" class="toggle-label">
                                     <svg class="open-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                         <path d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"/>
                                     </svg>
                                     <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                                        <path d="M352 144c0-44.2 35.8-80 80-80s80 35.8 80 80l0 48c0 17.7 14.3 32 32 32s32-14.3 32-32l0-48C576 64.5 511.5 0 432 0S288 64.5 288 144l0 48L64 192c-35.3 0-64 28.7-64 64L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-32 0 0-48z"/>
+                                        <path d="M352 144c0-44.2 35.8-80 80-80s80 35.8 80 80l0 48c0 17.7 14.3 32 32 32s32-14.3 32-32l0-48C576 64.5 511.5 0 432 0S288 64.5 288 144l0 48L64 192c-35.3 0-64 28.7-64 64L0 448c0 35.3-28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-32 0 0-48z"/>
                                     </svg>
                                 </label>
                             </div>
@@ -85,29 +61,12 @@ $(document).ready(function () {
     
     function formatCreatedAt(createdAt) {
         const date = new Date(createdAt);
-        const currentYear = new Date().getFullYear();
-        const formattedDate = date.toLocaleDateString("en-US", { month: 'short', day: 'numeric' });
-    
-        // Display year only if it's not the current year
-        if (date.getFullYear() !== currentYear) {
-            return `${formattedDate}, ${date.getFullYear()}`;
-        }
-        return formattedDate;
+        return date.toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric' });
     }
 
-    // Helper: Format deadline for display
     function formatDeadline(deadline) {
         const date = new Date(deadline);
-        const currentYear = new Date().getFullYear();
-
-        const deadlineYear = date.getFullYear();
-        const formattedDate = date.toLocaleDateString("en-US", { month: 'short', day: 'numeric' });
-
-        if (currentYear !== deadlineYear) {
-            return `${formattedDate}, ${deadlineYear}`;
-        } else {
-            return formattedDate;
-        }
+        return date.toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric' });
     }
 
     function formatDateForInput(deadline) {
