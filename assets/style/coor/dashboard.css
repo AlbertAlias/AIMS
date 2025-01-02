@@ -1,8 +1,22 @@
-#requirements-chart {
+#requirements-chart,
+#ojthours-chart {
     width: 100%;
     height: 400px;
     min-height: 400px;
     position: relative;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .card-chart {
+        padding: 10px;
+    }
+
+    #requirements-chart,
+    #ojthours-chart {
+        height: 300px;
+        min-height: 300px;
+    }
 }
 
 .dropdown-overlay {

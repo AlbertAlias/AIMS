@@ -31,7 +31,7 @@ $(document).ready(function () {
                 icon: 'error',
                 title: 'Please fill out all required fields!',
                 showConfirmButton: false,
-                timer: 2000,
+                timer: 3000,
                 background: '#f8d7da',
                 iconColor: '#721c24',
                 color: '#721c24',
