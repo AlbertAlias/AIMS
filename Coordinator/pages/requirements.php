@@ -4,21 +4,17 @@
             <div class="post-container">
                 <div class="post-header">
                     <h5 class="border-bottom border-black pb-2 mb-2">Post a Requirement</h5>
-                    <!-- Requirement Title -->
                     <input type="text" class="form-control title" id="requirementTitle" placeholder="What's on your mind, Coordinator?">
                 </div>
                 <div class="post-body mb-2">
-                    <!-- Requirement Description -->
                     <textarea rows="3" class="form-control" id="requirementDescription" placeholder="Write something..."></textarea>
                 </div>
                 <div class="post-footer d-flex justify-content-between align-items-center">
                     <div class="deadline-container">
-                        <!-- Deadline Input -->
                         <!-- <input type="date" class="form-control deadline-input" id="deadline" placeholder="Set a deadline"> -->
                         <input type="text" class="form-control deadline-input" id="deadline" placeholder="Set a deadline" onfocus="(this.type='date')" onblur="(this.type='text')">
                     </div>
                     <div>
-                        <!-- Post Button -->
                         <button class="btn btn-md btn-success" id="postRequirementBtn">Post</button>
                         <button class="btn btn-md btn-primary" id="updatePostRequirementBtn" style="display: none;">Update</button>
                         <button class="btn btn-md btn-secondary" id="cancelEditRequirementsBtn">Cancel</button>
@@ -67,11 +63,9 @@
             <div class="modal-header d-flex justify-content-between align-items-center w-100">
                 <h5 class="text-center mb-0 text-warning">Pending Requirements</h5>
                 <div class="input-group flex-shrink-1" style="max-width: 350px;">
-                    <!-- Select Dropdown -->
                     <select class="form-select form-select-sm" aria-label="Select filter" id="pendingSelectOption">
                         <option selected></option>
                     </select>
-                    <!-- Search Input -->
                     <input type="text" id="pendingSearchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
                     <button class="btn btn-outline-secondary btn-sm" type="button">
                         <svg class="table-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -81,7 +75,6 @@
                 </div>
             </div>
             <div class="modal-body">
-                <!-- Pending requirements content here -->
                 <div id="pendingContent">
                     <!-- This is where the pending requirements will be inserted dynamically -->
                 </div>
@@ -101,11 +94,9 @@
             <div class="modal-header d-flex justify-content-between align-items-center w-100">
                 <h5 class="text-center mb-0 text-danger">Rejected Requirements</h5>
                 <div class="input-group flex-shrink-1" style="max-width: 350px;">
-                    <!-- Select Dropdown -->
                     <select class="form-select form-select-sm" aria-label="Select filter" id="rejectedSelectOption">
                         <option selected>Filter</option>
                     </select>
-                    <!-- Search Input -->
                     <input type="text" id="rejectedSearchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
                     <button class="btn btn-outline-secondary btn-sm" type="button">
                         <svg class="table-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -115,7 +106,6 @@
                 </div>
             </div>
             <div class="modal-body">
-                <!-- Rejected requirements content here -->
                 <div id="rejectedContent">
                     <!-- This is where the rejected requirements will be inserted dynamically -->
                 </div>
@@ -134,11 +124,9 @@
             <div class="modal-header d-flex justify-content-between align-items-center w-100">
                 <h5 class="text-center mb-0 text-success">Completed Requirements</h5>
                 <div class="input-group flex-shrink-1" style="max-width: 350px;">
-                    <!-- Select Dropdown -->
                     <select class="form-select form-select-sm" aria-label="Select filter" id="completedSelectOption">
                         <option selected>Filter</option>
                     </select>
-                    <!-- Search Input -->
                     <input type="text" id="completedSearchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
                     <button class="btn btn-outline-secondary btn-sm" type="button">
                         <svg class="table-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -148,7 +136,6 @@
                 </div>
             </div>
             <div class="modal-body">
-                <!-- Completed requirements content here -->
                 <div id="completedContent">
                     <!-- This is where the completed requirements will be inserted dynamically -->
                 </div>
