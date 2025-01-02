@@ -208,6 +208,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Apply the formula to compute total_grade
         $totalGrade = ($ratingPoints / 90) * 70;
 
+        // Prepare database query to insert evaluation data
         $stmt = $conn->prepare("
             INSERT INTO evaluations (student_id, ratings, total_grade, comments, evaluator_id, evaluation_date)
             VALUES (?, ?, ?, ?, ?, NOW())

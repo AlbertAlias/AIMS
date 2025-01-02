@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 02, 2025 at 07:31 AM
+-- Generation Time: Dec 29, 2024 at 07:45 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -122,21 +122,19 @@ INSERT INTO `department` (`department_id`, `department_name`) VALUES
 
 CREATE TABLE `evaluations` (
   `id` int(11) NOT NULL,
-  `student_id` int(11) NOT NULL,
+  `student_id` varchar(50) NOT NULL,
   `ratings` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `total_grade` decimal(5,2) NOT NULL,
   `comments` text DEFAULT NULL,
-  `evaluation_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `evaluator_id` int(11) DEFAULT NULL
+  `evaluation_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `evaluations`
 --
 
-INSERT INTO `evaluations` (`id`, `student_id`, `ratings`, `total_grade`, `comments`, `evaluation_date`, `evaluator_id`) VALUES
-(1, 1197, '{\"ratings[quality1]\":\"5\"}', 3.89, '', '2024-12-29 10:47:41', 1195),
-(2, 1197, '{\"ratings[quality7]\":\"5\",\"ratings[quality8]\":\"5\"}', 7.78, '', '2025-01-02 06:28:01', 1195);
+INSERT INTO `evaluations` (`id`, `student_id`, `ratings`, `total_grade`, `comments`, `evaluation_date`) VALUES
+(1, '1197', '{\"ratings[quality1]\":\"5\",\"ratings[quality2]\":\"5\",\"ratings[quality3]\":\"5\",\"ratings[quality4]\":\"5\",\"ratings[quality5]\":\"5\",\"ratings[quality6]\":\"5\",\"ratings[quality7]\":\"5\",\"ratings[quality8]\":\"5\",\"ratings[quality9]\":\"5\",\"ratings[quality10]\":\"5\",\"ratings[quality11]\":\"5\",\"ratings[quality12]\":\"5\",\"ratings[quality13]\":\"5\",\"ratings[quality14]\":\"5\",\"ratings[quality15]\":\"5\",\"ratings[quality16]\":\"5\",\"ratings[quality17]\":\"5\",\"ratings[quality18]\":\"5\"}', 70.00, 'tanga ka bert', '2024-12-17 13:12:11');
 
 -- --------------------------------------------------------
 
@@ -177,10 +175,10 @@ CREATE TABLE `requirements` (
 --
 
 INSERT INTO `requirements` (`requirement_id`, `coordinator_id`, `title`, `description`, `created_at`, `deadline`, `status`) VALUES
-(67, 484, 'Application Letter', 'Pokemon Horizon Episode 30', '2024-12-17 13:05:11', '2024-12-18', 'closed'),
-(68, 484, 'Resume Letter', 'Pokemon Horizon Rayquaza', '2024-12-17 13:05:38', '2001-12-15', 'closed'),
-(77, 484, 'Memorandum of Agreement', 'pikachu', '2024-12-18 03:29:59', '2024-12-22', 'closed'),
-(79, 484, 'BSIT COOR ONLY', 'sad', '2024-12-27 05:47:44', '2024-12-27', 'closed');
+(67, 484, 'Application Letter', 'Pokemon Horizon Episode 30', '2024-12-17 13:05:11', '2024-12-18', 'open'),
+(68, 484, 'Resume Letter', 'Pokemon Horizon Rayquaza', '2024-12-17 13:05:38', '2001-12-15', 'open'),
+(77, 484, 'Memorandum of Agreement', 'pikachu', '2024-12-18 03:29:59', '2024-12-22', 'open'),
+(79, 484, 'BSIT COOR ONLY', 'sad', '2024-12-27 05:47:44', '2024-12-27', 'open');
 
 -- --------------------------------------------------------
 
@@ -587,9 +585,7 @@ ALTER TABLE `department`
 -- Indexes for table `evaluations`
 --
 ALTER TABLE `evaluations`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `student_id` (`student_id`),
-  ADD KEY `evaluator_id` (`evaluator_id`);
+  ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- Indexes for table `ojt_hours`
@@ -631,8 +627,7 @@ ALTER TABLE `submit_requirements`
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
   ADD UNIQUE KEY `username` (`username`),
-  ADD KEY `FK_users_department` (`department_id`),
-  ADD KEY `student_id` (`student_id`);
+  ADD KEY `FK_users_department` (`department_id`);
 
 --
 -- Indexes for table `weekly_reports`
@@ -667,7 +662,7 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT for table `evaluations`
 --
 ALTER TABLE `evaluations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `ojt_hours`
@@ -728,13 +723,6 @@ ALTER TABLE `coordinator_evaluation`
 ALTER TABLE `dean_department`
   ADD CONSTRAINT `FK_dean_department_dean` FOREIGN KEY (`dean_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_dean_department_department` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `evaluations`
---
-ALTER TABLE `evaluations`
-  ADD CONSTRAINT `evaluations_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `evaluations_ibfk_2` FOREIGN KEY (`evaluator_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `ojt_hours`
