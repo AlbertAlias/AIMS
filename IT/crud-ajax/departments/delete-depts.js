@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 toast: true,
                                 position: 'top-end',
                                 showConfirmButton: false,
-                                timer: 3000,
+                                timer: 2000,
                                 background: '#b9f6ca', // Light green background
                                 iconColor: '#2e7d32', // Darker green icon
                                 color: '#155724', // Text color
@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 toast: true,
                                 position: 'top-end',
                                 showConfirmButton: false,
-                                timer: 3000,
+                                timer: 2000,
                                 background: '#f8bbd0', // Dark red background
                                 iconColor: '#c62828', // Darker red icon
                                 color: '#721c24', // Text color

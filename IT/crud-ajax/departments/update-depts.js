@@ -24,7 +24,7 @@ $('#deptUpdateBtn').click(function() {
                         icon: 'success',
                         title: 'Department updated successfully!',
                         showConfirmButton: false,
-                        timer: 3000,
+                        timer: 2000,
                         background: '#b9f6ca',
                         iconColor: '#2e7d32',
                         color: '#155724',

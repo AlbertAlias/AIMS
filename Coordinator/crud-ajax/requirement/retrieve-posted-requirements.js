@@ -17,45 +17,41 @@ $(document).ready(function () {
                         const deadlineDate = new Date(requirement.deadline);
                         let status = requirement.status;
 
-                        // Disable checkbox if the deadline has passed and status is closed
-                        const isDeadlinePassed = deadlineDate < currentDate;
-                        const isDisabled = (status === 'closed' && isDeadlinePassed);
-
                         const requirementHTML = `
-                            <div class="requirement-post mb-3" data-id="${requirement.requirement_id}">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <h6>${requirement.title}</h6>
-                                    <div class="dropdown">
-                                        <button class="post-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512">
-                                                <path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"/>
-                                            </svg>
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item text-success edit-requirement" href="#">Edit</a>
-                                            <a class="dropdown-item text-danger delete-requirement" href="#" data-id="${requirement.requirement_id}">Delete</a>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <p>${requirement.description}</p>
-                                <div class="d-flex">
-                                    <div class="created-at text-muted">Posted: ${formattedCreatedAt}</div>
-                                    <div class="ms-1 deadline text-muted">/ Deadline: ${formattedDeadline}</div>
-                                </div>
-                                <div class="toggle-switch">
-                                    <input type="checkbox" id="toggleSwitch${requirement.requirement_id}" class="toggle-input" 
-                                        ${status === 'closed' ? 'checked' : ''} 
-                                        ${isDisabled ? 'disabled' : ''}>
-                                    <label for="toggleSwitch${requirement.requirement_id}" class="toggle-label">
-                                        <svg class="open-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                            <path d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"/>
+                        <div class="requirement-post mb-3" data-id="${requirement.requirement_id}">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h6>${requirement.title}</h6>
+                                <div class="dropdown">
+                                    <button class="post-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512">
+                                            <path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"/>
                                         </svg>
-                                        <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                                            <path d="M352 144c0-44.2 35.8-80 80-80s80 35.8 80 80l0 48c0 17.7 14.3 32 32 32s32-14.3 32-32l0-48C576 64.5 511.5 0 432 0S288 64.5 288 144l0 48L64 192c-35.3 0-64 28.7-64 64L0 448c0 35.3-28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-32 0 0-48z"/>
-                                        </svg>
-                                    </label>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item text-success edit-requirement" href="#">Edit</a>
+                                        <a class="dropdown-item text-danger delete-requirement" href="#" data-id="${requirement.requirement_id}">Delete</a>
+                                    </ul>
                                 </div>
-                            </div>`;
+                            </div>
+                            <p>${requirement.description}</p>
+                            <div class="d-flex">
+                                <div class="created-at text-muted">Posted: ${formattedCreatedAt}</div>
+                                <div class="ms-1 deadline text-muted">/ Deadline: ${formattedDeadline}</div>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="toggleSwitch${requirement.requirement_id}" class="toggle-input" 
+                                    ${status === 'closed' ? 'checked' : ''} 
+                                    ${(status === 'closed') ? 'disabled' : ''}>
+                                <label for="toggleSwitch${requirement.requirement_id}" class="toggle-label">
+                                    <svg class="open-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"/>
+                                    </svg>
+                                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                        <path d="M352 144c0-44.2 35.8-80 80-80s80 35.8 80 80l0 48c0 17.7 14.3 32 32 32s32-14.3 32-32l0-48C576 64.5 511.5 0 432 0S288 64.5 288 144l0 48L64 192c-35.3 0-64 28.7-64 64L0 448c0 35.3-28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-192c0-35.3-28.7-64-64-64l-32 0 0-48z"/>
+                                    </svg>
+                                </label>
+                            </div>
+                        </div>`;
                         requirementsContainer.append(requirementHTML);
                     });
                 }
@@ -71,30 +67,6 @@ $(document).ready(function () {
     function formatDeadline(deadline) {
         const date = new Date(deadline);
         return date.toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric' });
-    }
-
-    function formatDateForInput(deadline) {
-        const dateParts = deadline.split(' ');  // Split the deadline into month and day, e.g., ["Dec", "27"]
-        const month = dateParts[0];  // "Dec"
-        const day = dateParts[1];  // "27"
-        const currentYear = new Date().getFullYear();  // Get the current year, e.g., 2024
-    
-        // Map the month abbreviation to its numeric value
-        const monthMap = {
-            "Jan": "01", "Feb": "02", "Mar": "03", "Apr": "04", "May": "05", "Jun": "06",
-            "Jul": "07", "Aug": "08", "Sep": "09", "Oct": "10", "Nov": "11", "Dec": "12"
-        };
-    
-        // Check if the month abbreviation is valid
-        const monthNumber = monthMap[month];
-        if (!monthNumber) {
-            console.error("Invalid month:", month);
-            return "";  // Return empty if the month is invalid
-        }
-    
-        // Construct the full date in YYYY-MM-DD format
-        const formattedDate = `${currentYear}-${monthNumber}-${day.padStart(2, '0')}`;
-        return formattedDate;
     }
 
     $(document).on("click", ".toggle-switch", function (e) {
