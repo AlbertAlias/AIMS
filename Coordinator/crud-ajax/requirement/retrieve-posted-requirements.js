@@ -10,19 +10,16 @@ $(document).ready(function () {
                     requirementsContainer.empty();
 
                     data.requirements.forEach(function (requirement) {
-                        const formattedDeadline = formatDeadline(requirement.deadline);
-                        const formattedCreatedAt = formatCreatedAt(requirement.created_at);
-
-                        const currentDate = new Date();
-                        const deadlineDate = new Date(requirement.deadline);
-                        let status = requirement.status;
+                        const formattedDeadline = formatDate(requirement.deadline);
+                        const formattedCreatedAt = formatDate(requirement.created_at);
+                        const isDeadlinePassed = new Date(requirement.deadline) < new Date();
 
                         const requirementHTML = `
                         <div class="requirement-post mb-3" data-id="${requirement.requirement_id}">
                             <div class="d-flex justify-content-between align-items-center">
                                 <h6>${requirement.title}</h6>
                                 <div class="dropdown">
-                                    <button class="post-dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="post-dropdown" type="button" data-bs-toggle="dropdown">
                                         <svg class="dropdown-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512">
                                             <path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"/>
                                         </svg>
@@ -40,8 +37,9 @@ $(document).ready(function () {
                             </div>
                             <div class="toggle-switch">
                                 <input type="checkbox" id="toggleSwitch${requirement.requirement_id}" class="toggle-input" 
-                                    ${status === 'closed' ? 'checked' : ''} 
-                                    ${(status === 'closed') ? 'disabled' : ''}>
+                                    ${requirement.status === 'closed' ? 'checked' : ''} 
+                                    ${isDeadlinePassed ? 'disabled' : ''} 
+                                    data-deadline="${requirement.deadline}">
                                 <label for="toggleSwitch${requirement.requirement_id}" class="toggle-label">
                                     <svg class="open-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                         <path d="M144 144l0 48 160 0 0-48c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192l0-48C80 64.5 144.5 0 224 0s144 64.5 144 144l0 48 16 0c35.3 0 64 28.7 64 64l0 192c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 256c0-35.3 28.7-64 64-64l16 0z"/>
@@ -58,31 +56,24 @@ $(document).ready(function () {
             }
         });
     }
-    
-    function formatCreatedAt(createdAt) {
-        const date = new Date(createdAt);
-        return date.toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric' });
-    }
 
-    function formatDeadline(deadline) {
-        const date = new Date(deadline);
+    function formatDate(dateString) {
+        const date = new Date(dateString);
         return date.toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric' });
     }
 
     $(document).on("click", ".toggle-switch", function (e) {
         const checkbox = $(this).find(".toggle-input");
-        
-        if (checkbox.is(":disabled")) {
-            // Prevent any default behavior
-            e.preventDefault();
-            e.stopPropagation();
+        const deadline = new Date(checkbox.data("deadline"));
+        const now = new Date();
     
-            // Show SweetAlert notification
+        if (deadline < now) {
+            e.preventDefault();
             Swal.fire({
                 toast: true,
                 position: 'top-right',
                 icon: 'warning',
-                title: 'Deadline is reached, Edit it instead.',
+                title: 'Deadline has passed. You can edit it instead.',
                 showConfirmButton: false,
                 timer: 3000,
                 background: '#ffcccb',
@@ -95,12 +86,11 @@ $(document).ready(function () {
         }
     });
     
+
     $(document).on("change", ".toggle-input:not(:disabled)", function () {
         const requirementId = $(this).closest(".requirement-post").data("id");
-        const isChecked = $(this).is(":checked");
-        const newStatus = isChecked ? "closed" : "open";
-    
-        // Proceed with AJAX for status update
+        const newStatus = $(this).is(":checked") ? "closed" : "open";
+
         $.ajax({
             url: "controller/requirement/close-open-post-requirements.php",
             type: "POST",
@@ -108,80 +98,54 @@ $(document).ready(function () {
             dataType: "json",
             success: function (response) {
                 if (response.success) {
-                    const successMessage = isChecked
-                        ? "Requirement is now closed"
-                        : "Requirement is now open";
                     Swal.fire({
                         toast: true,
                         position: 'top-right',
                         icon: 'success',
-                        title: successMessage,
+                        title: `Requirement is now ${newStatus}.`,
                         showConfirmButton: false,
                         timer: 3000,
-                        background: isChecked ? '#ffcccb' : '#b9f6ca', // Red for closed, green for open
-                        iconColor: isChecked ? '#d32f2f' : '#2e7d32', // Adjust icon color accordingly
-                        color: isChecked ? '#721c24' : '#155724', // Adjust text color accordingly
+                        background: newStatus === 'closed' ? '#ffcccb' : '#b9f6ca',
+                        iconColor: newStatus === 'closed' ? '#d32f2f' : '#2e7d32',
+                        color: newStatus === 'closed' ? '#721c24' : '#155724',
                         customClass: {
                             popup: 'mt-5'
                         }
                     });
                     loadPostedRequirements();
                 } else {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Error!",
-                        text: response.error,
-                        confirmButtonText: "OK"
-                    });
+                    Swal.fire("Error!", response.error, "error");
                 }
             },
             error: function () {
-                Swal.fire({
-                    icon: "error",
-                    title: "Error!",
-                    text: "Something went wrong.",
-                    confirmButtonText: "OK"
-                });
+                Swal.fire("Error!", "Something went wrong.", "error");
             }
         });
     });
-    
-    // Edit functionality
+
     $(document).on("click", ".edit-requirement", function (e) {
         e.preventDefault();
-        const requirementPost = $(this).closest(".requirement-post");
-        const requirementId = requirementPost.data("id");
-        const title = requirementPost.find("h6").text().trim();
-        const description = requirementPost.find("p").text().trim();
-        const deadline = requirementPost.find(".deadline").text().split(":")[1].trim();
-    
-        // Set the values in the form for editing
-        $("#requirementTitle").val(title);
-        $("#requirementDescription").val(description);
-    
-        // Correctly format the date for input[type="date"]
-        $("#deadline").val(formatDateForInput(deadline));
-    
-        // Show the update button, hide the post button
+        const requirement = $(this).closest(".requirement-post");
+        $("#requirementTitle").val(requirement.find("h6").text().trim());
+        $("#requirementDescription").val(requirement.find("p").text().trim());
+        $("#deadline").val(new Date(requirement.find(".deadline").text().split(":")[1].trim()).toISOString().split("T")[0]);
         $("#postRequirementBtn").hide();
-        $("#updatePostRequirementBtn").show().data("id", requirementId);
+        $("#updatePostRequirementBtn").show().data("id", requirement.data("id"));
     });
 
     $("#updatePostRequirementBtn").on("click", function () {
         const requirementId = $(this).data("id");
-        const updatedTitle = $("#requirementTitle").val();
-        const updatedDescription = $("#requirementDescription").val();
-        const updatedDeadline = $("#deadline").val();
-    
+        const data = {
+            requirement_id: requirementId,
+            title: $("#requirementTitle").val(),
+            description: $("#requirementDescription").val(),
+            deadline: $("#deadline").val()
+        };
+
         $.ajax({
             url: "controller/requirement/update-posted-requirements.php",
             type: "POST",
-            data: {
-                requirement_id: requirementId,
-                title: updatedTitle,
-                description: updatedDescription,
-                deadline: updatedDeadline
-            },
+            data,
             dataType: "json",
             success: function (response) {
                 if (response.success) {
@@ -195,49 +159,26 @@ $(document).ready(function () {
                         background: '#b9f6ca',
                         iconColor: '#2e7d32',
                         color: '#155724',
-                        customClass: { popup: 'mt-5' }
+                        customClass: {
+                            popup: 'mt-5'
+                        }
                     });
                     resetForm();
                     loadPostedRequirements();
                 } else {
-                    Swal.fire({
-                        toast: true,
-                        position: 'top-right',
-                        icon: 'error',
-                        title: 'Error updating requirement!',
-                        text: response.error,
-                        showConfirmButton: false,
-                        timer: 3000,
-                        background: '#ffcccb',
-                        iconColor: '#d32f2f',
-                        color: '#721c24',
-                        customClass: { popup: 'mt-5' }
-                    });
+                    Swal.fire("Error!", response.error, "error");
                 }
             },
             error: function () {
-                Swal.fire({
-                    toast: true,
-                    position: 'top-right',
-                    icon: 'error',
-                    title: 'Something went wrong!',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    background: '#ffcccb',
-                    iconColor: '#d32f2f',
-                    color: '#721c24',
-                    customClass: { popup: 'mt-5' }
-                });
+                Swal.fire("Error!", "Something went wrong.", "error");
             }
         });
     });
-    
 
-    // Delete functionality
     $(document).on("click", ".delete-requirement", function (e) {
         e.preventDefault();
         const requirementId = $(this).data("id");
-    
+
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to recover this!",
@@ -255,7 +196,6 @@ $(document).ready(function () {
                     dataType: "json",
                     success: function (response) {
                         if (response.success) {
-                            // Custom success SweetAlert
                             Swal.fire({
                                 toast: true,
                                 position: 'top-right',
@@ -264,11 +204,13 @@ $(document).ready(function () {
                                 showConfirmButton: false,
                                 timer: 3000,
                                 background: '#b9f6ca',
-                                iconColor: '#2e7d2f',
+                                iconColor: '#2e7d32',
                                 color: '#155724',
-                                customClass: { popup: 'mt-5' }
+                                customClass: {
+                                    popup: 'mt-5'
+                                }
                             });
-                            loadPostedRequirements();  // Refresh the posted requirements list
+                            loadPostedRequirements();
                         } else {
                             Swal.fire("Error!", response.error, "error");
                         }
@@ -281,24 +223,15 @@ $(document).ready(function () {
         });
     });
 
-    $("#cancelEditRequirementsBtn").on("click", function () {
-        resetForm(); // Reset form fields and button visibility
-    });
+    $("#cancelEditRequirementsBtn").on("click", resetForm);
 
-    // Reset form
     function resetForm() {
-        // Clear the form fields
-        $("#requirementTitle").val("");
-        $("#requirementDescription").val("");
-        $("#deadline").val("");
-
-        // Show the Post button, hide the Update button
+        $("#requirementTitle, #requirementDescription, #deadline").val("");
         $("#postRequirementBtn").show();
         $("#updatePostRequirementBtn").hide();
     }
-
-    window.loadPostedRequirements = loadPostedRequirements;
     
-    // Load requirements on page load
+    window.loadPostedRequirements = loadPostedRequirements;
+
     loadPostedRequirements();
 });

@@ -1,6 +1,4 @@
 $(document).ready(function () {
-    console.log("post-requirement.js loaded");
-
     $("#postRequirementBtn").on("click", function (e) {
         e.preventDefault();
 
@@ -57,11 +55,8 @@ $(document).ready(function () {
                     $("#requirementTitle").val('');
                     $("#requirementDescription").val('');
                     $(".deadline-input").val('');
-
-                    // Dynamically reload the requirements
-                    if (typeof loadPostedRequirements === "function") {
-                        loadPostedRequirements();
-                    }
+                    console.log("Triggering loadPostedRequirements()...");
+                    loadPostedRequirements();
                 } else {
                     Swal.fire({
                         toast: true,
