@@ -107,10 +107,10 @@ $(document).ready(function () {
                 `${segments[2] + 1} - ${segments[3]}`
             ],
             colors: [
-                'rgba(255, 0, 0, 0.85)',   // Red (danger) for first segment
-                'rgba(255, 165, 0, 0.85)', // Orange (warning) for second segment
-                'rgba(0, 0, 255, 0.85)',   // Blue (almost finished) for third segment
-                'rgba(0, 255, 0, 0.85)'    // Green (completed) for last segment
+                'rgba(204, 0, 0, 0.85)',   // Soft Red (less intense) for the first segment
+                'rgba(255, 165, 0, 0.85)',   // Muted Orange for the second segment
+                'rgba(70, 130, 180, 0.85)', // Soft Steel Blue for the third segment
+                'rgba(34, 139, 34, 0.85)'   // Soft Green for the last segment
             ],
             plotOptions: {
                 pie: {
