@@ -17,7 +17,7 @@
                     <div class="flex-shrink-1">
                     <div class="input-group">
                         <input type="text" id="stud-lists-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
-                        <button class="btn btn-outline-secondary btn-sm" type="button">
+                        <button class="btn btn-sm btn-outline-secondary" type="button">
                             <svg class="table-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                 <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
                             </svg>
@@ -25,8 +25,8 @@
                     </div>
                 </div>
                 </div>
-                <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#setHoursModal">
-                    Interns Set Hours
+                <button class="btn btn-sm btn-primary " type="button" data-bs-toggle="modal" data-bs-target="#setHoursModal">
+                    Set OJT Hours
                 </button>
             </div>
         </div>
@@ -104,14 +104,12 @@
     </div>
 </div>
 
-
-
 <!-- Modal for setting hours -->
 <div class="modal fade" id="setHoursModal" tabindex="-1" aria-labelledby="setHoursModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="setHoursModalLabel">Set Hours for Interns</h5>
+                <h5 class="modal-title" id="setHoursModalLabel">Set Hours for Students</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -126,7 +124,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="saveHoursButton">Save Hours</button>
+                <button type="button" class="btn btn-primary" id="saveHoursButton">Set Hours</button>
             </div>
         </div>
     </div>

@@ -8,17 +8,19 @@ $(document).ready(function () {
             Array.isArray(data.segments) &&
             Array.isArray(data.counts) &&
             data.segments.length === 4 &&
-            data.counts.length === 4
+            data.counts.length === 4 &&
+            data.segments.every((segment) => typeof segment === 'number') &&
+            data.counts.every((count) => typeof count === 'number')
         );
     }
 
     // Function to fetch the user analytics data
     function fetchUserAnalytics() {
-        // Add a timestamp to prevent caching
+        const timestamp = new Date().getTime(); // Prevent cache by adding timestamp
         $.ajax({
             url: 'controller/dashboard/retrieve-ojt-hours-analytics.php',
             method: 'GET',
-            data: { timestamp: new Date().getTime() }, // Prevent cache
+            data: { timestamp: timestamp }, // Prevent cache
             success: function (response) {
                 console.log("Raw response from PHP:", response);
 
@@ -38,6 +40,8 @@ $(document).ready(function () {
             },
             error: function (xhr, status, error) {
                 console.error('AJAX error:', error);
+                console.error('Status:', status);
+                console.error('Response:', xhr.responseText); // More detailed error logging
                 showError(`There was an error processing your request. Status: ${status}`);
             }
         });
@@ -101,16 +105,16 @@ $(document).ready(function () {
                 }
             },
             labels: [
-                `0 - ${segments[0]}`,
-                `${segments[0] + 1} - ${segments[1]}`,
+                `${segments[2] + 1} - ${segments[3]}`,
                 `${segments[1] + 1} - ${segments[2]}`,
-                `${segments[2] + 1} - ${segments[3]}`
+                `${segments[0] + 1} - ${segments[1]}`,
+                `0 - ${segments[0]}`,
             ],
             colors: [
-                'rgba(204, 0, 0, 0.85)',   // Soft Red (less intense) for the first segment
-                'rgba(255, 165, 0, 0.85)',   // Muted Orange for the second segment
+                'rgba(34, 139, 34, 0.85)',   // Soft Green for the last segment
                 'rgba(70, 130, 180, 0.85)', // Soft Steel Blue for the third segment
-                'rgba(34, 139, 34, 0.85)'   // Soft Green for the last segment
+                'rgba(255, 165, 0, 0.85)',   // Muted Orange for the second segment
+                'rgba(204, 0, 0, 0.85)',   // Soft Red (less intense) for the first segment
             ],
             plotOptions: {
                 pie: {
