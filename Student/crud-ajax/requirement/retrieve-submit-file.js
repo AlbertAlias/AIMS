@@ -131,14 +131,10 @@ $(document).ready(function () {
                                     popup: 'mt-5'
                                 }
                             });
-                            $(`.delete-icon[data-id="${submitId}"]`)
-                                .closest('.task-card')
-                                .fadeOut(300, function () {
-                                    $(this).remove();
-                                });
-
-                            loadCoordinatorRequirements();
+                            $('#taskCardContainer').empty();
+                            $('.approved-file-container').empty();
                             window.loadStudentFiles();
+                            loadCoordinatorRequirements();
                         } else {
                             Swal.fire('Error', 'Error deleting file: ' + response.error, 'error');
                         }
