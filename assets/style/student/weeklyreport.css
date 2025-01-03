@@ -2,7 +2,6 @@
     position: relative;
 }
 
-/* Modal Styles */
 .reportModal {
     display: none;
     top: 0;
@@ -16,7 +15,6 @@
     padding: 0 !important;
 }
   
-/* Modal Content */
 .report-modal-content {
     position: relative;
     width: 100%;
@@ -27,24 +25,21 @@
     padding: 0 !important;
 }
   
-/* PDF Viewer inside the modal */
 .report-modal-content iframe {
     width: 100%;
     height: 100%;
-    border: none; /* Remove border */
+    border: none;
 }
 
-/* Image Viewer inside the modal */
 .report-modal-content img {
-    max-width: 100%;  /* Ensure image doesn’t stretch beyond the container */
-    max-height: 100%; /* Ensure image doesn’t stretch beyond the container */
-    object-fit: contain; /* Ensure the image maintains its aspect ratio */
-    display: block; /* Make sure the image is centered */
-    margin: auto; /* Center the image */
-    background-color: #f4f4f488; /* Add background color around the image */
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+    background-color: #f4f4f42b;
 }
   
-  /* Close button */
 .close {
     position: absolute;
     top: 10px;
@@ -56,11 +51,36 @@
     z-index: 1001; /* Ensure the close button is always on top */
 }
 
-
 .svg-icon {
     width: 16px;
     height: 16px;
     margin-right: 3px;
     vertical-align: -0.125em;
     fill: currentColor;
+}
+
+.file-details-container {
+    display: inline-block; /* Wraps file details as a single unit */
+    max-width: 200px; /* Set the maximum width for the entire block */
+    text-align: left;
+}
+
+.file-name {
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden;    /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add an ellipsis for overflowing text */
+    max-width: 200px;    /* Set a maximum width for the file name */
+    margin: 0;           /* Reset margin */
+}
+
+.text-muted {
+    white-space: nowrap; /* Prevent wrapping */
+    overflow: hidden;    /* Hide overflowing text */
+    text-overflow: ellipsis; /* Add an ellipsis */
+    max-width: 200px; /* Match width of file name */
+    margin: 0;         /* Reset margin */
+    font-size: 0.85em; /* Slightly smaller font size */
+    color: gray;
+    display: block;    /* Ensure this appears below the file name */
+    margin-top: 2px;   /* Add slight spacing below the file name */
 }

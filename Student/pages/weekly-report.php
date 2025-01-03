@@ -1,6 +1,6 @@
 <div class="container-fluid bg-light p-0 m-0" id="weeklyreport" style="display: none;">
     <div class="row">
-        <div class="col-12 col-md-12 col-lg-4">
+        <div class="col-12 col-md-12 col-lg-5">
             <div class="card mb-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <div class="card-body">
                     <h5 class="mb-2">Upload Weekly Report</h5>
@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-12 col-lg-8">
+        <div class="col-12 col-md-12 col-lg-7">
             <h4 class="border-bottom border-secondary pb-2 mb-2">Weekly Reports</h4>
             <div id="weeklypostedRequirementsContainer" class="row"></div>
         </div>
