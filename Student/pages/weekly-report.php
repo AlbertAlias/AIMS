@@ -20,10 +20,15 @@
                         </div>
                         <div class="mb-2">
                             <label for="file" class="form-label">Attach File/Picture (PDF, JPG, PNG)</label>
-                            <input type="file" class="form-control" name="file" id="file" accept=".png, .jpg, .jpeg, .pdf">
-                            <div id="filePreview" style="margin-top: 15px;"></div>
+                            <label class="btn btn-white d-flex align-items-center justify-content-center border-secondary mb-3" style="cursor: pointer;">
+                                <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"/>
+                                </svg> Add File
+                                <input type="file" id="reportInput" style="display: none;" accept=".png, .jpg, .jpeg, .pdf">
+                            </label>
+                            <div id="reportContainer" class="mt-1"></div>
                         </div>
-                        <button type="submit" class="btn btn-success w-100">Submit Report</button>
+                        <button id="turnInReportButton" class="btn btn-success w-100 mb-2" disabled>Turn in report</button>
                     </form>
                 </div>
             </div>
@@ -36,27 +41,10 @@
     </div>
 </div>
 
-
-<!-- Modal for preview -->
-<!-- <div id="pdfModal" class="modal" style="display: none;">
-    <div class="modal-content">
-    <span id="closeModal" class="close">&times;</span>
-        <iframe id="pdfViewer" src="" frameborder="0"></iframe>
-    </div>
-</div> -->
-
-<!-- Modal for PDF Viewer -->
-<!-- <div id="pdfModal" class="modal">
-    <div class="modal-content">
-        <iframe id="pdfViewer" width="100%" height="500px" style="border: none;"></iframe>
-        <button id="closeModal" class="btn btn-danger mt-3">Close</button>
-    </div>
-</div> -->
-
-<!-- Modal for preview -->
-<div id="weekly-reports-modal" class="reportsModal" style="display: none;">
-    <div class="weekly-reports-content">
-        <span id="closeModal" class="close">&times;</span>
-        <div id="modalContentContainer"></div>
+<div id="reportModal" class="modal" style="display: none;">
+    <div class="report-modal-content">
+        <span id="report-closeModal" class="close">&times;</span>
+        <iframe id="reportViewer" src="" frameborder="0"></iframe>
+        <img id="imageViewer" src="" alt="Preview" style="width: 100%; height: 100%; display: none;" />
     </div>
 </div>
