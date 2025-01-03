@@ -134,7 +134,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const studentIdInput = document.querySelector('.student-id');
         const requirementIdInput = document.querySelector('.requirement-id');
         const taskCardContainer = document.getElementById('taskCardContainer');
-        const requirementTitleElement = document.querySelector('.card-title');
         const requirementId = requirementIdInput.value;
         const studentId = studentIdInput.value;
 

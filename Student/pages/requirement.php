@@ -1,7 +1,7 @@
 <div class="container-fluid p-0 m-0" id="requirement" style="display: none;">
     <div class="row">
         <div class="col-12 col-md-5 col-lg-5" >
-            <div class="card shadow-sm" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+            <div class="card" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <div class="card-body">
                     <h5 class="card-title">Upload requirement</h5>
                     <input type="hidden" class="requirement-id" value="${req.requirement_id}">
@@ -37,7 +37,7 @@
 <!-- Modal for preview -->
 <div id="pdfModal" class="modal" style="display: none;">
     <div class="pdf-modal-content">
-    <span id="closeModal" class="close">&times;</span>
+        <span id="closeModal" class="close">&times;</span>
         <iframe id="pdfViewer" src="" frameborder="0"></iframe>
     </div>
 </div>

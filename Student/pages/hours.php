@@ -1,6 +1,6 @@
-<div class="container-fluid bg-light" id="hours" style="display: none;">
+<div class="container-fluid bg-light p-0 m-0" id="hours" style="display: none;">
     <div class="row">
-        <div class="col-12 col-md-12 col-lg-4 m-0 p-0">
+        <div class="col-12 col-md-12 col-lg-4">
             <div class="card shadow-sm mb-3 me-4">
                 <div class="card-body">
                     <h5 class="mb-3">Submit OJT Hours</h5>
