@@ -73,7 +73,7 @@
     margin: 0;           /* Reset margin */
 }
 
-.text-muted {
+.file-size {
     white-space: nowrap; /* Prevent wrapping */
     overflow: hidden;    /* Hide overflowing text */
     text-overflow: ellipsis; /* Add an ellipsis */

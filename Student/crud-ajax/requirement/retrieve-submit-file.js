@@ -48,15 +48,15 @@ $(document).ready(function () {
                             // Determine the content for the description based on the status
                             let additionalInfo = '';
                             if (fileStatus.toLowerCase() === 'pending') {
-                                additionalInfo = `<p class="file-description text-muted" style="font-size: 0.835rem;">${new Date(submissionDate).toLocaleDateString('en-US', {
+                                additionalInfo = `<p class="file-description m-0 p-0 text-muted" style="font-size: 0.835rem;">${new Date(submissionDate).toLocaleDateString('en-US', {
                                     month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true
                                 })}</p>`;
                             } else if (fileStatus.toLowerCase() === 'rejected') {
-                                additionalInfo = `<p class="file-description text-danger" style="font-size: 0.735rem;">${remarks}</p>`;
+                                additionalInfo = `<p class="file-description m-0 p-0 text-danger" style="font-size: 0.735rem;">${remarks}</p>`;
                             }
 
                             const fileCardHtml = `
-                            <div class="card task-card px-3 py-3 mt-1 mb-3 col-12 col-md-6 col-lg-4 w-100" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; transition: transform 0.3s ease;" data-file-name="${fileName}">
+                            <div class="card task-card px-3 py-3 mb-2 col-12 col-md-6 col-lg-4 w-100" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; transition: transform 0.3s ease;" data-file-name="${fileName}">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex flex-column justify-content-center">
                                         <div class="card-title text-success fw-bold" style="font-size: 0.835rem;">${fileName}</div>

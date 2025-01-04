@@ -27,8 +27,9 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-7 col-lg-7" id="postedRequirementsContainer">
+        <div class="col-12 col-md-7 col-lg-7">
             <h5 class="border-bottom border-secondary pb-2 mb-2">Requirements</h5>
+            <div id="postedRequirementsContainer"></div>
             <!-- Dynamically populated requirement posts will appear here -->
         </div>
     </div>

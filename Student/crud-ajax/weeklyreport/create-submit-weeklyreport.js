@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const fileDetails = document.createElement('div');
             fileDetails.innerHTML = ` 
                 <p class="file-name mb-0" title="${file.name}"><strong>${file.name}</strong></p>
-                <p class="text-muted small mb-0">${(file.size / 1024).toFixed(2)} KB</p>
+                <p class="file-size text-muted small mb-0">${(file.size / 1024).toFixed(2)} KB</p>
             `;
 
             const closeButton = document.createElement('button');
