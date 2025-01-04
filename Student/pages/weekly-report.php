@@ -7,19 +7,19 @@
                     <input type="hidden" class="student-id">
                     <form id="weeklyReportForm" method="POST" enctype="multipart/form-data">
                         <div class="mb-2">
-                            <label for="title" class="form-label">Report Title</label>
+                            <label for="title" class="form-label">Report Title <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="title" id="title" required>
                         </div>
                         <div class="mb-2">
-                            <label for="week_start" class="form-label">Week Start</label>
+                            <label for="week_start" class="form-label">Week Start <span class="text-danger">*</span></label>
                             <input type="date" class="form-control" name="week_start" id="week_start" required>
                         </div>
                         <div class="mb-2">
-                            <label for="week_end" class="form-label">Week End</label>
+                            <label for="week_end" class="form-label">Week End <span class="text-danger">*</span></label>
                             <input type="date" class="form-control" name="week_end" id="week_end" required>
                         </div>
                         <div class="mb-2">
-                            <label for="file" class="form-label">Attach File/Picture (PDF, JPG, PNG)</label>
+                            <label for="file" class="form-label">Attach File/Picture (PDF, JPG, PNG) <span class="text-danger">*</span></label>
                             <label class="btn btn-white d-flex align-items-center justify-content-center border-secondary mb-3" style="cursor: pointer;">
                                 <svg class="svg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                     <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"/>

@@ -172,13 +172,17 @@ document.addEventListener('DOMContentLoaded', function () {
         const fileCard = document.querySelector('#reportContainer .d-flex');
         const studentIdInput = document.querySelector('.student-id');
         const studentId = studentIdInput.value;
+        const title = document.getElementById('title').value.trim();
+        const weekStart = document.getElementById('week_start').value.trim();
+        const weekEnd = document.getElementById('week_end').value.trim();
 
-        if (!fileCard) {
+        // Check if required fields are empty
+        if (!title || !weekStart || !weekEnd) {
             Swal.fire({
                 toast: true,
-                position: 'top-end',
-                icon: 'error',
-                title: 'No file uploaded! Please upload a file before submitting.',
+                position: 'top-right',
+                icon: 'success',
+                title: 'Please fill in all required fields!',
                 showConfirmButton: false,
                 timer: 2000,
                 background: '#f8d7da',
@@ -192,24 +196,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         const file = fileInput.files[0];
-        if (!file) {
-            Swal.fire({
-                toast: true,
-                position: 'top-end',
-                icon: 'error',
-                title: 'No file selected! Please upload a file before submitting.',
-                showConfirmButton: false,
-                timer: 2000,
-                background: '#f8d7da',
-                iconColor: '#721c24',
-                color: '#721c24',
-                customClass: {
-                    popup: 'mt-5'
-                }
-            });
-            return;
-        }
-
         formData.append('file', file);
         formData.append('student_id', studentId);
 
@@ -234,9 +220,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         popup: 'mt-5'
                     }
                 });
-                document.getElementById('title').value = ''; // Reset title
-                document.getElementById('week_start').value = ''; // Reset week start
-                document.getElementById('week_end').value = ''; // Reset week end
+                document.getElementById('title').value = '';
+                document.getElementById('week_start').value = '';
+                document.getElementById('week_end').value = '';
                 fileContainer.innerHTML = '';
                 fileInput.value = '';
                 submitButton.disabled = true;
