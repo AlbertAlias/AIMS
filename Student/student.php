@@ -70,7 +70,7 @@
                     <?php include "pages/dashboard.php"; ?>
                     <?php include "pages/requirement.php"; ?>
                     <?php include "pages/weekly-report.php"; ?>
-                    <?php include "pages/hours.php"; ?>
+                    <?php include "pages/ojthours.php"; ?>
                     <?php include "pages/requirements-folder.php"; ?>
                     <?php include "pages/profile.php"; ?>
                 </div>
@@ -103,9 +103,9 @@
     <script src="crud-ajax/weeklyreport/retrieve-weekly-report.js"></script>
     <script src="crud-ajax/requirement/create-submit-file.js"></script>
 
-    <script src="crud-ajax/hours/hours.js"></script>
     <script src="crud-ajax/hours/submit_hours.js"></script>
     <script src="crud-ajax/hours/retrieve_hours.js"></script>
+    <script src="function/hours/total-ojthours-inputs.js"></script>
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>
 </html>
