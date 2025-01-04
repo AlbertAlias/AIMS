@@ -104,7 +104,7 @@
     <script src="crud-ajax/requirement/create-submit-file.js"></script>
 
     <script src="crud-ajax/hours/submit_hours.js"></script>
-    <script src="crud-ajax/hours/retrieve_hours.js"></script>
+    <script src="crud-ajax/hours/retrieve-ojt-hours.js"></script>
     <script src="function/hours/total-ojthours-inputs.js"></script>
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>
