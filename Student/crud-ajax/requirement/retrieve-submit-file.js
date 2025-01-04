@@ -56,10 +56,10 @@ $(document).ready(function () {
                             }
 
                             const fileCardHtml = `
-                            <div class="card task-card px-3 py-1 mt-1 mb-3 col-12 col-md-6 col-lg-4 w-100" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; transition: transform 0.3s ease;" data-file-name="${fileName}">
+                            <div class="card task-card px-3 py-3 mt-1 mb-3 col-12 col-md-6 col-lg-4 w-100" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; transition: transform 0.3s ease;" data-file-name="${fileName}">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex flex-column justify-content-center">
-                                        <div class="card-title text-success fw-bold mt-3" style="font-size: 0.835rem;">${fileName}</div>
+                                        <div class="card-title text-success fw-bold" style="font-size: 0.835rem;">${fileName}</div>
                                         ${additionalInfo}
                                     </div>
                                     <div class="d-flex align-items-center">

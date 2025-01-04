@@ -29,13 +29,15 @@
                             <div id="reportContainer" class="mt-1"></div>
                         </div>
                         <button id="turnInReportButton" class="btn btn-success w-100 mb-2" disabled>Turn in report</button>
+                        <!-- <button id="updateReportButton" class="btn btn-success w-100 mb-2" type="button" style="display: none;" disabled>Update report</button> -->
+                        <!-- DON'T REMOVE ITS FOR THE EDIT DROPDOWN <li><button class="dropdown-item edit-btn" data-id="${report.id}">Edit</button></li> -->
                     </form>
                 </div>
             </div>
         </div>
 
         <div class="col-12 col-md-12 col-lg-7">
-            <h4 class="border-bottom border-secondary pb-2 mb-2">Weekly Reports</h4>
+            <h5 class="border-bottom border-secondary pb-2 mb-2">Weekly Reports</h5>
             <div id="weeklypostedRequirementsContainer" class="row"></div>
         </div>
     </div>

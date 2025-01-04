@@ -1,150 +1,140 @@
-// document.addEventListener('DOMContentLoaded', function () {
-//     async function fetchWeeklyReports() {
-//       try {
-//         const response = await fetch('controller/weeklyreport/retrieve_weeklyreport.php');
-//         const result = await response.json();
-  
-//         if (result.success) {
-//           renderReports(result.data);
-//         } else {
-//           alert('Failed to load reports: ' + result.error);
-//         }
-//       } catch (error) {
-//         console.error('Unexpected error:', error);
-//         alert('An unexpected error occurred');
-//       }
-//     }
-  
-//     function renderReports(data) {
-//       const container = document.getElementById('weeklypostedRequirementsContainer');
-//       container.innerHTML = ''; // Clear existing data
-  
-//       if (data.length === 0) {
-//         container.innerHTML = '<div class="col-12">No weekly reports available.</div>';
-//         return;
-//       }
-  
-//       data.forEach(report => {
-//         const reportCard = `
-//           <div class="col-12 col-md-6 mb-3">
-//             <div class="card shadow-sm">
-//               <div class="card-body">
-//                 <h5 class="card-title">Student ID: ${report.student_id}</h5>
-//                 <p class="card-text">Week Start: ${report.week_start}</p>
-//                 <p class="card-text">Week End: ${report.week_end}</p>
-//                 ${report.file_path ? `<a href="${report.file_path}" class="btn btn-info btn-sm" target="_blank">View Report</a>` : ''}
-//               </div>
-//             </div>
-//           </div>
-//         `;
-//         container.insertAdjacentHTML('beforeend', reportCard);
-//       });
-//     }
-  
-//     fetchWeeklyReports();
-//   });
-  
-// eto yung nagana
-document.addEventListener('DOMContentLoaded', function () {
-    async function fetchWeeklyReports() {
-      try {
-        const response = await fetch('controller/weeklyreport/retrieve_weeklyreport.php');
-        const result = await response.json();
-  
-        if (result.success) {
-          renderReports(result.data);
-        } else {
-          alert('Failed to load reports: ' + result.error);
-        }
-      } catch (error) {
-        console.error('Unexpected error:', error);
-        alert('An unexpected error occurred');
-      }
+$(document).ready(function () {
+    function fetchWeeklyReports() {
+        $.ajax({
+            url: 'controller/weeklyreport/retrieve-weekly-report.php',
+            method: 'GET',
+            dataType: 'json',
+            success: function (result) {
+                if (result.success) {
+                    renderReports(result.data);
+                } else {
+                    alert('Failed to load reports: ' + result.error);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Unexpected error:', error);
+                alert('An unexpected error occurred');
+            }
+        });
     }
-  
+
     function renderReports(data) {
-      const container = document.getElementById('weeklypostedRequirementsContainer');
-      container.innerHTML = ''; // Clear existing data
-  
-      if (data.length === 0) {
-        container.innerHTML = '<div class="col-12">No weekly reports available.</div>';
-        return;
-      }
-  
-      data.forEach(report => {
-        const reportCard = `
-          <div class="col-12 col-md-6 mb-3">
-            <div class="card shadow-sm">
-              <div class="card-body">
-                <h5 class="card-title">${report.title}</h5>
-                <p class="card-text">Week Start: ${report.week_start}</p>
-                <p class="card-text">Week End: ${report.week_end}</p>
-                ${report.file_path ? `<a href="${report.file_path}" class="btn btn-info btn-sm" target="_blank">View Report</a>` : ''}
-              </div>
+        const $container = $('#weeklypostedRequirementsContainer');
+        $container.empty();
+    
+        if (data.length === 0) {
+            $container.html('<div class="col-12">No weekly reports available.</div>');
+            return;
+        }
+
+        const formatDate = (dateString) => {
+            const options = { month: 'short', day: 'numeric' };
+            return new Intl.DateTimeFormat('en-US', options).format(new Date(dateString));
+        };
+    
+        data.forEach(function (report) {
+            const formattedStart = formatDate(report.week_start);
+            const formattedEnd = formatDate(report.week_end);
+
+            const reportCard = `
+            <div class="col-12 mb-3">
+                <div class="card report-card px-3 py-3 position-relative" style="border-left: 4px solid #198754; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;" data-file-path="${report.file_path}">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <!-- Title with Dropdown -->
+                        <div>
+                            <p class="mb-1" style="font-weight: 500; color: #333; font-size: 1.1rem;">
+                                <span style="color: #198754;">${report.title}</span>
+                            </p>
+                            <div class="card-text m-0 p-0" style="font-size: 1rem; color: #555;">
+                                ${formattedStart} to ${formattedEnd}
+                            </div>
+                        </div>
+                        <!-- Dropdown Icon -->
+                        <div class="dropdown ms-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" width="34" height="34" class="dropdown-toggle dropdown-icon" data-bs-toggle="dropdown" aria-expanded="false">
+                                <path fill="#198754" d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"/>
+                            </svg>
+                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-sm-start">
+                                <li><button class="dropdown-item delete-btn" data-id="${report.id}">Delete</button></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        `;
-        container.insertAdjacentHTML('beforeend', reportCard);
-      });
+            `;
+            $container.append(reportCard);
+        });
+    
+        // Attach the click event for opening the modal
+        $('.card').click(function () {
+            const filePath = $(this).data('file-path');
+            showFileInModal(filePath);
+        });
+
+        // Prevent card click when SVG is clicked
+        $('.dropdown-icon').click(function (event) {
+            event.stopPropagation();
+        });
+
+        $('.delete-btn').click(function (event) {
+            event.stopPropagation(); // Prevent the card click event from firing
+            const reportId = $(this).data('id');
+            deleteReport(reportId);
+        });
     }
-  
+
+    function showFileInModal(filePath) {
+        const reportModal = document.getElementById('reportModal');
+        const reportViewer = document.getElementById('reportViewer');
+        const imageViewer = document.getElementById('imageViewer');
+
+        // Log the filePath to see what it's getting
+        console.log("File path received: ", filePath);
+
+        const fileURL = filePath; // The file URL should be complete and valid at this point
+
+        // Check if the file is a PDF or image
+        if (filePath.endsWith('.pdf')) {
+            reportViewer.src = `${fileURL}#toolbar=0`;
+            reportViewer.style.display = 'block';
+            imageViewer.style.display = 'none';
+        } else if (['.jpg', '.jpeg', '.png'].some(ext => filePath.endsWith(ext))) {
+            imageViewer.src = fileURL;
+            imageViewer.style.display = 'block';
+            reportViewer.style.display = 'none';
+        }
+
+        // Show modal
+        reportModal.style.display = 'flex';
+    }
+
+    document.getElementById('report-closeModal').addEventListener('click', function () {
+        document.getElementById('reportModal').style.display = 'none';
+        document.getElementById('reportViewer').src = '';
+        document.getElementById('imageViewer').src = '';
+    });
+
+    function deleteReport(reportId) {
+        $.ajax({
+            url: 'controller/weeklyreport/delete-weekly-report.php',
+            method: 'POST',
+            data: { id: reportId },
+            dataType: 'json', // Ensure you expect JSON response
+            success: function(response) {
+                console.log('Response from server:', response); // Log the full response for debugging
+                if (response.success) {
+                    alert('Report deleted successfully');
+                    fetchWeeklyReports();  // Refresh the report list after deletion
+                } else {
+                    alert('Failed to delete report: ' + response.error);
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Unexpected error:', error);
+                alert('An unexpected error occurred while deleting the report');
+            }
+        });
+    }
+
     fetchWeeklyReports();
 });
-
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     async function fetchWeeklyReports() {
-//         try {
-//             const response = await fetch('controller/weeklyreport/retrieve_weeklyreport.php');
-//             const result = await response.json();
-
-//             if (result.success) {
-//                 renderReports(result.data);
-//             } else {
-//                 alert('Failed to load reports: ' + result.error);
-//             }
-//         } catch (error) {
-//             console.error('Unexpected error:', error);
-//             alert('An unexpected error occurred');
-//         }
-//     }
-
-//     function renderReports(data) {
-//         const container = document.getElementById('weeklypostedRequirementsContainer');
-//         container.innerHTML = ''; // Clear existing data
-
-//         if (data.length === 0) {
-//             container.innerHTML = '<div class="col-12">No weekly reports available.</div>';
-//             return;
-//         }
-
-//         data.forEach(report => {
-//             const reportCard = `
-//                 <div class="col-12 col-md-6 mb-3">
-//                     <div class="card shadow-sm">
-//                         <div class="card-body">
-//                             <h5 class="card-title">${report.title}</h5>
-//                             <p class="card-text">Week Start: ${report.week_start}</p>
-//                             <p class="card-text">Week End: ${report.week_end}</p>
-//                             ${report.file_path ? `<a href="${report.file_path}" class="btn btn-info btn-sm view-report-link" target="_blank">View Report</a>` : ''}
-//                         </div>
-//                     </div>
-//                 </div>
-//             `;
-//             container.insertAdjacentHTML('beforeend', reportCard);
-//         });
-
-//         // Add click event for report links to open in modal
-//         container.querySelectorAll('.view-report-link').forEach(link => {
-//             link.addEventListener('click', function (event) {
-//                 event.preventDefault();
-//                 const filePath = link.href; // Get the file path from the link
-//                 const pdfViewer = document.getElementById('pdfViewer'); // Assuming you have an iframe with id="pdfViewer" in the modal
-//                 pdfViewer.src = filePath; // Set the file path as the source of the iframe
-//                 $('#pdfModal').modal('show'); // Show the modal
-//             });
-//         });
-//     }
-
-//     fetchWeeklyReports();
-// });

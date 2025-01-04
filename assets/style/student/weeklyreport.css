@@ -84,3 +84,49 @@
     display: block;    /* Ensure this appears below the file name */
     margin-top: 2px;   /* Add slight spacing below the file name */
 }
+
+.report-card:hover {
+    transition: background-color 0.3s ease;
+    cursor: pointer; /* Change cursor to hand */
+    background-color: #f4f4f4df; /* Light gray background on hover */
+}
+
+.card .dropdown {
+    margin-left: auto; /* Ensures dropdown aligns to the far-right */
+    position: relative; /* Keeps the dropdown positioning relative to its container */
+}
+
+.card .dropdown svg {
+    vertical-align: middle; /* Centers the SVG vertically */
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    max-width: 200px; /* Limit dropdown width */
+    margin-top: 30px !important; /* Add space between the toggle icon and dropdown */
+    overflow: hidden;
+    position: absolute;
+    transform: translate3d(0px, 0px, 0px) !important; /* Prevent auto placement issues */
+}
+
+.dropdown-menu.dropdown-menu-end {
+    left: auto !important; /* Ensure right-side alignment */
+    right: 0 !important;
+}
+
+.card {
+    overflow: visible; /* Ensure the dropdown doesn't clip with card's boundary */
+    position: relative;
+}
+
+.dropdown-icon {
+    position: relative;
+    cursor: pointer;
+    border-radius: 50%; /* Make it circular */
+    padding: 6px; /* Add padding for circle effect */
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-icon:hover {
+    background-color: #dcdcdc; /* Light gray background */
+}

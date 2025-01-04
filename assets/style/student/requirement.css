@@ -10,7 +10,7 @@
 .file-preview {
   display: flex;
   align-items: center;
-  padding: 8px;
+  padding: 10px;
   width: 100%;
   max-width: 900px;
   background: #f9f9f9;
