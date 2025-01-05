@@ -100,10 +100,10 @@
     <script src="crud-ajax/profile/update-users-info.js"></script>
     <script src="function/profile/profile-details.js"></script>
 
-    <script src="crud-ajax/requirement/retrieve-stud-lists.js"></script>
-    <script src="crud-ajax/requirement/retrieve-companies.js"></script>
-    <script src="crud-ajax/requirement/retrieve-supervisors.js"></script>
-    <script src="crud-ajax/requirement/create-assign-supervisors.js"></script>
+    <script src="crud-ajax/student-lists/retrieve-stud-lists.js"></script>
+    <script src="crud-ajax/student-lists/retrieve-companies.js"></script>
+    <script src="crud-ajax/student-lists/retrieve-supervisors.js"></script>
+    <script src="crud-ajax/student-lists/create-assign-supervisors.js"></script>
 
     <script src="crud-ajax/requirement/retrieve-posted-requirements.js"></script>
     <script src="crud-ajax/requirement/retrieve-pending-requirements.js"></script>

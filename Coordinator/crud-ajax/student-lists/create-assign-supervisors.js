@@ -1,15 +1,14 @@
 $(document).on('click', '.open-modal-btn', function () {
     var studentId = $(this).data('user-id');
-    console.log('Student ID:', studentId); // Log the student ID to verify it's being set
-    $('#assignSupervisorModal').data('student-id', studentId); // Store student ID in modal
+    console.log('Student ID:', studentId);
+    $('#assignSupervisorModal').data('student-id', studentId);
 });
 
 $('#assignSupervisorBtn').on('click', function () {
-    var company = $('#companySelect').val(); // Get selected company
-    var supervisorId = $('#supervisorSelect').val(); // Get selected supervisor ID
-    var studentId = $('#assignSupervisorModal').data('student-id'); // Retrieve the student ID from modal
+    var company = $('#companySelect').val();
+    var supervisorId = $('#supervisorSelect').val();
+    var studentId = $('#assignSupervisorModal').data('student-id');
 
-    // Validate inputs in the correct order
     if (!company || company === "Assign Company") {
         Swal.fire({
             toast: true,
@@ -64,9 +63,8 @@ $('#assignSupervisorBtn').on('click', function () {
         return;
     }
 
-    // Send the data to the server using AJAX
     $.ajax({
-        url: 'controller/requirement/create-assign-supervisors.php',
+        url: 'controller/student-lists/create-assign-supervisors.php',
         type: 'POST',
         data: {
             company: company,
@@ -93,7 +91,7 @@ $('#assignSupervisorBtn').on('click', function () {
                         popup: 'mt-5'
                     }
                 });
-                $('#assignSupervisorModal').modal('hide'); // Close the modal
+                $('#assignSupervisorModal').modal('hide');
             } else {
                 Swal.fire({
                     toast: true,
