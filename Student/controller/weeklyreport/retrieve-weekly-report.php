@@ -2,12 +2,28 @@
     header('Content-Type: application/json');
     include '../../../dbconn.php';
 
+    // Start session to access the logged-in user's ID
+    session_start();
+
     try {
-        // Query to fetch the reports along with the title and file path
+        // Check if the user is logged in (i.e., user_id is set in the session)
+        if (!isset($_SESSION['user_id'])) {
+            throw new Exception("User not logged in.");
+        }
+
+        // Get the logged-in user's student_id from session
+        $student_id = $_SESSION['user_id'];
+
+        // Query to fetch the reports for the logged-in student
         $sql = "SELECT wr.id, wr.student_id, wr.title, wr.week_start, wr.week_end, wr.file_path 
-                FROM weekly_reports AS wr";
-        
-        $result = $conn->query($sql);
+                FROM weekly_reports AS wr
+                WHERE wr.student_id = ?";
+
+        // Prepare the statement to prevent SQL injection
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $student_id);  // Bind the student_id parameter to the query
+        $stmt->execute();
+        $result = $stmt->get_result();
 
         if ($result) {
             $reports = [];
@@ -33,5 +49,7 @@
         echo json_encode(['success' => false, 'error' => $e->getMessage()]);
     }
 
+    // Close the statement and connection
+    $stmt->close();
     $conn->close();
 ?>
