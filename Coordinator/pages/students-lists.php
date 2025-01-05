@@ -129,3 +129,19 @@
         </div>
     </div>
 </div>
+
+<!-- OJT Hours Modal -->
+<div class="modal fade" id="ojthoursModal" tabindex="-1" aria-labelledby="ojthoursModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header d-flex justify-content-between align-items-center w-100">
+                <h5 class="text-center mb-0">OJT Hours</h5>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

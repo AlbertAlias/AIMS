@@ -81,8 +81,12 @@
             $html .= "<td>{$supervisorCompany}</td>";
             $html .= "<td>{$supervisorAddress}</td>";
             $html .= '<td>
-                <button class="btn btn-success btn-sm open-modal-btn" data-bs-toggle="modal" data-bs-target="#assignSupervisorModal"
-                        data-user-id="' . $row['userID'] . '">Assign</button>
+                <button class="btn btn-success btn-sm open-modal-btn" data-bs-toggle="modal" 
+                    data-bs-target="#assignSupervisorModal" data-user-id="' . $row['userID'] . '">Assign
+                </button>
+                <button class="btn btn-primary btn-sm open-ojthours-btn" data-bs-toggle="modal" 
+                    data-bs-target="#ojthoursModal" data-user-id="' . $row['userID'] . '">View Hours
+                </button>
             </td>';
             $html .= '</tr>';
         }
