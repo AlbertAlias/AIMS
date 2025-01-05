@@ -101,7 +101,7 @@
     cursor: pointer;
 }
 
-.dropdown-menu {
+.report-dropdown-menu {
     max-width: 200px; /* Limit dropdown width */
     margin-top: 30px !important; /* Add space between the toggle icon and dropdown */
     overflow: hidden;
@@ -109,7 +109,7 @@
     transform: translate3d(0px, 0px, 0px) !important; /* Prevent auto placement issues */
 }
 
-.dropdown-menu.dropdown-menu-end {
+.report-dropdown-menu.dropdown-menu-end {
     left: auto !important; /* Ensure right-side alignment */
     right: 0 !important;
 }

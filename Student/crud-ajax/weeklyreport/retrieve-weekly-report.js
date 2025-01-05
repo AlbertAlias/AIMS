@@ -54,7 +54,7 @@ $(document).ready(function () {
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 512" width="34" height="34" class="dropdown-toggle dropdown-icon" data-bs-toggle="dropdown" aria-expanded="false">
                                 <path fill="#198754" d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"/>
                             </svg>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-sm-start">
+                            <ul class="dropdown-menu report-dropdown-menu dropdown-menu-end dropdown-menu-sm-start">
                                 <li><button class="dropdown-item delete-btn" data-id="${report.id}">Delete</button></li>
                             </ul>
                         </div>
