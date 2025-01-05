@@ -2,15 +2,31 @@
     <div class="card shadow-sm">
         <!-- Header -->
         <div class="card-header bg-light text-dark">
-            <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <!-- Page Length Selector -->
-                <div class="d-flex align-items-center">
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                <!-- Page Length Selector and Dropdown -->
+                <div class="d-flex align-items-center gap-2">
+                    <!-- Page Length Selector -->
                     <div class="d-flex align-items-center">
                         <select id="master-lists-pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
                             <option value="100">100</option>
+                        </select>
+                    </div>
+                    <div class="dropdown">
+                        <select id="userTypeDropdown" class="form-select form-select-sm">
+                            <option value="">Select User Type</option>
+                        </select>
+                    </div>
+                    <div class="dropdown">
+                        <select id="departmentDropdown" class="form-select form-select-sm" style="display: none;">
+                            <option value="">Select Department</option>
+                        </select>
+                    </div>
+                    <div class="dropdown">
+                        <select id="companyDropdown" class="form-select form-select-sm" style="display: none;">
+                            <option value="">Select Company</option>
                         </select>
                     </div>
                 </div>

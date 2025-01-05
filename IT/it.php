@@ -120,6 +120,7 @@
     <!-- <script src="crud-ajax/archive/archive.js"></script> -->
 
     <script src="crud-ajax/masterlists/retrieve-master-lists.js"></script>
+    <script src="crud-ajax/masterlists/retrieve-usertypes.js"></script>
 
     <script src="crud-ajax/profile/retrieve-users-profile.js"></script>
     <script src="crud-ajax/profile/create-users-profile.js"></script>

@@ -8,49 +8,121 @@
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
         $length = isset($_GET['length']) ? intval($_GET['length']) : 10;
         $search = isset($_GET['search']) ? $_GET['search'] : '';
+        $userType = isset($_GET['user_type']) ? $_GET['user_type'] : '';
+        $departmentId = isset($_GET['department_id']) ? intval($_GET['department_id']) : null;
+        $company = isset($_GET['company']) ? $_GET['company'] : '';
+
+        // Define column visibility
+        $columns = [
+            'Name' => true,
+            'Department' => $userType === '' || in_array($userType, ['Dean', 'Coordinator', 'Student']),
+            'Company' => $userType === '' || in_array($userType, ['Supervisor']),
+            'Email' => true,
+            'AY' => $userType === '' || in_array($userType, ['Student']),
+            'Username' => true,
+            'UserType' => true
+        ];
+
+        // Prepare selected columns for SQL query
+        $selectColumns = [];
+        if ($columns['Name']) $selectColumns[] = "CONCAT(users.last_name, ', ', users.first_name) AS Name";
+        if ($columns['Department']) $selectColumns[] = "department.department_name AS Department";
+        if ($columns['Company']) $selectColumns[] = "users.company AS Company";
+        if ($columns['Email']) $selectColumns[] = "users.email AS Email";
+        if ($columns['AY']) $selectColumns[] = "users.academic_year AS AY";
+        if ($columns['Username']) $selectColumns[] = "users.username AS Username";
+        if ($columns['UserType']) $selectColumns[] = "users.user_type AS UserType";
+
+        $sqlColumns = implode(', ', $selectColumns);
 
         // Calculate pagination
         $start = ($page - 1) * $length;
 
-        // Query to get filtered and paginated data
+        // Start SQL query
+        // $sql = "
+        // SELECT 
+        //     CONCAT(users.last_name, ', ', users.first_name) AS Name,
+        //     department.department_name AS Department,
+        //     users.company AS Company,
+        //     users.email AS Email,
+        //     users.academic_year AS AY,
+        //     users.username AS Username,
+        //     users.user_type AS UserType
+        // FROM users
+        // LEFT JOIN department ON users.department_id = department.department_id
+        // WHERE CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email, users.username, users.user_type) LIKE ?";
+
         $sql = "
         SELECT 
-            CONCAT(users.last_name, ', ', users.first_name) AS Name,
-            department.department_name AS Department,
-            users.company AS Company,
-            users.email AS Email,
-            users.academic_year AS AY,
-            users.username AS Username,
-            users.user_type AS UserType
+            $sqlColumns
         FROM users
         LEFT JOIN department ON users.department_id = department.department_id
-        WHERE CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email, users.username, users.user_type) LIKE ?
-        LIMIT ?, ?";
+        WHERE CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email, users.username, users.user_type) LIKE ?";
+
+        // If a user_type is specified, add it to the WHERE clause
+        if ($userType) {
+            $sql .= " AND users.user_type = ?";
+        }
+
+        // If Supervisor is selected and company is specified, add company filter
+        if ($userType === 'Supervisor' && $company) {
+            $sql .= " AND users.company = ?";
+        }
+
+        // If department_id is provided and user_type is 'Student', filter by department
+        if ($userType === 'Student' && $departmentId) {
+            $sql .= " AND users.department_id = ?";
+        }
+
+        $sql .= " LIMIT ?, ?";
         $stmt = $conn->prepare($sql);
         $searchTerm = "%$search%";
-        $stmt->bind_param('sii', $searchTerm, $start, $length);
+
+        if ($userType === 'Supervisor' && $company) {
+            $stmt->bind_param('sssii', $searchTerm, $userType, $company, $start, $length);
+        } else if ($userType === 'Student' && $departmentId) {
+            $stmt->bind_param('ssiii', $searchTerm, $userType, $departmentId, $start, $length);
+        } else if ($userType) {
+            $stmt->bind_param('ssii', $searchTerm, $userType, $start, $length);
+        } else {
+            $stmt->bind_param('sii', $searchTerm, $start, $length);
+        }
+
         $stmt->execute();
         $result = $stmt->get_result();
 
         // Generate table rows
+        // $html = '';
+        // while ($row = $result->fetch_assoc()) {
+        //     $name = htmlspecialchars($row['Name']) ?: '--';
+        //     $department = htmlspecialchars($row['Department']) ?: '--';
+        //     $company = htmlspecialchars($row['Company']) ?: '--';
+        //     $email = htmlspecialchars($row['Email']) ?: '--';
+        //     $academicYear = htmlspecialchars($row['AY']) ?: '--';
+        //     $username = htmlspecialchars($row['Username']) ?: '--';
+        //     $userType = htmlspecialchars($row['UserType']) ?: '--';
+
+        //     $html .= '<tr>';
+        //     $html .= '<td>' . $name . '</td>';
+        //     $html .= '<td>' . $department . '</td>';
+        //     $html .= '<td>' . $company . '</td>';
+        //     $html .= '<td>' . $email . '</td>';
+        //     $html .= '<td>' . $academicYear . '</td>';
+        //     $html .= '<td>' . $username . '</td>';
+        //     $html .= '<td>' . $userType . '</td>';
+        //     $html .= '</tr>';
+        // }
+
         $html = '';
         while ($row = $result->fetch_assoc()) {
-            $name = htmlspecialchars($row['Name']) ?: '--';
-            $department = htmlspecialchars($row['Department']) ?: '--';
-            $company = htmlspecialchars($row['Company']) ?: '--';
-            $email = htmlspecialchars($row['Email']) ?: '--';
-            $academicYear = htmlspecialchars($row['AY']) ?: '--';
-            $username = htmlspecialchars($row['Username']) ?: '--';
-            $userType = htmlspecialchars($row['UserType']) ?: '--';
-
             $html .= '<tr>';
-            $html .= '<td>' . $name . '</td>';
-            $html .= '<td>' . $department . '</td>';
-            $html .= '<td>' . $company . '</td>';
-            $html .= '<td>' . $email . '</td>';
-            $html .= '<td>' . $academicYear . '</td>';
-            $html .= '<td>' . $username . '</td>';
-            $html .= '<td>' . $userType . '</td>';
+            if ($columns['Name']) $html .= '<td>' . (htmlspecialchars($row['Name']) ?: '--') . '</td>';
+            if ($columns['Department']) $html .= '<td>' . (htmlspecialchars($row['Department']) ?: '--') . '</td>';
+            if ($columns['Company']) $html .= '<td>' . (htmlspecialchars($row['Company']) ?: '--') . '</td>';
+            if ($columns['Email']) $html .= '<td>' . (htmlspecialchars($row['Email']) ?: '--') . '</td>';
+            if ($columns['AY']) $html .= '<td>' . (htmlspecialchars($row['AY']) ?: '--') . '</td>';
+            if ($columns['Username']) $html .= '<td>' . (htmlspecialchars($row['Username']) ?: '--') . '</td>';
+            if ($columns['UserType']) $html .= '<td>' . (htmlspecialchars($row['UserType']) ?: '--') . '</td>';
             $html .= '</tr>';
         }
 
@@ -60,8 +132,25 @@
         FROM users
         LEFT JOIN department ON users.department_id = department.department_id
         WHERE CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email, users.username, users.user_type) LIKE ?";
+
+        // If a user_type is specified, add it to the WHERE clause
+        if ($userType) {
+            $totalSql .= " AND users.user_type = ?";
+        }
+
+        // If Supervisor is selected and company is specified, add company filter
+        if ($userType === 'Supervisor' && $company) {
+            $totalSql .= " AND users.company = ?";
+        }
+
         $totalStmt = $conn->prepare($totalSql);
-        $totalStmt->bind_param('s', $searchTerm);
+        if ($userType === 'Supervisor' && $company) {
+            $totalStmt->bind_param('sss', $searchTerm, $userType, $company);
+        } else if ($userType) {
+            $totalStmt->bind_param('ss', $searchTerm, $userType);
+        } else {
+            $totalStmt->bind_param('s', $searchTerm);
+        }
         $totalStmt->execute();
         $totalResult = $totalStmt->get_result();
         $total = $totalResult->fetch_assoc()['total'];
