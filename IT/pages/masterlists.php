@@ -58,7 +58,7 @@
                             <th>AY</th>
                             <th>Username</th>
                             <th>User Type</th>
-                            <!-- <th>Actions</th> -->
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody id="tdata">

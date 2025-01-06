@@ -39,7 +39,7 @@ function loadTableData() {
 function toggleColumns(userType) {
     const columnsToHide = {
         IT: ['Department', 'Company', 'AY'],
-        Dean: ['Company', 'AY'],
+        Dean: ['Department', 'Company', 'AY'],
         Coordinator: ['Company', 'AY'],
         Student: ['Company'],
         Supervisor: ['Department', 'AY'],

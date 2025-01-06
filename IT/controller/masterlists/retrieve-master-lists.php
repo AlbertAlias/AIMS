@@ -15,7 +15,7 @@
         // Define column visibility
         $columns = [
             'Name' => true,
-            'Department' => $userType === '' || in_array($userType, ['Dean', 'Coordinator', 'Student']),
+            'Department' => $userType === '' || in_array($userType, ['Coordinator', 'Student']),
             'Company' => $userType === '' || in_array($userType, ['Supervisor']),
             'Email' => true,
             'AY' => $userType === '' || in_array($userType, ['Student']),
@@ -37,21 +37,7 @@
 
         // Calculate pagination
         $start = ($page - 1) * $length;
-
-        // Start SQL query
-        // $sql = "
-        // SELECT 
-        //     CONCAT(users.last_name, ', ', users.first_name) AS Name,
-        //     department.department_name AS Department,
-        //     users.company AS Company,
-        //     users.email AS Email,
-        //     users.academic_year AS AY,
-        //     users.username AS Username,
-        //     users.user_type AS UserType
-        // FROM users
-        // LEFT JOIN department ON users.department_id = department.department_id
-        // WHERE CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email, users.username, users.user_type) LIKE ?";
-
+        
         $sql = "
         SELECT 
             $sqlColumns
@@ -91,28 +77,6 @@
         $stmt->execute();
         $result = $stmt->get_result();
 
-        // Generate table rows
-        // $html = '';
-        // while ($row = $result->fetch_assoc()) {
-        //     $name = htmlspecialchars($row['Name']) ?: '--';
-        //     $department = htmlspecialchars($row['Department']) ?: '--';
-        //     $company = htmlspecialchars($row['Company']) ?: '--';
-        //     $email = htmlspecialchars($row['Email']) ?: '--';
-        //     $academicYear = htmlspecialchars($row['AY']) ?: '--';
-        //     $username = htmlspecialchars($row['Username']) ?: '--';
-        //     $userType = htmlspecialchars($row['UserType']) ?: '--';
-
-        //     $html .= '<tr>';
-        //     $html .= '<td>' . $name . '</td>';
-        //     $html .= '<td>' . $department . '</td>';
-        //     $html .= '<td>' . $company . '</td>';
-        //     $html .= '<td>' . $email . '</td>';
-        //     $html .= '<td>' . $academicYear . '</td>';
-        //     $html .= '<td>' . $username . '</td>';
-        //     $html .= '<td>' . $userType . '</td>';
-        //     $html .= '</tr>';
-        // }
-
         $html = '';
         while ($row = $result->fetch_assoc()) {
             $html .= '<tr>';
@@ -123,6 +87,7 @@
             if ($columns['AY']) $html .= '<td>' . (htmlspecialchars($row['AY']) ?: '--') . '</td>';
             if ($columns['Username']) $html .= '<td>' . (htmlspecialchars($row['Username']) ?: '--') . '</td>';
             if ($columns['UserType']) $html .= '<td>' . (htmlspecialchars($row['UserType']) ?: '--') . '</td>';
+            $html .= '<td><button class="btn btn-sm btn-warning" disabled>Archived</button></td>';
             $html .= '</tr>';
         }
 
