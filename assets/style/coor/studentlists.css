@@ -56,11 +56,66 @@
     pointer-events: none;
 }
 
-
-
 button.btn.btn-outline-secondary.btn-sm .table-icon {
     width: 18px;
     height: 18px;
     padding-bottom: 3px;
     fill: #198754;
+}
+
+.ojthoursModal {
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    padding: 0 !important;
+}
+  
+.ojthours-modal-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /* background: transparent !important; */
+    background: rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    padding: 0 !important;
+}
+  
+.ojthours-modal-content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.ojthours-modal-content img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+    background-color: #f4f4f42b;
+}
+  
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff; /* White color for the close button */
+    cursor: pointer;
+    z-index: 1001; /* Ensure the close button is always on top */
+}
+
+.svg-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 3px;
+    vertical-align: -0.125em;
+    fill: currentColor;
 }
