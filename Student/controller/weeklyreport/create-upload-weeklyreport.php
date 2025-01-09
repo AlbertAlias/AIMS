@@ -8,13 +8,11 @@
             throw new Exception("Invalid request.");
         }
 
-        // Validate session
         if (!isset($_SESSION['user_id'])) {
             throw new Exception("Unauthorized user.");
         }
 
-        // Get POST Data
-        $title = $_POST['title'];  // Get the report title
+        $title = $_POST['title'];
         $weekStart = $_POST['week_start'];
         $weekEnd = $_POST['week_end'];
         $filePath = '';

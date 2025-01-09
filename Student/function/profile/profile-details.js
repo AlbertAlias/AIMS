@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Set the active links
     const profileInfo = document.getElementById('profile-info');
     const passwordInfo = document.getElementById('account-info');
     const companyInfo = document.getElementById('company-info');
@@ -9,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     personalDetailsLink.classList.add('active');
 
-    // Add click event listeners to the links
     personalDetailsLink.addEventListener('click', function(e) {
         e.preventDefault();
         profileInfo.style.display = 'block';

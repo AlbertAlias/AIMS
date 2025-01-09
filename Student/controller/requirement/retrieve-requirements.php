@@ -8,17 +8,14 @@
 
     session_start();
 
-    // Check if student is logged in
     if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'Student') {
         echo json_encode(["success" => false, "error" => "Unauthorized access"]);
         exit();
     }
 
-    // Get the student's ID and department ID
     $student_id = $_SESSION['user_id'];
 
     try {
-        // Fetch only the requirements the student needs to address (pending or rejected, not closed)
         $stmt = $conn->prepare("
             SELECT r.requirement_id, r.title, r.description, r.created_at, r.deadline, u.first_name, u.last_name, COALESCE(sr.status, 'not_submitted') AS submission_status
             FROM requirements r
@@ -39,7 +36,6 @@
             $requirements[] = $row;
         }
 
-        // Include the requirements along with descriptions
         echo json_encode(["success" => true, "requirements" => $requirements, "studentId" => $student_id]);
     } catch (Exception $e) {
         echo json_encode(["success" => false, "error" => $e->getMessage()]);

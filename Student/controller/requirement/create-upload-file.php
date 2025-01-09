@@ -35,7 +35,6 @@
                 exit;
             }
 
-            // Insert file info into the database, including the file_path
             $sql = "INSERT INTO submit_requirements (student_id, document_name, status, requirement_id, file_path) 
                     VALUES (?, ?, 'pending', ?, ?)";
             $stmt = $conn->prepare($sql);

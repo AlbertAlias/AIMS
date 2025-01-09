@@ -65,19 +65,17 @@ $(document).ready(function () {
             $container.append(reportCard);
         });
     
-        // Attach the click event for opening the modal
         $('.card').click(function () {
             const filePath = $(this).data('file-path');
             showFileInModal(filePath);
         });
 
-        // Prevent card click when SVG is clicked
         $('.dropdown-icon').click(function (event) {
             event.stopPropagation();
         });
 
         $('.delete-btn').click(function (event) {
-            event.stopPropagation(); // Prevent the card click event from firing
+            event.stopPropagation();
             const reportId = $(this).data('id');
             deleteReport(reportId);
         });
@@ -87,13 +85,8 @@ $(document).ready(function () {
         const reportModal = document.getElementById('reportModal');
         const reportViewer = document.getElementById('reportViewer');
         const imageViewer = document.getElementById('imageViewer');
+        const fileURL = filePath;
 
-        // Log the filePath to see what it's getting
-        console.log("File path received: ", filePath);
-
-        const fileURL = filePath; // The file URL should be complete and valid at this point
-
-        // Check if the file is a PDF or image
         if (filePath.endsWith('.pdf')) {
             reportViewer.src = `${fileURL}#toolbar=0`;
             reportViewer.style.display = 'block';
@@ -104,7 +97,6 @@ $(document).ready(function () {
             reportViewer.style.display = 'none';
         }
 
-        // Show modal
         reportModal.style.display = 'flex';
     }
 
@@ -119,12 +111,11 @@ $(document).ready(function () {
             url: 'controller/weeklyreport/delete-weekly-report.php',
             method: 'POST',
             data: { id: reportId },
-            dataType: 'json', // Ensure you expect JSON response
+            dataType: 'json',
             success: function(response) {
-                console.log('Response from server:', response); // Log the full response for debugging
                 if (response.success) {
                     alert('Report deleted successfully');
-                    fetchWeeklyReports();  // Refresh the report list after deletion
+                    fetchWeeklyReports();
                 } else {
                     alert('Failed to delete report: ' + response.error);
                 }

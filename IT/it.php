@@ -52,6 +52,7 @@
 </head>
 
 <body id="page-top">
+
     <div id="wrapper">
 
         <?php include('components/sidebar.php'); ?>
@@ -61,6 +62,7 @@
             <?php include('components/header.php'); ?>
 
             <div id="content">
+                
                 <div id="page-content" style="width: 100%;">
                     <?php include "pages/dashboard.php"; ?>
                     <?php include "pages/departments.php"; ?>

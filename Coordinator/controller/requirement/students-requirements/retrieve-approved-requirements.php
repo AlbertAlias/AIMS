@@ -1,21 +1,16 @@
 <?php
     include '../../../../dbconn.php';
-
-    // Start session to retrieve the logged-in user's department
     session_start();
 
-    // Check if the user is logged in and is a Coordinator
     if (isset($_SESSION['user_type']) && $_SESSION['user_type'] === 'Coordinator') {
         $department_id = $_SESSION['department_id'];
         $requirement_id = isset($_GET['requirement_id']) ? $_GET['requirement_id'] : null;
         $search_term = isset($_GET['search_term']) ? $_GET['search_term'] : '';
 
-        // Escape the search term if present
         if (!empty($search_term)) {
-            $search_term = "%" . $search_term . "%"; // Add the wildcards for the LIKE clause
+            $search_term = "%" . $search_term . "%";
         }
 
-        // SQL query to fetch approved requirements from students within the same department
         $sql = "
             SELECT 
                 sr.submit_id,
@@ -32,19 +27,15 @@
                 u.department_id = ? AND sr.status = 'approved'
         ";
 
-        // Add filtering for search term
         if (!empty($search_term)) {
             $sql .= " AND (u.first_name LIKE ? OR u.last_name LIKE ?)";
         }
 
-        // Add filtering for specific requirement_id if provided
         if (!empty($requirement_id)) {
             $sql .= " AND sr.requirement_id = ?";
         }
 
-        // Prepare and execute query
         if ($stmt = $conn->prepare($sql)) {
-            // Bind parameters dynamically based on what is set
             if (!empty($search_term) && $requirement_id) {
                 $stmt->bind_param('ssss', $department_id, $search_term, $search_term, $requirement_id);
             } elseif (!empty($search_term)) {
@@ -55,14 +46,12 @@
                 $stmt->bind_param('s', $department_id);
             }
 
-            // Execute the statement
             if ($stmt->execute()) {
                 $result = $stmt->get_result();
                 $submissions = [];
 
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        // Adjust the file path to be accessible via the correct URL
                         $row['file_path'] = '/AIMS/Student/controller/requirement/uploads/' . basename($row['file_path']);
                         $submissions[] = $row;
                     }

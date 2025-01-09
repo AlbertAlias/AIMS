@@ -1,6 +1,6 @@
 const normalizeDate = (date) => {
     const newDate = new Date(date);
-    newDate.setHours(0, 0, 0, 0); // Set the time to midnight
+    newDate.setHours(0, 0, 0, 0);
     return newDate;
 };
 
@@ -10,7 +10,6 @@ $(document).ready(function () {
     const hiddenRequirementIdInput = $(".requirement-id");
     let activeRequirement = null;
 
-    // Function to load the coordinator's requirements
     function loadCoordinatorRequirements() {
         $.ajax({
             url: "controller/requirement/retrieve-requirements.php",
@@ -19,15 +18,13 @@ $(document).ready(function () {
             success: function (result) {
                 if (result.success) {
                     const requirements = result.requirements;
-
-                    // Add studentId as hidden input field
                     const studentId = result.studentId;
                     const hiddenStudentIdInput = $('<input>', {
                         type: 'hidden',
                         class: 'student-id',
                         value: studentId
                     });
-                    $('body').append(hiddenStudentIdInput); // Append it to the body or any other container
+                    $('body').append(hiddenStudentIdInput);
 
                     if (requirements.length > 0) {
                         const requirementsHtml = requirements.map(req => {
@@ -51,20 +48,18 @@ $(document).ready(function () {
                         }).join("");
 
                         const postedRequirementsHtml = requirements.map(req => {
-                            // Parse the deadline date
                             const deadline = normalizeDate(req.deadline);
                             const currentDate = normalizeDate(new Date());
                             const currentYear = new Date().getFullYear();
                         
-                            // Determine whether to include the year in the formatted date for deadline
                             const formattedDeadline = deadline.getFullYear() === currentYear
-                                ? deadline.toLocaleString('default', { month: 'short', day: 'numeric' }) // Only show month and day
-                                : deadline.toLocaleString('default', { month: 'short', day: 'numeric', year: 'numeric' }); // Show full date with year
+                                ? deadline.toLocaleString('default', { month: 'short', day: 'numeric' })
+                                : deadline.toLocaleString('default', { month: 'short', day: 'numeric', year: 'numeric' });
 
                                 const deadlineColor = deadline < currentDate
-                                ? 'red' // Red for overdue
-                                : (deadline - currentDate < 7 * 24 * 60 * 60 * 1000) // Less than 7 days
-                                ? 'orange' // Orange for approaching
+                                ? 'red'
+                                : (deadline - currentDate < 7 * 24 * 60 * 60 * 1000)
+                                ? 'orange'
                                 : 'green';
                         
                             return `
@@ -87,11 +82,9 @@ $(document).ready(function () {
                             `;
                         }).join("");
 
-                        // Append the generated HTML to the respective containers
                         requirementsContainer.html(requirementsHtml);
                         postedRequirementsContainer.html(postedRequirementsHtml);
 
-                        // Add hover effect for all the posted-requirements
                         $(".posted-requirement").hover(
                             function() {
                                 if (!$(this).hasClass('active')) {
@@ -105,54 +98,40 @@ $(document).ready(function () {
                             }
                         );
 
-                        // Add click event listener to update the title and hidden requirement ID
                         $(".posted-requirement").on("click", function() {
                             const title = $(this).data("title");
                             const requirementId = $(this).data("requirement-id");
-
-                            // Check if a file is attached to the requirement
                             const isFileAttached = $('#fileContainer').children().length > 0;
 
-                            // If a requirement is already active and there's a file attached, don't allow switching
                             if (activeRequirement && activeRequirement !== requirementId && isFileAttached) {
                                 alert('You cannot switch to another task while a file is attached.');
-                                return; // Exit without changing the active card
+                                return;
                             }
 
-                            // Proceed to toggle the active state of the card
                             if ($(this).hasClass('active')) {
-                                // If active, reset everything (unless a file is attached)
                                 if (!isFileAttached) {
-                                    // Reset the file input to be disabled again
                                     $('#fileInput').prop('disabled', true);
                                     $('#fileInput').closest('label').css('pointer-events', 'none');
-
-                                    // Reset the chosen requirement text
-                                    $('#chosenRequirement').text(''); // Reset text
+                                    $('#chosenRequirement').text('');
                                     hiddenRequirementIdInput.val('');
                                     $(this).removeClass('active');
                                     $(this).css('box-shadow', 'none');
-                                    activeRequirement = null; // Reset active requirement
+                                    activeRequirement = null;
                                 }
                             } else {
-                                // If not active, deactivate the previous active card
                                 $(".posted-requirement.active").removeClass('active').css('box-shadow', 'none');
-                                
-                                // Activate the new clicked card
-                                $('#chosenRequirement').text('Requirement: ' + title); // Update chosen requirement text
+                                $('#chosenRequirement').text('Requirement: ' + title);
                                 hiddenRequirementIdInput.val(requirementId);
 
                                 const fileInput = $('#fileInput');
-                                fileInput.prop('disabled', false); // Enable file input for this task
-                                fileInput.closest('label').css('pointer-events', 'auto'); // Enable the label button
-
+                                fileInput.prop('disabled', false);
+                                fileInput.closest('label').css('pointer-events', 'auto');
                                 $(this).addClass('active');
                                 $(this).css('box-shadow', 'rgba(25, 135, 84, 0.7) 0px 1px 2px 0px, rgba(25, 135, 84, 0.16) 0px 2px 6px 2px');
                                 
-                                activeRequirement = requirementId; // Mark this requirement as active
+                                activeRequirement = requirementId;
                             }
 
-                            // Disable other task cards when one is active
                             if (activeRequirement) {
                                 $(".posted-requirement").each(function() {
                                     const requirementId = $(this).data("requirement-id");
@@ -181,10 +160,8 @@ $(document).ready(function () {
         });
     }
 
-    // Load the coordinator's requirements
     window.loadCoordinatorRequirements = loadCoordinatorRequirements;
 
-    // Call the function on document ready
     $(document).ready(function () {
         loadCoordinatorRequirements();
     });

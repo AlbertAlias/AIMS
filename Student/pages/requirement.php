@@ -35,7 +35,6 @@
     </div>
 </div>
 
-<!-- Modal for preview -->
 <div id="pdfModal" class="modal" style="display: none;">
     <div class="pdf-modal-content">
         <span id="closeModal" class="close">&times;</span>

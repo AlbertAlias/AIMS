@@ -1,10 +1,8 @@
 <?php
     header('Content-Type: application/json');
-
     include '../../dbconn.php';
 
     try {
-        // Start session to check if user is logged in
         session_start();
         if (!isset($_SESSION['user_id'])) {
             throw new Exception('Unauthorized access. Please log in.');
@@ -12,7 +10,6 @@
 
         $deanUserId = $_SESSION['user_id'];
 
-        // Fetch departments managed by the logged-in dean
         $deptQuery = "SELECT department_id FROM dean_department WHERE dean_id = ?";
         $deptStmt = $conn->prepare($deptQuery);
         if (!$deptStmt) {
@@ -32,18 +29,14 @@
             throw new Exception('No departments assigned to the logged-in dean.');
         }
 
-        // Convert department IDs into a comma-separated string for SQL queries
         $departmentIdsStr = implode(',', $departmentIds);
 
-        // Get parameters
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
         $length = isset($_GET['length']) ? intval($_GET['length']) : 10;
         $search = isset($_GET['search']) ? $_GET['search'] : '';
 
-        // Calculate pagination
         $start = ($page - 1) * $length;
 
-        // Query to fetch coordinators managed by the dean
         $sql = "
         SELECT 
             u.user_id, 
@@ -67,7 +60,6 @@
         $stmt->execute();
         $result = $stmt->get_result();
 
-        // Generate table rows
         $html = '';
         while ($row = $result->fetch_assoc()) {
             $first_name = htmlspecialchars($row['first_name']) ?: '--';
@@ -83,7 +75,6 @@
             $html .= '</tr>';
         }
 
-        // Query to get total count for pagination
         $totalSql = "
         SELECT COUNT(*) AS total
         FROM users u
@@ -100,10 +91,9 @@
         $totalResult = $totalStmt->get_result();
         $total = $totalResult->fetch_assoc()['total'];
 
-        // Generate pagination links with a limited display
         $totalPages = ceil($total / $length);
         $pagination = '';
-        $maxVisiblePages = 3; // Number of pages to show at a time
+        $maxVisiblePages = 3;
         $startPage = max(1, $page - floor($maxVisiblePages / 2));
         $endPage = min($totalPages, $startPage + $maxVisiblePages - 1);
 
@@ -111,28 +101,24 @@
             $startPage = max(1, $endPage - $maxVisiblePages + 1);
         }
 
-        // Previous button
         if ($page > 1) {
             $pagination .= '<li class="page-item"><a class="page-link" href="#" data-page="' . ($page - 1) . '">Previous</a></li>';
         } else {
             $pagination .= '<li class="page-item disabled"><span class="page-link">Previous</span></li>';
         }
 
-        // Main pagination buttons
         for ($i = $startPage; $i <= $endPage; $i++) {
             $pagination .= '<li class="page-item ' . ($i == $page ? ' active' : '') . '">';
             $pagination .= '<a class="page-link" href="#" data-page="' . $i . '">' . $i . '</a>';
             $pagination .= '</li>';
         }
 
-        // Next button
         if ($page < $totalPages) {
             $pagination .= '<li class="page-item"><a class="page-link" href="#" data-page="' . ($page + 1) . '">Next</a></li>';
         } else {
             $pagination .= '<li class="page-item disabled"><span class="page-link">Next</span></li>';
         }
 
-        // Return JSON response
         $response = [
             'html' => $html,
             'pagination' => $pagination,

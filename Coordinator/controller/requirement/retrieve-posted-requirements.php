@@ -6,14 +6,12 @@
     header('Content-Type: application/json');
     include '../../../dbconn.php';
 
-    // Update statuses of expired requirements
     $current_date = date('Y-m-d');
     $update_expired_query = "UPDATE requirements SET status = 'closed' WHERE deadline < ? AND status = 'open'";
     $stmt_update = $conn->prepare($update_expired_query);
     $stmt_update->bind_param("s", $current_date);
     $stmt_update->execute();
 
-    // Retrieve updated requirements
     session_start();
     $coordinator_id = $_SESSION['user_id'];
 

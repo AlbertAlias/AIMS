@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    // Update admin information
     $('.profileUpdateBtn').on('click', function () {
         var lastName = $('#editLastNameInput').val();
         var firstName = $('#editFirstNameInput').val();
@@ -97,7 +96,6 @@ $(document).ready(function () {
         });
     });
 
-    // Change password form submission
     $('#changePasswordForm').submit(function (event) {
         event.preventDefault();
 
@@ -188,7 +186,6 @@ $(document).ready(function () {
     });
 });
 
-// Refresh user info
 function refreshUserInfo() {
     $.ajax({
         url: 'controller/profile/retrieve-users-info.php',

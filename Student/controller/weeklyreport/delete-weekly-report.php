@@ -6,7 +6,6 @@
     if (isset($_POST['id']) && is_numeric($_POST['id'])) {
         $reportId = $_POST['id'];
 
-        // First, get the file path associated with the report to delete the file if necessary
         $sql = "SELECT file_path FROM weekly_reports WHERE id = ?";
         if ($stmt = $conn->prepare($sql)) {
             $stmt->bind_param("i", $reportId);
@@ -17,16 +16,14 @@
                 $stmt->bind_result($filePath);
                 $stmt->fetch();
 
-                // Delete the report record from the database
                 $deleteSql = "DELETE FROM weekly_reports WHERE id = ?";
                 if ($deleteStmt = $conn->prepare($deleteSql)) {
                     $deleteStmt->bind_param("i", $reportId);
                     $deleteStmt->execute();
 
-                    // If the report was deleted successfully, delete the file (if it exists)
                     if ($deleteStmt->affected_rows > 0) {
                         if (file_exists($filePath)) {
-                            unlink($filePath); // Remove the file
+                            unlink($filePath);
                         }
                         $response['success'] = true;
                     } else {
