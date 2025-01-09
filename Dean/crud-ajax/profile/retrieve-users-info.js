@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    // Fetch user info when the page loads
     $.ajax({
         url: 'controller/profile/retrieve-users-info.php',
         type: 'POST',
@@ -7,19 +6,16 @@ $(document).ready(function () {
         success: function (response) {
             var userInfo = JSON.parse(response);
             if (userInfo.status === 'success') {
-                // Display user info on the page
                 $('#users-name').text(userInfo.full_name);
                 $('#users-location').text(userInfo.address);
-                $('#users-gender').text(userInfo.gender); // Updated field to reflect schema
+                $('#users-gender').text(userInfo.gender);
                 $('#users-email').text(userInfo.email);
                 $('#users-username').text(userInfo.username);
-
-                // Populate modal fields with user information
                 $('#editLastNameInput').val(userInfo.last_name);
                 $('#editFirstNameInput').val(userInfo.first_name);
                 $('#editMiddleNameInput').val(userInfo.middle_name || '');
                 $('#editLocationInput').val(userInfo.address);
-                $('#editGenderInput').val(userInfo.gender); // Updated field to reflect schema
+                $('#editGenderInput').val(userInfo.gender);
                 $('#editEmailInput').val(userInfo.email);
                 $('#editUsernameInput').val(userInfo.username);
             } else {
@@ -31,14 +27,13 @@ $(document).ready(function () {
         }
     });
 
-    // Event listener for the old password input change
     $('#modalOldPassword').on('input', function () {
-        var oldPassword = $(this).val(); // Get the value entered in the old password input
+        var oldPassword = $(this).val();
 
         $.ajax({
             url: 'controller/profile/retrieve-users-info.php',
             type: 'POST',
-            data: { oldPassword: oldPassword }, // Send old password for verification
+            data: { oldPassword: oldPassword },
             success: function (response) {
                 var result = JSON.parse(response);
                 var feedbackElement = $('#oldPasswordFeedback');
@@ -55,7 +50,6 @@ $(document).ready(function () {
         });
     });
 
-    // Check if New Password matches Confirm Password
     $('#modalNewPassword, #modalConfirmPassword').on('input', function () {
         var newPassword = $('#modalNewPassword').val();
         var confirmPassword = $('#modalConfirmPassword').val();
@@ -68,11 +62,10 @@ $(document).ready(function () {
                 feedbackElement.text('Password doesn\'t match').removeClass('text-success').addClass('text-danger');
             }
         } else {
-            feedbackElement.text(''); // Clear feedback if fields are empty
+            feedbackElement.text('');
         }
     });
 
-    // Handle form submission for password change
     $('#changePasswordForm').submit(function (event) {
         event.preventDefault();
 
@@ -80,9 +73,7 @@ $(document).ready(function () {
         var newPassword = $('#modalNewPassword').val();
         var confirmPassword = $('#modalConfirmPassword').val();
 
-        // Handle the password change logic if everything is correct
         if (newPassword === confirmPassword) {
-            // Proceed with password change logic
             alert('Password changed successfully!');
         } else {
             alert('Please ensure the new passwords match!');

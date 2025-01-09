@@ -1,7 +1,6 @@
 let coorlistsPage = 1;
 let coorlistsPageLength = 10;
 
-// Fetch and display table data
 function loadcoorTableData() {
     $.ajax({
         url: 'controller/retrieve-coor-lists.php',
@@ -13,7 +12,6 @@ function loadcoorTableData() {
             search: $('#coor-searchInput').val()
         },
         success: function(response) {
-            console.log('Response:', response);
             if (response.html) {
                 $('#coorTable tbody').html(response.html);
             }
@@ -24,12 +22,10 @@ function loadcoorTableData() {
         },
         error: function(xhr, status, error) {
             console.error('AJAX Error:', status, error);
-            console.log('Response Text:', xhr.responseText);
         }
     });
 }
 
-// Event listeners
 $('#coor-pageLengthSelect').on('change', function() {
     coorlistsPageLength = parseInt($(this).val());
     coorlistsPage = 1;
@@ -47,5 +43,4 @@ $('#coor-pagination').on('click', '.page-link', function(e) {
     loadcoorTableData();
 });
 
-// Initial load
 loadcoorTableData();
