@@ -28,17 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Apply the formula to compute total_grade
         $totalGrade = ($ratingPoints / 90) * 70;
 
-        // Prepare database query to insert evaluation data
+        // Prepare database query to insert evaluation data without ratings
         $stmt = $conn->prepare("
-            INSERT INTO coordinator_evaluations (student_id, ratings, total_grade, comments, evaluator_id, evaluation_date)
-            VALUES (?, ?, ?, ?, ?, NOW())
+            INSERT INTO coordinator_evaluations (student_id, total_grade, comments, evaluator_id, evaluation_date)
+            VALUES (?, ?, ?, ?, NOW())
         ");
-        
-        // Convert the ratings array to JSON
-        $ratings_json = json_encode($ratings);
 
         // Bind parameters to the query (corrected types)
-        $stmt->bind_param('ssdsd', $student_id, $ratings_json, $totalGrade, $comments, $evaluator_id);
+        $stmt->bind_param('sdss', $student_id, $totalGrade, $comments, $evaluator_id);
 
         // Execute the query
         if ($stmt->execute()) {
