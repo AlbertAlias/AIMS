@@ -1,6 +1,5 @@
 <div class="container-fluid bg-light p-0 m-0" id="supervisors" style="display: none;">
     <div class="row g-3">
-        <!-- Supervisor Section -->
         <div class="col-12 col-md-6 col-lg-4">
             <div class="bg-light rounded-3 p-3 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-2">Supervisors</h5>
@@ -24,25 +23,21 @@
                 <p class="text-gray-800 fs-5 mb-2">Personal Information</p>
                 <form id="visorForm">
                     <div class="row mb-1">
-                        <!-- Last Name -->
                         <div class="col-12 col-md-4">
                             <input type="hidden" id="visorID" name="id">
                             <label for="visor_last_name" class="form-label required-asterisk">Last Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control mb-2" id="visor_last_name" name="visor_last_name" required>
                         </div>
-                        <!-- First Name -->
                         <div class="col-12 col-md-4">
                             <label for="visor_first_name" class="form-label required-asterisk">First Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control mb-2" id="visor_first_name" name="visor_first_name" required>
                         </div>
-                        <!-- Middle Name -->
                         <div class="col-12 col-md-4">
                             <label for="visor_middleName" class="form-label">Middle Name</label>
                             <input type="text" class="form-control mb-2" id="visor_middle_name" name="visor_middle_name">
                         </div>
                     </div>
                     <div class="row mb-1">
-                        <!-- Gender -->
                         <div class="col-12 col-md-3">
                             <label for="visor_gender" class="form-label required-asterisk">Gender <span class="text-danger">*</span></label>
                             <select class="form-select mb-2" id="visor_gender" name="visor_gender" required>
@@ -51,19 +46,16 @@
                                 <option value="Female">Female</option>
                             </select>
                         </div>
-                        <!-- Email -->
                         <div class="col-12 col-md-4">
                             <label for="visor_personal_email" class="form-label required-asterisk">Email <span class="text-danger">*</span></label>
                             <input type="email" class="form-control mb-2" id="visor_personal_email" name="visor_personal_email" required>
                         </div>
-                        <!-- Company -->
                         <div class="col-12 col-md-5">
                             <label for="visor_company_name" class="form-label required-asterisk">Company Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control mb-2" id="visor_company_name" name="visor_company_name" required>
                         </div>
                     </div>
                     <div class="row mb-1">
-                        <!-- Company Address -->
                         <div class="col-12 col-md-4">
                             <label for="visor_company_address" class="form-label">Company Address <span class="text-danger">*</span></label>
                             <input type="text" class="form-control mb-2" id="visor_company_address" name="visor_company_address" required>

@@ -5,19 +5,18 @@ $(document).ready(function() {
             method: 'GET',
             dataType: 'json',
             success: function(data) {
-                console.log("Student Count Response:", data);
                 if (data.count !== undefined) {
-                    $('#num-students').text(data.count); // Update the student count
+                    $('#num-students').text(data.count);
                 } else {
-                    $('#num-students').text('0'); // Fallback in case of unexpected response
+                    $('#num-students').text('0');
                 }
             },
             error: function(xhr, status, error) {
                 console.error("Error fetching student count:", error);
-                $('#num-students').text('0'); // Fallback on error
+                $('#num-students').text('0');
             }
         });
     }
 
-    fetchStudentCount(); // Call the function to fetch the count
+    fetchStudentCount();
 });

@@ -5,19 +5,17 @@ $(document).ready(function() {
             method: 'GET',
             dataType: 'json',
             success: function(data) {
-                console.log("Coordinator Count:", data);
                 if (data.count !== undefined) {
-                    $('#num-coordinators').text(data.count); // Update the count
+                    $('#num-coordinators').text(data.count);
                 } else {
-                    $('#num-coordinators').text('0'); // Fallback for unexpected response
+                    $('#num-coordinators').text('0');
                 }
             },
             error: function(xhr, status, error) {
-                console.error("Error fetching coordinator count:", error);
-                $('#num-coordinators').text('0'); // Fallback for errors
+                $('#num-coordinators').text('0');
             }
         });
     }
 
-    fetchCoordinatorCount(); // Call the function to fetch the count
+    fetchCoordinatorCount();
 });

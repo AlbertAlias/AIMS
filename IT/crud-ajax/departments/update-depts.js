@@ -1,23 +1,20 @@
-// When the "Update" button is clicked, update the department in the database
 $('#deptUpdateBtn').click(function() {
     var departmentId = $('#departmentSelect').val();
     var departmentName = $('#additionalInput').val();
 
     if (departmentId && departmentName) {
-        // Send AJAX request to update the department
         $.ajax({
-            url: 'controller/departments/update-depts.php', // Endpoint to update department
+            url: 'controller/departments/update-depts.php',
             type: 'POST',
             data: {
                 department_id: departmentId,
                 department_name: departmentName
             },
-            dataType: 'json',  // Make sure to specify that we expect JSON in response
+            dataType: 'json',
             success: function(response) {
-                console.log(response); // Log the full response from the PHP script
+                console.log(response);
                 
                 if (response && response.success) {
-                    // SweetAlert success toast
                     Swal.fire({
                         toast: true,
                         position: 'top-right',
@@ -33,12 +30,10 @@ $('#deptUpdateBtn').click(function() {
                         }
                     });
 
-                    // Reset the input and close the modal
                     $('#additionalInput').val('').attr('readonly', true);
-                    $('#departmentSelect').val(''); // Reset the select dropdown
-                    $('#seeDepartmentsModal').modal('hide'); // Close the modal
+                    $('#departmentSelect').val('');
+                    $('#seeDepartmentsModal').modal('hide');
 
-                    // Re-populate the department dropdown with fresh data
                     populateDepartmentSelect();
                 } else {
                     alert('Error updating department: ' + (response.message || 'Unknown error'));
@@ -54,18 +49,17 @@ $('#deptUpdateBtn').click(function() {
     }
 });
 
-// Function to populate department dropdown with updated data
 function populateDepartmentSelect() {
     $.ajax({
-        url: 'controller/departments/retrieve-depts.php', // Endpoint to fetch departments
+        url: 'controller/departments/retrieve-depts.php',
         type: 'GET',
         dataType: 'json',
         success: function(data) {
             var select = $('#departmentSelect');
-            select.empty(); // Clear the current dropdown options
-            select.append('<option selected>Choose a department</option>'); // Add default option
+            select.empty();
+            select.append('<option selected>Choose a department</option>');
             data.forEach(function(department) {
-                select.append('<option value="' + department.department_id + '">' + department.department_name + '</option>'); // Add departments to the dropdown
+                select.append('<option value="' + department.department_id + '">' + department.department_name + '</option>');
             });
         },
         error: function(xhr, status, error) {
@@ -74,21 +68,64 @@ function populateDepartmentSelect() {
     });
 }
 
-// Populate departments on modal open
 $('#seeDepartmentsModal').on('show.bs.modal', function() {
     populateDepartmentSelect();
 });
 
-// When the user selects a department, populate the input field and make it editable
 $('#departmentSelect').change(function() {
     var selectedDeptId = $(this).val();
     var selectedDeptName = $("#departmentSelect option:selected").text();
     
     if (selectedDeptId && selectedDeptName !== "Choose a department") {
-        // Populate the input field with the department name and make it editable
         $('#additionalInput').val(selectedDeptName).removeAttr('readonly');
     } else {
-        // Clear input and make it readonly if no valid department is selected
         $('#additionalInput').val('').attr('readonly', true);
+    }
+});
+
+$('#deptDeleteBtn').click(function () {
+    var departmentId = $('#departmentSelect').val();
+
+    if (departmentId && confirm('Are you sure you want to delete this department? This action cannot be undone.')) {
+        $.ajax({
+            url: 'controller/departments/delete-depts.php',
+            type: 'POST',
+            data: {
+                department_id: departmentId
+            },
+            dataType: 'json',
+            success: function (response) {
+                console.log(response);
+                
+                if (response && response.success) {
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-right',
+                        icon: 'success',
+                        title: 'Department deleted successfully!',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        background: '#ffcccb',
+                        iconColor: '#d32f2f',
+                        color: '#b71c1c',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
+
+                    $('#additionalInput').val('').attr('readonly', true);
+                    $('#departmentSelect').val('');
+                    $('#seeDepartmentsModal').modal('hide');
+
+                    populateDepartmentSelect();
+                } else {
+                    alert('Error deleting department: ' + (response.message || 'Unknown error'));
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error deleting department: " + error);
+                alert('Error deleting department');
+            }
+        });
     }
 });

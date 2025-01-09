@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    // Configuration constants
     const chartConfig = {
         departmentColors: {
             'BSA': '#FF69B4',
@@ -20,43 +19,30 @@ $(document).ready(function() {
         refreshInterval: 300000
     };
 
-    // Utility functions
-
-    // Filters departments with total count > 5
     function filterDepartments(data) {
         return data.filter(item => parseInt(item.total) > 5);
     }
 
-    // Calculates total for "Other" category
     function calculateOtherTotal(data) {
         return data.filter(item => parseInt(item.total) <= 5)
                    .reduce((acc, item) => acc + parseInt(item.total), 0);
     }
 
-    // Sorts departments alphabetically
     function sortDepartments(data) {
         return data.sort((a, b) => a.department_name.localeCompare(b.department_name));
     }
 
-    // Displays error message in the chart container
     function showError(message) {
         $('#students-chart').html(`<p style="text-align: center; font-size: 18px; color: #999;">${message}</p>`);
     }
 
-    // Fetches chart data and renders the chart
     function fetchChartData() {
-        console.log("fetchChartData function called");
-
         $.ajax({
             url: 'controller/dashboards/retrieve-students-analytics.php',
             method: 'GET',
             success: function(response) {
-                console.log("Raw response from PHP:", response);
-
                 try {
                     const data = JSON.parse(response);
-                    console.log("Parsed data:", data);
-
                     if (!data.error && data.length > 0) {
                         let departments = filterDepartments(data);
                         const otherTotal = calculateOtherTotal(data);
@@ -67,7 +53,6 @@ $(document).ready(function() {
 
                         departments = sortDepartments(departments);
 
-                        // Prepare the series data (using actual department names for each department)
                         const series = [{
                             data: departments.map(item => parseInt(item.total) || 0)
                         }];
@@ -135,7 +120,7 @@ $(document).ready(function() {
                                     options: {
                                         chart: {
                                             width: '100%',
-                                            height: '350px'  // Adjust the height for smaller screens
+                                            height: '350px'
                                         },
                                         title: {
                                             fontSize: '14px'
@@ -147,7 +132,7 @@ $(document).ready(function() {
                                     options: {
                                         chart: {
                                             width: '100%',
-                                            height: '250px'  // Further reduce height for phones
+                                            height: '250px'
                                         },
                                         title: {
                                             fontSize: '12px'
@@ -180,11 +165,9 @@ $(document).ready(function() {
         });
     }
 
-    // Initial chart fetch
     fetchChartData();
 
-    // Handle updateChart event to refresh the chart when data is uploaded
     window.addEventListener('updateChart', function() {
-        fetchChartData(); // Refresh the chart
+        fetchChartData();
     });
 });

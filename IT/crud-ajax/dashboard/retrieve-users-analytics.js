@@ -1,7 +1,6 @@
 $(document).ready(function () {
-    let chart = null; // Keep a reference to the chart instance
+    let chart = null;
 
-    // Function to validate incoming data
     function validateData(data) {
         return (
             data &&
@@ -9,25 +8,19 @@ $(document).ready(function () {
         );
     }
 
-    // Function to fetch the user analytics data
     function fetchUserAnalytics() {
-        // Add a timestamp to prevent caching
         $.ajax({
             url: 'controller/dashboards/retrieve-users-analytics.php',
             method: 'GET',
-            data: { timestamp: new Date().getTime() }, // Prevent cache
+            data: { timestamp: new Date().getTime() },
             success: function (response) {
-                console.log("Raw response from PHP:", response);
-
                 try {
                     const data = JSON.parse(response);
-                    console.log("Parsed data:", data);
-
                     if (!data.error && validateData(data)) {
                         renderChart(data);
                     } else if (!validateData(data)) {
                         showError('No Data Available');
-                        clearChart(); // Clear any existing chart if no data is available
+                        clearChart();
                     } else {
                         showError(`Error fetching data: ${data.error || 'Invalid data received'}`);
                     }
@@ -43,7 +36,6 @@ $(document).ready(function () {
         });
     }
 
-    // Function to render the chart with the parsed data
     function renderChart(data) {
         const deanCount = parseInt(data['Dean']) || 0;
         const coordinatorCount = parseInt(data['Coordinator']) || 0;
@@ -118,27 +110,22 @@ $(document).ready(function () {
             responsive: getResponsiveOptions()
         };
 
-        console.log("Chart data:", chartOptions);
-
-        // Destroy the existing chart if it exists
         if (chart) {
             chart.destroy();
         }
 
-        // Create a new chart instance
         chart = new ApexCharts(document.querySelector("#users-chart"), chartOptions);
         chart.render();
     }
 
-    // Function to return responsive chart options
     function getResponsiveOptions() {
         return [
             {
-                breakpoint: 1024, // Adjust for tablets and smaller devices
+                breakpoint: 1024,
                 options: {
                     chart: {
                         width: '100%',
-                        height: '350px' // Adjust the height to fit better on smaller screens
+                        height: '350px'
                     },
                     title: {
                         style: {
@@ -152,11 +139,11 @@ $(document).ready(function () {
                 }
             },
             {
-                breakpoint: 768, // Adjust for tablets and smaller devices
+                breakpoint: 768,
                 options: {
                     chart: {
                         width: '100%',
-                        height: '300px'  // Adjust the height to fit better on smaller screens
+                        height: '300px'
                     },
                     title: {
                         style: {
@@ -170,11 +157,11 @@ $(document).ready(function () {
                 }
             },
             {
-                breakpoint: 480, // Adjust for small devices like phones
+                breakpoint: 480,
                 options: {
                     chart: {
                         width: '100%',
-                        height: '250px'  // Further reduce height for small screens
+                        height: '250px'
                     },
                     title: {
                         style: {
@@ -190,12 +177,10 @@ $(document).ready(function () {
         ];
     }
 
-    // Function to show error messages (using a toast or alert)
     function showError(message) {
-        toastr.error(message); // Show a non-blocking toast notification
+        toastr.error(message);
     }
 
-    // Function to clear the chart if no data is available
     function clearChart() {
         if (chart) {
             chart.destroy();
@@ -203,14 +188,11 @@ $(document).ready(function () {
         $("#users-chart").html('<div class="text-center text-muted mt-3">No Data Available</div>');
     }
 
-    // Expose the fetchUserAnalytics function globally for external triggers
-    window.fetchUserAnalytics = debounce(fetchUserAnalytics, 500); // Debounce function added
+    window.fetchUserAnalytics = debounce(fetchUserAnalytics, 500);
 
-    // Call the function to fetch data on page load
     fetchUserAnalytics();
 });
 
-// Debounce function to prevent multiple simultaneous calls
 function debounce(func, delay) {
     let timeout;
     return function (...args) {

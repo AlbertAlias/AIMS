@@ -5,7 +5,6 @@ $(document).ready(function() {
             method: 'GET',
             dataType: 'json',
             success: function(data) {
-                console.log("Supervisor Count Response:", data);
                 if (data.count !== undefined) {
                     $('#num-supervisors').text(data.count);
                 } else {
