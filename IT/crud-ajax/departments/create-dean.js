@@ -1,9 +1,7 @@
 $(document).ready(function () {
-    // Handle form submission
     $("#deanSubmitBtn").on("click", function (event) {
-        event.preventDefault(); // Prevent form default submission
+        event.preventDefault();
 
-        // Gather form data
         const formData = {
             last_name: $("#add_last_name").val(),
             first_name: $("#add_first_name").val(),
@@ -14,7 +12,6 @@ $(document).ready(function () {
             department3: $("#add_department3").val(),
         };
 
-        // Check if any required field is empty
         let emptyField = false;
         for (const field in formData) {
             if (formData[field] === "") {
@@ -23,7 +20,6 @@ $(document).ready(function () {
             }
         }
 
-        // If any required field is empty, show SweetAlert and return
         if (emptyField) {
             Swal.fire({
                 toast: true,
@@ -39,12 +35,11 @@ $(document).ready(function () {
                     popup: 'mt-5'
                 }
             });
-            return; // Prevent form submission if fields are empty
+            return;
         }
 
-        // Proceed with AJAX request if all fields are filled
         $.ajax({
-            url: "controller/departments/create-dean.php", // PHP script to handle request
+            url: "controller/departments/create-dean.php",
             type: "POST",
             data: formData,
             dataType: "json",

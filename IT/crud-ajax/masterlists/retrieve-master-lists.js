@@ -1,7 +1,6 @@
 let masterlistsPage = 1;
 let masterlistsPageLength = 10;
 
-// Fetch and display table data
 function loadTableData() {
     const selectedUserType = $('#userTypeDropdown').val();
     const selectedDepartmentId = $('#departmentDropdown').val();
@@ -20,7 +19,6 @@ function loadTableData() {
             company: selectedCompany
         },
         success: function(response) {
-            console.log('Response:', response);
             if (response.html) {
                 $('#master-lists tbody').html(response.html);
             }
@@ -46,13 +44,11 @@ function toggleColumns(userType) {
         Registrar: ['Department', 'Company', 'AY']
     };
 
-    // Reset all column visibility
     $('#master-lists thead th').show();
     $('#master-lists tbody tr').each(function () {
         $(this).find('td').show();
     });
 
-    // Hide specific columns only if a user type is selected
     if (userType && columnsToHide[userType]) {
         columnsToHide[userType].forEach(columnName => {
             const columnIndex = $(`#master-lists thead th:contains(${columnName})`).index();
@@ -66,7 +62,6 @@ function toggleColumns(userType) {
     }
 }
 
-// Event listeners
 $('#master-lists-pageLengthSelect').on('change', function() {
     masterlistsPageLength = parseInt($(this).val());
     masterlistsPage = 1;
@@ -85,28 +80,26 @@ $('#master-lists-pagination').on('click', '.page-link', function(e) {
 });
 
 $('#userTypeDropdown').on('change', function () {
-    masterlistsPage = 1; // Reset to first page
-    loadTableData(); // Reload the table with the selected user type
+    masterlistsPage = 1;
+    loadTableData();
 });
 
 $('#departmentDropdown').on('change', function () {
-    masterlistsPage = 1; // Reset to first page
-    loadTableData(); // Reload the table with the selected user type
+    masterlistsPage = 1;
+    loadTableData();
 });
 
 $('#companyDropdown').on('change', function () {
-    masterlistsPage = 1; // Reset to first page
-    loadTableData(); // Reload the table with the selected user type
+    masterlistsPage = 1;
+    loadTableData();
 });
 
 $('#userTypeDropdown').on('change', function () {
     const selectedUserType = $(this).val();
-    masterlistsPage = 1; // Reset to first page
-    toggleColumns(selectedUserType); // Toggle columns visibility
-    loadTableData(); // Reload the table with the selected user type
+    masterlistsPage = 1;
+    toggleColumns(selectedUserType);
+    loadTableData();
 });
 
-// Initial load with default behavior (all columns visible)
-toggleColumns(''); // Show all columns
-// Initial load
+toggleColumns('');
 loadTableData();

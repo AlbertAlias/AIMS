@@ -1,30 +1,26 @@
 $(document).ready(function () {
     window.loadRegistrar = function (searchTerm = '') {
         $.ajax({
-            url: 'controller/registrar/retrieve-registrar.php', // PHP script to fetch registrar
+            url: 'controller/registrar/retrieve-registrar.php',
             method: 'GET',
-            data: { searchTerm: searchTerm }, // Send search term to the server
+            data: { searchTerm: searchTerm },
             dataType: 'json',
             success: function (response) {
-                console.log(response);
                 if (response.success) {
-                    // Store the fetched registrar for filtering
                     window.registrar = response.registrar;
                     updateRegistrarList(window.registrar);
                 } else {
-                    // Gracefully handle empty data
                     console.warn('No registrar found. Displaying empty list.');
                     updateRegistrarList([], response.message);
                 }
             },
             error: function (xhr, status, error) {
                 console.error('Failed to load registrar:', error);
-                console.error('Response Text:', xhr.responseText); // Debug response
+                console.error('Response Text:', xhr.responseText);
             },
         });
     };
 
-    // Function to update the Registrar list
     function updateRegistrarList(registrar, message = null) {
         let registrarInfo = $('#registrarInfo');
         registrarInfo.empty();
@@ -49,15 +45,13 @@ $(document).ready(function () {
         });
     }
 
-    // Event listener for input field to trigger search
     $('#searchRegistrar').on('input', function () {
-        const searchTerm = $(this).val(); // Get the value of the search input
-        loadRegistrar(searchTerm); // Load registrar based on the search term
+        const searchTerm = $(this).val();
+        loadRegistrar(searchTerm);
     });
 
-    // When a registrar button is clicked, fetch and populate their details
     $(document).on('click', '.registrar-btn', function () {
-        var userId = $(this).data('id'); // Get the ID of the selected registrar
+        var userId = $(this).data('id');
 
         $.ajax({
             url: 'controller/registrar/retrieve-registrar-info.php',
@@ -65,19 +59,15 @@ $(document).ready(function () {
             data: { user_id: userId },
             dataType: 'json',
             success: function (response) {
-                console.log(response);
                 if (response.success) {
-                    // Populate form fields with registrar data
                     $('#registrarID').val(userId);
                     $('#registrar_last_name').val(response.last_name);
                     $('#registrar_first_name').val(response.first_name);
                     $('#registrar_personal_email').val(response.email);
                     $('#registrar_username').val(response.username);
-
-                    // Manage button visibility
-                    $('#registrarSubmitBtn').hide();   // Hide Submit button
-                    $('#registrarUpdateBtn').show();   // Show Update button
-                    $('#registrarCancelBtn').show();   // Show Cancel button
+                    $('#registrarSubmitBtn').hide();
+                    $('#registrarUpdateBtn').show();
+                    $('#registrarCancelBtn').show();
                 }
             },
             error: function (xhr, status, error) {
@@ -95,7 +85,6 @@ $(document).ready(function () {
             username: $('#registrar_username').val(),
         };
 
-        // Validate required fields (ignoring middle name and password)
         if (!userData.last_name || !userData.first_name || !userData.email || !userData.username) {
             Swal.fire({
                 toast: true,
@@ -114,9 +103,8 @@ $(document).ready(function () {
             return;
         }
 
-        // Send AJAX request to update registrar details
         $.ajax({
-            url: 'controller/registrar/update-registrar.php', // PHP script to handle updates
+            url: 'controller/registrar/update-registrar.php',
             method: 'POST',
             data: userData,
             dataType: 'json',
@@ -137,10 +125,8 @@ $(document).ready(function () {
                         }
                     });
 
-                    loadRegistrar(); // Reload the registrar list
-                    $('#registrarForm')[0].reset(); // Reset the form
-
-                    // Show Submit button and hide Update/Cancel buttons
+                    loadRegistrar();
+                    $('#registrarForm')[0].reset();
                     $('#registrarSubmitBtn').show();
                     $('#registrarUpdateBtn').hide();
                     $('#registrarCancelBtn').hide();
@@ -163,7 +149,7 @@ $(document).ready(function () {
             },
             error: function (xhr, status, error) {
                 console.error('Error updating registrar:', error);
-                console.error('Response Text:', xhr.responseText); // Debugging info
+                console.error('Response Text:', xhr.responseText);
 
                 Swal.fire({
                     toast: true,
@@ -183,17 +169,12 @@ $(document).ready(function () {
         });
     });
 
-    // Cancel the update and reset the form
     $('#registrarCancelBtn').click(function () {
-        // Reset the form fields
         $('#registrarForm')[0].reset();
-
-        // Ensure the visibility of buttons is properly toggled
-        $('#registrarSubmitBtn').show();  // Show Submit button
-        $('#registrarUpdateBtn').hide();  // Hide Update button
-        $('#registrarCancelBtn').hide();  // Hide Cancel button
+        $('#registrarSubmitBtn').show();
+        $('#registrarUpdateBtn').hide();
+        $('#registrarCancelBtn').hide();
     });
 
-    // Initial load
-    loadRegistrar(); // Initially load the registrar list
+    loadRegistrar();
 });

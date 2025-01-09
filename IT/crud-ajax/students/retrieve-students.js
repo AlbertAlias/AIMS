@@ -5,14 +5,14 @@ $(document).ready(function () {
         $.ajax({
             url: 'controller/students/retrieve-students.php',
             method: 'GET',
-            data: { searchTerm: searchTerm },  // Send the search term to the backend
+            data: { searchTerm: searchTerm },
             dataType: 'json',
             success: function (response) {
                 if (response.success && response.students && response.students.length > 0) {
                     window.students = response.students;
                     updateStudentsList(window.students);
                 } else {
-                    updateStudentsList([], 'No students available yet.'); // Empty state message
+                    updateStudentsList([], 'No students available yet.');
                 }
             },
             error: function (xhr, status, error) {
@@ -26,13 +26,11 @@ $(document).ready(function () {
         let studentsInfo = $('#studentsInfo');
         studentsInfo.empty();
 
-        // If a message is provided, display it
         if (message) {
             studentsInfo.html(`<div class="alert alert-info">${message}</div>`);
             return;
         }
 
-        // If students are available, display them
         if (students.length === 0) {
             studentsInfo.html('<div class="alert alert-info">No students found for the selected department.</div>');
             return;
@@ -46,13 +44,11 @@ $(document).ready(function () {
         });
     }
 
-    // When a student button is clicked, fetch and populate their details
     $(document).on('click', '.stud-btn', function () {
-        var userId = $(this).data('id'); // Get the ID of the selected student
-        console.log("Clicked user ID:", userId);
+        var userId = $(this).data('id');
     
-        $('#studentUpdateBtn').prop('disabled', false);  // Show update button
-        $('#studentCancelBtn').show();  // Show cancel button
+        $('#studentUpdateBtn').prop('disabled', false);
+        $('#studentCancelBtn').show();
     
         $.ajax({
             url: 'controller/students/retrieve-students-info.php',
@@ -69,7 +65,6 @@ $(document).ready(function () {
                     $('#student_email').val(response.email);
                     $('#student_username').val(response.username);
     
-                    // Fetch department options
                     $.ajax({
                         url: 'controller/students/retrieve-depts.php',
                         method: 'GET',
@@ -88,9 +83,6 @@ $(document).ready(function () {
                                         })
                                     );
                                 });
-    
-                                // Set the selected department
-                                console.log('Setting department:', response.department_id);
                                 departmentDropdown.val(String(response.department_id));
                             } else {
                                 departmentDropdown.append('<option selected disabled>No departments available</option>');
@@ -112,12 +104,10 @@ $(document).ready(function () {
 
     $('#searchStudents').on('input', function () {
         const searchTerm = $(this).val().toLowerCase();
-        window.loadStudents(searchTerm); // Pass the search term to load students
+        window.loadStudents(searchTerm);
     });
 
     $('#studentUpdateBtn').click(function () {
-        console.log("Update button clicked!");
-    
         const userData = {
             user_id: $('#student_id').val(),
             last_name: $('#student_last_name').val(),
@@ -125,7 +115,7 @@ $(document).ready(function () {
             email: $('#student_email').val(),
             username: $('#student_username').val(),
             department_id: $('#student_department').val(),
-            password: $('#student_password').val(),  // Include password field
+            password: $('#student_password').val(),
         };
     
         if (!userData.last_name || !userData.first_name || !userData.username || !userData.department_id) {
@@ -212,18 +202,14 @@ $(document).ready(function () {
         });
     });
 
-    // Cancel the update and reset the form
     $('#studentCancelBtn').click(function () {
-        // Reset the form fields
         $('#studentsForm')[0].reset();
     
-        // Reset the "Choose Department" option explicitly
         $('#student_department').val('Choose Department');
     
-        // Hide the Update and Cancel buttons, and show the Submit button
         $('#studentUpdateBtn').prop('disabled', true);
         $('#studentCancelBtn').hide();
     });
 
-    loadStudents(); // Initially load the student list
+    loadStudents();
 });

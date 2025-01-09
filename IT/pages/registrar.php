@@ -1,6 +1,5 @@
 <div class="container-fluid bg-light p-0 m-0" id="registrar" style="display: none;">
     <div class="row g-3">
-        <!-- Registrar Section -->
         <div class="col-12 col-md-6 col-lg-4">
             <div class="bg-light rounded-3 p-3 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-2">Registrar</h5>
@@ -17,25 +16,21 @@
             </div>
         </div>
 
-        <!-- Add Registrar Section -->
         <div class="col-12 col-md-6 col-lg-8">
             <div class="bg-light rounded-3 p-3 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-2">Add Registrar</h5>
                 <p class="text-gray-800 fs-5 mb-2">Personal Information</p>
                 <form id="registrarForm">
                     <div class="row mb-1">
-                        <!-- Last Name -->
                         <div class="col-12 col-md-4">
                             <input type="hidden" id="registrarID" name="id">
                             <label for="registrar_last_name" class="form-label required-asterisk">Last Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control mb-2" id="registrar_last_name" name="registrar_last_name" required>
                         </div>
-                        <!-- First Name -->
                         <div class="col-12 col-md-4">
                             <label for="registrar_first_name" class="form-label required-asterisk">First Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control mb-2" id="registrar_first_name" name="registrar_first_name" required>
                         </div>
-                        <!-- Email -->
                         <div class="col-12 col-md-4">
                             <label for="registrar_personal_email" class="form-label required-asterisk">Email <span class="text-danger">*</span></label>
                             <input type="email" class="form-control mb-2" id="registrar_personal_email" name="registrar_personal_email" required>
@@ -66,7 +61,6 @@
                             <path d="M48.5 224L40 224c-13.3 0-24-10.7-24-24L16 72c0-9.7 5.8-18.5 14.8-22.2s19.3-1.7 26.2 5.2L98.6 96.6c87.6-86.5 228.7-86.2 315.8 1c87.5 87.5 87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3c-62.2-62.2-162.7-62.5-225.3-1L185 183c6.9 6.9 8.9 17.2 5.2 26.2s-12.5 14.8-22.2 14.8L48.5 224z"/>
                         </svg> Cancel
                     </button>
-                    <!-- <button type="button" id="registrarDeleteBtn" class="btn btn-danger" style="display: none;"><i class="fa-solid fa-trash"></i> Delete</button> -->
                 </form>
             </div>
         </div>

@@ -1,9 +1,7 @@
 $(document).ready(function () {
-    // Handle form submission
     $("#registrarSubmitBtn").on("click", function (event) {
-        event.preventDefault(); // Prevent form default submission
+        event.preventDefault();
 
-        // Gather form data
         const formData = {
             registrar_last_name: $("#registrar_last_name").val(),
             registrar_first_name: $("#registrar_first_name").val(),
@@ -12,7 +10,6 @@ $(document).ready(function () {
             registrar_password: $("#registrar_password").val(),
         };
 
-        // Check if any required field is empty
         let emptyField = false;
         for (const field in formData) {
             if (formData[field] === "") {
@@ -21,7 +18,6 @@ $(document).ready(function () {
             }
         }
 
-        // If any required field is empty, show SweetAlert and return
         if (emptyField) {
             Swal.fire({
                 toast: true,
@@ -37,12 +33,11 @@ $(document).ready(function () {
                     popup: 'mt-5'
                 }
             });
-            return; // Prevent form submission if fields are empty
+            return;
         }
 
-        // Proceed with AJAX request if all fields are filled
         $.ajax({
-            url: "controller/registrar/create-registrar.php", // PHP script to handle request
+            url: "controller/registrar/create-registrar.php",
             type: "POST",
             data: formData,
             dataType: "json",
@@ -62,7 +57,7 @@ $(document).ready(function () {
                             popup: 'mt-5'
                         }
                     });
-                    $("#registrarForm")[0].reset(); // Reset the form
+                    $("#registrarForm")[0].reset();
                 } else {
                     Swal.fire({
                         toast: true,

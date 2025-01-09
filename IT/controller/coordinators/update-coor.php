@@ -1,7 +1,7 @@
 <?php
     include('../../../dbconn.php');
+    header('Content-Type: application/json');
 
-    // Get data from POST request
     $user_id = $_POST['user_id'];
     $last_name = $_POST['last_name'];
     $first_name = $_POST['first_name'];
@@ -17,10 +17,8 @@
         $response['success'] = false;
         $response['message'] = 'All required fields must be filled.';
     } else {
-        // Hash the password using bcrypt
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
-        // Update query with hashed password
         $sql = "UPDATE users SET 
                     last_name = ?, 
                     first_name = ?, 
@@ -52,6 +50,5 @@
 
     $conn->close();
 
-    // Return the response as JSON
     echo json_encode($response);
 ?>

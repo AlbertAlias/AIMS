@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (deleteBtn) {
         deleteBtn.addEventListener('click', function() {
-            const userId = coordinatorForm.querySelector('#coorID').value; // Assuming this is the user_id
+            const userId = coordinatorForm.querySelector('#coorID').value;
 
             Swal.fire({
                 title: 'Are you sure?',
@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ id: userId }) // Pass the user_id for deletion
+                        body: JSON.stringify({ id: userId })
                     })
                     .then(response => response.text())
                     .then(text => {
@@ -44,13 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
                                 }
                             });
 
-                            // Remove the deleted coordinator button from the UI
                             const deletedCoorButton = document.querySelector(`.coor-btn[data-id='${userId}']`);
                             if (deletedCoorButton) {
                                 deletedCoorButton.remove();
                             }
 
-                            // Reset and lock the forms after successful deletion
                             if (typeof window.resetAndLockForms === 'function') {
                                 window.resetAndLockForms();
                             }
