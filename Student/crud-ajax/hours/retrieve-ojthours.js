@@ -22,8 +22,7 @@ function loadOjtHoursData() {
             }
             $('#ojthours-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
 
-            // Update total hours
-            $('#totalHoursDisplay').text(`Rendered Hours: ${response.total_hours_sum || '0'}`);
+            // $('#totalHoursDisplay').text(`Rendered Hours: ${response.total_hours_sum || '0'}`);
         },
         error: function(xhr, status, error) {
             console.error('AJAX Error:', status, error);

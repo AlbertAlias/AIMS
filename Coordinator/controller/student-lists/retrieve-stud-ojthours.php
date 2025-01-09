@@ -94,24 +94,6 @@
             $html .= '</tr>';
         }
 
-        // Fetch the sum of total hours
-        $totalHoursSql = "
-        SELECT SUM(CAST(ojt_hours.total_hours AS DECIMAL(10,2))) AS total_hours_sum
-        FROM ojt_hours
-        WHERE ojt_hours.student_id = ? 
-        AND (CONCAT(MONTHNAME(ojt_hours.submission_date), ' ', DAY(ojt_hours.submission_date)) LIKE ?)";
-        
-        $totalHoursStmt = $conn->prepare($totalHoursSql);
-        $totalHoursStmt->bind_param('is', $user_id, $searchTerm);
-        $totalHoursStmt->execute();
-        $totalHoursResult = $totalHoursStmt->get_result();
-        $totalHoursSum = $totalHoursResult->fetch_assoc()['total_hours_sum'];
-
-        // Ensure total_hours_sum is a whole number if it's an integer
-        if ($totalHoursSum == floor($totalHoursSum)) {
-            $totalHoursSum = (int) $totalHoursSum; // Convert to integer if no decimal part
-        }
-
         // Fetch total count for pagination
         $totalSql = "
         SELECT COUNT(*) AS total
@@ -163,8 +145,7 @@
             'pagination' => $pagination,
             'start' => $start + 1,
             'end' => min($start + $length, $total),
-            'total' => $total,
-            'total_hours_sum' => $totalHoursSum
+            'total' => $total
         ];
         echo json_encode($response);
     } catch (Exception $e) {

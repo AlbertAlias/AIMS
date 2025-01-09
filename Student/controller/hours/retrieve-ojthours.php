@@ -1,14 +1,11 @@
 <?php 
     header('Content-Type: application/json');
-
     include '../../../dbconn.php';
 
     try {
-        // Get the logged-in user's ID from session
         session_start();
-        $student_id = $_SESSION['user_id'];  // Assuming the student ID is stored in session
+        $student_id = $_SESSION['user_id'];
 
-        // Get parameters for pagination
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
         $length = isset($_GET['length']) ? intval($_GET['length']) : 10;
         $search = isset($_GET['search']) ? $_GET['search'] : '';
@@ -96,24 +93,6 @@
             $html .= '</tr>';
         }
 
-        // Fetch the sum of total hours
-        $totalHoursSql = "
-        SELECT SUM(CAST(ojt_hours.total_hours AS DECIMAL(10,2))) AS total_hours_sum
-        FROM ojt_hours
-        WHERE ojt_hours.student_id = ? 
-        AND (CONCAT(MONTHNAME(ojt_hours.submission_date), ' ', DAY(ojt_hours.submission_date)) LIKE ?)";
-        
-        $totalHoursStmt = $conn->prepare($totalHoursSql);
-        $totalHoursStmt->bind_param('is', $student_id, $searchTerm);
-        $totalHoursStmt->execute();
-        $totalHoursResult = $totalHoursStmt->get_result();
-        $totalHoursSum = $totalHoursResult->fetch_assoc()['total_hours_sum'];
-
-        // Ensure total_hours_sum is a whole number if it's an integer
-        if ($totalHoursSum == floor($totalHoursSum)) {
-            $totalHoursSum = (int) $totalHoursSum; // Convert to integer if no decimal part
-        }
-
         // Fetch total count for pagination
         $totalSql = "
         SELECT COUNT(*) AS total
@@ -165,8 +144,7 @@
             'pagination' => $pagination,
             'start' => $start + 1,
             'end' => min($start + $length, $total),
-            'total' => $total,
-            'total_hours_sum' => $totalHoursSum
+            'total' => $total
         ];
         echo json_encode($response);
     } catch (Exception $e) {
