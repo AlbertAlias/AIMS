@@ -210,7 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Prepare database query to insert evaluation data
         $stmt = $conn->prepare("
-            INSERT INTO evaluations (student_id, ratings, total_grade, comments, evaluator_id, evaluation_date)
+            INSERT INTO supervisor_evaluations (student_id, ratings, total_grade, comments, evaluator_id, evaluation_date)
             VALUES (?, ?, ?, ?, ?, NOW())
         ");
         

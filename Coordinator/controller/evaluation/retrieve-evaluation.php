@@ -1,17 +1,17 @@
 <?php
-    include '../../dbconn.php';
+    include '../../../dbconn.php';
 
     if (isset($_GET['user_id'])) {
         $user_id = intval($_GET['user_id']);
-        $supervisorUserId = $_SESSION['user_id'];
+        $coordinatorUserId = $_SESSION['user_id'];
 
         $evaluationQuery = "
             SELECT COUNT(*) AS evaluation_count
-            FROM supervisor_evaluations
+            FROM coordinator_evaluations
             WHERE student_id = ? AND evaluator_id = ?
         ";
         $stmt = $conn->prepare($evaluationQuery);
-        $stmt->bind_param('ii', $user_id, $supervisorUserId);
+        $stmt->bind_param('ii', $user_id, $coordinatorUserId);
         $stmt->execute();
         $result = $stmt->get_result()->fetch_assoc();
 
