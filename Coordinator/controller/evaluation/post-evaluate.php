@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ratingPoints = array_sum($ratings);
 
         // Apply the formula to compute total_grade
-        $totalGrade = ($ratingPoints / 90) * 70;
+        $totalGrade = ($ratingPoints / 90) * 30;
 
         // Prepare database query to insert evaluation data without ratings
         $stmt = $conn->prepare("
