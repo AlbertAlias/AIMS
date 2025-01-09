@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2025 at 08:46 AM
+-- Generation Time: Jan 02, 2025 at 07:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -50,17 +50,14 @@ INSERT INTO `coordinator` (`coordinator_id`, `user_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `coordinator_evaluations`
+-- Table structure for table `coordinator_evaluation`
 --
 
-CREATE TABLE `coordinator_evaluations` (
-  `id` int(11) NOT NULL,
-  `student_id` int(11) NOT NULL,
-  `ratings` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `total_grade` decimal(5,2) NOT NULL,
-  `comments` text DEFAULT NULL,
-  `evaluation_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `evaluator_id` int(11) DEFAULT NULL
+CREATE TABLE `coordinator_evaluation` (
+  `evaluation_id` int(11) NOT NULL,
+  `student_id` int(11) DEFAULT NULL,
+  `supervisor_id` int(11) DEFAULT NULL,
+  `coordinator_grade` decimal(5,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -120,6 +117,30 @@ INSERT INTO `department` (`department_id`, `department_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `evaluations`
+--
+
+CREATE TABLE `evaluations` (
+  `id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `ratings` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `total_grade` decimal(5,2) NOT NULL,
+  `comments` text DEFAULT NULL,
+  `evaluation_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `evaluator_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `evaluations`
+--
+
+INSERT INTO `evaluations` (`id`, `student_id`, `ratings`, `total_grade`, `comments`, `evaluation_date`, `evaluator_id`) VALUES
+(1, 1197, '{\"ratings[quality1]\":\"5\"}', 3.89, '', '2024-12-29 10:47:41', 1195),
+(2, 1197, '{\"ratings[quality7]\":\"5\",\"ratings[quality8]\":\"5\"}', 7.78, '', '2025-01-02 06:28:01', 1195);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ojt_hours`
 --
 
@@ -134,13 +155,6 @@ CREATE TABLE `ojt_hours` (
   `file_path` varchar(255) DEFAULT NULL,
   `submission_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `ojt_hours`
---
-
-INSERT INTO `ojt_hours` (`id`, `student_id`, `morning_start`, `lunch_start`, `lunch_end`, `afternoon_end`, `total_hours`, `file_path`, `submission_date`) VALUES
-(23, 1197, '10:00:00', '12:00:00', '13:00:00', '19:00:00', '8 hour(s) and 0 minute(s)', 'uploads/sabao.jpg', '2025-01-09 01:01:12');
 
 -- --------------------------------------------------------
 
@@ -166,8 +180,7 @@ INSERT INTO `requirements` (`requirement_id`, `coordinator_id`, `title`, `descri
 (67, 484, 'Application Letter', 'Pokemon Horizon Episode 30', '2024-12-17 13:05:11', '2024-12-18', 'closed'),
 (68, 484, 'Resume Letter', 'Pokemon Horizon Rayquaza', '2024-12-17 13:05:38', '2001-12-15', 'closed'),
 (77, 484, 'Memorandum of Agreement', 'pikachu', '2024-12-18 03:29:59', '2024-12-22', 'closed'),
-(79, 484, 'BSIT COOR ONLY', 'sad', '2024-12-27 05:47:44', '2024-12-27', 'closed'),
-(80, 484, 'BSIT COOR ONLY', 'sad', '2025-01-02 11:07:32', '2025-01-03', 'closed');
+(79, 484, 'BSIT COOR ONLY', 'sad', '2024-12-27 05:47:44', '2024-12-27', 'closed');
 
 -- --------------------------------------------------------
 
@@ -185,8 +198,7 @@ CREATE TABLE `student_hours` (
 --
 
 INSERT INTO `student_hours` (`coordinator_id`, `hours_needed`) VALUES
-(484, 480),
-(488, 600);
+(484, 480);
 
 -- --------------------------------------------------------
 
@@ -212,9 +224,7 @@ INSERT INTO `student_supervisor` (`id`, `student_id`, `supervisor_id`, `company`
 (26, 1207, 1195, 'Fujitsu Die Tech Philippines Corporation', '2024-12-17 21:11:42'),
 (27, 1208, 1431, 'fujitsu', '2024-12-27 13:58:28'),
 (28, 1209, 1431, 'fujitsu', '2024-12-27 13:58:36'),
-(29, 1210, 1431, 'fujitsu', '2024-12-27 13:58:42'),
-(30, 1211, 1195, 'Fujitsu Die Tech Philippines Corporation', '2025-01-02 18:03:50'),
-(31, 1212, 1431, 'fujitsu', '2025-01-02 18:04:01');
+(29, 1210, 1431, 'fujitsu', '2024-12-27 13:58:42');
 
 -- --------------------------------------------------------
 
@@ -231,22 +241,6 @@ CREATE TABLE `submit_requirements` (
   `requirement_id` int(11) DEFAULT NULL,
   `file_path` varchar(255) DEFAULT NULL,
   `remarks` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `supervisor_evaluations`
---
-
-CREATE TABLE `supervisor_evaluations` (
-  `id` int(11) NOT NULL,
-  `student_id` int(11) NOT NULL,
-  `ratings` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `total_grade` decimal(5,2) NOT NULL,
-  `comments` text DEFAULT NULL,
-  `evaluation_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `evaluator_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -554,8 +548,7 @@ CREATE TABLE `weekly_reports` (
 --
 
 INSERT INTO `weekly_reports` (`id`, `title`, `student_id`, `week_start`, `week_end`, `file_path`) VALUES
-(1, 'Weekly Report 1', 1197, '2024-12-22', '2024-12-28', 'uploads/1734844756_MOA.pdf'),
-(2, 'Weekly Report 1', 1197, '2025-01-01', '2025-01-03', 'uploads/1735815544_MOA.pdf');
+(1, 'Weekly Report 1', 1197, '2024-12-22', '2024-12-28', 'uploads/1734844756_MOA.pdf');
 
 --
 -- Indexes for dumped tables
@@ -569,12 +562,12 @@ ALTER TABLE `coordinator`
   ADD KEY `FK_coordinator_user` (`user_id`);
 
 --
--- Indexes for table `coordinator_evaluations`
+-- Indexes for table `coordinator_evaluation`
 --
-ALTER TABLE `coordinator_evaluations`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `student_id` (`student_id`),
-  ADD KEY `evaluator_id` (`evaluator_id`);
+ALTER TABLE `coordinator_evaluation`
+  ADD PRIMARY KEY (`evaluation_id`),
+  ADD KEY `FK_coordinator_evaluation_student` (`student_id`),
+  ADD KEY `FK_coordinator_evaluation_supervisor` (`supervisor_id`);
 
 --
 -- Indexes for table `dean_department`
@@ -589,6 +582,14 @@ ALTER TABLE `dean_department`
 ALTER TABLE `department`
   ADD PRIMARY KEY (`department_id`),
   ADD UNIQUE KEY `department_name` (`department_name`);
+
+--
+-- Indexes for table `evaluations`
+--
+ALTER TABLE `evaluations`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`),
+  ADD KEY `evaluator_id` (`evaluator_id`);
 
 --
 -- Indexes for table `ojt_hours`
@@ -625,14 +626,6 @@ ALTER TABLE `submit_requirements`
   ADD KEY `requirement_id` (`requirement_id`);
 
 --
--- Indexes for table `supervisor_evaluations`
---
-ALTER TABLE `supervisor_evaluations`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `student_id` (`student_id`),
-  ADD KEY `evaluator_id` (`evaluator_id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -659,10 +652,10 @@ ALTER TABLE `coordinator`
   MODIFY `coordinator_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `coordinator_evaluations`
+-- AUTO_INCREMENT for table `coordinator_evaluation`
 --
-ALTER TABLE `coordinator_evaluations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+ALTER TABLE `coordinator_evaluation`
+  MODIFY `evaluation_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `department`
@@ -671,34 +664,34 @@ ALTER TABLE `department`
   MODIFY `department_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
+-- AUTO_INCREMENT for table `evaluations`
+--
+ALTER TABLE `evaluations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `ojt_hours`
 --
 ALTER TABLE `ojt_hours`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `requirements`
 --
 ALTER TABLE `requirements`
-  MODIFY `requirement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `requirement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `student_supervisor`
 --
 ALTER TABLE `student_supervisor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `submit_requirements`
 --
 ALTER TABLE `submit_requirements`
-  MODIFY `submit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=133;
-
---
--- AUTO_INCREMENT for table `supervisor_evaluations`
---
-ALTER TABLE `supervisor_evaluations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `submit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -710,7 +703,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `weekly_reports`
 --
 ALTER TABLE `weekly_reports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -723,11 +716,11 @@ ALTER TABLE `coordinator`
   ADD CONSTRAINT `FK_coordinator_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
 
 --
--- Constraints for table `coordinator_evaluations`
+-- Constraints for table `coordinator_evaluation`
 --
-ALTER TABLE `coordinator_evaluations`
-  ADD CONSTRAINT `coordinator_evaluations_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`),
-  ADD CONSTRAINT `coordinator_evaluations_ibfk_2` FOREIGN KEY (`evaluator_id`) REFERENCES `users` (`user_id`);
+ALTER TABLE `coordinator_evaluation`
+  ADD CONSTRAINT `FK_coordinator_evaluation_student` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`),
+  ADD CONSTRAINT `FK_coordinator_evaluation_supervisor` FOREIGN KEY (`supervisor_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `dean_department`
@@ -735,6 +728,13 @@ ALTER TABLE `coordinator_evaluations`
 ALTER TABLE `dean_department`
   ADD CONSTRAINT `FK_dean_department_dean` FOREIGN KEY (`dean_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_dean_department_department` FOREIGN KEY (`department_id`) REFERENCES `department` (`department_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `evaluations`
+--
+ALTER TABLE `evaluations`
+  ADD CONSTRAINT `evaluations_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `evaluations_ibfk_2` FOREIGN KEY (`evaluator_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `ojt_hours`
@@ -761,13 +761,6 @@ ALTER TABLE `student_supervisor`
 ALTER TABLE `submit_requirements`
   ADD CONSTRAINT `fk_requirement_id` FOREIGN KEY (`requirement_id`) REFERENCES `requirements` (`requirement_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `submit_requirements_ibfk_1` FOREIGN KEY (`requirement_id`) REFERENCES `requirements` (`requirement_id`);
-
---
--- Constraints for table `supervisor_evaluations`
---
-ALTER TABLE `supervisor_evaluations`
-  ADD CONSTRAINT `supervisor_evaluations_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `supervisor_evaluations_ibfk_2` FOREIGN KEY (`evaluator_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `users`
