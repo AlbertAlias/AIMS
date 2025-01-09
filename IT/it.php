@@ -44,8 +44,7 @@
     <link rel="stylesheet" href="../assets/style/itdev/student.css">
     <link rel="stylesheet" href="../assets/style/itdev/masterlists.css">
     <style> 
-        html, body { height: 100%; margin: 0; } 
-        #wrapper { display: flex; height: 100vh; margin: 0; padding: 0; } 
+        html, body { height: 100%; margin: 0; } #wrapper { display: flex; height: 100vh; margin: 0; padding: 0; } 
         #content-wrapper { flex-grow: 1; display: flex; flex-direction: column; background-color: #f8f8f8; } 
         #content { padding: 1rem; flex-grow: 1; } #page-content { flex-grow: 1; padding: 10px; }
     </style>
