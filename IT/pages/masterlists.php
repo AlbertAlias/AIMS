@@ -1,11 +1,8 @@
 <div class="container-fluid bg-light p-0 m-0" id="masterlists" style="display: none;">
     <div class="card shadow-sm">
-        <!-- Header -->
         <div class="card-header bg-light text-dark">
-        <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <!-- Page Length Selector and Dropdown -->
+            <div class="d-flex justify-content-between align-items-center flex-wrap">
                 <div class="d-flex align-items-center gap-2">
-                    <!-- Page Length Selector -->
                     <div class="d-flex align-items-center">
                         <select id="master-lists-pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
                             <option value="10">10</option>
@@ -30,7 +27,6 @@
                         </select>
                     </div>
                 </div>
-                <!-- Search Input -->
                 <div class="flex-shrink-1">
                     <div class="input-group">
                         <input type="text" id="master-lists-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
@@ -44,9 +40,7 @@
             </div>
         </div>
 
-        <!-- Body -->
         <div class="card-body bg-white p-0">
-            <!-- Table Placeholder -->
             <div class="table-responsive">
                 <table id="master-lists" class="table table-hover text-center m-0" style="width: 100%;">
                     <thead class="table-light">
@@ -68,11 +62,9 @@
             </div>
         </div>
 
-        <!-- Footer -->
         <div class="card-footer bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
                 <span class="mb-2" id="master-lists-tableInfo">Showing 0 to 0 of 0 entries</span>
-                <!-- Pagination -->
                 <nav aria-label="Page navigation">
                     <ul id="master-lists-pagination" class="pagination mb-0">
                         <!-- Pagination buttons will be generated here via AJAX -->

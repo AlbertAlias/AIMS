@@ -1,10 +1,6 @@
 <?php
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-
     include('../../../dbconn.php');
 
-    // Query to count the number of students per department who have accounts
     $query = "
         SELECT 
             department.department_name, 
@@ -21,11 +17,9 @@
 
     $result = $conn->query($query);
 
-    // Check if the query failed
     if (!$result) {
-        // If there's an error with the query, return an error message
         echo json_encode(['error' => 'Query failed: ' . $conn->error]);
-        exit; // Exit after error to avoid further output
+        exit;
     }
 
     if ($result->num_rows > 0) {
@@ -36,7 +30,7 @@
                 'total' => $row['total']
             ];
         }
-        echo json_encode($studentData); // Return the data as JSON
+        echo json_encode($studentData);
     } else {
         echo json_encode(['error' => 'No data found']);
     }

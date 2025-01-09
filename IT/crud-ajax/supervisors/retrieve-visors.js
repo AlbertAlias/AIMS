@@ -1,30 +1,26 @@
 $(document).ready(function () {
     function loadVisor(searchTerm = '') {
         $.ajax({
-            url: 'controller/supervisors/retrieve-visors.php', // PHP script to fetch supervisors
+            url: 'controller/supervisors/retrieve-visors.php',
             method: 'GET',
-            data: { searchTerm: searchTerm }, // Send search term to the server
+            data: { searchTerm: searchTerm },
             dataType: 'json',
             success: function (response) {
-                console.log(response);
                 if (response.success) {
-                    // Store the fetched supervisors for filtering
                     window.supervisors = response.supervisors;
                     updateSupervisorList(window.supervisors);
                 } else {
-                    // Gracefully handle empty data
                     console.warn('No supervisors found. Displaying empty list.');
                     updateSupervisorList([], response.message);
                 }
             },
             error: function (xhr, status, error) {
                 console.error('Failed to load supervisor:', error);
-                console.error('Response Text:', xhr.responseText); // Debug response
+                console.error('Response Text:', xhr.responseText);
             },
         });
     }
 
-    // Function to update the Supervisor list
     function updateSupervisorList(supervisors, message = null) {
         let supervisorInfo = $('#supervisorInfo');
         supervisorInfo.empty();
@@ -49,15 +45,13 @@ $(document).ready(function () {
         });
     }
 
-    // Event listener for input field to trigger search
     $('#searchSupervisors').on('input', function () {
-        const searchTerm = $(this).val(); // Get the value of the search input
-        loadVisor(searchTerm); // Load supervisors based on the search term
+        const searchTerm = $(this).val();
+        loadVisor(searchTerm);
     });
 
-    // When a supervisor button is clicked, fetch and populate their details
     $(document).on('click', '.visor-btn', function () {
-        var userId = $(this).data('id'); // Get the ID of the selected supervisor
+        var userId = $(this).data('id');
     
         $.ajax({
             url: 'controller/supervisors/retrieve-visors-info.php',
@@ -65,9 +59,7 @@ $(document).ready(function () {
             data: { user_id: userId },
             dataType: 'json',
             success: function (response) {
-                console.log(response);
                 if (response.success) {
-                    // Populate form fields with supervisor data
                     $('#visorID').val(userId);
                     $('#visor_last_name').val(response.last_name);
                     $('#visor_first_name').val(response.first_name);
@@ -77,11 +69,9 @@ $(document).ready(function () {
                     $('#visor_company_name').val(response.company);
                     $('#visor_company_address').val(response.company_address);
                     $('#visor_username').val(response.username);
-    
-                    // Manage button visibility
-                    $('#visorSubmitBtn').hide();   // Hide Submit button
-                    $('#visorUpdateBtn').show();   // Show Update button
-                    $('#visorCancelBtn').show();   // Show Cancel button
+                    $('#visorSubmitBtn').hide();
+                    $('#visorUpdateBtn').show();
+                    $('#visorCancelBtn').show();
                 }
             },
             error: function (xhr, status, error) {
@@ -103,7 +93,6 @@ $(document).ready(function () {
             username: $('#visor_username').val(),
         };
     
-        // Validate required fields (ignoring middle name and password)
         if (!userData.last_name || !userData.first_name || !userData.gender || !userData.email || 
             !userData.company || !userData.company_address || !userData.username) {
             Swal.fire({
@@ -123,9 +112,8 @@ $(document).ready(function () {
             return;
         }
     
-        // Send AJAX request to update supervisor details
         $.ajax({
-            url: 'controller/supervisors/update-visors.php', // PHP script to handle updates
+            url: 'controller/supervisors/update-visors.php',
             method: 'POST',
             data: userData,
             dataType: 'json',
@@ -146,10 +134,8 @@ $(document).ready(function () {
                         }
                     });
     
-                    loadVisor(); // Reload the supervisor list
-                    $('#visorForm')[0].reset(); // Reset the form
-    
-                    // Show Submit button and hide Update/Cancel buttons
+                    loadVisor();
+                    $('#visorForm')[0].reset();
                     $('#visorSubmitBtn').show();
                     $('#visorUpdateBtn').hide();
                     $('#visorCancelBtn').hide();
@@ -172,7 +158,7 @@ $(document).ready(function () {
             },
             error: function (xhr, status, error) {
                 console.error('Error updating supervisor:', error);
-                console.error('Response Text:', xhr.responseText); // Debugging info
+                console.error('Response Text:', xhr.responseText);
     
                 Swal.fire({
                     toast: true,
@@ -192,17 +178,13 @@ $(document).ready(function () {
         });
     });
 
-    // Cancel the update and reset the form
     $('#visorCancelBtn').click(function () {
-        // Reset the form fields
         $('#visorForm')[0].reset();
-    
-        // Ensure the visibility of buttons is properly toggled
-        $('#visorSubmitBtn').show();  // Show Submit button
-        $('#visorUpdateBtn').hide();  // Hide Update button
-        $('#visorCancelBtn').hide();  // Hide Cancel button
+        $('#visorSubmitBtn').show();
+        $('#visorUpdateBtn').hide();
+        $('#visorCancelBtn').hide();
     });
     
 
-    loadVisor(); // Initially load the supervisor list
+    loadVisor();
 });

@@ -6,7 +6,6 @@ window.loadDepartments = function (excludeDeptId) {
         success: function (response) {
             const $select = $('#coor_department');
 
-            // Add available departments excluding the specified one
             if (response.success && response.data.length > 0) {
                 response.data.forEach(function (department) {
                     if (department.id !== excludeDeptId) {
@@ -22,5 +21,5 @@ window.loadDepartments = function (excludeDeptId) {
 };
 
 $(document).ready(function () {
-    loadDepartments(); // Load departments on page load
+    loadDepartments();
 });

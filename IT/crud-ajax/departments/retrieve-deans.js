@@ -81,12 +81,10 @@ $(document).ready(function() {
                         $('#add_department3').val('');
                     }
 
-                    // Show the "Update" and "Cancel" buttons, hide the "Submit" button
                     $('#deanSubmitBtn').hide();
                     $('#deanUpdateBtn').show();
                     $('#deanCancelBtn').show();
 
-                    // Reset button actions
                     $('#deanCancelBtn').on('click', function() {
                         resetForm();
                     });
@@ -103,7 +101,6 @@ $(document).ready(function() {
     }
 
     function resetForm() {
-        // Reset form fields
         $('#add_last_name').val('');
         $('#add_first_name').val('');
         $('#add_username').val('');
@@ -111,8 +108,6 @@ $(document).ready(function() {
         $('#add_department1').val('Choose Department 1');
         $('#add_department2').val('Choose Department 2');
         $('#add_department3').val('Choose Department 3');
-
-        // Hide "Update" and "Cancel" buttons, show the "Submit" button
         $('#deanUpdateBtn').hide();
         $('#deanCancelBtn').hide();
         $('#deanSubmitBtn').show();
@@ -127,9 +122,7 @@ $(document).ready(function() {
         const dept2 = $('#add_department2').val();
         const dept3 = $('#add_department3').val();
     
-        // Validate that required fields are not empty
         if (!lastName || !firstName || !username || dept1 === 'Choose Department 1') {
-            // Show SweetAlert for missing required fields
             Swal.fire({
                 toast: true,
                 position: 'top-end',
@@ -144,10 +137,9 @@ $(document).ready(function() {
                     popup: 'mt-5'
                 }
             });
-            return; // Prevent submission if required fields are empty
+            return;
         }
     
-        // Send an AJAX request to update the dean's details
         $.ajax({
             url: 'controller/departments/update-dean-info.php',
             method: 'POST',
@@ -163,9 +155,8 @@ $(document).ready(function() {
             },
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             success: function(response) {
-                console.log(response); // Log the entire response to debug
+                console.log(response);
                 if (response.success) {
-                    // Show success message with SweetAlert
                     Swal.fire({
                         toast: true,
                         position: 'top-end',
@@ -180,10 +171,9 @@ $(document).ready(function() {
                             popup: 'mt-5'
                         }
                     });
-                    resetForm(); // Reset the form fields and buttons
-                    loadDeans();  // Refresh the dean list after update
+                    resetForm();
+                    loadDeans();
                 } else {
-                    // Show error validation message (e.g., username already exists)
                     Swal.fire({
                         toast: true,
                         position: 'top-end',
@@ -201,7 +191,6 @@ $(document).ready(function() {
                 }
             },
             error: function(xhr, status, error) {
-                // Show generic error message
                 Swal.fire({
                     toast: true,
                     position: 'top-end',

@@ -1,11 +1,9 @@
 $(document).ready(function () {
-    // Handle form submission
     $("#deptSubmitBtn").on("click", function (e) {
-        e.preventDefault(); // Prevent form default submission
+        e.preventDefault();
 
-        const departmentName = $("#department_name").val(); // Get input value
+        const departmentName = $("#department_name").val();
 
-        // Check if the department name is empty
         if (!departmentName) {
             Swal.fire({
                 toast: true,
@@ -21,12 +19,11 @@ $(document).ready(function () {
                     popup: 'mt-5'
                 }
             });
-            return; // Prevent form submission if the field is empty
+            return;
         }
 
-        // Proceed with AJAX request if all fields are filled
         $.ajax({
-            url: "controller/departments/create-depts.php", // PHP script to handle insertion
+            url: "controller/departments/create-depts.php",
             type: "POST",
             data: {
                 department_name: departmentName
@@ -49,7 +46,7 @@ $(document).ready(function () {
                         }
                     });
 
-                    $("#department_name").val(""); // Clear the input field
+                    $("#department_name").val("");
                     populateDepartments();
                     loadDepartments();
                 } else {

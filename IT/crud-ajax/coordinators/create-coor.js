@@ -1,9 +1,7 @@
 $(document).ready(function () {
-    // Handle form submission
     $("#coorSubmitBtn").on("click", function (event) {
-        event.preventDefault(); // Prevent form default submission
+        event.preventDefault();
 
-        // Gather form data
         const formData = {
             coor_last_name: $("#coor_last_name").val(),
             coor_first_name: $("#coor_first_name").val(),
@@ -13,7 +11,6 @@ $(document).ready(function () {
             coor_password: $("#coor_password").val(),
         };
 
-        // Check if any required field is empty
         let emptyField = false;
         for (const field in formData) {
             if (formData[field] === "") {
@@ -22,7 +19,6 @@ $(document).ready(function () {
             }
         }
 
-        // If any required field is empty, show SweetAlert and return
         if (emptyField) {
             Swal.fire({
                 toast: true,
@@ -38,17 +34,16 @@ $(document).ready(function () {
                     popup: 'mt-5'
                 }
             });
-            return; // Prevent form submission if fields are empty
+            return;
         }
 
-        // Proceed with AJAX request if all fields are filled
         $.ajax({
-            url: 'controller/coordinators/create-coor.php', // PHP script to handle request
+            url: 'controller/coordinators/create-coor.php',
             type: 'POST',
             data: formData,
             dataType: 'json',
             success: function (response) {
-                console.log(response); // Log the entire response
+                console.log(response);
                 if (response.success) {
                     Swal.fire({
                         toast: true,
@@ -64,7 +59,7 @@ $(document).ready(function () {
                             popup: 'mt-5'
                         }
                     });
-                    $("#coordinatorForm")[0].reset(); // Reset the form after success
+                    $("#coordinatorForm")[0].reset();
                     loadCoor();
                     loadDepartments();
                     fetchUserAnalytics();

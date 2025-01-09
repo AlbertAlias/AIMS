@@ -1,10 +1,5 @@
 <?php
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-
     include '../../../dbconn.php';
-
     header('Content-Type: application/json');
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -15,10 +10,8 @@
             exit;
         }
 
-        // Log received data for debugging
         error_log("Data received: " . print_r($data, true));
 
-        // Validate all required fields
         $required_fields = ['last_name', 'first_name', 'personal_email', 'department_id', 'username', 'password'];
         foreach ($required_fields as $field) {
             if (empty($data[$field])) {
@@ -27,7 +20,6 @@
             }
         }
 
-        // Validate department ID
         $deptCheckStmt = $conn->prepare("SELECT department_id FROM department WHERE department_id = ?");
         if (!$deptCheckStmt) {
             echo json_encode(['success' => false, 'message' => 'Error preparing department query: ' . $conn->error]);
@@ -42,13 +34,11 @@
         }
         $deptCheckStmt->close();
 
-        // Validate username format: alphanumeric and underscores, 3-15 characters
         if (!preg_match('/^[a-zA-Z0-9_]{3,15}$/', $data['username'])) {
             echo json_encode(['success' => false, 'message' => 'Invalid username format.']);
             exit;
         }
 
-        // Check for duplicate username
         $stmt = $conn->prepare("SELECT user_id FROM users WHERE username = ?");
         if (!$stmt) {
             echo json_encode(['success' => false, 'message' => 'Error preparing username check query: ' . $conn->error]);
@@ -63,13 +53,10 @@
         }
         $stmt->close();
 
-        // Hash the password
         $hashedPassword = password_hash($data['password'], PASSWORD_BCRYPT);
 
-        // Check if gender is provided (Assuming it should be part of the form input)
-        $gender = isset($data['gender']) ? $data['gender'] : 'Other'; // Default to 'Other' if not provided
+        $gender = isset($data['gender']) ? $data['gender'] : 'Other';
 
-        // Insert into users table
         $stmt = $conn->prepare("INSERT INTO users (last_name, first_name, middle_name, email, username, password, user_type, department_id) 
                                 VALUES (?, ?, ?, ?, ?, ?, 'Coordinator', ?)");
         if (!$stmt) {
@@ -87,7 +74,6 @@
             $user_id = $stmt->insert_id;
             $stmt->close();
 
-            // Insert into coordinators table
             $stmt = $conn->prepare("INSERT INTO coordinator (user_id) VALUES (?)");
             if (!$stmt) {
                 echo json_encode(['success' => false, 'message' => 'Error preparing coordinator insert query: ' . $conn->error]);

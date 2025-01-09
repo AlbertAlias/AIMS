@@ -60,25 +60,20 @@ $(document).ready(function () {
         });
     }
 
-    // Handle user type selection
     $("#userTypeDropdown").on("change", function () {
         const selectedUserType = $(this).val();
 
-        // Hide both dropdowns initially
         $("#departmentDropdown").hide();
         $("#companyDropdown").hide();
 
         if (selectedUserType === "Student") {
-            // Show Department dropdown
             populateDepartmentDropdown();
             $("#departmentDropdown").show();
         } else if (selectedUserType === "Supervisor") {
-            // Show Company dropdown
             populateCompanyDropdown();
             $("#companyDropdown").show();
         }
     });
 
-    // Populate user types on page load
     populateUserTypeDropdown();
 });
