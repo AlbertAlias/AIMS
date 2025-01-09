@@ -1,9 +1,7 @@
 <div class="container-fluid bg-light p-0 m-0" id="evaluation" style="display: none;">
     <div class="card shadow-sm">
-        <!-- Header -->
         <div class="card-header bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <!-- Page Length Selector -->
                 <div class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
                         <select id="stud-lists-pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
@@ -14,7 +12,6 @@
                         </select>
                     </div>
                 </div>
-                <!-- Search Input -->
                 <div class="flex-shrink-1">
                     <div class="input-group">
                         <input type="text" id="stud-lists-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
@@ -28,9 +25,7 @@
             </div>
         </div>
 
-        <!-- Body -->
         <div class="card-body bg-white p-0">
-            <!-- Table Placeholder -->
             <div class="table-responsive">
                 <table id="stud-lists" class="table table-hover text-center m-0" style="width: 100%;">
                     <thead class="table-light">
@@ -49,11 +44,9 @@
             </div>
         </div>
 
-        <!-- Footer -->
         <div class="card-footer bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
                 <span class="mb-2" id="stud-lists-tableInfo">Showing 0 to 0 of 0 entries</span>
-                <!-- Pagination -->
                 <nav aria-label="Page navigation">
                     <ul id="stud-lists-pagination" class="pagination mb-0">
                         <!-- Pagination buttons will be generated here via AJAX -->
@@ -64,46 +57,13 @@
     </div>
 </div>
 
-<!-- <div class="modal fade" id="evaluateModal" tabindex="-1" role="dialog" aria-labelledby="evaluateModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="evaluateModalLabel">Evaluate Student</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form id="evaluationForm">
-          <input type="hidden" id="student_id">
-          <div class="form-group">
-            <label for="evaluationScore">Score:</label>
-            <input type="number" class="form-control" id="evaluationScore" placeholder="Enter score (0-100)" required>
-          </div>
-          <div class="form-group">
-            <label for="comments">Comments:</label>
-            <textarea class="form-control" id="comments" placeholder="Enter comments here..."></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="submitEvaluation()">Submit</button>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-<!-- Evaluation Modal -->
 <div class="modal fade" id="evaluationModal" tabindex="-1" aria-labelledby="evaluationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable custom-modal-width">
         <div class="modal-content">
-            <!-- Modal Header -->
             <div class="modal-header bg-light">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             
-            <!-- Modal Body -->
             <form id="evaluationForm">
                 <input type="hidden" id="student_id" name="student_id">
                 <div class="modal-body">
@@ -299,7 +259,6 @@
                                 <td><input type="radio" name="ratings[quality18]" value="2"></td>
                                 <td><input type="radio" name="ratings[quality18]" value="1"></td>
                             </tr>
-                            <!-- Continue for additional criteria -->
                         </tbody>
                     </table>
                     <div class="comments mt-3">
@@ -307,7 +266,6 @@
                         <textarea id="comments" name="comments" rows="4" class="form-control"></textarea>
                     </div>
                 </div>
-                <!-- Modal Footer -->
                 <div class="modal-footer bg-light">
                     <button type="submit" class="btn btn-primary">Submit Evaluation</button>
                 </div>
