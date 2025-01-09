@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2025 at 09:30 AM
+-- Generation Time: Jan 09, 2025 at 08:46 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -56,18 +56,12 @@ INSERT INTO `coordinator` (`coordinator_id`, `user_id`) VALUES
 CREATE TABLE `coordinator_evaluations` (
   `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
+  `ratings` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `total_grade` decimal(5,2) NOT NULL,
   `comments` text DEFAULT NULL,
   `evaluation_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `evaluator_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `coordinator_evaluations`
---
-
-INSERT INTO `coordinator_evaluations` (`id`, `student_id`, `total_grade`, `comments`, `evaluation_date`, `evaluator_id`) VALUES
-(33, 1197, 70.00, 'try', '2025-01-09 08:29:24', 484);
 
 -- --------------------------------------------------------
 
@@ -248,18 +242,12 @@ CREATE TABLE `submit_requirements` (
 CREATE TABLE `supervisor_evaluations` (
   `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
+  `ratings` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `total_grade` decimal(5,2) NOT NULL,
   `comments` text DEFAULT NULL,
   `evaluation_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `evaluator_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `supervisor_evaluations`
---
-
-INSERT INTO `supervisor_evaluations` (`id`, `student_id`, `total_grade`, `comments`, `evaluation_date`, `evaluator_id`) VALUES
-(32, 1197, 70.00, '', '2025-01-09 08:28:06', 1195);
 
 -- --------------------------------------------------------
 
@@ -674,7 +662,7 @@ ALTER TABLE `coordinator`
 -- AUTO_INCREMENT for table `coordinator_evaluations`
 --
 ALTER TABLE `coordinator_evaluations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `department`
@@ -710,7 +698,7 @@ ALTER TABLE `submit_requirements`
 -- AUTO_INCREMENT for table `supervisor_evaluations`
 --
 ALTER TABLE `supervisor_evaluations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `users`
