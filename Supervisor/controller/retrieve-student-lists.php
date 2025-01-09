@@ -62,7 +62,7 @@
 
             $evaluationQuery = "
                 SELECT COUNT(*) AS evaluation_count
-                FROM evaluations
+                FROM supervisor_evaluations
                 WHERE student_id = ? AND evaluator_id = ?
             ";
             $evaluationStmt = $conn->prepare($evaluationQuery);

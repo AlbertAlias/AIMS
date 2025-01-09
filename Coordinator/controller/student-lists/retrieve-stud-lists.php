@@ -85,6 +85,7 @@
                     data-bs-target="#assignSupervisorModal" data-user-id="' . $row['userID'] . '">Assign
                 </button>
                 <button class="btn btn-primary btn-sm open-ojthours-btn" data-bs-toggle="modal" data-bs-target="#ojthoursModal" data-user-id="' . $row['userID'] . '">View Hours</button>
+                <button class="btn btn-warning btn-sm open-evaluate-btn" onclick="evaluateStudent(' . $row['userID'] . ')">Evaluate</button>
             </td>';
             $html .= '</tr>';
         }

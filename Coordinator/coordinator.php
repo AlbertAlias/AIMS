@@ -38,6 +38,9 @@
     <link rel="stylesheet" href="../assets/style/coor/studentreq.css">
     <link rel="stylesheet" href="../assets/style/coor/requirement.css?v=1.1">
 
+    <link rel="stylesheet" href="../assets/style/supervisor/modalform.css">
+
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css">
 
@@ -114,6 +117,8 @@
     
 
     <script src="crud-ajax/hours/hours.js"></script>
+    <script src="crud-ajax/evaluation/post-evaluate.js"></script>
+
 
     <!--END::CRUD AJAX FUNCTIONS-->
 </body>
