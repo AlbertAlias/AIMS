@@ -31,6 +31,61 @@
 
         $start = ($page - 1) * $length;
 
+<<<<<<< HEAD
+=======
+        // Query to get filtered and paginated data, only for students in the coordinator's department
+        // $sql = "
+        // SELECT 
+        //     users.user_id AS userID,
+        //     CONCAT(users.last_name, ' ', users.first_name) AS name,
+        //     department.department_name AS department,
+        //     users.email AS email,
+        //     supervisor.last_name AS supervisor_last_name,
+        //     supervisor.first_name AS supervisor_first_name,
+        //     supervisor.company AS supervisor_company,
+        //     supervisor.company_address AS supervisor_company_address
+        // FROM users
+        // LEFT JOIN department ON users.department_id = department.department_id
+        // LEFT JOIN student_supervisor ON users.user_id = student_supervisor.student_id
+        // LEFT JOIN users AS supervisor ON student_supervisor.supervisor_id = supervisor.user_id
+        // WHERE users.user_type = 'Student'
+        // AND users.department_id = ? 
+        // AND CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email) LIKE ?
+        // LIMIT ?, ?";
+        
+        // $stmt = $conn->prepare($sql);
+        // $searchTerm = "%$search%";
+        // $stmt->bind_param('isii', $departmentId, $searchTerm, $start, $length);
+        // $stmt->execute();
+        // $result = $stmt->get_result();
+
+        // // Generate table rows
+        // $html = '';
+        // while ($row = $result->fetch_assoc()) {
+        //     $name = htmlspecialchars($row['name']) ?: '--';
+        //     $department = htmlspecialchars($row['department']) ?: '--';
+        //     $email = htmlspecialchars($row['email']) ?: '--';
+        //     $supervisorName = htmlspecialchars($row['supervisor_first_name'] . ' ' . $row['supervisor_last_name']) ?: '--';
+        //     $supervisorCompany = htmlspecialchars($row['supervisor_company']) ?: '--';
+        //     $supervisorAddress = htmlspecialchars($row['supervisor_company_address']) ?: '--';
+
+        //     $html .= '<tr>';
+        //     $html .= "<td>{$name}</td>";
+        //     $html .= "<td>{$department}</td>";
+        //     $html .= "<td>{$email}</td>";
+        //     $html .= "<td>{$supervisorName}</td>";
+        //     $html .= "<td>{$supervisorCompany}</td>";
+        //     $html .= "<td>{$supervisorAddress}</td>";
+        //     $html .= '<td>
+        //         <button class="btn btn-success btn-sm open-modal-btn" data-bs-toggle="modal" 
+        //             data-bs-target="#assignSupervisorModal" data-user-id="' . $row['userID'] . '">Assign
+        //         </button>
+        //         <button class="btn btn-primary btn-sm open-ojthours-btn" data-bs-toggle="modal" data-bs-target="#ojthoursModal" data-user-id="' . $row['userID'] . '">View Hours</button>
+        //         <button class="btn btn-warning btn-sm open-evaluate-btn" onclick="evaluateStudent(' . $row['userID'] . ')">Evaluate</button>
+        //     </td>';
+        //     $html .= '</tr>';
+        // }
+>>>>>>> 0419ebbeb57019f66c115de36449db39e898b277
         $sql = "
         SELECT 
             users.user_id AS userID,
@@ -40,11 +95,16 @@
             supervisor.last_name AS supervisor_last_name,
             supervisor.first_name AS supervisor_first_name,
             supervisor.company AS supervisor_company,
-            supervisor.company_address AS supervisor_company_address
+            supervisor.company_address AS supervisor_company_address,
+            COALESCE(ce.total_grade, NULL) AS coordinator_grade,
+            COALESCE(se.total_grade, NULL) AS supervisor_grade,
+            (COALESCE(ce.total_grade, 0) + COALESCE(se.total_grade, 0)) AS final_grade
         FROM users
         LEFT JOIN department ON users.department_id = department.department_id
         LEFT JOIN student_supervisor ON users.user_id = student_supervisor.student_id
         LEFT JOIN users AS supervisor ON student_supervisor.supervisor_id = supervisor.user_id
+        LEFT JOIN coordinator_evaluations AS ce ON ce.student_id = users.user_id
+        LEFT JOIN supervisor_evaluations AS se ON se.student_id = users.user_id
         WHERE users.user_type = 'Student'
         AND users.department_id = ? 
         AND CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email) LIKE ?
@@ -64,6 +124,7 @@
             $supervisorName = htmlspecialchars($row['supervisor_first_name'] . ' ' . $row['supervisor_last_name']) ?: '--';
             $supervisorCompany = htmlspecialchars($row['supervisor_company']) ?: '--';
             $supervisorAddress = htmlspecialchars($row['supervisor_company_address']) ?: '--';
+            $finalGrade = $row['final_grade'] == 0 || is_null($row['final_grade']) ? '--' : htmlspecialchars($row['final_grade']);  // Show -- for empty or 0.00
 
             $html .= '<tr>';
             $html .= "<td>{$name}</td>";
@@ -72,13 +133,14 @@
             $html .= "<td>{$supervisorName}</td>";
             $html .= "<td>{$supervisorCompany}</td>";
             $html .= "<td>{$supervisorAddress}</td>";
+            $html .= "<td>{$finalGrade}</td>";  // Display final grade only if it's not 0
             $html .= '<td>
-                <button class="btn btn-success btn-sm open-modal-btn" data-bs-toggle="modal" 
-                    data-bs-target="#assignSupervisorModal" data-user-id="' . $row['userID'] . '">Assign
-                </button>
-                <button class="btn btn-primary btn-sm open-ojthours-btn" data-bs-toggle="modal" data-bs-target="#ojthoursModal" data-user-id="' . $row['userID'] . '">View Hours</button>
-                <button class="btn btn-warning btn-sm open-evaluate-btn" onclick="evaluateStudent(' . $row['userID'] . ')">Evaluate</button>
-            </td>';
+                        <button class="btn btn-success btn-sm open-modal-btn" data-bs-toggle="modal" 
+                            data-bs-target="#assignSupervisorModal" data-user-id="' . $row['userID'] . '">Assign
+                        </button>
+                        <button class="btn btn-primary btn-sm open-ojthours-btn" data-bs-toggle="modal" data-bs-target="#ojthoursModal" data-user-id="' . $row['userID'] . '">View Hours</button>
+                        <button class="btn btn-warning btn-sm open-evaluate-btn" onclick="evaluateStudent(' . $row['userID'] . ')">Evaluate</button>
+                    </td>';
             $html .= '</tr>';
         }
 
