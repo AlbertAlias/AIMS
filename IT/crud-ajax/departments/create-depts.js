@@ -1,7 +1,6 @@
 $(document).ready(function () {
     $("#deptSubmitBtn").on("click", function (e) {
         e.preventDefault();
-
         const departmentName = $("#department_name").val();
 
         if (!departmentName) {
@@ -48,7 +47,7 @@ $(document).ready(function () {
 
                     $("#department_name").val("");
                     populateDepartments();
-                    loadDepartments();
+                    populateDepartmentSelect()
                 } else {
                     Swal.fire({
                         toast: true,

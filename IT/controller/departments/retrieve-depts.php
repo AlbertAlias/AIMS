@@ -1,19 +1,25 @@
 <?php
-    include '../../../dbconn.php'; // Include the database connection
+    include('../../../dbconn.php');
 
-    // SQL query to get departments
-    $sql = "SELECT department_id, department_name FROM department";
-    $result = $conn->query($sql);
+    $response = array();
+    $query = "SELECT department_id, department_name FROM department";
+    $result = mysqli_query($conn, $query);
 
-    $departments = [];
-
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $departments[] = $row; // Store each department in the array
+    if ($result) {
+        $departments = array();
+        while ($row = mysqli_fetch_assoc($result)) {
+            $departments[] = array(
+                'id' => $row['department_id'],
+                'name' => $row['department_name']
+            );
         }
+
+        $response['success'] = true;
+        $response['data'] = $departments;
+    } else {
+        $response['success'] = false;
+        $response['error'] = 'Unable to fetch departments from the database';
     }
 
-    echo json_encode($departments); // Return the departments as JSON
-
-    $conn->close();
+    echo json_encode($response);
 ?>

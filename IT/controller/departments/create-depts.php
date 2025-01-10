@@ -1,16 +1,14 @@
 <?php
-    require_once "../../../dbconn.php"; // Include the database connection file
+    require_once "../../../dbconn.php";
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $department_name = trim($_POST['department_name'] ?? '');
 
-        // Validate input
         if (empty($department_name)) {
             echo json_encode(['success' => false, 'error' => 'Department name is required']);
             exit;
         }
 
-        // Check if the department name already exists
         $checkQuery = "SELECT 1 FROM department WHERE department_name = ?";
         $stmt = $conn->prepare($checkQuery);
         $stmt->bind_param("s", $department_name);
@@ -23,7 +21,6 @@
         }
         $stmt->close();
 
-        // Insert department into the database
         $insertQuery = "INSERT INTO department (department_name) VALUES (?)";
         $stmt = $conn->prepare($insertQuery);
         $stmt->bind_param("s", $department_name);

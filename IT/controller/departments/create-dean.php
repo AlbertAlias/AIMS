@@ -1,74 +1,58 @@
 <?php
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-header('Content-Type: application/json');
+    ini_set('display_errors', 1);
+    error_reporting(E_ALL);
+    header('Content-Type: application/json');
+    ob_start();
+    include('../../../dbconn.php');
+    
+    $response = [];
 
-// Start output buffering
-ob_start();
+    try {
+        if (!isset($_POST['last_name'], $_POST['first_name'], $_POST['username'], $_POST['password'], $_POST['department1'])) {
+            throw new Exception('Missing required fields.');
+        }
 
-include('../../../dbconn.php'); // Ensure this path is correct
+        $last_name = $conn->real_escape_string($_POST['last_name']);
+        $first_name = $conn->real_escape_string($_POST['first_name']);
+        $username = $conn->real_escape_string($_POST['username']);
+        $password = password_hash($conn->real_escape_string($_POST['password']), PASSWORD_BCRYPT);
+        $department1 = $_POST['department1'];
+        $department2 = !empty($_POST['department2']) ? $_POST['department2'] : null;
+        $department3 = !empty($_POST['department3']) ? $_POST['department3'] : null;
 
-// Debugging: Log incoming data
-file_put_contents('debug_log.txt', "POST data received: " . json_encode($_POST) . "\n", FILE_APPEND);
+        $check_username_sql = "SELECT user_id FROM users WHERE username = '$username'";
+        $result = $conn->query($check_username_sql);
+        if ($result->num_rows > 0) {
+            throw new Exception('Username already exists');
+        }
 
-$response = []; // Prepare a response array
+        $sql = "INSERT INTO users (last_name, first_name, username, password, user_type) 
+                VALUES ('$last_name', '$first_name', '$username', '$password', 'Dean')";
+        if (!$conn->query($sql)) {
+            throw new Exception("Error inserting dean: " . $conn->error);
+        }
 
-try {
-    // Validate required fields
-    if (!isset($_POST['last_name'], $_POST['first_name'], $_POST['username'], $_POST['password'], $_POST['department1'])) {
-        throw new Exception('Missing required fields.');
-    }
+        $dean_id = $conn->insert_id;
 
-    // Sanitize inputs
-    $last_name = $conn->real_escape_string($_POST['last_name']);
-    $first_name = $conn->real_escape_string($_POST['first_name']);
-    $username = $conn->real_escape_string($_POST['username']);
-    $password = password_hash($conn->real_escape_string($_POST['password']), PASSWORD_BCRYPT); // Hash password
-    $department1 = $_POST['department1'];
-    $department2 = !empty($_POST['department2']) ? $_POST['department2'] : null;
-    $department3 = !empty($_POST['department3']) ? $_POST['department3'] : null;
-
-    // Check if username already exists
-    $check_username_sql = "SELECT user_id FROM users WHERE username = '$username'";
-    $result = $conn->query($check_username_sql);
-    if ($result->num_rows > 0) {
-        // Username already exists, return an error response
-        throw new Exception('Username already exists');
-    }
-
-    // Insert dean into users table
-    $sql = "INSERT INTO users (last_name, first_name, username, password, user_type) 
-            VALUES ('$last_name', '$first_name', '$username', '$password', 'Dean')";
-    if (!$conn->query($sql)) {
-        throw new Exception("Error inserting dean: " . $conn->error);
-    }
-
-    $dean_id = $conn->insert_id;
-
-    // Assign departments
-    $departments = [$department1, $department2, $department3];
-    foreach ($departments as $department_id) {
-        if (!empty($department_id)) {
-            $dept_sql = "INSERT INTO dean_department (dean_id, department_id) VALUES ('$dean_id', '$department_id')";
-            if (!$conn->query($dept_sql)) {
-                throw new Exception("Error assigning department: " . $conn->error);
+        $departments = [$department1, $department2, $department3];
+        foreach ($departments as $department_id) {
+            if (!empty($department_id)) {
+                $dept_sql = "INSERT INTO dean_department (dean_id, department_id) VALUES ('$dean_id', '$department_id')";
+                if (!$conn->query($dept_sql)) {
+                    throw new Exception("Error assigning department: " . $conn->error);
+                }
             }
         }
+
+        $response['success'] = true;
+    } catch (Exception $e) {
+        file_put_contents('debug_log.txt', "Error: " . $e->getMessage() . "\n", FILE_APPEND);
+        $response['success'] = false;
+        $response['error'] = $e->getMessage();
     }
 
-    // Prepare a success response
-    $response['success'] = true;
-} catch (Exception $e) {
-    // Log error and prepare error response
-    file_put_contents('debug_log.txt', "Error: " . $e->getMessage() . "\n", FILE_APPEND);
-    $response['success'] = false;
-    $response['error'] = $e->getMessage();
-}
+    ob_end_clean();
 
-// Clean the output buffer
-ob_end_clean();
-
-// Send JSON response
-echo json_encode($response);
-$conn->close();
+    echo json_encode($response);
+    $conn->close();
 ?>

@@ -98,6 +98,7 @@
 
     <!--START::DEPARTMENT AJAX-->
     <script src="crud-ajax/departments/retrieve-deans.js"></script>
+    <script src="crud-ajax/departments/retrieve-depts.js"></script>
     <script src="crud-ajax/departments/create-depts.js"></script>
     <script src="crud-ajax/departments/create-dean.js"></script>
     <script src="crud-ajax/departments/update-depts.js"></script>

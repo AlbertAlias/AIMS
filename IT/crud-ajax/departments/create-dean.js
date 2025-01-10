@@ -13,8 +13,13 @@ $(document).ready(function () {
         };
 
         let emptyField = false;
+
+        if (formData.department1 === "") {
+            emptyField = true;
+        }
+
         for (const field in formData) {
-            if (formData[field] === "") {
+            if (formData[field] === "" && field !== "department2" && field !== "department3") {
                 emptyField = true;
                 break;
             }
@@ -78,23 +83,6 @@ $(document).ready(function () {
                         }
                     });
                 }
-            },
-            error: function (xhr, status, error) {
-                console.error("AJAX Error:", error);
-                Swal.fire({
-                    toast: true,
-                    position: 'top-right',
-                    icon: 'error',
-                    title: 'An error occurred. Please try again.',
-                    showConfirmButton: false,
-                    timer: 2000,
-                    background: '#f8d7da',
-                    iconColor: '#721c24',
-                    color: '#721c24',
-                    customClass: {
-                        popup: 'mt-5'
-                    }
-                });
             }
         });
     });

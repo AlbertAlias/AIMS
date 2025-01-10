@@ -33,7 +33,6 @@ $('#deptUpdateBtn').click(function() {
                     $('#additionalInput').val('').attr('readonly', true);
                     $('#departmentSelect').val('');
                     $('#seeDepartmentsModal').modal('hide');
-
                     populateDepartmentSelect();
                 } else {
                     alert('Error updating department: ' + (response.message || 'Unknown error'));
@@ -54,13 +53,19 @@ function populateDepartmentSelect() {
         url: 'controller/departments/retrieve-depts.php',
         type: 'GET',
         dataType: 'json',
-        success: function(data) {
-            var select = $('#departmentSelect');
-            select.empty();
-            select.append('<option selected>Choose a department</option>');
-            data.forEach(function(department) {
-                select.append('<option value="' + department.department_id + '">' + department.department_name + '</option>');
-            });
+        success: function(response) {
+            console.log("Response:", response);
+            if (response.success) {
+                var select = $('#departmentSelect');
+                select.empty();
+                select.append('<option selected>Choose a department</option>');
+
+                response.data.forEach(function(department) {
+                    select.append('<option value="' + department.id + '">' + department.name + '</option>');
+                });
+            } else {
+                console.error("Error fetching departments:", response.error);
+            }
         },
         error: function(xhr, status, error) {
             console.error("Error fetching departments: " + error);
@@ -82,6 +87,7 @@ $('#departmentSelect').change(function() {
         $('#additionalInput').val('').attr('readonly', true);
     }
 });
+
 
 $('#deptDeleteBtn').click(function () {
     var departmentId = $('#departmentSelect').val();

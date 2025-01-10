@@ -54,32 +54,17 @@ $(document).ready(function() {
             success: function(response) {
                 if (response.success) {
                     const dean = response.dean;
-    
+                    const dept1 = dean.departments.split(', ')[0] || '';
+                    const dept2 = dean.departments.split(', ')[1] || 'Choose Department 2';
+                    const dept3 = dean.departments.split(', ')[2] || 'Choose Department 3';
+
                     $('#add_last_name').val(dean.last_name);
                     $('#add_first_name').val(dean.first_name);
                     $('#add_username').val(dean.username);
-    
-                    const departments = dean.departments.split(', ');
-    
-                    $('#add_department1').empty().append('<option selected>Choose Department 1</option>');
-                    $('#add_department2').empty().append('<option selected>Choose Department 2</option>');
-                    $('#add_department3').empty().append('<option selected>Choose Department 3</option>');
-    
-                    if (departments.length > 0) {
-                        $('#add_department1').append(`<option value="${departments[0]}" selected>${departments[0]}</option>`);
-                    }
-    
-                    if (departments.length > 1) {
-                        $('#add_department2').append(`<option value="${departments[1]}" selected>${departments[1]}</option>`);
-                    } else {
-                        $('#add_department2').val('');
-                    }
-    
-                    if (departments.length > 2) {
-                        $('#add_department3').append(`<option value="${departments[2]}" selected>${departments[2]}</option>`);
-                    } else {
-                        $('#add_department3').val('');
-                    }
+
+                    $('#add_department1').html(`<option selected>${dept1}</option>`);
+                    $('#add_department2').html(`<option selected>${dept2}</option>`);
+                    $('#add_department3').html(`<option selected>${dept3}</option>`);
 
                     $('#deanSubmitBtn').hide();
                     $('#deanUpdateBtn').show();
@@ -105,9 +90,9 @@ $(document).ready(function() {
         $('#add_first_name').val('');
         $('#add_username').val('');
         $('#add_password').val('');
-        $('#add_department1').val('Choose Department 1');
-        $('#add_department2').val('Choose Department 2');
-        $('#add_department3').val('Choose Department 3');
+        $('#add_department1').html('<option selected>Choose Department 1</option>');
+        $('#add_department2').html('<option selected>Choose Department 2</option>');
+        $('#add_department3').html('<option selected>Choose Department 3</option>');
         $('#deanUpdateBtn').hide();
         $('#deanCancelBtn').hide();
         $('#deanSubmitBtn').show();
@@ -155,7 +140,7 @@ $(document).ready(function() {
             },
             contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
             success: function(response) {
-                console.log(response);
+                console.log("AJAX Success:", response);
                 if (response.success) {
                     Swal.fire({
                         toast: true,
