@@ -19,19 +19,14 @@ $(document).ready(function () {
                     if (!data.error && validateData(data)) {
                         renderChart(data);
                     } else if (!validateData(data)) {
-                        showError('No Data Available');
                         clearChart();
-                    } else {
-                        showError(`Error fetching data: ${data.error || 'Invalid data received'}`);
                     }
                 } catch (e) {
                     console.error('Error parsing JSON:', e);
-                    showError('Invalid JSON response.');
                 }
             },
             error: function (xhr, status, error) {
                 console.error('AJAX error:', error);
-                showError(`There was an error processing your request. Status: ${status}`);
             }
         });
     }
@@ -177,15 +172,11 @@ $(document).ready(function () {
         ];
     }
 
-    function showError(message) {
-        toastr.error(message);
-    }
-
     function clearChart() {
         if (chart) {
             chart.destroy();
         }
-        $("#users-chart").html('<div class="text-center text-muted mt-3">No Data Available</div>');
+        $("#users-chart").html('<div class="text-center" style="font-size: 16px; color: #999;">No Data Available</div>');
     }
 
     window.fetchUserAnalytics = debounce(fetchUserAnalytics, 500);

@@ -12,7 +12,7 @@ $(document).ready(function() {
             'BSTM': '#8A2BE2'
         },
         errorMessages: {
-            noData: 'No Data Available',
+            noData: 'No data available',
             parseError: 'Error parsing data',
             loadError: 'Error loading data'
         },
@@ -33,7 +33,7 @@ $(document).ready(function() {
     }
 
     function showError(message) {
-        $('#students-chart').html(`<p style="text-align: center; font-size: 18px; color: #999;">${message}</p>`);
+        $('#students-chart').html(`<p style="text-align: center; font-size: 16px; color: #999;">${message}</p>`);
     }
 
     function fetchChartData() {
