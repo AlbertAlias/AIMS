@@ -1,4 +1,5 @@
 function evaluateStudent(userId) {
+    
     $.ajax({
         url: 'controller/evaluation/retrieve-evaluation.php',
         type: 'GET',
@@ -41,6 +42,7 @@ $('#evaluationForm').submit(function (e) {
         return;
     }
 
+    
     $.ajax({
         url: 'controller/evaluation/post-evaluate.php',
         type: 'POST',

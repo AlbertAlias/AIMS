@@ -69,7 +69,7 @@
             $supervisorName = htmlspecialchars($row['supervisor_first_name'] . ' ' . $row['supervisor_last_name']) ?: '--';
             $supervisorCompany = htmlspecialchars($row['supervisor_company']) ?: '--';
             $supervisorAddress = htmlspecialchars($row['supervisor_company_address']) ?: '--';
-            $finalGrade = $row['final_grade'] == 0 || is_null($row['final_grade']) ? '--' : htmlspecialchars($row['final_grade']);  // Show -- for empty or 0.00
+            $finalGrade = $row['final_grade'] == 0 || is_null($row['final_grade']) ? '--' : htmlspecialchars($row['final_grade']);
 
             $html .= '<tr>';
             $html .= "<td>{$name}</td>";
@@ -78,7 +78,7 @@
             $html .= "<td>{$supervisorName}</td>";
             $html .= "<td>{$supervisorCompany}</td>";
             $html .= "<td>{$supervisorAddress}</td>";
-            $html .= "<td>{$finalGrade}</td>";  // Display final grade only if it's not 0
+            $html .= "<td>{$finalGrade}</td>";
             $html .= '<td>
                         <button class="btn btn-success btn-sm open-modal-btn" data-bs-toggle="modal" 
                             data-bs-target="#assignSupervisorModal" data-user-id="' . $row['userID'] . '">Assign

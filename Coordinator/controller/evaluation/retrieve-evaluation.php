@@ -1,20 +1,24 @@
 <?php
-    include '../../../dbconn.php';
+// retrieve-evaluation.php
 
-    if (isset($_GET['user_id'])) {
-        $user_id = intval($_GET['user_id']);
-        $coordinatorUserId = $_SESSION['user_id'];
+include '../../../dbconn.php';
+session_start();
 
-        $evaluationQuery = "
-            SELECT COUNT(*) AS evaluation_count
-            FROM coordinator_evaluations
-            WHERE student_id = ? AND evaluator_id = ?
-        ";
-        $stmt = $conn->prepare($evaluationQuery);
-        $stmt->bind_param('ii', $user_id, $coordinatorUserId);
-        $stmt->execute();
-        $result = $stmt->get_result()->fetch_assoc();
+if (isset($_GET['user_id'])) {
+    $user_id = $_GET['user_id'];
 
-        echo json_encode(['alreadyEvaluated' => $result['evaluation_count'] > 0]);
-    }
+    // Query to check if the student has been evaluated
+    $stmt = $conn->prepare("SELECT is_evaluated FROM coordinator_evaluations WHERE student_id = ? LIMIT 1");
+    $stmt->bind_param('s', $user_id);
+    $stmt->execute();
+    $stmt->bind_result($isEvaluated);
+    $stmt->fetch();
+
+    echo json_encode([
+        'alreadyEvaluated' => $isEvaluated == 1
+    ]);
+} else {
+    echo json_encode(['error' => 'No user ID provided.']);
+}
+
 ?>

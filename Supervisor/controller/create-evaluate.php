@@ -1,43 +1,34 @@
 <?php
 include '../../dbconn.php';
-session_start();  // Make sure session is started to capture user data
+session_start();  
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        // Capture POST data
         $student_id = $_POST['student_id'];
         $ratings = json_decode($_POST['ratings'], true);
         $comments = $_POST['comments'];
 
-        // Validate and process ratings
         if (!is_array($ratings) || empty($ratings)) {
             throw new Exception("Invalid ratings provided.");
         }
 
-        // Ensure evaluator is logged in
         if (!isset($_SESSION['user_id'])) {
             throw new Exception("Evaluator not logged in.");
         }
 
-        // Get the evaluator's ID from the session
         $evaluator_id = $_SESSION['user_id'];
 
-        // Calculate total points (sum of all ratings)
         $ratingPoints = array_sum($ratings);
 
-        // Apply the formula to compute total_grade
         $totalGrade = ($ratingPoints / 90) * 70;
 
-        // Prepare database query to insert evaluation data without ratings
         $stmt = $conn->prepare("
             INSERT INTO supervisor_evaluations (student_id, total_grade, comments, evaluator_id, evaluation_date)
             VALUES (?, ?, ?, ?, NOW())
         ");
         
-        // Bind parameters to the query (corrected types)
         $stmt->bind_param('sdss', $student_id, $totalGrade, $comments, $evaluator_id);
 
-        // Execute the query
         if ($stmt->execute()) {
             echo json_encode(['success' => true]);
         } else {
