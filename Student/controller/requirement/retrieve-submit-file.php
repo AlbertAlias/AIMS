@@ -1,17 +1,14 @@
 <?php
     header('Content-Type: application/json');
     session_start();
-    include '../../../dbconn.php';  // Include the database connection
+    include '../../../dbconn.php';
 
-    // Ensure the student is logged in (based on session)
     if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'Student') {
         die(json_encode(['error' => 'You must be logged in as a student to view the file']));
     }
 
-    // Get the student ID from the session
-    $student_id = $_SESSION['user_id'];  // Assuming the student's ID is stored in the session
+    $student_id = $_SESSION['user_id'];
 
-    // Query to get all file submissions for the logged-in student, ordered by submission_date DESC
     $sql = "
     SELECT sr.submit_id, sr.document_name, sr.status, sr.submission_date, sr.remarks, r.description
     FROM submit_requirements sr

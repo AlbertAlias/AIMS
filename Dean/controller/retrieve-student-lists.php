@@ -1,19 +1,15 @@
 <?php
     header('Content-Type: application/json');
-
     include '../../dbconn.php';
-
     session_start();
 
     try {
-        // Ensure user is logged in
         if (!isset($_SESSION['user_id'])) {
             throw new Exception('Unauthorized access. Please log in.');
         }
 
         $deanUserId = $_SESSION['user_id'];
 
-        // Fetch departments managed by the logged-in dean
         $deptQuery = "SELECT department_id FROM dean_department WHERE dean_id = ?";
         $deptStmt = $conn->prepare($deptQuery);
         if (!$deptStmt) {
@@ -35,15 +31,12 @@
 
         $departmentIdsStr = implode(',', $departmentIds);
 
-        // Get parameters
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
         $length = isset($_GET['length']) ? intval($_GET['length']) : 10;
         $search = isset($_GET['search']) ? $_GET['search'] : '';
 
-        // Calculate pagination
         $start = ($page - 1) * $length;
 
-        // Query to get filtered and paginated data
         $query = "
             SELECT 
                 u.first_name, 
@@ -71,7 +64,6 @@
         $stmt->execute();
         $result = $stmt->get_result();
 
-        // Generate table rows
         $html = '';
         while ($row = $result->fetch_assoc()) {
             $first_name = htmlspecialchars($row['first_name']) ?: '--';
@@ -95,7 +87,6 @@
             $html .= '</tr>';
         }
 
-        // Fetch total count for pagination
         $countQuery = "
             SELECT COUNT(*) AS total
             FROM users u
@@ -114,7 +105,6 @@
         $countResult = $countStmt->get_result();
         $total = $countResult->fetch_assoc()['total'];
 
-        // Generate pagination links
         $totalPages = ceil($total / $length);
         $pagination = '';
         $maxVisiblePages = 3;
@@ -143,7 +133,6 @@
             $pagination .= '<li class="page-item disabled"><span class="page-link">Next</span></li>';
         }
 
-        // Return JSON response
         $response = [
             'html' => $html,
             'pagination' => $pagination,

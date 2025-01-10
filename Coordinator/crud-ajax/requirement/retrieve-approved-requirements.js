@@ -1,7 +1,6 @@
 $(document).ready(function () {
     let isFileOpen = false;
 
-    // Fetch requirements titles and populate dropdown
     function fetchRequirements() {
         $.ajax({
             url: 'controller/requirement/students-requirements/retrieve-requirements-title.php',
@@ -32,7 +31,6 @@ $(document).ready(function () {
         const now = new Date();
         const isSameYear = date.getFullYear() === now.getFullYear();
         
-        // Format the date to "Month Date, Year, Hours:Minutes AM/PM"
         const options = {
             month: 'short',
             day: 'numeric',
@@ -43,7 +41,6 @@ $(document).ready(function () {
         
         let formattedDate = date.toLocaleString('en-US', options);
         
-        // Check if the year is the same or different from the current year
         if (!isSameYear) {
             formattedDate = `${formattedDate}, ${date.getFullYear()}`;
         }
@@ -51,14 +48,13 @@ $(document).ready(function () {
         return formattedDate;
     }
 
-    // Fetch approved requirements based on selected requirement or search term
     function fetchApprovedRequirements(searchTerm = '', requirementId = '') {
         $.ajax({
             url: 'controller/requirement/students-requirements/retrieve-approved-requirements.php',
             method: 'GET',
             data: {
-                search_term: searchTerm, // Pass the search term for student_name filtering
-                requirement_id: requirementId // Filter by selected requirement
+                search_term: searchTerm,
+                requirement_id: requirementId
             },
             dataType: 'json',
             success: function (response) {
@@ -99,93 +95,78 @@ $(document).ready(function () {
         });
     }
 
-    // Open PDF modal function (without delay)
     function openPDFModal(filePath) {
         const pdfViewer = document.getElementById('pdfViewer');
         const modal = document.getElementById('pdfModal');
         
-        // Reset and load the new file immediately
-        pdfViewer.src = `${filePath}#toolbar=0`; // Directly setting the src without delay
+        pdfViewer.src = `${filePath}#toolbar=0`;
 
         modal.style.display = 'flex';
     }
 
-    // Close the modal when the close button is clicked
     document.getElementById('closeModal').addEventListener('click', function () {
         const modal = document.getElementById('pdfModal');
         const pdfViewer = document.getElementById('pdfViewer');
         modal.style.display = 'none';
-        pdfViewer.src = ''; // Reset the PDF source
+        pdfViewer.src = '';
     });
 
-    // Close the modal when clicking outside the modal content
     window.addEventListener('click', function (event) {
         const modal = document.getElementById('pdfModal');
         if (event.target === modal) {
             modal.style.display = 'none';
-            document.getElementById('pdfViewer').src = ''; // Reset the PDF source
+            document.getElementById('pdfViewer').src = '';
         }
     });
 
-    // Fetch requirements and approved submissions when the modal is shown
     $('#completedModal').on('show.bs.modal', function () {
         fetchRequirements();
         fetchApprovedRequirements();
     });
 
-    // Listen for changes on the requirement filter
     $('#completedSelectOption').on('change', function () {
         const selectedRequirement = $(this).val();
-        const searchTerm = $('#completedSearchInput').val().trim(); // Get the current search term
+        const searchTerm = $('#completedSearchInput').val().trim();
         fetchApprovedRequirements(searchTerm, selectedRequirement);
     });
 
-    // Listen for changes in the search input
     $('#completedSearchInput').on('input', function () {
         const searchTerm = $(this).val().trim();
-        const selectedRequirement = $('#completedSelectOption').val(); // Get selected requirement
+        const selectedRequirement = $('#completedSelectOption').val();
         fetchApprovedRequirements(searchTerm, selectedRequirement);
     });
 
-    // Handle submission card click for "View File" 
     $(document).on('click', '.submission-card', function () {
         var viewFileButton = $(this).find('.btn-view-file');
         if (viewFileButton.length && !isFileOpen) {
             isFileOpen = true;
             const filePath = viewFileButton.data('file-path');
-            openPDFModal(filePath); // Open the PDF modal with the file
+            openPDFModal(filePath);
 
             setTimeout(() => {
-                isFileOpen = false; // Reset the flag after the file has been opened
-            }, 200); // Allow a small time window to avoid issues
+                isFileOpen = false;
+            }, 200);
         }
     });
 
-    // Handle reject button click (Only opens the modal now)
     $(document).on('click', '.btn-reject', function (event) {
-        event.stopPropagation(); // Stop click propagation
+        event.stopPropagation();
 
         var submitId = $(this).data('id');
-        
-        // Store the submission ID on the modal's reject button
         $('#submitRemarksBtn').data('submit-id', submitId);
-
-        // Open the modal
         $('#remarksModal').modal('show');
     });
 
-    // Handle the actual reject action when the "Submit" button inside the modal is clicked
     $('#submitRemarksBtn').on('click', function () {
-        var submitId = $(this).data('submit-id'); // Retrieve the submission ID
-        var remarks = $('#remarksTextarea').val(); // Get the remarks entered by the user
+        var submitId = $(this).data('submit-id');
+        var remarks = $('#remarksTextarea').val();
 
-        // Proceed to update the status via AJAX
         $.ajax({
             url: 'controller/requirement/students-requirements/update-requirements-status.php',
             method: 'POST',
             data: {
                 submit_id: submitId,
-                status: 'rejected', // Set the status to 'rejected'
+                status: 'rejected',
                 remarks: remarks
             },
             success: function (response) {

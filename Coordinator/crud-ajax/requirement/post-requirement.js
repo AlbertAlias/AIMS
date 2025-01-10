@@ -51,11 +51,9 @@ $(document).ready(function () {
                         }
                     });
 
-                    // Reset the form fields
                     $("#requirementTitle").val('');
                     $("#requirementDescription").val('');
                     $(".deadline-input").val('');
-                    console.log("Triggering loadPostedRequirements()...");
                     loadPostedRequirements();
                 } else {
                     Swal.fire({

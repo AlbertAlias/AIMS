@@ -1,9 +1,7 @@
 <div class="container-fluid p-0 m-0" id="students" style="display: none;">
     <div class="card shadow-sm">
-        <!-- Header -->
         <div class="card-header bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <!-- Page Length Selector -->
                 <div class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
                         <select id="stud-lists-pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
@@ -13,7 +11,6 @@
                             <option value="100">100</option>
                         </select>
                     </div>
-                    <!-- Search Input -->
                     <div class="flex-shrink-1">
                         <div class="input-group">
                             <input type="text" id="stud-lists-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
@@ -31,9 +28,7 @@
             </div>
         </div>
         
-        <!-- Body -->
         <div class="card-body bg-white p-0">
-            <!-- Table Placeholder -->
             <div class="table-responsive">
                 <table id="stud-lists" class="table table-hover text-center m-0" style="width: 100%;">
                     <thead class="table-light">
@@ -55,11 +50,9 @@
             </div>
         </div>
         
-        <!-- Footer -->
         <div class="card-footer bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
                 <span class="mb-2" id="stud-lists-tableInfo">Showing 1 to 10 of 50 entries</span>
-                <!-- Pagination -->
                 <nav aria-label="Page navigation">
                     <ul id="stud-lists-pagination" class="pagination mb-0">
                         <!-- Pagination buttons will be generated here via AJAX -->
@@ -68,9 +61,7 @@
             </div>
         </div>
     </div>
-    <!-- End Custom Container -->
 </div>
-<!-- End Page Content -->
 
 <div class="modal fade" id="assignSupervisorModal" tabindex="-1" aria-labelledby="actionModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -79,21 +70,17 @@
                 <h5 class="modal-title" id="actionModalLabel">Assign Student</h5>
             </div>
             <div class="modal-body">
-                <!-- Company Dropdown -->
                 <div class="mb-3">
                     <label for="companySelect" class="form-label">Company</label>
                     <select class="form-select" id="companySelect" aria-label="Select Company">
                         <option selected>Assign Company</option>
-                        <!-- Dynamically populate options -->
                     </select>
                 </div>
 
-                <!-- Supervisor Dropdown -->
                 <div class="mb-3">
                     <label for="supervisorSelect" class="form-label">Supervisor</label>
                     <select class="form-select" id="supervisorSelect" aria-label="Select Supervisor">
                         <option selected>Assign Supervisor</option>
-                        <!-- Dynamically populate options based on selected company -->
                     </select>
                 </div>
             </div>
@@ -105,7 +92,6 @@
     </div>
 </div>
 
-<!-- Modal for setting hours -->
 <div class="modal fade" id="setHoursModal" tabindex="-1" aria-labelledby="setHoursModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -114,7 +100,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Form to set hours -->
                 <form id="setHoursForm">
                     <div class="mb-3">
                         <label for="hoursNeeded" class="form-label">Hours Needed</label>
@@ -131,7 +116,6 @@
     </div>
 </div>
 
-<!-- OJT Hours Modal -->
 <div class="modal fade" id="ojthoursModal" tabindex="-1" aria-labelledby="ojthoursModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
         <div class="modal-content">
@@ -140,10 +124,8 @@
             </div>
             <div class="modal-body m-0 p-2">
                 <div class="card shadow-sm">
-                    <!-- Header -->
                     <div class="card-header bg-light text-dark">
                         <div class="d-flex justify-content-between align-items-center flex-wrap">
-                            <!-- Page Length Selector -->
                             <div class="d-flex align-items-center">
                                 <div class="d-flex align-items-center me-1">
                                     <select id="ojthours-pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
@@ -153,7 +135,6 @@
                                         <option value="100">100</option>
                                     </select>
                                 </div>
-                                <!-- Search Input -->
                                 <div class="flex-shrink-1">
                                     <div class="input-group">
                                         <input type="text" id="ojthours-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
@@ -165,16 +146,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Total Hours Display (to the right) -->
                             <div id="totalHoursDisplay" class="text-end">
                                 Rendered Hours:
                             </div>
                         </div>
                     </div>
 
-                    <!-- Body -->
                     <div class="card-body bg-white p-0">
-                        <!-- Table Placeholder -->
                         <div class="table-responsive">
                             <table id="ojthours" class="table table-hover text-center m-0" style="width: 100%;">
                                 <thead class="table-light">
@@ -195,11 +173,9 @@
                         </div>
                     </div>
 
-                    <!-- Footer -->
                     <div class="card-footer bg-light text-dark">
                         <div class="d-flex justify-content-between align-items-center flex-wrap">
                             <span class="mb-2" id="ojthours-tableInfo">Showing 0 to 0 of 0 entries</span>
-                            <!-- Pagination -->
                             <nav aria-label="Page navigation">
                                 <ul id="ojthours-pagination" class="pagination mb-0">
                                     <!-- Pagination buttons will be generated here via AJAX -->
@@ -225,16 +201,13 @@
 </div>
 
 
-<!-- Evaluation Modal -->
 <div class="modal fade" id="evaluationModal" tabindex="-1" aria-labelledby="evaluationModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable custom-modal-width">
         <div class="modal-content">
-            <!-- Modal Header -->
             <div class="modal-header bg-light">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             
-            <!-- Modal Body -->
             <form id="evaluationForm">
                 <input type="hidden" id="student_id" name="student_id">
                 <div class="modal-body">
@@ -430,7 +403,6 @@
                                 <td><input type="radio" name="ratings[quality18]" value="2"></td>
                                 <td><input type="radio" name="ratings[quality18]" value="1"></td>
                             </tr>
-                            <!-- Continue for additional criteria -->
                         </tbody>
                     </table>
                     <div class="comments mt-3">
@@ -438,7 +410,6 @@
                         <textarea id="comments" name="comments" rows="4" class="form-control"></textarea>
                     </div>
                 </div>
-                <!-- Modal Footer -->
                 <div class="modal-footer bg-light">
                     <button type="submit" class="btn btn-primary">Submit Evaluation</button>
                 </div>

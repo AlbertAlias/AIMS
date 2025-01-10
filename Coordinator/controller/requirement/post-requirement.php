@@ -2,36 +2,27 @@
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
-
     header('Content-Type: application/json');
     include '../../../dbconn.php';
-
-    // Start session
     session_start();
 
-    // Ensure coordinator is logged in
     if (!isset($_SESSION['user_id']) || $_SESSION['user_type'] !== 'Coordinator') {
         echo json_encode(["success" => false, "error" => "Unauthorized access"]);
         exit();
     }
 
-    // Validate the request method
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-        // Sanitize and validate input
         $title = trim($_POST['requirementTitle'] ?? '');
         $description = trim($_POST['requirementDescription'] ?? '');
-        $deadline = $_POST['deadline'] ?? ''; // Get the deadline
+        $deadline = $_POST['deadline'] ?? '';
 
         if (!$title || !$description || !$deadline) {
             echo json_encode(["success" => false, "error" => "All fields are required"]);
             exit();
         }
 
-        // Get logged-in coordinator's ID
         $createdBy = $_SESSION['user_id'];
 
-        // Prepare and execute database query
         try {
             $stmt = $conn->prepare(
                 "INSERT INTO requirements (coordinator_id, title, description, deadline) VALUES (?, ?, ?, ?)"

@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeModal = document.getElementById('report-closeModal');
     const weeklyReportForm = document.getElementById('weeklyReportForm');
 
-    // Show file preview in a modal when file is clicked
     fileContainer.addEventListener('click', function (event) {
         const fileCard = event.target.closest('.d-flex');
         if (fileCard && !event.target.closest('.btn')) {
@@ -16,50 +15,44 @@ document.addEventListener('DOMContentLoaded', function () {
             if (file) {
                 const fileURL = URL.createObjectURL(file);
 
-                // If the file is a PDF, use iframe to display it
                 if (file.type === 'application/pdf') {
-                    reportViewer.src = `${fileURL}#toolbar=0`; // Display PDF in iframe
+                    reportViewer.src = `${fileURL}#toolbar=0`;
                     reportViewer.style.display = 'block';
-                    imageViewer.style.display = 'none'; // Hide image viewer
+                    imageViewer.style.display = 'none';
                 } 
-                // If the file is an image (PNG, JPG, JPEG), use img tag to display it
                 else if (['image/jpeg', 'image/png'].includes(file.type)) {
-                    imageViewer.src = fileURL; // Display image in img tag
+                    imageViewer.src = fileURL;
                     imageViewer.style.display = 'block';
-                    reportViewer.style.display = 'none'; // Hide iframe
+                    reportViewer.style.display = 'none';
                 }
 
-                // Show the modal with the appropriate content
                 reportModal.style.display = 'flex';
             }
         }
     });
 
-    // Close modal and free up resources
     closeModal.addEventListener('click', function () {
         reportModal.style.display = 'none';
-        URL.revokeObjectURL(reportViewer.src); // Revoke the PDF object URL
-        URL.revokeObjectURL(imageViewer.src); // Revoke the image object URL
+        URL.revokeObjectURL(reportViewer.src);
+        URL.revokeObjectURL(imageViewer.src);
         reportViewer.src = '';
         imageViewer.src = '';
     });
 
-    // Close modal when clicked outside of the modal
     window.addEventListener('click', function (event) {
         if (event.target === reportModal) {
             reportModal.style.display = 'none';
-            URL.revokeObjectURL(reportViewer.src); // Revoke the PDF object URL
-            URL.revokeObjectURL(imageViewer.src); // Revoke the image object URL
+            URL.revokeObjectURL(reportViewer.src);
+            URL.revokeObjectURL(imageViewer.src);
             reportViewer.src = '';
             imageViewer.src = '';
         }
     });
 
-    // Handle file input change (on file selection)
     fileInput.addEventListener('change', function () {
         fileInput.disabled = true;
         fileInput.closest('label').style.pointerEvents = 'none';
-        fileContainer.innerHTML = ''; // Clear existing files
+        fileContainer.innerHTML = '';
 
         const files = this.files;
         Array.from(files).forEach((file, index) => {
@@ -71,7 +64,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            // Create file card with loading indicator
             const fileCard = document.createElement('div');
             fileCard.className = 'd-flex align-items-center border p-1 rounded mb-2 position-relative';
             fileCard.setAttribute('data-file-index', index);
@@ -88,17 +80,14 @@ document.addEventListener('DOMContentLoaded', function () {
             fileCard.appendChild(loadingElement);
             fileContainer.appendChild(fileCard);
 
-            // Create file icon, details, and close button
             const fileIcon = document.createElement('div');
             if (file.type === 'application/pdf') {
-                // For PDF files, use the existing PDF SVG icon
                 fileIcon.innerHTML = `        
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 2.3rem; height: 2.3rem; padding: 1px; margin-left: 3px; margin-right: 3px;">
                         <path fill="#d32923" d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 144-208 0c-35.3 0-64 28.7-64 64l0 144-48 0c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128zM176 352l32 0c30.9 0 56 25.1 56 56s-25.1 56-56 56l-16 0 0 32c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-48 0-80c0-8.8 7.2-16 16-16zm32 80c13.3 0 24-10.7 24-24s-10.7-24-24-24l-16 0 0 48 16 0zm96-80l32 0c26.5 0 48 21.5 48 48l0 64c0 26.5-21.5 48-48 48l-32 0c-8.8 0-16-7.2-16-16l0-128c0-8.8 7.2-16 16-16zm32 128c8.8 0 16-7.2 16-16l0-64c0-8.8-7.2-16-16-16l-16 0 0 96 16 0zm80-112c0-8.8 7.2-16 16-16l48 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 32 32 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0 0 48c0 8.8-7.2 16-16 16s-16-7.2-16-16l0-64 0-64z"/>
                     </svg>
                 `;
             } else if (['image/jpeg', 'image/png'].includes(file.type)) {
-                // For image files, use the image SVG icon (JPG, PNG, JPEG)
                 fileIcon.innerHTML = `
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" style="width: 2.3rem; height: 2.3rem; padding: 1px; margin-left: 3px; margin-right: 3px;">
                         <path fill="#d32923" d="M64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-288-128 0c-17.7 0-32-14.3-32-32L224 0 64 0zM256 0l0 128 128 0L256 0zM64 256a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm152 32c5.3 0 10.2 2.6 13.2 6.9l88 128c3.4 4.9 3.7 11.3 1 16.5s-8.2 8.6-14.2 8.6l-88 0-40 0-48 0-48 0c-5.8 0-11.1-3.1-13.9-8.1s-2.8-11.2 .2-16.1l48-80c2.9-4.8 8.1-7.8 13.7-7.8s10.8 2.9 13.7 7.8l12.8 21.4 48.3-70.2c3-4.3 7.9-6.9 13.2-6.9z"/>
@@ -155,7 +144,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }, 2500);
         });
 
-        // Simulate file upload progress
         setTimeout(function () {
             Array.from(fileContainer.children).forEach(function (fileCard) {
                 const loadingElement = fileCard.querySelector('.loading-indicator');
@@ -167,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     submitButton.addEventListener('click', function (event) {
-        event.preventDefault(); // Prevent form submission
+        event.preventDefault();
         const formData = new FormData(weeklyReportForm);
         const fileCard = document.querySelector('#reportContainer .d-flex');
         const studentIdInput = document.querySelector('.student-id');
@@ -176,7 +164,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const weekStart = document.getElementById('week_start').value.trim();
         const weekEnd = document.getElementById('week_end').value.trim();
 
-        // Check if required fields are empty
         if (!title || !weekStart || !weekEnd) {
             Swal.fire({
                 toast: true,

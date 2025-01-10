@@ -1,6 +1,5 @@
 $(document).on('click', '.open-modal-btn', function () {
     var studentId = $(this).data('user-id');
-    console.log('Student ID:', studentId);
     $('#assignSupervisorModal').data('student-id', studentId);
 });
 

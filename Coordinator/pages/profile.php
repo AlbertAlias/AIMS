@@ -1,5 +1,4 @@
 <div class="container-fluid p-0 m-0" id="profile" style="display: none;">
-    <!-- User Information Section -->
     <div class="col-md-9 col-12">
         <div class="bg-light rounded-3 px-2" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
             <div class="row">
@@ -16,7 +15,6 @@
                         </svg>
                         <input type="file" id="profile-picture-input" accept="image/png, image/jpeg" style="display: none;">
                     </div>
-                    <!-- Sidebar Navigation -->
                     <div class="mt-2 w-100">
                         <div class="list-group">
                             <a href="#profile-info" class="list-group-item list-group-item-action active">Profile</a>
@@ -25,9 +23,7 @@
                     </div>
                 </div>
 
-                <!-- Form Section on the Right Side -->
                 <div class="col-md-8 py-3">
-                    <!-- Personal Information Section -->
                     <div id="profile-info" style="display: block;">
                         <h6 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Personal Information</h6>
                         <form>
@@ -90,11 +86,9 @@
                         </form>
                     </div>
 
-                    <!-- Password Change Section -->
                     <div id="account-info" style="display: none;">
                         <h6 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Account Settings</h6>
                         <form>
-                            <!-- Username (New Section) -->
                             <div class="mb-3 d-flex justify-content-between align-items-center">
                                 <label class="form-label" for="username" style="flex-grow: 1;">
                                     <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -111,7 +105,6 @@
                                 </button>
                             </div>
 
-                            <!-- Password Settings -->
                             <div class="d-flex justify-content-between align-items-center">
                                 <button type="button" id="changePasswordBtn" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
                                     <svg class="edit-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -128,7 +121,6 @@
     </div>
 </div>
 
-<!-- Modal for Name -->
 <div class="modal fade" id="editNameModal" tabindex="-1" aria-labelledby="editNameModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -137,21 +129,15 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Last Name -->
                 <div class="mb-3">
                     <input type="text" class="form-control" id="editLastNameInput" placeholder="Last name">
                 </div>
-                
-                <!-- First Name -->
                 <div class="mb-3">
                     <input type="text" class="form-control" id="editFirstNameInput" placeholder="First name">
                 </div>
-                
-                <!-- Middle Name -->
                 <div class="mb-3">
                     <input type="text" class="form-control" id="editMiddleNameInput" placeholder="Middle name">
                 </div>
-
                 <div class="d-flex justify-content-end mt-3">
                     <button type="button" class="btn btn-sm btn-primary profileUpdateBtn">Update</button>
                 </div>
@@ -160,7 +146,6 @@
     </div>
 </div>
 
-<!-- Modal for Location -->
 <div class="modal fade" id="editLocationModal" tabindex="-1" aria-labelledby="editLocationModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -178,7 +163,6 @@
     </div>
 </div>
 
-<!-- Modal for Gender -->
 <div class="modal fade" id="editGenderModal" tabindex="-1" aria-labelledby="editGenderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -187,7 +171,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Dropdown for Gender -->
                 <select class="form-select" id="editGenderInput">
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -200,7 +183,6 @@
     </div>
 </div>
 
-<!-- Modal for Email -->
 <div class="modal fade" id="editEmailModal" tabindex="-1" aria-labelledby="editEmailModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -218,7 +200,6 @@
     </div>
 </div>
 
-<!-- Modal for Username -->
 <div class="modal fade" id="editUsernameModal" tabindex="-1" aria-labelledby="editUsernameModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -236,7 +217,6 @@
     </div>
 </div>
 
-<!-- Change Password Modal -->
 <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true"> 
     <div class="modal-dialog">
         <div class="modal-content">
@@ -249,7 +229,6 @@
                     <div class="mb-3 position-relative">
                         <label for="modalOldPassword" class="form-label">Old Password</label>
                         <input type="password" id="modalOldPassword" class="form-control" required>
-                        <!-- Feedback positioned above the input field, to the right -->
                         <span id="oldPasswordFeedback" class="position-absolute"></span>
                     </div>
                     <div class="mb-3">

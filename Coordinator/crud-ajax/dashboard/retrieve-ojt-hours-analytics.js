@@ -1,7 +1,6 @@
 $(document).ready(function () {
-    let chart = null; // Keep a reference to the chart instance
+    let chart = null;
 
-    // Function to validate incoming data
     function validateData(data) {
         return (
             data &&
@@ -14,19 +13,15 @@ $(document).ready(function () {
         );
     }
 
-    // Function to fetch the user analytics data
     function fetchUserAnalytics() {
-        const timestamp = new Date().getTime(); // Prevent cache by adding timestamp
+        const timestamp = new Date().getTime();
         $.ajax({
             url: 'controller/dashboard/retrieve-ojt-hours-analytics.php',
             method: 'GET',
             data: { timestamp: timestamp }, // Prevent cache
             success: function (response) {
-                console.log("Raw response from PHP:", response);
-
                 try {
                     const data = JSON.parse(response);
-                    console.log("Parsed data:", data);
 
                     if (!data.error && validateData(data)) {
                         renderChart(data);
@@ -41,13 +36,12 @@ $(document).ready(function () {
             error: function (xhr, status, error) {
                 console.error('AJAX error:', error);
                 console.error('Status:', status);
-                console.error('Response:', xhr.responseText); // More detailed error logging
+                console.error('Response:', xhr.responseText);
                 showError(`There was an error processing your request. Status: ${status}`);
             }
         });
     }
 
-    // Function to render the chart with the parsed data
     function renderChart(data) {
         const segments = data.segments;
         const counts = data.counts;
@@ -93,7 +87,7 @@ $(document).ready(function () {
             chart: {
                 type: 'donut',
                 width: '100%',
-                height: '400px', // Set a fixed height for larger screens
+                height: '400px',
                 animations: {
                     enabled: true,
                     easing: 'easeinout',
@@ -111,10 +105,10 @@ $(document).ready(function () {
                 `0 - ${segments[0]}`,
             ],
             colors: [
-                'rgba(34, 139, 34, 0.85)',   // Soft Green for the last segment
-                'rgba(70, 130, 180, 0.85)', // Soft Steel Blue for the third segment
-                'rgba(255, 165, 0, 0.85)',   // Muted Orange for the second segment
-                'rgba(204, 0, 0, 0.85)',   // Soft Red (less intense) for the first segment
+                'rgba(34, 139, 34, 0.85)',
+                'rgba(70, 130, 180, 0.85)',
+                'rgba(255, 165, 0, 0.85)',
+                'rgba(204, 0, 0, 0.85)',
             ],
             plotOptions: {
                 pie: {
@@ -131,27 +125,22 @@ $(document).ready(function () {
             responsive: getResponsiveOptions()
         };
 
-        console.log("Chart data:", chartOptions);
-
-        // Destroy the existing chart if it exists
         if (chart) {
             chart.destroy();
         }
 
-        // Create a new chart instance
         chart = new ApexCharts(document.querySelector("#ojthours-chart"), chartOptions);
         chart.render();
     }
 
-    // Function to return responsive chart options
     function getResponsiveOptions() {
         return [
             {
-                breakpoint: 1024, // Adjust for tablets and smaller devices
+                breakpoint: 1024,
                 options: {
                     chart: {
                         width: '100%',
-                        height: '400px' // Set a larger fixed height for larger screens
+                        height: '400px'
                     },
                     title: {
                         style: {
@@ -165,11 +154,11 @@ $(document).ready(function () {
                 }
             },
             {
-                breakpoint: 768, // Adjust for tablets and smaller devices
+                breakpoint: 768,
                 options: {
                     chart: {
                         width: '100%',
-                        height: '350px' // Adjust the height for smaller screens
+                        height: '350px'
                     },
                     title: {
                         style: {
@@ -183,11 +172,11 @@ $(document).ready(function () {
                 }
             },
             {
-                breakpoint: 480, // Adjust for small devices like phones
+                breakpoint: 480,
                 options: {
                     chart: {
                         width: '100%',
-                        height: '250px'  // Further reduce height for small screens
+                        height: '250px'
                     },
                     title: {
                         style: {
@@ -203,7 +192,6 @@ $(document).ready(function () {
         ];
     }
 
-    // Function to show error messages using SweetAlert
     function showError(message) {
         Swal.fire({
             toast: true,
@@ -221,14 +209,11 @@ $(document).ready(function () {
         });
     }
 
-    // Expose the fetchUserAnalytics function globally for external triggers
-    window.fetchUserAnalytics = debounce(fetchUserAnalytics, 500); // Debounce function added
+    window.fetchUserAnalytics = debounce(fetchUserAnalytics, 500);
 
-    // Call the function to fetch data on page load
     fetchUserAnalytics();
 });
 
-// Debounce function to prevent multiple simultaneous calls
 function debounce(func, delay) {
     let timeout;
     return function (...args) {

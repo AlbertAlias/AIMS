@@ -1,7 +1,6 @@
 $(document).ready(function () {
     let isFileOpen = false;
 
-    // Fetch requirements titles and populate dropdown
     function fetchRequirements() {
         $.ajax({
             url: 'controller/requirement/students-requirements/retrieve-requirements-title.php',
@@ -32,7 +31,6 @@ $(document).ready(function () {
         const now = new Date();
         const isSameYear = date.getFullYear() === now.getFullYear();
         
-        // Format the date to "Month Date, Year, Hours:Minutes AM/PM"
         const options = {
             month: 'short',
             day: 'numeric',
@@ -43,7 +41,6 @@ $(document).ready(function () {
         
         let formattedDate = date.toLocaleString('en-US', options);
         
-        // Check if the year is the same or different from the current year
         if (!isSameYear) {
             formattedDate = `${formattedDate}, ${date.getFullYear()}`;
         }
@@ -51,14 +48,13 @@ $(document).ready(function () {
         return formattedDate;
     }
 
-    // Fetch rejected requirements based on selected requirement or search term
     function fetchRejectedRequirements(searchTerm = '', requirementId = '') {
         $.ajax({
             url: 'controller/requirement/students-requirements/retrieve-rejected-requirements.php',
             method: 'GET',
             data: {
-                search_term: searchTerm, // Pass the search term for student_name filtering
-                requirement_id: requirementId // Filter by selected requirement
+                search_term: searchTerm,
+                requirement_id: requirementId
             },
             dataType: 'json',
             success: function (response) {
@@ -99,69 +95,60 @@ $(document).ready(function () {
         });
     }
 
-    // Open PDF modal function (without delay)
     function openPDFModal(filePath) {
         const pdfViewer = document.getElementById('pdfViewer');
         const modal = document.getElementById('pdfModal');
         
-        // Reset and load the new file immediately
-        pdfViewer.src = `${filePath}#toolbar=0`; // Directly setting the src without delay
+        pdfViewer.src = `${filePath}#toolbar=0`;
 
         modal.style.display = 'flex';
     }
 
-    // Close the modal when the close button is clicked
     document.getElementById('closeModal').addEventListener('click', function () {
         const modal = document.getElementById('pdfModal');
         const pdfViewer = document.getElementById('pdfViewer');
         modal.style.display = 'none';
-        pdfViewer.src = ''; // Reset the PDF source
+        pdfViewer.src = '';
     });
 
-    // Close the modal when clicking outside the modal content
     window.addEventListener('click', function (event) {
         const modal = document.getElementById('pdfModal');
         if (event.target === modal) {
             modal.style.display = 'none';
-            document.getElementById('pdfViewer').src = ''; // Reset the PDF source
+            document.getElementById('pdfViewer').src = '';
         }
     });
 
-    // Function to fetch rejected requirements and requirement titles when the modal is shown
     $('#rejectedModal').on('show.bs.modal', function () {
         fetchRequirements();
         fetchRejectedRequirements();
     });
 
-    // Listen for changes on the requirement filter
     $('#rejectedSelectOption').on('change', function () {
         const selectedRequirement = $(this).val();
-        const searchTerm = $('#rejectedSearchInput').val().trim(); // Get the current search term
+        const searchTerm = $('#rejectedSearchInput').val().trim();
         fetchRejectedRequirements(searchTerm, selectedRequirement);
     });
 
-    // Listen for changes in the search input
     $('#rejectedSearchInput').on('input', function () {
         const searchTerm = $(this).val().trim();
-        const selectedRequirement = $('#rejectedSelectOption').val(); // Get selected requirement
+        const selectedRequirement = $('#rejectedSelectOption').val();
         fetchRejectedRequirements(searchTerm, selectedRequirement);
     });
 
-    // Handle submission card click for "View File" 
     $(document).on('click', '.submission-card', function () {
         var viewFileButton = $(this).find('.btn-view-file');
         if (viewFileButton.length && !isFileOpen) {
             isFileOpen = true;
             const filePath = viewFileButton.data('file-path');
-            openPDFModal(filePath); // Open the PDF modal with the file
+            openPDFModal(filePath);
 
             setTimeout(() => {
-                isFileOpen = false; // Reset the flag after the file has been opened
-            }, 200); // Allow a small time window to avoid issues
+                isFileOpen = false;
+            }, 200);
         }
     });
 
-    // Handle approve button click
     $(document).on('click', '.btn-approve', function (event) {
         event.stopPropagation();
         var submitId = $(this).data('id');
@@ -174,7 +161,6 @@ $(document).ready(function () {
                 status: 'approved'
             },
             success: function (response) {
-                console.log("Response from server:", response);
                 try {
                     var parsedResponse = typeof response === 'string' ? JSON.parse(response) : response;
                     if (parsedResponse.status === 'success') {

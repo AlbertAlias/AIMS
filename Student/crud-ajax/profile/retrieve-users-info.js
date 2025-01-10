@@ -12,8 +12,6 @@ $(document).ready(function () {
                     $('#users-gender').text(userInfo.gender);
                     $('#users-email').text(userInfo.email);
                     $('#users-username').text(userInfo.username);
-
-                    // Populate modal fields with user information
                     $('#editLastNameInput').val(userInfo.last_name);
                     $('#editFirstNameInput').val(userInfo.first_name);
                     $('#editMiddleNameInput').val(userInfo.middle_name || '');
@@ -21,8 +19,6 @@ $(document).ready(function () {
                     $('#editGenderInput').val(userInfo.gender);
                     $('#editEmailInput').val(userInfo.email);
                     $('#editUsernameInput').val(userInfo.username);
-
-                    // Populate company information
                     $('#users-company-name').text(userInfo.company);
                     $('#users-company-location').text(userInfo.company_address);
                     $('#users-supervisor').text(userInfo.supervisor);
@@ -36,7 +32,6 @@ $(document).ready(function () {
         },
     });
 
-    // Event listener for the old password input change
     $('#modalOldPassword').on('input', function () {
         var oldPassword = $(this).val();
 
@@ -60,7 +55,6 @@ $(document).ready(function () {
         });
     });
 
-    // Check if New Password matches Confirm Password
     $('#modalNewPassword, #modalConfirmPassword').on('input', function () {
         var newPassword = $('#modalNewPassword').val();
         var confirmPassword = $('#modalConfirmPassword').val();
@@ -77,7 +71,6 @@ $(document).ready(function () {
         }
     });
 
-    // Handle form submission for password change
     $('#changePasswordForm').submit(function (event) {
         event.preventDefault();
 
@@ -85,9 +78,7 @@ $(document).ready(function () {
         var newPassword = $('#modalNewPassword').val();
         var confirmPassword = $('#modalConfirmPassword').val();
 
-        // Handle the password change logic if everything is correct
         if (newPassword === confirmPassword) {
-            // Proceed with password change logic
             alert('Password changed successfully!');
         } else {
             alert('Please ensure the new passwords match!');

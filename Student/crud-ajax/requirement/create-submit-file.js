@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('pdfModal');
     const closeModal = document.getElementById('closeModal');
 
-    // Show PDF preview in a modal when file is clicked
     fileContainer.addEventListener('click', function (event) {
         const fileCard = event.target.closest('.d-flex');
         if (fileCard && !event.target.closest('.btn')) {
@@ -20,14 +19,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Close modal and free up resources
     closeModal.addEventListener('click', function () {
         modal.style.display = 'none';
         URL.revokeObjectURL(pdfViewer.src);
         pdfViewer.src = '';
     });
 
-    // Close modal when clicked outside of the modal
     window.addEventListener('click', function (event) {
         if (event.target === modal) {
             modal.style.display = 'none';
@@ -36,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Handle file input change (on file selection)
     fileInput.addEventListener('change', function () {
         fileInput.disabled = true;
         fileInput.closest('label').style.pointerEvents = 'none';
@@ -52,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
 
-            // Create file card with loading indicator
             const fileCard = document.createElement('div');
             fileCard.className = 'd-flex align-items-center border p-1 rounded mb-2 position-relative';
             fileCard.style.pointerEvents = 'none';
@@ -70,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function () {
             fileCard.appendChild(loadingElement);
             fileContainer.appendChild(fileCard);
 
-            // Create file icon, details, and close button
             const fileIcon = document.createElement('div');
             fileIcon.innerHTML = `        
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 2.3rem; height: 2.3rem; padding: 1px; margin-left: 3px; margin-right: 3px;">
@@ -128,7 +122,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Handle the "Turn in" button click
     submitButton.addEventListener('click', function () {
         const fileCard = document.querySelector('#fileContainer .d-flex');
         const studentIdInput = document.querySelector('.student-id');

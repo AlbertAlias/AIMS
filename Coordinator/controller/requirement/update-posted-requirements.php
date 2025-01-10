@@ -17,12 +17,10 @@
             exit;
         }
 
-        // Check if the new deadline is in the future
         $currentDate = new DateTime();
         $newDeadline = new DateTime($deadline);
         $status = ($newDeadline > $currentDate) ? 'open' : 'closed';
 
-        // Update the requirement details
         $sql = "UPDATE requirements SET title = ?, description = ?, deadline = ?, status = ? WHERE requirement_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ssssi", $title, $description, $deadline, $status, $requirement_id);

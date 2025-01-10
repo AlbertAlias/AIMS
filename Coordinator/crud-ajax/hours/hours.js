@@ -1,32 +1,12 @@
 document.getElementById('setHoursModal').addEventListener('show.bs.modal', function () {
     fetch('controller/hours/get_hours.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data) {
-                document.getElementById('hoursNeeded').value = data.hours_needed || '';
-            }
-        });
+    .then(response => response.json())
+    .then(data => {
+        if (data) {
+            document.getElementById('hoursNeeded').value = data.hours_needed || '';
+        }
+    });
 });
-
-// document.getElementById('saveHoursButton').addEventListener('click', function () {
-//     const form = document.getElementById('setHoursForm');
-//     const formData = new FormData(form);
-
-//     fetch('controller/hours/save_hours.php', {
-//         method: 'POST',
-//         body: formData,
-//     })
-//         .then(response => response.json())
-//         .then(data => {
-//             if (data.success) {
-//                 alert('Hours saved successfully!');
-//                 const modal = bootstrap.Modal.getInstance(document.getElementById('setHoursModal'));
-//                 modal.hide();
-//             } else {
-//                 alert('Error saving hours: ' + (data.error || 'Unknown error'));
-//             }
-//         });
-// });
 
 $(document).ready(function () {
     $("#saveHoursButton").click(function () {
@@ -52,7 +32,7 @@ $(document).ready(function () {
         }
 
         $.ajax({
-            url: "controller/hours/save_hours.php", // Update with your PHP file path
+            url: "controller/hours/save_hours.php",
             type: "POST",
             data: {
                 hoursNeeded: hoursNeeded
@@ -75,7 +55,6 @@ $(document).ready(function () {
                         }
                     });
 
-                    // Close modal and reset form
                     $('#setHoursModal').modal('hide');
                     $("#hoursNeeded").val('');
                 } else {

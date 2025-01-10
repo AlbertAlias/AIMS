@@ -4,11 +4,9 @@
 
     header('Content-Type: application/json');
 
-    // Debug session data
     error_log("Session User ID: " . ($_SESSION['user_id'] ?? 'not set'));
     error_log("Session Department ID: " . ($_SESSION['department_id'] ?? 'not set'));
 
-    // Validate session variables
     if (!isset($_SESSION['user_id']) || !isset($_SESSION['department_id'])) {
         error_log("Unauthorized access: Missing session variables");
         echo json_encode(['error' => 'Unauthorized access']);
@@ -64,7 +62,7 @@
         }
 
         if (empty($chartData['labels'])) {
-            echo json_encode(['noData' => true]); // Indicate no data is available
+            echo json_encode(['noData' => true]);
         } else {
             echo json_encode($chartData);
         }

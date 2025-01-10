@@ -9,7 +9,6 @@
 
     $user_username = $_SESSION['username'];
 
-    // Check if oldPassword is being sent
     if (isset($_POST['oldPassword'])) {
         $old_password = $_POST['oldPassword'];
 
@@ -38,7 +37,6 @@
         exit();
     }
 
-    // Query user details and company information
     $stmt = $conn->prepare("
         SELECT 
             u.last_name, u.first_name, u.middle_name, u.address, u.gender, u.email, u.username,
@@ -64,7 +62,6 @@
         );
         $stmt->fetch();
 
-        // Concatenate full name
         $full_name = $last_name . ', ' . $first_name;
         if ($middle_name) $full_name .= ' ' . $middle_name;
 

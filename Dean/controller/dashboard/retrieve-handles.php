@@ -3,7 +3,6 @@
     include '../../../dbconn.php';
 
     if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        // Get the current dean's departments (assuming `$_SESSION['user_id']` is the dean)
         session_start();
         $dean_id = $_SESSION['user_id'];
 

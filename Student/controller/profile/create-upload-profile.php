@@ -1,30 +1,24 @@
 <?php
-    include '../../../dbconn.php'; // Include your database connection file
+    include '../../../dbconn.php';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Check if file was uploaded without errors
         if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] == 0) {
-            $user_id = $_POST['user_id']; // Get user ID from POST data
-            // Use error_log for debugging instead of echoing to the response
-            error_log("User ID from POST: " . $user_id); // Log to the server error log
+            $user_id = $_POST['user_id'];
+            error_log("User ID from POST: " . $user_id);
 
-            $file_name = basename($_FILES['profile_picture']['name']); // Get only the file name
+            $file_name = basename($_FILES['profile_picture']['name']);
             $file_tmp = $_FILES['profile_picture']['tmp_name'];
             $file_type = pathinfo($file_name, PATHINFO_EXTENSION);
 
-            // Specify the directory to save the file
-            $upload_directory = 'uploads/'; // Ensure this directory exists
-            $unique_file_name = uniqid('profile_', true) . '.' . $file_type; // Use a unique file name with extension
-            $file_path = $upload_directory . $unique_file_name; // Full path to move the file
+            $upload_directory = 'uploads/';
+            $unique_file_name = uniqid('profile_', true) . '.' . $file_type;
+            $file_path = $upload_directory . $unique_file_name;
 
-            // Check if file type is allowed
             $allowed_types = ['jpg', 'jpeg', 'png'];
             if (in_array(strtolower($file_type), $allowed_types)) {
-                // Move the uploaded file to the specified directory
                 if (move_uploaded_file($file_tmp, $file_path)) {
-                    // Store only the file name in the database (Make sure you're using user_id column)
                     $stmt = $conn->prepare("UPDATE users SET profile_picture = ? WHERE user_id = ?");
-                    $stmt->bind_param("si", $unique_file_name, $user_id); // Save only the file name
+                    $stmt->bind_param("si", $unique_file_name, $user_id);
 
                     if ($stmt->execute()) {
                         echo json_encode(['success' => 'Profile picture updated successfully.']);

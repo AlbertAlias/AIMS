@@ -45,7 +45,6 @@ $(document).ready(function () {
                         } else {
                             $('#taskCardContainer').show();
 
-                            // Determine the content for the description based on the status
                             let additionalInfo = '';
                             if (fileStatus.toLowerCase() === 'pending') {
                                 additionalInfo = `<p class="file-description m-0 p-0 text-muted" style="font-size: 0.835rem;">${new Date(submissionDate).toLocaleDateString('en-US', {
@@ -78,7 +77,7 @@ $(document).ready(function () {
                     });
 
                     $('.delete-icon').on('click', function (event) {
-                        event.stopPropagation(); // Prevent the parent .task-card click event
+                        event.stopPropagation();
                         const submitId = $(this).closest('.delete-icon-container').data('id');
                         deleteStudentFile(submitId);
                     });

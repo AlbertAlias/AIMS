@@ -1,9 +1,7 @@
 <div class="container-fluid p-0 m-0" id="coorlist" style="display: none;">
     <div class="card shadow-sm">
-        <!-- Header -->
         <div class="card-header bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
-                <!-- Page Length Selector -->
                 <div class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
                         <select id="coor-pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
@@ -14,7 +12,6 @@
                         </select>
                     </div>
                 </div>
-                <!-- Search Input -->
                 <div class="flex-shrink-1">
                     <div class="input-group">
                         <input type="text" id="coor-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
@@ -28,9 +25,7 @@
             </div>
         </div>
 
-        <!-- Body -->
         <div class="card-body bg-white p-0">
-            <!-- Table Placeholder -->
             <div class="table-responsive">
                 <table id="coorTable" class="table table-hover text-center m-0" style="width: 100%;">
                     <thead class="table-light">
@@ -48,11 +43,9 @@
             </div>
         </div>
 
-        <!-- Footer -->
         <div class="card-footer bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
                 <span class="mb-2" id="coor-tableInfo">Showing 0 to 0 of 0 entries</span>
-                <!-- Pagination -->
                 <nav aria-label="Page navigation">
                     <ul id="coor-pagination" class="pagination mb-0">
                         <!-- Pagination buttons will be generated here via AJAX -->

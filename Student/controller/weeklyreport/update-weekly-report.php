@@ -2,7 +2,6 @@
     header('Content-Type: application/json');
     include '../../../dbconn.php';
 
-    // Enable error reporting for debugging
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
 
@@ -13,12 +12,9 @@
             $weekStart = $_POST['week_start'];
             $weekEnd = $_POST['week_end'];
 
-            // Initialize file path
             $filePath = null;
 
-            // Check if a file is uploaded and handle it
             if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
-                // Handle file upload
                 $uploadDir = '../../../uploads/';
                 $fileName = basename($_FILES['file']['name']);
                 $targetFilePath = $uploadDir . $fileName;
@@ -34,10 +30,8 @@
                 }
             }
 
-            // Log input parameters to debug
             error_log("Title: $title, Week Start: $weekStart, Week End: $weekEnd, File Path: $filePath");
 
-            // Update the report in the database
             $sql = "UPDATE weekly_reports SET title = ?, week_start = ?, week_end = ?, file_path = ? WHERE id = ?";
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("ssssi", $title, $weekStart, $weekEnd, $filePath, $reportId);
@@ -54,7 +48,7 @@
             echo json_encode(['success' => false, 'error' => 'Invalid request']);
         }
     } catch (Exception $e) {
-        error_log('Error: ' . $e->getMessage());  // Log error message
+        error_log('Error: ' . $e->getMessage());
         echo json_encode(['success' => false, 'error' => $e->getMessage()]);
     }
 

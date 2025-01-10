@@ -5,7 +5,6 @@ $(document).ready(function () {
             method: 'GET',
             success: function (response) {
                 try {
-                    console.log("Raw response:", response);
                     const data = typeof response === 'string' ? JSON.parse(response) : response;
 
                     if (Array.isArray(data)) {
@@ -36,7 +35,6 @@ $(document).ready(function () {
             data: { requirement_id: requirementId },
             success: function (response) {
                 try {
-                    console.log("Raw response:", response);
                     const data = typeof response === 'string' ? JSON.parse(response) : response;
 
                     if (data.noData) {
@@ -67,7 +65,7 @@ $(document).ready(function () {
                         plotOptions: {
                             bar: {
                                 distributed: true,
-                                horizontal: false // Set to false for a column chart
+                                horizontal: false
                             }
                         },
                         colors: ['#FEB019', '#FF4560', '#00E396'],
@@ -76,7 +74,7 @@ $(document).ready(function () {
                             align: 'center',
                             style: { fontSize: '18px', fontWeight: '600' }
                         },
-                        xaxis: { categories: labels }, // Map labels to the x-axis
+                        xaxis: { categories: labels },
                         tooltip: { theme: 'dark' }
                     };
 
