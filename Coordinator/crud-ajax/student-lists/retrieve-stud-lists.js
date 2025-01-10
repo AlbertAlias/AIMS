@@ -14,11 +14,16 @@ function loadTableData() {
         success: function(response) {
             if (response.html) {
                 $('#stud-lists tbody').html(response.html);
+            } else {
+                $('#stud-lists tbody').html('<tr><td colspan="7">No data available</td></tr>');
             }
             if (response.pagination) {
                 $('#stud-lists-pagination').html(response.pagination);
+            } else {
+                $('#stud-lists-pagination').html('');
             }
-            $('#stud-lists-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
+            // $('#stud-lists-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
+            $('#stud-lists-tableInfo').text(response.total > 0 ? `Showing ${response.start} to ${response.end} of ${response.total} entries` : 'No entries available');
         },
         error: function(xhr, status, error) {
             console.error('AJAX error:', status, error);

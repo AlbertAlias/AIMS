@@ -65,26 +65,31 @@
         $result = $stmt->get_result();
 
         $html = '';
-        while ($row = $result->fetch_assoc()) {
-            $first_name = htmlspecialchars($row['first_name']) ?: '--';
-            $last_name = htmlspecialchars($row['last_name']) ?: '--';
-            $gender = htmlspecialchars($row['gender']) ?: '--';
-            $department_name = htmlspecialchars($row['department_name']) ?: '--';
-            $student_id = htmlspecialchars($row['student_id']) ?: '--';
-            $email = htmlspecialchars($row['email']) ?: '--';
-            $address = htmlspecialchars($row['address']) ?: '--';
-            $academic_year = htmlspecialchars($row['academic_year']) ?: '--';
 
-            $html .= '<tr>';
-            $html .= '<td>' . $first_name . '</td>';
-            $html .= '<td>' . $last_name . '</td>';
-            $html .= '<td>' . $gender . '</td>';
-            $html .= '<td>' . $department_name . '</td>';
-            $html .= '<td>' . $student_id . '</td>';
-            $html .= '<td>' . $email . '</td>';
-            $html .= '<td>' . $address . '</td>';
-            $html .= '<td>' . $academic_year . '</td>';
-            $html .= '</tr>';
+        if ($result->num_rows === 0) {
+            $html = '<tr><td colspan="7">No data available</td></tr>';
+        } else {
+            while ($row = $result->fetch_assoc()) {
+                $first_name = htmlspecialchars($row['first_name']) ?: '--';
+                $last_name = htmlspecialchars($row['last_name']) ?: '--';
+                $gender = htmlspecialchars($row['gender']) ?: '--';
+                $department_name = htmlspecialchars($row['department_name']) ?: '--';
+                $student_id = htmlspecialchars($row['student_id']) ?: '--';
+                $email = htmlspecialchars($row['email']) ?: '--';
+                $address = htmlspecialchars($row['address']) ?: '--';
+                $academic_year = htmlspecialchars($row['academic_year']) ?: '--';
+    
+                $html .= '<tr>';
+                $html .= '<td>' . $first_name . '</td>';
+                $html .= '<td>' . $last_name . '</td>';
+                $html .= '<td>' . $gender . '</td>';
+                $html .= '<td>' . $department_name . '</td>';
+                $html .= '<td>' . $student_id . '</td>';
+                $html .= '<td>' . $email . '</td>';
+                $html .= '<td>' . $address . '</td>';
+                $html .= '<td>' . $academic_year . '</td>';
+                $html .= '</tr>';
+            }
         }
 
         $countQuery = "

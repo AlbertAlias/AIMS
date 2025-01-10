@@ -61,18 +61,22 @@
         $result = $stmt->get_result();
 
         $html = '';
-        while ($row = $result->fetch_assoc()) {
-            $first_name = htmlspecialchars($row['first_name']) ?: '--';
-            $last_name = htmlspecialchars($row['last_name']) ?: '--';
-            $department_name = htmlspecialchars($row['department_name']) ?: '--';
-            $department_id = htmlspecialchars($row['department_id']) ?: '--';
-
-            $html .= '<tr>';
-            $html .= '<td>' . $first_name . '</td>';
-            $html .= '<td>' . $last_name . '</td>';
-            $html .= '<td>' . $department_name . '</td>';
-            $html .= '<td>' . $department_id . '</td>';
-            $html .= '</tr>';
+        if ($result->num_rows === 0) {
+            $html = '<tr><td colspan="7">No data available</td></tr>';
+        } else {
+            while ($row = $result->fetch_assoc()) {
+                $first_name = htmlspecialchars($row['first_name']) ?: '--';
+                $last_name = htmlspecialchars($row['last_name']) ?: '--';
+                $department_name = htmlspecialchars($row['department_name']) ?: '--';
+                $department_id = htmlspecialchars($row['department_id']) ?: '--';
+    
+                $html .= '<tr>';
+                $html .= '<td>' . $first_name . '</td>';
+                $html .= '<td>' . $last_name . '</td>';
+                $html .= '<td>' . $department_name . '</td>';
+                $html .= '<td>' . $department_id . '</td>';
+                $html .= '</tr>';
+            }
         }
 
         $totalSql = "

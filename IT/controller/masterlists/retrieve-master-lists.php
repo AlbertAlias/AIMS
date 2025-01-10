@@ -78,18 +78,23 @@
         $result = $stmt->get_result();
 
         $html = '';
-        while ($row = $result->fetch_assoc()) {
-            $html .= '<tr>';
-            if ($columns['Name']) $html .= '<td>' . (htmlspecialchars($row['Name']) ?: '--') . '</td>';
-            if ($columns['Department']) $html .= '<td>' . (htmlspecialchars($row['Department']) ?: '--') . '</td>';
-            if ($columns['Company']) $html .= '<td>' . (htmlspecialchars($row['Company']) ?: '--') . '</td>';
-            if ($columns['Email']) $html .= '<td>' . (htmlspecialchars($row['Email']) ?: '--') . '</td>';
-            if ($columns['AY']) $html .= '<td>' . (htmlspecialchars($row['AY']) ?: '--') . '</td>';
-            if ($columns['Username']) $html .= '<td>' . (htmlspecialchars($row['Username']) ?: '--') . '</td>';
-            if ($columns['UserType']) $html .= '<td>' . (htmlspecialchars($row['UserType']) ?: '--') . '</td>';
-            $html .= '<td><button class="btn btn-sm btn-warning" disabled>Archived</button></td>';
-            $html .= '</tr>';
+        if ($result->num_rows === 0) {
+            $html = '<tr><td colspan="7">No data available</td></tr>';
+        } else {
+            while ($row = $result->fetch_assoc()) {
+                $html .= '<tr>';
+                if ($columns['Name']) $html .= '<td>' . (htmlspecialchars($row['Name']) ?: '--') . '</td>';
+                if ($columns['Department']) $html .= '<td>' . (htmlspecialchars($row['Department']) ?: '--') . '</td>';
+                if ($columns['Company']) $html .= '<td>' . (htmlspecialchars($row['Company']) ?: '--') . '</td>';
+                if ($columns['Email']) $html .= '<td>' . (htmlspecialchars($row['Email']) ?: '--') . '</td>';
+                if ($columns['AY']) $html .= '<td>' . (htmlspecialchars($row['AY']) ?: '--') . '</td>';
+                if ($columns['Username']) $html .= '<td>' . (htmlspecialchars($row['Username']) ?: '--') . '</td>';
+                if ($columns['UserType']) $html .= '<td>' . (htmlspecialchars($row['UserType']) ?: '--') . '</td>';
+                $html .= '<td><button class="btn btn-sm btn-warning" disabled>Archived</button></td>';
+                $html .= '</tr>';
+            }
         }
+        
 
         // Fetch total count for pagination
         $totalSql = "

@@ -21,11 +21,15 @@ function loadTableData() {
         success: function(response) {
             if (response.html) {
                 $('#master-lists tbody').html(response.html);
+            } else {
+                $('#master-lists tbody').html('<tr><td colspan="7">No data available</td></tr>');
             }
             if (response.pagination) {
                 $('#master-lists-pagination').html(response.pagination);
+            } else {
+                $('#master-lists-pagination').html('');
             }
-            $('#master-lists-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
+            $('#master-lists-tableInfo').text(response.total > 0 ? `Showing ${response.start} to ${response.end} of ${response.total} entries` : 'No entries available');
         },
         error: function(xhr, status, error) {
             console.error('AJAX Error:', status, error);

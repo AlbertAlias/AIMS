@@ -1,7 +1,6 @@
 let studentlistsPage = 1;
 let studentlistsPageLength = 10;
 
-// Fetch and display table data
 function loadTableData() {
     $.ajax({
         url: 'controller/retrieve-student-lists.php',
@@ -13,23 +12,25 @@ function loadTableData() {
             search: $('#stud-lists-searchInput').val()
         },
         success: function(response) {
-            console.log('Response:', response);
             if (response.html) {
                 $('#stud-lists tbody').html(response.html);
+            } else {
+                $('#stud-lists tbody').html('<tr><td colspan="7">No data available</td></tr>');
             }
             if (response.pagination) {
                 $('#stud-lists-pagination').html(response.pagination);
+            } else {
+                $('#stud-lists-pagination').html('');
             }
-            $('#stud-lists-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
+            // $('#stud-lists-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
+            $('#stud-lists-tableInfo').text(response.total > 0 ? `Showing ${response.start} to ${response.end} of ${response.total} entries` : 'No entries available');
         },
         error: function(xhr, status, error) {
             console.error('AJAX Error:', status, error);
-            console.log('Response Text:', xhr.responseText);
         }
     });
 }
 
-// Event listeners
 $('#stud-lists-pageLengthSelect').on('change', function() {
     studentlistsPageLength = parseInt($(this).val());
     studentlistsPage = 1;
@@ -47,5 +48,4 @@ $('#stud-lists-pagination').on('click', '.page-link', function(e) {
     loadTableData();
 });
 
-// Initial load
 loadTableData();

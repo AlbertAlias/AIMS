@@ -39,49 +39,53 @@
 
         $html = '';
         $currentYear = date('Y');
-        while ($row = $result->fetch_assoc()) {
 
-            $morningStart = htmlspecialchars($row['morning_start']) ?: '--';
-            $lunchStart = htmlspecialchars($row['lunch_start']) ?: '--';
-            $lunchEnd = htmlspecialchars($row['lunch_end']) ?: '--';
-            $afternoonEnd = htmlspecialchars($row['afternoon_end']) ?: '--';
-            $totalHours = htmlspecialchars($row['total_hours']) ?: '--';
+        if ($result->num_rows === 0) {
+            $html = '<tr><td colspan="7">No data available</td></tr>';
+        } else {
+            while ($row = $result->fetch_assoc()) {
+                $morningStart = htmlspecialchars($row['morning_start']) ?: '--';
+                $lunchStart = htmlspecialchars($row['lunch_start']) ?: '--';
+                $lunchEnd = htmlspecialchars($row['lunch_end']) ?: '--';
+                $afternoonEnd = htmlspecialchars($row['afternoon_end']) ?: '--';
+                $totalHours = htmlspecialchars($row['total_hours']) ?: '--';
 
-            $morningStart = formatTime($morningStart);
-            $lunchStart = formatTime($lunchStart);
-            $lunchEnd = formatTime($lunchEnd);
-            $afternoonEnd = formatTime($afternoonEnd);
-            $totalHours = formatTotalHours($totalHours);
+                $morningStart = formatTime($morningStart);
+                $lunchStart = formatTime($lunchStart);
+                $lunchEnd = formatTime($lunchEnd);
+                $afternoonEnd = formatTime($afternoonEnd);
+                $totalHours = formatTotalHours($totalHours);
 
-            $filePath = htmlspecialchars($row['file_path']) ? '/AIMS/Student/controller/hours/uploads/' . basename($row['file_path']) : '--';
+                $filePath = htmlspecialchars($row['file_path']) ? '/AIMS/Student/controller/hours/uploads/' . basename($row['file_path']) : '--';
 
-            $submissionDate = htmlspecialchars($row['submission_date']) ?: '--';
-            if ($submissionDate !== '--') {
-                $timestamp = strtotime($submissionDate);
-                $month = date('M', $timestamp);
-                $day = date('j', $timestamp);
-                $year = date('Y', $timestamp);
-                $time = date('g:i A', $timestamp);
+                $submissionDate = htmlspecialchars($row['submission_date']) ?: '--';
+                if ($submissionDate !== '--') {
+                    $timestamp = strtotime($submissionDate);
+                    $month = date('M', $timestamp);
+                    $day = date('j', $timestamp);
+                    $year = date('Y', $timestamp);
+                    $time = date('g:i A', $timestamp);
 
-                $yearDisplay = ($year == $currentYear) ? '' : ' ' . $year;
-                $submissionDate = $month . ' ' . $day . $yearDisplay . ' ' . $time;
+                    $yearDisplay = ($year == $currentYear) ? '' : ' ' . $year;
+                    $submissionDate = $month . ' ' . $day . $yearDisplay . ' ' . $time;
+                }
+
+                $html .= '<tr>';
+                $html .= '<td>' . $submissionDate . '</td>';
+                $html .= '<td>' . $morningStart . '</td>';
+                $html .= '<td>' . $lunchStart . '</td>';
+                $html .= '<td>' . $lunchEnd . '</td>';
+                $html .= '<td>' . $afternoonEnd . '</td>';
+                $html .= '<td>' . $totalHours . '</td>';
+                $html .= '<td>';
+                if ($filePath !== '--') {
+                    $html .= '<button class="btn btn-sm btn-primary view-file-button" data-file="' . $filePath . '">View File</button>';
+                } else {
+                    $html .= '--';
+                }
+                $html .= '</td>';
+                $html .= '</tr>';
             }
-
-            $html .= '<tr>';
-            $html .= '<td>' . $submissionDate . '</td>';
-            $html .= '<td>' . $morningStart . '</td>';
-            $html .= '<td>' . $lunchStart . '</td>';
-            $html .= '<td>' . $lunchEnd . '</td>';
-            $html .= '<td>' . $afternoonEnd . '</td>';
-            $html .= '<td>' . $totalHours . '</td>';
-            $html .= '<td>';
-            if ($filePath !== '--') {
-                $html .= '<button class="btn btn-sm btn-primary view-file-button" data-file="' . $filePath . '">View File</button>';
-            } else {
-                $html .= '--';
-            }
-            $html .= '</td>';
-            $html .= '</tr>';
         }
 
         $totalSql = "
@@ -127,8 +131,8 @@
         $response = [
             'html' => $html,
             'pagination' => $pagination,
-            'start' => $start + 1,
-            'end' => min($start + $length, $total),
+            'start' => ($total > 0) ? $start + 1 : 0,
+            'end' => ($total > 0) ? min($start + $length, $total) : 0,
             'total' => $total
         ];
         echo json_encode($response);

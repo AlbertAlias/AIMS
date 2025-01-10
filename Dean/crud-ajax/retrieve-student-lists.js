@@ -14,11 +14,16 @@ function loadstudentTableData() {
         success: function(response) {
             if (response.html) {
                 $('#studentsTable tbody').html(response.html);
+            } else {
+                $('#studentsTable tbody').html('<tr><td colspan="7">No data available</td></tr>');
             }
             if (response.pagination) {
                 $('#student-pagination').html(response.pagination);
+            } else {
+                $('#student-pagination').html('');
             }
-            $('#student-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
+            // $('#student-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
+            $('#student-tableInfo').text(response.total > 0 ? `Showing ${response.start} to ${response.end} of ${response.total} entries` : 'No entries available');
         },
         error: function(xhr, status, error) {
             console.error('AJAX Error:', status, error);

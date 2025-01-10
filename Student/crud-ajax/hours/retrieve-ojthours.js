@@ -14,11 +14,16 @@ function loadOjtHoursData() {
         success: function(response) {
             if (response.html) {
                 $('#ojthours tbody').html(response.html);
+            } else {
+                $('#ojthours tbody').html('<tr><td colspan="7">No data available</td></tr>');
             }
+
             if (response.pagination) {
                 $('#ojthours-pagination').html(response.pagination);
+            } else {
+                $('#ojthours-pagination').html('');
             }
-            $('#ojthours-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
+            $('#ojthours-tableInfo').text(response.total > 0 ? `Showing ${response.start} to ${response.end} of ${response.total} entries` : 'No entries available');
 
             // $('#totalHoursDisplay').text(`Rendered Hours: ${response.total_hours_sum || '0'}`);
         },

@@ -14,11 +14,16 @@ function loadcoorTableData() {
         success: function(response) {
             if (response.html) {
                 $('#coorTable tbody').html(response.html);
+            } else {
+                $('#coorTable tbody').html('<tr><td colspan="7">No data available</td></tr>');
             }
             if (response.pagination) {
                 $('#coor-pagination').html(response.pagination);
+            } else {
+                $('#coor-pagination').html('');
             }
-            $('#coor-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
+            // $('#coor-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
+            $('#coor-tableInfo').text(response.total > 0 ? `Showing ${response.start} to ${response.end} of ${response.total} entries` : 'No entries available');
         },
         error: function(xhr, status, error) {
             console.error('AJAX Error:', status, error);

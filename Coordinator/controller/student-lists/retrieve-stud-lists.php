@@ -62,31 +62,35 @@
         $result = $stmt->get_result();
 
         $html = '';
-        while ($row = $result->fetch_assoc()) {
-            $name = htmlspecialchars($row['name']) ?: '--';
-            $department = htmlspecialchars($row['department']) ?: '--';
-            $email = htmlspecialchars($row['email']) ?: '--';
-            $supervisorName = htmlspecialchars($row['supervisor_first_name'] . ' ' . $row['supervisor_last_name']) ?: '--';
-            $supervisorCompany = htmlspecialchars($row['supervisor_company']) ?: '--';
-            $supervisorAddress = htmlspecialchars($row['supervisor_company_address']) ?: '--';
-            $finalGrade = $row['final_grade'] == 0 || is_null($row['final_grade']) ? '--' : htmlspecialchars($row['final_grade']);
-
-            $html .= '<tr>';
-            $html .= "<td>{$name}</td>";
-            $html .= "<td>{$department}</td>";
-            $html .= "<td>{$email}</td>";
-            $html .= "<td>{$supervisorName}</td>";
-            $html .= "<td>{$supervisorCompany}</td>";
-            $html .= "<td>{$supervisorAddress}</td>";
-            $html .= "<td>{$finalGrade}</td>";
-            $html .= '<td>
-                        <button class="btn btn-success btn-sm open-modal-btn" data-bs-toggle="modal" 
-                            data-bs-target="#assignSupervisorModal" data-user-id="' . $row['userID'] . '">Assign
-                        </button>
-                        <button class="btn btn-primary btn-sm open-ojthours-btn" data-bs-toggle="modal" data-bs-target="#ojthoursModal" data-user-id="' . $row['userID'] . '">View Hours</button>
-                        <button class="btn btn-warning btn-sm open-evaluate-btn" onclick="evaluateStudent(' . $row['userID'] . ')">Evaluate</button>
-                    </td>';
-            $html .= '</tr>';
+        if ($result->num_rows === 0) {
+            $html = '<tr><td colspan="7">No data available</td></tr>';
+        } else {
+            while ($row = $result->fetch_assoc()) {
+                $name = htmlspecialchars($row['name']) ?: '--';
+                $department = htmlspecialchars($row['department']) ?: '--';
+                $email = htmlspecialchars($row['email']) ?: '--';
+                $supervisorName = htmlspecialchars($row['supervisor_first_name'] . ' ' . $row['supervisor_last_name']) ?: '--';
+                $supervisorCompany = htmlspecialchars($row['supervisor_company']) ?: '--';
+                $supervisorAddress = htmlspecialchars($row['supervisor_company_address']) ?: '--';
+                $finalGrade = $row['final_grade'] == 0 || is_null($row['final_grade']) ? '--' : htmlspecialchars($row['final_grade']);
+    
+                $html .= '<tr>';
+                $html .= "<td>{$name}</td>";
+                $html .= "<td>{$department}</td>";
+                $html .= "<td>{$email}</td>";
+                $html .= "<td>{$supervisorName}</td>";
+                $html .= "<td>{$supervisorCompany}</td>";
+                $html .= "<td>{$supervisorAddress}</td>";
+                $html .= "<td>{$finalGrade}</td>";
+                $html .= '<td>
+                            <button class="btn btn-success btn-sm open-modal-btn" data-bs-toggle="modal" 
+                                data-bs-target="#assignSupervisorModal" data-user-id="' . $row['userID'] . '">Assign
+                            </button>
+                            <button class="btn btn-primary btn-sm open-ojthours-btn" data-bs-toggle="modal" data-bs-target="#ojthoursModal" data-user-id="' . $row['userID'] . '">View Hours</button>
+                            <button class="btn btn-warning btn-sm open-evaluate-btn" onclick="evaluateStudent(' . $row['userID'] . ')">Evaluate</button>
+                        </td>';
+                $html .= '</tr>';
+            }
         }
 
         $countSql = "

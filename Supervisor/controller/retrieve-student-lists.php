@@ -54,38 +54,42 @@
         $result = $stmt->get_result();
 
         $html = '';
-        while ($row = $result->fetch_assoc()) {
-            $first_name = htmlspecialchars($row['first_name']) ?: '--';
-            $last_name = htmlspecialchars($row['last_name']) ?: '--';
-            $department_name = htmlspecialchars($row['department_name']) ?: '--';
-            $user_id = htmlspecialchars($row['user_id']);
-
-            $evaluationQuery = "
-                SELECT COUNT(*) AS evaluation_count
-                FROM supervisor_evaluations
-                WHERE student_id = ? AND evaluator_id = ?
-            ";
-            $evaluationStmt = $conn->prepare($evaluationQuery);
-            if (!$evaluationStmt) {
-                throw new Exception('Failed to prepare evaluation query.');
+        if ($result->num_rows === 0) {
+            $html = '<tr><td colspan="7">No data available</td></tr>';
+        } else {
+            while ($row = $result->fetch_assoc()) {
+                $first_name = htmlspecialchars($row['first_name']) ?: '--';
+                $last_name = htmlspecialchars($row['last_name']) ?: '--';
+                $department_name = htmlspecialchars($row['department_name']) ?: '--';
+                $user_id = htmlspecialchars($row['user_id']);
+    
+                $evaluationQuery = "
+                    SELECT COUNT(*) AS evaluation_count
+                    FROM supervisor_evaluations
+                    WHERE student_id = ? AND evaluator_id = ?
+                ";
+                $evaluationStmt = $conn->prepare($evaluationQuery);
+                if (!$evaluationStmt) {
+                    throw new Exception('Failed to prepare evaluation query.');
+                }
+                $evaluationStmt->bind_param('ii', $row['user_id'], $supervisorUserId);
+                $evaluationStmt->execute();
+                $evaluationResult = $evaluationStmt->get_result()->fetch_assoc();
+                $evaluationCount = $evaluationResult['evaluation_count'];
+    
+                $html .= '<tr>';
+                $html .= '<td>' . $first_name . '</td>';
+                $html .= '<td>' . $last_name . '</td>';
+                $html .= '<td>' . $department_name . '</td>';
+    
+                if ($evaluationCount > 0) {
+                    $html .= '<td><button class="btn btn-sm btn-primary" disabled>Evaluated</button></td>';
+                } else {
+                    $html .= '<td><button class="btn btn-sm btn-primary" onclick="evaluateStudent(' . $user_id . ')">Evaluate</button></td>';
+                }
+    
+                $html .= '</tr>';
             }
-            $evaluationStmt->bind_param('ii', $row['user_id'], $supervisorUserId);
-            $evaluationStmt->execute();
-            $evaluationResult = $evaluationStmt->get_result()->fetch_assoc();
-            $evaluationCount = $evaluationResult['evaluation_count'];
-
-            $html .= '<tr>';
-            $html .= '<td>' . $first_name . '</td>';
-            $html .= '<td>' . $last_name . '</td>';
-            $html .= '<td>' . $department_name . '</td>';
-
-            if ($evaluationCount > 0) {
-                $html .= '<td><button class="btn btn-sm btn-primary" disabled>Evaluated</button></td>';
-            } else {
-                $html .= '<td><button class="btn btn-sm btn-primary" onclick="evaluateStudent(' . $user_id . ')">Evaluate</button></td>';
-            }
-
-            $html .= '</tr>';
         }
 
         $totalSql = "
