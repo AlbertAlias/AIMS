@@ -176,7 +176,7 @@ $(document).ready(function () {
         if (chart) {
             chart.destroy();
         }
-        $("#users-chart").html('<div class="text-center" style="font-size: 16px; color: #999;">No Data Available</div>');
+        $("#users-chart").html('<div class="text-center" style="font-size: 16px; color: #999;">No ata Available</div>');
     }
 
     window.fetchUserAnalytics = debounce(fetchUserAnalytics, 500);
