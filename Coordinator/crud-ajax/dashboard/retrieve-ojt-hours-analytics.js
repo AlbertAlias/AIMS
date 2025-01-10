@@ -46,6 +46,15 @@ $(document).ready(function () {
         const segments = data.segments;
         const counts = data.counts;
 
+        // Check if counts are all zeros
+        const isEmpty = counts.every((count) => count === 0);
+
+        if (isEmpty) {
+            // Show "No data available" instead of the chart
+            $("#ojthours-chart").html("<div class='no-data'>No data available</div>");
+            return;
+        }
+
         const chartOptions = {
             title: {
                 text: 'OJT Hours Distribution',

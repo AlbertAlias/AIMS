@@ -48,11 +48,20 @@
         }
     }
 
-    // Return the data as JSON
-    echo json_encode([
-        'segments' => $segments,
-        'counts' => $counts
-    ]);
+    // If no data exists, still return valid JSON with zeros
+    if (array_sum($counts) === 0) {
+        echo json_encode([
+            'segments' => $segments,
+            'counts' => $counts,
+            'error' => false
+        ]);
+    } else {
+        // Return the data as JSON
+        echo json_encode([
+            'segments' => $segments,
+            'counts' => $counts
+        ]);
+    }
 
     $conn->close();
 ?>

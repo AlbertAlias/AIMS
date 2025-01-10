@@ -60,3 +60,9 @@
     height: 2rem; /* Adjust the height as needed */
     fill: #198754; /* This will set the color of the SVG to match the .card i color */
 }
+
+.no-data {
+    text-align: center;
+    font-size: 16px;
+    color: #666;
+}
