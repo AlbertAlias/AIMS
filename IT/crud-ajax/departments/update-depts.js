@@ -34,6 +34,8 @@ $('#deptUpdateBtn').click(function() {
                     $('#departmentSelect').val('');
                     $('#seeDepartmentsModal').modal('hide');
                     populateDepartmentSelect();
+                    populateDepartments();
+                    loadDepartments();
                 } else {
                     alert('Error updating department: ' + (response.message || 'Unknown error'));
                 }
@@ -122,8 +124,9 @@ $('#deptDeleteBtn').click(function () {
                     $('#additionalInput').val('').attr('readonly', true);
                     $('#departmentSelect').val('');
                     $('#seeDepartmentsModal').modal('hide');
-                    populateDepartments();
                     populateDepartmentSelect();
+                    populateDepartments();
+                    loadDepartments();
                 } else {
                     alert('Error deleting department: ' + (response.message || 'Unknown error'));
                 }
