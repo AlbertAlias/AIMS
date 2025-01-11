@@ -93,6 +93,7 @@ $(document).ready(function() {
         $('#add_department1').html('<option selected>Choose Department 1</option>');
         $('#add_department2').html('<option selected>Choose Department 2</option>');
         $('#add_department3').html('<option selected>Choose Department 3</option>');
+        populateDepartments();
         $('#deanUpdateBtn').hide();
         $('#deanCancelBtn').hide();
         $('#deanSubmitBtn').show();
@@ -174,22 +175,6 @@ $(document).ready(function() {
                         }
                     });
                 }
-            },
-            error: function(xhr, status, error) {
-                Swal.fire({
-                    toast: true,
-                    position: 'top-end',
-                    icon: 'error',
-                    title: 'An unexpected error occurred',
-                    showConfirmButton: false,
-                    timer: 2000,
-                    background: '#f8bbd0',
-                    iconColor: '#c62828',
-                    color: '#721c24',
-                    customClass: {
-                        popup: 'mt-5'
-                    }
-                });
             }
         });
     }

@@ -1,10 +1,8 @@
 <?php
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
-
     include('../../../dbconn.php');
 
-    // Query to select user_id, first_name, last_name, and departments for deans
     $query = "
         SELECT u.user_id, u.first_name, u.last_name, 
         GROUP_CONCAT(d.department_name ORDER BY d.department_name SEPARATOR ', ') AS departments
@@ -15,7 +13,6 @@
         GROUP BY u.user_id
     ";
 
-    // Prepare statement to avoid SQL injection
     $stmt = $conn->prepare($query);
     if ($stmt === false) {
         echo json_encode([
@@ -28,12 +25,11 @@
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // Check if any result is found
     if ($result->num_rows > 0) {
         $deans = [];
         while ($row = $result->fetch_assoc()) {
             $deans[] = [
-                'user_id' => $row['user_id'], // Include user_id in the response
+                'user_id' => $row['user_id'],
                 'first_name' => $row['first_name'],
                 'last_name' => $row['last_name'],
                 'departments' => $row['departments']

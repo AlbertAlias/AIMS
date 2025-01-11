@@ -2,20 +2,17 @@
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
     header('Content-Type: application/json');
-
     include('../../../dbconn.php');
 
-    // Get the POST data
     $dean_id = isset($_POST['dean_id']) ? intval($_POST['dean_id']) : 0;
     $last_name = isset($_POST['last_name']) ? $_POST['last_name'] : '';
     $first_name = isset($_POST['first_name']) ? $_POST['first_name'] : '';
     $username = isset($_POST['username']) ? $_POST['username'] : '';
-    $password = isset($_POST['password']) ? $_POST['password'] : '';  // Password may be empty
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
     $department1 = isset($_POST['department1']) ? $_POST['department1'] : '';
     $department2 = isset($_POST['department2']) ? $_POST['department2'] : '';
     $department3 = isset($_POST['department3']) ? $_POST['department3'] : '';
 
-    // Validate input data
     if ($dean_id <= 0 || empty($last_name) || empty($first_name) || empty($username)) {
         echo json_encode([
             'success' => false,
@@ -24,10 +21,8 @@
         exit;
     }
 
-    // If password is provided, hash it; if not, do not update the password field
     if (!empty($password)) {
         $passwordHash = password_hash($password, PASSWORD_BCRYPT);
-        // Update query with password
         $updateUserQuery = "
             UPDATE users 
             SET last_name = ?, first_name = ?, username = ?, password = ?
@@ -36,7 +31,6 @@
         $stmt = $conn->prepare($updateUserQuery);
         $stmt->bind_param('ssssi', $last_name, $first_name, $username, $passwordHash, $dean_id);
     } else {
-        // Update query without password (if password is empty)
         $updateUserQuery = "
             UPDATE users 
             SET last_name = ?, first_name = ?, username = ?
@@ -46,7 +40,6 @@
         $stmt->bind_param('sssi', $last_name, $first_name, $username, $dean_id);
     }
 
-    // Prepare and execute the update query
     if ($stmt === false) {
         echo json_encode([
             'success' => false,
@@ -63,7 +56,6 @@
         exit;
     }
 
-    // Delete existing departments from the dean_department table
     $deleteDepartmentsQuery = "
         DELETE FROM dean_department WHERE dean_id = ?
     ";
@@ -85,7 +77,6 @@
         exit;
     }
 
-    // Insert new departments for the dean
     $departments = array_filter([$department1, $department2, $department3]);
     $insertDepartmentsQuery = "
         INSERT INTO dean_department (dean_id, department_id)
