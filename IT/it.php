@@ -139,5 +139,8 @@
     <script src="crud-ajax/profile/update-users-info.js"></script>
     <script src="functions/profile/profile-details.js"></script>
     <!--END::PROFILE FUNCTION-->
+    <!-- START::ARCHIVE FUNCTION -->
+    <script src="crud-ajax/masterlists/archive-users.js"></script>
+    <!-- END::ARCHIVE FUNCTION -->
 </body>
 </html>
