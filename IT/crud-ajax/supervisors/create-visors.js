@@ -15,7 +15,14 @@ $(document).ready(function () {
         };
 
         let emptyField = false;
-        for (const field in formData) {
+
+        // Check required fields for emptiness
+        const requiredFields = [
+            'visor_last_name', 'visor_first_name', 'visor_gender', 'visor_personal_email', 
+            'visor_company_name', 'visor_company_address', 'visor_username', 'visor_password'
+        ];
+
+        for (const field of requiredFields) {
             if (formData[field] === "") {
                 emptyField = true;
                 break;
