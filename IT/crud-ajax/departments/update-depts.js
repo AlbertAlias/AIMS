@@ -122,7 +122,7 @@ $('#deptDeleteBtn').click(function () {
                     $('#additionalInput').val('').attr('readonly', true);
                     $('#departmentSelect').val('');
                     $('#seeDepartmentsModal').modal('hide');
-
+                    populateDepartments();
                     populateDepartmentSelect();
                 } else {
                     alert('Error deleting department: ' + (response.message || 'Unknown error'));
