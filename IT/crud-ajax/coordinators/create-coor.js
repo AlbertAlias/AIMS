@@ -3,17 +3,17 @@ $(document).ready(function () {
         event.preventDefault();
 
         const formData = {
-            coor_last_name: $("#coor_last_name").val(),
-            coor_first_name: $("#coor_first_name").val(),
-            coor_personal_email: $("#coor_personal_email").val(),
-            coor_department: $("#coor_department").val(),
-            coor_username: $("#coor_username").val(),
-            coor_password: $("#coor_password").val(),
+            last_name: $("#coor_last_name").val(),
+            first_name: $("#coor_first_name").val(),
+            personal_email: $("#coor_personal_email").val(),
+            department_id: $("#coor_department").val(),
+            username: $("#coor_username").val(),
+            password: $("#coor_password").val()
         };
 
         let emptyField = false;
         for (const field in formData) {
-            if (formData[field] === "") {
+            if (formData[field] === "" || formData[field] === "Choose Department") {
                 emptyField = true;
                 break;
             }
@@ -40,7 +40,8 @@ $(document).ready(function () {
         $.ajax({
             url: 'controller/coordinators/create-coor.php',
             type: 'POST',
-            data: formData,
+            data: JSON.stringify(formData),
+            contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function (response) {
                 console.log(response);

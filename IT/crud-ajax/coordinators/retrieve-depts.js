@@ -5,6 +5,8 @@ window.loadDepartments = function (excludeDeptId) {
         dataType: 'json',
         success: function (response) {
             const $select = $('#coor_department');
+            $select.empty(); // Clear existing options
+            $select.append('<option selected>Choose Department</option>'); // Add default option
 
             if (response.success && response.data.length > 0) {
                 response.data.forEach(function (department) {

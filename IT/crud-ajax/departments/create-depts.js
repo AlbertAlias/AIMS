@@ -47,6 +47,7 @@ $(document).ready(function () {
 
                     $("#department_name").val("");
                     populateDepartments();
+                    loadDepartments();
                     populateDepartmentSelect()
                 } else {
                     Swal.fire({
