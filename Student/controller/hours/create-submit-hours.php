@@ -19,8 +19,8 @@
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
     // File validation
-    if ($_FILES["ojtfile"]["size"] > 10000000) {  // 10 MB
-        echo json_encode(['error' => "Sorry, your file is too large."]);
+    if ($_FILES["ojtfile"]["size"] > 5000000) {  // 5 MB
+        echo json_encode(['error' => "Sorry, your file is too large. Maximum size is 5MB."]);
         exit();
     }
 
