@@ -33,7 +33,7 @@ document.getElementById('submitHoursButton').addEventListener('click', function 
     formData.append('totalHours', totalHours);
     formData.append('ojtfile', ojtfile);
 
-    fetch('controller/hours/submit_hours.php', {
+    fetch('controller/hours/create-submit-hours.php', {
         method: 'POST',
         body: formData
     })
@@ -48,6 +48,7 @@ document.getElementById('submitHoursButton').addEventListener('click', function 
             document.getElementById('totalHoursInput').value = '';
             document.getElementById('ojtfile').value = '';
             document.getElementById('submitHoursButton').disabled = true;
+            loadOjtHoursData();
         } else {
             alert(data.error);
         }

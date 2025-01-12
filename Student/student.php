@@ -96,7 +96,7 @@
     <!--END::REQUIREMENT AJAX-->
 
     <!--START::HOURS AJAX-->
-    <script src="crud-ajax/hours/submit_hours.js"></script>
+    <script src="crud-ajax/hours/create-submit-hours.js"></script>
     <script src="crud-ajax/hours/retrieve-ojthours.js"></script>
     <script src="function/hours/total-ojthours-inputs.js"></script>
     <!--END::HOURS AJAX-->
