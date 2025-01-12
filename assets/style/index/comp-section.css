@@ -42,3 +42,22 @@
     display: flex;
     align-items: center;
 }
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    .swiper-slide img {
+        height: 50px; /* Adjust logo height for medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .swiper-slide img {
+        height: 40px; /* Adjust logo height for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .swiper-slide img {
+        height: 30px; /* Smaller logo height for very small screens */
+    }
+}
