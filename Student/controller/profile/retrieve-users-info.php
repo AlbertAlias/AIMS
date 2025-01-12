@@ -40,7 +40,7 @@
     $stmt = $conn->prepare("
         SELECT 
             u.last_name, u.first_name, u.middle_name, u.address, u.gender, u.email, u.username,
-            ss.company, u.company_address, CONCAT(s.first_name, ' ', s.last_name) AS supervisor
+            ss.company, s.company_address, CONCAT(s.first_name, ' ', s.last_name) AS supervisor
         FROM users u
         LEFT JOIN student_supervisor ss ON u.user_id = ss.student_id
         LEFT JOIN users s ON ss.supervisor_id = s.user_id
@@ -58,7 +58,7 @@
     if ($stmt->num_rows > 0) {
         $stmt->bind_result(
             $last_name, $first_name, $middle_name, $address, $gender, $email, $username,
-            $company, $company_address, $supervisor
+            $company, $supervisor_company_address, $supervisor
         );
         $stmt->fetch();
 
@@ -76,7 +76,7 @@
             'email' => $email,
             'username' => $username,
             'company' => $company,
-            'company_address' => $company_address,
+            'company_address' => $supervisor_company_address,
             'supervisor' => $supervisor
         ]);
     } else {
