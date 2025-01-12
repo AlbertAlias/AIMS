@@ -12,7 +12,6 @@ $(document).ready(function () {
                     data.requirements.forEach(function (requirement) {
                         const formattedDeadline = formatDate(requirement.deadline);
                         const formattedCreatedAt = formatDate(requirement.created_at);
-                        const isDeadlinePassed = new Date(requirement.deadline) < new Date();
 
                         const requirementHTML = `
                         <div class="requirement-post mb-3" data-id="${requirement.requirement_id}">
@@ -48,7 +47,6 @@ $(document).ready(function () {
                             <div class="toggle-switch">
                                 <input type="checkbox" id="toggleSwitch${requirement.requirement_id}" class="toggle-input" 
                                     ${requirement.status === 'closed' ? 'checked' : ''} 
-                                    ${isDeadlinePassed ? 'disabled' : ''} 
                                     data-deadline="${requirement.deadline}">
                                 <label for="toggleSwitch${requirement.requirement_id}" class="toggle-label">
                                     <svg class="open-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -71,30 +69,6 @@ $(document).ready(function () {
         const date = new Date(dateString);
         return date.toLocaleDateString("en-US", { month: 'short', day: 'numeric', year: 'numeric' });
     }
-
-    $(document).on("click", ".toggle-switch", function (e) {
-        const checkbox = $(this).find(".toggle-input");
-        const deadline = new Date(checkbox.data("deadline"));
-        const now = new Date();
-    
-        if (deadline < now) {
-            e.preventDefault();
-            Swal.fire({
-                toast: true,
-                position: 'top-right',
-                icon: 'warning',
-                title: 'Deadline has passed. You can edit it instead.',
-                showConfirmButton: false,
-                timer: 3000,
-                background: '#ffcccb',
-                iconColor: '#d32f2f',
-                color: '#721c24',
-                customClass: {
-                    popup: 'mt-5'
-                }
-            });
-        }
-    });
     
 
     $(document).on("change", ".toggle-input:not(:disabled)", function () {

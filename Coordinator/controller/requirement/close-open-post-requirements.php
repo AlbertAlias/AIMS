@@ -14,33 +14,27 @@
             exit();
         }
 
-        $sql = "SELECT deadline FROM requirements WHERE requirement_id = ?";
+        // No need to check the deadline anymore
+        $sql = "SELECT * FROM requirements WHERE requirement_id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $requirement_id);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $deadline = $row['deadline'];
+            // Requirement found, now we proceed to update its status
+            $sql = "UPDATE requirements SET status = ? WHERE requirement_id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("si", $status, $requirement_id);
 
-            if (new DateTime() > new DateTime($deadline)) {
-                echo json_encode(['success' => false, 'error' => 'Cannot change status after the deadline.']);
-                exit();
+            if ($stmt->execute()) {
+                echo json_encode(['success' => true]);
+            } else {
+                echo json_encode(['success' => false, 'error' => 'Failed to update status']);
             }
         } else {
             echo json_encode(['success' => false, 'error' => 'Requirement not found']);
             exit();
-        }
-
-        $sql = "UPDATE requirements SET status = ? WHERE requirement_id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("si", $status, $requirement_id);
-
-        if ($stmt->execute()) {
-            echo json_encode(['success' => true]);
-        } else {
-            echo json_encode(['success' => false, 'error' => 'Failed to update status']);
         }
     }
 ?>
