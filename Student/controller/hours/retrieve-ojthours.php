@@ -6,6 +6,24 @@
         session_start();
         $student_id = $_SESSION['user_id'];
 
+        if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+            parse_str(file_get_contents('php://input'), $data);
+            $id = intval($data['id']);
+
+            $deleteSql = "DELETE FROM ojt_hours WHERE id = ?";
+            $deleteStmt = $conn->prepare($deleteSql);
+            $deleteStmt->bind_param('i', $id);
+
+            if ($deleteStmt->execute()) {
+                echo json_encode(['success' => true, 'message' => 'Record deleted successfully.']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Failed to delete record.']);
+            }
+
+            $deleteStmt->close();
+            exit;
+        }
+
         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
         $length = isset($_GET['length']) ? intval($_GET['length']) : 10;
         $search = isset($_GET['search']) ? $_GET['search'] : '';
@@ -14,6 +32,7 @@
 
         $sql = "
         SELECT 
+            ojt_hours.id,
             ojt_hours.morning_start,
             ojt_hours.lunch_start,
             ojt_hours.lunch_end,
@@ -49,15 +68,15 @@
                 $lunchEnd = htmlspecialchars($row['lunch_end']) ?: '--';
                 $afternoonEnd = htmlspecialchars($row['afternoon_end']) ?: '--';
                 $totalHours = htmlspecialchars($row['total_hours']) ?: '--';
-
+    
                 $morningStart = formatTime($morningStart);
                 $lunchStart = formatTime($lunchStart);
                 $lunchEnd = formatTime($lunchEnd);
                 $afternoonEnd = formatTime($afternoonEnd);
                 $totalHours = formatTotalHours($totalHours);
-
+    
                 $filePath = htmlspecialchars($row['file_path']) ? '/AIMS/Student/controller/hours/uploads/' . basename($row['file_path']) : '--';
-
+    
                 $submissionDate = htmlspecialchars($row['submission_date']) ?: '--';
                 if ($submissionDate !== '--') {
                     $timestamp = strtotime($submissionDate);
@@ -65,11 +84,11 @@
                     $day = date('j', $timestamp);
                     $year = date('Y', $timestamp);
                     $time = date('g:i A', $timestamp);
-
+    
                     $yearDisplay = ($year == $currentYear) ? '' : ' ' . $year;
                     $submissionDate = $month . ' ' . $day . $yearDisplay . ' ' . $time;
                 }
-
+    
                 $html .= '<tr>';
                 $html .= '<td>' . $submissionDate . '</td>';
                 $html .= '<td>' . $morningStart . '</td>';
@@ -83,6 +102,9 @@
                 } else {
                     $html .= '--';
                 }
+                $html .= '</td>';
+                $html .= '<td>';
+                $html .= '<button class="btn btn-sm btn-danger delete-button" data-id="' . htmlspecialchars($row['id']) . '">Delete</button>';
                 $html .= '</td>';
                 $html .= '</tr>';
             }

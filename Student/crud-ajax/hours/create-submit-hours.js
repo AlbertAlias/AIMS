@@ -4,7 +4,6 @@ document.getElementById('submitHoursButton').addEventListener('click', function 
     const ojtfile = document.getElementById('ojtfile').files[0];
 
     if (ojtfile) {
-        // Check file size (5MB max)
         if (ojtfile.size > 5000000) {  // 5 MB
             Swal.fire({
                 toast: true,
@@ -23,7 +22,6 @@ document.getElementById('submitHoursButton').addEventListener('click', function 
             return;
         }
 
-        // Check file type
         const fileType = ojtfile.type;
         if (!["application/pdf", "image/jpeg", "image/png"].includes(fileType)) {
             Swal.fire({
@@ -44,7 +42,6 @@ document.getElementById('submitHoursButton').addEventListener('click', function 
         }
     }
 
-    // Proceed with form submission
     const morningStart = document.getElementById('morningStartInput').value;
     const lunchStart = document.getElementById('lunchBreakStartInput').value;
     const lunchEnd = document.getElementById('lunchBreakEndInput').value;
@@ -66,7 +63,6 @@ document.getElementById('submitHoursButton').addEventListener('click', function 
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            // Show SweetAlert success message
             Swal.fire({
                 toast: true,
                 position: 'top-right',
@@ -82,15 +78,12 @@ document.getElementById('submitHoursButton').addEventListener('click', function 
                 }
             });
 
-            // Reset inputs
             document.getElementById('morningStartInput').value = '';
             document.getElementById('lunchBreakStartInput').value = '';
             document.getElementById('lunchBreakEndInput').value = '';
             document.getElementById('afternoonEndInput').value = '';
             document.getElementById('totalHoursInput').value = '';
             document.getElementById('ojtfile').value = '';
-
-            // Hide fields and reset button state
             document.getElementById('lunchStartContainer').style.display = 'none';
             document.getElementById('lunchEndContainer').style.display = 'none';
             document.getElementById('afternoonEndContainer').style.display = 'none';
