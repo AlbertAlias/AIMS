@@ -22,12 +22,10 @@ header("Pragma: no-cache");
 </head>
 <body>
 
-    <!-- Login Container -->
     <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
         <div class="row w-100">
             <div class="col-md-6 col-lg-4 offset-md-3 offset-lg-4">
                 <div class="login-box">
-                    <!-- Logo -->
                     <img src="../assets/img/esyatek-logo.png" alt="Esyatek Logo" class="logo img-fluid">
 
                     <!-- Login Form -->

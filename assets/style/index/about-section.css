@@ -4,7 +4,8 @@
     align-items: center;
     gap: 20px;
     padding: 50px 20px;
-    height: 160vh;
+    min-height: 100vh;
+    width: 100%;
 }
 
 .feature {
@@ -64,6 +65,11 @@
 
 /* Media Query for smaller screens */
 @media screen and (max-width: 768px) {
+    .about-section {
+        padding: 40px 15px;
+        min-height: auto; /* Allow the section to grow */
+    }
+
     .feature {
         flex-direction: column;
         text-align: center;
@@ -86,6 +92,10 @@
     .icon, .icon1 {
         width: 80%;
     }
+
+    .icon-container {
+        padding: 15px;
+    }
 }
 
 /* Media Query for very small screens */
@@ -106,5 +116,10 @@
     .about-section {
         padding: 30px 10px;
         gap: 15px;
+        min-height: auto; /* Let the section grow to fit content */
+    }
+
+    .text-container {
+        padding: 10px;
     }
 }

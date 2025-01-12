@@ -139,7 +139,7 @@
     </section>
 
     <!-- ABOUT SECTION -->
-    <section class="about-section p-0 m-0" id="about">
+    <section class="about-section" id="about">
         <div class="feature feature-left">
             <div class="text-container">
                 <h2>Introduction</h2>
@@ -248,7 +248,7 @@
                 </div>
 
                 <!-- Team Member 3 -->
-                <div class="col-12 col-md-4 mb-4">
+                <!-- <div class="col-12 col-md-4 mb-4">
                     <div class="team-member">
                         <img src="assets/img/index/george.jpg" alt="" class="img-fluid rounded-circle">
                     </div>
@@ -273,7 +273,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>

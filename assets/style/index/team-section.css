@@ -23,7 +23,6 @@
 
 .team-member:hover {
     transform: translateY(-10px);
-    /* border-color: #0000001a; */
     border-color: #198754b5;
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
@@ -53,9 +52,13 @@
 
 /* Responsive columns */
 @media (max-width: 767px) {
+    .container {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
     .team-member {
-        width: 80px;  /* Smaller size for smaller screens */
-        height: 80px;  /* Smaller size for smaller screens */
+        width: 130px;  /* Slightly smaller size for mobile screens */
+        height: 130px;  /* Slightly smaller size for mobile screens */
     }
 
     .text-center h3 {
@@ -64,6 +67,16 @@
 
     .text-center p {
         font-size: 1rem;  /* Adjust text size for smaller screens */
+    }
+
+    /* Responsive adjustments for social icons */
+    .social-icons {
+        gap: 10px;  /* Reduce space between icons on mobile */
+    }
+
+    .social-icons .icon {
+        width: 30px;  /* Smaller icon size for mobile */
+        height: 30px;
     }
 }
 

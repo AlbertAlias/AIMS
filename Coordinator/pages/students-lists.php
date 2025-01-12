@@ -39,7 +39,7 @@
                             <th>Supervisor</th>
                             <th>Company</th>
                             <th>Company Address</th>
-                            <th>finalGrade</th>
+                            <th>Final Grade</th>
                             <th>Actions</th>
                         </tr>
                     </thead>

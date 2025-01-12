@@ -77,6 +77,7 @@
                                     <th>Afternoon End</th>
                                     <th>Total Hours</th>
                                     <th>File</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody id="tdata">

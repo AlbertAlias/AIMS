@@ -48,7 +48,14 @@ function calculateTotalHours() {
     if (totalMinutes > 0) {
         const hours = Math.floor(totalMinutes / 60);
         const minutes = totalMinutes % 60;
-        totalHoursInput.value = `${hours} hour(s) and ${minutes} minute(s)`;
+        
+        // Update display logic
+        if (minutes === 0) {
+            totalHoursInput.value = `${hours} hours`;
+        } else {
+            totalHoursInput.value = `${hours} hours and ${minutes} minutes`;
+        }
+
         submitButton.disabled = false;
     } else {
         totalHoursInput.value = '';
