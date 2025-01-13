@@ -34,7 +34,7 @@
     </section>
 
     <!-- DEPARTMENT SECTION -->
-    <section class="dept-section p-0 m-0" id="department">
+    <!-- <section class="dept-section p-0 m-0" id="department">
         <div class="row">
             <div class="card-container col-12">
                 <div class="card">
@@ -91,6 +91,13 @@
                         <div class="card-back" style="background-color: maroon;"></div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section> -->
+
+    <section class="dept-section p-0 m-0" id="department">
+        <div class="row">
+            <div class="card-container col-12" id="department-cards">
             </div>
         </div>
     </section>
@@ -284,8 +291,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
-    <script src="functions/landing-header.js"></script>
     <script src="functions/dept-card.js"></script>
+    <script src="crud-ajax/retrieve-dept-img.js"></script>
+
+    <script src="functions/landing-header.js"></script>
     <script src="functions/comp-card-logo.js"></script>
     <script src="functions/about-carousel-info.js"></script>
 </body>

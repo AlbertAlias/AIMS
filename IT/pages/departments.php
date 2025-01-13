@@ -21,10 +21,14 @@
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-2">Add Department</h5>
                 <form id="addDepartmentForm">
                     <div class="row mb-2">
-                        <div class="col-12 col-md-12">
+                        <div class="col-12 col-md-6">
                             <input type="hidden" id="deptID" name="id">
                             <label for="department_name" class="form-label">Department Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" id="department_name" name="department_name" required aria-describedby="departmentHelp">
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="department_image" class="form-label">Department Image</label>
+                            <input type="file" class="form-control" id="department_image" name="department_image" accept="image/*">
                         </div>
                     </div>
                     <button type="submit" id="deptSubmitBtn" class="btn btn-success me-1">

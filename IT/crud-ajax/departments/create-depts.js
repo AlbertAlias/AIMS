@@ -1,6 +1,8 @@
 $(document).ready(function () {
     $("#deptSubmitBtn").on("click", function (e) {
         e.preventDefault();
+        const form = $("#addDepartmentForm")[0];
+        const formData = new FormData(form);
         const departmentName = $("#department_name").val();
 
         if (!departmentName) {
@@ -24,9 +26,9 @@ $(document).ready(function () {
         $.ajax({
             url: "controller/departments/create-depts.php",
             type: "POST",
-            data: {
-                department_name: departmentName
-            },
+            data: formData, // Send the FormData object for file handling
+            processData: false, // Do not process the data
+            contentType: false, // Do not set content type
             dataType: "json",
             success: function (response) {
                 if (response.success) {
@@ -44,11 +46,10 @@ $(document).ready(function () {
                             popup: 'mt-5'
                         }
                     });
-
-                    $("#department_name").val("");
-                    populateDepartments();
-                    loadDepartments();
-                    populateDepartmentSelect()
+                    $("#addDepartmentForm")[0].reset();
+                    populateDepartments(); // If you have a function to update the department list
+                    loadDepartments(); // If you have a function to load departments dynamically
+                    populateDepartmentSelect() // If you want to populate a select dropdown with the new department
                 } else {
                     Swal.fire({
                         toast: true,
