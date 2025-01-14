@@ -1,17 +1,11 @@
 .dept-section {
     height: 100vh;
-    /* background-color: #e0d5d5be; */
     background-color: #e0e0e0;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     position: relative;
-}
-
-.row {
-    /* background-color: green; */
-    overflow: visible;
 }
 
 .card-container {
@@ -27,24 +21,25 @@
     margin-top: 50px;
     height: 470px !important;
     width: 350px !important;
-    background-color: transparent !important; /* Ensure transparency */
-    border: none !important; /* Remove borders */
-    box-shadow: none !important; /* Remove any default shadows */
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
     perspective: 1000px;
     overflow: visible;
     display: none;
-    position: absolute; /* Position cards absolutely */
-    transition: transform 0.5s ease, opacity 0.5s ease; /* Smooth movement and fading */
+    position: absolute;
+    transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
 .card.active {
     height: 480px !important;
     width: 350px !important;
-    transform: translateX(0) scale(1.1); /* Centered and slightly larger */
-    z-index: 2; /* Make sure it's above other cards */
+    transform: translateX(0) scale(1.1);
+    z-index: 2;
     opacity: 1;
     border-radius: 10px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .card-inner {
@@ -54,16 +49,14 @@
     transform-style: preserve-3d;
     transition: transform 0.6s ease;
     border-radius: 10px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .card.flipped .card-inner {
-    transform: rotateY(180deg); /* Flips the card */
-    border-radius: 10px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    transform: rotateY(180deg);
 }
 
-/* Front and Back faces */
 .card-front,
 .card-back {
     position: absolute;
@@ -71,46 +64,40 @@
     height: 100%;
     backface-visibility: hidden;
     border-radius: 10px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
-/* Front of the card with image */
 .card-front {
     background-size: cover;
     background-position: center;
 }
 
-/* Back of the card with color */
 .card-back {
-    transform: rotateY(180deg); /* Make the back face initially hidden */
-    background-size: cover; /* Ensure full background fills back */
+    transform: rotateY(180deg);
 }
 
-/* Cards to the left of the active card */
 .card.left {
-    transform: translateX(-30%) scale(0.9); /* Move left and scale down slightly */
+    transform: translateX(-30%) scale(0.9);
     z-index: 1;
     opacity: 1;
     border-radius: 10px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
-/* Cards to the right of the active card */
 .card.right {
-    transform: translateX(30%) scale(0.9); /* Move right and scale down slightly */
+    transform: translateX(30%) scale(0.9);
     z-index: 1;
     opacity: 1;
     border-radius: 10px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
-/* Hide cards smoothly */
 .card:not(.active):not(.left):not(.right) {
     opacity: 0;
-    transform: translateX(0) scale(0.8); /* Keep hidden cards small and out of view */
+    transform: translateX(0) scale(0.8);
 }
 
-/* Mobile responsiveness */
 @media (max-width: 768px) {
     .card-container {
         flex-wrap: wrap;
@@ -133,7 +120,8 @@
         z-index: 1;
         opacity: 1;
         border-radius: 8px;
-        box-shadow: rgba(60, 64, 67, 0.2) 0px 1px 2px 0px, rgba(60, 64, 67, 0.1) 0px 2px 6px 2px;
+        box-shadow: rgba(60, 64, 67, 0.2) 0px 1px 2px 0px,
+            rgba(60, 64, 67, 0.1) 0px 2px 6px 2px;
     }
 }
 
@@ -144,13 +132,13 @@
     }
 
     .card {
-        height: 250px !important;
-        width: 180px !important;
+        height: 200px !important;
+        width: 165px !important;
     }
 
     .card.active {
-        height: 270px !important;
-        width: 180px !important;
+        height: 220px !important;
+        width: 165px !important;
     }
 
     .card.left,
@@ -159,6 +147,7 @@
         z-index: 1;
         opacity: 1;
         border-radius: 6px;
-        box-shadow: rgba(60, 64, 67, 0.2) 0px 1px 2px 0px, rgba(60, 64, 67, 0.1) 0px 2px 6px 2px;
+        box-shadow: rgba(60, 64, 67, 0.2) 0px 1px 2px 0px,
+            rgba(60, 64, 67, 0.1) 0px 2px 6px 2px;
     }
 }
