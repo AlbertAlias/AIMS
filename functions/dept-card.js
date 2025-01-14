@@ -40,14 +40,14 @@ const handleSeamlessLoop = () => {
             cardContainer.style.transition = 'none'; // Disable animation
             activeIndex = 1; // Jump to the first real card
             updateCards();
-        }, 500); // Wait for the transition to complete
+        }, 1000); // Wait for the transition to complete
     } else if (activeIndex === 0) {
         // If at the first card, jump to the cloned last card
         setTimeout(() => {
             cardContainer.style.transition = 'none'; // Disable animation
             activeIndex = cards.length - 2; // Jump to the last real card
             updateCards();
-        }, 500); // Wait for the transition to complete
+        }, 1000); // Wait for the transition to complete
     }
 };
 
@@ -57,7 +57,7 @@ const startCarousel = () => {
         activeIndex = (activeIndex + 1) % cards.length; // Increment index
         updateCards();
         handleSeamlessLoop();
-    }, 3000); // 3 seconds interval
+    }, 4000); // 4 seconds interval
 };
 
 // Function to load cards and initialize the carousel
