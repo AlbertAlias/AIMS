@@ -122,8 +122,13 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="additionalInput" class="form-label">Edit Department</label>
-                    <input type="text" id="additionalInput" class="form-control" readonly>
+                    <label for="department_name" class="form-label">Edit Department</label>
+                    <input type="text" id="update_department_name" class="form-control" readonly>
+                </div>
+                <div class="mb-3">
+                    <label for="department_image" class="form-label">Department Image</label>
+                    <input type="file" class="form-control" id="update_department_image" name="department_image" accept="image/*">
+                    <div id="currentImageName" class="alert alert-info mt-2" role="alert" style="display: none;"></div>
                 </div>
                 <button type="button" id="deptUpdateBtn" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
