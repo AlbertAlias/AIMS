@@ -1,22 +1,23 @@
 $(document).ready(function() {
-    window.loadDeans = function() {
+    window.loadDeans = function (searchQuery = '') {
         $.ajax({
             url: 'controller/departments/retrieve-deans.php',
             method: 'GET',
+            data: { search: searchQuery }, // Pass the search query
             dataType: 'json',
-            success: function(response) {
-                console.log(response);
+            success: function (response) {
                 if (response.success) {
                     window.deans = response.deans;
                     updateDeanList(window.deans);
                 } else {
+                    console.warn('No deans found. Displaying empty list.');
                     updateDeanList([], response.message);
                 }
             },
-            error: function(xhr, status, error) {
-                console.error("AJAX Error: ", status, error);
-                updateDeanList([], "Failed to load deans. Please try again later.");
-            }
+            error: function (xhr, status, error) {
+                console.error('Failed to load deans:', error);
+                console.error('Response Text:', xhr.responseText); 
+            },
         });
     };
 
@@ -26,9 +27,11 @@ $(document).ready(function() {
     
         if (message) {
             deanInfo.append(`<div class="text-danger">${message}</div>`);
+            return;
         }
     
-        const limitedDeans = deans.slice(0, 10);
+        const limitedDeans = deans.slice(0, 10); // Limit the list to 10 deans
+    
         if (limitedDeans.length === 0) {
             deanInfo.append(`
                 <div class="text-center">
@@ -49,7 +52,8 @@ $(document).ready(function() {
             deanInfo.append(deanButton);
         });
     
-        $('.dean-btn').on('click', function() {
+        // Bind click event to dean buttons
+        $('.dean-btn').on('click', function () {
             const deanId = $(this).data('id');
             fetchDeanDetails(deanId);
         });
@@ -188,6 +192,12 @@ $(document).ready(function() {
             }
         });
     }
+
+    // Implementing the search functionality
+    $('#searchDepartments').on('input', function () {
+        const searchQuery = $(this).val().toLowerCase();
+        loadDeans(searchQuery); // Pass search query to loadDeans function
+    });
 
     loadDeans(); 
     window.refreshDeanList = loadDeans;
