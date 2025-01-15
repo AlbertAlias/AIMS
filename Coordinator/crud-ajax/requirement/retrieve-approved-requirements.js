@@ -7,7 +7,7 @@ $(document).ready(function () {
             method: 'GET',
             dataType: 'json',
             success: function (response) {
-                if (response.status === 'success') {
+                if (response.status === 'success' && response.data.length > 0) {
                     let requirements = response.data;
                     let options = '<option value="" selected>All Requirements</option>';
             
@@ -17,14 +17,16 @@ $(document).ready(function () {
             
                     $('#completedSelectOption').html(options);
                 } else {
-                    $('#completedSelectOption').html('<option disabled>No open requirements found.</option>');
+                    // When no data is found
+                    $('#completedSelectOption').html('<option disabled selected>No requirements found.</option>');
                 }
             },
             error: function () {
-                $('#completedSelectOption').html('<option disabled>Error fetching requirements.</option>');
+                $('#completedSelectOption').html('<option disabled selected>Error fetching requirements.</option>');
             }
         });
     }
+    
 
     function formatSubmissionDate(submissionDate) {
         const date = new Date(submissionDate);

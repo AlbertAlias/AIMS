@@ -56,12 +56,18 @@
     pointer-events: none;
 }
 
-button.btn.btn-outline-secondary.btn-sm .table-icon {
+.btn .table-icon {
+    width: 15px;
+    height: 15px;
+    margin-bottom: 3px;
+}
+
+/* button.btn.btn-outline-secondary.btn-sm .table-icon {
     width: 18px;
     height: 18px;
     padding-bottom: 3px;
     fill: #198754;
-}
+} */
 
 .ojthoursModal {
     display: none;
