@@ -10,7 +10,6 @@ $(document).on('click', '.open-ojthours-btn', function() {
     }
 });
 
-
 function loadOjtHoursData(userId) {
     $.ajax({
         url: 'controller/student-lists/retrieve-stud-ojthours.php',
@@ -23,22 +22,32 @@ function loadOjtHoursData(userId) {
             search: $('#ojthours-searchInput').val()
         },
         success: function(response) {
-            if (response.error) {
-                alert(response.error);
-                return;
+            // Check if response contains HTML for table body
+            if (response.html && response.html.trim() !== "") {
+                $('#ojthours tbody').html(response.html);  // Update table with retrieved HTML
+            } else {
+                $('#ojthours tbody').html('<tr><td colspan="7" class="text-center">No data available</td></tr>');  // Display "No data available"
             }
-            if (response.html) {
-                $('#ojthours tbody').html(response.html);
-            }
-            if (response.pagination) {
-                $('#ojthours-pagination').html(response.pagination);
-            }
-            $('#ojthours-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
 
+            // Check if pagination exists and update it
+            if (response.pagination && response.pagination.trim() !== "") {
+                $('#ojthours-pagination').html(response.pagination);  // Update pagination
+            } else {
+                $('#ojthours-pagination').html('');  // Clear pagination if no pagination data
+            }
+
+            // Update the table information (total records, etc.)
+            if (response.total && response.total > 0) {
+                $('#ojthours-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
+            } else {
+                $('#ojthours-tableInfo').text('No entries available');
+            }
+
+            // Optional: Display total rendered hours if available
             // $('#totalHoursDisplay').text(`Rendered Hours: ${response.total_hours_sum || '0'}`);
         },
         error: function(xhr, status, error) {
-            console.error('AJAX Error:', status, error);
+            console.error('AJAX Error:', status, error);  // Log AJAX error
         }
     });
 }

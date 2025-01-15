@@ -7,21 +7,21 @@ $(document).ready(function () {
             method: 'GET',
             dataType: 'json',
             success: function (response) {
-                if (response.status === 'success') {
-                    let requirements = response.data;
-                    let options = '<option value="" selected>All Requirements</option>';
-            
-                    requirements.forEach(function (requirement) {
+                let options = '';
+                if (response.status === 'success' && response.data.length > 0) {
+                    options += '<option value="" selected>All Requirements</option>';
+                    response.data.forEach(function (requirement) {
                         options += `<option value="${requirement.requirement_id}">${requirement.title}</option>`;
                     });
-            
-                    $('#pendingSelectOption').html(options);
                 } else {
-                    $('#pendingSelectOption').html('<option disabled>No open requirements found.</option>');
+                    // If no requirements, show a placeholder option
+                    options = '<option value="" disabled selected>No requirements available</option>';
                 }
+                $('#pendingSelectOption').html(options);
             },
             error: function () {
-                $('#pendingSelectOption').html('<option disabled>Error fetching requirements.</option>');
+                // In case of an error fetching requirements
+                $('#pendingSelectOption').html('<option value="" disabled selected>Error fetching requirements</option>');
             }
         });
     }
