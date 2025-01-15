@@ -298,6 +298,31 @@ if (isset($_POST['delete_user_id'])) {
         $stmt->bind_param("i", $userIdToDelete);
         $stmt->execute();
 
+        // Archive only student_id, document_name, and file_path
+        $stmt = $conn->prepare("
+            INSERT IGNORE INTO archive_db.submit_requirements (student_id, document_name, file_path)
+            SELECT student_id, document_name, file_path
+            FROM aims_db.submit_requirements
+            WHERE student_id = ?
+        ");
+        $stmt->bind_param("i", $userIdToDelete);
+        $stmt->execute();
+
+        // Step 2: Delete submit_requirements for the student_id from aims_db
+        $stmt = $conn->prepare("DELETE FROM aims_db.submit_requirements WHERE student_id = ?");
+        $stmt->bind_param("i", $userIdToDelete);
+        $stmt->execute();
+
+        // Step 3: Optionally delete requirements if necessary (adjust query as needed)
+        $stmt = $conn->prepare("
+            DELETE FROM aims_db.requirements
+            WHERE requirement_id IN (
+                SELECT DISTINCT requirement_id FROM aims_db.submit_requirements WHERE student_id = ?
+            )
+        ");
+        $stmt->bind_param("i", $userIdToDelete);
+        $stmt->execute();
+
         // Now delete related coordinator evaluations from aims_db before deleting the user
         $stmt = $conn->prepare("DELETE FROM aims_db.coordinator_evaluations WHERE evaluator_id = ? OR student_id = ?");
         $stmt->bind_param("ii", $userIdToDelete, $userIdToDelete);
