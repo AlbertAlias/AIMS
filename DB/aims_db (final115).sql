@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2025 at 02:38 PM
+-- Generation Time: Jan 09, 2025 at 09:30 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -62,6 +62,13 @@ CREATE TABLE `coordinator_evaluations` (
   `evaluator_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `coordinator_evaluations`
+--
+
+INSERT INTO `coordinator_evaluations` (`id`, `student_id`, `total_grade`, `comments`, `evaluation_date`, `evaluator_id`) VALUES
+(33, 1197, 70.00, 'try', '2025-01-09 08:29:24', 484);
+
 -- --------------------------------------------------------
 
 --
@@ -96,26 +103,25 @@ INSERT INTO `dean_department` (`dean_id`, `department_id`) VALUES
 
 CREATE TABLE `department` (
   `department_id` int(11) NOT NULL,
-  `department_name` varchar(100) DEFAULT NULL,
-  `department_image` varchar(255) DEFAULT NULL
+  `department_name` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `department`
 --
 
-INSERT INTO `department` (`department_id`, `department_name`, `department_image`) VALUES
-(27, 'BSIT', NULL),
-(28, 'BSCS', NULL),
-(29, 'BSCPE', NULL),
-(30, 'BSTM', NULL),
-(31, 'BSHM', NULL),
-(32, 'BSBA', NULL),
-(33, 'BSA', NULL),
-(34, 'BSCRIM', NULL),
-(39, 'BSED', NULL),
-(47, 'TRY AGAIN', NULL),
-(48, 'TRY ISA PA', NULL);
+INSERT INTO `department` (`department_id`, `department_name`) VALUES
+(33, 'BSA'),
+(32, 'BSBA'),
+(29, 'BSCPE'),
+(34, 'BSCRIM'),
+(28, 'BSCS'),
+(39, 'BSED'),
+(31, 'BSHM'),
+(27, 'BSIT'),
+(30, 'BSTM'),
+(47, 'TRY AGAIN'),
+(48, 'TRY ISA PA');
 
 -- --------------------------------------------------------
 
@@ -247,6 +253,13 @@ CREATE TABLE `supervisor_evaluations` (
   `evaluation_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `evaluator_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `supervisor_evaluations`
+--
+
+INSERT INTO `supervisor_evaluations` (`id`, `student_id`, `total_grade`, `comments`, `evaluation_date`, `evaluator_id`) VALUES
+(32, 1197, 70.00, '', '2025-01-09 08:28:06', 1195);
 
 -- --------------------------------------------------------
 
@@ -600,8 +613,7 @@ ALTER TABLE `ojt_hours`
 -- Indexes for table `requirements`
 --
 ALTER TABLE `requirements`
-  ADD PRIMARY KEY (`requirement_id`),
-  ADD KEY `FK_requirements_coordinator_id` (`coordinator_id`);
+  ADD PRIMARY KEY (`requirement_id`);
 
 --
 -- Indexes for table `student_hours`
@@ -622,8 +634,7 @@ ALTER TABLE `student_supervisor`
 --
 ALTER TABLE `submit_requirements`
   ADD PRIMARY KEY (`submit_id`),
-  ADD KEY `requirement_id` (`requirement_id`),
-  ADD KEY `fk_student_id` (`student_id`);
+  ADD KEY `requirement_id` (`requirement_id`);
 
 --
 -- Indexes for table `supervisor_evaluations`
@@ -744,16 +755,10 @@ ALTER TABLE `ojt_hours`
   ADD CONSTRAINT `ojt_hours_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`);
 
 --
--- Constraints for table `requirements`
---
-ALTER TABLE `requirements`
-  ADD CONSTRAINT `FK_requirements_coordinator_id` FOREIGN KEY (`coordinator_id`) REFERENCES `users` (`user_id`);
-
---
 -- Constraints for table `student_hours`
 --
 ALTER TABLE `student_hours`
-  ADD CONSTRAINT `student_hours_ibfk_1` FOREIGN KEY (`coordinator_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `student_hours_ibfk_1` FOREIGN KEY (`coordinator_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `student_supervisor`
@@ -767,7 +772,6 @@ ALTER TABLE `student_supervisor`
 --
 ALTER TABLE `submit_requirements`
   ADD CONSTRAINT `fk_requirement_id` FOREIGN KEY (`requirement_id`) REFERENCES `requirements` (`requirement_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_student_id` FOREIGN KEY (`student_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL,
   ADD CONSTRAINT `submit_requirements_ibfk_1` FOREIGN KEY (`requirement_id`) REFERENCES `requirements` (`requirement_id`);
 
 --

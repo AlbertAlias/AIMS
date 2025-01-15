@@ -19,9 +19,9 @@ if (isset($_POST['delete_user_id'])) {
         $stmt->execute();
 
         // Archive related coordinator data
-        $stmt = $conn->prepare("INSERT INTO archive_db.coordinator SELECT * FROM aims_db.coordinator WHERE user_id = ?");
-        $stmt->bind_param("i", $userIdToDelete);
-        $stmt->execute();
+        // $stmt = $conn->prepare("INSERT INTO archive_db.coordinator SELECT * FROM aims_db.coordinator WHERE user_id = ?");
+        // $stmt->bind_param("i", $userIdToDelete);
+        // $stmt->execute();
 
         // Archive coordinator evaluations
         $stmt = $conn->prepare("INSERT INTO archive_db.coordinator_evaluations SELECT * FROM aims_db.coordinator_evaluations WHERE evaluator_id = ? OR student_id = ?");
@@ -49,9 +49,9 @@ if (isset($_POST['delete_user_id'])) {
         $stmt->execute();
 
         // Archive requirements
-        $stmt = $conn->prepare("INSERT INTO archive_db.requirements SELECT * FROM aims_db.requirements WHERE coordinator_id = ?");
-        $stmt->bind_param("i", $userIdToDelete);
-        $stmt->execute();
+        // $stmt = $conn->prepare("INSERT INTO archive_db.requirements SELECT * FROM aims_db.requirements WHERE coordinator_id = ?");
+        // $stmt->bind_param("i", $userIdToDelete);
+        // $stmt->execute();
 
         // Archive only student_id, document_name, and file_path
         $stmt = $conn->prepare("
@@ -60,6 +60,31 @@ if (isset($_POST['delete_user_id'])) {
             FROM aims_db.submit_requirements
             WHERE student_id = ?
         ");
+        $stmt->bind_param("i", $userIdToDelete);
+        $stmt->execute();
+
+        // Archive related coordinator data
+        $stmt = $conn->prepare("INSERT INTO archive_db.coordinator SELECT * FROM aims_db.coordinator WHERE user_id = ?");
+        $stmt->bind_param("i", $userIdToDelete);
+        $stmt->execute();
+
+        // Archive related requirements data
+        $stmt = $conn->prepare("INSERT INTO archive_db.requirements SELECT * FROM aims_db.requirements WHERE coordinator_id = ?");
+        $stmt->bind_param("i", $userIdToDelete);
+        $stmt->execute();
+
+        // Delete related student_hours data only for the specified coordinator
+        $stmt = $conn->prepare("DELETE FROM aims_db.student_hours WHERE coordinator_id = ?");
+        $stmt->bind_param("i", $userIdToDelete);
+        $stmt->execute();
+
+        // Delete related requirements data
+        $stmt = $conn->prepare("DELETE FROM aims_db.requirements WHERE coordinator_id = ?");
+        $stmt->bind_param("i", $userIdToDelete);
+        $stmt->execute();
+
+        // Delete related coordinator data
+        $stmt = $conn->prepare("DELETE FROM aims_db.coordinator WHERE user_id = ?");
         $stmt->bind_param("i", $userIdToDelete);
         $stmt->execute();
 
@@ -111,17 +136,17 @@ if (isset($_POST['delete_user_id'])) {
         $stmt->bind_param("i", $userIdToDelete);
         $stmt->execute();
 
-        $stmt = $conn->prepare("DELETE FROM aims_db.coordinator WHERE user_id = ?");
-        $stmt->bind_param("i", $userIdToDelete);
-        $stmt->execute();
+        // $stmt = $conn->prepare("DELETE FROM aims_db.coordinator WHERE user_id = ?");
+        // $stmt->bind_param("i", $userIdToDelete);
+        // $stmt->execute();
 
         $stmt = $conn->prepare("DELETE FROM aims_db.student_hours WHERE coordinator_id = ?");
         $stmt->bind_param("i", $userIdToDelete);
         $stmt->execute();
 
-        $stmt = $conn->prepare("DELETE FROM aims_db.requirements WHERE coordinator_id = ?");
-        $stmt->bind_param("i", $userIdToDelete);
-        $stmt->execute();
+        // $stmt = $conn->prepare("DELETE FROM aims_db.requirements WHERE coordinator_id = ?");
+        // $stmt->bind_param("i", $userIdToDelete);
+        // $stmt->execute();
 
         // Commit the transaction
         $conn->commit();
