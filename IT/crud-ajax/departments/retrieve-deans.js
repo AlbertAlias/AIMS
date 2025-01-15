@@ -10,7 +10,7 @@ $(document).ready(function() {
                     window.deans = response.deans;
                     updateDeanList(window.deans);
                 } else {
-                    updateDeanList([], response.message);  // Pass an empty array and the error message
+                    updateDeanList([], response.message);
                 }
             },
             error: function(xhr, status, error) {
@@ -28,7 +28,7 @@ $(document).ready(function() {
             deanInfo.append(`<div class="text-danger">${message}</div>`);
         }
     
-        const limitedDeans = deans.slice(0, 10);  // Ensure that the deans array is empty or contains fewer than 10 items
+        const limitedDeans = deans.slice(0, 10);
         if (limitedDeans.length === 0) {
             deanInfo.append(`
                 <div class="text-center">

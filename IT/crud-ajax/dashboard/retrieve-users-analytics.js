@@ -1,18 +1,6 @@
 $(document).ready(function () {
     let chart = null;
 
-    // Show loading state initially
-    function showLoadingState() {
-        $("#users-chart").html(`
-            <div class="text-center" style="font-size: 16px; color: #999;">
-                Loading data...
-            </div>
-            <div style="display: flex; justify-content: center; align-items: center; height: 320px;">
-                <img src="../assets/img/404-NOT-FOUND.png" alt="Loading..." style="width: 300px; height: auto;">
-            </div>
-        `);
-    }
-
     function validateData(data) {
         return (
             data &&
@@ -21,9 +9,6 @@ $(document).ready(function () {
     }
 
     function fetchUserAnalytics() {
-        // Show the loading state
-        showLoadingState();
-
         $.ajax({
             url: 'controller/dashboards/retrieve-users-analytics.php',
             method: 'GET',
