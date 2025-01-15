@@ -5,40 +5,50 @@ $(document).ready(function() {
             method: 'GET',
             dataType: 'json',
             success: function(response) {
+                console.log(response);
                 if (response.success) {
                     window.deans = response.deans;
                     updateDeanList(window.deans);
+                } else {
+                    updateDeanList([], response.message);  // Pass an empty array and the error message
                 }
             },
+            error: function(xhr, status, error) {
+                console.error("AJAX Error: ", status, error);
+                updateDeanList([], "Failed to load deans. Please try again later.");
+            }
         });
     };
 
     function updateDeanList(deans, message = null) {
         let deanInfo = $('#deanInfo');
         deanInfo.empty();
-
+    
         if (message) {
             deanInfo.append(`<div class="text-danger">${message}</div>`);
-            return;
         }
-
-        const limitedDeans = deans.slice(0, 10);
+    
+        const limitedDeans = deans.slice(0, 10);  // Ensure that the deans array is empty or contains fewer than 10 items
         if (limitedDeans.length === 0) {
-            updateDeanList([], 'No deans found');
+            deanInfo.append(`
+                <div class="text-center">
+                    <img src="../assets/img/notfound.png" alt="No Deans Found" style="margin-top: 3px; max-width: 39%; height: auto;">
+                </div>
+            `);
             return;
         }
-
+    
         limitedDeans.forEach(function(dean) {
             let deptList = dean.departments.split(', ').map(function(department) {
                 return `<div class="text-gray-800">${department}</div>`;
             }).join('');
-
+    
             let deanButton = `<button class="btn btn-outline-secondary d-block mb-2 w-100 dean-btn" data-id="${dean.user_id}">
                                 ${dean.last_name}, ${dean.first_name}<br><div class="department-list">${deptList}</div>
                             </button>`;
             deanInfo.append(deanButton);
         });
-
+    
         $('.dean-btn').on('click', function() {
             const deanId = $(this).data('id');
             fetchDeanDetails(deanId);

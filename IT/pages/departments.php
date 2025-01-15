@@ -1,5 +1,5 @@
 <div class="container-fluid bg-light p-0 m-0" id="departments" style="display: none;">
-    <div class="row g-4">
+    <div class="row g-3">
         <div class="col-12 col-md-6 col-lg-4">
             <div class="bg-light rounded-3 p-3 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-2">Departments</h5>
@@ -17,7 +17,7 @@
         </div>
 
         <div class="col-12 col-md-6 col-lg-8">
-            <div class="bg-light rounded-3 px-4 py-3 d-flex flex-column" style="min-height: 150px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+            <div class="bg-light rounded-3 p-3 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-2">Add Department</h5>
                 <form id="addDepartmentForm">
                     <div class="row mb-2">

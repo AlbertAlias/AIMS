@@ -1,5 +1,5 @@
 <div class="container-fluid bg-light p-0 m-0" id="students" style="display: none;">
-    <div class="row g-4">
+    <div class="row g-3">
         <div class="col-md-4 col-lg-3">
             <div class="bg-light rounded-3 px-4 py-3 d-flex flex-column" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-3">Upload Student Lists</h5>
@@ -21,8 +21,8 @@
         </div>
 
         <div class="col-12 col-md-6 col-lg-3">
-            <div class="bg-light rounded-3 p-4 d-flex flex-column position-relative" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-2">Departments</h5>
+            <div class="bg-light rounded-3 p-3 d-flex flex-column position-relative" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-2">Students</h5>
                 <div class="mb-2 position-relative">
                     <input type="text" class="form-control" id="searchStudents" placeholder="Search Department...">
                     <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

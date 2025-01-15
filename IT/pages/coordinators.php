@@ -12,7 +12,7 @@
                 <div id="coordinatorInfo" class="text-gray-800">
                     <!-- Coordinator information will be displayed here -->
                 </div>
-                <div class="container rounded bg-success p-2 mt-3 text-center text-white">Coordinator Lists</div>
+                <div class="container rounded bg-success p-2 mt-2 text-center text-white">Coordinator Lists</div>
             </div>
         </div>
 

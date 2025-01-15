@@ -42,8 +42,8 @@
         ]);
     } else {
         echo json_encode([
-            'success' => false,
-            'message' => 'No deans with departments found.'
+            'success' => true, // No need for failure here anymore
+            'deans' => [] // Return an empty array instead of an error message
         ]);
     }
 

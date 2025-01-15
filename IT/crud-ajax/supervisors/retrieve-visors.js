@@ -24,19 +24,32 @@ $(document).ready(function () {
     function updateSupervisorList(supervisors, message = null) {
         let supervisorInfo = $('#supervisorInfo');
         supervisorInfo.empty();
-
+    
+        // If a message is passed, just show the image without the "No supervisors found" text
         if (message) {
-            supervisorInfo.append(`<div class="text-danger">${message}</div>`);
+            supervisorInfo.append(`
+                <div class="text-center">
+                    <img src="../assets/img/notfound.png" alt="No Coordinators Found" 
+                         style="margin-top: 3px; margin-left: 8px; max-width: 40%; height: auto;">
+                </div>
+            `);
             return;
         }
-
+    
         const limitedSupervisors = supervisors.slice(0, 10);
-
+    
+        // If there are no supervisors in the list, display the image only
         if (limitedSupervisors.length === 0) {
-            updateSupervisorList([], 'No supervisors found');
+            supervisorInfo.append(`
+                <div class="text-center">
+                    <img src="../assets/img/notfound.png" alt="No Coordinators Found" 
+                         style="margin-top: 3px; max-width: 39%; height: auto;">
+                </div>
+            `);
             return;
         }
-
+    
+        // If there are supervisors, display the supervisor buttons
         limitedSupervisors.forEach(function (supervisor) {
             let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 visor-btn" data-id="${supervisor.id}">
                         ${supervisor.last_name}, ${supervisor.first_name}<br>${supervisor.company}

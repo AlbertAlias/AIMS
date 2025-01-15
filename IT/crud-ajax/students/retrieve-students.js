@@ -12,7 +12,8 @@ $(document).ready(function () {
                     window.students = response.students;
                     updateStudentsList(window.students);
                 } else {
-                    updateStudentsList([], 'No students available yet.');
+                    // No message displayed here, only the image will be shown
+                    updateStudentsList([], '');
                 }
             },
             error: function (xhr, status, error) {
@@ -25,17 +26,22 @@ $(document).ready(function () {
     function updateStudentsList(students, message = null) {
         let studentsInfo = $('#studentsInfo');
         studentsInfo.empty();
-
+    
         if (message) {
             studentsInfo.html(`<div class="alert alert-info">${message}</div>`);
             return;
         }
-
+    
         if (students.length === 0) {
-            studentsInfo.html('<div class="alert alert-info">No students found for the selected department.</div>');
+            // Show an image when no students are found
+            studentsInfo.html(`
+                <div class="text-center">
+                    <img src="../assets/img/notfound.png" alt="No Students Available" style="margin-top: 3px; margin-left: 8px; max-width: 50%; height: auto;">
+                </div>
+            `);
             return;
         }
-
+    
         students.forEach(function (student) {
             let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 stud-btn" data-id="${student.id}">
                        ${student.last_name}, ${student.first_name}<br>${student.department_name}

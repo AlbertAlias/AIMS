@@ -38,7 +38,7 @@ $(document).ready(function() {
                 ${message}
             </div>
             <div style="display: flex; justify-content: center; align-items: center; height: 320px;">
-                <img src="../assets/img/index/404-NOT-FOUND.png" alt="No Data Image" style="width: 300px; height: auto;">
+                <img src="../assets/img/404-NOT-FOUND.png" alt="No Data Image" style="width: 300px; height: auto;">
             </div>
         `);
     }
@@ -50,7 +50,7 @@ $(document).ready(function() {
                 Loading data...
             </div>
             <div style="display: flex; justify-content: center; align-items: center; height: 320px;">
-                <img src="../assets/img/index/404-NOT-FOUND.png" alt="Loading" style="width: 300px; height: auto;">
+                <img src="../assets/img/404-NOT-FOUND.png" alt="Loading" style="width: 300px; height: auto;">
             </div>
         `);
     }

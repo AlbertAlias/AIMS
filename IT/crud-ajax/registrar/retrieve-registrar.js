@@ -24,19 +24,27 @@ $(document).ready(function () {
     function updateRegistrarList(registrar, message = null) {
         let registrarInfo = $('#registrarInfo');
         registrarInfo.empty();
-
+    
+        // Check if there is a message to display (like "No registrar found")
         if (message) {
             registrarInfo.append(`<div class="text-danger">${message}</div>`);
             return;
         }
-
-        const limitedRegistrar = registrar.slice(0, 10);
-
-        if (limitedRegistrar.length === 0) {
-            updateRegistrarList([], 'No registrar found');
+    
+        // Check if there are no registrars
+        if (registrar.length === 0) {
+            // Display your "No Data Found" image
+            registrarInfo.append(`
+                <div class="text-center">
+                    <img src="../assets/img/notfound.png" alt="No Coordinators Found" style="margin-top: 3px; max-width: 39%; height: auto;">
+                </div>
+            `);
             return;
         }
-
+    
+        const limitedRegistrar = registrar.slice(0, 10);
+    
+        // Iterate over each registrar and create a button for each
         limitedRegistrar.forEach(function (registrar) {
             let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 registrar-btn" data-id="${registrar.id}">
                         ${registrar.last_name}, ${registrar.first_name}

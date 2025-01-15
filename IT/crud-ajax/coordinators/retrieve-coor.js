@@ -24,19 +24,23 @@ $(document).ready(function () {
     function updateCoordinatorList(coordinators, message = null) {
         let coordinatorInfo = $('#coordinatorInfo');
         coordinatorInfo.empty();
-
+    
         if (message) {
             coordinatorInfo.append(`<div class="text-danger">${message}</div>`);
             return;
         }
-
+    
         const limitedCoordinators = coordinators.slice(0, 10);
-
+    
         if (limitedCoordinators.length === 0) {
-            updateCoordinatorList([], 'No coordinators found');
+            coordinatorInfo.append(`
+                <div class="text-center">
+                    <img src="../assets/img/notfound.png" alt="No Coordinators Found" style="margin-top: 3px; margin-left: 8px; max-width: 40%; height: auto;">
+                </div>
+            `);
             return;
         }
-
+    
         limitedCoordinators.forEach(function (coordinator) {
             let btn = `<button class="btn btn-outline-secondary d-block mb-2 w-100 coor-btn" data-id="${coordinator.id}">
                         ${coordinator.last_name}, ${coordinator.first_name}<br>${coordinator.department_name}
@@ -44,6 +48,7 @@ $(document).ready(function () {
             coordinatorInfo.append(btn);
         });
     }
+    
 
     $('#searchCoordinators').on('input', function () {
         const searchQuery = $(this).val().toLowerCase();
