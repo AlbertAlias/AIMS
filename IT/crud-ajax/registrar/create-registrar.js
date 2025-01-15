@@ -58,6 +58,7 @@ $(document).ready(function () {
                         }
                     });
                     $("#registrarForm")[0].reset();
+                    loadRegistrar();
                 } else {
                     Swal.fire({
                         toast: true,

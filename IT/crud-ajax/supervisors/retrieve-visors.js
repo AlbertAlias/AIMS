@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    function loadVisor(searchTerm = '') {
+    window.loadVisor = function(searchTerm = '') {
         $.ajax({
             url: 'controller/supervisors/retrieve-visors.php',
             method: 'GET',

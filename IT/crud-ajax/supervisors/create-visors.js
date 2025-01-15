@@ -70,6 +70,7 @@ $(document).ready(function () {
                     });
                     $("#visorForm")[0].reset();
                     fetchUserAnalytics();
+                    loadVisor();
                 } else {
                     Swal.fire({
                         toast: true,
