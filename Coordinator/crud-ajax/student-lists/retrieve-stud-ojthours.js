@@ -10,13 +10,13 @@ $(document).on('click', '.open-ojthours-btn', function() {
     }
 });
 
-
-function loadOjtHoursData() {
+function loadOjtHoursData(userId) {
     $.ajax({
         url: 'controller/student-lists/retrieve-stud-ojthours.php',
         type: 'GET',
         dataType: 'json',
         data: {
+            user_id: userId,
             page: ojthoursPage,
             length: ojthoursPageLength,
             search: $('#ojthours-searchInput').val()
