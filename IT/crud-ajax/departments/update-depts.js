@@ -1,55 +1,3 @@
-// $('#deptUpdateBtn').click(function() {
-//     var departmentId = $('#departmentSelect').val();
-//     var departmentName = $('#update_department_name').val();
-
-//     if (departmentId && departmentName) {
-//         $.ajax({
-//             url: 'controller/departments/update-depts.php',
-//             type: 'POST',
-//             data: {
-//                 department_id: departmentId,
-//                 department_name: departmentName
-//             },
-//             dataType: 'json',
-//             success: function(response) {
-//                 console.log(response);
-                
-//                 if (response && response.success) {
-//                     Swal.fire({
-//                         toast: true,
-//                         position: 'top-right',
-//                         icon: 'success',
-//                         title: 'Department updated successfully!',
-//                         showConfirmButton: false,
-//                         timer: 2000,
-//                         background: '#b9f6ca',
-//                         iconColor: '#2e7d32',
-//                         color: '#155724',
-//                         customClass: {
-//                             popup: 'mt-5'
-//                         }
-//                     });
-
-//                     $('#update_department_name').val('').attr('readonly', true);
-//                     $('#departmentSelect').val('');
-//                     $('#seeDepartmentsModal').modal('hide');
-//                     populateDepartmentSelect();
-//                     populateDepartments();
-//                     loadDepartments();
-//                 } else {
-//                     alert('Error updating department: ' + (response.message || 'Unknown error'));
-//                 }
-//             },
-//             error: function(xhr, status, error) {
-//                 console.error("Error updating department: " + error);
-//                 alert('Error updating department');
-//             }
-//         });
-//     } else {
-//         alert('Please select a department and enter a valid name');
-//     }
-// });
-
 $('#deptUpdateBtn').click(function () {
     var departmentId = $('#departmentSelect').val();
     var departmentName = $('#update_department_name').val();
@@ -59,8 +7,9 @@ $('#deptUpdateBtn').click(function () {
         var formData = new FormData();
         formData.append('department_id', departmentId);
         formData.append('department_name', departmentName);
+
         if (departmentImage) {
-            formData.append('department_image', departmentImage);
+            formData.append('department_image', departmentImage); // Add department image if it exists
         }
 
         $.ajax({
@@ -108,31 +57,6 @@ $('#deptUpdateBtn').click(function () {
     }
 });
 
-
-// function populateDepartmentSelect() {
-//     $.ajax({
-//         url: 'controller/departments/retrieve-depts.php',
-//         type: 'GET',
-//         dataType: 'json',
-//         success: function(response) {
-//             console.log("Response:", response);
-//             if (response.success) {
-//                 var select = $('#departmentSelect');
-//                 select.empty();
-//                 select.append('<option selected>Choose a department</option>');
-
-//                 response.data.forEach(function(department) {
-//                     select.append('<option value="' + department.id + '">' + department.name + '</option>');
-//                 });
-//             } else {
-//                 console.error("Error fetching departments:", response.error);
-//             }
-//         },
-//         error: function(xhr, status, error) {
-//             console.error("Error fetching departments: " + error);
-//         }
-//     });
-// }
 
 function populateDepartmentSelect() {
     $.ajax({
