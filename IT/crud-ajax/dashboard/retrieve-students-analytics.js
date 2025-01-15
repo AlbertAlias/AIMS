@@ -33,10 +33,31 @@ $(document).ready(function() {
     }
 
     function showError(message) {
-        $('#students-chart').html(`<p style="text-align: center; font-size: 16px; color: #999;">${message}</p>`);
+        $('#students-chart').html(`
+            <div style="text-align: center; font-size: 16px; color: #999;">
+                ${message}
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center; height: 320px;">
+                <img src="../assets/img/index/404-NOT-FOUND.png" alt="No Data Image" style="width: 300px; height: auto;">
+            </div>
+        `);
+    }
+
+    // Show the loading state initially
+    function showLoadingState() {
+        $('#students-chart').html(`
+            <div style="text-align: center; font-size: 16px; color: #999;">
+                Loading data...
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center; height: 320px;">
+                <img src="../assets/img/index/404-NOT-FOUND.png" alt="Loading" style="width: 300px; height: auto;">
+            </div>
+        `);
     }
 
     function fetchChartData() {
+        showLoadingState(); // Display loading state while data is being fetched
+
         $.ajax({
             url: 'controller/dashboards/retrieve-students-analytics.php',
             method: 'GET',

@@ -1,6 +1,18 @@
 $(document).ready(function () {
     let chart = null;
 
+    // Show loading state initially
+    function showLoadingState() {
+        $("#users-chart").html(`
+            <div class="text-center" style="font-size: 16px; color: #999;">
+                Loading data...
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center; height: 320px;">
+                <img src="../assets/img/index/loading.gif" alt="Loading..." style="width: 300px; height: auto;">
+            </div>
+        `);
+    }
+
     function validateData(data) {
         return (
             data &&
@@ -9,6 +21,9 @@ $(document).ready(function () {
     }
 
     function fetchUserAnalytics() {
+        // Show the loading state
+        showLoadingState();
+
         $.ajax({
             url: 'controller/dashboards/retrieve-users-analytics.php',
             method: 'GET',
@@ -27,6 +42,7 @@ $(document).ready(function () {
             },
             error: function (xhr, status, error) {
                 console.error('AJAX error:', error);
+                clearChart();
             }
         });
     }
@@ -176,7 +192,14 @@ $(document).ready(function () {
         if (chart) {
             chart.destroy();
         }
-        $("#users-chart").html('<div class="text-center" style="font-size: 16px; color: #999;">No data available</div>');
+        $("#users-chart").html(`
+        <div class="text-center" style="font-size: 16px; color: #999;">
+            No data available
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; height: 320px;">
+            <img src="../assets/img/index/404-NOT-FOUND.png" alt="No Data Image" style="width: 300px; height: auto;">
+        </div>
+    `);
     }
 
     window.fetchUserAnalytics = debounce(fetchUserAnalytics, 500);
