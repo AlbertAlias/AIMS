@@ -122,6 +122,14 @@
         $totalResult = $totalStmt->get_result();
         $total = $totalResult->fetch_assoc()['total'];
 
+        // Query to get the sum of total_hours
+        $sumSql = "SELECT SUM(total_hours) AS total_hours_sum FROM ojt_hours WHERE ojt_hours.student_id = ?";
+        $sumStmt = $conn->prepare($sumSql);
+        $sumStmt->bind_param('i', $student_id);
+        $sumStmt->execute();
+        $sumResult = $sumStmt->get_result();
+        $totalHoursSum = $sumResult->fetch_assoc()['total_hours_sum'] ?: 0; // Default to 0 if null
+
         $totalPages = ceil($total / $length);
         $pagination = '';
         $maxVisiblePages = 3;
@@ -155,7 +163,8 @@
             'pagination' => $pagination,
             'start' => ($total > 0) ? $start + 1 : 0,
             'end' => ($total > 0) ? min($start + $length, $total) : 0,
-            'total' => $total
+            'total' => $total,
+            'total_hours_sum' => $totalHoursSum        
         ];
         echo json_encode($response);
     } catch (Exception $e) {
