@@ -57,7 +57,6 @@ $('#deptUpdateBtn').click(function () {
     }
 });
 
-
 function populateDepartmentSelect() {
     $.ajax({
         url: 'controller/departments/retrieve-depts.php',
