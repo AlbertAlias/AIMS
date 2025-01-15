@@ -38,7 +38,14 @@ $(document).ready(function () {
                     const data = typeof response === 'string' ? JSON.parse(response) : response;
 
                     if (data.noData) {
-                        $("#requirements-chart").html('<p style="text-align:center; font-size:16px; color:gray;">No data available</p>');
+                        $("#requirements-chart").html(`
+                            <div class="text-center" style="font-size: 16px; color: #999;">
+                                No data available
+                            </div>
+                            <div style="display: flex; justify-content: center; align-items: center; height: 320px;">
+                                <img src="../assets/img/404-NOT-FOUND.png" alt="No Data Image" style="width: 300px; height: auto;">
+                            </div>
+                        `);
                         return;
                     }
 

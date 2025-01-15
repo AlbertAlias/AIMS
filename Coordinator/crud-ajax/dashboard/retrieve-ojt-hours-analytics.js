@@ -50,8 +50,15 @@ $(document).ready(function () {
         const isEmpty = counts.every((count) => count === 0);
 
         if (isEmpty) {
-            // Show "No data available" instead of the chart
-            $("#ojthours-chart").html("<div class='no-data'>No data available</div>");
+            // Show "No data available" message and an image in the center of the container
+            $("#ojthours-chart").html(`
+                <div class="text-center" style="font-size: 16px; color: #999;">
+                    No data available
+                </div>
+                <div style="display: flex; justify-content: center; align-items: center; height: 320px;">
+                    <img src="../assets/img/404-NOT-FOUND.png" alt="No Data Image" style="width: 300px; height: auto;">
+                </div>
+            `);
             return;
         }
 
