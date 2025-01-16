@@ -120,7 +120,7 @@ $(document).ready(function() {
                         const submissionDate = new Date(item.week_start).toLocaleDateString(); // You can format this as you need
 
                         htmlContent += `
-                            <div class="card task-card px-1 py-1 mb-3 submission-card position-relative" data-submission-id="${item.id}">
+                            <div class="card task-card px-1 py-1 mb-2 submission-card position-relative" data-submission-id="${item.id}">
                                 <div class="d-flex align-items-center px-2 py-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" class="icon" style="fill: #6f42c1; width: 3rem; height: 3.4rem; margin-right: 5px;">
                                         <path d="M64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-288-128 0c-17.7 0-32-14.3-32-32L224 0 64 0zM256 0l0 128 128 0L256 0zM112 256l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l160 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-160 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/>

@@ -95,7 +95,6 @@ $result = $conn->query($query);
 $data = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        // Update file_path with the base path
         $row['file_path'] = '/AIMS/Student/controller/weeklyreport/uploads/' . basename($row['file_path']);
         $data[] = $row;
     }
