@@ -56,9 +56,19 @@
                         </div>
                     </div>
                     <div class="row mb-1">
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-6">
                             <label for="visor_company_address" class="form-label">Company Address <span class="text-danger">*</span></label>
                             <input type="text" class="form-control mb-2" id="visor_company_address" name="visor_company_address" required>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="visor_company_image" class="form-label required-asterisk">Company Image (PNG)</label>
+                            <input type="file" class="form-control mb-2" id="visor_company_image" name="visor_company_image" accept="image/png">
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-12 col-md-4">
+                            <label for="visor_company_logo" class="form-label required-asterisk">Company Logo (PNG)</label>
+                            <input type="file" class="form-control mb-2" id="visor_company_logo" name="visor_company_logo" accept="image/png">
                         </div>
                         <div class="col-12 col-md-4">
                             <label for="visor_username" class="form-label required-asterisk">Username <span class="text-danger">*</span></label>

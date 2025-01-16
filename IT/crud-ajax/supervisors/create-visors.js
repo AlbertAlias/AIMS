@@ -2,17 +2,22 @@ $(document).ready(function () {
     $("#visorSubmitBtn").on("click", function (event) {
         event.preventDefault();
 
-        const formData = {
-            visor_last_name: $("#visor_last_name").val(),
-            visor_first_name: $("#visor_first_name").val(),
-            visor_middle_name: $("#visor_middle_name").val(),
-            visor_gender: $("#visor_gender").val(),
-            visor_personal_email: $("#visor_personal_email").val(),
-            visor_company_name: $("#visor_company_name").val(),
-            visor_company_address: $("#visor_company_address").val(),
-            visor_username: $("#visor_username").val(),
-            visor_password: $("#visor_password").val(),
-        };
+        const formData = new FormData();
+        
+        // Collecting form data
+        formData.append('visor_last_name', $("#visor_last_name").val());
+        formData.append('visor_first_name', $("#visor_first_name").val());
+        formData.append('visor_middle_name', $("#visor_middle_name").val());
+        formData.append('visor_gender', $("#visor_gender").val());
+        formData.append('visor_personal_email', $("#visor_personal_email").val());
+        formData.append('visor_company_name', $("#visor_company_name").val());
+        formData.append('visor_company_address', $("#visor_company_address").val());
+        formData.append('visor_username', $("#visor_username").val());
+        formData.append('visor_password', $("#visor_password").val());
+
+        // Handling file uploads (images)
+        formData.append('visor_company_image', $("#visor_company_image")[0].files[0]);
+        formData.append('visor_company_logo', $("#visor_company_logo")[0].files[0]);
 
         let emptyField = false;
 
@@ -23,7 +28,7 @@ $(document).ready(function () {
         ];
 
         for (const field of requiredFields) {
-            if (formData[field] === "") {
+            if (formData.get(field) === "") {
                 emptyField = true;
                 break;
             }
@@ -51,7 +56,9 @@ $(document).ready(function () {
             url: "controller/supervisors/create-visors.php",
             type: "POST",
             data: formData,
-            dataType: "json",
+            processData: false,  // Prevent jQuery from processing the data
+            contentType: false,  // Prevent setting contentType header
+            dataType: "json", // Expected JSON response
             success: function (response) {
                 if (response.success) {
                     Swal.fire({
