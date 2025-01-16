@@ -103,6 +103,7 @@
     <script src="crud-ajax/requirement/retrieve-pending-requirements.js"></script>
     <script src="crud-ajax/requirement/retrieve-rejected-requirements.js"></script>
     <script src="crud-ajax/requirement/retrieve-approved-requirements.js"></script>
+    <script src="crud-ajax/requirement/retrieve-weekly-reports.js"></script>
     <script src="crud-ajax/requirement/post-requirement.js"></script>
     <!--END::REQUIREMENT LISTS AJAX-->
 
