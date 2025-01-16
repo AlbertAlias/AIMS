@@ -113,7 +113,7 @@ document.getElementById('submitHoursButton').addEventListener('click', function 
             toast: true,
             position: 'top-right',
             icon: 'error',
-            title: 'An error occurred while submitting your hours.',
+            title: 'No File attached!.',
             showConfirmButton: false,
             timer: 2000,
             background: '#ffebee',
