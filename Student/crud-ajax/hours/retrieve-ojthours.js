@@ -25,7 +25,7 @@ function loadOjtHoursData() {
             }
             $('#ojthours-tableInfo').text(response.total > 0 ? `Showing ${response.start} to ${response.end} of ${response.total} entries` : 'No entries available');
 
-            // $('#totalHoursDisplay').text(`Rendered Hours: ${response.total_hours_sum || '0'}`);
+            $('#totalHoursDisplay').text(`Rendered Hours: ${response.total_hours_sum || '0'}`);
         },
         error: function(xhr, status, error) {
             console.error('AJAX Error:', status, error);
