@@ -1,23 +1,58 @@
 function evaluateStudent(userId) {
-    
     $.ajax({
         url: 'controller/evaluation/retrieve-evaluation.php',
         type: 'GET',
         data: { user_id: userId },
         success: function(response) {
-            if (response.alreadyEvaluated) {
+            // Ensure response is parsed as JSON
+            response = typeof response === 'string' ? JSON.parse(response) : response;
+
+            console.log(response);  // Debugging the response
+
+            if (response.error) {
                 Swal.fire({
-                    icon: 'info',
-                    title: 'Already Evaluated',
-                    text: 'This student has already been evaluated.',
+                    icon: 'error',
+                    title: 'Error',
+                    text: response.error,
                 });
                 return;
             }
-            $('#student_id').val(userId);
+
+            // Log individual fields to check if they are empty or null
+            console.log('First Name:', response.first_name);
+            console.log('Last Name:', response.last_name);
+            console.log('Middle Name:', response.middle_name);
+            console.log('Department Name:', response.department_name);
+
+            // Construct the name text
+            var nameText = "Name of Student: ";
+            if (response.last_name || response.first_name) {
+                nameText += (response.last_name || '') + ", " + (response.first_name || '');
+            } else {
+                nameText += 'N/A';  // In case both names are missing
+            }
+
+            // Handle middle_name if it's not null
+            if (response.middle_name) {
+                nameText += " " + response.middle_name;
+            }
+
+            // Construct the department text
+            var departmentText = "Department: " + (response.department_name || 'N/A');  // Use 'N/A' if department is missing
+
+            console.log("Name Text:", nameText);  // Debugging name
+            console.log("Department Text:", departmentText);  // Debugging department
+
+            // Update modal text
+            $('#evaluationModal').find('#main p').text(nameText);
+            $('#evaluationModal').find('#main1 p').text(departmentText);
+
+            // Show the modal
             $('#evaluationModal').modal('show');
         },
     });
 }
+
 
 $('#evaluationForm').submit(function (e) {
     e.preventDefault();
@@ -36,8 +71,8 @@ $('#evaluationForm').submit(function (e) {
     if (Object.keys(ratings).length === 0) {
         Swal.fire({
             icon: 'error',
-            title: 'Error',
-            text: 'Please complete all ratings before submitting!',
+            title: 'Please Evaluate!',
+            text: 'Complete all ratings before submitting',
         });
         return;
     }
