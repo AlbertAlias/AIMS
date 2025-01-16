@@ -11,9 +11,8 @@ $(document).ready(function() {
                 let htmlContent = '';
                 if (data.length > 0) {
                     data.forEach(function(item) {
-                        // Define submissionDate based on week_start (assuming it's a date field)
-                        const submissionDate = new Date(item.week_start).toLocaleDateString(); // You can format this as you need
-
+                        const submissionDate = new Date(item.week_start).toLocaleDateString();
+            
                         htmlContent += `
                             <div class="card task-card px-1 py-1 mb-2 submission-card position-relative" data-submission-id="${item.id}">
                                 <div class="d-flex align-items-center px-2 py-2">
