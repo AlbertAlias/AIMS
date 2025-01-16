@@ -1,0 +1,30 @@
+/* Maintain original styles for larger devices */
+#users-chart,
+#students-chart {
+    width: 100%;
+    height: 400px;
+    min-height: 400px;
+}
+
+.card i {
+    color: #198754;
+}
+
+.card svg {
+    width: 2rem;
+    height: 2rem;
+    fill: #198754;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+    .card-chart {
+        padding: 10px;
+    }
+
+    #users-chart,
+    #students-chart {
+        height: 300px;
+        min-height: 300px;
+    }
+}

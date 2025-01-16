@@ -36,7 +36,7 @@
         </div>
 
         <div class="col-12 col-md-12 col-lg-9">
-            <div class="card shadow-sm">
+            <div class="card" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <div class="card-header bg-light text-dark">
                     <div class="d-flex justify-content-between align-items-center flex-wrap">
                         <div class="d-flex align-items-center">

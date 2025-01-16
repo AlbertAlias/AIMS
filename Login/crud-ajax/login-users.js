@@ -97,7 +97,7 @@ $(document).ready(function () {
             Coordinator: '../Coordinator/coordinator.php',
             Supervisor: '../Supervisor/supervisor.php',
             Student: '../Student/student.php',
-            Registrar: '../../Registrar/registrar.php',
+            Registrar: '../Registrar/registrar.php',
         };
 
         const baseUrl = userRedirects[user_type];
