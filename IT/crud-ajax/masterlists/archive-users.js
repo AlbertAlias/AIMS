@@ -2,13 +2,13 @@ $(document).on('click', '.deleteButton', function () {
     const userId = $(this).data('user-id');
 
     Swal.fire({
-        title: 'Are you sure?',
-        text: 'You are about to delete this user and all related data. This action is irreversible!',
+        title: 'Archive User?',
+        text: 'This user and all its data will be archived. This action is irreversible!',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#e74a3b',
         cancelButtonColor: '#858796',
-        confirmButtonText: 'Yes, delete it!',
+        confirmButtonText: 'Archive',
         cancelButtonText: 'Cancel'
     }).then((result) => {
         if (result.isConfirmed) {
