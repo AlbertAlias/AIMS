@@ -8,7 +8,6 @@
     min-height: 450px; /* Increased height for the login box */
     justify-content: center;
     align-items: center;
-    margin-left: 35px;
     backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
     border: 1px solid rgba(255, 255, 255, 0.3); /* Slight border to enhance glass effect */
 }

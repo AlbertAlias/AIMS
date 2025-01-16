@@ -73,8 +73,8 @@ $(document).on('click', '.deleteButton', function () {
         text: 'You are about to delete this user and all related data. This action is irreversible!',
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
+        confirmButtonColor: '#e74a3b',
+        cancelButtonColor: '#858796',
         confirmButtonText: 'Yes, delete it!',
         cancelButtonText: 'Cancel'
     }).then((result) => {

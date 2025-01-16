@@ -90,7 +90,7 @@ try {
             if ($columns['AY']) $html .= '<td>' . (htmlspecialchars($row['AY']) ?: '--') . '</td>';
             if ($columns['Username']) $html .= '<td>' . (htmlspecialchars($row['Username']) ?: '--') . '</td>';
             if ($columns['UserType']) $html .= '<td>' . (htmlspecialchars($row['UserType']) ?: '--') . '</td>';
-            $html .= '<td><button class="btn btn-danger deleteButton" data-user-id="' . htmlspecialchars($userID) . '">Delete</button></td>';
+            $html .= '<td><button class="btn btn-warning deleteButton" data-user-id="' . htmlspecialchars($userID) . '">Archive</button></td>';
             $html .= '</tr>';
         }
     }
