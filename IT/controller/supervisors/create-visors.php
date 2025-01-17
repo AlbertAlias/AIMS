@@ -102,9 +102,9 @@
         // Set the upload directory
         $upload_dir = '../../../assets/uploads/comp-img/';
 
-        // Generate unique file names
-        $logo_filename = $company_logo ? uniqid('logo_', true) . '.' . pathinfo($company_logo['name'], PATHINFO_EXTENSION) : null;
-        $image_filename = $company_image ? uniqid('image_', true) . '.' . pathinfo($company_image['name'], PATHINFO_EXTENSION) : null;
+        // Use original file names instead of generating unique names
+        $logo_filename = $company_logo ? basename($company_logo['name']) : null;
+        $image_filename = $company_image ? basename($company_image['name']) : null;
 
         // Attempt to move the uploaded files to the server
         if ($company_logo && !move_uploaded_file($company_logo['tmp_name'], $upload_dir . $logo_filename)) {
