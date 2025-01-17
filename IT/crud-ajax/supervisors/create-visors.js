@@ -2,22 +2,70 @@ $(document).ready(function () {
     $("#visorSubmitBtn").on("click", function (event) {
         event.preventDefault();
 
+        // Create FormData instance to handle both text and files
         const formData = new FormData();
-        
-        // Collecting form data
-        formData.append('visor_last_name', $("#visor_last_name").val());
-        formData.append('visor_first_name', $("#visor_first_name").val());
-        formData.append('visor_middle_name', $("#visor_middle_name").val());
-        formData.append('visor_gender', $("#visor_gender").val());
-        formData.append('visor_personal_email', $("#visor_personal_email").val());
-        formData.append('visor_company_name', $("#visor_company_name").val());
-        formData.append('visor_company_address', $("#visor_company_address").val());
-        formData.append('visor_username', $("#visor_username").val());
-        formData.append('visor_password', $("#visor_password").val());
 
-        // Handling file uploads (images)
-        formData.append('visor_company_image', $("#visor_company_image")[0].files[0]);
-        formData.append('visor_company_logo', $("#visor_company_logo")[0].files[0]);
+        // Add regular form fields to formData
+        formData.append("visor_last_name", $("#visor_last_name").val());
+        formData.append("visor_first_name", $("#visor_first_name").val());
+        formData.append("visor_middle_name", $("#visor_middle_name").val());
+        formData.append("visor_gender", $("#visor_gender").val());
+        formData.append("visor_personal_email", $("#visor_personal_email").val());
+        formData.append("visor_company_name", $("#visor_company_name").val());
+        formData.append("visor_company_address", $("#visor_company_address").val());
+        formData.append("visor_username", $("#visor_username").val());
+        formData.append("visor_password", $("#visor_password").val());
+
+        // Add files to formData
+        const companyLogo = $("#company_logo")[0].files[0];
+        const companyImage = $("#company_image")[0].files[0];
+
+        // Max file size (40MB)
+        const maxFileSize = 40 * 1024 * 1024;  // 40MB in bytes
+
+        if (companyLogo && companyLogo.size > maxFileSize) {
+            Swal.fire({
+                toast: true,
+                position: 'top-right',
+                icon: 'error',
+                title: 'Company logo file size exceeds 40MB!',
+                showConfirmButton: false,
+                timer: 2000,
+                background: '#f8d7da',
+                iconColor: '#721c24',
+                color: '#721c24',
+                customClass: {
+                    popup: 'mt-5'
+                }
+            });
+            return;
+        }
+
+        if (companyImage && companyImage.size > maxFileSize) {
+            Swal.fire({
+                toast: true,
+                position: 'top-right',
+                icon: 'error',
+                title: 'Company image file size exceeds 40MB!',
+                showConfirmButton: false,
+                timer: 2000,
+                background: '#f8d7da',
+                iconColor: '#721c24',
+                color: '#721c24',
+                customClass: {
+                    popup: 'mt-5'
+                }
+            });
+            return;
+        }
+
+        if (companyLogo) {
+            formData.append("company_logo", companyLogo);
+        }
+
+        if (companyImage) {
+            formData.append("company_image", companyImage);
+        }
 
         let emptyField = false;
 
@@ -28,7 +76,7 @@ $(document).ready(function () {
         ];
 
         for (const field of requiredFields) {
-            if (formData.get(field) === "") {
+            if (formData.get(field) === "") {  // Use .get() for FormData
                 emptyField = true;
                 break;
             }
@@ -56,9 +104,9 @@ $(document).ready(function () {
             url: "controller/supervisors/create-visors.php",
             type: "POST",
             data: formData,
-            processData: false,  // Prevent jQuery from processing the data
-            contentType: false,  // Prevent setting contentType header
-            dataType: "json", // Expected JSON response
+            processData: false,  // Important to avoid jQuery trying to process the data
+            contentType: false,  // Important to prevent jQuery from setting the content-type header
+            dataType: "json",
             success: function (response) {
                 if (response.success) {
                     Swal.fire({
@@ -97,6 +145,7 @@ $(document).ready(function () {
             },
             error: function (xhr, status, error) {
                 console.error("AJAX Error:", error);
+                console.log("Response text:", xhr.responseText); // Log the response text
                 Swal.fire({
                     toast: true,
                     position: 'top-right',
