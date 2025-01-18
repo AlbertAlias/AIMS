@@ -33,108 +33,14 @@
         <img src="assets/img/index/esyatek-bg1-logo.png" alt="Logo" class="home-logo">
     </section>
 
-    <!-- DEPARTMENT SECTION -->
-    <!-- <section class="dept-section p-0 m-0" id="department">
-        <div class="row">
-            <div class="card-container col-12">
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front" style="background-image: url('assets/img/index/a-card.jpg');"></div>
-                        <div class="card-back" style="background-color: skyblue;"></div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front" style="background-image: url('assets/img/index/ba-card.jpg');"></div>
-                        <div class="card-back" style="background-color: gold;"></div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front" style="background-image: url('assets/img/index/hm-card.jpg');"></div>
-                        <div class="card-back" style="background-color: lightgray;"></div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front" style="background-image: url('assets/img/index/tm-card.jpg');"></div>
-                        <div class="card-back" style="background-color: violet;"></div>
-                    </div>
-                </div>
-                <div class="card active">
-                    <div class="card-inner">
-                        <div class="card-front" style="background-image: url('assets/img/index/a-card.jpg');"></div>
-                        <div class="card-back" style="background-color: pink;"></div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front" style="background-image: url('assets/img/index/educ-card.jpg');"></div>
-                        <div class="card-back" style="background-color: red;"></div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front" style="background-image: url('assets/img/index/hm-card.jpg');"></div>
-                        <div class="card-back" style="background-color: orange;"></div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front" style="background-image: url('assets/img/index/a-card.jpg');"></div>
-                        <div class="card-back" style="background-color: darkgray;"></div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-inner">
-                        <div class="card-front" style="background-image: url('assets/img/index/tm-card.jpg');"></div>
-                        <div class="card-back" style="background-color: maroon;"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-
     <section class="dept-section p-0 m-0" id="department">
         <div class="row">
             <div class="card-container col-12" id="department-cards">
+                <!-- Slides will be dynamically generated here -->
             </div>
         </div>
     </section>
 
-    <!-- <section class="comp-section p-0 m-0" id="company">
-        <div class="swiper company-carousel">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide" data-bg="assets/img/index/accenture-bg.jpg">
-                    <img src="assets/img/index/accenture-logo.png">
-                </div>
-                <div class="swiper-slide" data-bg="assets/img/index/cognizant-bg.jpg">
-                    <img src="assets/img/index/cognizant-logo.png">
-                </div>
-                <div class="swiper-slide" data-bg="assets/img/index/concentrix-bg.png">
-                    <img src="assets/img/index/concentrix-logo.png">
-                </div>
-                <div class="swiper-slide" data-bg="assets/img/index/denso-bg.jpg">
-                    <img src="assets/img/index/denso-logo.png">
-                </div>
-                <div class="swiper-slide" data-bg="assets/img/index/fujitsu-bg.jpg">
-                    <img src="assets/img/index/fujitsu-logo.png">
-                </div>
-                <div class="swiper-slide" data-bg="assets/img/index/ibm-bg.jpg">
-                    <img src="assets/img/index/ibm-logo.png">
-                </div>
-                <div class="swiper-slide" data-bg="assets/img/index/imi-bg.jpg">
-                    <img src="assets/img/index/imi-logo.png">
-                </div>
-                <div class="swiper-slide" data-bg="assets/img/index/oracle-bg.jpg">
-                    <img src="assets/img/index/oracle-logo.png">
-                </div>
-                <div class="swiper-slide" data-bg="assets/img/index/taskus-bg.jpg">
-                    <img src="assets/img/index/taskus-logo.png">
-                </div>
-            </div>
-        </div>
-    </section> -->
 
     <section class="comp-section p-0 m-0" id="company">
         <div class="swiper company-carousel">
@@ -197,7 +103,6 @@
     <section class="team-section p-0 m-0" id="team">
         <div class="container">
             <div class="row justify-content-center">
-                <!-- Team Member 1 -->
                 <div class="col-12 col-md-4 mb-4">
                     <div class="team-member">
                         <img src="assets/img/index/bry.jpg" alt="" class="img-fluid rounded-circle">
@@ -224,8 +129,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Team Member 2 -->
                 <div class="col-12 col-md-4 mb-4">
                     <div class="team-member">
                         <img src="assets/img/index/al.jpg" alt="" class="img-fluid rounded-circle">
