@@ -102,45 +102,44 @@
         </div>
     </section>
 
-    <section class="comp-section p-0 m-0" id="company">
+    <!-- <section class="comp-section p-0 m-0" id="company">
         <div class="swiper company-carousel">
             <div class="swiper-wrapper">
-                <!-- Slide 1 -->
                 <div class="swiper-slide" data-bg="assets/img/index/accenture-bg.jpg">
                     <img src="assets/img/index/accenture-logo.png">
                 </div>
-                <!-- Slide 2 -->
                 <div class="swiper-slide" data-bg="assets/img/index/cognizant-bg.jpg">
                     <img src="assets/img/index/cognizant-logo.png">
                 </div>
-                <!-- Slide 3 -->
                 <div class="swiper-slide" data-bg="assets/img/index/concentrix-bg.png">
                     <img src="assets/img/index/concentrix-logo.png">
                 </div>
-                <!-- Slide 4 -->
                 <div class="swiper-slide" data-bg="assets/img/index/denso-bg.jpg">
                     <img src="assets/img/index/denso-logo.png">
                 </div>
-                <!-- Slide 5 -->
                 <div class="swiper-slide" data-bg="assets/img/index/fujitsu-bg.jpg">
                     <img src="assets/img/index/fujitsu-logo.png">
                 </div>
-                <!-- Slide 6 -->
                 <div class="swiper-slide" data-bg="assets/img/index/ibm-bg.jpg">
                     <img src="assets/img/index/ibm-logo.png">
                 </div>
-                <!-- Slide 7 -->
                 <div class="swiper-slide" data-bg="assets/img/index/imi-bg.jpg">
                     <img src="assets/img/index/imi-logo.png">
                 </div>
-                <!-- Slide 8 -->
                 <div class="swiper-slide" data-bg="assets/img/index/oracle-bg.jpg">
                     <img src="assets/img/index/oracle-logo.png">
                 </div>
-                <!-- Slide 9 -->
                 <div class="swiper-slide" data-bg="assets/img/index/taskus-bg.jpg">
                     <img src="assets/img/index/taskus-logo.png">
                 </div>
+            </div>
+        </div>
+    </section> -->
+
+    <section class="comp-section p-0 m-0" id="company">
+        <div class="swiper company-carousel">
+            <div class="swiper-wrapper">
+                <!-- Slides will be dynamically generated here -->
             </div>
         </div>
     </section>
@@ -296,6 +295,5 @@
 
     <script src="functions/landing-header.js"></script>
     <script src="functions/comp-card-logo.js"></script>
-    <script src="functions/about-carousel-info.js"></script>
 </body>
 </html>
