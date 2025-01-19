@@ -3,7 +3,7 @@
         <div class="col-12 col-md-12 col-lg-5">
             <div class="card mb-3" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <div class="card-body">
-                    <h5 class="mb-2">Upload Weekly Report</h5>
+                    <h5>Upload Weekly Report</h5>
                     <input type="hidden" class="student-id">
                     <form id="weeklyReportForm" method="POST" enctype="multipart/form-data">
                         <div class="mb-2">
@@ -29,8 +29,6 @@
                             <div id="reportContainer" class="mt-1"></div>
                         </div>
                         <button id="turnInReportButton" class="btn btn-success w-100 mb-2" disabled>Turn in report</button>
-                        <!-- <button id="updateReportButton" class="btn btn-success w-100 mb-2" type="button" style="display: none;" disabled>Update report</button> -->
-                        <!-- DON'T REMOVE ITS FOR THE EDIT DROPDOWN <li><button class="dropdown-item edit-btn" data-id="${report.id}">Edit</button></li> -->
                     </form>
                 </div>
             </div>

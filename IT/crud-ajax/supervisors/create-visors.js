@@ -1,38 +1,21 @@
 $(document).ready(function () {
     $("#visorSubmitBtn").on("click", function (event) {
         event.preventDefault();
+        const form = $("#visorForm")[0];
+        const formData = new FormData(form);
+        const lastName = $("#visor_last_name").val();
+        const firstName = $("#visor_first_name").val();
+        const gender = $("#visor_gender").val();
+        const email = $("#visor_personal_email").val();
+        const companyName = $("#visor_company_name").val();
+        const companyAddress = $("#visor_company_address").val();
+        const username = $("#visor_username").val();
+        const password = $("#visor_password").val();
 
-        const formData = {
-            visor_last_name: $("#visor_last_name").val(),
-            visor_first_name: $("#visor_first_name").val(),
-            visor_middle_name: $("#visor_middle_name").val(),
-            visor_gender: $("#visor_gender").val(),
-            visor_personal_email: $("#visor_personal_email").val(),
-            visor_company_name: $("#visor_company_name").val(),
-            visor_company_address: $("#visor_company_address").val(),
-            visor_username: $("#visor_username").val(),
-            visor_password: $("#visor_password").val(),
-        };
-
-        let emptyField = false;
-
-        // Check required fields for emptiness
-        const requiredFields = [
-            'visor_last_name', 'visor_first_name', 'visor_gender', 'visor_personal_email', 
-            'visor_company_name', 'visor_company_address', 'visor_username', 'visor_password'
-        ];
-
-        for (const field of requiredFields) {
-            if (formData[field] === "") {
-                emptyField = true;
-                break;
-            }
-        }
-
-        if (emptyField) {
+        if (!lastName || !firstName || !gender || !email || !companyName || !companyAddress || !username || !password) {
             Swal.fire({
                 toast: true,
-                position: 'top-right',
+                position: 'top-end',
                 icon: 'error',
                 title: 'Please fill out all required fields!',
                 showConfirmButton: false,
@@ -47,16 +30,67 @@ $(document).ready(function () {
             return;
         }
 
+        const companyLogo = $("#company_logo")[0].files[0];
+        const companyImage = $("#company_image")[0].files[0];
+        const maxFileSize = 40 * 1024 * 1024;
+
+        if (companyLogo && companyLogo.size > maxFileSize) {
+            Swal.fire({
+                toast: true,
+                position: 'top-right',
+                icon: 'error',
+                title: 'Company logo file size exceeds 40MB!',
+                showConfirmButton: false,
+                timer: 2000,
+                background: '#f8d7da',
+                iconColor: '#721c24',
+                color: '#721c24',
+                customClass: {
+                    popup: 'mt-5'
+                }
+            });
+            return;
+        }
+
+        if (companyImage && companyImage.size > maxFileSize) {
+            Swal.fire({
+                toast: true,
+                position: 'top-right',
+                icon: 'error',
+                title: 'Company image file size exceeds 40MB!',
+                showConfirmButton: false,
+                timer: 2000,
+                background: '#f8d7da',
+                iconColor: '#721c24',
+                color: '#721c24',
+                customClass: {
+                    popup: 'mt-5'
+                }
+            });
+            return;
+        }
+
+        if (companyLogo) {
+            formData.append("company_logo", companyLogo);
+        }
+
+        if (companyImage) {
+            formData.append("company_image", companyImage);
+        }
+
+        console.log(...formData.entries());
         $.ajax({
             url: "controller/supervisors/create-visors.php",
             type: "POST",
             data: formData,
+            processData: false,
+            contentType: false,
             dataType: "json",
             success: function (response) {
                 if (response.success) {
                     Swal.fire({
                         toast: true,
-                        position: 'top-right',
+                        position: 'top-end',
                         icon: 'success',
                         title: 'Supervisor added successfully!',
                         showConfirmButton: false,
@@ -74,7 +108,7 @@ $(document).ready(function () {
                 } else {
                     Swal.fire({
                         toast: true,
-                        position: 'top-right',
+                        position: 'top-end',
                         icon: 'error',
                         title: 'Error: ' + response.message,
                         showConfirmButton: false,
@@ -89,10 +123,12 @@ $(document).ready(function () {
                 }
             },
             error: function (xhr, status, error) {
-                console.error("AJAX Error:", error);
+                console.log('Error Status: ' + status);
+                console.log('Error Message: ' + error);
+                console.log('Response Text: ' + xhr.responseText);
                 Swal.fire({
                     toast: true,
-                    position: 'top-right',
+                    position: 'top-end',
                     icon: 'error',
                     title: 'An error occurred. Please try again.',
                     showConfirmButton: false,
@@ -104,7 +140,7 @@ $(document).ready(function () {
                         popup: 'mt-5'
                     }
                 });
-            },
+            }
         });
     });
 });

@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="../assets/style/student/requirement.css">
     <link rel="stylesheet" href="../assets/style/student/weeklyreport.css">
     <link rel="stylesheet" href="../assets/style/student/hours.css">
+    <link rel="stylesheet" href="../assets/style/student/folder.css">
     <style>
         html, body { height: 100%; margin: 0; } #wrapper { display: flex; height: 100vh; margin: 0; padding: 0; }
         #content-wrapper { flex-grow: 1; display: flex; flex-direction: column; background-color: #f8f8f8; }
@@ -90,16 +91,23 @@
     <!--START::REQUIREMENT AJAX-->
     <script src="crud-ajax/requirement/retrieve-requirements.js"></script>
     <script src="crud-ajax/requirement/retrieve-submit-file.js"></script>
-    <script src="crud-ajax/weeklyreport/create-submit-weeklyreport.js"></script>
-    <script src="crud-ajax/weeklyreport/retrieve-weekly-report.js"></script>
     <script src="crud-ajax/requirement/create-submit-file.js"></script>
     <!--END::REQUIREMENT AJAX-->
+
+    <!--START::WEEKLY REPORT AJAX-->
+    <script src="crud-ajax/weeklyreport/create-submit-weeklyreport.js"></script>
+    <script src="crud-ajax/weeklyreport/retrieve-weekly-report.js"></script>
+    <!--END::WEEKLY REPORT AJAX-->
 
     <!--START::HOURS AJAX-->
     <script src="crud-ajax/hours/create-submit-hours.js"></script>
     <script src="crud-ajax/hours/retrieve-ojthours.js"></script>
     <script src="function/hours/total-ojthours-inputs.js"></script>
     <!--END::HOURS AJAX-->
+
+    <!--START::REQUIREMENT FOLDER AJAX-->
+    <script src="crud-ajax/requirements-folder/retrieve-all-requirements.js"></script>
+    <!--END::REQUIREMENT FOLDER AJAX-->
     <!--END::CRUD AJAX FUNCTIONS-->
 
     <!--START::PROFILE FUNCTION-->

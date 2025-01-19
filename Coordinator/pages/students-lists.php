@@ -218,10 +218,10 @@
                         <p>(Practicum Training)</p>
                     </header>
                     <div id="main">
-                        <p>Name of Student: ___________________________________    Course: ________________________________</p>
+                        <p>Name of Student: ___________________________________</p>
                     </div>
                     <div id="main1">
-                        <p>Date Covered: From_________________ to _____________    Department: ______________________________</p>
+                        <p>Department: ______________________________</p>
                     </div>
                     <div id="instructions">
                         <p>To the Rater:</p>

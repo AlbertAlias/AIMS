@@ -1,0 +1,24 @@
+#folderTabs {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    border-radius: 0.25rem 0.25rem 0 0;
+}
+
+#folderTabs .nav-link {
+    color: #495057;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+}
+
+#folderTabs .nav-link.active {
+    background-color: #198754;
+    color: #fff !important;
+    border-color: #198754 #198754 #fff;
+    border-radius: 0.25rem 0.25rem 0 0;
+}
+
+#folderTabs .nav-link:hover {
+    border-color: #198754 #198754 #fff;
+}

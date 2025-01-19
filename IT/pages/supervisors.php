@@ -16,7 +16,6 @@
             </div>
         </div>
 
-        <!-- Add Supervisor Section -->
         <div class="col-12 col-md-6 col-lg-8">
             <div class="bg-light rounded-3 p-3 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-2">Add Supervisor</h5>
@@ -56,9 +55,19 @@
                         </div>
                     </div>
                     <div class="row mb-1">
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-6">
                             <label for="visor_company_address" class="form-label">Company Address <span class="text-danger">*</span></label>
                             <input type="text" class="form-control mb-2" id="visor_company_address" name="visor_company_address" required>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="visor_company_image" class="form-label required-asterisk">Company Image (PNG)</label>
+                            <input type="file" class="form-control mb-2" id="company_image" name="company_image" accept=".png" />
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-12 col-md-4">
+                            <label for="visor_company_logo" class="form-label required-asterisk">Company Logo (PNG)</label>
+                            <input type="file" class="form-control mb-2" id="company_logo" name="company_logo" accept=".png" />
                         </div>
                         <div class="col-12 col-md-4">
                             <label for="visor_username" class="form-label required-asterisk">Username <span class="text-danger">*</span></label>

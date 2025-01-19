@@ -183,3 +183,8 @@ table td:first-child {
 .custom-modal-width {
   max-width: 70% !important; /* Adjust percentage as needed */
 }
+
+table td:first-child {
+  text-align: left;  /* Aligns the text in the first column to the left */
+  padding-left: 15px;  /* Optional: adds padding for better readability */
+}
