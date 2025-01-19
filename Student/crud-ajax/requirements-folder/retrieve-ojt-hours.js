@@ -11,6 +11,15 @@ $(document).ready(function () {
 
                     if (ojtHoursData.length > 0) {
                         ojtHoursData.forEach((record) => {
+                            // Function to format 24-hour time to 12-hour with AM/PM
+                            function formatTime(timeStr) {
+                                let hours = parseInt(timeStr.split(':')[0]);
+                                let minutes = timeStr.split(':')[1] || '00'; // Handle case if minutes are not present
+                                let suffix = hours >= 12 ? 'pm' : 'am';
+                                hours = hours % 12 || 12; // Convert 0 hour to 12 (for midnight)
+                                return `${hours}:${minutes} ${suffix}`;
+                            }
+
                             // Format the submission date for display
                             const submissionDate = new Date(record.submission_date);
                             const formattedSubmissionDate = submissionDate.toLocaleDateString('en-US', {
@@ -18,6 +27,10 @@ $(document).ready(function () {
                                 month: 'short',
                                 day: 'numeric'
                             });
+
+                            // Format the morning and afternoon start/end times
+                            const morningStart = formatTime(record.morning_start);
+                            const afternoonEnd = formatTime(record.afternoon_end);
 
                             content += `
                                 <div class="card mb-2">
@@ -33,7 +46,7 @@ $(document).ready(function () {
                                         <div>
                                             <h5 class="card-title">${formattedSubmissionDate}</h5>
                                             <p class="card-text">
-                                                ${record.morning_start} to ${record.afternoon_end}
+                                                ${morningStart} to ${afternoonEnd}
                                             </p>
                                         </div>
                                     </div>
