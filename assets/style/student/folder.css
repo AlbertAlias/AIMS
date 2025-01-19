@@ -1,6 +1,5 @@
 #folderTabs {
     background-color: #f8f9fa;
-    border-bottom: 2px solid #dee2e6;
     border-radius: 0.25rem 0.25rem 0 0;
 }
 
@@ -21,4 +20,57 @@
 
 #folderTabs .nav-link:hover {
     border-color: #198754 #198754 #fff;
+}
+
+.file-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.file-modal-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+    padding: 0;
+}
+
+.file-modal-content embed {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.file-modal-content img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    margin: auto;
+    background-color: #f4f4f42b;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.close:hover {
+    color: #ff4d4d;
 }

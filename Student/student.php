@@ -106,7 +106,9 @@
     <!--END::HOURS AJAX-->
 
     <!--START::REQUIREMENT FOLDER AJAX-->
-    <script src="crud-ajax/requirements-folder/retrieve-all-requirements.js"></script>
+    <script src="crud-ajax/requirements-folder/retrieve-requirements.js"></script>
+    <script src="crud-ajax/requirements-folder/retrieve-weekly-reports.js"></script>
+    <script src="crud-ajax/requirements-folder/retrieve-ojt-hours.js"></script>
     <!--END::REQUIREMENT FOLDER AJAX-->
     <!--END::CRUD AJAX FUNCTIONS-->
 

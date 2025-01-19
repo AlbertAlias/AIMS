@@ -12,6 +12,9 @@ if (!isset($_SESSION['user_id'])) {
 
 $student_id = $_SESSION['user_id'];
 
+// Define the base path for uploaded files
+$upload_base_path = '/AIMS/Student/controller/requirement/uploads/';
+
 // SQL query to retrieve approved requirements for the logged-in student
 $sql = "
     SELECT document_name, submission_date, file_path, status 
@@ -26,6 +29,8 @@ $result = $stmt->get_result();
 
 $data = [];
 while ($row = $result->fetch_assoc()) {
+    // Prepend the base path to the file_path
+    $row['file_path'] = $upload_base_path . basename($row['file_path']);
     $data[] = $row;
 }
 
