@@ -1,44 +1,37 @@
 <?php
-// Prevent caching
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-header("Content-Type: application/json");
+    header("Content-Type: application/json");
+    include '../../../dbconn.php';
+    session_start();
 
-// Include database connection
-include '../../../dbconn.php';
-session_start();
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
+        exit();
+    }
 
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    echo json_encode(['status' => 'error', 'message' => 'User not logged in.']);
-    exit();
-}
+    $user_id = $_SESSION['user_id'];
 
-$user_id = $_SESSION['user_id'];
+    $sql = "
+        SELECT title, week_start, week_end, file_path 
+        FROM weekly_reports 
+        WHERE student_id = ?
+        ORDER BY week_start ASC
+    ";
 
-// Query to fetch weekly reports for the logged-in student
-$sql = "
-    SELECT title, week_start, week_end, file_path 
-    FROM weekly_reports 
-    WHERE student_id = ?
-    ORDER BY week_start ASC
-";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('i', $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param('i', $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
+    $reports = [];
+    while ($row = $result->fetch_assoc()) {
+        $upload_base_path = '/AIMS/Student/controller/weeklyreport/uploads/';
+        $row['file_path'] = $upload_base_path . basename($row['file_path']);
+        $reports[] = $row;
+    }
 
-// Fetch data
-$reports = [];
-while ($row = $result->fetch_assoc()) {
-    $reports[] = $row;
-}
+    $stmt->close();
+    $conn->close();
 
-$stmt->close();
-$conn->close();
-
-// Return the data as JSON
-echo json_encode(['status' => 'success', 'data' => $reports]);
-?>
+    // Return the data as JSON
+    echo json_encode(['status' => 'success', 'data' => $reports]);
+?> 
