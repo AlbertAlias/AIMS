@@ -61,6 +61,9 @@
                 <div id="page-content" style="width: 100%;">
                     <?php include "pages/dashboard.php"; ?>
                     <?php include "pages/profile.php"; ?>
+                    <?php include "pages/studentlist.php"; ?>
+                    <?php include "pages/coordinatorlist.php"; ?>
+                    <?php include "pages/supervisorlist.php"; ?>
                 </div>
             </div>
         </div>
@@ -86,5 +89,19 @@
     <script src="crud-ajax/profile/update-users-info.js"></script>
     <script src="functions/profile/profile-details.js"></script>
     <!--END::PROFILE FUNCTION-->
+
+    <!-- student start-->
+    <script src="crud-ajax/student/retrieve-stud-ojthours.js"></script>
+    <script src="crud-ajax/student/retrieve-stud-lists.js"></script>
+     <!-- student end -->
+
+     <!-- coordinator start -->
+    <script src="crud-ajax/coordinator/retrieve-coor-lists.js"></script>
+     <!-- coordinator end -->
+
+     <!-- supervisor start -->
+    <script src="crud-ajax/supervisor/retrieve-supervisor-lists.js"></script>
+     <!-- supervisor end -->
+
 </body>
 </html>
