@@ -8,7 +8,7 @@
                     <form id="weeklyReportForm" method="POST" enctype="multipart/form-data">
                         <div class="mb-2">
                             <label for="title" class="form-label">Report Title <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="title" id="title" required>
+                            <input type="text" class="form-control" name="title" id="title" placeholder="Eaxmple: Week 1" required>
                         </div>
                         <div class="mb-2">
                             <label for="week_start" class="form-label">Week Start <span class="text-danger">*</span></label>

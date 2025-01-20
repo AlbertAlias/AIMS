@@ -61,3 +61,7 @@
     height: 15px;
     margin-bottom: 3px;
 }
+
+#stud-lists tbody td {
+    text-align: center;
+}

@@ -12,21 +12,32 @@ function loadTableData() {
             search: $('#stud-lists-searchInput').val()
         },
         success: function(response) {
+            console.log('AJAX Response:', response); // Debugging log
+            
+            if (response.error) {
+                $('#stud-lists tbody').html('<tr><td colspan="4">Error: ' + response.error + '</td></tr>');
+                return;
+            }
+
             if (response.html) {
                 $('#stud-lists tbody').html(response.html);
             } else {
-                $('#stud-lists tbody').html('<tr><td colspan="7">No data available</td></tr>');
+                $('#stud-lists tbody').html('<tr><td colspan="4" class="text-center">No data available</td></tr>');
             }
+
             if (response.pagination) {
                 $('#stud-lists-pagination').html(response.pagination);
             } else {
                 $('#stud-lists-pagination').html('');
             }
-            // $('#stud-lists-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
-            $('#stud-lists-tableInfo').text(response.total > 0 ? `Showing ${response.start} to ${response.end} of ${response.total} entries` : 'No entries available');
+
+            $('#stud-lists-tableInfo').text(response.total > 0 ? 
+                `Showing ${response.start} to ${response.end} of ${response.total} entries` : 
+                'No entries available');
         },
         error: function(xhr, status, error) {
-            console.error('AJAX Error:', status, error);
+            console.error('AJAX Error:', status, error); // Log AJAX error for debugging
+            $('#stud-lists tbody').html('<tr><td colspan="4" class="text-center">Error retrieving data</td></tr>');
         }
     });
 }
