@@ -12,8 +12,6 @@ function loadTableData() {
             search: $('#stud-lists-searchInput').val()
         },
         success: function(response) {
-            console.log('AJAX Response:', response); // Debugging log
-            
             if (response.error) {
                 $('#stud-lists tbody').html('<tr><td colspan="4">Error: ' + response.error + '</td></tr>');
                 return;
@@ -36,7 +34,7 @@ function loadTableData() {
                 'No entries available');
         },
         error: function(xhr, status, error) {
-            console.error('AJAX Error:', status, error); // Log AJAX error for debugging
+            console.error('AJAX Error:', status, error);
             $('#stud-lists tbody').html('<tr><td colspan="4" class="text-center">Error retrieving data</td></tr>');
         }
     });
