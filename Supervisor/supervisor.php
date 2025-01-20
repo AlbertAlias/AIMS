@@ -64,7 +64,6 @@
 
                 <!-- Begin Page Content -->
                 <div id="page-content" style="width: 100%;">
-                    <?php include "pages/dashboard.php"; ?>
                     <?php include "pages/student-evaluation.php"; ?>
                     <?php include "pages/profile.php"; ?>
                 </div>
