@@ -90,8 +90,8 @@
 
     <!--START::REQUIREMENT AJAX-->
     <script src="crud-ajax/requirement/retrieve-requirements.js"></script>
-    <script src="crud-ajax/requirement/retrieve-submit-file.js"></script>
     <script src="crud-ajax/requirement/create-submit-file.js"></script>
+    <script src="crud-ajax/requirement/retrieve-submit-file.js"></script>
     <!--END::REQUIREMENT AJAX-->
 
     <!--START::WEEKLY REPORT AJAX-->
