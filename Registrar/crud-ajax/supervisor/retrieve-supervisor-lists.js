@@ -3,22 +3,22 @@ let supervisorPageLength = 10;
 
 function loadSupervisorTableData() {
     $.ajax({
-        url: 'controller/supervisor/retrieve-supervisor-lists.php', // Ensure the URL points to the correct supervisor endpoint
+        url: 'controller/supervisor/retrieve-supervisor-lists.php',
         type: 'GET',
         dataType: 'json',
         data: {
             page: supervisorPage,
             length: supervisorPageLength,
-            search: $('#supervisor-lists-searchInput').val() // Update the input ID to match the supervisor search input
+            search: $('#supervisor-lists-searchInput').val()
         },
         success: function(response) {
             if (response.html) {
-                $('#supervisortbody').html(response.html); // Update the tbody ID to 'supervisortbody'
+                $('#supertbody').html(response.html);
             } else {
-                $('#supervisortbody').html('<tr><td colspan="8">No data available</td></tr>'); // Ensure column count matches
+                $('#supertbody').html('<tr><td colspan="8">No data available</td></tr>');
             }
             if (response.pagination) {
-                $('#supervisor-lists-pagination').html(response.pagination); // Update the pagination ID accordingly
+                $('#supervisor-lists-pagination').html(response.pagination);
             } else {
                 $('#supervisor-lists-pagination').html('');
             }

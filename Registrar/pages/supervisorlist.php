@@ -30,17 +30,16 @@
                 <table id="supervisor-lists" class="table table-hover text-center m-0" style="width: 100%;">
                     <thead class="table-light">
                         <tr>
-                            <th>Name</th>
-                            <th>Department</th>
-                            <th>Company</th>
-                            <th>Email</th>
-                            <th>AY</th>
-                            <th>Username</th>
-                            <th>User Type</th>
-                            <th>Actions</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>User Type</th>
+                        <th>Company</th>
+                        <th>Company Address</th>
                         </tr>
                     </thead>
-                    <tbody id="supervisortbody">
+                    <tbody id="supertbody">
                         <!-- Data will be loaded here via AJAX -->
                     </tbody>
                 </table>

@@ -28,7 +28,6 @@ try {
 
     $start = ($page - 1) * $length;
 
-    // Modify the query to fetch supervisor data
     $sql = "
     SELECT 
         users.user_id AS userID,
@@ -36,12 +35,14 @@ try {
         department.department_name AS department,
         users.email AS email,
         users.username AS username,
-        users.user_type AS userType
+        users.user_type AS userType,
+        users.company AS company,
+        users.company_address AS companyAddress
     FROM users
     LEFT JOIN department ON users.department_id = department.department_id
-    WHERE users.user_type = 'Supervisor'  <!-- Changed from 'Coordinator' to 'Supervisor' -->
-    AND CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email) LIKE ?
-    LIMIT ?, ?";
+    WHERE users.user_type = 'Supervisor'
+    AND CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email, users.company, users.company_address) LIKE ?
+    LIMIT ?, ?";    
 
     $stmt = $conn->prepare($sql);
     $searchTerm = "%$search%";
@@ -59,26 +60,26 @@ try {
             $email = htmlspecialchars($row['email']) ?: '--';
             $username = htmlspecialchars($row['username']) ?: '--';
             $userType = htmlspecialchars($row['userType']) ?: '--';
-
+            $company = htmlspecialchars($row['company']) ?: '--';
+            $companyAddress = htmlspecialchars($row['companyAddress']) ?: '--';
+            
             $html .= '<tr>';
             $html .= "<td>{$name}</td>";
             $html .= "<td>{$department}</td>";
-            $html .= "<td>--</td>"; // Placeholder for company, since it's not needed
             $html .= "<td>{$email}</td>";
-            $html .= "<td>--</td>"; // Placeholder for academic year
             $html .= "<td>{$username}</td>";
             $html .= "<td>{$userType}</td>";
-            $html .= '<td>
-                        <button class="btn btn-primary btn-sm">View</button>
-                    </td>';
+            $html .= "<td>{$company}</td>";
+            $html .= "<td>{$companyAddress}</td>";
             $html .= '</tr>';
+            
         }
     }
 
     $countSql = "
     SELECT COUNT(*) AS total 
     FROM users 
-    WHERE user_type = 'Supervisor'  <!-- Changed from 'Coordinator' to 'Supervisor' -->
+    WHERE user_type = 'Supervisor'
     AND CONCAT_WS(' ', first_name, last_name, email) LIKE ?";
     
     $countStmt = $conn->prepare($countSql);

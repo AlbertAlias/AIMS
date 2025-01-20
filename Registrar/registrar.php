@@ -64,6 +64,7 @@
                     <?php include "pages/studentlist.php"; ?>
                     <?php include "pages/coordinatorlist.php"; ?>
                     <?php include "pages/supervisorlist.php"; ?>
+                    <?php include "pages/deanlist.php"; ?>
                 </div>
             </div>
         </div>
