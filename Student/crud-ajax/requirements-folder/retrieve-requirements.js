@@ -71,8 +71,7 @@ $(document).ready(function () {
     });
 
     // Use delegated event listener to handle dynamically created close button
-    $(document).on('click', '#closeModal', function () {
-        console.log('Close button clicked');
+    $(document).on('click', '#filecloseModal', function () {
         $('#fileModal').hide(); // Hide the modal
         $('#fileViewer').attr('src', ''); // Clear the PDF viewer
         $('#fileimageViewer').attr('src', ''); // Clear the image viewer

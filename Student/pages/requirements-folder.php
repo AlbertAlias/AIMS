@@ -25,7 +25,7 @@
 
 <div id="fileModal" class="file-modal" style="display: none;">
     <div class="file-modal-content">
-        <span id="closeModal" class="close">&times;</span>
+        <span id="filecloseModal" class="close">&times;</span>
         <embed id="fileViewer" width="100%" height="100%" type="application/pdf">
         <img id="fileimageViewer" src="" alt="Preview" style="width: 100%; height: 100%; display: none;" />
     </div>

@@ -100,11 +100,13 @@ $(document).ready(function () {
         reportModal.style.display = 'flex';
     }
 
-    document.getElementById('report-closeModal').addEventListener('click', function () {
+    document.getElementById('report-closeModal').addEventListener('click', function (event) {
+        event.stopPropagation();
         document.getElementById('reportModal').style.display = 'none';
         document.getElementById('reportViewer').src = '';
         document.getElementById('imageViewer').src = '';
     });
+    
 
     function deleteReport(reportId) {
         $.ajax({

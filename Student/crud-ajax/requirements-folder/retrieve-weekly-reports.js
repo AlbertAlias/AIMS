@@ -94,7 +94,7 @@ $(document).ready(function () {
     }
 
     // Close the modal
-    document.getElementById('closeModal').addEventListener('click', function () {
+    document.getElementById('filecloseModal').addEventListener('click', function () {
         const fileModal = document.getElementById('fileModal');
         const fileViewer = document.getElementById('fileViewer');
         const fileImageViewer = document.getElementById('fileimageViewer');
