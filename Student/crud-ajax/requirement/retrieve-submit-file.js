@@ -147,7 +147,7 @@ $(document).ready(function () {
         });
     }
 
-    $('#closeModal').on('click', function () {
+    $('#pdf-closeModal').on('click', function () {
         const modal = document.getElementById('pdfModal');
         modal.style.display = 'none';
         document.getElementById('pdfViewer').src = '';

@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const submitButton = document.getElementById('turnInButton');
     const pdfViewer = document.getElementById('pdfViewer');
     const modal = document.getElementById('pdfModal');
-    const closeModal = document.getElementById('closeModal');
+    const closeModal = document.getElementById('pdf-closeModal');
 
     fileContainer.addEventListener('click', function (event) {
         const fileCard = event.target.closest('.d-flex');

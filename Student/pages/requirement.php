@@ -37,7 +37,7 @@
 
 <div id="pdfModal" class="modal" style="display: none;">
     <div class="pdf-modal-content">
-        <span id="closeModal" class="close">&times;</span>
+        <span id="pdf-closeModal" class="close">&times;</span>
         <iframe id="pdfViewer" src="" frameborder="0"></iframe>
     </div>
 </div>
