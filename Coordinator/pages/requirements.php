@@ -7,7 +7,7 @@
                     <input type="text" class="form-control title" id="requirementTitle" placeholder="What's on your mind, Coordinator?">
                 </div>
                 <div class="post-body mb-2">
-                    <textarea rows="3" class="form-control" id="requirementDescription" placeholder="Write something..."></textarea>
+                    <textarea rows="3" class="form-control" id="requirementDescription" placeholder="Descriptions"></textarea>
                 </div>
                 <div class="post-footer d-flex justify-content-between align-items-center">
                     <div class="deadline-container">
@@ -24,7 +24,7 @@
             <div class="row mt-2">
                 <div class="col-lg-12">
                     <a class="requirements-container" id="pendingContainer" data-bs-toggle="modal" data-bs-target="#pendingModal">
-                        Pending: 0
+                        Pending
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon" style="fill: #ffc107dd;">
                             <path d="M464 256A208 208 0 1 1 48 256a208 208 0 1 1 416 0zM0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM232 120l0 136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2 280 120c0-13.3-10.7-24-24-24s-24 10.7-24 24z"/>
                         </svg>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="col-lg-12 mt-2 mb-2">
                     <a class="requirements-container" id="rejectedContainer" data-bs-toggle="modal" data-bs-target="#rejectedModal">
-                        Rejected: 0
+                        Rejected
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon" style="fill: #ff2a00cf;">
                             <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"/>
                         </svg>
@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-lg-12 mb-2">
                     <a class="requirements-container" id="completedContainer" data-bs-toggle="modal" data-bs-target="#completedModal">
-                        Completed: 0
+                        Completed
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon" style="fill: #28a745;">
                             <path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/>
                         </svg>
