@@ -11,8 +11,7 @@
                             <option value="100">100</option>
                         </select>
                     </div>
-                </div>
-                <div class="flex-shrink-1">
+                    <div class="flex-shrink-1">
                     <div class="input-group">
                         <input type="text" id="supervisor-lists-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
                         <button class="btn btn-success btn-sm" type="button">
@@ -21,6 +20,7 @@
                             </svg>
                         </button>
                     </div>
+                </div>
                 </div>
             </div>
         </div>

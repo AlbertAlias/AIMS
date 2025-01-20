@@ -104,5 +104,8 @@
     <script src="crud-ajax/supervisor/retrieve-supervisor-lists.js"></script>
      <!-- supervisor end -->
 
+    <!-- dean start -->
+    <script src="crud-ajax/dean/retrieve-dean-lists.js"></script>
+     <!-- deab end -->
 </body>
 </html>
