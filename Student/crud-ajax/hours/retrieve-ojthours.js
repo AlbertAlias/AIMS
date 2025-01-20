@@ -50,8 +50,9 @@ $('#ojthours-pagination').on('click', '.page-link', function(e) {
     loadOjtHoursData();
 });
 
-$('#ojthours').on('click', '.view-file-button', function() {
-    var filePath = $(this).data('file');
+function handleFileView(event) {
+    event.stopPropagation();  // Prevent this event from affecting other scripts
+    var filePath = $(event.target).data('file'); // Use event.target to get the button
     if (filePath) {
         if (filePath.endsWith('.pdf')) {
             $('#ojthoursViewer').show().attr('src', filePath + '#toolbar=0');
@@ -62,7 +63,8 @@ $('#ojthours').on('click', '.view-file-button', function() {
         }
         $('#ojthoursModal').show();
     }
-});
+}
+
 
 $('#ojthours-closeModal').on('click', function() {
     $('#ojthoursModal').hide();

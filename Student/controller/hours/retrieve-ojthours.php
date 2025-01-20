@@ -98,7 +98,7 @@
                 $html .= '<td>' . $totalHours . '</td>';
                 $html .= '<td>';
                 if ($filePath !== '--') {
-                    $html .= '<button class="btn btn-sm btn-primary view-file-button" data-file="' . $filePath . '">View File</button>';
+                    $html .= '<button class="btn btn-sm btn-primary view-file-button" data-file="' . $filePath . '" onclick="handleFileView(event)">View File</button>';
                 } else {
                     $html .= '--';
                 }
