@@ -64,6 +64,7 @@
                     <?php include "pages/studentlist.php"; ?>
                     <?php include "pages/coordinatorlist.php"; ?>
                     <?php include "pages/supervisorlist.php"; ?>
+                    <?php include "pages/deanlist.php"; ?>
                 </div>
             </div>
         </div>
@@ -103,5 +104,8 @@
     <script src="crud-ajax/supervisor/retrieve-supervisor-lists.js"></script>
      <!-- supervisor end -->
 
+    <!-- dean start -->
+    <script src="crud-ajax/dean/retrieve-dean-lists.js"></script>
+     <!-- deab end -->
 </body>
 </html>

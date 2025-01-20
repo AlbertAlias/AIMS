@@ -11,8 +11,7 @@
                             <option value="100">100</option>
                         </select>
                     </div>
-                </div>
-                <div class="flex-shrink-1">
+                    <div class="flex-shrink-1">
                     <div class="input-group">
                         <input type="text" id="supervisor-lists-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
                         <button class="btn btn-success btn-sm" type="button">
@@ -22,6 +21,7 @@
                         </button>
                     </div>
                 </div>
+                </div>
             </div>
         </div>
 
@@ -30,17 +30,16 @@
                 <table id="supervisor-lists" class="table table-hover text-center m-0" style="width: 100%;">
                     <thead class="table-light">
                         <tr>
-                            <th>Name</th>
-                            <th>Department</th>
-                            <th>Company</th>
-                            <th>Email</th>
-                            <th>AY</th>
-                            <th>Username</th>
-                            <th>User Type</th>
-                            <th>Actions</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Email</th>
+                        <th>Username</th>
+                        <th>User Type</th>
+                        <th>Company</th>
+                        <th>Company Address</th>
                         </tr>
                     </thead>
-                    <tbody id="supervisortbody">
+                    <tbody id="supertbody">
                         <!-- Data will be loaded here via AJAX -->
                     </tbody>
                 </table>

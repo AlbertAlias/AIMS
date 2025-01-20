@@ -11,9 +11,6 @@ try {
 
     $userTypeQuery = "SELECT user_type FROM users WHERE user_id = ?";
     $userTypeStmt = $conn->prepare($userTypeQuery);
-    if (!$userTypeStmt) {
-        throw new Exception('Failed to prepare user type query.');
-    }
     $userTypeStmt->bind_param('i', $_SESSION['user_id']);
     $userTypeStmt->execute();
     $userTypeResult = $userTypeStmt->get_result()->fetch_assoc();
@@ -35,14 +32,12 @@ try {
         department.department_name AS department,
         users.email AS email,
         users.username AS username,
-        users.user_type AS userType,
-        users.company AS company,
-        users.company_address AS companyAddress
+        users.user_type AS userType
     FROM users
     LEFT JOIN department ON users.department_id = department.department_id
-    WHERE users.user_type = 'Supervisor'
-    AND CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email, users.company, users.company_address) LIKE ?
-    LIMIT ?, ?";    
+    WHERE users.user_type = 'Dean'
+    AND CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email) LIKE ?
+    LIMIT ?, ?";
 
     $stmt = $conn->prepare($sql);
     $searchTerm = "%$search%";
@@ -56,30 +51,23 @@ try {
     } else {
         while ($row = $result->fetch_assoc()) {
             $name = htmlspecialchars($row['name']) ?: '--';
-            $department = htmlspecialchars($row['department']) ?: '--';
             $email = htmlspecialchars($row['email']) ?: '--';
             $username = htmlspecialchars($row['username']) ?: '--';
             $userType = htmlspecialchars($row['userType']) ?: '--';
-            $company = htmlspecialchars($row['company']) ?: '--';
-            $companyAddress = htmlspecialchars($row['companyAddress']) ?: '--';
-            
+
             $html .= '<tr>';
             $html .= "<td>{$name}</td>";
-            $html .= "<td>{$department}</td>";
             $html .= "<td>{$email}</td>";
             $html .= "<td>{$username}</td>";
             $html .= "<td>{$userType}</td>";
-            $html .= "<td>{$company}</td>";
-            $html .= "<td>{$companyAddress}</td>";
             $html .= '</tr>';
-            
         }
     }
 
     $countSql = "
     SELECT COUNT(*) AS total 
     FROM users 
-    WHERE user_type = 'Supervisor'
+    WHERE user_type = 'Dean'
     AND CONCAT_WS(' ', first_name, last_name, email) LIKE ?";
     
     $countStmt = $conn->prepare($countSql);
