@@ -55,7 +55,7 @@ $(document).ready(function () {
                             }
 
                             const fileCardHtml = `
-                            <div class="card task-card px-3 py-3 mb-2 col-12 col-md-6 col-lg-4 w-100" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; transition: transform 0.3s ease;" data-file-name="${fileName}">
+                            <div class="card submit-card px-3 py-3 mb-2 col-12 col-md-6 col-lg-4 w-100" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px; transition: transform 0.3s ease;" data-file-name="${fileName}">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="d-flex flex-column justify-content-center">
                                         <div class="card-title text-success fw-bold" style="font-size: 0.835rem;">${fileName}</div>
@@ -82,7 +82,7 @@ $(document).ready(function () {
                         deleteStudentFile(submitId);
                     });
 
-                    $('.task-card').on('click', function () {
+                    $('.submit-card').on('click', function () {
                         const fileName = $(this).data('file-name');
                         const pdfViewer = document.getElementById('pdfViewer');
                         pdfViewer.src = `controller/requirement/uploads/${fileName}#toolbar=0`;
@@ -147,7 +147,7 @@ $(document).ready(function () {
         });
     }
 
-    $('#closeModal').on('click', function () {
+    $('#pdf-closeModal').on('click', function () {
         const modal = document.getElementById('pdfModal');
         modal.style.display = 'none';
         document.getElementById('pdfViewer').src = '';

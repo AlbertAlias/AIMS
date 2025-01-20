@@ -9,8 +9,11 @@
 
     $student_id = $_SESSION['user_id'];
 
+    // Define the base upload path
+    $upload_base_path = '/AIMS/Student/controller/requirement/uploads/';
+
     $sql = "
-    SELECT sr.submit_id, sr.document_name, sr.status, sr.submission_date, sr.remarks, r.description
+    SELECT sr.submit_id, sr.document_name, sr.status, sr.submission_date, sr.remarks, r.description, sr.file_path
     FROM submit_requirements sr
     LEFT JOIN requirements r ON sr.requirement_id = r.requirement_id
     WHERE sr.student_id = ?
@@ -24,6 +27,8 @@
 
     $files = [];
     while ($file = $result->fetch_assoc()) {
+        // Append the base path to the file path
+        $file['file_path'] = $upload_base_path . basename($file['file_path']);
         $files[] = $file;
     }
 

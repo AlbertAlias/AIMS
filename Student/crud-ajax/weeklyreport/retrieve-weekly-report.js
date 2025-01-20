@@ -65,7 +65,7 @@ $(document).ready(function () {
             $container.append(reportCard);
         });
     
-        $('.card').click(function () {
+        $('.report-card').click(function () {
             const filePath = $(this).data('file-path');
             showFileInModal(filePath);
         });
