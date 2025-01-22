@@ -141,6 +141,7 @@
     <!--END::PROFILE FUNCTION-->
     <!-- START::ARCHIVE FUNCTION -->
     <script src="crud-ajax/masterlists/archive-users.js"></script>
+    <!-- <script src="crud-ajax/masterlists/archive-users.js"></script> -->
     <!-- END::ARCHIVE FUNCTION -->
 </body>
 </html>
