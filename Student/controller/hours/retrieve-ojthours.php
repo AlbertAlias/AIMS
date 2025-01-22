@@ -130,6 +130,13 @@
         $sumResult = $sumStmt->get_result();
         $totalHoursSum = $sumResult->fetch_assoc()['total_hours_sum'] ?: 0; // Default to 0 if null
 
+        // Update total_hours_sum into users.rendered_hours
+        $updateHoursSql = "UPDATE users SET rendered_hours = ? WHERE user_id = ?";
+        $updateHoursStmt = $conn->prepare($updateHoursSql);
+        $updateHoursStmt->bind_param('di', $totalHoursSum, $student_id);
+        $updateHoursStmt->execute();
+        $updateHoursStmt->close();
+
         $totalPages = ceil($total / $length);
         $pagination = '';
         $maxVisiblePages = 3;
