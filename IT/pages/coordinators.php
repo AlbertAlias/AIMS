@@ -19,7 +19,7 @@
         <div class="col-12 col-md-6 col-lg-8">
             <div class="bg-light rounded-3 p-3 d-flex flex-column" style="min-height: 200px; box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
                 <h5 class="text-gray-800 fw-bold border-bottom border-dark pb-2 mb-2">Add Coordinator</h5>
-                <p class="text-gray-800 fs-5 mb-2">Personal Informations</p>
+                <p class="text-gray-800 fs-5 mb-2">Personal Information</p>
                 <form id="coordinatorForm">
                     <div class="row mb-1">
                         <div class="col-12 col-md-4">
