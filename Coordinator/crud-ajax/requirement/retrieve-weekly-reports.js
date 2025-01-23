@@ -31,7 +31,7 @@ $(document).ready(function() {
                         `;
                     });
                 } else {
-                    htmlContent = '<p>No reports found</p>';
+                    htmlContent = '<p>No reports available</p>';
                 }
                 $('#weeklyreportContent').html(htmlContent);
             },

@@ -18,7 +18,7 @@ $(document).ready(function () {
                     $('#completedSelectOption').html(options);
                 } else {
                     // When no data is found
-                    $('#completedSelectOption').html('<option disabled selected>No requirements found.</option>');
+                    $('#completedSelectOption').html('<option disabled selected>Not available</option>');
                 }
             },
             error: function () {
@@ -88,7 +88,7 @@ $(document).ready(function () {
                     });
                     $('#completedContent').html(content);
                 } else {
-                    $('#completedContent').html('<p>No completed requirements found.</p>');
+                    $('#completedContent').html('<p>No completed requirements available</p>');
                 }
             },
             error: function () {

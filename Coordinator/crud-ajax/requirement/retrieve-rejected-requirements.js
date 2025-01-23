@@ -18,7 +18,7 @@ $(document).ready(function () {
                     $('#rejectedSelectOption').html(options);
                 } else {
                     // No requirements available
-                    $('#rejectedSelectOption').html('<option disabled selected>No open requirements found.</option>');
+                    $('#rejectedSelectOption').html('<option disabled selected>Not available</option>');
                 }
             },
             error: function () {
@@ -89,7 +89,7 @@ $(document).ready(function () {
                     });
                     $('#rejectedContent').html(content);
                 } else {
-                    $('#rejectedContent').html('<p>No rejected requirements found.</p>');
+                    $('#rejectedContent').html('<p>No rejected requirements available</p>');
                 }
             },
             error: function () {

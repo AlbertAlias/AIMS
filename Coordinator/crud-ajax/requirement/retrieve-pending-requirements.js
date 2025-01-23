@@ -15,7 +15,7 @@ $(document).ready(function () {
                     });
                 } else {
                     // If no requirements, show a placeholder option
-                    options = '<option value="" disabled selected>No requirements available</option>';
+                    options = '<option value="" disabled selected>Not available</option>';
                 }
                 $('#pendingSelectOption').html(options);
             },
@@ -87,7 +87,7 @@ $(document).ready(function () {
                     });
                     $('#pendingContent').html(content);
                 } else {
-                    $('#pendingContent').html('<p>No pending requirements found.</p>');
+                    $('#pendingContent').html('<p>No pending requirements available</p>');
                 }
             },
             error: function () {
