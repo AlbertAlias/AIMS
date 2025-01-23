@@ -1,10 +1,12 @@
 <div class="container-fluid p-0 m-0" id="students" style="display: none;">
-    <div class="card" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+    <div class="card"
+        style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
         <div class="card-header bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
                 <div class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
-                        <select id="stud-lists-pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
+                        <select id="stud-lists-pageLengthSelect" class="form-select form-select-sm custom-select"
+                            aria-label="Page length selector">
                             <option value="10">10</option>
                             <option value="25">25</option>
                             <option value="50">50</option>
@@ -13,21 +15,24 @@
                     </div>
                     <div class="flex-shrink-1">
                         <div class="input-group">
-                            <input type="text" id="stud-lists-searchInput" class="form-control form-control-sm" aria-label="Search">
+                            <input type="text" id="stud-lists-searchInput" class="form-control form-control-sm"
+                                aria-label="Search">
                             <button class="btn btn-success btn-sm" type="button">
                                 <svg class="table-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                    <path fill="#f3f3f3" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
+                                    <path fill="#f3f3f3"
+                                        d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
                                 </svg>
                             </button>
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-sm btn-primary " type="button" data-bs-toggle="modal" data-bs-target="#setHoursModal">
+                <button class="btn btn-sm btn-primary " type="button" data-bs-toggle="modal"
+                    data-bs-target="#setHoursModal">
                     Set OJT Hours
                 </button>
             </div>
         </div>
-        
+
         <div class="card-body bg-white p-0">
             <div class="table-responsive">
                 <table id="stud-lists" class="table table-hover text-center m-0" style="width: 100%;">
@@ -49,7 +54,7 @@
                 </table>
             </div>
         </div>
-        
+
         <div class="card-footer bg-light text-dark">
             <div class="d-flex justify-content-between align-items-center flex-wrap">
                 <span class="mb-2" id="stud-lists-tableInfo">Showing 1 to 10 of 50 entries</span>
@@ -105,7 +110,8 @@
                         <label for="hoursNeeded" class="form-label">Hours Needed</label>
                         <input type="number" class="form-control" id="hoursNeeded" name="hoursNeeded" required>
                     </div>
-                    <input type="hidden" id="coordinatorId" name="coordinatorId" value="1"> <!-- Set the coordinator ID here -->
+                    <input type="hidden" id="coordinatorId" name="coordinatorId" value="1">
+                    <!-- Set the coordinator ID here -->
                 </form>
             </div>
             <div class="modal-footer">
@@ -128,7 +134,9 @@
                         <div class="d-flex justify-content-between align-items-center flex-wrap">
                             <div class="d-flex align-items-center">
                                 <div class="d-flex align-items-center me-1">
-                                    <select id="ojthours-pageLengthSelect" class="form-select form-select-sm custom-select" aria-label="Page length selector">
+                                    <select id="ojthours-pageLengthSelect"
+                                        class="form-select form-select-sm custom-select"
+                                        aria-label="Page length selector">
                                         <option value="10">10</option>
                                         <option value="25">25</option>
                                         <option value="50">50</option>
@@ -137,10 +145,14 @@
                                 </div>
                                 <div class="flex-shrink-1">
                                     <div class="input-group">
-                                        <input type="text" id="ojthours-searchInput" class="form-control form-control-sm" placeholder="Search..." aria-label="Search">
+                                        <input type="text" id="ojthours-searchInput"
+                                            class="form-control form-control-sm" placeholder="Search..."
+                                            aria-label="Search">
                                         <button class="btn btn-sm btn-outline-secondary" type="button">
-                                            <svg class="table-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                                <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
+                                            <svg class="table-icon" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 512 512">
+                                                <path
+                                                    d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
                                             </svg>
                                         </button>
                                     </div>
@@ -207,7 +219,7 @@
             <div class="modal-header bg-light">
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            
+
             <form id="evaluationForm">
                 <input type="hidden" id="student_id" name="student_id">
                 <div class="modal-body">
@@ -225,8 +237,12 @@
                     </div>
                     <div id="instructions">
                         <p>To the Rater:</p>
-                        <p>This form has been developed to monitor the performance of each practicum trainee not only for grading purposes but also to provide a basis for identifying his/her strengths & weaknesses:</p>
-                        <p>Kindly rate the trainee in each of the traits indicated below by encircling the appropriate number that corresponds to your OBJECTIVE EVALUATION of his/her performance in your department using the scale provided.</p>
+                        <p>This form has been developed to monitor the performance of each practicum trainee not only
+                            for grading purposes but also to provide a basis for identifying his/her strengths &
+                            weaknesses:</p>
+                        <p>Kindly rate the trainee in each of the traits indicated below by encircling the appropriate
+                            number that corresponds to your OBJECTIVE EVALUATION of his/her performance in your
+                            department using the scale provided.</p>
                         <p>
                             5 – Outstanding (O)<br>
                             4 – Very Satisfactory (VS)<br>
@@ -361,7 +377,8 @@
                                 <td><input type="radio" name="ratings[quality13]" value="1"></td>
                             </tr>
                             <tr>
-                                <td>Demonstrates an interest and willingness to learn the task required to maintain operational standards</td>
+                                <td>Demonstrates an interest and willingness to learn the task required to maintain
+                                    operational standards</td>
                                 <td><input type="radio" name="ratings[quality14]" value="5"></td>
                                 <td><input type="radio" name="ratings[quality14]" value="4"></td>
                                 <td><input type="radio" name="ratings[quality14]" value="3"></td>
@@ -388,7 +405,8 @@
                                 <td><input type="radio" name="ratings[quality16]" value="1"></td>
                             </tr>
                             <tr>
-                                <td>Accepts suggestions, directions and constructive criticism from employees and supervisors</td>
+                                <td>Accepts suggestions, directions and constructive criticism from employees and
+                                    supervisors</td>
                                 <td><input type="radio" name="ratings[quality17]" value="5"></td>
                                 <td><input type="radio" name="ratings[quality17]" value="4"></td>
                                 <td><input type="radio" name="ratings[quality17]" value="3"></td>

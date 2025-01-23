@@ -63,7 +63,7 @@
 
         $html = '';
         if ($result->num_rows === 0) {
-            $html = '<tr><td colspan="7">No data available</td></tr>';
+            $html = '<tr><td colspan="8" style="text-align: center;">No data available</td></tr>';
         } else {
             while ($row = $result->fetch_assoc()) {
                 $name = htmlspecialchars($row['name']) ?: '--';
