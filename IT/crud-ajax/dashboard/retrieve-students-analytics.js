@@ -1,16 +1,6 @@
 $(document).ready(function() {
     const chartConfig = {
-        departmentColors: {
-            'BSA': '#FF69B4',
-            'BSBA': '#FF0000',
-            'BSCPE': '#FFA500',
-            'BSCRIM': '#800000',
-            'BSCS': '#A9A9A9',
-            'BSED': '#ADD8E6',
-            'BSHM': '#FFD700',
-            'BSIT': '#D3D3D3',
-            'BSTM': '#8A2BE2'
-        },
+        baseColor: '#198754',
         errorMessages: {
             noData: 'No data available',
             parseError: 'Error parsing data',
@@ -18,6 +8,50 @@ $(document).ready(function() {
         },
         refreshInterval: 300000
     };
+
+    // Generate lighter and darker variations of the base color
+    function generateUniqueGreenShades(baseColor, count) {
+        const colors = new Set(); // Use a Set to avoid duplicates
+        const [r, g, b] = hexToRgb(baseColor);
+
+        let factor = 0.1; // Starting adjustment factor
+        for (let i = 0; i < count; i++) {
+            let adjustedColor;
+            do {
+                // Alternate between lighter and darker shades
+                const adjustment = i % 2 === 0 ? factor : -factor;
+                adjustedColor = rgbToHex(
+                    adjustColorValue(r, adjustment),
+                    adjustColorValue(g, adjustment),
+                    adjustColorValue(b, adjustment)
+                );
+                factor += 0.1; // Increment factor to ensure no repeats
+            } while (colors.has(adjustedColor)); // Ensure the color is unique
+
+            colors.add(adjustedColor);
+        }
+
+        return Array.from(colors); // Convert Set to Array
+    }
+
+    // Convert HEX to RGB
+    function hexToRgb(hex) {
+        const bigint = parseInt(hex.slice(1), 16);
+        const r = (bigint >> 16) & 255;
+        const g = (bigint >> 8) & 255;
+        const b = bigint & 255;
+        return [r, g, b];
+    }
+
+    // Convert RGB to HEX
+    function rgbToHex(r, g, b) {
+        return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+    }
+
+    // Adjust color values for lighter/darker shades
+    function adjustColorValue(value, factor) {
+        return Math.min(255, Math.max(0, Math.round(value + value * factor)));
+    }
 
     function filterDepartments(data) {
         return data.filter(item => parseInt(item.total) > 5);
@@ -64,7 +98,7 @@ $(document).ready(function() {
                             data: departments.map(item => parseInt(item.total) || 0)
                         }];
 
-                        const colors = departments.map(item => chartConfig.departmentColors[item.department_name] || '#808080');
+                        const colors = generateUniqueGreenShades(chartConfig.baseColor, departments.length);
 
                         const chartData = {
                             series: series,
