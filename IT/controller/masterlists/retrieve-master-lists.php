@@ -26,14 +26,22 @@ try {
 
     // Prepare selected columns for SQL query
     $selectColumns = [];
-    if ($columns['UserID']) $selectColumns[] = "users.user_id AS UserID"; // Added user_id
-    if ($columns['Name']) $selectColumns[] = "CONCAT(users.last_name, ', ', users.first_name) AS Name";
-    if ($columns['Department']) $selectColumns[] = "department.department_name AS Department";
-    if ($columns['Company']) $selectColumns[] = "users.company AS Company";
-    if ($columns['Email']) $selectColumns[] = "users.email AS Email";
-    if ($columns['AY']) $selectColumns[] = "users.academic_year AS AY";
-    if ($columns['Username']) $selectColumns[] = "users.username AS Username";
-    if ($columns['UserType']) $selectColumns[] = "users.user_type AS UserType";
+    if ($columns['UserID'])
+        $selectColumns[] = "users.user_id AS UserID"; // Added user_id
+    if ($columns['Name'])
+        $selectColumns[] = "CONCAT(users.last_name, ', ', users.first_name) AS Name";
+    if ($columns['Department'])
+        $selectColumns[] = "department.department_name AS Department";
+    if ($columns['Company'])
+        $selectColumns[] = "users.company AS Company";
+    if ($columns['Email'])
+        $selectColumns[] = "users.email AS Email";
+    if ($columns['AY'])
+        $selectColumns[] = "users.academic_year AS AY";
+    if ($columns['Username'])
+        $selectColumns[] = "users.username AS Username";
+    if ($columns['UserType'])
+        $selectColumns[] = "users.user_type AS UserType";
 
     $sqlColumns = implode(', ', $selectColumns);
 
@@ -41,23 +49,25 @@ try {
     $start = ($page - 1) * $length;
 
     $sql = "
-    SELECT 
-        $sqlColumns
-    FROM users
-    LEFT JOIN department ON users.department_id = department.department_id
-    WHERE CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email, users.username, users.user_type) LIKE ?";
+        SELECT 
+            $sqlColumns
+        FROM users
+        LEFT JOIN department ON users.department_id = department.department_id
+        WHERE users.user_type != 'IT'
+        AND CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email, users.username, users.user_type) LIKE ?";
 
-    if ($userType) {
-        $sql .= " AND users.user_type = ?";
-    }
-    if ($userType === 'Supervisor' && $company) {
-        $sql .= " AND users.company = ?";
-    }
-    if ($userType === 'Student' && $departmentId) {
-        $sql .= " AND users.department_id = ?";
-    }
+        if ($userType) {
+            $sql .= " AND users.user_type = ?";
+        }
+        if ($userType === 'Supervisor' && $company) {
+            $sql .= " AND users.company = ?";
+        }
+        if ($userType === 'Student' && $departmentId) {
+            $sql .= " AND users.department_id = ?";
+        }
 
-    $sql .= " LIMIT ?, ?";
+        $sql .= " LIMIT ?, ?";
+
     $stmt = $conn->prepare($sql);
     $searchTerm = "%$search%";
 
@@ -83,23 +93,31 @@ try {
             $html .= '<tr>';
             // Hidden field for user_id (Optional, for use in JavaScript actions)
             $html .= '<td style="display:none;" data-user-id="' . htmlspecialchars($userID) . '"></td>';
-            if ($columns['Name']) $html .= '<td>' . (htmlspecialchars($row['Name']) ?: '--') . '</td>';
-            if ($columns['Department']) $html .= '<td>' . (htmlspecialchars($row['Department']) ?: '--') . '</td>';
-            if ($columns['Company']) $html .= '<td>' . (htmlspecialchars($row['Company']) ?: '--') . '</td>';
-            if ($columns['Email']) $html .= '<td>' . (htmlspecialchars($row['Email']) ?: '--') . '</td>';
-            if ($columns['AY']) $html .= '<td>' . (htmlspecialchars($row['AY']) ?: '--') . '</td>';
-            if ($columns['Username']) $html .= '<td>' . (htmlspecialchars($row['Username']) ?: '--') . '</td>';
-            if ($columns['UserType']) $html .= '<td>' . (htmlspecialchars($row['UserType']) ?: '--') . '</td>';
+            if ($columns['Name'])
+                $html .= '<td>' . (htmlspecialchars($row['Name']) ?: '--') . '</td>';
+            if ($columns['Department'])
+                $html .= '<td>' . (htmlspecialchars($row['Department']) ?: '--') . '</td>';
+            if ($columns['Company'])
+                $html .= '<td>' . (htmlspecialchars($row['Company']) ?: '--') . '</td>';
+            if ($columns['Email'])
+                $html .= '<td>' . (htmlspecialchars($row['Email']) ?: '--') . '</td>';
+            if ($columns['AY'])
+                $html .= '<td>' . (htmlspecialchars($row['AY']) ?: '--') . '</td>';
+            if ($columns['Username'])
+                $html .= '<td>' . (htmlspecialchars($row['Username']) ?: '--') . '</td>';
+            if ($columns['UserType'])
+                $html .= '<td>' . (htmlspecialchars($row['UserType']) ?: '--') . '</td>';
             $html .= '<td><button class="btn btn-warning deleteButton" data-user-id="' . htmlspecialchars($userID) . '">Archive</button></td>';
             $html .= '</tr>';
         }
     }
 
     $totalSql = "
-    SELECT COUNT(*) AS total
-    FROM users
-    LEFT JOIN department ON users.department_id = department.department_id
-    WHERE CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email, users.username, users.user_type) LIKE ?";
+        SELECT COUNT(*) AS total
+        FROM users
+        LEFT JOIN department ON users.department_id = department.department_id
+        WHERE users.user_type != 'IT'
+        AND CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email, users.username, users.user_type) LIKE ?";
 
     if ($userType) {
         $totalSql .= " AND users.user_type = ?";
@@ -107,6 +125,7 @@ try {
     if ($userType === 'Supervisor' && $company) {
         $totalSql .= " AND users.company = ?";
     }
+
 
     $totalStmt = $conn->prepare($totalSql);
     if ($userType === 'Supervisor' && $company) {

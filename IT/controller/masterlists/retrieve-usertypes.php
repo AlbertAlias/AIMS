@@ -1,4 +1,5 @@
 <?php
+    header('Content-Type: application/json');
     require '../../../dbconn.php';
 
     $response = [
@@ -8,8 +9,8 @@
     ];
 
     try {
-        // SQL query to fetch unique user types
-        $sql = "SELECT DISTINCT user_type FROM users WHERE user_type IS NOT NULL";
+        // SQL query to fetch unique user types excluding 'IT'
+        $sql = "SELECT DISTINCT user_type FROM users WHERE user_type IS NOT NULL AND user_type != 'IT'";
         $result = $conn->query($sql);
 
         if ($result && $result->num_rows > 0) {
@@ -26,7 +27,6 @@
     }
 
     // Send JSON response
-    header('Content-Type: application/json');
     echo json_encode($response);
 
     // Close the database connection
