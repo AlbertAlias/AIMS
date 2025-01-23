@@ -38,46 +38,47 @@
         $start = ($page - 1) * $length;
 
         $sql = "
-        SELECT 
-            u.user_id, 
-            u.first_name, 
-            u.last_name, 
-            u.department_id, 
-            d.department_name
-        FROM users u
-        INNER JOIN department d ON u.department_id = d.department_id
-        WHERE u.user_type = 'Coordinator'
-        AND u.department_id IN ($departmentIdsStr)
-        AND CONCAT_WS(' ', u.first_name, u.last_name, u.username, u.email) LIKE ?
-        LIMIT ?, ?";
-        $stmt = $conn->prepare($sql);
-        if (!$stmt) {
-            throw new Exception('Failed to prepare query.');
-        }
-
-        $searchTerm = "%$search%";
-        $stmt->bind_param('sii', $searchTerm, $start, $length);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        $html = '';
-        if ($result->num_rows === 0) {
-            $html = '<tr><td colspan="7">No data available</td></tr>';
-        } else {
-            while ($row = $result->fetch_assoc()) {
-                $first_name = htmlspecialchars($row['first_name']) ?: '--';
-                $last_name = htmlspecialchars($row['last_name']) ?: '--';
-                $department_name = htmlspecialchars($row['department_name']) ?: '--';
-                $department_id = htmlspecialchars($row['department_id']) ?: '--';
-    
-                $html .= '<tr>';
-                $html .= '<td>' . $first_name . '</td>';
-                $html .= '<td>' . $last_name . '</td>';
-                $html .= '<td>' . $department_name . '</td>';
-                $html .= '<td>' . $department_id . '</td>';
-                $html .= '</tr>';
+            SELECT 
+                u.user_id, 
+                u.first_name, 
+                u.last_name, 
+                d.department_name,
+                (SELECT COUNT(*) FROM users s WHERE s.department_id = u.department_id AND s.user_type = 'Student') AS student_count
+            FROM users u
+            INNER JOIN department d ON u.department_id = d.department_id
+            WHERE u.user_type = 'Coordinator'
+            AND u.department_id IN ($departmentIdsStr)
+            AND CONCAT_WS(' ', u.first_name, u.last_name, u.username, u.email) LIKE ?
+            LIMIT ?, ?";
+            $stmt = $conn->prepare($sql);
+            if (!$stmt) {
+                throw new Exception('Failed to prepare query.');
             }
-        }
+
+            $searchTerm = "%$search%";
+            $stmt->bind_param('sii', $searchTerm, $start, $length);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $html = '';
+            if ($result->num_rows === 0) {
+                $html = '<tr><td colspan="7">No data available</td></tr>';
+            } else {
+                while ($row = $result->fetch_assoc()) {
+                    $first_name = htmlspecialchars($row['first_name']) ?: '--';
+                    $last_name = htmlspecialchars($row['last_name']) ?: '--';
+                    $department_name = htmlspecialchars($row['department_name']) ?: '--';
+                    $student_count = htmlspecialchars($row['student_count']) ?: '0'; // Student count
+                    
+                    $html .= '<tr>';
+                    $html .= '<td>' . $first_name . '</td>';
+                    $html .= '<td>' . $last_name . '</td>';
+                    $html .= '<td>' . $department_name . '</td>';
+                    $html .= '<td>' . $student_count . '</td>'; // Display student count
+                    $html .= '</tr>';
+                }
+            }
+
 
         $totalSql = "
         SELECT COUNT(*) AS total

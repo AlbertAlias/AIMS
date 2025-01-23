@@ -12,24 +12,35 @@ function loadcoorTableData() {
             search: $('#coor-searchInput').val()
         },
         success: function(response) {
+            // Populate the table body
             if (response.html) {
                 $('#coorTable tbody').html(response.html);
             } else {
-                $('#coorTable tbody').html('<tr><td colspan="7">No data available</td></tr>');
+                $('#coorTable tbody').html('<tr><td colspan="4">No data available</td></tr>'); // Match colspan with the number of columns
             }
+
+            // Update table info or display "No entries available"
+            if (response.total > 0) {
+                $('#coor-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
+            } else {
+                $('#coor-tableInfo').text('No entries available');
+            }
+
+            // Handle pagination
             if (response.pagination) {
                 $('#coor-pagination').html(response.pagination);
             } else {
                 $('#coor-pagination').html('');
             }
-            // $('#coor-tableInfo').text(`Showing ${response.start} to ${response.end} of ${response.total} entries`);
-            $('#coor-tableInfo').text(response.total > 0 ? `Showing ${response.start} to ${response.end} of ${response.total} entries` : 'No entries available');
         },
         error: function(xhr, status, error) {
             console.error('AJAX Error:', status, error);
+            $('#coorTable tbody').html('<tr><td colspan="4">An error occurred. Please try again later.</td></tr>');
+            $('#coor-tableInfo').text('No entries available');
         }
     });
 }
+
 
 $('#coor-pageLengthSelect').on('change', function() {
     coorlistsPageLength = parseInt($(this).val());
