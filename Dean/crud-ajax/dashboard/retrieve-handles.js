@@ -1,16 +1,31 @@
 $(document).ready(function () {
     const chartElement = $("#handles-chart");
 
+    function showError(message) {
+        chartElement.html(`
+            <div style="text-align: center; font-size: 16px; color: #999;">
+                ${message}
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center; height: 320px;">
+                <img src="../assets/img/404-NOT-FOUND.png" alt="No Data Image" style="width: 300px; height: auto;">
+            </div>
+        `);
+    }
+
     $.ajax({
         url: 'controller/dashboard/retrieve-handles.php',
         method: 'GET',
         dataType: 'json',
         success: function (data) {
-            renderChart(data);
+            if (data && data.length > 0) {
+                renderChart(data);
+            } else {
+                showError("No data available");
+            }
         },
         error: function (error) {
             console.error('Error fetching data:', error);
-            alert('An error occurred while fetching data. Please try again later.');
+            showError("An error occurred while loading data.");
         }
     });
 
