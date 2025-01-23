@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const fileInput = document.getElementById('fileInput');
     const uploadButton = document.getElementById('uploadButton');
 
+    // Prevent default behaviors for drag events
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
         dropZone.addEventListener(eventName, preventDefaults, false);
     });
@@ -12,18 +13,21 @@ document.addEventListener('DOMContentLoaded', function () {
         e.stopPropagation();
     }
 
+    // Highlight drop zone on drag over
     ['dragenter', 'dragover'].forEach(eventName => {
         dropZone.addEventListener(eventName, () => {
             dropZone.style.backgroundColor = '#e0ffe0';
         }, false);
     });
 
+    // Reset drop zone styling on drag leave or drop
     ['dragleave', 'drop'].forEach(eventName => {
         dropZone.addEventListener(eventName, () => {
             dropZone.style.backgroundColor = '';
         }, false);
     });
 
+    // Handle drop event
     dropZone.addEventListener('drop', handleDrop, false);
 
     function handleDrop(e) {
@@ -32,10 +36,12 @@ document.addEventListener('DOMContentLoaded', function () {
         handleFiles(files);
     }
 
+    // Upload button click event to trigger file input
     uploadButton.addEventListener('click', () => {
         fileInput.click();
     });
 
+    // Handle file selection from file input
     fileInput.addEventListener('change', (e) => {
         const files = e.target.files;
         handleFiles(files);
@@ -45,7 +51,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const file = files[0];
         if (file && file.name.endsWith('.csv')) {
             uploadButton.disabled = true;
-            uploadButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Uploading...';
+
+            // Create and add the spinner element to the button
+            const spinner = document.createElement('div');
+            spinner.classList.add('spinner-border', 'text-light');
+            spinner.setAttribute('role', 'status');
+            spinner.style.width = '1.5rem';
+            spinner.style.height = '1.5rem';
+            uploadButton.innerHTML = '';
+            uploadButton.appendChild(spinner);
+            uploadButton.append(' Uploading...');
 
             uploadFile(file);
         } else {
