@@ -144,8 +144,8 @@ $(document).ready(function () {
                             }
                         });
                     } else {
-                        requirementsContainer.html("<p class='text-muted'>No requirements posted by your coordinator.</p>");
-                        postedRequirementsContainer.html("<p class='text-muted'>No requirements posted by your coordinator.</p>");
+                        requirementsContainer.html("<p class='text-muted'>No requirements available</p>");
+                        postedRequirementsContainer.html("<p class='text-muted'>No requirements available</p>");
                     }
                 } else {
                     requirementsContainer.html(`<p class='text-danger'>Error: ${result.error}</p>`);

@@ -23,7 +23,7 @@ $(document).ready(function () {
         $container.empty();
     
         if (data.length === 0) {
-            $container.html('<div class="col-12">No weekly reports available.</div>');
+            $container.html('<div class="col-12 text-muted">No weekly reports available.</div>');
             return;
         }
 
@@ -116,18 +116,59 @@ $(document).ready(function () {
             dataType: 'json',
             success: function(response) {
                 if (response.success) {
-                    alert('Report deleted successfully');
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-right',
+                        icon: 'success',
+                        title: 'Report deleted successfully!',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        background: '#b9f6ca',
+                        iconColor: '#2e7d32',
+                        color: '#155724',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
                     fetchWeeklyReports();
                 } else {
-                    alert('Failed to delete report: ' + response.error);
+                    Swal.fire({
+                        toast: true,
+                        position: 'top-right',
+                        icon: 'error',
+                        title: 'Failed to delete report: ' + response.error,
+                        showConfirmButton: false,
+                        timer: 3000,
+                        background: '#ffcdd2',
+                        iconColor: '#c62828',
+                        color: '#b71c1c',
+                        customClass: {
+                            popup: 'mt-5'
+                        }
+                    });
                 }
             },
             error: function(xhr, status, error) {
                 console.error('Unexpected error:', error);
-                alert('An unexpected error occurred while deleting the report');
+                Swal.fire({
+                    toast: true,
+                    position: 'top-right',
+                    icon: 'error',
+                    title: 'An unexpected error occurred while deleting the report',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    background: '#ffcdd2',
+                    iconColor: '#c62828',
+                    color: '#b71c1c',
+                    customClass: {
+                        popup: 'mt-5'
+                    }
+                });
             }
         });
     }
+
+    window.fetchWeeklyReports = fetchWeeklyReports;
 
     fetchWeeklyReports();
 });

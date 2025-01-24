@@ -215,6 +215,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 submitButton.disabled = true;
                 fileInput.disabled = false;
                 fileInput.closest('label').style.pointerEvents = 'auto';
+                window.fetchWeeklyReports();
             } else {
                 Swal.fire({
                     toast: true,
