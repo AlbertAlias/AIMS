@@ -4,12 +4,6 @@
     </div>
 
     <nav>
-        <a href="#" class="sidebar-link" onclick="showSection(event, 'dashboard')">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                <path d="M0 80C0 53.5 21.5 32 48 32l96 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-96 0c-26.5 0-48-21.5-48-48L0 80zM64 96l0 64 64 0 0-64L64 96zM0 336c0-26.5 21.5-48 48-48l96 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-96 0c-26.5 0-48-21.5-48-48l0-96zm64 16l0 64 64 0 0-64-64 0zM304 32l96 0c26.5 0 48 21.5 48 48l0 96c0 26.5-21.5 48-48 48l-96 0c-26.5 0-48-21.5-48-48l0-96c0-26.5 21.5-48 48-48zm80 64l-64 0 0 64 64 0 0-64zM256 304c0-8.8 7.2-16 16-16l64 0c8.8 0 16 7.2 16 16s7.2 16 16 16l32 0c8.8 0 16-7.2 16-16s7.2-16 16-16s16 7.2 16 16l0 96c0 8.8-7.2 16-16 16l-64 0c-8.8 0-16-7.2-16-16s-7.2-16-16-16s-16 7.2-16 16l0 64c0 8.8-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16l0-160zM368 480a16 16 0 1 1 0-32 16 16 0 1 1 0 32zm64 0a16 16 0 1 1 0-32 16 16 0 1 1 0 32z"/>
-            </svg>
-            <span>Dashboard</span>
-        </a>
         <a href="#" class="sidebar-link" onclick="showSection(event, 'coordinatorlist')">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
                 <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304l91.4 0C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7L29.7 512C13.3 512 0 498.7 0 482.3zM609.3 512l-137.8 0c5.4-9.4 8.6-20.3 8.6-32l0-8c0-60.7-27.1-115.2-69.8-151.8c2.4-.1 4.7-.2 7.1-.2l61.4 0C567.8 320 640 392.2 640 481.3c0 17-13.8 30.7-30.7 30.7zM432 256c-31 0-59-12.6-79.3-32.9C372.4 196.5 384 163.6 384 128c0-26.8-6.6-52.1-18.3-74.3C384.3 40.1 407.2 32 432 32c61.9 0 112 50.1 112 112s-50.1 112-112 112z"/>
@@ -51,7 +45,7 @@
         }
 
         document.querySelectorAll
-        ('#dashboard, #coordinatorlist, #studentlist, #coordinatorlist, #supervisorlist, #deanlist').forEach(section => {
+        ('#coordinatorlist, #studentlist, #coordinatorlist, #supervisorlist, #deanlist, #profile').forEach(section => {
             section.style.display = 'none';
         });
 
@@ -62,8 +56,8 @@
     }
 
     window.onload = function() {
-        showSection(null, 'dashboard'); 
+        showSection(null, 'coordinatorlist'); 
 
-        document.querySelector('a[href="#"][onclick*="dashboard"]').classList.add('active');
+        document.querySelector('a[href="#"][onclick*="coordinatorlist"]').classList.add('active');
     };
 </script>

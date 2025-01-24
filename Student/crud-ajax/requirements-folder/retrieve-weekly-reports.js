@@ -78,15 +78,23 @@ $(document).ready(function () {
         
         const fileExtension = filePath.split('.').pop().toLowerCase();
 
+        // Clear any previous content
+        fileViewer.src = '';
+        fileImageViewer.src = '';
+        fileViewer.style.display = 'none';
+        fileImageViewer.style.display = 'none';
+
         // Check file type and display accordingly
         if (fileExtension === 'pdf') {
-            fileViewer.src = filePath + '#toolbar=0';
+            // Short delay to ensure the PDF source is properly updated
+            const fileURL = `${filePath}#toolbar=0`;
+            setTimeout(() => {
+                fileViewer.src = fileURL;
+            }, 50);  // Adding small delay
             fileViewer.style.display = 'block';
-            fileImageViewer.style.display = 'none';
         } else if (['jpg', 'jpeg', 'png'].includes(fileExtension)) {
             fileImageViewer.src = filePath;
             fileImageViewer.style.display = 'block';
-            fileViewer.style.display = 'none';
         }
 
         // Show modal
