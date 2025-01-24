@@ -23,7 +23,6 @@ $(document).on('click', '.deleteButton', function () {
                         const data = JSON.parse(response);
                         if (data.status === 'success') {
                             Swal.fire('Deleted!', data.message, 'success').then(() => {
-                                location.reload(); // Reload to reflect the deletion
                             });
                         } else {
                             Swal.fire('Error', data.message, 'error');
