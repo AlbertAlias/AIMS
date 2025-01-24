@@ -15,7 +15,7 @@ function loadCoordinatorTableData() {
             if (response.html) {
                 $('#coortbody').html(response.html);  // Changed tbody to coortbody
             } else {
-                $('#coortbody').html('<tr><td colspan="8">No data available</td></tr>');  // Changed tbody to coortbody
+                $('#coortbody').html('<tr><td colspan="5">No data available</td></tr>');  // Changed tbody to coortbody
             }
             if (response.pagination) {
                 $('#coord-lists-pagination').html(response.pagination);
@@ -26,7 +26,9 @@ function loadCoordinatorTableData() {
         },
         error: function(xhr, status, error) {
             console.error('AJAX error:', status, error);
+            console.log('Response Text:', xhr.responseText);  // Log the response text for debugging
         }
+        
     });
 }
 

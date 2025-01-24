@@ -32,12 +32,9 @@
                         <tr>
                             <th>Name</th>
                             <th>Department</th>
-                            <!-- <th>Company</th> -->
                             <th>Email</th>
-                            <!-- <th>AY</th> -->
                             <th>Username</th>
                             <th>User Type</th>
-                            <!-- <th>Actions</th> -->
                         </tr>
                     </thead>
                     <tbody id="coortbody">

@@ -1,6 +1,7 @@
 <?php
 header('Content-Type: application/json');
-include '../../../dbconn.php';
+include '../../../archive_dbconn.php';  // Archive DB connection for retrieving dean lists
+include '../../../dbconn.php';         // AIMS DB connection for registrar check
 
 try {
     session_start();
@@ -9,6 +10,7 @@ try {
         throw new Exception('Unauthorized access. Please log in.');
     }
 
+    // Checking the user type in the AIMS DB (for registrar)
     $userTypeQuery = "SELECT user_type FROM users WHERE user_id = ?";
     $userTypeStmt = $conn->prepare($userTypeQuery);
     $userTypeStmt->bind_param('i', $_SESSION['user_id']);
@@ -19,12 +21,21 @@ try {
         throw new Exception('Unauthorized access. Only registrar accounts can view this data.');
     }
 
+    // Now switch to the archive DB for retrieving the dean list
+    $archiveConn = new mysqli($servername, $username, $password, "archive_db");
+
+    if ($archiveConn->connect_error) {
+        error_log("Connection to archive_db failed: " . $archiveConn->connect_error);
+        die(json_encode(['error' => 'Database connection to archive_db failed']));
+    }
+
     $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
     $length = isset($_GET['length']) ? intval($_GET['length']) : 10;
     $search = isset($_GET['search']) ? $_GET['search'] : '';
 
     $start = ($page - 1) * $length;
 
+    // Query to retrieve the dean list from the archive_db
     $sql = "
     SELECT 
         users.user_id AS userID,
@@ -39,7 +50,7 @@ try {
     AND CONCAT_WS(' ', users.first_name, users.last_name, department.department_name, users.email) LIKE ?
     LIMIT ?, ?";
 
-    $stmt = $conn->prepare($sql);
+    $stmt = $archiveConn->prepare($sql);
     $searchTerm = "%$search%";
     $stmt->bind_param('sii', $searchTerm, $start, $length);
     $stmt->execute();
@@ -47,7 +58,7 @@ try {
 
     $html = '';
     if ($result->num_rows === 0) {
-        $html = '<tr><td colspan="8">No data available</td></tr>';
+        $html = '<tr><td colspan="4">No data available</td></tr>';
     } else {
         while ($row = $result->fetch_assoc()) {
             $name = htmlspecialchars($row['name']) ?: '--';
@@ -69,8 +80,8 @@ try {
     FROM users 
     WHERE user_type = 'Dean'
     AND CONCAT_WS(' ', first_name, last_name, email) LIKE ?";
-    
-    $countStmt = $conn->prepare($countSql);
+
+    $countStmt = $archiveConn->prepare($countSql);
     $countStmt->bind_param('s', $searchTerm);
     $countStmt->execute();
     $countResult = $countStmt->get_result()->fetch_assoc();
@@ -120,4 +131,5 @@ try {
 $stmt->close();
 $countStmt->close();
 $conn->close();
+$archiveConn->close();
 ?>

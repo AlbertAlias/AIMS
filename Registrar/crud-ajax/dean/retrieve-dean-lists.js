@@ -15,7 +15,7 @@ function loadDeanTableData() {
             if (response.html) {
                 $('#deantbody').html(response.html);  // Changed tbody to deantbody
             } else {
-                $('#deantbody').html('<tr><td colspan="8">No data available</td></tr>');  // Changed tbody to deantbody
+                $('#deantbody').html('<tr><td colspan="4">No data available</td></tr>');  // Changed tbody to deantbody
             }
             if (response.pagination) {
                 $('#dean-lists-pagination').html(response.pagination);
@@ -26,6 +26,7 @@ function loadDeanTableData() {
         },
         error: function(xhr, status, error) {
             console.error('AJAX error:', status, error);
+            console.log('Response Text:', xhr.responseText);
         }
     });
 }

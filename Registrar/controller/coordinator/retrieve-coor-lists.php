@@ -1,6 +1,12 @@
 <?php
 header('Content-Type: application/json');
-include '../../../dbconn.php';
+include '../../../archive_dbconn.php';  // For the archive_db queries (departments)
+include '../../../dbconn.php';         // For the aims_db queries (users)
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+ob_clean();
 
 try {
     session_start();
@@ -9,6 +15,7 @@ try {
         throw new Exception('Unauthorized access. Please log in.');
     }
 
+    // First, check if the logged-in user is a registrar using the aims_db
     $userTypeQuery = "SELECT user_type FROM users WHERE user_id = ?";
     $userTypeStmt = $conn->prepare($userTypeQuery);
     if (!$userTypeStmt) {
@@ -22,6 +29,10 @@ try {
         throw new Exception('Unauthorized access. Only registrar accounts can view this data.');
     }
 
+    // Proceed with the data retrieval for coordinators from archive_db
+    include '../../../archive_dbconn.php'; // Re-include archive_dbconn.php for this section
+
+    // Data processing logic
     $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
     $length = isset($_GET['length']) ? intval($_GET['length']) : 10;
     $search = isset($_GET['search']) ? $_GET['search'] : '';
@@ -43,14 +54,18 @@ try {
     LIMIT ?, ?";
 
     $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        throw new Exception('Failed to prepare coordinator query.');
+    }
     $searchTerm = "%$search%";
     $stmt->bind_param('sii', $searchTerm, $start, $length);
     $stmt->execute();
     $result = $stmt->get_result();
 
+    // Generate HTML for response
     $html = '';
     if ($result->num_rows === 0) {
-        $html = '<tr><td colspan="8">No data available</td></tr>';
+        $html = '<tr><td colspan="5">No data available</td></tr>';
     } else {
         while ($row = $result->fetch_assoc()) {
             $name = htmlspecialchars($row['name']) ?: '--';
@@ -69,13 +84,17 @@ try {
         }
     }
 
+    // Pagination logic
     $countSql = "
     SELECT COUNT(*) AS total 
     FROM users 
     WHERE user_type = 'Coordinator'
     AND CONCAT_WS(' ', first_name, last_name, email) LIKE ?";
-    
+
     $countStmt = $conn->prepare($countSql);
+    if (!$countStmt) {
+        throw new Exception('Failed to prepare count query.');
+    }
     $countStmt->bind_param('s', $searchTerm);
     $countStmt->execute();
     $countResult = $countStmt->get_result()->fetch_assoc();
@@ -109,6 +128,7 @@ try {
         $pagination .= '<li class="page-item disabled"><span class="page-link">Next</span></li>';
     }
 
+    // Response
     $response = [
         'html' => $html,
         'pagination' => $pagination,
@@ -119,10 +139,17 @@ try {
     echo json_encode($response);
 
 } catch (Exception $e) {
+    // Log the error and return a proper JSON response
+    error_log($e->getMessage());
     echo json_encode(['error' => $e->getMessage()]);
 }
 
-$stmt->close();
-$countStmt->close();
+// Close the database connections safely
+if (isset($stmt)) {
+    $stmt->close();
+}
+if (isset($countStmt)) {
+    $countStmt->close();
+}
 $conn->close();
 ?>

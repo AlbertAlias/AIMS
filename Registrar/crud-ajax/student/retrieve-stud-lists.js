@@ -15,7 +15,7 @@ function loadTableData() {
             if (response.html) {
                 $('#stud-lists tbody').html(response.html);
             } else {
-                $('#stud-lists tbody').html('<tr><td colspan="7">No data available</td></tr>');
+                $('#stud-lists tbody').html('<tr><td colspan="8">No data available</td></tr>');
             }
             if (response.pagination) {
                 $('#stud-lists-pagination').html(response.pagination);
@@ -27,6 +27,7 @@ function loadTableData() {
         },
         error: function(xhr, status, error) {
             console.error('AJAX error:', status, error);
+            console.log('Response Text:', xhr.responseText);
         }
     });
 }

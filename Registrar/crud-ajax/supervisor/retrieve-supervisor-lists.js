@@ -15,7 +15,7 @@ function loadSupervisorTableData() {
             if (response.html) {
                 $('#supertbody').html(response.html);
             } else {
-                $('#supertbody').html('<tr><td colspan="8">No data available</td></tr>');
+                $('#supertbody').html('<tr><td colspan="7">No data available</td></tr>');
             }
             if (response.pagination) {
                 $('#supervisor-lists-pagination').html(response.pagination);
@@ -26,6 +26,7 @@ function loadSupervisorTableData() {
         },
         error: function(xhr, status, error) {
             console.error('AJAX error:', status, error);
+            console.log('Response Text:', xhr.responseText);
         }
     });
 }
