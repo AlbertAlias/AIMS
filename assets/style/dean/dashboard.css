@@ -1,18 +1,21 @@
-#handles-chart {
+#handles-chart,
+#students-chart {
     width: 100%;
     height: 400px;
     min-height: 400px;
 }
 
 @media (max-width: 768px) {
-    #handles-chart {
+    #handles-chart,
+    #students-chart {
         height: 300px;
         min-height: 300px;
     }
 }
 
 @media (max-width: 576px) {
-    #handles-chart {
+    #handles-chart,
+    #students-chart {
         height: 200px;
         min-height: 200px;
     }

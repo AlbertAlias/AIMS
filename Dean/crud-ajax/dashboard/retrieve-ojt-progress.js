@@ -17,10 +17,15 @@ $(document).ready(function () {
         method: 'GET',
         dataType: 'json',
         success: function (data) {
-            if (data && data.length > 0) {
-                renderChart(data);
+            // Check if there are any departments and if all have no completed students
+            const allDepartmentsHaveNoData = data.every(department => 
+                department.male_finished_count === 0 && department.female_finished_count === 0
+            );
+    
+            if (data.length > 0 && !allDepartmentsHaveNoData) {
+                renderChart(data); // Render chart if there are students with completed hours
             } else {
-                showError("No data available");
+                showError("No data available"); // Show error if no completed students
             }
         },
         error: function (error) {
@@ -28,6 +33,7 @@ $(document).ready(function () {
             showError("An error occurred while loading data.");
         }
     });
+    
 
     function renderChart(data) {
         const categories = data.map(item => item.department_name);

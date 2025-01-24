@@ -17,10 +17,13 @@ $(document).ready(function () {
         method: 'GET',
         dataType: 'json',
         success: function (data) {
-            if (data && data.length > 0) {
+            // Check if the data exists and the sum of coordinators_count and students_count is greater than zero
+            const hasData = data.some(item => item.coordinators_count > 0 || item.students_count > 0);
+    
+            if (hasData) {
                 renderChart(data);
             } else {
-                showError("No data available");
+                showError("No data available.");
             }
         },
         error: function (error) {
@@ -28,6 +31,7 @@ $(document).ready(function () {
             showError("An error occurred while loading data.");
         }
     });
+    
 
     function renderChart(data) {
         const categories = data.map(item => item.department_name);

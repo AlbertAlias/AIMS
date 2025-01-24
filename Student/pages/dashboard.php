@@ -11,17 +11,17 @@
                     <div class="d-flex justify-content-between">
                         <div class="text-left">
                             <div class="fs-6 text-center">Hours Needed</div>
-                            <div class="h4 text-center" id="hours_needed"></div>
+                            <div class="h4 text-center" id="hours_needed">0</div>
                         </div>
 
                         <div class="text-center">
                             <div class="fs-6 text-center">Hours Rendered</div>
-                            <div class="h4 text-center" id="hours_rendered"></div>
+                            <div class="h4 text-center" id="hours_rendered">0</div>
                         </div>
 
                         <div class="text-right">
                             <div class="fs-6 text-center">Hours Remaining</div>
-                            <div class="h4 text-center" id="hours_remaining"></div>
+                            <div class="h4 text-center" id="hours_remaining">0</div>
                         </div>
                     </div>
                 </div>
