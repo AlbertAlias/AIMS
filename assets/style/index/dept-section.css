@@ -151,3 +151,7 @@
             rgba(60, 64, 67, 0.1) 0px 2px 6px 2px;
     }
 }
+
+.card.no-transition {
+    transition: none !important; /* Disable all transitions */
+}
