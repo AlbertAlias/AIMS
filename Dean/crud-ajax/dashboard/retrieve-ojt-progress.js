@@ -36,8 +36,8 @@ $(document).ready(function () {
 
         const options = {
             series: [
-                { name: 'Male Finished', data: maleFinished, color: '#2196f3' }, // Male color (blue)
-                { name: 'Female Finished', data: femaleFinished, color: '#f06292' } // Female color (pink)
+                { name: 'Completed Males', data: maleFinished, color: '#2196f3' }, // Male color (blue)
+                { name: 'Completed Females', data: femaleFinished, color: '#f06292' } // Female color (pink)
             ],
             chart: {
                 type: 'bar',

@@ -55,7 +55,7 @@ $(document).ready(function () {
                         toast: true,
                         position: 'top-end',
                         icon: 'error',
-                        title: 'Error: ' + response.error,
+                        title: response.error,
                         showConfirmButton: false,
                         timer: 2000,
                         background: '#f8d7da',
