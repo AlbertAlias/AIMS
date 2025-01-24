@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('#ojt-hours-tab').on('click', function () {
         $.ajax({
-            url: 'controller/requirements-folder/retrieve-ojt-hours.php',
+            url: 'controller/requirements-folder/retrieve-ojt-hours.php', // Path to the PHP script
             method: 'GET',
             dataType: 'json',
             success: function (response) {
@@ -11,14 +11,16 @@ $(document).ready(function () {
 
                     if (ojtHoursData.length > 0) {
                         ojtHoursData.forEach((record) => {
+                            // Function to format 24-hour time to 12-hour with AM/PM
                             function formatTime(timeStr) {
                                 let hours = parseInt(timeStr.split(':')[0]);
-                                let minutes = timeStr.split(':')[1] || '00';
+                                let minutes = timeStr.split(':')[1] || '00'; // Handle case if minutes are not present
                                 let suffix = hours >= 12 ? 'pm' : 'am';
-                                hours = hours % 12 || 12;
+                                hours = hours % 12 || 12; // Convert 0 hour to 12 (for midnight)
                                 return `${hours}:${minutes} ${suffix}`;
                             }
 
+                            // Format the submission date for display
                             const submissionDate = new Date(record.submission_date);
                             const formattedSubmissionDate = submissionDate.toLocaleDateString('en-US', {
                                 year: 'numeric',
@@ -26,6 +28,7 @@ $(document).ready(function () {
                                 day: 'numeric'
                             });
 
+                            // Format the morning and afternoon start/end times
                             const morningStart = formatTime(record.morning_start);
                             const afternoonEnd = formatTime(record.afternoon_end);
 
@@ -54,7 +57,7 @@ $(document).ready(function () {
 
                     $('#ojt-hours').html(content);
                 } else {
-                    $('#ojt-hours').html(`<p class="text-muted">No OJT hours available.</p>`);
+                    $('#ojt-hours').html(`<p class="text-muted">${response.message}</p>`);
                 }
             },
             error: function () {
@@ -63,17 +66,21 @@ $(document).ready(function () {
         });
     });
 
+    // Use event delegation to handle click on dynamically loaded cards
     $('#ojt-hours').on('click', '.card', function () {
         const filePath = $(this).data('file-path');
         showFileInModal(filePath);
     });
 
+    // Function to show file in modal
     function showFileInModal(filePath) {
         const fileModal = document.getElementById('fileModal');
         const fileViewer = document.getElementById('fileViewer');
         const fileImageViewer = document.getElementById('fileimageViewer');
+        
         const fileExtension = filePath.split('.').pop().toLowerCase();
 
+        // Check file type and display accordingly
         if (fileExtension === 'pdf') {
             fileViewer.src = filePath + '#toolbar=0';
             fileViewer.style.display = 'block';
@@ -84,9 +91,11 @@ $(document).ready(function () {
             fileViewer.style.display = 'none';
         }
 
+        // Show modal
         fileModal.style.display = 'flex';
     }
 
+    // Close the modal
     document.getElementById('filecloseModal').addEventListener('click', function () {
         const fileModal = document.getElementById('fileModal');
         const fileViewer = document.getElementById('fileViewer');
