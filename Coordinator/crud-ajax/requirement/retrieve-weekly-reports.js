@@ -46,25 +46,33 @@ $(document).ready(function() {
         const modal = document.getElementById('pdfModal');
         const fileViewer = document.getElementById('pdfViewer');
         const imageViewer = document.getElementById('weeklyreportimageViewer');
-        
+    
+        // Reset viewers
+        fileViewer.src = '';
+        imageViewer.src = '';
+        fileViewer.style.display = 'none';
+        imageViewer.style.display = 'none';
+    
+        // Check file extension and handle accordingly
         const fileExtension = filePath.split('.').pop().toLowerCase();
-
+    
         if (fileExtension === 'pdf') {
-            // If it's a PDF file
-            fileViewer.src = `${filePath}#toolbar=0`;
+            // Short delay to ensure the PDF source is properly updated
+            const fileURL = `${filePath}#toolbar=0`;
+            setTimeout(() => {
+                fileViewer.src = fileURL;
+            }, 50);  // Adding small delay
             fileViewer.style.display = 'block';
-            imageViewer.style.display = 'none';
-        } else {
-            // If it's an image file
+        } else if (['jpg', 'jpeg', 'png'].includes(fileExtension)) {
             imageViewer.src = filePath;
             imageViewer.style.display = 'block';
-            fileViewer.style.display = 'none';
         }
-
+    
+        // Show modal
         modal.style.display = 'flex';
     }
-
-    // Close modal event listener
+    
+    // Close modal functionality
     document.getElementById('closeModal').addEventListener('click', function () {
         const modal = document.getElementById('pdfModal');
         const pdfViewer = document.getElementById('pdfViewer');
@@ -74,6 +82,7 @@ $(document).ready(function() {
         pdfViewer.src = '';
         imageViewer.src = '';
     });
+    
 
     window.addEventListener('click', function (event) {
         const modal = document.getElementById('pdfModal');
