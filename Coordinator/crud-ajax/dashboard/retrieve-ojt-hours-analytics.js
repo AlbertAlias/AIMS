@@ -64,7 +64,7 @@ $(document).ready(function () {
 
         const chartOptions = {
             title: {
-                text: 'OJT Hours Distribution',
+                text: 'OJT Hours Progress',
                 align: 'center',
                 style: {
                     fontSize: '18px',
@@ -99,9 +99,12 @@ $(document).ready(function () {
                     radius: 50
                 }
             },
-            series: counts,
+            series: [{
+                name: 'Students',
+                data: counts
+            }],
             chart: {
-                type: 'donut',
+                type: 'bar',
                 width: '100%',
                 height: '400px',
                 animations: {
@@ -114,30 +117,38 @@ $(document).ready(function () {
                     }
                 }
             },
-            labels: [
-                `${segments[2] + 1} - ${segments[3]}`,
-                `${segments[1] + 1} - ${segments[2]}`,
-                `${segments[0] + 1} - ${segments[1]}`,
-                `0 - ${segments[0]}`,
-            ],
-            colors: [
-                'rgba(34, 139, 34, 0.85)',
-                'rgba(70, 130, 180, 0.85)',
-                'rgba(255, 165, 0, 0.85)',
-                'rgba(204, 0, 0, 0.85)',
-            ],
-            plotOptions: {
-                pie: {
-                    expandOnClick: false,
-                    donut: {
-                        size: '50%'
-                    },
-                    customScale: 0.85,
-                    hover: {
-                        expand: true
+            xaxis: {
+                categories: [
+                    `0 - ${segments[0]}`,
+                    `${segments[0] + 1} - ${segments[1]}`,
+                    `${segments[1] + 1} - ${segments[2] - 1}`,
+                    `${segments[3]}`
+                ],
+                title: {
+                    text: 'Hour Needed',
+                    style: {
+                        fontSize: '14px',
+                        fontFamily: 'Arial, sans-serif',
+                        fontWeight: 'normal'
                     }
                 }
             },
+            yaxis: {
+                title: {
+                    text: 'Number of Students',
+                    style: {
+                        fontSize: '14px',
+                        fontFamily: 'Arial, sans-serif',
+                        fontWeight: 'normal'
+                    }
+                }
+            },
+            colors: [
+                'rgba(204, 0, 0, 0.85)',
+                'rgba(255, 165, 0, 0.85)',
+                'rgba(70, 130, 180, 0.85)',
+                'rgba(34, 139, 34, 0.85)',
+            ],
             responsive: getResponsiveOptions()
         };
 
