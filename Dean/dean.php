@@ -111,6 +111,7 @@ header("Pragma: no-cache");
     <!--START::CRUD AJAX FUNCTIONS-->
     <!--START::DASHBOARD AJAX-->
     <script src="crud-ajax/dashboard/retrieve-handles.js"></script>
+    <script src="crud-ajax/dashboard/retrieve-ojt-progress.js"></script>
     <!--END::DASHBOARD AJAX-->
 
     <!--START::STUDENT AJAX-->
