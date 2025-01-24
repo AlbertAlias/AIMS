@@ -1,4 +1,0 @@
-[05-Dec-2024 22:13:34 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "PhpOffice\PhpSpreadsheet\IOFactory" not found in C:\xampp\htdocs\AIMS\IT\controller\interns\create-upload-interns.php:47
-Stack trace:
-#0 {main}
-  thrown in C:\xampp\htdocs\AIMS\IT\controller\interns\create-upload-interns.php on line 47
