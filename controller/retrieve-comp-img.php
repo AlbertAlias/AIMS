@@ -1,31 +1,43 @@
 <?php
-require '../dbconn.php';
+require_once "../dbconn.php";
 
-$basePath = '/AIMS/assets/uploads/comp-img/';
+$baseUrl = '/AIMS/assets/uploads/comp-img/';
+$defaultLogo = $baseUrl . 'asiatech-logo.png'; // Default logo image
+$defaultBackground = $baseUrl . 'asiatech.png'; // Default background image
 
-$sql = "SELECT company, company_logo, company_image 
-        FROM users 
-        WHERE company_logo IS NOT NULL AND company_image IS NOT NULL 
-        GROUP BY company";
+$query = "SELECT company, company_logo, company_image FROM users";
+$result = $conn->query($query);
 
-$result = $conn->query($sql);
+$response = ['success' => false, 'data' => []];
 
-$companies = [];
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $logo = trim($row['company_logo']);
-        $background = trim($row['company_image']);
+        $logo_path = trim($row['company_logo']);
+        $background_path = trim($row['company_image']);
 
-        $logoPath = !empty($logo) ? $basePath . $logo : null;
-        $backgroundPath = !empty($background) ? $basePath . $background : null;
+        // If the logo or background image is empty, use the default images
+        if (empty($logo_path)) {
+            $logo_path = $defaultLogo;
+        } else {
+            $logo_path = $baseUrl . basename($logo_path);
+        }
 
-        $companies[] = [
-            'logo' => $logoPath,
-            'background' => $backgroundPath
+        if (empty($background_path)) {
+            $background_path = $defaultBackground;
+        } else {
+            $background_path = $baseUrl . basename($background_path);
+        }
+
+        $response['data'][] = [
+            'company' => $row['company'],
+            'company_logo' => $logo_path,
+            'company_image' => $background_path,
         ];
     }
+    $response['success'] = true;
 }
 
-header('Content-Type: application/json');
-echo json_encode($companies);
+$conn->close();
+
+echo json_encode($response);
 ?>

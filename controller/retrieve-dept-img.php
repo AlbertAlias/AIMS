@@ -12,7 +12,7 @@
         while ($row = $result->fetch_assoc()) {
             $image_path = trim($row['department_image']);
             if (empty($image_path)) {
-                $image_path = $baseUrl . 'placeholder.jpg'; 
+                $image_path = $baseUrl . 'placeholder.png'; 
             } else {
                 $image_path = $baseUrl . basename($image_path);
             }
