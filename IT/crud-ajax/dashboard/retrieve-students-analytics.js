@@ -85,21 +85,18 @@ $(document).ready(function() {
                 try {
                     const data = JSON.parse(response);
                     if (!data.error && data.length > 0) {
-                        let departments = filterDepartments(data);
-                        const otherTotal = calculateOtherTotal(data);
-
-                        if (otherTotal > 0) {
-                            departments.push({ department_name: 'Other', total: otherTotal });
-                        }
-
+                        // No filtering for departments based on student count
+                        let departments = data;
+    
+                        // Sort departments alphabetically (optional)
                         departments = sortDepartments(departments);
-
+    
                         const series = [{
                             data: departments.map(item => parseInt(item.total) || 0)
                         }];
-
+    
                         const colors = generateUniqueGreenShades(chartConfig.baseColor, departments.length);
-
+    
                         const chartData = {
                             series: series,
                             chart: {
@@ -182,7 +179,7 @@ $(document).ready(function() {
                                 }
                             ]
                         };
-
+    
                         const chartElement = document.querySelector("#students-chart");
                         if (chartElement) {
                             const chart = new ApexCharts(chartElement, chartData);
@@ -190,7 +187,7 @@ $(document).ready(function() {
                         } else {
                             console.error("Element with id 'students-chart' not found");
                         }
-
+    
                     } else {
                         showError(chartConfig.errorMessages.noData);
                     }
@@ -205,6 +202,7 @@ $(document).ready(function() {
             }
         });
     }
+    
 
     fetchChartData();
 
