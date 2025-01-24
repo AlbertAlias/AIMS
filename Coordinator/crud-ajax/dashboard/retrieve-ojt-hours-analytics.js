@@ -22,11 +22,22 @@ $(document).ready(function () {
             success: function (response) {
                 try {
                     const data = JSON.parse(response);
-
-                    if (!data.error && validateData(data)) {
+    
+                    if (data.error) {
+                        // Handle specific case when 'hours_needed' is not found
+                        if (data.error === 'No hours_needed value found for this department.') {
+                            // Pass empty data to renderChart
+                            renderChart({
+                                segments: [0, 0, 0, 0],
+                                counts: [0, 0, 0, 0]
+                            });
+                        } else {
+                            showError(`Error fetching data: ${data.error}`);
+                        }
+                    } else if (validateData(data)) {
                         renderChart(data);
                     } else {
-                        showError(`Error fetching data: ${data.error || 'Invalid data received'}`);
+                        showError('Invalid data received');
                     }
                 } catch (e) {
                     console.error('Error parsing JSON:', e);
