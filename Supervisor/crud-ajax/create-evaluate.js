@@ -1,4 +1,5 @@
 function evaluateStudent(userId) {
+    $('#student_id').val(userId);
     $.ajax({
         url: 'controller/check-evaluation.php',
         type: 'GET',

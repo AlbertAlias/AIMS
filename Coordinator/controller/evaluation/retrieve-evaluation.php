@@ -7,14 +7,14 @@
 
         // Query to get student's details and department name
         $stmt = $conn->prepare("
-            SELECT 
-                u.last_name, 
-                u.first_name, 
-                u.middle_name, 
-                d.department_name
-            FROM users u
-            LEFT JOIN department d ON u.department_id = d.department_id
-            WHERE u.user_id = ?");
+                SELECT 
+                    u.last_name, 
+                    u.first_name, 
+                    u.middle_name, 
+                    d.department_name
+                FROM users u
+                LEFT JOIN department d ON u.department_id = d.department_id
+                WHERE u.user_id = ?");
         $stmt->bind_param('i', $user_id);
         $stmt->execute();
 
