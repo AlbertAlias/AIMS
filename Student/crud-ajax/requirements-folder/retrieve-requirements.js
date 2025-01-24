@@ -40,7 +40,7 @@ $(document).ready(function () {
                         });
                         content += '</ul>';
                     } else {
-                        content = '<p>No approved requirements found.</p>';
+                        content = '<p class="text-muted">No approved requirements available.</p>';
                     }
 
                     $('#requirements-content').html(content);

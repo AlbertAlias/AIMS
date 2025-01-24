@@ -57,7 +57,7 @@ $(document).ready(function () {
 
                     $('#ojt-hours').html(content);
                 } else {
-                    $('#ojt-hours').html(`<p class="text-danger">${response.message}</p>`);
+                    $('#ojt-hours').html(`<p class="text-muted">No OJT hours available.</p>`);
                 }
             },
             error: function () {
