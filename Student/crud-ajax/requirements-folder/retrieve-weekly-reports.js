@@ -1,6 +1,5 @@
 $(document).ready(function () {
     $('#weekly-reports-tab').on('click', function () {
-        // Check if content is already loaded
         if (!$('#weekly-reports').data('loaded')) {
             $.ajax({
                 url: 'controller/requirements-folder/retrieve-weekly-reports.php',
@@ -13,7 +12,6 @@ $(document).ready(function () {
 
                         if (reports.length > 0) {
                             reports.forEach((report) => {
-                                // Format the dates to MM/DD/YYYY with short month name
                                 const weekStart = new Date(report.week_start);
                                 const weekEnd = new Date(report.week_end);
 
@@ -64,13 +62,11 @@ $(document).ready(function () {
         }
     });
 
-    // Use event delegation to handle click on dynamically loaded cards
     $('#weekly-reports').on('click', '.card', function () {
         const filePath = $(this).data('file-path');
         showFileInModal(filePath);
     });
 
-    // Function to show file in modal
     function showFileInModal(filePath) {
         const fileModal = document.getElementById('fileModal');
         const fileViewer = document.getElementById('fileViewer');
@@ -78,7 +74,6 @@ $(document).ready(function () {
         
         const fileExtension = filePath.split('.').pop().toLowerCase();
 
-        // Check file type and display accordingly
         if (fileExtension === 'pdf') {
             fileViewer.src = filePath + '#toolbar=0';
             fileViewer.style.display = 'block';
@@ -89,11 +84,9 @@ $(document).ready(function () {
             fileViewer.style.display = 'none';
         }
 
-        // Show modal
         fileModal.style.display = 'flex';
     }
 
-    // Close the modal
     document.getElementById('filecloseModal').addEventListener('click', function () {
         const fileModal = document.getElementById('fileModal');
         const fileViewer = document.getElementById('fileViewer');

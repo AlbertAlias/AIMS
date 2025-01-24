@@ -12,7 +12,6 @@ $(document).ready(function () {
                     if (requirements.length > 0) {
                         content += '<ul class="list-group">';
                         requirements.forEach((req) => {
-                            // Format the date to "MMM dd, yyyy"
                             const formattedDate = new Date(req.submission_date).toLocaleDateString('en-US', {
                                 year: 'numeric',
                                 month: 'short',
@@ -45,7 +44,6 @@ $(document).ready(function () {
 
                     $('#requirements-content').html(content);
 
-                    // Add click event to open file in modal
                     $('.card').click(function () {
                         const filePath = $(this).data('file-path');
                         showFileInModal(filePath);
@@ -60,21 +58,18 @@ $(document).ready(function () {
         });
     }
 
-    // Fetch requirements on page load if "Requirements" is the active tab
     if ($('#requirements-tab').hasClass('active')) {
         fetchRequirements();
     }
 
-    // Fetch requirements when the "Requirements" tab is shown
     $('#requirements-tab').on('shown.bs.tab', function () {
         fetchRequirements();
     });
 
-    // Use delegated event listener to handle dynamically created close button
     $(document).on('click', '#filecloseModal', function () {
-        $('#fileModal').hide(); // Hide the modal
-        $('#fileViewer').attr('src', ''); // Clear the PDF viewer
-        $('#fileimageViewer').attr('src', ''); // Clear the image viewer
+        $('#fileModal').hide();
+        $('#fileViewer').attr('src', '');
+        $('#fileimageViewer').attr('src', '');
     });
 });
 
@@ -83,27 +78,22 @@ function showFileInModal(filePath) {
     const fileViewer = document.getElementById('fileViewer');
     const fileImageViewer = document.getElementById('fileimageViewer');
 
-    // Clear the current source of both viewers
     fileViewer.src = '';
     fileImageViewer.src = '';
 
-    // If file is a PDF
     if (filePath.endsWith('.pdf')) {
-        // Append `#toolbar=0` to hide the toolbar
         const fileURL = `${filePath}#toolbar=0`;
         setTimeout(() => {
-            fileViewer.src = fileURL; // Set the source after clearing
-        }, 50); // Short delay to ensure proper reload
+            fileViewer.src = fileURL;
+        }, 50);
         fileViewer.style.display = 'block';
         fileImageViewer.style.display = 'none';
     }
-    // If file is an image
     else if (['.jpg', '.jpeg', '.png'].some(ext => filePath.endsWith(ext))) {
-        fileImageViewer.src = filePath; // Set the source for the image
+        fileImageViewer.src = filePath;
         fileImageViewer.style.display = 'block';
         fileViewer.style.display = 'none';
     }
 
-    // Show the modal
     fileModal.style.display = 'flex';
 }
