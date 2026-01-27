@@ -1,7 +1,7 @@
-# Asiatech Internship Management System (AIMS) | Site: https://group72024.ceitesystems.com/
+# Asiatech Internship Management System (AIMS)
 A web-based **Internship Management System (IMS)** that automates manual on-the-job training processes, including managing students’ documents, tracking OJT progress, approving or rejecting submissions, archiving users, and evaluating student performance, improving efficiency, accuracy, and overall internship management.
 
-
+Site: https://group72024.ceitesystems.com/
 
 ## **Features**
 - CRUD (Create, Read, Update, Delete) operations for users and documents
