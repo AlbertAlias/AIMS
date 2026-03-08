@@ -21,8 +21,10 @@ Different dashboards per user type:
 - Student evaluation and performance tracking
 
 ## 📸 Samples
+Landing Page:
 ![landing](assets/UI/landing_page.png)
 ![login](assets/UI/login_page.png)
+- Admin Page:
 ![admin dashboard](assets/UI/admin/dashboard.png)
 ![admin department](assets/UI/admin/department.png)
 ![admin coordinator](assets/UI/admin/coordinator.png)
@@ -30,17 +32,21 @@ Different dashboards per user type:
 ![admin supervisor](assets/UI/admin/supervisor.png)
 ![admin registrar](assets/UI/admin/registrar.png)
 ![admin masterlists](assets/UI/admin/masterlists.png)
+Students Page:
 ![student dashboard](assets/UI/students/dashboard.png)
 ![student folders](assets/UI/students/folders.png)
 ![student hours](assets/UI/students/hours.png)
 ![student reports](assets/UI/students/reports.png)
 ![student requirements](assets/UI/students/requirements.png)
+Coordinators Page:
 ![coordinator dashboard](assets/UI/coordinator/dashboard.png)
 ![coordinator students](assets/UI/coordinator/students.png)
 ![coordinator requirements](assets/UI/coordinator/requirements.png)
+Deans Page:
 ![dean dashboard](assets/UI/dean/dashboard.png)
 ![dean coordinators](assets/UI/dean/coordinators.png)
 ![dean students](assets/UI/dean/students.png)
+Supervisors Page:
 ![supervisor evaluation](assets/UI/supervisor/evaluation.png)
 
 ## Tech Stacks
