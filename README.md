@@ -55,7 +55,7 @@ Supervisors Page:
 ![supervisor evaluation](assets/UI/supervisor/evaluation.png)
 
 ## Tech Stacks
-- Frontend: <strong>HTML, CSS, Bootstrap 5, JavaScript JQuery</strong>
+- Frontend: <strong>HTML, CSS, Bootstrap 5, JavaScript, JQuery AJAX</strong>
 - Backend: <strong>PHP</strong>
 - Database: <strong>MySQL</strong>
 - Tools: <strong>XAMPP, phpMyAdmin</strong>
