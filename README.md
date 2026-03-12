@@ -36,10 +36,10 @@ Admin Page:
 
 Students Page:
 ![student dashboard](assets/UI/students/dashboard.png)
-![student folders](assets/UI/students/folders.png)
-![student hours](assets/UI/students/hours.png)
-![student reports](assets/UI/students/reports.png)
 ![student requirements](assets/UI/students/requirements.png)
+![student reports](assets/UI/students/reports.png)
+![student hours](assets/UI/students/hours.png)
+![student folders](assets/UI/students/folders.png)
 
 Coordinators Page:
 ![coordinator dashboard](assets/UI/coordinator/dashboard.png)
