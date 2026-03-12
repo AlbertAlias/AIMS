@@ -48,8 +48,8 @@ Coordinators Page:
 
 Deans Page:
 ![dean dashboard](assets/UI/dean/dashboard.png)
-![dean coordinators](assets/UI/dean/coordinators.png)
 ![dean students](assets/UI/dean/students.png)
+![dean coordinators](assets/UI/dean/coordinators.png)
 
 Supervisors Page:
 ![supervisor evaluation](assets/UI/supervisor/evaluation.png)
